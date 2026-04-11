@@ -491,6 +491,7 @@ textarea {
     .nav-overlay-content {
         max-width: 100%;
         border-left: none;
+        padding: 1.5rem;
     }
 
     .sidebar-link,
@@ -501,6 +502,36 @@ textarea {
 
     .sidebar-sublink {
         font-size: 0.9rem;
+    }
+
+    /* Stack nav contact info on small screens */
+    .nav-info-block .grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .nav-info-value {
+        font-size: 0.75rem;
+        word-break: break-word;
+    }
+}
+
+/* --- GLOBAL MOBILE RESPONSIVE FIXES --- */
+@media (max-width: 480px) {
+    /* Prevent any element from causing horizontal overflow */
+    img, video, iframe, canvas, svg {
+        max-width: 100%;
+    }
+
+    /* Scale down glass panels padding on very small screens */
+    .glass-panel {
+        padding: 1rem;
+    }
+
+    /* Reduce decorative blur elements that might overflow */
+    .bg-glow {
+        width: 300px;
+        height: 300px;
     }
 }
 

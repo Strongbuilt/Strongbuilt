@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Careers | Strong Built - Build Your Legacy</title>
+  <meta name="description" content="Join the Strong Built team and build your career in construction. Explore current job openings and opportunities.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Outfit:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="theme-config.js"></script>
+
+  <style>
+    /* Careers Specific Styles */
+    .timeline-line::before {
+      content: '';
+      position: absolute;
+      left: 23px;
+      /* Mobile Position: Aligns with w-12 centered marker */
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, #FFD700, transparent);
+      opacity: 0.5;
+    }
+
+    @media (min-width: 768px) {
+      .timeline-line::before {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    .job-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .job-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: #FFD700;
+      transform: translateY(-5px);
+    }
+
+    .animate-float-slow {
+      animation: float 8s ease-in-out infinite;
+    }
+  </style>
+</head>
+
+<body class="bg-noise antialiased overflow-x-hidden selection:bg-brand-gold selection:text-black">
+
+  <!-- NAVIGATION OVERLAY (Side Drawer) -->
+  <div id="navOverlay" class="nav-overlay">
+    <div id="navBackdrop" class="nav-overlay-backdrop"></div>
+    <div class="nav-overlay-content p-8 md:p-10">
+
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-12">
+        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto opacity-80">
+        <button id="closeMenuBtn" class="nav-close-btn"><i class="fas fa-times"></i></button>
+      </div>
+
+      <!-- Links -->
+      <ul class="space-y-0 flex-1">
+        <li><a href="index.html" class="sidebar-link">Home</a></li>
+        <li>
+          <button class="sidebar-dropdown-btn">
+            <span>About</span> <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="sidebar-submenu">
+            <a href="story.html" class="sidebar-sublink">Our Story</a>
+            <a href="leadership.html" class="sidebar-sublink">Leadership</a>
+          </div>
+        </li>
+        <li><a href="projects.html" class="sidebar-link">Projects</a></li>
+        <li><a href="services.html" class="sidebar-link">Services</a></li>
+        <li><a href="careers.html" class="sidebar-link">Careers</a></li>
+        <li>
+          <button class="sidebar-dropdown-btn">
+            <span>Insights</span> <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="sidebar-submenu">
+            <a href="updates.html" class="sidebar-sublink">News & Press</a>
+            <a href="blog.html" class="sidebar-sublink">Blog</a>
+            <a href="resources.html" class="sidebar-sublink">Resources</a>
+          </div>
+        </li>
+        <li><a href="contact.html" class="sidebar-link">Contact</a></li>
+      </ul>
+
+      <!-- Contact Info -->
+      <div class="nav-info-block">
+        <div class="grid grid-cols-2 gap-4 mb-5">
+          <div class="nav-info-item">
+            <span class="nav-info-label">Call</span>
+            <p class="nav-info-value">+91 9619875081</p>
+          </div>
+          <div class="nav-info-item">
+            <span class="nav-info-label">Email</span>
+            <p class="nav-info-value">sales@strongbuilt.in</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav-social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="nav-social-link"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.twitter.com" target="_blank" rel="noopener" aria-label="Twitter" class="nav-social-link"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HEADER (Glass) -->
+  <header class="fixed w-full z-50 transition-all duration-300 glass-header" id="mainHeader">
+    <div class="container mx-auto px-6 h-24 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center group relative z-50">
+        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built Logo"
+          class="h-14 md:h-24 w-auto object-contain transition duration-300 hover:opacity-90">
+      </a>
+
+      <!-- Menu Trigger -->
+      <button id="menuToggle" class="menu-btn group">
+        <div class="menu-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <div class="h-24"></div>
+
+  <!-- HERO SECTION -->
+  <section class="relative h-[70vh] flex items-center justify-center text-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1920"
+        alt="Strong Built careers and opportunities" class="w-full h-full object-cover opacity-50 animate-ken-burns">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black z-0"></div>
+
+    <div class="relative z-30 container mx-auto px-6 mt-20">
+      <div class="inline-block mb-4 overflow-hidden">
+        <span class="block text-brand-gold text-sm font-bold tracking-[0.5em] uppercase reveal-up"
+          style="transition-delay: 100ms;">Join Our Team</span>
+      </div>
+      <h1 class="text-6xl md:text-9xl font-bold mb-6 text-white uppercase tracking-tighter leading-none reveal-up"
+        style="transition-delay: 200ms;">
+        Build Your <span
+          class="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-yellow-200">Legacy</span>
+      </h1>
+      <div class="h-px w-24 bg-brand-gold mx-auto my-8 reveal-up" style="transition-delay: 300ms;"></div>
+      <p class="text-lg md:text-2xl font-light text-gray-300 max-w-3xl mx-auto leading-relaxed reveal-up"
+        style="transition-delay: 400ms;">
+        We don't just build structures; we build careers. Join a team where precision meets passion, and every project
+        is a masterpiece of engineering.
+      </p>
+    </div>
+  </section>
+
+  <!-- VALUES / BENEFITS SECTION -->
+  <section class="py-16 md:py-24 container mx-auto px-6 relative">
+    <div class="text-center mb-16 reveal-up">
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 uppercase font-heading">Why Work With <span
+          class="text-brand-gold">Us?</span></h2>
+      <div class="h-1 w-24 bg-brand-gold mx-auto mb-6"></div>
+      <p class="text-gray-400 font-body max-w-2xl mx-auto text-lg">More than standard employment. We offer a path to
+        excellence, providing the tools and environment for elite professionals to thrive.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Card 1 -->
+      <div
+        class="glass-panel p-10 hover:border-brand-gold transition duration-500 reveal-up text-center group cursor-default">
+        <div
+          class="w-20 h-20 mx-auto border border-brand-gold/30 rounded-full flex items-center justify-center text-brand-gold mb-8 group-hover:bg-brand-gold group-hover:text-black transition duration-300 relative overflow-hidden">
+          <div class="absolute inset-0 bg-brand-gold opacity-0 group-hover:opacity-100 transition duration-300"></div>
+          <i class="fas fa-chart-line text-3xl relative z-10"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4 uppercase font-heading">Accelerated Growth</h3>
+        <p class="text-gray-400 text-sm leading-relaxed font-body">
+          We invest in our people. From day one, you'll have access to structured mentorship programs, advanced
+          technical training, and clear pathways to leadership roles.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div
+        class="glass-panel p-10 hover:border-brand-gold transition duration-500 reveal-up text-center group cursor-default"
+        style="transition-delay: 100ms;">
+        <div
+          class="w-20 h-20 mx-auto border border-brand-gold/30 rounded-full flex items-center justify-center text-brand-gold mb-8 group-hover:bg-brand-gold group-hover:text-black transition duration-300 relative overflow-hidden">
+          <div class="absolute inset-0 bg-brand-gold opacity-0 group-hover:opacity-100 transition duration-300"></div>
+          <i class="fas fa-shield-alt text-3xl relative z-10"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4 uppercase font-heading">Uncompromised Safety</h3>
+        <p class="text-gray-400 text-sm leading-relaxed font-body">
+          Safety isn't just a policy; it's our culture. We maintain ISO-certified safety standards, ensuring that every
+          team member returns home safe, every single day.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div
+        class="glass-panel p-10 hover:border-brand-gold transition duration-500 reveal-up text-center group cursor-default"
+        style="transition-delay: 200ms;">
+        <div
+          class="w-20 h-20 mx-auto border border-brand-gold/30 rounded-full flex items-center justify-center text-brand-gold mb-8 group-hover:bg-brand-gold group-hover:text-black transition duration-300 relative overflow-hidden">
+          <div class="absolute inset-0 bg-brand-gold opacity-0 group-hover:opacity-100 transition duration-300"></div>
+          <i class="fas fa-users text-3xl relative z-10"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4 uppercase font-heading">Elite Collaboration</h3>
+        <p class="text-gray-400 text-sm leading-relaxed font-body">
+          Work alongside the industry's best engineers, architects, and managers. We foster an inclusive environments
+          where innovation is encouraged and excellence is shared.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LISTINGS SECTION -->
+  <section class="py-16 md:py-24 bg-white/5 border-y border-white/5 backdrop-blur-sm">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16 reveal-up">
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 uppercase font-heading">Current <span
+            class="text-brand-gold">Opportunities</span></h2>
+        <div class="h-1 w-24 bg-brand-gold mx-auto"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Job 1 -->
+        <div class="glass-panel p-8 group job-card reveal-up flex flex-col h-full">
+          <div class="flex justify-between items-start mb-6">
+            <h3
+              class="text-2xl font-bold text-white uppercase group-hover:text-brand-gold transition font-heading leading-tight">
+              Senior Project Manager</h3>
+            <span
+              class="bg-brand-gold text-black text-[10px] font-bold px-3 py-1 uppercase tracking-wider rounded-sm shadow-lg whitespace-nowrap">Full
+              Time</span>
+          </div>
+
+          <div class="space-y-3 mb-8 flex-grow">
+            <p class="text-xs text-brand-gold font-bold uppercase tracking-widest"><i
+                class="fas fa-map-marker-alt mr-2"></i> Mumbai HQ</p>
+            <p class="text-gray-300 text-sm leading-relaxed font-body">
+              Lead high-value commercial projects from inception to handover. You will oversee budgeting, scheduling,
+              and client relations for our flagship developments.
+            </p>
+            <ul class="text-gray-500 text-xs space-y-2 mt-4 border-t border-white/10 pt-4">
+              <li><i class="fas fa-check text-brand-gold mr-2"></i> 10+ Years Experience</li>
+              <li><i class="fas fa-check text-brand-gold mr-2"></i> PMP Certification Preferred</li>
+              <li><i class="fas fa-check text-brand-gold mr-2"></i> High-Rise Experience Essential</li>
+            </ul>
+          </div>
+
+          <a href="mailto:careers@strongbuilt.com?subject=Application - Senior Project Manager"
+            class="block w-full py-3 bg-transparent border border-gray-600 text-center text-gray-300 font-bold uppercase text-xs hover:border-brand-gold hover:text-brand-gold hover:bg-white/5 transition tracking-widest font-heading rounded-sm">
+            Apply Position
+          </a>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="glass-panel p-8 group job-card reveal-up flex flex-col h-full" style="transition-delay: 100ms;">
+          <div class="flex justify-between items-start mb-6">
+            <h3
+              class="text-2xl font-bold text-white uppercase group-hover:text-brand-gold transition font-heading leading-tight">
+              Site<br>Engineer</h3>
+            <span
+              class="bg-brand-gold text-black text-[10px] font-bold px-3 py-1 uppercase tracking-wider rounded-sm shadow-lg whitespace-nowrap">Full
+              Time</span>
+          </div>
+
+          <div class="space-y-3 mb-8 flex-grow">
+            <p class="text-xs text-brand-gold font-bold uppercase tracking-widest"><i
+                class="fas fa-map-marker-alt mr-2"></i> Navi Mumbai</p>
+            <p class="text-gray-300 text-sm leading-relaxed font-body">
+              Ensure rigorous quality control and on-site execution. You will directly manage labor teams and coordinate
+              with structural consultants to ensure design fidelity.
+            </p>
+            <ul class="text-gray-500 text-xs space-y-2 mt-4 border-t border-white/10 pt-4">
+              <li><i class="fas fa-check text-brand-gold mr-2"></i> B.E. / B.Tech Civil</li>
+              <li><i class="fas fa-check text-brand-gold mr-2"></i> 3-5 Years Experience</li>
+              <li><i class="fas fa-check text-brand-gold mr-2"></i> AutoCAD Proficiency</li>
+            </ul>
+          </div>
+
+          <a href="mailto:careers@strongbuilt.com?subject=Application - Site Engineer"
+            class="block w-full py-3 bg-transparent border border-gray-600 text-center text-gray-300 font-bold uppercase text-xs hover:border-brand-gold hover:text-brand-gold hover:bg-white/5 transition tracking-widest font-heading rounded-sm">
+            Apply Position
+          </a>
+        </div>
+
+        <!-- Job 3 -->
+        <div class="glass-panel p-8 group job-card reveal-up flex flex-col h-full" style="transition-delay: 200ms;">
+          <div class="flex justify-between items-start mb-6">
+            <h3
+              class="text-2xl font-bold text-white uppercase group-hover:text-brand-gold transition font-heading leading-tight">
+              EHS<br>Officer</h3>
+            <span
+              class="bg-gray-800 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-wider rounded-sm border border-white/20 whitespace-nowrap">Contract</span>
+          </div>
+
+          <div class="space-y-3 mb-8 flex-grow">
+            <p class="text-xs text-brand-gold font-bold uppercase tracking-widest"><i
+                class="fas fa-map-marker-alt mr-2"></i> Multiple Sites</p>
+            <p class="text-gray-300 text-sm leading-relaxed font-body">
+              Champion our safety culture. Conduct regular audits, risk assessments, and training sessions to maintain
+              our zero-accident record across all active sites.
+            </p>
+            <ul class="text-gray-500 text-xs space-y-2 mt-4 border-t border-white/10 pt-4">
+              <li><i class="fas fa-check text-brand-gold mr-2"></i> NEBOSH Certified</li>
+              <li><i class="fas fa-check text-brand-gold mr-2"></i> 5+ Years Industry Exp</li>
+              <li><i class="fas fa-check text-brand-gold mr-2"></i> Crisis Management Skills</li>
+            </ul>
+          </div>
+
+          <a href="mailto:careers@strongbuilt.com?subject=Application - EHS Officer"
+            class="block w-full py-3 bg-transparent border border-gray-600 text-center text-gray-300 font-bold uppercase text-xs hover:border-brand-gold hover:text-brand-gold hover:bg-white/5 transition tracking-widest font-heading rounded-sm">
+            Apply Position
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS TIMELINE -->
+  <section class="py-16 md:py-24 container mx-auto px-6 max-w-6xl">
+    <div class="text-center mb-24 reveal-up">
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 uppercase font-heading">Recruitment <span
+          class="text-brand-gold">Process</span></h2>
+      <p class="text-gray-400 font-body max-w-2xl mx-auto">Our transparent approach to identifying the best talent.</p>
+    </div>
+
+    <!-- Timeline Container -->
+    <div class="relative">
+      <!-- Vertical Line -->
+      <div
+        class="absolute left-[23px] md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-brand-gold to-transparent opacity-50 transform md:-translate-x-1/2 z-0">
+      </div>
+
+      <div class="space-y-12">
+
+        <!-- Step 1 -->
+        <div class="relative grid md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-12 items-center group reveal-up">
+
+          <!-- Left: Desktop Content -->
+          <div class="hidden md:block text-right">
+            <h3
+              class="text-2xl font-bold uppercase text-white font-heading group-hover:text-brand-gold transition duration-300">
+              1. Application</h3>
+            <p class="text-gray-400 text-sm mt-3 font-body leading-relaxed">
+              Submit your detailed CV and portfolio via our online portal or email.
+            </p>
+          </div>
+
+          <!-- Center: Marker -->
+          <div class="relative z-10 flex justify-start md:justify-center">
+            <div
+              class="w-12 h-12 bg-black rounded-full border-2 border-brand-gold shadow-[0_0_15px_rgba(255,215,0,0.3)] flex items-center justify-center font-bold text-brand-gold text-xl font-heading group-hover:scale-110 transition duration-300">
+              1
+            </div>
+          </div>
+
+          <!-- Right: Mobile Content -->
+          <div class="md:hidden -ml-2">
+            <h3 class="text-xl font-bold uppercase text-white font-heading mb-2">1. Application</h3>
+            <p class="text-gray-400 text-sm font-body leading-relaxed">
+              Submit your detailed CV and portfolio via our online portal or email.
+            </p>
+          </div>
+
+          <!-- Right: Desktop Spacer -->
+          <div class="hidden md:block"></div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="relative grid md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-12 items-center group reveal-up">
+
+          <!-- Left: Desktop Spacer -->
+          <div class="hidden md:block"></div>
+
+          <!-- Center: Marker -->
+          <div class="relative z-10 flex justify-start md:justify-center">
+            <div
+              class="w-12 h-12 bg-black rounded-full border-2 border-gray-700 shadow flex items-center justify-center font-bold text-gray-500 text-xl font-heading group-hover:border-brand-gold group-hover:text-brand-gold transition duration-300 group-hover:scale-110">
+              2
+            </div>
+          </div>
+
+          <!-- Right: Content (Desktop & Mobile) -->
+          <div class="md:text-left -ml-2 md:ml-0">
+            <h3
+              class="text-xl md:text-2xl font-bold uppercase text-white font-heading group-hover:text-brand-gold transition duration-300">
+              2. Initial Screening</h3>
+            <p class="text-gray-400 text-sm mt-2 font-body leading-relaxed">
+              A telephonic discussion to understand your background, aspirations, and cultural fit.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="relative grid md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-12 items-center group reveal-up">
+
+          <!-- Left: Desktop Content -->
+          <div class="hidden md:block text-right">
+            <h3
+              class="text-2xl font-bold uppercase text-white font-heading group-hover:text-brand-gold transition duration-300">
+              3. Technical Assessment</h3>
+            <p class="text-gray-400 text-sm mt-3 font-body leading-relaxed">
+              In-depth interview with the hiring manager and technical leads to evaluate core competencies.
+            </p>
+          </div>
+
+          <!-- Center: Marker -->
+          <div class="relative z-10 flex justify-start md:justify-center">
+            <div
+              class="w-12 h-12 bg-black rounded-full border-2 border-gray-700 shadow flex items-center justify-center font-bold text-gray-500 text-xl font-heading group-hover:border-brand-gold group-hover:text-brand-gold transition duration-300 group-hover:scale-110">
+              3
+            </div>
+          </div>
+
+          <!-- Right: Mobile Content -->
+          <div class="md:hidden -ml-2">
+            <h3 class="text-xl font-bold uppercase text-white font-heading mb-2">3. Assessment</h3>
+            <p class="text-gray-400 text-sm font-body leading-relaxed">
+              In-depth interview with the hiring manager and technical leads to evaluate core competencies.
+            </p>
+          </div>
+
+          <!-- Right: Desktop Spacer -->
+          <div class="hidden md:block"></div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="relative grid md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-12 items-center group reveal-up">
+
+          <!-- Left: Desktop Spacer -->
+          <div class="hidden md:block"></div>
+
+          <!-- Center: Marker -->
+          <div class="relative z-10 flex justify-start md:justify-center">
+            <div
+              class="w-12 h-12 bg-black rounded-full border-2 border-gray-700 shadow flex items-center justify-center font-bold text-gray-500 text-xl font-heading group-hover:border-brand-gold group-hover:text-brand-gold transition duration-300 group-hover:scale-110">
+              4
+            </div>
+          </div>
+
+          <!-- Right: Content (Desktop & Mobile) -->
+          <div class="md:text-left -ml-2 md:ml-0">
+            <h3
+              class="text-xl md:text-2xl font-bold uppercase text-white font-heading group-hover:text-brand-gold transition duration-300">
+              4. The Offer</h3>
+            <p class="text-gray-400 text-sm mt-2 font-body leading-relaxed">
+              Welcome to the family. We extend a formal offer and onboard you to your new role.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="py-16 md:py-24 bg-brand-gold relative overflow-hidden">
+    <div
+      class="absolute inset-0 bg-black opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
+    </div>
+    <div class="container mx-auto px-6 relative z-10 text-center">
+      <h2 class="text-3xl md:text-5xl font-bold text-black mb-6 uppercase font-heading">Don't See a Perfect Fit?</h2>
+      <p class="text-black/80 text-xl mb-10 max-w-xl mx-auto font-medium font-body leading-relaxed">
+        We are always scouting for exceptional talent. Send us your CV, and we'll keep you on our radar for future
+        opportunities.
+      </p>
+      <a href="mailto:careers@strongbuilt.com"
+        class="inline-block bg-black text-white px-12 py-5 font-bold uppercase tracking-widest hover:scale-105 hover:bg-white hover:text-black transition shadow-2xl rounded-sm font-heading">
+        Send Open Application
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-black text-white pt-16 md:pt-20 pb-10 border-t border-white/10 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10"
+      style="background-image: radial-gradient(#333 1px, transparent 1px); background-size: 20px 20px;"></div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
+        <div class="col-span-1">
+          <div class="text-2xl font-bold text-white mb-6 font-heading tracking-widest flex items-center gap-2">
+            <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto">
+          </div>
+          <p class="text-gray-500 text-sm mb-6 font-light leading-relaxed">
+            Forging the future with concrete, steel, and integrity.
+          </p>
+          <div class="flex gap-4">
+            <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram"
+              class="w-10 h-10 border border-white/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition"><i
+                class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn"
+              class="w-10 h-10 border border-white/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition"><i
+                class="fab fa-linkedin-in"></i></a>
+            <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter"
+              class="w-10 h-10 border border-white/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition"><i
+                class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-brand-gold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Navigation</h4>
+          <ul class="space-y-3 text-sm text-gray-400 font-body">
+            <li><a href="story.html" class="hover:text-white transition">About</a></li>
+            <li><a href="services.html" class="hover:text-white transition">Services</a></li>
+            <li><a href="projects.html" class="hover:text-white transition">Projects</a></li>
+            <li><a href="clients.html" class="hover:text-white transition">Clients</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-brand-gold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Services</h4>
+          <ul class="space-y-3 text-sm text-gray-400 font-body">
+            <li><a href="services.html" class="hover:text-white transition">Residential</a></li>
+            <li><a href="services.html" class="hover:text-white transition">Commercial</a></li>
+            <li><a href="services.html" class="hover:text-white transition">Industrial</a></li>
+            <li><a href="services.html" class="hover:text-white transition">Infrastructure</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-brand-gold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Contact</h4>
+          <ul class="space-y-3 text-sm text-gray-400 font-body">
+            <li><i class="fas fa-map-marker-alt text-brand-gold mr-2"></i> 901-B Wing, 9th Floor, HDIL Kaledonia, Sahar
+              Road, Opp D'Mart, Sambhaji Nagar, Andheri-East, Mumbai - 400069.</li>
+            <li><i class="fas fa-phone text-brand-gold mr-2"></i> +91 9619875081 / 022-6123-2500</li>
+            <li><i class="fas fa-envelope text-brand-gold mr-2"></i> sales@strongbuilt.in <br>
+              strongbuilt@skywaygroup.co.in</li>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 font-light uppercase tracking-wider">
+        <p class="font-body">&copy; 2026 Strong Built. All rights reserved.</p>
+        <div class="flex gap-6 mt-4 md:mt-0 font-heading">
+          <a href="contact.html" class="hover:text-white">Privacy</a>
+          <a href="contact.html" class="hover:text-white">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    // Reveal Animations
+    function handleScrollAnimations() {
+      const reveals = document.querySelectorAll(".reveal-up, .reveal");
+      const windowHeight = window.innerHeight;
+
+      reveals.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 100) {
+          el.classList.add("reveal-active");
+          el.classList.add("active"); // Legacy support
+        }
+      });
+    }
+    window.addEventListener("scroll", handleScrollAnimations);
+    handleScrollAnimations(); // Trigger once
+
+    // Mobile Menu Logic - REMOVED
+  </script>
+  <script src="script.js"></script>
+</body>
+
+</html>

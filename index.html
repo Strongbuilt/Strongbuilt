@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth overflow-x-hidden">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strong Built | Engineering Legacies</title>
+  <meta name="description" content="Strong Built is a premier construction firm building legacies across residential, commercial, and industrial sectors with 15+ years of excellence in Mumbai, India.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="theme-config.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Outfit:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Hero side accent animation */
+    @keyframes accentPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+  </style>
+</head>
+
+<body class="bg-brand-dark text-gray-300 font-body overflow-x-hidden selection:bg-brand-gold selection:text-black">
+
+  <!-- PRELOADER -->
+  <div id="preloader" class="fixed inset-0 bg-black z-[9999] flex items-center justify-center">
+    <div class="text-center">
+      <div class="text-brand-gold text-4xl font-heading font-bold mb-4 tracking-[0.5em] animate-pulse">STRONG BUILT
+      </div>
+      <div class="w-48 h-0.5 bg-gray-800 mx-auto overflow-hidden">
+        <div class="h-full bg-brand-gold w-0 animate-loading-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION OVERLAY (Side Drawer) -->
+  <div id="navOverlay" class="nav-overlay">
+    <div id="navBackdrop" class="nav-overlay-backdrop"></div>
+    <div class="nav-overlay-content p-8 md:p-10">
+
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-12">
+        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto opacity-80">
+        <button id="closeMenuBtn" class="nav-close-btn"><i class="fas fa-times"></i></button>
+      </div>
+
+      <!-- Links -->
+      <ul class="space-y-0 flex-1">
+        <li><a href="index.html" class="sidebar-link" data-i18n="nav.home">Home</a></li>
+        <li>
+          <button class="sidebar-dropdown-btn">
+            <span data-i18n="nav.about">About</span> <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="sidebar-submenu">
+            <a href="story.html" class="sidebar-sublink" data-i18n="nav.story">Our Story</a>
+            <a href="leadership.html" class="sidebar-sublink" data-i18n="nav.leadership">Leadership</a>
+          </div>
+        </li>
+        <li><a href="projects.html" class="sidebar-link" data-i18n="nav.projects">Projects</a></li>
+        <li><a href="services.html" class="sidebar-link" data-i18n="nav.services">Services</a></li>
+        <li><a href="careers.html" class="sidebar-link" data-i18n="nav.careers">Careers</a></li>
+        <li>
+          <button class="sidebar-dropdown-btn">
+            <span data-i18n="nav.insights">Insights</span> <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="sidebar-submenu">
+            <a href="updates.html" class="sidebar-sublink" data-i18n="nav.news">News & Press</a>
+            <a href="blog.html" class="sidebar-sublink" data-i18n="nav.blog">Blog</a>
+            <a href="resources.html" class="sidebar-sublink" data-i18n="nav.resources">Resources</a>
+          </div>
+        </li>
+        <li><a href="contact.html" class="sidebar-link" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+
+      <!-- Contact Info -->
+      <div class="nav-info-block">
+        <div class="grid grid-cols-2 gap-4 mb-5">
+          <div class="nav-info-item">
+            <span class="nav-info-label">Call</span>
+            <p class="nav-info-value">+91 9619875081</p>
+          </div>
+          <div class="nav-info-item">
+            <span class="nav-info-label">Email</span>
+            <p class="nav-info-value">sales@strongbuilt.in</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav-social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="nav-social-link"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.twitter.com" target="_blank" rel="noopener" aria-label="Twitter" class="nav-social-link"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HEADER (Glass) -->
+  <header class="fixed w-full z-50 transition-all duration-300 glass-header" id="mainHeader">
+    <div class="container mx-auto px-6 h-24 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center group relative z-50">
+        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built Logo"
+          class="h-14 md:h-24 w-auto object-contain transition duration-300 hover:opacity-90">
+      </a>
+
+      <div class="flex items-center gap-4">
+        <!-- Language Selector -->
+        <div class="relative group" id="langSelector">
+          <button class="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-xs font-heading uppercase tracking-widest px-3 py-2 border border-white/10 rounded-full hover:border-brand-gold/30 bg-white/5 backdrop-blur-sm">
+            <i class="fas fa-globe text-brand-gold text-sm"></i>
+            <span id="currentLangLabel">EN</span>
+            <i class="fas fa-chevron-down text-[8px] ml-1"></i>
+          </button>
+          <div class="absolute right-0 top-full mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50">
+            <div class="glass-panel rounded-sm overflow-hidden min-w-[140px] py-1">
+              <button data-lang="en" onclick="I18N.switchTo('en')" class="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-white/10 transition-colors text-gray-400 border-b border-transparent"><span class="text-xs font-heading uppercase tracking-widest">English</span></button>
+              <button data-lang="hi" onclick="I18N.switchTo('hi')" class="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-white/10 transition-colors text-gray-400 border-b border-transparent"><span class="text-xs font-heading uppercase tracking-widest">हिंदी</span></button>
+              <button data-lang="mr" onclick="I18N.switchTo('mr')" class="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-white/10 transition-colors text-gray-400 border-b border-transparent"><span class="text-xs font-heading uppercase tracking-widest">मराठी</span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menu Trigger -->
+        <button id="menuToggle" class="menu-btn group">
+          <div class="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION (Cinematic) -->
+  <section class="relative h-screen flex items-end overflow-hidden">
+    <!-- Background -->
+    <div class="absolute inset-0 z-0 select-none">
+      <img src="assets/images/home.png" alt="Strong Built Hero Background"
+        class="w-full h-full object-cover animate-ken-burns opacity-50">
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20 z-10"></div>
+    </div>
+
+    <!-- Side accent line -->
+    <div class="absolute left-6 md:left-12 top-1/4 bottom-1/4 w-px bg-gradient-to-b from-transparent via-brand-gold/30 to-transparent z-20 hidden md:block"></div>
+
+    <!-- Content -->
+    <div class="container mx-auto px-6 relative z-20 pb-20 md:pb-28">
+      <div class="max-w-4xl">
+        <div class="flex items-center gap-4 mb-6 animate-fade-in-down">
+          <div class="h-px w-12 bg-brand-gold"></div>
+          <span class="text-brand-gold font-bold tracking-[0.5em] text-xs uppercase font-heading">Est. 2010</span>
+        </div>
+        <h1 class="text-6xl md:text-8xl lg:text-[10rem] font-bold text-white font-heading leading-[0.85] mb-8">
+          BUILDING<br><span class="text-gradient-gold">LEGACIES</span>
+        </h1>
+        <p class="text-gray-400 text-base md:text-lg font-light max-w-xl mb-10 leading-relaxed">
+          We construct not just structures, but skylines. Merging sustainable engineering with architectural mastery across 16 million sq. ft.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="projects.html"
+            class="group relative px-8 py-4 bg-brand-gold text-black overflow-hidden transition-all duration-300 hover:bg-white">
+            <span class="relative z-10 font-bold tracking-widest uppercase text-sm font-heading">Explore Projects</span>
+          </a>
+          <a href="contact.html"
+            class="group px-8 py-4 border border-white/20 text-white hover:border-brand-gold hover:text-brand-gold transition-all duration-300">
+            <span class="font-bold tracking-widest uppercase text-sm font-heading">Get a Quote</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 right-8 z-20 flex flex-col items-center gap-2 animate-bounce-slow">
+      <span class="text-[9px] text-gray-500 uppercase tracking-widest font-heading rotate-90 origin-center translate-y-6">Scroll</span>
+      <div class="w-px h-10 bg-gradient-to-b from-brand-gold to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <section class="border-b border-white/10 bg-black relative z-20">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/5">
+        <div class="group py-8 md:py-12 text-center cursor-default reveal-up">
+          <span class="block text-3xl md:text-5xl font-bold text-white mb-1 group-hover:text-brand-gold transition duration-300 font-heading stat-counter" data-target="15">0</span>
+          <span class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 font-heading">Years Excellence</span>
+        </div>
+        <div class="group py-8 md:py-12 text-center cursor-default reveal-up" style="transition-delay: 100ms;">
+          <span class="block text-3xl md:text-5xl font-bold text-white mb-1 group-hover:text-brand-gold transition duration-300 font-heading stat-counter" data-target="40">0</span>
+          <span class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 font-heading">Projects Done</span>
+        </div>
+        <div class="group py-8 md:py-12 text-center cursor-default reveal-up" style="transition-delay: 200ms;">
+          <span class="block text-3xl md:text-5xl font-bold text-white mb-1 group-hover:text-brand-gold transition duration-300 font-heading stat-counter" data-target="16">0</span>
+          <span class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 font-heading">Million Sq. Ft.</span>
+        </div>
+        <div class="group py-8 md:py-12 text-center cursor-default reveal-up" style="transition-delay: 300ms;">
+          <span class="block text-3xl md:text-5xl font-bold text-white mb-1 group-hover:text-brand-gold transition duration-300 font-heading stat-counter" data-target="100">0</span>
+          <span class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 font-heading">Safety Record %</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="py-20 md:py-32 bg-brand-dark relative">
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <!-- Left: Text -->
+        <div class="reveal-up">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="h-px w-12 bg-brand-gold"></div>
+            <span class="text-brand-gold text-xs font-bold tracking-[0.4em] uppercase font-heading">Who We Are</span>
+          </div>
+          <h2 class="text-4xl md:text-5xl font-bold text-white font-heading mb-6 leading-tight">Engineering <br>the <span class="text-gradient-gold">Future</span></h2>
+          <p class="text-gray-400 leading-relaxed mb-8 font-light text-lg">
+            Strong Built is a premier construction firm dedicated to transforming visions into tangible realities.
+            With over 40 completed projects across residential, commercial, and industrial sectors, we set the benchmark
+            for quality and safety.
+          </p>
+          <a href="story.html" class="inline-flex items-center gap-3 text-brand-gold border-b border-brand-gold/30 pb-1 hover:border-brand-gold transition font-heading text-xs uppercase tracking-widest group">
+            Our Story <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-1 transition duration-300"></i>
+          </a>
+        </div>
+
+        <!-- Right: Feature image with overlay stat -->
+        <div class="relative reveal-up" style="transition-delay: 200ms;">
+          <div class="overflow-hidden border border-white/10">
+            <img src="assets/Projects/monticello.jpg" alt="Strong Built Monticello Project" class="w-full h-[500px] object-cover grayscale hover:grayscale-0 transition duration-700 hover:scale-105">
+          </div>
+          <div class="absolute -bottom-6 -left-6 bg-black border border-brand-gold/20 p-6 backdrop-blur-sm">
+            <span class="block text-4xl font-bold text-white font-heading">15<span class="text-brand-gold">+</span></span>
+            <span class="text-xs text-gray-400 uppercase tracking-widest font-heading">Years of<br>Excellence</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE VALUES (Glassmorphism Cards) -->
+  <section class="py-16 md:py-24 bg-black relative border-t border-white/5">
+    <div
+      class="absolute inset-0 bg-brand-gold/5 blur-[100px] rounded-full pointer-events-none opacity-20 transform -translate-x-1/2">
+    </div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center mb-20 reveal-up">
+        <div class="flex items-center gap-4 justify-center mb-4">
+          <div class="h-px w-12 bg-brand-gold"></div>
+          <span class="text-brand-gold text-xs font-bold tracking-[0.4em] uppercase font-heading">Our Foundation</span>
+          <div class="h-px w-12 bg-brand-gold"></div>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold text-white font-heading uppercase">Core <span class="text-gradient-gold">Values</span></h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <div
+          class="glass-panel p-10 text-center group hover:bg-brand-gold/5 transition duration-500 reveal-up border-t-0 hover:border-brand-gold/30">
+          <div
+            class="w-20 h-20 mx-auto rounded-full bg-brand-dark border border-brand-gold/30 flex items-center justify-center mb-8 group-hover:scale-110 transition duration-500 shadow-[0_0_30px_rgba(191,149,63,0.1)] group-hover:shadow-[0_0_30px_rgba(191,149,63,0.4)]">
+            <i class="fas fa-leaf text-3xl text-brand-gold"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-white font-heading mb-4 group-hover:text-brand-gold transition">
+            Sustainability</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">We engineer for the future, utilizing eco-friendly materials
+            and energy-efficient designs that respect our planet and reduce carbon footprints.</p>
+        </div>
+        <!-- Card 2 -->
+        <div
+          class="glass-panel p-10 text-center group hover:bg-brand-gold/5 transition duration-500 reveal-up border-t-0 hover:border-brand-gold/30"
+          style="transition-delay: 100ms;">
+          <div
+            class="w-20 h-20 mx-auto rounded-full bg-brand-dark border border-brand-gold/30 flex items-center justify-center mb-8 group-hover:scale-110 transition duration-500 shadow-[0_0_30px_rgba(191,149,63,0.1)] group-hover:shadow-[0_0_30px_rgba(191,149,63,0.4)]">
+            <i class="fas fa-lightbulb text-3xl text-brand-gold"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-white font-heading mb-4 group-hover:text-brand-gold transition">Innovation
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Embracing cutting-edge technology and modern engineering
+            marvels to build smarter, safer, and more enduring structures.</p>
+        </div>
+        <!-- Card 3 -->
+        <div
+          class="glass-panel p-10 text-center group hover:bg-brand-gold/5 transition duration-500 reveal-up border-t-0 hover:border-brand-gold/30"
+          style="transition-delay: 200ms;">
+          <div
+            class="w-20 h-20 mx-auto rounded-full bg-brand-dark border border-brand-gold/30 flex items-center justify-center mb-8 group-hover:scale-110 transition duration-500 shadow-[0_0_30px_rgba(191,149,63,0.1)] group-hover:shadow-[0_0_30px_rgba(191,149,63,0.4)]">
+            <i class="fas fa-handshake text-3xl text-brand-gold"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-white font-heading mb-4 group-hover:text-brand-gold transition">Integrity
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Built on trust. We maintain transparent communication and
+            honest practices in every brick we lay and every contract we sign.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNATURE PROJECTS (Full Screen Slider) -->
+  <section class="relative bg-black h-screen overflow-hidden">
+    <div class="swiper-container h-full w-full">
+      <div class="swiper-wrapper">
+
+        <!-- Slide 1: Monticello -->
+        <div class="swiper-slide relative flex items-center justify-center overflow-hidden">
+          <div class="absolute inset-0">
+            <img src="assets/Projects/monticello.jpg"
+              class="w-full h-full object-cover grayscale brightness-50 transition duration-[2s] hover:scale-105 hover:grayscale-0">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+          </div>
+          <div
+            class="relative z-10 text-center px-6 max-w-4xl mx-auto transform transition-all duration-1000 translate-y-0 opacity-100">
+            <span
+              class="block text-brand-gold font-bold tracking-[0.3em] uppercase mb-4 text-sm animate-fade-in">Residential
+              Icon</span>
+            <h2 class="text-6xl md:text-8xl font-bold text-white font-heading mb-6 leading-none">MONTICELLO</h2>
+            <p class="text-gray-300 text-lg font-light mb-10 max-w-2xl mx-auto">A testament to vertical luxury living.
+            </p>
+            <a href="projects.html"
+              class="inline-block border-b border-brand-gold text-white pb-1 hover:text-brand-gold transition">View
+              Details</a>
+          </div>
+        </div>
+
+        <!-- Slide 2: Tree Top -->
+        <div class="swiper-slide relative flex items-center justify-center overflow-hidden">
+          <div class="absolute inset-0">
+            <img src="assets/Projects/Tree Top.jpg"
+              class="w-full h-full object-cover grayscale brightness-50 transition duration-[2s] hover:scale-105 hover:grayscale-0">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+          </div>
+          <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <span class="block text-brand-gold font-bold tracking-[0.3em] uppercase mb-4 text-sm">Eco-Conscious</span>
+            <h2 class="text-6xl md:text-8xl font-bold text-white font-heading mb-6 leading-none">TREE TOP</h2>
+            <p class="text-gray-300 text-lg font-light mb-10 max-w-2xl mx-auto">Merging modern architecture with nature.
+            </p>
+            <a href="projects.html"
+              class="inline-block border-b border-brand-gold text-white pb-1 hover:text-brand-gold transition">View
+              Details</a>
+          </div>
+        </div>
+
+        <!-- Slide 3: Splendora -->
+        <div class="swiper-slide relative flex items-center justify-center overflow-hidden">
+          <div class="absolute inset-0">
+            <img src="assets/Projects/selendora.jpg"
+              class="w-full h-full object-cover grayscale brightness-50 transition duration-[2s] hover:scale-105 hover:grayscale-0">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+          </div>
+          <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <span class="block text-brand-gold font-bold tracking-[0.3em] uppercase mb-4 text-sm">Mixed Use</span>
+            <h2 class="text-6xl md:text-8xl font-bold text-white font-heading mb-6 leading-none">SPLENDORA</h2>
+            <p class="text-gray-300 text-lg font-light mb-10 max-w-2xl mx-auto">Self-sustaining urban ecosystem.</p>
+            <a href="projects.html"
+              class="inline-block border-b border-brand-gold text-white pb-1 hover:text-brand-gold transition">View
+              Details</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Navigation -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev text-brand-gold/50 hover:text-brand-gold transition absolute left-8 z-20"><i
+          class="fas fa-chevron-left text-3xl"></i></div>
+      <div class="swiper-button-next text-brand-gold/50 hover:text-brand-gold transition absolute right-8 z-20"><i
+          class="fas fa-chevron-right text-3xl"></i></div>
+    </div>
+  </section>
+
+  <!-- EXPERTISE (Bento Grid) -->
+  <section class="py-16 md:py-24 bg-brand-dark px-6">
+    <div class="container mx-auto">
+      <div class="text-center mb-16 reveal-up">
+        <div class="flex items-center gap-4 justify-center mb-4">
+          <div class="h-px w-12 bg-brand-gold"></div>
+          <span class="text-brand-gold text-xs font-bold tracking-[0.4em] uppercase font-heading">What We Do</span>
+          <div class="h-px w-12 bg-brand-gold"></div>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold text-white font-heading uppercase">Our <span class="text-gradient-gold">Expertise</span></h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+
+        <!-- Card 1: Residential (Tall) -->
+        <div
+          class="md:row-span-2 glass-panel p-8 relative overflow-hidden group hover:border-brand-gold/30 transition duration-500 reveal-up">
+          <div
+            class="absolute top-0 right-0 p-6 text-6xl text-white/5 font-heading group-hover:text-brand-gold/10 transition">
+            01</div>
+          <i class="fas fa-home text-4xl text-brand-gold mb-6 block"></i>
+          <h3 class="text-2xl font-bold text-white font-heading mb-4">Residential</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">High-end villas and skyscraper apartments designed for
+            luxury and comfort.</p>
+          <ul class="text-xs text-gray-500 space-y-2">
+            <li><i class="fas fa-check text-brand-gold mr-2"></i> Custom Villas</li>
+            <li><i class="fas fa-check text-brand-gold mr-2"></i> High Rise Towers</li>
+            <li><i class="fas fa-check text-brand-gold mr-2"></i> Townships</li>
+          </ul>
+          <div
+            class="absolute bottom-0 left-0 w-full h-1 bg-brand-gold transform scale-x-0 group-hover:scale-x-100 transition duration-500">
+          </div>
+        </div>
+
+        <!-- Card 2: Commercial -->
+        <div
+          class="glass-panel p-8 relative overflow-hidden group hover:border-brand-gold/30 transition duration-500 reveal-up"
+          style="transition-delay: 100ms;">
+          <div
+            class="absolute top-0 right-0 p-6 text-6xl text-white/5 font-heading group-hover:text-brand-gold/10 transition">
+            02</div>
+          <i class="fas fa-city text-4xl text-brand-gold mb-6 block"></i>
+          <h3 class="text-2xl font-bold text-white font-heading mb-4">Commercial</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Office spaces and IT parks optimized for productivity.</p>
+        </div>
+
+        <!-- Card 3: Industrial -->
+        <div
+          class="glass-panel p-8 relative overflow-hidden group hover:border-brand-gold/30 transition duration-500 reveal-up"
+          style="transition-delay: 200ms;">
+          <div
+            class="absolute top-0 right-0 p-6 text-6xl text-white/5 font-heading group-hover:text-brand-gold/10 transition">
+            03</div>
+          <i class="fas fa-industry text-4xl text-brand-gold mb-6 block"></i>
+          <h3 class="text-2xl font-bold text-white font-heading mb-4">Industrial</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Warehousing and manufacturing units built to last.</p>
+        </div>
+
+        <!-- Card 4: Architecture (Wide) -->
+        <div
+          class="md:col-span-2 glass-panel p-8 relative overflow-hidden group hover:border-brand-gold/30 transition duration-500 flex items-center reveal-up"
+          style="transition-delay: 300ms;">
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-brand-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
+          </div>
+          <div class="relative z-10 grid md:grid-cols-2 gap-8 items-center w-full">
+            <div>
+              <h3 class="text-2xl font-bold text-white font-heading mb-4">Design & Planning</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">We don't just build; we design. Our in-house
+                architectural team ensures every project is aesthetically pleasing and structurally sound.</p>
+            </div>
+            <div class="text-right hidden md:block">
+              <i
+                class="fas fa-drafting-compass text-6xl text-brand-gold/20 group-hover:text-brand-gold/80 transition transform group-hover:rotate-12"></i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR PROCESS (Timeline Style) -->
+  <section class="py-16 md:py-24 bg-brand-dark relative border-t border-white/5 overflow-hidden">
+    <!-- Background styling -->
+    <div
+      class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-gold/5 to-transparent pointer-events-none">
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center mb-24 reveal-up">
+        <div class="flex items-center gap-4 justify-center mb-4">
+          <div class="h-px w-12 bg-brand-gold"></div>
+          <span class="text-brand-gold text-xs font-bold tracking-[0.4em] uppercase font-heading">Our Process</span>
+          <div class="h-px w-12 bg-brand-gold"></div>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold text-white font-heading uppercase">How We <span class="text-gradient-gold">Build</span></h2>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-8 relative">
+        <!-- Connecting Line (hidden on mobile) -->
+        <div class="absolute top-8 left-0 w-full h-0.5 bg-white/10 hidden md:block z-0"></div>
+
+        <!-- Step 1 -->
+        <div class="relative group reveal-up z-10">
+          <div
+            class="w-16 h-16 bg-brand-dark border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-white mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(191,149,63,0.3)]">
+            <span>01</span>
+          </div>
+          <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
+            <h3 class="text-xl font-bold text-white font-heading mb-3 text-brand-gold">Consultation</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">We start by deeply understanding your vision, requirements,
+              and site potential.</p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="relative group reveal-up z-10" style="transition-delay: 150ms;">
+          <div
+            class="w-16 h-16 bg-brand-dark border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-white mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(191,149,63,0.3)]">
+            <span>02</span>
+          </div>
+          <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
+            <h3 class="text-xl font-bold text-white font-heading mb-3 text-brand-gold">Design & Plan</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Our architects create detailed blueprints, 3D models, and
+              structural plans.</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="relative group reveal-up z-10" style="transition-delay: 300ms;">
+          <div
+            class="w-16 h-16 bg-brand-dark border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-white mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(191,149,63,0.3)]">
+            <span>03</span>
+          </div>
+          <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
+            <h3 class="text-xl font-bold text-white font-heading mb-3 text-brand-gold">Construction</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">We execute with precision, using premium materials and
+              adhering to safety standards.</p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="relative group reveal-up z-10" style="transition-delay: 450ms;">
+          <div
+            class="w-16 h-16 bg-brand-dark border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-white mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(191,149,63,0.3)]">
+            <span>04</span>
+          </div>
+          <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
+            <h3 class="text-xl font-bold text-white font-heading mb-3 text-brand-gold">Handover</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Final inspections, quality checks, and delivering the keys
+              to your legacy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LATEST INSIGHTS (News Ticker style) -->
+  <section class="py-20 border-t border-white/5 bg-black">
+    <div class="container mx-auto px-6">
+      <div class="flex justify-between items-end mb-12">
+        <h2 class="text-3xl font-bold text-white font-heading">LATEST <span class="text-brand-gold">UPDATES</span></h2>
+        <a href="updates.html" class="text-xs text-gray-500 hover:text-white uppercase tracking-widest transition">View
+          All -></a>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Article 1 -->
+        <a href="updates.html" class="group block reveal-up">
+          <div class="overflow-hidden aspect-video mb-4 relative">
+            <div
+              class="absolute inset-0 bg-brand-gold/10 opacity-0 group-hover:opacity-100 transition z-10 mix-blend-overlay">
+            </div>
+            <img src="assets/Projects/monticello.jpg"
+              class="w-full h-full object-cover transition duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
+          </div>
+          <div class="text-brand-gold text-[10px] uppercase tracking-widest mb-2 font-bold">Press Release</div>
+          <h3 class="text-xl font-bold text-white group-hover:text-brand-gold transition font-heading leading-tight">
+            Strong Built Expands Operations to Middle East</h3>
+        </a>
+
+        <!-- Article 2 -->
+        <a href="updates.html" class="group block reveal-up" style="transition-delay: 100ms;">
+          <div class="overflow-hidden aspect-video mb-4 relative">
+            <div
+              class="absolute inset-0 bg-brand-gold/10 opacity-0 group-hover:opacity-100 transition z-10 mix-blend-overlay">
+            </div>
+            <img src="assets/Projects/Tree Top.jpg"
+              class="w-full h-full object-cover transition duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
+          </div>
+          <div class="text-brand-gold text-[10px] uppercase tracking-widest mb-2 font-bold">Milestone</div>
+          <h3 class="text-xl font-bold text-white group-hover:text-brand-gold transition font-heading leading-tight">
+            Achieving Carbon Neutrality Goals</h3>
+        </a>
+
+        <!-- Article 3 -->
+        <a href="updates.html" class="group block reveal-up" style="transition-delay: 200ms;">
+          <div class="overflow-hidden aspect-video mb-4 relative">
+            <div
+              class="absolute inset-0 bg-brand-gold/10 opacity-0 group-hover:opacity-100 transition z-10 mix-blend-overlay">
+            </div>
+            <img src="assets/Projects/selendora.jpg"
+              class="w-full h-full object-cover transition duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
+          </div>
+          <div class="text-brand-gold text-[10px] uppercase tracking-widest mb-2 font-bold">Project Launch</div>
+          <h3 class="text-xl font-bold text-white group-hover:text-brand-gold transition font-heading leading-tight">
+            Groundbreaking for Vertex Tower Phase 2</h3>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTS (Ticker) -->
+  <section class="py-10 bg-brand-dark border-y border-white/5 relative overflow-hidden">
+    <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-brand-dark to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-brand-dark to-transparent z-10 pointer-events-none"></div>
+    <div class="flex animate-marquee whitespace-nowrap w-max">
+      <div class="flex gap-12 md:gap-20 px-6 items-center">
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 hover:text-brand-gold/60 transition duration-300 cursor-default">LODHA</span>
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 hover:text-brand-gold/60 transition duration-300 cursor-default">RUSTOMJEE</span>
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 hover:text-brand-gold/60 transition duration-300 cursor-default">MAHINDRA LIFESPACES</span>
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 hover:text-brand-gold/60 transition duration-300 cursor-default">HIRANANDANI</span>
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 hover:text-brand-gold/60 transition duration-300 cursor-default">DHEERAJ REALTY</span>
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 hover:text-brand-gold/60 transition duration-300 cursor-default">EKTA WORLD</span>
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 hover:text-brand-gold/60 transition duration-300 cursor-default">AJMERA</span>
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 hover:text-brand-gold/60 transition duration-300 cursor-default">PURANIKS</span>
+      </div>
+      <div class="flex gap-12 md:gap-20 px-6 items-center" aria-hidden="true">
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 cursor-default">LODHA</span>
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 cursor-default">RUSTOMJEE</span>
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 cursor-default">MAHINDRA LIFESPACES</span>
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 cursor-default">HIRANANDANI</span>
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 cursor-default">DHEERAJ REALTY</span>
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 cursor-default">EKTA WORLD</span>
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 cursor-default">AJMERA</span>
+        <span class="text-xl md:text-2xl font-bold font-heading text-white/15 cursor-default">PURANIKS</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="py-20 md:py-32 bg-black relative border-t border-white/5">
+    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-gold/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal-up">
+        <div>
+          <div class="flex items-center gap-4 mb-4">
+            <div class="h-px w-12 bg-brand-gold"></div>
+            <span class="text-brand-gold text-xs font-bold tracking-[0.4em] uppercase font-heading">Testimonials</span>
+          </div>
+          <h2 class="text-4xl md:text-5xl font-bold text-white font-heading uppercase">Client <span class="text-gradient-gold">Voices</span></h2>
+        </div>
+        <p class="mt-6 md:mt-0 text-gray-500 max-w-sm text-sm md:text-right">
+          Trusted by leading developers and organizations across the nation.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Review 1 -->
+        <div class="glass-panel p-8 reveal-up hover:border-brand-gold/30 transition duration-500 flex flex-col">
+          <i class="fas fa-quote-left text-brand-gold/20 text-3xl mb-4"></i>
+          <p class="text-lg text-gray-300 italic mb-8 leading-relaxed font-light flex-1">"Strong Built transformed our concept
+            into a landmark. Their attention to detail and commitment to quality is unmatched in the industry."</p>
+          <div class="flex items-center gap-4 border-t border-white/5 pt-6">
+            <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center border border-white/10 shrink-0">
+              <span class="text-lg font-heading font-bold text-brand-gold">RM</span>
+            </div>
+            <div>
+              <h4 class="text-white font-bold font-heading">Rajesh Mehta</h4>
+              <p class="text-brand-gold/70 text-[10px] uppercase tracking-widest font-bold">CEO, Horizon Group</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="glass-panel p-8 reveal-up hover:border-brand-gold/30 transition duration-500 flex flex-col" style="transition-delay: 150ms;">
+          <i class="fas fa-quote-left text-brand-gold/20 text-3xl mb-4"></i>
+          <p class="text-lg text-gray-300 italic mb-8 leading-relaxed font-light flex-1">"Professionalism from start to finish.
+            They delivered our project ahead of schedule and exceeded our safety expectations."</p>
+          <div class="flex items-center gap-4 border-t border-white/5 pt-6">
+            <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center border border-white/10 shrink-0">
+              <span class="text-lg font-heading font-bold text-brand-gold">PS</span>
+            </div>
+            <div>
+              <h4 class="text-white font-bold font-heading">Priya Sharma</h4>
+              <p class="text-brand-gold/70 text-[10px] uppercase tracking-widest font-bold">Director, Sky High Realty</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="glass-panel p-8 reveal-up hover:border-brand-gold/30 transition duration-500 flex flex-col" style="transition-delay: 300ms;">
+          <i class="fas fa-quote-left text-brand-gold/20 text-3xl mb-4"></i>
+          <p class="text-lg text-gray-300 italic mb-8 leading-relaxed font-light flex-1">"Strong Built handled our complex commercial project with remarkable expertise. Their safety record and on-time delivery set them apart from every other contractor."</p>
+          <div class="flex items-center gap-4 border-t border-white/5 pt-6">
+            <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center border border-white/10 shrink-0">
+              <span class="text-lg font-heading font-bold text-brand-gold">AK</span>
+            </div>
+            <div>
+              <h4 class="text-white font-bold font-heading">Arun Kapoor</h4>
+              <p class="text-brand-gold/70 text-[10px] uppercase tracking-widest font-bold">MD, Vertex Developers</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative overflow-hidden">
+    <div class="grid md:grid-cols-2 min-h-[400px]">
+      <!-- Left: Image -->
+      <div class="relative h-64 md:h-auto overflow-hidden">
+        <img src="assets/Projects/Tree Top.jpg" alt="Strong Built Project" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700">
+        <div class="absolute inset-0 bg-black/40"></div>
+      </div>
+      <!-- Right: Content -->
+      <div class="bg-brand-gold flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+        <div class="relative z-10 p-10 md:p-16 lg:p-20">
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-black font-heading mb-6 leading-tight uppercase">Ready to<br>Build?</h2>
+          <p class="text-black/70 text-base md:text-lg mb-8 max-w-md font-light">Let's discuss how we can turn your architectural dreams into lasting structures.</p>
+          <a href="contact.html"
+            class="inline-block px-10 py-4 bg-black text-white font-bold uppercase tracking-widest hover:bg-white hover:text-black transition duration-300 font-heading text-sm">
+            Get a Quote
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-black text-white pt-16 md:pt-20 pb-10 border-t border-white/10 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10"
+      style="background-image: radial-gradient(#333 1px, transparent 1px); background-size: 20px 20px;"></div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
+        <div class="col-span-1">
+          <div class="text-2xl font-bold text-white mb-6 font-heading tracking-widest flex items-center gap-2">
+            <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto">
+          </div>
+          <p class="text-gray-500 text-sm mb-6 font-light leading-relaxed">
+            Forging the future with concrete, steel, and integrity.
+          </p>
+          <div class="flex gap-4">
+            <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram"
+              class="w-10 h-10 border border-white/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition"><i
+                class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"
+              class="w-10 h-10 border border-white/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition"><i
+                class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.twitter.com" target="_blank" rel="noopener" aria-label="Twitter"
+              class="w-10 h-10 border border-white/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition"><i
+                class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-brand-gold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Navigation</h4>
+          <ul class="space-y-3 text-sm text-gray-400 font-body">
+            <li><a href="story.html" class="hover:text-white transition">About</a></li>
+            <li><a href="services.html" class="hover:text-white transition">Services</a></li>
+            <li><a href="projects.html" class="hover:text-white transition">Projects</a></li>
+            <li><a href="clients.html" class="hover:text-white transition">Clients</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-brand-gold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Services</h4>
+          <ul class="space-y-3 text-sm text-gray-400 font-body">
+            <li><a href="services.html" class="hover:text-white transition">Residential</a></li>
+            <li><a href="services.html" class="hover:text-white transition">Commercial</a></li>
+            <li><a href="services.html" class="hover:text-white transition">Industrial</a></li>
+            <li><a href="services.html" class="hover:text-white transition">Infrastructure</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-brand-gold font-bold uppercase tracking-widest mb-6 text-sm font-heading" data-i18n="footer.connect">Contact</h4>
+          <ul class="space-y-3 text-sm text-gray-400 font-body">
+            <li><i class="fas fa-map-marker-alt text-brand-gold mr-2"></i> 901-B Wing, 9th Floor, HDIL Kaledonia, Sahar
+              Road, Opp D'Mart, Sambhaji Nagar, Andheri-East, Mumbai - 400069.</li>
+            <li><i class="fas fa-phone text-brand-gold mr-2"></i> +91 9619875081 / 022-6123-2500</li>
+            <li><i class="fas fa-envelope text-brand-gold mr-2"></i> sales@strongbuilt.in <br>
+              strongbuilt@skywaygroup.co.in</li>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 font-light uppercase tracking-wider">
+        <p class="font-body">&copy; 2026 Strong Built. All rights reserved.</p>
+        <div class="flex gap-6 mt-4 md:mt-0 font-heading">
+          <a href="contact.html" class="hover:text-white">Privacy</a>
+          <a href="contact.html" class="hover:text-white">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+  <script src="script.js"></script>
+  <script src="i18n.js"></script>
+
+</body>
+
+</html>

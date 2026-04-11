@@ -1,0 +1,6 @@
+.claude/
+index_backup.html
+.DS_Store
+*.log
+node_modules/
+.env

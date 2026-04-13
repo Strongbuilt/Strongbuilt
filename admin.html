@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Manage Projects | Strong Built</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="icon" type="image/png" href="assets/Favicon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="assets/Favicon/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Leaflet for coordinate picker -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="theme-config.js"></script>
+
+  <!-- Load existing project data (works when opened from project folder) -->
+  <script src="projects-data.js"></script>
+
+  <style>
+    body { font-family: 'Outfit', sans-serif; background: #030303; color: #e5e5e5; }
+    h1, h2, h3, h4, .font-heading, button, input, select, textarea, label { font-family: 'Oswald', sans-serif; }
+    .text-gradient-gold { background: linear-gradient(to right, #FFD700, #FFE566, #C5A000, #FFE566, #FFD700); background-size: 200% auto; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 5s linear infinite; }
+    @keyframes shine { to { background-position: 200% center; } }
+    .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.05); }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #FFD700; }
+
+    input, select, textarea { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; transition: all 0.3s; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #FFD700; box-shadow: 0 0 0 2px rgba(255,215,0,0.15); background: rgba(255,255,255,0.08); }
+    label { display: block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #FFD700; margin-bottom: 0.4rem; }
+
+    .btn-primary { background: #FFD700; color: #000; border: 1px solid #FFD700; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.3s; }
+    .btn-primary:hover { background: #fff; border-color: #fff; }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.2); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.3s; }
+    .btn-outline:hover { border-color: #FFD700; color: #FFD700; }
+    .btn-danger { background: transparent; color: #f87171; border: 1px solid rgba(248,113,113,0.3); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.3s; }
+    .btn-danger:hover { background: rgba(248,113,113,0.1); border-color: #f87171; }
+
+    #pickerMap { height: 220px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
+    .leaflet-container { background: #1a1a1a; }
+    .leaflet-control-zoom a { background: rgba(0,0,0,0.8) !important; color: #FFD700 !important; border: 1px solid rgba(255,215,0,0.2) !important; }
+
+    .project-row { transition: all 0.3s; border-left: 2px solid transparent; }
+    .project-row:hover { background: rgba(255,255,255,0.05); border-left-color: #FFD700; }
+    .project-row.editing { background: rgba(255,215,0,0.08); border-left-color: #FFD700; }
+
+    .badge { font-size: 0.6rem; font-weight: 700; padding: 2px 8px; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 2px; display: inline-block; }
+    .badge-resi { background: rgba(255,215,0,0.15); color: #FFD700; }
+    .badge-comm { background: rgba(255,140,0,0.15); color: #FF8C00; }
+    .badge-infra { background: rgba(192,192,192,0.15); color: #C0C0C0; }
+    .badge-ongoing { background: rgba(34,197,94,0.15); color: #4ade80; }
+    .badge-completed { background: rgba(255,255,255,0.05); color: #9ca3af; }
+
+    .toast { position: fixed; top: 20px; right: 20px; padding: 12px 20px; background: rgba(10,10,10,0.95); border: 1px solid #FFD700; color: #fff; border-radius: 4px; z-index: 10000; animation: slideIn 0.3s ease-out; backdrop-filter: blur(10px); }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+    .dirty-indicator { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #f87171; margin-left: 8px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Header -->
+  <header class="border-b border-white/10 bg-black/40 backdrop-blur-xl sticky top-0 z-30">
+    <div class="container mx-auto px-4 md:px-6 py-4 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 md:gap-4">
+        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-10 md:h-14 w-auto">
+        <div>
+          <h1 class="text-lg md:text-2xl font-bold text-white font-heading uppercase tracking-wider leading-none">Project <span class="text-gradient-gold">Admin</span></h1>
+          <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mt-1">
+            Local editor <span id="dirtyBadge" class="hidden"><span class="dirty-indicator"></span><span class="text-red-400">Unsaved changes</span></span>
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 md:gap-3">
+        <button id="importBtn" class="btn-outline px-3 md:px-4 py-2 text-[10px] md:text-xs rounded-sm" title="Import projects-data.js"><i class="fas fa-upload"></i> <span class="hidden md:inline">Import</span></button>
+        <button id="downloadBtn" class="btn-primary px-3 md:px-5 py-2 text-[10px] md:text-xs rounded-sm"><i class="fas fa-download"></i> <span class="hidden md:inline">Download</span> projects-data.js</button>
+      </div>
+    </div>
+  </header>
+
+  <input type="file" id="importFile" accept=".js,.json" class="hidden">
+
+  <!-- Main layout -->
+  <main class="container mx-auto px-4 md:px-6 py-6 md:py-10 grid lg:grid-cols-[1fr_420px] gap-6 md:gap-8">
+
+    <!-- LEFT: Project list -->
+    <section class="glass rounded-sm p-4 md:p-6">
+      <div class="flex items-center justify-between mb-4 gap-3">
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold text-white uppercase">Projects <span id="countBadge" class="text-brand-gold text-sm ml-2">0</span></h2>
+          <p class="text-xs text-gray-500 mt-1">Click a row to edit, or Add New</p>
+        </div>
+        <button id="addNewBtn" class="btn-primary px-4 py-2 text-xs rounded-sm flex-shrink-0"><i class="fas fa-plus mr-1"></i> Add New</button>
+      </div>
+
+      <div class="mb-4">
+        <input id="searchInput" type="search" placeholder="Search by title, client, or location..." class="w-full px-3 py-2 text-sm rounded-sm">
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-white/10 text-[10px] text-gray-500 uppercase tracking-widest">
+              <th class="text-left py-3 px-2 font-heading">Title</th>
+              <th class="text-left py-3 px-2 font-heading hidden md:table-cell">Client</th>
+              <th class="text-left py-3 px-2 font-heading hidden sm:table-cell">Location</th>
+              <th class="text-left py-3 px-2 font-heading">Status</th>
+              <th class="text-right py-3 px-2 font-heading">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="projectList"></tbody>
+        </table>
+      </div>
+
+      <div id="emptyState" class="hidden text-center py-12">
+        <i class="fas fa-folder-open text-4xl text-gray-700 mb-3 block"></i>
+        <p class="text-gray-400 text-sm">No projects yet. Click <strong>Add New</strong> to get started.</p>
+      </div>
+    </section>
+
+    <!-- RIGHT: Edit Form -->
+    <aside class="glass rounded-sm p-4 md:p-6 sticky top-24 self-start max-h-[calc(100vh-120px)] overflow-y-auto">
+      <h2 id="formTitle" class="text-xl md:text-2xl font-bold text-white uppercase mb-5">New Project</h2>
+
+      <form id="projectForm" class="space-y-4">
+        <input type="hidden" id="fieldIndex" value="">
+
+        <div>
+          <label for="fieldTitle">Title *</label>
+          <input id="fieldTitle" type="text" required class="w-full px-3 py-2 rounded-sm text-sm" placeholder="Monticello">
+        </div>
+
+        <div>
+          <label for="fieldId">ID (slug) *</label>
+          <input id="fieldId" type="text" required class="w-full px-3 py-2 rounded-sm text-sm" placeholder="monticello" pattern="[a-z0-9-]+" title="lowercase letters, numbers, and hyphens only">
+          <p class="text-[10px] text-gray-600 mt-1">Auto-generated from title. Use lowercase, hyphens only.</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label for="fieldClient">Client *</label>
+            <input id="fieldClient" type="text" required class="w-full px-3 py-2 rounded-sm text-sm" placeholder="Dheeraj Realty">
+          </div>
+          <div>
+            <label for="fieldYear">Year *</label>
+            <input id="fieldYear" type="number" required min="2000" max="2050" class="w-full px-3 py-2 rounded-sm text-sm" placeholder="2024">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label for="fieldCategory">Category *</label>
+            <select id="fieldCategory" required class="w-full px-3 py-2 rounded-sm text-sm">
+              <option value="residential">Residential</option>
+              <option value="commercial">Commercial</option>
+              <option value="infrastructure">Infrastructure</option>
+            </select>
+          </div>
+          <div>
+            <label for="fieldStatus">Status *</label>
+            <select id="fieldStatus" required class="w-full px-3 py-2 rounded-sm text-sm">
+              <option value="completed">Completed</option>
+              <option value="ongoing">Ongoing</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label for="fieldLocation">Location *</label>
+            <input id="fieldLocation" type="text" required class="w-full px-3 py-2 rounded-sm text-sm" placeholder="Mumbai">
+          </div>
+          <div>
+            <label for="fieldArea">Area *</label>
+            <input id="fieldArea" type="text" required class="w-full px-3 py-2 rounded-sm text-sm" placeholder="1.5L Sq.ft">
+          </div>
+        </div>
+
+        <div>
+          <label for="fieldImg">Image Path</label>
+          <input id="fieldImg" type="text" class="w-full px-3 py-2 rounded-sm text-sm" placeholder="assets/Projects/project-name.jpg">
+          <p class="text-[10px] text-gray-600 mt-1">Save image to <code class="text-brand-gold">assets/Projects/</code> folder first. Leave blank to use placeholder icon.</p>
+        </div>
+
+        <div>
+          <label>Coordinates (click map to set) *</label>
+          <div id="pickerMap"></div>
+          <div class="grid grid-cols-2 gap-3 mt-2">
+            <div>
+              <input id="fieldLat" type="number" step="0.0001" required class="w-full px-3 py-2 rounded-sm text-xs" placeholder="Latitude">
+            </div>
+            <div>
+              <input id="fieldLng" type="number" step="0.0001" required class="w-full px-3 py-2 rounded-sm text-xs" placeholder="Longitude">
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 pt-2">
+          <label class="flex items-center gap-2 cursor-pointer select-none" style="text-transform:none; letter-spacing:0; color:#fff; font-weight:400; font-size: 0.875rem; margin:0;">
+            <input id="fieldFeatured" type="checkbox" class="w-4 h-4 accent-yellow-400">
+            <i class="fas fa-star text-brand-gold text-xs"></i>
+            Featured (shown larger on projects page)
+          </label>
+        </div>
+
+        <div class="flex gap-2 pt-4 border-t border-white/10">
+          <button type="submit" class="btn-primary px-4 py-2 text-xs rounded-sm flex-1"><i class="fas fa-save mr-1"></i> Save</button>
+          <button type="button" id="cancelBtn" class="btn-outline px-4 py-2 text-xs rounded-sm"><i class="fas fa-times"></i></button>
+        </div>
+      </form>
+    </aside>
+  </main>
+
+  <!-- Footer help -->
+  <footer class="container mx-auto px-4 md:px-6 py-6 border-t border-white/5 mt-10">
+    <div class="glass rounded-sm p-4 md:p-6 text-xs md:text-sm">
+      <h3 class="text-brand-gold font-bold uppercase tracking-widest mb-3 text-xs">How to publish changes</h3>
+      <ol class="space-y-2 text-gray-400 list-decimal list-inside">
+        <li>Save your project image to <code class="text-brand-gold bg-black/50 px-2 py-0.5 rounded">assets/Projects/</code></li>
+        <li>Edit / Add / Delete projects above</li>
+        <li>Click <strong class="text-white">Download projects-data.js</strong> in the header</li>
+        <li>Replace <code class="text-brand-gold bg-black/50 px-2 py-0.5 rounded">projects-data.js</code> in the project folder with the downloaded file</li>
+        <li>Commit and push to git — Netlify auto-deploys</li>
+      </ol>
+    </div>
+  </footer>
+
+  <div id="toast" class="hidden"></div>
+
+  <script>
+    // ─── State ───
+    let projects = [];
+    let editingIndex = -1;
+    let isDirty = false;
+
+    const STORAGE_KEY = 'strongbuilt_admin_projects';
+
+    // ─── Load Initial Data ───
+    function loadProjects() {
+      // Priority: localStorage > projects-data.js > empty
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        try {
+          projects = JSON.parse(stored);
+          setDirty(true);
+          toast('Loaded unsaved changes from local storage', 'info');
+          return;
+        } catch (e) { console.warn('Failed to parse stored data', e); }
+      }
+      if (typeof PROJECT_DATA !== 'undefined' && Array.isArray(PROJECT_DATA)) {
+        projects = JSON.parse(JSON.stringify(PROJECT_DATA)); // deep clone
+        setDirty(false);
+      } else {
+        projects = [];
+        toast('projects-data.js not found. Use Import or start fresh.', 'warn');
+      }
+    }
+
+    function setDirty(dirty) {
+      isDirty = dirty;
+      document.getElementById('dirtyBadge').classList.toggle('hidden', !dirty);
+      if (dirty) localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+    }
+
+    // ─── Render list ───
+    function renderList(filter = '') {
+      const tbody = document.getElementById('projectList');
+      const emptyState = document.getElementById('emptyState');
+      const q = filter.trim().toLowerCase();
+
+      const filtered = q
+        ? projects.filter(p => p.title.toLowerCase().includes(q) || p.client.toLowerCase().includes(q) || p.location.toLowerCase().includes(q))
+        : projects;
+
+      document.getElementById('countBadge').textContent = filtered.length + (q ? ` of ${projects.length}` : '');
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+      emptyState.classList.add('hidden');
+
+      tbody.innerHTML = filtered.map(p => {
+        const idx = projects.indexOf(p);
+        const catBadge = `badge-${p.category === 'residential' ? 'resi' : p.category === 'commercial' ? 'comm' : 'infra'}`;
+        const statusBadge = p.status === 'ongoing' ? 'badge-ongoing' : 'badge-completed';
+        const star = p.featured ? '<i class="fas fa-star text-brand-gold text-[9px] ml-1" title="Featured"></i>' : '';
+        return `
+          <tr class="project-row border-b border-white/5 cursor-pointer ${editingIndex === idx ? 'editing' : ''}" data-idx="${idx}">
+            <td class="py-3 px-2">
+              <div class="font-bold text-white text-sm">${escapeHTML(p.title)}${star}</div>
+              <div class="text-[10px] text-gray-500 mt-0.5"><span class="badge ${catBadge}">${p.category}</span> <span class="md:hidden ml-1">${escapeHTML(p.client)}</span></div>
+            </td>
+            <td class="py-3 px-2 text-gray-300 text-xs hidden md:table-cell">${escapeHTML(p.client)}</td>
+            <td class="py-3 px-2 text-gray-400 text-xs hidden sm:table-cell">${escapeHTML(p.location)} <span class="text-gray-600">· ${p.year}</span></td>
+            <td class="py-3 px-2"><span class="badge ${statusBadge}">${p.status}</span></td>
+            <td class="py-3 px-2 text-right whitespace-nowrap">
+              <button class="edit-btn text-brand-gold hover:text-white p-2" data-idx="${idx}" title="Edit"><i class="fas fa-pen text-xs"></i></button>
+              <button class="delete-btn text-red-400 hover:text-red-300 p-2" data-idx="${idx}" title="Delete"><i class="fas fa-trash text-xs"></i></button>
+            </td>
+          </tr>`;
+      }).join('');
+
+      // Row click → edit (but not action buttons)
+      tbody.querySelectorAll('.project-row').forEach(row => {
+        row.addEventListener('click', (e) => {
+          if (e.target.closest('.delete-btn, .edit-btn')) return;
+          editProject(parseInt(row.dataset.idx));
+        });
+      });
+      tbody.querySelectorAll('.edit-btn').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); editProject(parseInt(b.dataset.idx)); }));
+      tbody.querySelectorAll('.delete-btn').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); deleteProject(parseInt(b.dataset.idx)); }));
+    }
+
+    function escapeHTML(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    // ─── Form logic ───
+    function slugify(s) {
+      return s.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+    }
+
+    const form = document.getElementById('projectForm');
+    const formTitle = document.getElementById('formTitle');
+    const titleInput = document.getElementById('fieldTitle');
+    const idInput = document.getElementById('fieldId');
+
+    // Auto-generate ID from title (only if new or ID matches old slug)
+    titleInput.addEventListener('input', () => {
+      const existingIdx = parseInt(document.getElementById('fieldIndex').value);
+      const currentSlug = existingIdx >= 0 && projects[existingIdx] ? slugify(projects[existingIdx].title) : '';
+      if (!idInput.value || idInput.value === currentSlug) {
+        idInput.value = slugify(titleInput.value);
+      }
+    });
+
+    function resetForm() {
+      form.reset();
+      document.getElementById('fieldIndex').value = '';
+      document.getElementById('fieldCategory').value = 'residential';
+      document.getElementById('fieldStatus').value = 'completed';
+      document.getElementById('fieldYear').value = new Date().getFullYear();
+      document.getElementById('fieldLat').value = '19.0596';
+      document.getElementById('fieldLng').value = '72.8295';
+      formTitle.innerHTML = 'New Project';
+      updateMapMarker(19.0596, 72.8295);
+      editingIndex = -1;
+      renderList(document.getElementById('searchInput').value);
+    }
+
+    function editProject(idx) {
+      const p = projects[idx];
+      if (!p) return;
+      editingIndex = idx;
+      document.getElementById('fieldIndex').value = idx;
+      titleInput.value = p.title;
+      idInput.value = p.id;
+      document.getElementById('fieldClient').value = p.client;
+      document.getElementById('fieldYear').value = p.year;
+      document.getElementById('fieldCategory').value = p.category;
+      document.getElementById('fieldStatus').value = p.status;
+      document.getElementById('fieldLocation').value = p.location;
+      document.getElementById('fieldArea').value = p.area;
+      document.getElementById('fieldImg').value = p.img || '';
+      document.getElementById('fieldLat').value = p.coordinates ? p.coordinates[0] : 19.0596;
+      document.getElementById('fieldLng').value = p.coordinates ? p.coordinates[1] : 72.8295;
+      document.getElementById('fieldFeatured').checked = !!p.featured;
+      formTitle.innerHTML = `Edit: <span class="text-brand-gold">${escapeHTML(p.title)}</span>`;
+      updateMapMarker(p.coordinates ? p.coordinates[0] : 19.0596, p.coordinates ? p.coordinates[1] : 72.8295);
+      renderList(document.getElementById('searchInput').value);
+      document.querySelector('aside').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function deleteProject(idx) {
+      const p = projects[idx];
+      if (!p) return;
+      if (!confirm(`Delete "${p.title}"?\n\nThis only affects the admin editor. You must also Download + replace projects-data.js + git push to publish.`)) return;
+      projects.splice(idx, 1);
+      if (editingIndex === idx) resetForm();
+      setDirty(true);
+      renderList(document.getElementById('searchInput').value);
+      toast(`Deleted "${p.title}"`, 'success');
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = {
+        id: idInput.value.trim(),
+        title: titleInput.value.trim(),
+        client: document.getElementById('fieldClient').value.trim(),
+        category: document.getElementById('fieldCategory').value,
+        location: document.getElementById('fieldLocation').value.trim(),
+        area: document.getElementById('fieldArea').value.trim(),
+        status: document.getElementById('fieldStatus').value,
+        year: parseInt(document.getElementById('fieldYear').value),
+        img: document.getElementById('fieldImg').value.trim() || null,
+        featured: document.getElementById('fieldFeatured').checked,
+        coordinates: [parseFloat(document.getElementById('fieldLat').value), parseFloat(document.getElementById('fieldLng').value)]
+      };
+
+      // Validate ID uniqueness
+      const idxStr = document.getElementById('fieldIndex').value;
+      const currentIdx = idxStr === '' ? -1 : parseInt(idxStr);
+      const dupe = projects.findIndex((p, i) => p.id === data.id && i !== currentIdx);
+      if (dupe >= 0) {
+        toast(`ID "${data.id}" already used by "${projects[dupe].title}"`, 'error');
+        return;
+      }
+
+      if (currentIdx === -1) {
+        projects.push(data);
+        toast(`Added "${data.title}"`, 'success');
+      } else {
+        projects[currentIdx] = data;
+        toast(`Saved "${data.title}"`, 'success');
+      }
+
+      setDirty(true);
+      resetForm();
+    });
+
+    document.getElementById('addNewBtn').addEventListener('click', resetForm);
+    document.getElementById('cancelBtn').addEventListener('click', resetForm);
+
+    // ─── Search ───
+    let searchTimer;
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => renderList(e.target.value), 150);
+    });
+
+    // ─── Import ───
+    document.getElementById('importBtn').addEventListener('click', () => {
+      if (isDirty && !confirm('You have unsaved changes. Import will replace them. Continue?')) return;
+      document.getElementById('importFile').click();
+    });
+    document.getElementById('importFile').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        try {
+          let text = evt.target.result;
+          // Handle `const PROJECT_DATA = [...]` format by extracting the array
+          const match = text.match(/=\s*(\[[\s\S]*?\]);?\s*(?:\/\/|$)/);
+          const jsonLike = match ? match[1] : text;
+          // Permissive eval (this is a local tool, not untrusted input)
+          const data = new Function('return ' + jsonLike)();
+          if (!Array.isArray(data)) throw new Error('Not an array');
+          projects = data;
+          setDirty(true);
+          resetForm();
+          toast(`Imported ${data.length} projects`, 'success');
+        } catch (err) {
+          toast('Import failed: ' + err.message, 'error');
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = ''; // allow re-import same file
+    });
+
+    // ─── Download ───
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const lines = [
+        '// projects-data.js — Single source of truth for all StrongBuilt projects',
+        'const PROJECT_DATA = ['
+      ];
+      projects.forEach((p, i) => {
+        const trail = i === projects.length - 1 ? '' : ',';
+        lines.push('  {');
+        lines.push(`    id: ${JSON.stringify(p.id)},`);
+        lines.push(`    title: ${JSON.stringify(p.title)},`);
+        lines.push(`    client: ${JSON.stringify(p.client)},`);
+        lines.push(`    category: ${JSON.stringify(p.category)},`);
+        lines.push(`    location: ${JSON.stringify(p.location)},`);
+        lines.push(`    area: ${JSON.stringify(p.area)},`);
+        lines.push(`    status: ${JSON.stringify(p.status)},`);
+        lines.push(`    year: ${p.year},`);
+        lines.push(`    img: ${p.img ? JSON.stringify(p.img) : 'null'},`);
+        lines.push(`    featured: ${!!p.featured},`);
+        lines.push(`    coordinates: [${p.coordinates[0]}, ${p.coordinates[1]}]`);
+        lines.push('  }' + trail);
+      });
+      lines.push('];');
+      lines.push('');
+      lines.push('// Helper: Get unique values for filter dropdowns');
+      lines.push('function getFilterOptions(field) {');
+      lines.push('  return [...new Set(PROJECT_DATA.map(p => p[field]).filter(Boolean))].sort();');
+      lines.push('}');
+      lines.push('');
+      lines.push('// Helper: Get project count by field value');
+      lines.push('function getProjectCount(field, value) {');
+      lines.push('  return PROJECT_DATA.filter(p => p[field] === value).length;');
+      lines.push('}');
+      lines.push('');
+
+      const content = lines.join('\n');
+      const blob = new Blob([content], { type: 'text/javascript' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'projects-data.js';
+      a.click();
+      URL.revokeObjectURL(url);
+
+      setDirty(false); // mark clean after download
+      localStorage.removeItem(STORAGE_KEY);
+      toast('Downloaded! Replace the file in your project folder and push to git.', 'success', 5000);
+    });
+
+    // ─── Map coordinate picker ───
+    let pickerMap, pickerMarker;
+    function initMap() {
+      pickerMap = L.map('pickerMap', { zoomControl: true, attributionControl: false }).setView([19.0596, 72.8295], 11);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { subdomains: 'abcd', maxZoom: 19 }).addTo(pickerMap);
+      pickerMarker = L.marker([19.0596, 72.8295], { draggable: true }).addTo(pickerMap);
+      pickerMarker.on('dragend', (e) => {
+        const ll = e.target.getLatLng();
+        document.getElementById('fieldLat').value = ll.lat.toFixed(4);
+        document.getElementById('fieldLng').value = ll.lng.toFixed(4);
+      });
+      pickerMap.on('click', (e) => {
+        updateMapMarker(e.latlng.lat, e.latlng.lng);
+        document.getElementById('fieldLat').value = e.latlng.lat.toFixed(4);
+        document.getElementById('fieldLng').value = e.latlng.lng.toFixed(4);
+      });
+    }
+    function updateMapMarker(lat, lng) {
+      if (!pickerMap) return;
+      pickerMarker.setLatLng([lat, lng]);
+      pickerMap.setView([lat, lng], pickerMap.getZoom() < 11 ? 11 : pickerMap.getZoom());
+    }
+    // Sync form fields → map
+    ['fieldLat', 'fieldLng'].forEach(id => {
+      document.getElementById(id).addEventListener('change', () => {
+        const lat = parseFloat(document.getElementById('fieldLat').value);
+        const lng = parseFloat(document.getElementById('fieldLng').value);
+        if (!isNaN(lat) && !isNaN(lng)) updateMapMarker(lat, lng);
+      });
+    });
+
+    // ─── Toast ───
+    function toast(msg, type = 'info', duration = 3000) {
+      const el = document.getElementById('toast');
+      const colors = { success: '#4ade80', error: '#f87171', warn: '#fbbf24', info: '#FFD700' };
+      el.style.cssText = `position: fixed; top: 20px; right: 20px; padding: 12px 20px; background: rgba(10,10,10,0.95); border: 1px solid ${colors[type]}; color: ${colors[type]}; border-radius: 4px; z-index: 10000; backdrop-filter: blur(10px); font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; animation: slideIn 0.3s ease-out;`;
+      el.textContent = msg;
+      el.classList.remove('hidden');
+      clearTimeout(el._timer);
+      el._timer = setTimeout(() => el.classList.add('hidden'), duration);
+    }
+
+    // ─── Prevent accidental close with unsaved changes ───
+    window.addEventListener('beforeunload', (e) => {
+      if (isDirty) { e.preventDefault(); e.returnValue = ''; }
+    });
+
+    // ─── Init ───
+    loadProjects();
+    initMap();
+    resetForm();
+    renderList();
+  </script>
+</body>
+</html>

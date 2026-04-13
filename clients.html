@@ -45,6 +45,89 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="theme-config.js"></script>
+
+  <style>
+    /* Client card layout */
+    .client-card {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 160px;
+      text-align: center;
+    }
+    @media (min-width: 768px) { .client-card { padding: 1.5rem; min-height: 180px; } }
+
+    .client-logo-wrap {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 0 0.75rem;
+      min-height: 70px;
+    }
+    @media (min-width: 768px) { .client-logo-wrap { min-height: 90px; } }
+
+    .client-logo {
+      max-height: 60px;
+      max-width: 90%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      filter: brightness(1.05) contrast(1.05);
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+    @media (min-width: 768px) { .client-logo { max-height: 80px; } }
+    .client-card:hover .client-logo { transform: scale(1.08); filter: brightness(1.15) contrast(1.1); }
+
+    .client-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.2;
+      margin-top: auto;
+    }
+    @media (min-width: 768px) { .client-name { font-size: 0.85rem; } }
+
+    .client-badge {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      font-size: 0.55rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 2px;
+      font-family: 'Oswald', sans-serif;
+      z-index: 2;
+    }
+    @media (min-width: 768px) { .client-badge { font-size: 0.6rem; } }
+
+    .client-crown {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      font-size: 0.85rem;
+      color: #FFD700;
+      opacity: 0.8;
+      z-index: 2;
+    }
+
+    .client-sector {
+      font-size: 0.55rem;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-top: 0.35rem;
+      font-family: 'Oswald', sans-serif;
+    }
+  </style>
 </head>
 
 <body class="bg-noise antialiased overflow-x-hidden selection:bg-brand-gold selection:text-black">
@@ -242,94 +325,104 @@
 
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
 
-      <!-- Tier 1 - Largest repeat clients -->
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up relative">
-        <span class="absolute top-2 right-2 text-[9px] bg-brand-gold text-black px-2 py-0.5 font-bold uppercase tracking-wider rounded-sm font-heading">5 projects</span>
-        <i class="fas fa-crown text-3xl text-brand-gold mb-3 group-hover:scale-110 transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Dheeraj Realty</h3>
+      <!-- Tier 1 - Largest repeat clients (Crown badge + project count) -->
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up">
+        <span class="client-badge bg-brand-gold text-black">5 Projects</span>
+        <i class="fas fa-crown client-crown"></i>
+        <div class="client-logo-wrap"><img src="assets/Clients/dheeraj.png" alt="Dheeraj Realty" class="client-logo" loading="lazy"></div>
+        <h3 class="client-name">Dheeraj Realty</h3>
       </div>
 
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up relative" style="transition-delay: 50ms;">
-        <span class="absolute top-2 right-2 text-[9px] bg-brand-gold text-black px-2 py-0.5 font-bold uppercase tracking-wider rounded-sm font-heading">4 projects</span>
-        <i class="fas fa-crown text-3xl text-brand-gold mb-3 group-hover:scale-110 transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Rustomjee</h3>
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 50ms;">
+        <span class="client-badge bg-brand-gold text-black">4 Projects</span>
+        <i class="fas fa-crown client-crown"></i>
+        <div class="client-logo-wrap"><img src="assets/Clients/rustomjee.png" alt="Rustomjee" class="client-logo" loading="lazy"></div>
+        <h3 class="client-name">Rustomjee</h3>
       </div>
 
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up relative" style="transition-delay: 100ms;">
-        <span class="absolute top-2 right-2 text-[9px] bg-brand-gold text-black px-2 py-0.5 font-bold uppercase tracking-wider rounded-sm font-heading">3 projects</span>
-        <i class="fas fa-crown text-3xl text-brand-gold mb-3 group-hover:scale-110 transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Lodha Group</h3>
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 100ms;">
+        <span class="client-badge bg-brand-gold text-black">3 Projects</span>
+        <i class="fas fa-crown client-crown"></i>
+        <div class="client-logo-wrap"><img src="assets/Clients/lodha.png" alt="Lodha Group" class="client-logo" loading="lazy"></div>
+        <h3 class="client-name">Lodha Group</h3>
       </div>
 
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up relative" style="transition-delay: 150ms;">
-        <span class="absolute top-2 right-2 text-[9px] bg-brand-gold text-black px-2 py-0.5 font-bold uppercase tracking-wider rounded-sm font-heading">3 projects</span>
-        <i class="fas fa-crown text-3xl text-brand-gold mb-3 group-hover:scale-110 transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Hiranandani</h3>
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 150ms;">
+        <span class="client-badge bg-brand-gold text-black">3 Projects</span>
+        <i class="fas fa-crown client-crown"></i>
+        <div class="client-logo-wrap"><img src="assets/Clients/hiranandani.png" alt="Hiranandani" class="client-logo" loading="lazy"></div>
+        <h3 class="client-name">Hiranandani</h3>
       </div>
 
       <!-- Tier 2 - Multi-project clients -->
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up relative">
-        <span class="absolute top-2 right-2 text-[9px] bg-white/10 text-gray-300 px-2 py-0.5 font-bold uppercase tracking-wider rounded-sm font-heading">2 projects</span>
-        <i class="fas fa-building text-3xl text-brand-gold/60 mb-3 group-hover:scale-110 transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Mahindra Lifespaces</h3>
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up">
+        <span class="client-badge bg-white/10 text-gray-300">2 Projects</span>
+        <div class="client-logo-wrap"><img src="assets/Clients/mahindra-lifespaces.png" alt="Mahindra Lifespaces" class="client-logo" loading="lazy"></div>
+        <h3 class="client-name">Mahindra Lifespaces</h3>
       </div>
 
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up relative" style="transition-delay: 50ms;">
-        <span class="absolute top-2 right-2 text-[9px] bg-white/10 text-gray-300 px-2 py-0.5 font-bold uppercase tracking-wider rounded-sm font-heading">2 projects</span>
-        <i class="fas fa-building text-3xl text-brand-gold/60 mb-3 group-hover:scale-110 transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Ekta World</h3>
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 50ms;">
+        <span class="client-badge bg-white/10 text-gray-300">2 Projects</span>
+        <div class="client-logo-wrap"><img src="assets/Clients/ekta-world.png" alt="Ekta World" class="client-logo" loading="lazy"></div>
+        <h3 class="client-name">Ekta World</h3>
       </div>
 
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up relative" style="transition-delay: 100ms;">
-        <span class="absolute top-2 right-2 text-[9px] bg-white/10 text-gray-300 px-2 py-0.5 font-bold uppercase tracking-wider rounded-sm font-heading">2 projects</span>
-        <i class="fas fa-building text-3xl text-brand-gold/60 mb-3 group-hover:scale-110 transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Antariksh</h3>
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 100ms;">
+        <span class="client-badge bg-white/10 text-gray-300">2 Projects</span>
+        <div class="client-logo-wrap"><img src="assets/Clients/antariksh.png" alt="Antariksh" class="client-logo" loading="lazy"></div>
+        <h3 class="client-name">Antariksh</h3>
       </div>
 
-      <!-- Tier 3 - Single project clients -->
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 150ms;">
-        <i class="fas fa-building text-2xl text-gray-600 mb-3 group-hover:text-brand-gold transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Ajmera Group</h3>
+      <!-- Hiranandani Communities (separate brand under same group) -->
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 150ms;">
+        <div class="client-logo-wrap"><img src="assets/Clients/hiranandani-communities.png" alt="Hiranandani Communities" class="client-logo" loading="lazy"></div>
+        <h3 class="client-name">Hiranandani Communities</h3>
       </div>
 
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up">
-        <i class="fas fa-building text-2xl text-gray-600 mb-3 group-hover:text-brand-gold transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Arkade Group</h3>
+      <!-- Tier 3 - Single project / brand-listed clients -->
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up">
+        <div class="client-logo-wrap"><img src="assets/Clients/ajmera.png" alt="Ajmera Group" class="client-logo" loading="lazy"></div>
+        <h3 class="client-name">Ajmera Group</h3>
       </div>
 
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 50ms;">
-        <i class="fas fa-building text-2xl text-gray-600 mb-3 group-hover:text-brand-gold transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Wadhwa Group</h3>
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 50ms;">
+        <div class="client-logo-wrap"><img src="assets/Clients/arkade-group.png" alt="Arkade Group" class="client-logo" loading="lazy"></div>
+        <h3 class="client-name">Arkade Group</h3>
       </div>
 
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 100ms;">
-        <i class="fas fa-building text-2xl text-gray-600 mb-3 group-hover:text-brand-gold transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Avighna Group</h3>
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 100ms;">
+        <div class="client-logo-wrap"><i class="fas fa-building text-2xl text-gray-600"></i></div>
+        <h3 class="client-name">Wadhwa Group</h3>
       </div>
 
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 150ms;">
-        <i class="fas fa-building text-2xl text-gray-600 mb-3 group-hover:text-brand-gold transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Techno Group</h3>
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 150ms;">
+        <div class="client-logo-wrap"><img src="assets/Clients/avighna.png" alt="Avighna" class="client-logo" loading="lazy"></div>
+        <h3 class="client-name">Avighna</h3>
       </div>
 
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up">
-        <i class="fas fa-building text-2xl text-gray-600 mb-3 group-hover:text-brand-gold transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Puraniks</h3>
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up">
+        <div class="client-logo-wrap"><img src="assets/Clients/techno.png" alt="Techno Group" class="client-logo" loading="lazy"></div>
+        <h3 class="client-name">Techno Group</h3>
       </div>
 
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 50ms;">
-        <i class="fas fa-building text-2xl text-gray-600 mb-3 group-hover:text-brand-gold transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Tridhaatu Realty</h3>
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 50ms;">
+        <div class="client-logo-wrap"><img src="assets/Clients/puraniks.png" alt="Puraniks" class="client-logo" loading="lazy"></div>
+        <h3 class="client-name">Puraniks</h3>
       </div>
 
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 100ms;">
-        <i class="fas fa-building text-2xl text-gray-600 mb-3 group-hover:text-brand-gold transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Satguru's</h3>
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 100ms;">
+        <div class="client-logo-wrap"><img src="assets/Clients/tridhaatu-realty.png" alt="Tridhaatu Realty" class="client-logo" loading="lazy"></div>
+        <h3 class="client-name">Tridhaatu Realty</h3>
       </div>
 
-      <div class="glass-panel p-6 md:p-8 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 150ms;">
-        <i class="fas fa-building text-2xl text-gray-600 mb-3 group-hover:text-brand-gold transition"></i>
-        <h3 class="text-sm md:text-base font-bold text-white uppercase font-heading text-center">Mehta Developers</h3>
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 150ms;">
+        <div class="client-logo-wrap"><img src="assets/Clients/satguru.png" alt="Satguru's" class="client-logo" loading="lazy"></div>
+        <h3 class="client-name">Satguru's</h3>
+      </div>
+
+      <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up">
+        <div class="client-logo-wrap"><i class="fas fa-building text-2xl text-gray-600"></i></div>
+        <h3 class="client-name">Mehta Developers</h3>
       </div>
 
     </div>
@@ -346,25 +439,25 @@
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
-        <div class="glass-panel p-6 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up">
-          <i class="fas fa-landmark text-3xl text-brand-gold mb-3 group-hover:scale-110 transition"></i>
-          <h3 class="text-sm font-bold text-white uppercase font-heading text-center">CPWD</h3>
-          <span class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Government</span>
+        <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up">
+          <div class="client-logo-wrap"><img src="assets/Clients/cpwd.png" alt="CPWD - Central Public Works Department" class="client-logo" loading="lazy"></div>
+          <h3 class="client-name">CPWD</h3>
+          <span class="client-sector">Government</span>
         </div>
-        <div class="glass-panel p-6 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 50ms;">
-          <i class="fas fa-landmark text-3xl text-brand-gold mb-3 group-hover:scale-110 transition"></i>
-          <h3 class="text-sm font-bold text-white uppercase font-heading text-center">KDMC</h3>
-          <span class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Municipal</span>
+        <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 50ms;">
+          <div class="client-logo-wrap"><img src="assets/Clients/govt-maharashtra.png" alt="Government of Maharashtra" class="client-logo" loading="lazy"></div>
+          <h3 class="client-name">Govt. of Maharashtra</h3>
+          <span class="client-sector">Municipal</span>
         </div>
-        <div class="glass-panel p-6 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 100ms;">
-          <i class="fas fa-shopping-cart text-3xl text-brand-gold mb-3 group-hover:scale-110 transition"></i>
-          <h3 class="text-sm font-bold text-white uppercase font-heading text-center">D'Mart</h3>
-          <span class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Retail</span>
+        <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 100ms;">
+          <div class="client-logo-wrap"><img src="assets/Clients/dmart.png" alt="D'Mart" class="client-logo" loading="lazy"></div>
+          <h3 class="client-name">D'Mart</h3>
+          <span class="client-sector">Retail</span>
         </div>
-        <div class="glass-panel p-6 flex flex-col items-center justify-center group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 150ms;">
-          <i class="fas fa-star text-3xl text-brand-gold mb-3 group-hover:scale-110 transition"></i>
-          <h3 class="text-sm font-bold text-white uppercase font-heading text-center">Rishi Kapoor</h3>
-          <span class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Private</span>
+        <div class="client-card glass-panel relative group hover:border-brand-gold transition duration-500 reveal-up" style="transition-delay: 150ms;">
+          <div class="client-logo-wrap"><i class="fas fa-star text-3xl text-brand-gold"></i></div>
+          <h3 class="client-name">Rishi Kapoor</h3>
+          <span class="client-sector">Private</span>
         </div>
       </div>
     </div>

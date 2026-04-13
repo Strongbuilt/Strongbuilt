@@ -21,11 +21,15 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Strong Built">
+  <meta property="og:title" content="Contact Us | Strong Built">
+  <meta property="og:description" content="Get in touch with Strong Built. Visit our HDIL Kaledonia office in Andheri-East, call +91 9619875081, or send a project enquiry.">
   <meta property="og:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
   <meta property="og:locale" content="en_IN">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact Strong Built">
+  <meta name="twitter:description" content="Visit our Mumbai office, call +91 9619875081, or send a project enquiry.">
   <meta name="twitter:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,22 +54,70 @@
     }
 
     .faq-active .faq-content {
-      max-height: 200px;
+      max-height: 600px;
     }
 
     .faq-active i {
       transform: rotate(180deg);
     }
 
-    /* Dark Mode Map Filter */
-    .dark-map iframe {
-      filter: grayscale(1) invert(1) contrast(1.2) opacity(0.8);
-      transition: filter 0.5s ease;
+    /* Map: subtle dark treatment that preserves colours and the marker.
+       Uses a CSS overlay + slight saturation/contrast tweak instead of
+       inverting the whole map (which made labels readable but distorted
+       waterways and hid the location marker). */
+    .map-wrap { position: relative; }
+    .map-wrap iframe {
+      filter: contrast(1.05) saturate(0.9) brightness(0.95);
+      transition: filter 0.4s ease;
     }
+    .map-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.18) 100%);
+      pointer-events: none;
+      mix-blend-mode: multiply;
+      transition: opacity 0.4s ease;
+    }
+    .map-wrap:hover iframe { filter: contrast(1) saturate(1) brightness(1); }
+    .map-wrap:hover::after { opacity: 0; }
+    .map-overlay-link {
+      position: absolute;
+      bottom: 12px; right: 12px;
+      background: rgba(10,10,10,0.92);
+      color: #FFD700;
+      border: 1px solid rgba(255,215,0,0.3);
+      padding: 8px 14px;
+      font-size: 11px;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 2px;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      z-index: 5;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .map-overlay-link:hover { background: #FFD700; color: #000; transform: translateY(-2px); }
 
-    .dark-map:hover iframe {
-      filter: grayscale(0) invert(0) contrast(1) opacity(1);
+    /* Quick contact tiles */
+    .quick-contact {
+      display: block;
+      padding: 0.75rem;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.02);
+      border-radius: 4px;
+      transition: all 0.3s ease;
     }
+    .quick-contact:hover {
+      border-color: rgba(255,215,0,0.4);
+      background: rgba(255,215,0,0.04);
+      transform: translateY(-2px);
+    }
+    @media (min-width: 768px) { .quick-contact { padding: 1rem; } }
 
     /* Success Overlay Styles */
     #formSuccess {
@@ -136,9 +188,9 @@
           </div>
         </div>
         <div class="flex gap-2">
-          <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav-social-link"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="nav-social-link"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.twitter.com" target="_blank" rel="noopener" aria-label="Twitter" class="nav-social-link"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav-social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram" class="nav-social-link"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter" class="nav-social-link"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
 
@@ -147,11 +199,11 @@
 
   <!-- HEADER (Glass) -->
   <header class="fixed w-full z-50 transition-all duration-300 glass-header" id="mainHeader">
-    <div class="container mx-auto px-6 h-24 flex items-center justify-between">
+    <div class="container mx-auto px-4 md:px-6 h-20 md:h-24 flex items-center justify-between">
       <!-- Logo -->
       <a href="index.html" class="flex items-center group relative z-50">
         <img src="assets/Logo/Strongbuilt.png" alt="Strong Built Logo"
-          class="h-14 md:h-24 w-auto object-contain transition duration-300 hover:opacity-90">
+          class="h-12 md:h-24 w-auto object-contain transition duration-300 hover:opacity-90">
       </a>
 
       <div class="flex items-center">
@@ -191,23 +243,34 @@
     </div>
   </section>
 
-  <section class="py-12 border-y border-white/5 bg-white/5 relative z-20">
-    <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-      <div class="reveal-up">
-        <i class="fas fa-clock text-brand-gold text-2xl mb-2"></i>
-        <span class="block text-white font-bold uppercase tracking-widest text-sm">Mon - Sat: 9AM - 7PM</span>
-        <span class="text-xs text-gray-500">Sunday Closed</span>
-      </div>
-      <div class="reveal-up" style="transition-delay: 100ms;">
-        <i class="fas fa-envelope text-brand-gold text-2xl mb-2"></i>
-        <span class="block text-white font-bold uppercase tracking-widest text-sm">strongbuilt@skywaygroup.co.in</span>
-        <span class="text-xs text-gray-500">24/7 Online Support</span>
-      </div>
-      <div class="reveal-up" style="transition-delay: 200ms;">
-        <i class="fas fa-phone text-brand-gold text-2xl mb-2"></i>
-        <span class="block text-white font-bold uppercase tracking-widest text-sm">+91 9619875081</span>
-        <span class="text-xs text-gray-500">Direct Support Line</span>
-      </div>
+  <!-- QUICK CONTACT BAR (tappable on mobile) -->
+  <section class="py-8 md:py-10 border-y border-white/5 bg-white/5 relative z-20">
+    <div class="container mx-auto px-4 md:px-6 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+
+      <a href="tel:+919619875081" class="quick-contact group reveal-up">
+        <i class="fas fa-phone text-brand-gold text-xl md:text-2xl mb-2 block group-hover:scale-110 transition"></i>
+        <span class="block text-white font-bold text-xs md:text-sm font-heading group-hover:text-brand-gold transition truncate">+91 9619875081</span>
+        <span class="text-[10px] text-gray-500 uppercase tracking-widest font-heading">Call Us</span>
+      </a>
+
+      <a href="https://wa.me/919619875081?text=Hi%20Strong%20Built%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="quick-contact group reveal-up" style="transition-delay: 75ms;">
+        <i class="fab fa-whatsapp text-brand-gold text-xl md:text-2xl mb-2 block group-hover:scale-110 transition"></i>
+        <span class="block text-white font-bold text-xs md:text-sm font-heading group-hover:text-brand-gold transition">Quick Chat</span>
+        <span class="text-[10px] text-gray-500 uppercase tracking-widest font-heading">WhatsApp</span>
+      </a>
+
+      <a href="mailto:strongbuilt@skywaygroup.co.in" class="quick-contact group reveal-up" style="transition-delay: 150ms;">
+        <i class="fas fa-envelope text-brand-gold text-xl md:text-2xl mb-2 block group-hover:scale-110 transition"></i>
+        <span class="block text-white font-bold text-xs md:text-sm font-heading group-hover:text-brand-gold transition truncate">Email Us</span>
+        <span class="text-[10px] text-gray-500 uppercase tracking-widest font-heading truncate">strongbuilt@skywaygroup.co.in</span>
+      </a>
+
+      <a href="https://maps.google.com/?q=HDIL+Tower+Kaledonia+Andheri+East+Mumbai" target="_blank" rel="noopener" class="quick-contact group reveal-up" style="transition-delay: 225ms;">
+        <i class="fas fa-map-marker-alt text-brand-gold text-xl md:text-2xl mb-2 block group-hover:scale-110 transition"></i>
+        <span class="block text-white font-bold text-xs md:text-sm font-heading group-hover:text-brand-gold transition">Visit</span>
+        <span class="text-[10px] text-gray-500 uppercase tracking-widest font-heading">Andheri-East</span>
+      </a>
+
     </div>
   </section>
 
@@ -223,10 +286,14 @@
               class="w-12 h-12 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold flex-shrink-0">
               <i class="fas fa-map-marker-alt text-xl"></i>
             </div>
-            <div class="ml-6">
+            <div class="ml-4 md:ml-6">
               <h4 class="font-bold text-white uppercase mb-1 tracking-wider font-heading">Location</h4>
-              <p class="text-gray-400 font-body">901-B Wing, 9th Floor, HDIL Kaledonia, Sahar Road,<br> Opp D'Mart,
-                Sambhaji Nagar, Andheri-East,<br> Mumbai - 400069.</p>
+              <a href="https://maps.google.com/?q=HDIL+Tower+Kaledonia+Andheri+East+Mumbai" target="_blank" rel="noopener" class="text-gray-400 font-body hover:text-brand-gold transition block">
+                901-B Wing, 9th Floor, HDIL Kaledonia, Sahar Road,<br>Opp D'Mart, Sambhaji Nagar, Andheri-East,<br>Mumbai - 400069.
+              </a>
+              <span class="inline-flex items-center gap-2 text-[10px] text-brand-gold uppercase tracking-widest font-heading font-bold mt-2">
+                <i class="fas fa-train"></i> Nearest: Andheri Station &middot; <i class="fas fa-subway"></i> Sahar Road Metro
+              </span>
             </div>
           </div>
 
@@ -235,10 +302,16 @@
               class="w-12 h-12 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold flex-shrink-0">
               <i class="fas fa-phone-alt text-xl"></i>
             </div>
-            <div class="ml-6">
+            <div class="ml-4 md:ml-6">
               <h4 class="font-bold text-white uppercase mb-1 tracking-wider font-heading">Contact</h4>
-              <p class="text-gray-400 font-body">+91 9619875081 / 022-6123-2500</p>
-              <p class="text-gray-400 font-body">strongbuilt@skywaygroup.co.in</p>
+              <p class="text-gray-400 font-body">
+                <a href="tel:+919619875081" class="hover:text-brand-gold transition">+91 9619875081</a>
+                <span class="text-gray-600">/</span>
+                <a href="tel:+912261232500" class="hover:text-brand-gold transition">022-6123-2500</a>
+              </p>
+              <p class="text-gray-400 font-body">
+                <a href="mailto:strongbuilt@skywaygroup.co.in" class="hover:text-brand-gold transition break-all">strongbuilt@skywaygroup.co.in</a>
+              </p>
             </div>
           </div>
 
@@ -247,18 +320,21 @@
               class="w-12 h-12 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold flex-shrink-0">
               <i class="far fa-clock text-xl"></i>
             </div>
-            <div class="ml-6">
-              <h4 class="font-bold text-white uppercase mb-1 tracking-wider font-heading">Hours</h4>
-              <p class="text-gray-400 font-body">Mon - Sat: 9:00 AM - 7:00 PM</p>
+            <div class="ml-4 md:ml-6">
+              <h4 class="font-bold text-white uppercase mb-1 tracking-wider font-heading">Hours <span class="text-[10px] text-gray-500 normal-case tracking-normal">(IST)</span></h4>
+              <p class="text-gray-400 font-body">Mon &ndash; Sat: 9:00 AM &ndash; 7:00 PM</p>
+              <p class="text-xs text-gray-500 font-body mt-1">Closed on Sundays &amp; public holidays</p>
             </div>
           </div>
         </div>
 
-        <div
-          class="h-64 w-full bg-gray-800 rounded-sm border border-white/10 overflow-hidden dark-map transition duration-500 shadow-2xl">
+        <div class="map-wrap h-64 md:h-72 w-full rounded-sm border border-white/10 overflow-hidden shadow-2xl">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1188.331379068811!2d72.84661444475961!3d19.11321707503275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9cc34bb0531%3A0x25f0bd25aab78d88!2sHDIL%20TOWER%20Kaledonia!5e1!3m2!1sen!2sin!4v1775904078945!5m2!1sen!2sin"
             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Strong Built Office Location"></iframe>
+          <a href="https://maps.google.com/?q=HDIL+Tower+Kaledonia+Andheri+East+Mumbai" target="_blank" rel="noopener" class="map-overlay-link">
+            <i class="fas fa-external-link-alt"></i> Open in Maps
+          </a>
         </div>
       </div>
 
@@ -266,39 +342,56 @@
         <div id="contactFormContainer">
           <h3 class="text-2xl font-bold text-white mb-6 uppercase font-heading">Send a <span
               class="text-brand-gold">Message</span></h3>
-          <form id="contactForm" action="https://formsubmit.co/strongbuilt@skywaygroup.co.in" method="POST" class="space-y-6">
-            <div class="grid md:grid-cols-2 gap-6">
+          <form id="contactForm" action="https://formsubmit.co/strongbuilt@skywaygroup.co.in" method="POST" class="space-y-5">
+            <!-- FormSubmit.co configuration -->
+            <input type="hidden" name="_subject" value="New Contact Enquiry — Strong Built Website">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <!-- Honey-pot to deter bots -->
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+
+            <div class="grid md:grid-cols-2 gap-5">
               <div>
-                <label
-                  class="block text-xs font-bold text-brand-gold mb-2 uppercase tracking-widest font-heading">Name</label>
-                <input type="text" name="name" id="userName" required
-                  class="w-full bg-black/50 border border-white/10 p-4 text-white font-heading focus:outline-none focus:border-brand-gold transition"
-                  placeholder="John Doe">
+                <label for="userName"
+                  class="block text-xs font-bold text-brand-gold mb-2 uppercase tracking-widest font-heading">Name *</label>
+                <input type="text" name="name" id="userName" required autocomplete="name"
+                  class="w-full bg-black/50 border border-white/10 p-3 md:p-4 text-white text-sm md:text-base font-body focus:outline-none focus:border-brand-gold transition"
+                  placeholder="Your name">
               </div>
               <div>
-                <label
-                  class="block text-xs font-bold text-brand-gold mb-2 uppercase tracking-widest font-heading">Email</label>
-                <input type="email" name="email" required
-                  class="w-full bg-black/50 border border-white/10 p-4 text-white font-heading focus:outline-none focus:border-brand-gold transition"
-                  placeholder="email@example.com">
+                <label for="userEmail"
+                  class="block text-xs font-bold text-brand-gold mb-2 uppercase tracking-widest font-heading">Email *</label>
+                <input type="email" name="email" id="userEmail" required autocomplete="email"
+                  class="w-full bg-black/50 border border-white/10 p-3 md:p-4 text-white text-sm md:text-base font-body focus:outline-none focus:border-brand-gold transition"
+                  placeholder="you@example.com">
+              </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-5">
+              <div>
+                <label for="userPhone"
+                  class="block text-xs font-bold text-brand-gold mb-2 uppercase tracking-widest font-heading">Phone</label>
+                <input type="tel" name="phone" id="userPhone" autocomplete="tel"
+                  class="w-full bg-black/50 border border-white/10 p-3 md:p-4 text-white text-sm md:text-base font-body focus:outline-none focus:border-brand-gold transition"
+                  placeholder="+91 ...">
+              </div>
+              <div>
+                <label for="userSubject"
+                  class="block text-xs font-bold text-brand-gold mb-2 uppercase tracking-widest font-heading">Subject *</label>
+                <input type="text" name="subject" id="userSubject" required
+                  class="w-full bg-black/50 border border-white/10 p-3 md:p-4 text-white text-sm md:text-base font-body focus:outline-none focus:border-brand-gold transition"
+                  placeholder="Project enquiry">
               </div>
             </div>
             <div>
-              <label
-                class="block text-xs font-bold text-brand-gold mb-2 uppercase tracking-widest font-heading">Subject</label>
-              <input type="text" name="subject" id="userSubject" required
-                class="w-full bg-black/50 border border-white/10 p-4 text-white font-heading focus:outline-none focus:border-brand-gold transition"
-                placeholder="Project Inquiry">
+              <label for="userMessage"
+                class="block text-xs font-bold text-brand-gold mb-2 uppercase tracking-widest font-heading">Message *</label>
+              <textarea rows="5" name="message" id="userMessage" required
+                class="w-full bg-black/50 border border-white/10 p-3 md:p-4 text-white text-sm md:text-base font-body focus:outline-none focus:border-brand-gold transition resize-none"
+                placeholder="Tell us about your project, timelines, and requirements..."></textarea>
             </div>
-            <div>
-              <label
-                class="block text-xs font-bold text-brand-gold mb-2 uppercase tracking-widest font-heading">Message</label>
-              <textarea rows="5" name="message" required
-                class="w-full bg-black/50 border border-white/10 p-4 text-white font-heading focus:outline-none focus:border-brand-gold transition"
-                placeholder="Tell us about your project..."></textarea>
-            </div>
+            <p class="text-[11px] text-gray-500 font-body">By submitting, you agree to be contacted by Strong Built. Your data is kept private &mdash; see our <a href="privacy.html" class="text-brand-gold hover:underline">Privacy Policy</a>.</p>
             <button type="submit" id="submitBtn"
-              class="w-full bg-brand-gold text-black font-bold uppercase tracking-widest py-4 hover:bg-white transition duration-300 font-heading">
+              class="w-full bg-brand-gold text-black font-bold uppercase tracking-widest py-3 md:py-4 hover:bg-white transition duration-300 font-heading text-sm md:text-base">
               <span id="btnText">Send Message</span>
               <span id="btnLoader" class="hidden"><i class="fas fa-spinner fa-spin"></i> Sending...</span>
             </button>
@@ -365,21 +458,54 @@
               complimentary. We discuss your vision, budget, and timeline to see if we are the right fit.</p>
           </div>
         </div>
+
+        <div class="glass-panel rounded-sm overflow-hidden cursor-pointer group reveal-up faq-item" onclick="toggleFaq(this)">
+          <div class="p-6 flex justify-between items-center">
+            <h4
+              class="font-bold text-white uppercase text-sm tracking-wide group-hover:text-brand-gold transition font-heading">
+              How long before you respond to enquiries?</h4>
+            <i class="fas fa-chevron-down text-brand-gold transition duration-300"></i>
+          </div>
+          <div class="faq-content px-6 bg-black/20">
+            <p class="pb-6 text-gray-400 text-sm leading-relaxed font-body">Most enquiries receive a response within 1&ndash;2 working days. For urgent project timelines, please call <a href="tel:+919619875081" class="text-brand-gold hover:underline">+91 9619875081</a> or WhatsApp us directly.</p>
+          </div>
+        </div>
+
+        <div class="glass-panel rounded-sm overflow-hidden cursor-pointer group reveal-up faq-item" onclick="toggleFaq(this)">
+          <div class="p-6 flex justify-between items-center">
+            <h4
+              class="font-bold text-white uppercase text-sm tracking-wide group-hover:text-brand-gold transition font-heading">
+              What information should I include in my enquiry?</h4>
+            <i class="fas fa-chevron-down text-brand-gold transition duration-300"></i>
+          </div>
+          <div class="faq-content px-6 bg-black/20">
+            <p class="pb-6 text-gray-400 text-sm leading-relaxed font-body">Share the project type (residential / commercial / institutional), estimated size (sq.ft.), target location, desired start date, and your role (developer, architect, principal). The more context you provide, the faster we can route your enquiry to the right lead.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="py-16 bg-black border-t border-white/10 text-center">
-    <div class="container mx-auto px-6">
-      <h2 class="text-xl font-bold mb-4 uppercase text-white font-heading">Stay Updated</h2>
-      <p class="text-gray-500 text-xs mb-8 uppercase tracking-widest font-body">Join our newsletter for industry
-        insights.</p>
-      <form class="max-w-md mx-auto flex">
-        <input type="email" placeholder="Email Address"
-          class="w-full bg-white/5 border border-white/10 px-4 py-3 text-white text-sm font-heading focus:outline-none focus:border-brand-gold">
-        <button
-          class="bg-brand-gold text-black px-6 py-3 font-bold uppercase text-xs tracking-widest hover:bg-white transition font-heading">Join</button>
+    <div class="container mx-auto px-4 md:px-6">
+      <h2 class="text-xl font-bold mb-2 uppercase text-white font-heading">Stay Updated</h2>
+      <p class="text-gray-500 text-xs mb-8 uppercase tracking-widest font-body">Project announcements &amp; industry insights.</p>
+
+      <form id="newsletterForm" action="https://formsubmit.co/strongbuilt@skywaygroup.co.in" method="POST" class="max-w-md mx-auto flex flex-col sm:flex-row gap-3 sm:gap-0">
+        <input type="hidden" name="_subject" value="Newsletter Subscription — Strong Built Website">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+
+        <input type="email" name="email" required autocomplete="email" placeholder="Your email address"
+          class="flex-1 bg-white/5 border border-white/10 px-4 py-3 text-white text-sm font-body focus:outline-none focus:border-brand-gold transition">
+        <button type="submit" id="newsletterBtn"
+          class="bg-brand-gold text-black px-6 py-3 font-bold uppercase text-xs tracking-widest hover:bg-white transition font-heading whitespace-nowrap">
+          <span id="newsletterBtnText">Join</span>
+          <span id="newsletterBtnLoader" class="hidden"><i class="fas fa-spinner fa-spin"></i></span>
+        </button>
       </form>
+      <p id="newsletterMsg" class="hidden text-xs text-brand-gold mt-4 font-body"></p>
     </div>
   </section>
 
@@ -396,13 +522,13 @@
             Forging the future with concrete, steel, and integrity.
           </p>
           <div class="flex gap-4">
-            <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram"
+            <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram"
               class="w-10 h-10 border border-white/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition"><i
                 class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"
+            <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn"
               class="w-10 h-10 border border-white/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition"><i
                 class="fab fa-linkedin-in"></i></a>
-            <a href="https://www.twitter.com" target="_blank" rel="noopener" aria-label="Twitter"
+            <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter"
               class="w-10 h-10 border border-white/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition"><i
                 class="fab fa-twitter"></i></a>
           </div>
@@ -447,21 +573,6 @@
   </footer>
 
   <script>
-    // Reveal Animations
-    function handleScrollAnimations() {
-      const reveals = document.querySelectorAll(".reveal-up");
-      const windowHeight = window.innerHeight;
-
-      reveals.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top;
-        if (elementTop < windowHeight - 100) {
-          el.classList.add("reveal-active");
-        }
-      });
-    }
-    window.addEventListener("scroll", handleScrollAnimations);
-    handleScrollAnimations();
-
     // FAQ Toggle (Accordion Style)
     function toggleFaq(element) {
       const allFaqs = document.querySelectorAll('.faq-item');
@@ -534,6 +645,44 @@
       if (formContainer) formContainer.classList.remove('hidden');
       if (successContainer) successContainer.style.display = 'none';
     }
+
+    // Newsletter signup (AJAX FormSubmit)
+    document.addEventListener('DOMContentLoaded', () => {
+      const nForm = document.getElementById('newsletterForm');
+      if (!nForm) return;
+      const nBtn = document.getElementById('newsletterBtn');
+      const nText = document.getElementById('newsletterBtnText');
+      const nLoader = document.getElementById('newsletterBtnLoader');
+      const nMsg = document.getElementById('newsletterMsg');
+
+      nForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        nBtn.disabled = true;
+        nText.classList.add('hidden');
+        nLoader.classList.remove('hidden');
+        nMsg.classList.add('hidden');
+
+        const data = Object.fromEntries(new FormData(nForm).entries());
+        try {
+          const r = await fetch('https://formsubmit.co/ajax/strongbuilt@skywaygroup.co.in', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          if (!r.ok) throw new Error('Subscription failed');
+          nForm.reset();
+          nMsg.textContent = '✓ You\'re subscribed. Thanks for joining!';
+          nMsg.classList.remove('hidden');
+        } catch (err) {
+          nMsg.textContent = 'Something went wrong. Please try again or email us directly.';
+          nMsg.classList.remove('hidden');
+        } finally {
+          nBtn.disabled = false;
+          nText.classList.remove('hidden');
+          nLoader.classList.add('hidden');
+        }
+      });
+    });
   </script>
   <script src="script.js"></script>
 </body>

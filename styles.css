@@ -312,6 +312,10 @@ textarea {
 .nav-overlay.active li:nth-child(6) .sidebar-dropdown-btn { animation-delay: 0.38s; }
 .nav-overlay.active li:nth-child(7) .sidebar-link,
 .nav-overlay.active li:nth-child(7) .sidebar-dropdown-btn { animation-delay: 0.44s; }
+.nav-overlay.active li:nth-child(8) .sidebar-link,
+.nav-overlay.active li:nth-child(8) .sidebar-dropdown-btn { animation-delay: 0.50s; }
+.nav-overlay.active li:nth-child(9) .sidebar-link,
+.nav-overlay.active li:nth-child(9) .sidebar-dropdown-btn { animation-delay: 0.56s; }
 
 /* Sidebar Links */
 .sidebar-link {

@@ -40,6 +40,312 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="theme-config.js"></script>
+
+  <style>
+    /* Timeline graphic card */
+    .tcard {
+      position: relative;
+      padding: 2rem 1.75rem 1.75rem;
+      background: linear-gradient(155deg, rgba(42, 38, 39, 0.85) 0%, rgba(26, 23, 24, 0.85) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.5s ease;
+    }
+    .tcard::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 40%;
+      height: 2px;
+      background: linear-gradient(90deg, #FCB615, transparent);
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .tcard::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at top right, rgba(252, 182, 21, 0.06), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .tcard:hover {
+      transform: translateY(-6px);
+      border-color: rgba(252, 182, 21, 0.35);
+      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(252, 182, 21, 0.15);
+    }
+    .tcard:hover::before { width: 100%; }
+    .tcard:hover::after { opacity: 1; }
+
+    .tcard-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(252, 182, 21, 0.18), rgba(252, 182, 21, 0.04) 70%);
+      border: 1px solid rgba(252, 182, 21, 0.25);
+      color: #FCB615;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 20px -8px rgba(252, 182, 21, 0.4);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+    }
+    .tcard:hover .tcard-icon {
+      transform: scale(1.08) rotate(-4deg);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 6px 28px -6px rgba(252, 182, 21, 0.55);
+    }
+
+    .tcard-tag {
+      display: inline-block;
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #C8900F;
+      padding: 4px 10px;
+      border: 1px solid rgba(200, 144, 15, 0.3);
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+    }
+
+    .tcard-title {
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #f5f1ec;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+    .tcard-meta {
+      font-family: 'Inter', Helvetica, Arial, sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: #b8b2a8;
+      line-height: 1.5;
+    }
+
+    .tcard-num {
+      position: absolute;
+      top: 1rem;
+      right: 1.25rem;
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      color: rgba(252, 182, 21, 0.35);
+    }
+
+    /* Finale variant — gold-tinted */
+    .tcard-finale {
+      background: linear-gradient(155deg, rgba(252, 182, 21, 0.08) 0%, rgba(42, 38, 39, 0.85) 70%);
+      border-color: rgba(252, 182, 21, 0.3);
+      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.5), 0 0 40px -8px rgba(252, 182, 21, 0.12);
+    }
+    .tcard-finale::before { width: 100%; height: 2px; }
+    .tcard-finale .tcard-icon {
+      width: 72px;
+      height: 72px;
+      font-size: 1.75rem;
+      background: radial-gradient(circle at 30% 30%, rgba(252, 182, 21, 0.35), rgba(252, 182, 21, 0.08) 70%);
+      border-color: rgba(252, 182, 21, 0.5);
+    }
+    .tcard-finale .tcard-stat-num {
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #FCB615;
+      line-height: 1;
+    }
+    .tcard-finale .tcard-stat-label {
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #b8b2a8;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 767px) {
+      .tcard { padding: 1.5rem 1.25rem; }
+      .tcard-title { font-size: 1.15rem; }
+      .tcard-icon { width: 52px; height: 52px; font-size: 1.2rem; margin-bottom: 1rem; }
+    }
+
+    /* === TIMELINE — single responsive layout === */
+    /* Mobile/tablet: cards stack full-width (year shown inline in each card title) */
+    /* Desktop ≥1024px: 5fr / 7fr grid with sticky year panel on the left */
+    .ss-grid {
+      display: block;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+    }
+    @media (min-width: 1024px) {
+      .ss-grid {
+        display: grid;
+        grid-template-columns: 5fr 7fr;
+        gap: 5rem;
+      }
+      /* Explicit column placement so the grid reserves slots even when .ss-sticky goes position:fixed */
+      .ss-sticky { grid-column: 1; grid-row: 1; }
+      .ss-stream { grid-column: 2; grid-row: 1; }
+    }
+    /* Sticky year panel — hidden on mobile/tablet, flex on desktop. JS pins to viewport center when grid encloses center. */
+    .ss-sticky {
+      display: none;
+      position: relative;
+      align-self: start;
+      flex-direction: column;
+      padding-top: 2rem;
+    }
+    @media (min-width: 1024px) {
+      .ss-sticky { display: flex; }
+    }
+    .ss-sticky.is-pinned {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      padding-top: 0;
+      z-index: 5;
+    }
+    .ss-sticky.is-end {
+      position: absolute;
+      bottom: 2rem;
+      top: auto;
+      transform: none;
+      padding-top: 0;
+    }
+    /* ── Sticky year — smooth fade+slide on swap ── */
+    .ss-bigyear {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: clamp(5rem, 9vw, 9rem);
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      background: linear-gradient(180deg, #f5f1ec 0%, #f5f1ec 50%, rgba(245, 241, 236, 0.15) 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      will-change: opacity, transform;
+      transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .ss-bigyear.is-swapping { opacity: 0; transform: translateY(12px); }
+
+    .ss-bigtag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: #C8900F;
+      margin-bottom: 1.25rem;
+      transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .ss-bigtag.is-swapping { opacity: 0; }
+
+    .ss-bigicon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(252, 182, 21, 0.25), rgba(252, 182, 21, 0.06) 70%);
+      border: 1px solid rgba(252, 182, 21, 0.35);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #FCB615;
+      font-size: 1.6rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 8px 30px -8px rgba(252, 182, 21, 0.4);
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+    }
+    .ss-bigicon.is-swapping { opacity: 0; transform: scale(0.85); }
+
+    /* ── Stream & cards ── */
+    .ss-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      padding-bottom: 3rem;
+    }
+    @media (min-width: 768px) { .ss-stream { gap: 4rem; } }
+    @media (min-width: 1024px) { .ss-stream { gap: 6rem; padding-bottom: 4rem; } }
+
+    .ss-card {
+      padding: 2rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      opacity: 0.45;
+      will-change: opacity;
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    @media (min-width: 768px) { .ss-card { padding: 2.5rem 0; } }
+    @media (min-width: 1024px) { .ss-card { padding: 3rem 0; } }
+    .ss-card:first-child { border-top: none; padding-top: 0; }
+    .ss-card.is-active { opacity: 1; }
+
+    .ss-card-kicker {
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: #C8900F;
+      margin-bottom: 0.75rem;
+    }
+    @media (min-width: 768px) { .ss-card-kicker { font-size: 0.7rem; margin-bottom: 1rem; } }
+
+    .ss-card-title {
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.35rem, 2.8vw, 2.25rem);
+      line-height: 1.1;
+      text-transform: uppercase;
+      color: #f5f1ec;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+    }
+    @media (min-width: 1024px) { .ss-card-title { margin-bottom: 1.25rem; } }
+
+    .ss-card-body {
+      font-family: 'Inter', Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: #b8b2a8;
+      max-width: 56ch;
+      margin-bottom: 1.25rem;
+    }
+    @media (min-width: 1024px) { .ss-card-body { font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem; } }
+
+    .ss-card-meta {
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(184, 178, 168, 0.6);
+      padding-top: 0.85rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    @media (min-width: 768px) { .ss-card-meta { font-size: 0.7rem; letter-spacing: 0.25em; padding-top: 1rem; } }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      .ss-bigyear, .ss-bigtag, .ss-bigicon, .ss-card,
+      .ss-bigyear.is-swapping, .ss-bigtag.is-swapping, .ss-bigicon.is-swapping {
+        transition: none !important;
+        transform: none !important;
+      }
+      .ss-card { opacity: 1 !important; }
+    }
+
+  </style>
 </head>
 
 <body class="bg-noise antialiased overflow-x-hidden selection:bg-brand-gold selection:text-black">
@@ -237,230 +543,174 @@
     </div>
   </section>
 
-  <!-- INTERACTIVE TIMELINE -->
-  <section class="py-16 md:py-24 relative overflow-hidden" id="timeline-section">
-    <!-- Center Line Background -->
-    <div class="absolute inset-0 flex justify-center pointer-events-none">
-      <div class="w-px bg-clay-surface/5 h-full"></div>
-    </div>
-
-    <div class="container mx-auto px-4 relative z-10 max-w-5xl">
-      <div class="text-center mb-24 reveal-up">
-        <h2 class="text-4xl md:text-6xl font-bold text-clay-ink uppercase tracking-tight">The <span
-            class="text-brand-darkGold">Timeline</span></h2>
-        <div class="mt-4 text-brand-darkGold text-sm tracking-[0.5em] uppercase">Milestones of Excellence</div>
+  <!-- INTERACTIVE TIMELINE — Three Design Options for Review -->
+  <section class="py-16 md:py-24 relative" id="timeline-section">
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="text-center mb-8 reveal-up">
+        <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase mb-3 block font-heading">A Decade of Building</span>
+        <h2 class="text-4xl md:text-6xl font-bold text-clay-ink uppercase tracking-tight">The <span class="text-brand-darkGold">Timeline</span></h2>
       </div>
 
-      <div class="relative timeline-container">
-        <!-- The Moving Gold Line -->
-        <div class="timeline-line hidden md:block">
-          <div class="timeline-progress" id="progress-bar"></div>
-        </div>
 
-        <!-- Nov 2014 -->
-        <div class="relative grid md:grid-cols-2 gap-8 mb-32 items-center timeline-item reveal-up">
-          <div class="md:text-right md:pr-12 order-2 md:order-1">
-            <div
-              class="inline-block text-brand-darkGold font-bold text-7xl font-heading opacity-10 absolute -top-10 left-0 md:left-auto md:right-10 z-0">
-              2014</div>
-            <h3 class="text-3xl font-bold text-clay-ink uppercase relative z-10">Nov 2014</h3>
-            <p class="text-clay-muted mt-4 relative z-10 font-light leading-relaxed">
-              Started with Del-sol (3B + P + 145) at Carter Road, Bandra.
-            </p>
-          </div>
-          <div
-            class="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-clay-base border-2 border-brand-gold rounded-full z-20 hidden md:flex items-center justify-center shadow-[0_0_15px_rgba(252,182,21,0.5)]">
-            <div class="w-2 h-2 bg-brand-gold rounded-full"></div>
-          </div>
-          <div class="glass-panel p-2 md:ml-12 order-1 md:order-2">
-            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80" alt="Del-sol project at Carter Road, Bandra" class="w-full h-64 object-cover">
-          </div>
+      <!-- Desktop: Sticky Scroll Storytelling -->
+      <div class="ss-grid" id="ss-grid">
+        <aside class="ss-sticky">
+          <div class="ss-bigtag" id="ss-tag">The Beginning</div>
+          <div class="ss-bigyear" id="ss-year">2014</div>
+          <div class="ss-bigicon"><i class="fas fa-flag" id="ss-icon"></i></div>
+        </aside>
+        <div class="ss-stream" id="ss-stream">
+          <article class="ss-card" data-year="2014" data-tag="The Beginning" data-icon="fa-flag">
+            <div class="ss-card-kicker">Chapter One · Nov 2014</div>
+            <h3 class="ss-card-title">First Project Begins</h3>
+            <p class="ss-card-body">Strong Built breaks ground on Del-sol — a 3B + P + 14F structure at Carter Road, Bandra. A modest beginning for what would become a portfolio defining Mumbai's premium residential landscape.</p>
+            <div class="ss-card-meta">Del-sol · Carter Road · Bandra</div>
+          </article>
+          <article class="ss-card" data-year="2015" data-tag="Repeat Trust" data-icon="fa-handshake">
+            <div class="ss-card-kicker">Chapter Two · Dec 2015</div>
+            <h3 class="ss-card-title">Trust Multiplies</h3>
+            <p class="ss-card-body">A second repeat order from Dheeraj signals client confidence. Ekta places the firm's first ₹100 Cr order — a defining vote of trust within the first eighteen months.</p>
+            <div class="ss-card-meta">₹100 Cr Order · Repeat Mandate · Ekta · Dheeraj</div>
+          </article>
+          <article class="ss-card" data-year="2016" data-tag="Brand Trust" data-icon="fa-star">
+            <div class="ss-card-kicker">Chapter Three · Dec 2016</div>
+            <h3 class="ss-card-title">Marquee Clientele</h3>
+            <p class="ss-card-body">Within two years the firm earns the trust of Mumbai's tier-one developers — Rustomjee, Wadhwa, Hiranandani and Mahindra Lifespaces all sign on.</p>
+            <div class="ss-card-meta">Rustomjee · Wadhwa · Hiranandani · Mahindra Lifespaces</div>
+          </article>
+          <article class="ss-card" data-year="2017" data-tag="Delivery" data-icon="fa-building">
+            <div class="ss-card-kicker">Chapter Four · Dec 2017</div>
+            <h3 class="ss-card-title">Seven Projects Delivered</h3>
+            <p class="ss-card-body">A milestone year — seven projects handed over, totalling 1.1 million square feet of completed construction across the metropolitan region.</p>
+            <div class="ss-card-meta">7 Projects · 1.1 Million Sq.Ft · 100% On-Time</div>
+          </article>
+          <article class="ss-card" data-year="2018" data-tag="Growth" data-icon="fa-chart-line">
+            <div class="ss-card-kicker">Chapter Five · Dec 2018</div>
+            <h3 class="ss-card-title">Scaling The Operation</h3>
+            <p class="ss-card-body">Twenty-one live projects span the city — 2.5 million square feet under simultaneous execution. The team grows; the standard does not slip.</p>
+            <div class="ss-card-meta">21 Live Projects · 2.5 Million Sq.Ft</div>
+          </article>
+          <article class="ss-card" data-year="2019" data-tag="Public Sector" data-icon="fa-landmark">
+            <div class="ss-card-kicker">Chapter Six · Jan 2019</div>
+            <h3 class="ss-card-title">Public Sector Mandate</h3>
+            <p class="ss-card-body">A 1,500-flat government turnkey project marks Strong Built's entry into public housing. By December, nine towers are completed for Lodha — proof of versatility at scale.</p>
+            <div class="ss-card-meta">1,500 Flats · 9 Lodha Towers · Government Turnkey</div>
+          </article>
+          <article class="ss-card" data-year="2020" data-tag="Resilience" data-icon="fa-shield-alt">
+            <div class="ss-card-kicker">Chapter Seven · Dec 2020</div>
+            <h3 class="ss-card-title">Through The Pandemic</h3>
+            <p class="ss-card-body">Sukrut at Dadar, Pashmina at Powai, Times Square at Andheri — three projects delivered while the rest of the industry stood still. Resilience becomes a brand value.</p>
+            <div class="ss-card-meta">3 Deliveries · Sukrut · Pashmina · Times Square</div>
+          </article>
+          <article class="ss-card" data-year="2022" data-tag="Milestone" data-icon="fa-city">
+            <div class="ss-card-kicker">Chapter Eight · Dec 2022</div>
+            <h3 class="ss-card-title">Scale, Achieved</h3>
+            <p class="ss-card-body">Forty-plus buildings completed. Eleven ongoing. Together, 4.8 million square feet of Strong Built construction now stands across the Mumbai Metropolitan Region.</p>
+            <div class="ss-card-meta">40+ Buildings · 4.8 Million Sq.Ft · 11 Ongoing</div>
+          </article>
+          <article class="ss-card" data-year="2023" data-tag="Mastery" data-icon="fa-award">
+            <div class="ss-card-kicker">Chapter Nine · 2023</div>
+            <h3 class="ss-card-title">High-Rise Mastery</h3>
+            <p class="ss-card-body">A new tier of expertise — super high-rise and premium residential execution across the MMR. The firm cements its reputation as the contractor of choice for Mumbai's most demanding skyline.</p>
+            <div class="ss-card-meta">Super High-Rise · Premium Residential · MMR</div>
+          </article>
+          <article class="ss-card" data-year="2024" data-tag="Present Day" data-icon="fa-rocket">
+            <div class="ss-card-kicker">Present Day · 2024</div>
+            <h3 class="ss-card-title">Today &amp; Beyond</h3>
+            <p class="ss-card-body">Thirty-three projects delivered. Ninety buildings standing. Five-point-seven million square feet of Strong Built construction. An order book of ₹808 Cr powers the next chapter.</p>
+            <div class="ss-card-meta">33+ Projects · 90+ Buildings · 5.7M Sq.Ft · ₹808 Cr Order Book</div>
+          </article>
         </div>
-
-        <!-- Dec 2015 -->
-        <div class="relative grid md:grid-cols-2 gap-8 mb-32 items-center timeline-item reveal-up">
-          <div class="glass-panel p-2 md:mr-12 order-1">
-            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80" alt="Rapid growth phase with Dheeraj and Ekta projects" class="w-full h-64 object-cover">
-          </div>
-          <div
-            class="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-clay-base border-2 border-brand-gold rounded-full z-20 hidden md:flex items-center justify-center shadow-[0_0_15px_rgba(252,182,21,0.5)]">
-            <div class="w-2 h-2 bg-brand-gold rounded-full"></div>
-          </div>
-          <div class="md:pl-12 order-2 text-left">
-            <div
-              class="inline-block text-brand-darkGold font-bold text-7xl font-heading opacity-10 absolute -top-10 right-0 md:right-auto md:left-10 z-0">
-              2015</div>
-            <h3 class="text-3xl font-bold text-clay-ink uppercase relative z-10">Dec 2015</h3>
-            <p class="text-clay-muted mt-4 relative z-10 font-light leading-relaxed">
-              2nd Repeat Project from Dheeraj; 1st 100 Cr order From Ekta.
-            </p>
-          </div>
-        </div>
-
-        <!-- Dec 2016 -->
-        <div class="relative grid md:grid-cols-2 gap-8 mb-32 items-center timeline-item reveal-up">
-          <div class="md:text-right md:pr-12 order-2 md:order-1">
-            <div
-              class="inline-block text-brand-darkGold font-bold text-7xl font-heading opacity-10 absolute -top-10 right-0 md:right-10 z-0">
-              2016</div>
-            <h3 class="text-3xl font-bold text-clay-ink uppercase relative z-10">Dec 2016</h3>
-            <p class="text-clay-muted mt-4 relative z-10 font-light leading-relaxed">
-              Bagged marquee clients: Rustomjee, Wadhwa, Hiranandani and Mahindra Lifespaces.
-            </p>
-          </div>
-          <div
-            class="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-clay-base border-2 border-brand-gold rounded-full z-20 hidden md:flex items-center justify-center shadow-[0_0_15px_rgba(252,182,21,0.5)]">
-            <div class="w-2 h-2 bg-brand-gold rounded-full"></div>
-          </div>
-          <div class="glass-panel p-2 md:ml-12 order-1 md:order-2">
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Major client acquisitions including Rustomjee and Mahindra" class="w-full h-64 object-cover">
-          </div>
-        </div>
-
-        <!-- Dec 2017 -->
-        <div class="relative grid md:grid-cols-2 gap-8 mb-32 items-center timeline-item reveal-up">
-          <div class="glass-panel p-2 md:mr-12 order-1">
-            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80" alt="Seven projects delivered totaling 1.1 million sq ft" class="w-full h-64 object-cover">
-          </div>
-          <div
-            class="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-clay-base border-2 border-brand-gold rounded-full z-20 hidden md:flex items-center justify-center shadow-[0_0_15px_rgba(252,182,21,0.5)]">
-            <div class="w-2 h-2 bg-brand-gold rounded-full"></div>
-          </div>
-          <div class="md:pl-12 order-2 text-left">
-            <div
-              class="inline-block text-brand-darkGold font-bold text-7xl font-heading opacity-10 absolute -top-10 left-10 z-0">
-              2017</div>
-            <h3 class="text-3xl font-bold text-clay-ink uppercase relative z-10">Dec 2017</h3>
-            <p class="text-clay-muted mt-4 relative z-10 font-light leading-relaxed">
-              Handed over 7 projects (1.1 million Sq.ft).
-            </p>
-          </div>
-        </div>
-
-        <!-- Oct 2018 -->
-        <div class="relative grid md:grid-cols-2 gap-8 mb-32 items-center timeline-item reveal-up">
-          <div class="md:text-right md:pr-12 order-2 md:order-1">
-            <div
-              class="inline-block text-brand-darkGold font-bold text-7xl font-heading opacity-10 absolute -top-10 right-0 md:right-10 z-0">
-              2018</div>
-            <h3 class="text-3xl font-bold text-clay-ink uppercase relative z-10">Dec 2018</h3>
-            <p class="text-clay-muted mt-4 relative z-10 font-light leading-relaxed">
-              21 Live Projects, admeasuring 2.5 million Sq.ft.
-            </p>
-          </div>
-          <div
-            class="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-clay-base border-2 border-brand-gold rounded-full z-20 hidden md:flex items-center justify-center shadow-[0_0_15px_rgba(252,182,21,0.5)]">
-            <div class="w-2 h-2 bg-brand-gold rounded-full"></div>
-          </div>
-          <div class="glass-panel p-2 md:ml-12 order-1 md:order-2">
-            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80" alt="21 live projects covering 4.8 million sq ft" class="w-full h-64 object-cover">
-          </div>
-        </div>
-
-        <!-- Jan 2019 -->
-        <div class="relative grid md:grid-cols-2 gap-8 mb-32 items-center timeline-item reveal-up">
-          <div class="glass-panel p-2 md:mr-12 order-1">
-            <img src="https://images.unsplash.com/photo-1582407947092-a88e9be43807?auto=format&fit=crop&w=600&q=80" alt="Government turnkey project of 1500 flats" class="w-full h-64 object-cover">
-          </div>
-          <div
-            class="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-clay-base border-2 border-brand-gold rounded-full z-20 hidden md:flex items-center justify-center shadow-[0_0_15px_rgba(252,182,21,0.5)]">
-            <div class="w-2 h-2 bg-brand-gold rounded-full"></div>
-          </div>
-          <div class="md:pl-12 order-2 text-left">
-            <div
-              class="inline-block text-brand-darkGold font-bold text-7xl font-heading opacity-10 absolute -top-10 left-10 z-0">
-              2019</div>
-            <h3 class="text-3xl font-bold text-clay-ink uppercase relative z-10">Jan 2019</h3>
-            <p class="text-clay-muted mt-4 relative z-10 font-light leading-relaxed">
-              Government Turnkey Project of 1500 Flats taken up. <br>
-              <strong>Dec 2019:</strong> Completed 9 Towers for Lodha.
-            </p>
-          </div>
-        </div>
-
-        <!-- Dec 2020 -->
-        <div class="relative grid md:grid-cols-2 gap-8 mb-32 items-center timeline-item reveal-up">
-          <div class="md:text-right md:pr-12 order-2 md:order-1">
-            <div
-              class="inline-block text-brand-darkGold font-bold text-7xl font-heading opacity-10 absolute -top-10 right-0 md:right-10 z-0">
-              2020</div>
-            <h3 class="text-3xl font-bold text-clay-ink uppercase relative z-10">Dec 2020</h3>
-            <p class="text-clay-muted mt-4 relative z-10 font-light leading-relaxed">
-              Handed over 3 projects (Sukrut-Dadar, Pashmina-Pawai & Times Square-Andheri) despite Covid.
-            </p>
-          </div>
-          <div
-            class="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-clay-base border-2 border-brand-gold rounded-full z-20 hidden md:flex items-center justify-center shadow-[0_0_15px_rgba(252,182,21,0.5)]">
-            <div class="w-2 h-2 bg-brand-gold rounded-full"></div>
-          </div>
-          <div class="glass-panel p-2 md:ml-12 order-1 md:order-2">
-            <img src="https://images.unsplash.com/photo-1574689049597-7e6df3e2b2e3?auto=format&fit=crop&w=600&q=80" alt="Projects delivered despite Covid-19 challenges" class="w-full h-64 object-cover">
-          </div>
-        </div>
-
-        <!-- Dec 2022 -->
-        <div class="relative grid md:grid-cols-2 gap-8 mb-32 items-center timeline-item reveal-up">
-          <div class="glass-panel p-2 md:mr-12 order-1">
-            <img src="https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?auto=format&fit=crop&w=600&q=80" alt="40+ completed buildings covering 4.8 million sq ft" class="w-full h-64 object-cover">
-          </div>
-          <div
-            class="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-clay-base border-2 border-brand-gold rounded-full z-20 hidden md:flex items-center justify-center shadow-[0_0_15px_rgba(252,182,21,0.5)]">
-            <div class="w-2 h-2 bg-brand-gold rounded-full"></div>
-          </div>
-          <div class="md:pl-12 order-2 text-left">
-            <div
-              class="inline-block text-brand-darkGold font-bold text-7xl font-heading opacity-10 absolute -top-10 right-0 md:right-auto md:left-10 z-0">
-              2022</div>
-            <h3 class="text-3xl font-bold text-clay-ink uppercase relative z-10">Dec 2022</h3>
-            <p class="text-clay-muted mt-4 relative z-10 font-light leading-relaxed">
-              11 ongoing projects; completed 40+ buildings, covering over 4.8 million sq.ft.
-            </p>
-          </div>
-        </div>
-
-        <!-- 2023 -->
-        <div class="relative grid md:grid-cols-2 gap-8 mb-32 items-center timeline-item reveal-up">
-          <div class="md:text-right md:pr-12 order-2 md:order-1">
-            <div
-              class="inline-block text-brand-darkGold font-bold text-7xl font-heading opacity-10 absolute -top-10 right-0 md:right-10 z-0">
-              2023</div>
-            <h3 class="text-3xl font-bold text-clay-ink uppercase relative z-10">2023</h3>
-            <p class="text-clay-muted mt-4 relative z-10 font-light leading-relaxed">
-              Gained proven expertise in executing super high-rise and premium residential projects across MMR.
-            </p>
-          </div>
-          <div
-            class="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-clay-base border-2 border-brand-gold rounded-full z-20 hidden md:flex items-center justify-center shadow-[0_0_15px_rgba(252,182,21,0.5)]">
-            <div class="w-2 h-2 bg-brand-gold rounded-full"></div>
-          </div>
-          <div class="glass-panel p-2 md:ml-12 order-1 md:order-2">
-            <img src="https://images.unsplash.com/photo-1590644365607-1c0d7a26e89e?auto=format&fit=crop&w=600&q=80" alt="Super high-rise and premium project expertise" class="w-full h-64 object-cover">
-          </div>
-        </div>
-
-        <!-- 2024 & Beyond (finale) -->
-        <div class="relative grid md:grid-cols-2 gap-8 items-center timeline-item reveal-up">
-          <div class="glass-panel p-2 md:mr-12 order-1">
-            <img src="https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=600&q=80" alt="33+ projects delivered, 90+ buildings built, 5.7M+ sq ft" class="w-full h-64 object-cover">
-          </div>
-          <div
-            class="absolute left-1/2 -translate-x-1/2 w-8 h-8 bg-brand-gold rounded-full z-20 hidden md:flex items-center justify-center animate-glow-pulse">
-            <i class="fas fa-rocket text-black text-xs"></i>
-          </div>
-          <div class="md:pl-12 order-2 text-left">
-            <div
-              class="inline-block text-clay-ink font-bold text-7xl font-heading opacity-5 absolute -top-10 right-10 z-0">
-              2024</div>
-            <h3 class="text-3xl font-bold text-brand-darkGold uppercase relative z-10 animate-pulse">2024 &amp; Beyond</h3>
-            <p class="text-clay-muted mt-4 relative z-10 font-light leading-relaxed">
-              33+ projects delivered, 90+ buildings built, 5.7 million+ sq. ft. constructed &mdash; and an order book of ₹808 Cr powering the next chapter.
-            </p>
-          </div>
-        </div>
-
       </div>
+
+
     </div>
   </section>
+
+  <!-- Timeline interactivity (Option B) -->
+  <script>
+    const tlData = {
+      '2014': { tag: 'The Beginning', icon: 'fa-flag', title: 'First Project', body: 'Started with Del-sol (3B + P + 14F) at Carter Road, Bandra — the first chapter of Strong Built\'s story.' },
+      '2015': { tag: 'Repeat Trust', icon: 'fa-handshake', title: 'Trust Multiplied', body: '2nd repeat from Dheeraj. 1st ₹100 Cr order from Ekta — proof that early clients believed enough to come back, and bring others.' },
+      '2016': { tag: 'Brand Trust', icon: 'fa-star', title: 'Marquee Clients', body: 'Bagged Rustomjee, Wadhwa, Hiranandani and Mahindra Lifespaces in a single year.' },
+      '2017': { tag: 'Delivery', icon: 'fa-building', title: '7 Projects Delivered', body: 'Handed over 7 projects totalling 1.1 million square feet.' },
+      '2018': { tag: 'Growth', icon: 'fa-chart-line', title: 'Scaling Up', body: '21 live projects covering 2.5 million sq.ft across the MMR.' },
+      '2019': { tag: 'Public Sector', icon: 'fa-landmark', title: 'Government Turnkey', body: 'A 1500-flat government turnkey project taken on. By December: 9 Lodha towers completed.' },
+      '2020': { tag: 'Resilience', icon: 'fa-shield-alt', title: 'Covid Resilience', body: 'Sukrut, Pashmina and Times Square delivered through the pandemic.' },
+      '2022': { tag: 'Milestone', icon: 'fa-city', title: 'Scale Achieved', body: '40+ buildings completed. 11 ongoing. 4.8 million sq.ft of Strong Built construction.' },
+      '2023': { tag: 'Mastery', icon: 'fa-award', title: 'High-Rise Expertise', body: 'Proven mastery in super high-rise and premium residential across the MMR.' },
+      '2024': { tag: 'Present Day', icon: 'fa-rocket', title: 'Today & Beyond', body: '33+ projects delivered, 90+ buildings built, 5.7 million+ sq. ft. constructed — and an order book of ₹808 Cr powering the next chapter.' }
+    };
+
+    // Option B — Sticky scroll: pin year panel to viewport center while grid is in view, swap content as cards pass center
+    (function initSticky() {
+      const yearEl = document.getElementById('ss-year');
+      const tagEl = document.getElementById('ss-tag');
+      const iconEl = document.getElementById('ss-icon');
+      const cards = document.querySelectorAll('#ss-stream .ss-card');
+      const sticky = document.querySelector('.ss-sticky');
+      const grid = document.getElementById('ss-grid');
+      if (!yearEl || !cards.length || !sticky || !grid) return;
+
+      // ---- Content swap as cards cross viewport center ----
+      const update = (card) => {
+        cards.forEach(c => c.classList.remove('is-active'));
+        card.classList.add('is-active');
+        const y = card.dataset.year;
+        yearEl.style.opacity = '0';
+        setTimeout(() => {
+          yearEl.textContent = y;
+          tagEl.textContent = card.dataset.tag;
+          iconEl.className = 'fas ' + card.dataset.icon;
+          yearEl.style.opacity = '1';
+        }, 150);
+      };
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) update(e.target); });
+      }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+      cards.forEach(c => io.observe(c));
+
+      // ---- Viewport-center pinning (replacement for position:sticky) ----
+      const isDesktop = () => window.matchMedia('(min-width: 1024px)').matches;
+      const reset = () => {
+        sticky.classList.remove('is-pinned', 'is-end');
+        sticky.style.left = sticky.style.width = '';
+      };
+      const sync = () => {
+        if (!isDesktop()) { reset(); return; }
+        const gridRect = grid.getBoundingClientRect();
+        const stickyHeight = sticky.offsetHeight;
+        const vh = window.innerHeight;
+        const center = vh / 2;
+        // Pin while viewport-center sits inside the grid (with room for the panel)
+        const shouldPin = gridRect.top <= center - stickyHeight / 2 && gridRect.bottom >= center + stickyHeight / 2;
+        const pastEnd = gridRect.bottom < center + stickyHeight / 2;
+
+        if (shouldPin) {
+          sticky.classList.add('is-pinned');
+          sticky.classList.remove('is-end');
+          // Match the left column geometry exactly
+          const cols = getComputedStyle(grid).gridTemplateColumns.split(' ');
+          const leftColWidth = parseFloat(cols[0]) || (gridRect.width * 5 / 12);
+          sticky.style.left = gridRect.left + 'px';
+          sticky.style.width = leftColWidth + 'px';
+        } else if (pastEnd) {
+          sticky.classList.remove('is-pinned');
+          sticky.classList.add('is-end');
+          sticky.style.left = sticky.style.width = '';
+        } else {
+          reset();
+        }
+      };
+      window.addEventListener('scroll', sync, { passive: true });
+      window.addEventListener('resize', sync);
+      // Run once on load + after layout settles
+      sync();
+      window.addEventListener('load', sync);
+    })();
+
+  </script>
+
 
   <!-- CTA SECTION -->
   <section class="py-16 md:py-24 relative overflow-hidden bg-brand-gold">
@@ -561,24 +811,6 @@
         }
       });
 
-      // Timeline Progress Line
-      const timelineSection = document.getElementById('timeline-section');
-      const progressBar = document.getElementById('progress-bar');
-
-      if (timelineSection && progressBar) {
-        const rect = timelineSection.getBoundingClientRect();
-        const absoluteTop = rect.top;
-        const offset = windowHeight / 2;
-
-        // Calculate percentage scrolled within the timeline section
-        if (rect.top < offset && rect.bottom > 0) {
-          const totalHeight = rect.height;
-          const scrolled = offset - rect.top;
-          let percentage = (scrolled / totalHeight) * 100;
-          percentage = Math.max(0, Math.min(100, percentage)); // Clamp between 0 and 100
-          progressBar.style.height = `${percentage}%`;
-        }
-      }
     }
 
     // --- NUMBER COUNT UP ---

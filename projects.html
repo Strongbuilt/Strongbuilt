@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Outfit:wght@300;400;500;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Archivo:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -31,8 +31,8 @@
     /* Leaflet Overrides for Dark Theme */
     .leaflet-popup-content-wrapper {
       background: rgba(10, 10, 10, 0.95);
-      color: #fff;
-      border: 1px solid rgba(191, 149, 63, 0.3);
+      color: #f5f1ec;
+      border: 1px solid rgba(200, 144, 15, 0.3);
       border-radius: 4px;
       backdrop-filter: blur(10px);
       padding: 0;
@@ -47,11 +47,11 @@
 
     .leaflet-popup-tip {
       background: rgba(10, 10, 10, 0.95);
-      border: 1px solid rgba(191, 149, 63, 0.3);
+      border: 1px solid rgba(200, 144, 15, 0.3);
     }
 
     .leaflet-container a.leaflet-popup-close-button {
-      color: #fff;
+      color: #f5f1ec;
       background: rgba(0, 0, 0, 0.5);
       border-radius: 50%;
       top: 8px;
@@ -68,7 +68,7 @@
     }
 
     .leaflet-container a.leaflet-popup-close-button:hover {
-      color: #BF953F;
+      color: #C8900F;
       background: rgba(0, 0, 0, 0.9);
       transform: rotate(90deg);
     }
@@ -77,6 +77,163 @@
       background: transparent !important;
       border: none !important;
       transition: none !important;
+    }
+
+    /* ── Cinematic Hero Reel ── */
+    .reel-slide {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 1.6s ease;
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      will-change: transform, opacity;
+    }
+    .reel-slide.active {
+      opacity: 1;
+      animation: kenburns 7s ease forwards;
+    }
+    @keyframes kenburns {
+      from { transform: scale(1.05); }
+      to   { transform: scale(1.12); }
+    }
+    .reel-scrim {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.95) 100%),
+        radial-gradient(ellipse at 30% 80%, rgba(0,0,0,0.6), transparent 60%);
+    }
+    .reel-title {
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      line-height: 0.85;
+      letter-spacing: -0.03em;
+      font-size: clamp(2.75rem, 11vw, 11rem);
+      text-transform: uppercase;
+      color: #f5f1ec;
+    }
+    .reel-title .stroke {
+      -webkit-text-stroke: 1.5px rgba(255,255,255,0.35);
+      color: transparent;
+    }
+    .reel-meta-row {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .reel-kv { font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif; }
+    .reel-kv .k { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: #C8900F; display:block; margin-bottom: 6px; }
+    .reel-kv .v { font-size: 0.9rem; color: #f5f1ec; text-transform: uppercase; letter-spacing: 0.12em; }
+    .reel-dots { display: flex; gap: 10px; }
+    .reel-dots button {
+      width: 28px; height: 2px; background: rgba(255,255,255,0.2);
+      transition: all 0.4s ease; cursor: pointer;
+    }
+    .reel-dots button.active { background: #C8900F; width: 56px; }
+    .reel-scroll {
+      position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif; font-size: 10px;
+      letter-spacing: 0.4em; text-transform: uppercase; color: rgba(255,255,255,0.5);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    .reel-scroll .line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, transparent, #C8900F, transparent);
+      animation: scroll-line 2.2s ease infinite;
+    }
+    @keyframes scroll-line {
+      0%   { transform: translateY(-20px); opacity: 0; }
+      50%  { opacity: 1; }
+      100% { transform: translateY(20px); opacity: 0; }
+    }
+
+    /* ── Sticky Filter Bar ── */
+    .filter-bar {
+      position: sticky;
+      top: 96px; z-index: 40;
+      background: rgba(3, 3, 3, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ── Numbered Project Card (cinematic) ── */
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      background: #1a1718;
+      border: 1px solid rgba(255,255,255,0.04);
+      cursor: pointer;
+      transition: border-color 0.6s ease;
+    }
+    .project-card:hover { border-color: rgba(200,144,15,0.3); }
+    .project-card .num {
+      position: absolute; top: 16px; left: 16px; z-index: 5;
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+      font-size: 11px; letter-spacing: 0.3em; color: rgba(255,255,255,0.55);
+      mix-blend-mode: difference;
+    }
+    .project-card .img-wrap {
+      position: absolute; inset: 0;
+      transition: transform 1.4s cubic-bezier(0.19, 1, 0.22, 1), filter 0.8s ease;
+    }
+    .project-card:hover .img-wrap { transform: scale(1.08); filter: none; }
+    .project-card .img-wrap { filter: none; }
+    .project-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .project-card .shade {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.92) 100%);
+    }
+    .project-card .meta {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 22px 22px 20px;
+      color: #f5f1ec; z-index: 4;
+    }
+    .project-card .meta h3 {
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif; font-weight: 700;
+      text-transform: uppercase; letter-spacing: -0.01em;
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      margin: 0 0 4px;
+      transform: translateY(0);
+      transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .project-card:hover .meta h3 { transform: translateY(-4px); }
+    .project-card .meta .row { display: flex; gap: 14px; font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.65); }
+    .project-card .meta .row span .dot { width: 4px; height: 4px; border-radius: 50%; background: #C8900F; display: inline-block; vertical-align: middle; margin-right: 6px; }
+    .project-card .ongoing-tag {
+      position: absolute; top: 16px; right: 16px; z-index: 5;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(74,222,128,0.35);
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: #4ade80;
+    }
+    .project-card .ongoing-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s ease infinite; }
+    @keyframes pulse { 50% { opacity: 0.4; } }
+
+    /* Scroll reveal (cinematic) */
+    .cine-up {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .cine-up.in { opacity: 1; transform: translateY(0); }
+
+    /* List-view overrides */
+    .project-card.list-mode { height: 110px; display: flex; align-items: stretch; }
+    .project-card.list-mode .img-wrap { position: relative; width: 140px; flex-shrink: 0; }
+    .project-card.list-mode .shade { display: none; }
+    .project-card.list-mode .meta {
+      position: relative; flex: 1; display: flex; align-items: center;
+      justify-content: space-between; padding: 0 24px;
+    }
+    .project-card.list-mode .num { position: relative; top: auto; left: auto; margin-right: 24px; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .reel-scroll { display: none; }
+      .filter-bar { top: 80px; }
     }
   </style>
 </head>
@@ -89,7 +246,7 @@
     <div class="nav-overlay-content p-6 md:p-12">
       <div class="flex justify-between items-center mb-16">
         <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-18 w-auto">
-        <button id="closeMenuBtn" class="text-gray-400 hover:text-white transition text-3xl"><i
+        <button id="closeMenuBtn" class="text-clay-muted hover:text-clay-ink transition text-3xl"><i
             class="fas fa-times"></i></button>
       </div>      <ul class="space-y-0 flex-1">
         <li><a href="index.html" class="sidebar-link">Home</a></li>
@@ -120,15 +277,15 @@
         <li><a href="contact.html" class="sidebar-link">Contact</a></li>
       </ul>
 
-      <div class="mt-auto pt-12 border-t border-white/10">
-        <p class="text-brand-gold font-heading text-sm mb-4">Connect With Us</p>
+      <div class="mt-auto pt-12 border-t border-clay-border">
+        <p class="text-brand-darkGold font-heading text-sm mb-4">Connect With Us</p>
         <div class="flex gap-6 text-xl">
           <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn"
-            class="text-gray-400 hover:text-brand-gold transition"><i class="fab fa-linkedin"></i></a>
+            class="text-clay-muted hover:text-brand-darkGold transition"><i class="fab fa-linkedin"></i></a>
           <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram"
-            class="text-gray-400 hover:text-brand-gold transition"><i class="fab fa-instagram"></i></a>
+            class="text-clay-muted hover:text-brand-darkGold transition"><i class="fab fa-instagram"></i></a>
           <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter"
-            class="text-gray-400 hover:text-brand-gold transition"><i class="fab fa-twitter"></i></a>
+            class="text-clay-muted hover:text-brand-darkGold transition"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
     </div>
@@ -160,289 +317,231 @@
   <!-- HERO SECTION -->
   <section class="relative h-[50vh] md:h-[60vh] flex items-center justify-center text-center overflow-hidden">
     <div class="absolute inset-0 z-0">
-      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80"
-        class="w-full h-full object-cover opacity-40 animate-pulse-slow">
+      <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1920&q=80"
+        alt="Strong Built construction projects" class="w-full h-full object-cover opacity-40 animate-pulse-slow">
     </div>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black z-0"></div>
-
+    <div class="absolute inset-0 bg-gradient-to-b from-clay-base/70 via-clay-mist/50 to-[#050505] z-0"></div>
     <div class="relative z-30 container mx-auto px-6 mt-20">
       <div class="inline-block mb-4 overflow-hidden">
-        <span class="block text-brand-gold text-sm font-bold tracking-[0.5em] uppercase reveal-up"
-          style="transition-delay: 100ms;">Our Portfolio</span>
+        <span class="block text-brand-darkGold text-sm font-bold tracking-[0.5em] uppercase reveal-up"
+          style="transition-delay: 100ms;">Portfolio</span>
       </div>
-      <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold mb-6 text-white uppercase tracking-tighter leading-none reveal-up"
+      <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold mb-6 text-clay-ink uppercase tracking-tighter leading-none reveal-up font-hero"
         style="transition-delay: 200ms;">
-        <span>Building</span> <br><span
-          class="gold-gradient-text stroke-text">Skyline</span>
+        Our <br><span class="gold-gradient-text stroke-text">Projects</span>
       </h1>
       <div class="h-px w-24 bg-brand-gold mx-auto my-8 reveal-up" style="transition-delay: 300ms;"></div>
-      <p class="text-lg md:text-2xl font-light text-gray-300 max-w-3xl mx-auto leading-relaxed reveal-up"
+      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-3xl mx-auto leading-relaxed reveal-up"
         style="transition-delay: 400ms;">
-        5.7+ Million Sq. Ft. Delivered Across 33+ Projects and 90+ Buildings.
+        Shaping the skyline with iconic residential, commercial, and industrial landmarks.
       </p>
     </div>
   </section>
 
-  <!-- STATS BAR -->
-  <div
-    class="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 md:gap-8 mt-16 max-w-6xl mx-auto border-t border-white/10 pt-10 reveal-up"
-    style="transition-delay: 400ms;">
-    <div class="group cursor-default text-center">
-      <span
-        class="block text-3xl md:text-5xl font-bold text-white mb-1 group-hover:text-brand-gold transition duration-300">15+</span>
-      <span class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 font-heading">Years Experience</span>
+  <!-- ── SCROLL BAND: volume / scale overview ── -->
+  <section class="relative border-y border-clay-border bg-clay-base">
+    <div class="container mx-auto px-6 py-12 md:py-16">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-y-8 md:gap-0 md:divide-x divide-clay-border">
+        <div class="md:px-8 cine-up">
+          <div class="text-brand-darkGold text-[10px] font-heading uppercase tracking-[0.4em] mb-3">Delivered</div>
+          <div class="text-4xl md:text-6xl font-heading font-bold text-clay-ink leading-none">5.7M<span class="text-brand-darkGold text-2xl md:text-3xl">+</span></div>
+          <div class="text-xs text-clay-faint mt-2 font-body">Sq. Ft. Built</div>
+        </div>
+        <div class="md:px-8 cine-up" style="transition-delay:120ms;">
+          <div class="text-brand-darkGold text-[10px] font-heading uppercase tracking-[0.4em] mb-3">Projects</div>
+          <div class="text-4xl md:text-6xl font-heading font-bold text-clay-ink leading-none">40<span class="text-brand-darkGold text-2xl md:text-3xl">+</span></div>
+          <div class="text-xs text-clay-faint mt-2 font-body">Landmarks Shaped</div>
+        </div>
+        <div class="md:px-8 cine-up" style="transition-delay:240ms;">
+          <div class="text-brand-darkGold text-[10px] font-heading uppercase tracking-[0.4em] mb-3">Experience</div>
+          <div class="text-4xl md:text-6xl font-heading font-bold text-clay-ink leading-none">15<span class="text-brand-darkGold text-2xl md:text-3xl">+</span></div>
+          <div class="text-xs text-clay-faint mt-2 font-body">Years Engineering</div>
+        </div>
+        <div class="md:px-8 cine-up" style="transition-delay:360ms;">
+          <div class="text-brand-darkGold text-[10px] font-heading uppercase tracking-[0.4em] mb-3">Safety</div>
+          <div class="text-4xl md:text-6xl font-heading font-bold text-clay-ink leading-none">100<span class="text-brand-darkGold text-2xl md:text-3xl">%</span></div>
+          <div class="text-xs text-clay-faint mt-2 font-body">Incident-Free Record</div>
+        </div>
+      </div>
     </div>
-    <div class="group cursor-default text-center">
-      <span
-        class="block text-3xl md:text-5xl font-bold text-white mb-1 group-hover:text-brand-gold transition duration-300">40+</span>
-      <span class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 font-heading">Projects Completed</span>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- INDEX — Editorial header                                        -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="container mx-auto px-6 pt-20 md:pt-28 pb-10">
+    <div class="flex items-end justify-between flex-wrap gap-6 cine-up">
+      <div>
+        <div class="text-brand-darkGold text-[10px] md:text-xs font-heading uppercase tracking-[0.5em] mb-4">The Index</div>
+        <h2 class="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-clay-ink uppercase leading-none">
+          All Projects
+        </h2>
+      </div>
+      <div class="text-right">
+        <div class="text-brand-darkGold text-[10px] font-heading uppercase tracking-[0.4em] mb-2">Showing</div>
+        <div class="font-heading text-3xl md:text-4xl text-clay-ink font-bold leading-none">
+          <span id="resultCount">0</span><span class="text-clay-ink/30"> / </span><span id="totalCount" class="text-clay-ink/50">0</span>
+        </div>
+      </div>
     </div>
-    <div class="group cursor-default text-center">
-      <span
-        class="block text-3xl md:text-5xl font-bold text-white mb-1 group-hover:text-brand-gold transition duration-300">100
-        Cr+</span>
-      <span class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 font-heading">Single Order Value</span>
-    </div>
-    <div class="group cursor-default text-center">
-      <span
-        class="block text-3xl md:text-5xl font-bold text-white mb-1 group-hover:text-brand-gold transition duration-300">100%</span>
-      <span class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 font-heading">Safety Record</span>
+  </section>
+
+  <!-- ── STICKY FILTER BAR ── -->
+  <div class="filter-bar">
+    <div class="container mx-auto px-6 py-4 md:py-5">
+      <div class="flex items-center gap-4 md:gap-6 flex-wrap">
+
+        <!-- Search -->
+        <div class="relative flex-grow min-w-[200px] md:min-w-[260px] max-w-md">
+          <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-clay-faint text-xs"></i>
+          <input type="text" id="projectSearch"
+            placeholder="Search projects, clients..."
+            class="w-full bg-clay-surface/5 border border-clay-border rounded-full pl-10 pr-5 py-2.5 text-sm text-clay-ink font-body placeholder-gray-500 focus:outline-none focus:border-brand-gold/40 focus:bg-clay-surface/8 transition-all">
+        </div>
+
+        <!-- Category -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-[10px] text-clay-faint font-heading uppercase tracking-[0.3em] hidden md:inline">Type</span>
+          <div class="flex flex-wrap gap-1.5" id="categoryFilters"></div>
+        </div>
+
+        <!-- Status -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-[10px] text-clay-faint font-heading uppercase tracking-[0.3em] hidden md:inline">Status</span>
+          <div class="flex flex-wrap gap-1.5" id="statusFilters"></div>
+        </div>
+
+        <div class="flex items-center gap-3 ml-auto">
+          <!-- Sort -->
+          <select id="sortSelect"
+            class="bg-clay-surface/5 border border-clay-border text-clay-ink text-[10px] md:text-xs font-heading uppercase tracking-[0.2em] px-3 md:px-4 py-2 rounded-full focus:outline-none focus:border-brand-gold/40 appearance-none cursor-pointer">
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="az">A → Z</option>
+            <option value="za">Z → A</option>
+          </select>
+
+          <!-- View toggle: Grid / List / Map -->
+          <div class="flex gap-1 bg-clay-surface/5 rounded-full p-1 border border-clay-border">
+            <button class="view-toggle bg-brand-gold text-black w-8 h-8 rounded-full flex items-center justify-center transition-all" data-view="grid" title="Grid View">
+              <i class="fas fa-th text-[11px]"></i>
+            </button>
+            <button class="view-toggle text-clay-faint w-8 h-8 rounded-full flex items-center justify-center transition-all" data-view="list" title="List View">
+              <i class="fas fa-list text-[11px]"></i>
+            </button>
+            <button id="mapViewBtn" class="text-clay-faint w-8 h-8 rounded-full flex items-center justify-center transition-all" title="Map View">
+              <i class="fas fa-map-marked-alt text-[11px]"></i>
+            </button>
+          </div>
+          <button id="galleryViewBtn" class="hidden"></button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- TRUSTED BY MARQUEE -->
-  <section class="py-10 mt-16 bg-black/60 backdrop-blur-md border-y border-white/5 relative z-20 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10 pointer-events-none"></div>
-    <div class="flex gap-16 md:gap-32 animate-scroll w-max hover:pause">
-      <div class="flex gap-16 md:gap-32 items-center shrink-0">
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Lodha Group</span>
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Rustomjee</span>
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Mahindra Lifespaces</span>
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Hiranandani</span>
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Dheeraj Realty</span>
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Ekta World</span>
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Ajmera Group</span>
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Puraniks</span>
-      </div>
-      <div class="flex gap-16 md:gap-32 items-center shrink-0" aria-hidden="true">
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Lodha Group</span>
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Rustomjee</span>
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Mahindra Lifespaces</span>
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Hiranandani</span>
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Dheeraj Realty</span>
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Ekta World</span>
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Ajmera Group</span>
-        <span class="text-xl md:text-3xl font-bold text-white/20 font-heading hover:text-brand-gold transition-colors duration-300 cursor-default uppercase tracking-widest">Puraniks</span>
-      </div>
-    </div>
-  </section>
-
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- PORTFOLIO SECTION — Dynamic Gallery + Map Toggle               -->
+  <!-- PORTFOLIO GRID / MAP                                           -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <section class="py-16 md:py-24 container mx-auto px-6 relative z-10" id="portfolio">
-
-    <!-- Section Header -->
-    <div class="text-center mb-12 reveal-up">
-      <span class="text-brand-gold text-xs font-bold uppercase tracking-[0.4em] mb-4 block font-heading">Our Masterpieces</span>
-      <h2 class="text-4xl md:text-6xl font-bold text-white uppercase font-heading mb-6"><span>Iconic</span> <span
-          class="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-yellow-100">Landmarks</span></h2>
-      <div class="h-1 w-24 bg-brand-gold mx-auto mb-8"></div>
-      <p class="text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">
-        Explore our diverse portfolio of landmark developments that have shaped the urban fabric of Mumbai and beyond.
-      </p>
-    </div>
-
-    <!-- VIEW MODE SWITCHER: Gallery | Map -->
-    <div class="flex justify-center mb-10 reveal-up">
-      <div class="inline-flex bg-black/40 backdrop-blur-xl rounded-full p-1 border border-white/10">
-        <button id="galleryViewBtn"
-          class="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest bg-brand-gold text-black transition-all duration-300">
-          <i class="fas fa-th-large mr-2"></i><span>Gallery</span>
-        </button>
-        <button id="mapViewBtn"
-          class="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-all duration-300">
-          <i class="fas fa-map-marked-alt mr-2"></i><span>Map</span>
-        </button>
-      </div>
-    </div>
+  <section class="py-10 md:py-16 container mx-auto px-6 relative z-10" id="portfolio">
 
     <!-- ── GALLERY CONTAINER ── -->
     <div id="galleryContainer">
-
-      <!-- Search + Count -->
-      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-4 mb-6">
-        <div class="relative flex-grow w-full md:w-auto">
-          <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
-          <input type="text" id="projectSearch"
-            placeholder="Search projects, clients..."
-            class="w-full bg-white/5 border border-white/10 rounded-full pl-11 pr-6 py-3 text-sm text-white font-body placeholder-gray-500 focus:outline-none focus:border-brand-gold/50 focus:bg-white/10 transition-all duration-300">
-        </div>
-        <div class="text-gray-500 text-xs font-heading uppercase tracking-widest whitespace-nowrap">
-          <span>Showing</span>
-          <span id="resultCount" class="text-brand-gold font-bold">0</span>
-          <span>of</span>
-          <span id="totalCount" class="text-white">0</span>
-        </div>
-      </div>
-
-      <!-- Filter Rows -->
-      <div class="max-w-6xl mx-auto space-y-3 mb-12">
-        <!-- Category -->
-        <div class="flex items-center gap-3 flex-wrap">
-          <span class="text-[10px] text-gray-500 font-heading uppercase tracking-widest w-14 shrink-0">Type</span>
-          <div class="flex flex-wrap gap-2" id="categoryFilters"></div>
-        </div>
-        <!-- Location -->
-        <div class="flex items-center gap-3 flex-wrap">
-          <span class="text-[10px] text-gray-500 font-heading uppercase tracking-widest w-14 shrink-0">City</span>
-          <div class="flex flex-wrap gap-2" id="locationFilters"></div>
-        </div>
-        <!-- Status -->
-        <div class="flex items-center gap-3 flex-wrap">
-          <span class="text-[10px] text-gray-500 font-heading uppercase tracking-widest w-14 shrink-0">Status</span>
-          <div class="flex flex-wrap gap-2" id="statusFilters"></div>
-        </div>
-        <!-- Sort + View Toggle -->
-        <div class="flex items-center justify-between pt-3 border-t border-white/5">
-          <div class="flex items-center gap-3">
-            <span class="text-[10px] text-gray-500 font-heading uppercase tracking-widest">Sort</span>
-            <select id="sortSelect"
-              class="bg-white/5 border border-white/10 text-white text-xs font-heading uppercase tracking-wider px-4 py-2 rounded-full focus:outline-none focus:border-brand-gold/50 appearance-none cursor-pointer">
-              <option value="newest">Newest First</option>
-              <option value="oldest">Oldest First</option>
-              <option value="az">A → Z</option>
-              <option value="za">Z → A</option>
-            </select>
-          </div>
-          <div class="flex gap-1 bg-white/5 rounded-full p-1 border border-white/10">
-            <button class="view-toggle bg-brand-gold text-black p-2 rounded-full transition-all" data-view="grid" title="Grid View">
-              <i class="fas fa-th text-xs"></i>
-            </button>
-            <button class="view-toggle text-gray-500 p-2 rounded-full transition-all" data-view="list" title="List View">
-              <i class="fas fa-list text-xs"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
       <!-- Dynamic Project Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-[400px] grid-flow-dense max-w-6xl mx-auto"
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 auto-rows-[280px] sm:auto-rows-[340px] md:auto-rows-[380px] lg:auto-rows-[420px] grid-flow-dense"
         id="project-grid">
         <!-- JS renders cards here -->
       </div>
 
       <!-- No Results -->
-      <div id="noResults" class="hidden text-center py-20">
-        <i class="fas fa-search text-4xl text-gray-700 mb-4 block"></i>
-        <p class="text-gray-500 font-heading uppercase tracking-widest text-sm">No projects match your filters</p>
+      <div id="noResults" class="hidden text-center py-24">
+        <div class="text-brand-darkGold text-[10px] font-heading uppercase tracking-[0.5em] mb-4">No Match</div>
+        <p class="text-clay-muted font-heading uppercase tracking-[0.2em] text-sm mb-6">No projects match your filters.</p>
         <button onclick="resetFilters()"
-          class="mt-4 text-brand-gold text-xs font-heading uppercase tracking-widest hover:underline">
-          Reset Filters
+          class="inline-flex items-center gap-2 text-brand-darkGold text-xs font-heading uppercase tracking-[0.3em] border border-brand-gold/30 hover:border-brand-gold hover:bg-brand-gold/5 px-5 py-2 rounded-full transition-all">
+          <i class="fas fa-rotate-left text-[10px]"></i> Reset Filters
         </button>
       </div>
-
     </div>
-    <!-- /galleryContainer -->
 
     <!-- ── MAP CONTAINER (hidden by default) ── -->
     <div id="mapContainer" class="hidden">
-      <div class="relative h-[50vh] md:h-[70vh] rounded-sm overflow-hidden border border-white/10">
+      <div class="relative h-[60vh] md:h-[75vh] rounded-sm overflow-hidden border border-clay-border">
         <div id="projectMapEmbed" class="w-full h-full bg-[#1a1a1a]"></div>
 
         <!-- Map Legend -->
-        <div class="absolute bottom-6 left-6 z-[1000] glass-panel p-4 rounded-sm">
-          <p class="text-[10px] text-gray-400 font-heading uppercase tracking-widest mb-3">Legend</p>
+        <div class="absolute bottom-6 left-6 z-[1000] bg-clay-base/75 backdrop-blur-md border border-clay-border p-4 rounded-sm">
+          <p class="text-[10px] text-brand-darkGold font-heading uppercase tracking-[0.3em] mb-3">Legend</p>
           <div class="space-y-2">
-            <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-[#FFD700] border border-white shrink-0"></span>
-              <span class="text-xs text-gray-300">Residential</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-[#FF8C00] border border-white shrink-0"></span>
-              <span class="text-xs text-gray-300">Commercial</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-[#C0C0C0] border border-white shrink-0"></span>
-              <span class="text-xs text-gray-300">Infrastructure</span>
-            </div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#FCB615] border border-clay-border shrink-0"></span><span class="text-xs text-clay-muted">Residential</span></div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#FF8C00] border border-clay-border shrink-0"></span><span class="text-xs text-clay-muted">Commercial</span></div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#C0C0C0] border border-clay-border shrink-0"></span><span class="text-xs text-clay-muted">Infrastructure</span></div>
           </div>
         </div>
 
         <!-- Map Stats Overlay -->
-        <div class="absolute top-6 right-6 z-[1000] glass-panel p-4 rounded-sm">
+        <div class="absolute top-6 right-6 z-[1000] bg-clay-base/75 backdrop-blur-md border border-clay-border p-4 rounded-sm">
           <div class="grid grid-cols-3 gap-6 text-center">
-            <div>
-              <span class="block text-2xl text-white font-bold font-heading" id="mapStatProjects">31</span>
-              <span class="text-[9px] text-gray-400 uppercase tracking-widest font-heading">Projects</span>
-            </div>
-            <div>
-              <span class="block text-2xl text-white font-bold font-heading">16M+</span>
-              <span class="text-[9px] text-gray-400 uppercase tracking-widest font-heading">Sq. Ft</span>
-            </div>
-            <div>
-              <span class="block text-2xl text-white font-bold font-heading" id="mapStatCities">8</span>
-              <span class="text-[9px] text-gray-400 uppercase tracking-widest font-heading">Cities</span>
-            </div>
+            <div><span class="block text-2xl text-clay-ink font-bold font-heading" id="mapStatProjects">0</span><span class="text-[9px] text-clay-muted uppercase tracking-widest font-heading">Projects</span></div>
+            <div><span class="block text-2xl text-clay-ink font-bold font-heading">16M+</span><span class="text-[9px] text-clay-muted uppercase tracking-widest font-heading">Sq. Ft</span></div>
+            <div><span class="block text-2xl text-clay-ink font-bold font-heading" id="mapStatCities">0</span><span class="text-[9px] text-clay-muted uppercase tracking-widest font-heading">Cities</span></div>
           </div>
         </div>
       </div>
     </div>
-    <!-- /mapContainer -->
 
   </section>
 
   <!-- 5-S METHODOLOGY -->
-  <section class="py-16 md:py-24 bg-zinc-900 border-y border-white/5 relative">
+  <section class="py-16 md:py-24 bg-clay-paper border-y border-clay-border relative">
     <div class="container mx-auto px-6">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div class="reveal-up">
-          <span class="text-brand-gold text-sm font-bold tracking-[0.3em] uppercase block mb-4 flex items-center gap-2">
+          <span class="text-brand-darkGold text-sm font-bold tracking-[0.3em] uppercase block mb-4 flex items-center gap-2">
             <span class="w-8 h-[1px] bg-brand-gold"></span> <span>Our Methodology</span>
           </span>
-          <h2 class="text-4xl md:text-5xl font-bold text-white font-heading mb-6 leading-tight"><span>The Strong Built</span> <br>
+          <h2 class="text-4xl md:text-5xl font-bold text-clay-ink font-heading mb-6 leading-tight"><span>The Strong Built</span> <br>
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-yellow-200">5-S Standard</span>
           </h2>
-          <p class="text-gray-400 mb-8 leading-relaxed font-body text-lg border-l-2 border-brand-gold/30 pl-6">
+          <p class="text-clay-muted mb-8 leading-relaxed font-body text-lg border-l-2 border-brand-gold/30 pl-6">
             We don't just build; we engineer confidence. Our proprietary 5-S methodology ensures that every project, regardless of scale, meets global standards of safety and structural integrity.
           </p>
           <a href="services.html"
-            class="group inline-flex items-center gap-2 text-brand-gold font-bold tracking-widest uppercase text-xs hover:text-white transition-colors duration-300">
+            class="group inline-flex items-center gap-2 text-brand-darkGold font-bold tracking-widest uppercase text-xs hover:text-clay-ink transition-colors duration-300">
             <span>Learn More About Process</span>
             <i class="fas fa-arrow-right transform group-hover:translate-x-2 transition-transform duration-300"></i>
           </a>
         </div>
         <div class="grid gap-6">
-          <div class="group bg-white/5 backdrop-blur-md p-8 border border-white/10 hover:border-brand-gold/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(191,149,63,0.2)] rounded-sm reveal-up" style="transition-delay: 100ms;">
+          <div class="group bg-clay-surface/5 backdrop-blur-md p-8 border border-clay-border hover:border-brand-gold/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(200,144,15,0.2)] rounded-sm reveal-up" style="transition-delay: 100ms;">
             <div class="flex items-start gap-6">
-              <div class="w-14 h-14 bg-brand-gold/10 flex items-center justify-center rounded-sm text-brand-gold text-2xl group-hover:bg-brand-gold group-hover:text-black transition-colors duration-500 shrink-0">
+              <div class="w-14 h-14 bg-brand-gold/10 flex items-center justify-center rounded-sm text-brand-darkGold text-2xl group-hover:bg-brand-gold group-hover:text-black transition-colors duration-500 shrink-0">
                 <i class="fas fa-shield-alt"></i>
               </div>
               <div>
-                <h4 class="text-xl font-bold text-white font-heading mb-2 group-hover:text-brand-gold transition-colors">Safety First</h4>
-                <p class="text-sm text-gray-400 leading-relaxed">Rigorous safety committees, ELCB checks, fall protection nets, and daily toolbox meetings to ensure zero accidents.</p>
+                <h4 class="text-xl font-bold text-clay-ink font-heading mb-2 group-hover:text-brand-darkGold transition-colors">Safety First</h4>
+                <p class="text-sm text-clay-muted leading-relaxed">Rigorous safety committees, ELCB checks, fall protection nets, and daily toolbox meetings to ensure zero accidents.</p>
               </div>
             </div>
           </div>
-          <div class="group bg-white/5 backdrop-blur-md p-8 border border-white/10 hover:border-brand-gold/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(191,149,63,0.2)] rounded-sm reveal-up" style="transition-delay: 200ms;">
+          <div class="group bg-clay-surface/5 backdrop-blur-md p-8 border border-clay-border hover:border-brand-gold/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(200,144,15,0.2)] rounded-sm reveal-up" style="transition-delay: 200ms;">
             <div class="flex items-start gap-6">
-              <div class="w-14 h-14 bg-brand-gold/10 flex items-center justify-center rounded-sm text-brand-gold text-2xl group-hover:bg-brand-gold group-hover:text-black transition-colors duration-500 shrink-0">
+              <div class="w-14 h-14 bg-brand-gold/10 flex items-center justify-center rounded-sm text-brand-darkGold text-2xl group-hover:bg-brand-gold group-hover:text-black transition-colors duration-500 shrink-0">
                 <i class="fas fa-hard-hat"></i>
               </div>
               <div>
-                <h4 class="text-xl font-bold text-white font-heading mb-2 group-hover:text-brand-gold transition-colors">Strength & Quality</h4>
-                <p class="text-sm text-gray-400 leading-relaxed">Comprehensive checklist systems for reinforcement, shuttering, and pour cards to ensure zero-defect delivery.</p>
+                <h4 class="text-xl font-bold text-clay-ink font-heading mb-2 group-hover:text-brand-darkGold transition-colors">Strength & Quality</h4>
+                <p class="text-sm text-clay-muted leading-relaxed">Comprehensive checklist systems for reinforcement, shuttering, and pour cards to ensure zero-defect delivery.</p>
               </div>
             </div>
           </div>
-          <div class="group bg-white/5 backdrop-blur-md p-8 border border-white/10 hover:border-brand-gold/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(191,149,63,0.2)] rounded-sm reveal-up" style="transition-delay: 300ms;">
+          <div class="group bg-clay-surface/5 backdrop-blur-md p-8 border border-clay-border hover:border-brand-gold/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(200,144,15,0.2)] rounded-sm reveal-up" style="transition-delay: 300ms;">
             <div class="flex items-start gap-6">
-              <div class="w-14 h-14 bg-brand-gold/10 flex items-center justify-center rounded-sm text-brand-gold text-2xl group-hover:bg-brand-gold group-hover:text-black transition-colors duration-500 shrink-0">
+              <div class="w-14 h-14 bg-brand-gold/10 flex items-center justify-center rounded-sm text-brand-darkGold text-2xl group-hover:bg-brand-gold group-hover:text-black transition-colors duration-500 shrink-0">
                 <i class="fas fa-stopwatch"></i>
               </div>
               <div>
-                <h4 class="text-xl font-bold text-white font-heading mb-2 group-hover:text-brand-gold transition-colors">Speed & Efficiency</h4>
-                <p class="text-sm text-gray-400 leading-relaxed">Utilization of pre-engineered shuttering systems and advanced ERP cost control for timely completion without compromise.</p>
+                <h4 class="text-xl font-bold text-clay-ink font-heading mb-2 group-hover:text-brand-darkGold transition-colors">Speed & Efficiency</h4>
+                <p class="text-sm text-clay-muted leading-relaxed">Utilization of pre-engineered shuttering systems and advanced ERP cost control for timely completion without compromise.</p>
               </div>
             </div>
           </div>
@@ -453,14 +552,14 @@
 
   <!-- CTA SECTION -->
   <section class="py-24 bg-brand-gold relative overflow-hidden">
-    <div class="absolute inset-0 bg-black opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+    <div class="absolute inset-0 bg-clay-base opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
     <div class="container mx-auto px-6 relative z-10 text-center">
       <h2 class="text-3xl md:text-5xl font-bold text-black mb-6 uppercase font-heading">Ready to Build Your Legacy?</h2>
       <p class="text-black/80 text-lg mb-10 max-w-xl mx-auto font-medium font-body">
         Partner with Mumbai's most trusted construction firm. Let's discuss your next project.
       </p>
       <a href="contact.html"
-        class="inline-block bg-black text-white px-10 py-4 font-bold uppercase tracking-widest hover:scale-105 transition shadow-2xl rounded-sm font-heading">
+        class="inline-block bg-clay-base text-clay-ink px-10 py-4 font-bold uppercase tracking-widest hover:scale-105 transition shadow-2xl rounded-sm font-heading">
         Start a Conversation
       </a>
     </div>
@@ -470,68 +569,68 @@
   <div id="lightbox" class="hidden" role="dialog" aria-modal="true" aria-label="Project image viewer"
     style="display:none; position:fixed; inset:0; z-index:10000; background:rgba(0,0,0,0.95); backdrop-filter:blur(10px); align-items:center; justify-content:center; flex-direction:column; cursor:zoom-out;">
     <button onclick="closeLightbox()" aria-label="Close lightbox"
-      class="absolute top-6 right-8 text-white/60 hover:text-brand-gold text-4xl font-light transition duration-300 hover:rotate-90 cursor-pointer z-10">&times;</button>
-    <img class="max-w-[90%] max-h-[80vh] object-contain border border-white/10 shadow-2xl" id="lightbox-img" alt="">
-    <div id="caption" class="text-center text-white/70 mt-6 font-heading text-sm tracking-[0.3em] uppercase"></div>
+      class="absolute top-6 right-8 text-clay-ink/60 hover:text-brand-darkGold text-4xl font-light transition duration-300 hover:rotate-90 cursor-pointer z-10">&times;</button>
+    <img class="max-w-[90%] max-h-[80vh] object-contain border border-clay-border shadow-2xl" id="lightbox-img" alt="">
+    <div id="caption" class="text-center text-clay-ink/70 mt-6 font-heading text-sm tracking-[0.3em] uppercase"></div>
   </div>
 
   <!-- FOOTER -->
-  <footer class="bg-black text-white pt-16 md:pt-20 pb-10 border-t border-white/10 relative overflow-hidden">
+  <footer class="bg-clay-mist text-clay-muted pt-16 md:pt-20 pb-10 border-t border-clay-border relative overflow-hidden">
     <div class="absolute inset-0 opacity-10"
-      style="background-image: radial-gradient(#333 1px, transparent 1px); background-size: 20px 20px;"></div>
+      style="background-image: radial-gradient(rgba(184, 130, 12, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
     <div class="container mx-auto px-6 relative z-10">
       <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
         <div class="col-span-1">
-          <div class="text-2xl font-bold text-white mb-6 font-heading tracking-widest flex items-center gap-2">
+          <div class="text-2xl font-bold text-clay-ink mb-6 font-heading tracking-widest flex items-center gap-2">
             <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto">
           </div>
-          <p class="text-gray-500 text-sm mb-6 font-light leading-relaxed">
+          <p class="text-clay-faint text-sm mb-6 font-light leading-relaxed">
             Forging the future with concrete, steel, and integrity.
           </p>
           <div class="flex gap-4">
             <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram"
-              class="w-10 h-10 border border-white/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition"><i
+              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
                 class="fab fa-instagram"></i></a>
             <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn"
-              class="w-10 h-10 border border-white/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition"><i
+              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
                 class="fab fa-linkedin-in"></i></a>
             <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter"
-              class="w-10 h-10 border border-white/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition"><i
+              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
                 class="fab fa-twitter"></i></a>
           </div>
         </div>
         <div>
-          <h4 class="text-brand-gold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Navigation</h4>
-          <ul class="space-y-3 text-sm text-gray-400 font-body">
-            <li><a href="story.html" class="hover:text-white transition">About</a></li>
-            <li><a href="services.html" class="hover:text-white transition">Services</a></li>
-            <li><a href="projects.html" class="hover:text-white transition">Projects</a></li>
-            <li><a href="clients.html" class="hover:text-white transition">Clients</a></li>
+          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Navigation</h4>
+          <ul class="space-y-3 text-sm text-clay-muted font-body">
+            <li><a href="story.html" class="hover:text-clay-ink transition">About</a></li>
+            <li><a href="services.html" class="hover:text-clay-ink transition">Services</a></li>
+            <li><a href="projects.html" class="hover:text-clay-ink transition">Projects</a></li>
+            <li><a href="clients.html" class="hover:text-clay-ink transition">Clients</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="text-brand-gold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Services</h4>
-          <ul class="space-y-3 text-sm text-gray-400 font-body">
-            <li><a href="services.html" class="hover:text-white transition">Residential</a></li>
-            <li><a href="services.html" class="hover:text-white transition">Commercial</a></li>
-            <li><a href="services.html" class="hover:text-white transition">Industrial</a></li>
-            <li><a href="services.html" class="hover:text-white transition">Infrastructure</a></li>
+          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Services</h4>
+          <ul class="space-y-3 text-sm text-clay-muted font-body">
+            <li><a href="services.html" class="hover:text-clay-ink transition">Residential</a></li>
+            <li><a href="services.html" class="hover:text-clay-ink transition">Commercial</a></li>
+            <li><a href="services.html" class="hover:text-clay-ink transition">Industrial</a></li>
+            <li><a href="services.html" class="hover:text-clay-ink transition">Infrastructure</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="text-brand-gold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Contact</h4>
-          <ul class="space-y-3 text-sm text-gray-400 font-body">
-            <li><i class="fas fa-map-marker-alt text-brand-gold mr-2"></i> 901-B Wing, 9th Floor, HDIL Kaledonia, Sahar Road, Opp D'Mart, Sambhaji Nagar, Andheri-East, Mumbai - 400069.</li>
-            <li><i class="fas fa-phone text-brand-gold mr-2"></i> +91 9619875081 / 022-6123-2500</li>
-            <li><i class="fas fa-envelope text-brand-gold mr-2"></i> strongbuilt@skywaygroup.co.in <br> strongbuilt@skywaygroup.co.in</li>
+          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Contact</h4>
+          <ul class="space-y-3 text-sm text-clay-muted font-body">
+            <li><i class="fas fa-map-marker-alt text-brand-darkGold mr-2"></i> 901-B Wing, 9th Floor, HDIL Kaledonia, Sahar Road, Opp D'Mart, Sambhaji Nagar, Andheri-East, Mumbai - 400069.</li>
+            <li><i class="fas fa-phone text-brand-darkGold mr-2"></i> +91 9619875081 / 022-6123-2500</li>
+            <li><i class="fas fa-envelope text-brand-darkGold mr-2"></i> strongbuilt@skywaygroup.co.in <br> strongbuilt@skywaygroup.co.in</li>
           </ul>
         </div>
       </div>
-      <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 font-light uppercase tracking-wider">
+      <div class="border-t border-clay-border pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-clay-muted font-light uppercase tracking-wider">
         <p class="font-body">&copy; 2026 <span>Strong Built. All rights reserved.</span></p>
         <div class="flex gap-6 mt-4 md:mt-0 font-heading">
-          <a href="privacy.html" class="hover:text-white">Privacy</a>
-          <a href="terms.html" class="hover:text-white">Terms</a>
+          <a href="privacy.html" class="hover:text-clay-ink">Privacy</a>
+          <a href="terms.html" class="hover:text-clay-ink">Terms</a>
         </div>
       </div>
     </div>

@@ -34,7 +34,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Archivo:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Leaflet -->
@@ -48,45 +48,45 @@
     <style>
         .sidebar-optimized { background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-right: 1px solid rgba(255,255,255,0.1); }
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #000; }
+        .custom-scrollbar::-webkit-scrollbar-track { background:#F5EEDC; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #BF953F; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #C8900F; }
 
-        .leaflet-popup-content-wrapper { background: rgba(10,10,10,0.95); color: #fff; border: 1px solid rgba(191,149,63,0.3); border-radius: 4px; backdrop-filter: blur(10px); padding: 0; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+        .leaflet-popup-content-wrapper { background: rgba(10,10,10,0.95); color: #f5f1ec; border: 1px solid rgba(200,144,15,0.3); border-radius: 4px; backdrop-filter: blur(10px); padding: 0; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .leaflet-popup-content { margin: 0; width: 280px !important; }
-        .leaflet-popup-tip { background: rgba(10,10,10,0.95); border: 1px solid rgba(191,149,63,0.3); }
-        .leaflet-container a.leaflet-popup-close-button { color: #fff; background: rgba(0,0,0,0.5); border-radius: 50%; top: 8px; right: 8px; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font: 16px/14px Tahoma, Verdana, sans-serif; text-shadow: none; transition: all 0.3s ease; z-index: 10; }
-        .leaflet-container a.leaflet-popup-close-button:hover { color: #BF953F; background: rgba(0,0,0,0.9); transform: rotate(90deg); }
+        .leaflet-popup-tip { background: rgba(10,10,10,0.95); border: 1px solid rgba(200,144,15,0.3); }
+        .leaflet-container a.leaflet-popup-close-button { color: #f5f1ec; background: rgba(0,0,0,0.5); border-radius: 50%; top: 8px; right: 8px; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font: 16px/14px Tahoma, Verdana, sans-serif; text-shadow: none; transition: all 0.3s ease; z-index: 10; }
+        .leaflet-container a.leaflet-popup-close-button:hover { color: #C8900F; background: rgba(0,0,0,0.9); transform: rotate(90deg); }
 
         .marker-icon { background: transparent !important; border: none !important; transition: none !important; }
-        .marker-inner { width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 10px rgba(191,149,63,0.6); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease; }
-        .marker-icon:hover .marker-inner { transform: scale(1.5); box-shadow: 0 0 20px rgba(191,149,63,1); }
+        .marker-inner { width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 10px rgba(200,144,15,0.6); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease; }
+        .marker-icon:hover .marker-inner { transform: scale(1.5); box-shadow: 0 0 20px rgba(200,144,15,1); }
 
         /* Active/selected marker — pulsing ring */
-        .marker-icon.is-active .marker-inner { transform: scale(1.4); box-shadow: 0 0 25px rgba(191,149,63,1); animation: markerPulse 1.5s ease-in-out infinite; }
+        .marker-icon.is-active .marker-inner { transform: scale(1.4); box-shadow: 0 0 25px rgba(200,144,15,1); animation: markerPulse 1.5s ease-in-out infinite; }
         @keyframes markerPulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(191,149,63,0.8), 0 0 25px rgba(191,149,63,1); }
-            50% { box-shadow: 0 0 0 10px rgba(191,149,63,0), 0 0 25px rgba(191,149,63,1); }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(200,144,15,0.8), 0 0 25px rgba(200,144,15,1); }
+            50% { box-shadow: 0 0 0 10px rgba(200,144,15,0), 0 0 25px rgba(200,144,15,1); }
         }
 
         .popup-image { width: 100%; height: 160px; object-fit: cover; border-bottom: 1px solid rgba(255,255,255,0.1); transition: transform 0.5s ease; }
         .leaflet-popup:hover .popup-image { transform: scale(1.05); }
         .popup-header { overflow: hidden; position: relative; height: 160px; }
         .popup-content { padding: 20px; position: relative; }
-        .filter-btn-map.active { background-color: #BF953F; color: black; border-color: #BF953F; }
+        .filter-btn-map.active { background-color: #C8900F; color: black; border-color: #C8900F; }
 
         /* Card enter animation (replaces GSAP) */
         .project-card { opacity: 0; transform: translateY(15px); animation: cardIn 0.4s cubic-bezier(0.16,1,0.3,1) forwards; }
         @keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
-        .project-card.is-selected { border-color: #BF953F !important; background: rgba(191,149,63,0.08); box-shadow: 0 0 20px rgba(191,149,63,0.15); }
+        .project-card.is-selected { border-color: #C8900F !important; background: rgba(200,144,15,0.08); box-shadow: 0 0 20px rgba(200,144,15,0.15); }
         .project-card.is-selected .card-accent { transform: translateX(0) !important; }
 
         /* Search input focus ring */
-        #projectSearch:focus { border-color: #BF953F; box-shadow: 0 0 0 2px rgba(191,149,63,0.2); }
+        #projectSearch:focus { border-color: #C8900F; box-shadow: 0 0 0 2px rgba(200,144,15,0.2); }
     </style>
 </head>
 
-<body class="bg-black antialiased overflow-hidden selection:bg-brand-gold selection:text-black h-screen flex flex-col">
+<body class="bg-clay-base antialiased overflow-hidden selection:bg-brand-gold selection:text-black h-screen flex flex-col">
 
     <!-- NAVIGATION OVERLAY -->
     <div id="navOverlay" class="nav-overlay">
@@ -94,7 +94,7 @@
         <div class="nav-overlay-content p-6 md:p-12">
             <div class="flex justify-between items-center mb-16">
                 <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto">
-                <button id="closeMenuBtn" class="text-gray-400 hover:text-white transition text-3xl"><i class="fas fa-times"></i></button>
+                <button id="closeMenuBtn" class="text-clay-muted hover:text-clay-ink transition text-3xl"><i class="fas fa-times"></i></button>
             </div>      <ul class="space-y-0 flex-1">
         <li><a href="index.html" class="sidebar-link">Home</a></li>
         <li>
@@ -123,12 +123,12 @@
         <li><a href="resources.html" class="sidebar-link">Resources</a></li>
         <li><a href="contact.html" class="sidebar-link">Contact</a></li>
       </ul>
-            <div class="mt-auto pt-12 border-t border-white/10">
-                <p class="text-brand-gold font-heading text-sm mb-4">Connect With Us</p>
+            <div class="mt-auto pt-12 border-t border-clay-border">
+                <p class="text-brand-darkGold font-heading text-sm mb-4">Connect With Us</p>
                 <div class="flex gap-6 text-xl">
-                    <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn" class="text-gray-400 hover:text-brand-gold transition"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram" class="text-gray-400 hover:text-brand-gold transition"><i class="fab fa-instagram"></i></a>
-                    <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter" class="text-gray-400 hover:text-brand-gold transition"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn" class="text-clay-muted hover:text-brand-darkGold transition"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram" class="text-clay-muted hover:text-brand-darkGold transition"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter" class="text-clay-muted hover:text-brand-darkGold transition"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
         </div>
@@ -150,57 +150,57 @@
     <div class="flex-grow flex flex-col md:flex-row h-full overflow-hidden">
         <!-- Sidebar -->
         <div class="w-full md:w-1/3 lg:w-1/4 sidebar-optimized flex flex-col relative z-20 max-h-[50vh] md:max-h-none">
-            <div class="p-4 md:p-6 pb-4 border-b border-white/10 shrink-0 bg-black/40">
-                <h2 class="text-3xl md:text-5xl font-bold text-white mb-1 uppercase font-heading tracking-tight leading-tight"><span>Project</span> <span class="text-brand-gold">Locations</span></h2>
-                <div class="flex gap-4 mt-3 text-xs font-heading tracking-widest text-gray-400">
-                    <div><span class="block text-lg md:text-xl text-white font-bold" id="total-projects">0</span><span>Projects</span></div>
-                    <div class="w-px bg-white/10"></div>
-                    <div><span class="block text-lg md:text-xl text-white font-bold" id="total-cities">0</span><span>Cities</span></div>
+            <div class="p-4 md:p-6 pb-4 border-b border-clay-border shrink-0 bg-clay-base/40">
+                <h2 class="text-3xl md:text-5xl font-bold text-clay-ink mb-1 uppercase font-heading tracking-tight leading-tight"><span>Project</span> <span class="text-brand-darkGold">Locations</span></h2>
+                <div class="flex gap-4 mt-3 text-xs font-heading tracking-widest text-clay-muted">
+                    <div><span class="block text-lg md:text-xl text-clay-ink font-bold" id="total-projects">0</span><span>Projects</span></div>
+                    <div class="w-px bg-clay-surface/10"></div>
+                    <div><span class="block text-lg md:text-xl text-clay-ink font-bold" id="total-cities">0</span><span>Cities</span></div>
                 </div>
 
                 <!-- Search -->
                 <div class="relative mt-4">
-                    <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xs pointer-events-none"></i>
+                    <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-clay-faint text-xs pointer-events-none"></i>
                     <input id="projectSearch" type="search" placeholder="Search projects or clients..." aria-label="Search projects"
-                        class="w-full pl-8 pr-3 py-2 bg-white/5 border border-white/10 rounded-sm text-xs text-white placeholder-gray-500 outline-none transition-all duration-300 font-body">
+                        class="w-full pl-8 pr-3 py-2 bg-clay-surface/5 border border-clay-border rounded-sm text-xs text-clay-ink placeholder-gray-500 outline-none transition-all duration-300 font-body">
                 </div>
 
                 <!-- Category Filters -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-3">
                     <button class="filter-btn-map active py-2 text-[10px] uppercase font-bold tracking-wider border border-brand-gold bg-brand-gold text-black transition-all duration-300 rounded-sm" data-filter="all" aria-pressed="true">All</button>
-                    <button class="filter-btn-map py-2 text-[10px] uppercase font-bold tracking-wider border border-white/10 text-gray-400 hover:border-brand-gold hover:text-brand-gold transition-all duration-300 rounded-sm" data-filter="residential" aria-pressed="false">Resi</button>
-                    <button class="filter-btn-map py-2 text-[10px] uppercase font-bold tracking-wider border border-white/10 text-gray-400 hover:border-brand-gold hover:text-brand-gold transition-all duration-300 rounded-sm" data-filter="commercial" aria-pressed="false">Comm</button>
-                    <button class="filter-btn-map py-2 text-[10px] uppercase font-bold tracking-wider border border-white/10 text-gray-400 hover:border-brand-gold hover:text-brand-gold transition-all duration-300 rounded-sm" data-filter="infrastructure" aria-pressed="false">Infra</button>
+                    <button class="filter-btn-map py-2 text-[10px] uppercase font-bold tracking-wider border border-clay-border text-clay-muted hover:border-brand-gold hover:text-brand-darkGold transition-all duration-300 rounded-sm" data-filter="residential" aria-pressed="false">Resi</button>
+                    <button class="filter-btn-map py-2 text-[10px] uppercase font-bold tracking-wider border border-clay-border text-clay-muted hover:border-brand-gold hover:text-brand-darkGold transition-all duration-300 rounded-sm" data-filter="commercial" aria-pressed="false">Comm</button>
+                    <button class="filter-btn-map py-2 text-[10px] uppercase font-bold tracking-wider border border-clay-border text-clay-muted hover:border-brand-gold hover:text-brand-darkGold transition-all duration-300 rounded-sm" data-filter="infrastructure" aria-pressed="false">Infra</button>
                 </div>
 
                 <!-- Status Filters -->
                 <div class="grid grid-cols-3 gap-2 mt-2">
                     <button class="status-btn active py-1.5 text-[9px] uppercase font-bold tracking-wider border border-brand-gold bg-brand-gold text-black transition-all duration-300 rounded-sm" data-status="all" aria-pressed="true">All Status</button>
-                    <button class="status-btn py-1.5 text-[9px] uppercase font-bold tracking-wider border border-white/10 text-gray-400 hover:border-green-500/50 hover:text-green-400 transition-all duration-300 rounded-sm" data-status="ongoing" aria-pressed="false">Ongoing</button>
-                    <button class="status-btn py-1.5 text-[9px] uppercase font-bold tracking-wider border border-white/10 text-gray-400 hover:border-brand-gold hover:text-brand-gold transition-all duration-300 rounded-sm" data-status="completed" aria-pressed="false">Completed</button>
+                    <button class="status-btn py-1.5 text-[9px] uppercase font-bold tracking-wider border border-clay-border text-clay-muted hover:border-green-500/50 hover:text-green-400 transition-all duration-300 rounded-sm" data-status="ongoing" aria-pressed="false">Ongoing</button>
+                    <button class="status-btn py-1.5 text-[9px] uppercase font-bold tracking-wider border border-clay-border text-clay-muted hover:border-brand-gold hover:text-brand-darkGold transition-all duration-300 rounded-sm" data-status="completed" aria-pressed="false">Completed</button>
                 </div>
 
                 <!-- Location Filters -->
                 <div class="flex flex-wrap gap-1.5 mt-3" id="locationFilterMap"></div>
 
                 <!-- Result count -->
-                <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
-                    <p class="text-[10px] text-gray-500 font-heading uppercase tracking-widest">
-                        Showing <span id="resultCount" class="text-brand-gold font-bold">0</span> of <span id="totalCount" class="text-white">0</span>
+                <div class="flex items-center justify-between mt-3 pt-3 border-t border-clay-border">
+                    <p class="text-[10px] text-clay-faint font-heading uppercase tracking-widest">
+                        Showing <span id="resultCount" class="text-brand-darkGold font-bold">0</span> of <span id="totalCount" class="text-clay-ink">0</span>
                     </p>
-                    <button id="clearFilters" class="hidden text-[9px] text-gray-400 hover:text-brand-gold transition uppercase tracking-wider font-heading font-bold">Clear <i class="fas fa-times ml-1"></i></button>
+                    <button id="clearFilters" class="hidden text-[9px] text-clay-muted hover:text-brand-darkGold transition uppercase tracking-wider font-heading font-bold">Clear <i class="fas fa-times ml-1"></i></button>
                 </div>
             </div>
 
             <div class="flex-grow overflow-y-auto custom-scrollbar p-3 md:p-4 space-y-2 md:space-y-3" id="listings"></div>
 
             <!-- Legend -->
-            <div class="p-3 md:p-4 border-t border-white/10 shrink-0 bg-black/40">
-                <p class="text-[10px] text-gray-500 font-heading uppercase tracking-widest mb-2">Legend</p>
+            <div class="p-3 md:p-4 border-t border-clay-border shrink-0 bg-clay-base/40">
+                <p class="text-[10px] text-clay-faint font-heading uppercase tracking-widest mb-2">Legend</p>
                 <div class="flex gap-3 md:gap-4 flex-wrap">
-                    <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#FFD700] border border-white shrink-0"></span><span class="text-[10px] text-gray-400">Residential</span></div>
-                    <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#FF8C00] border border-white shrink-0"></span><span class="text-[10px] text-gray-400">Commercial</span></div>
-                    <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#C0C0C0] border border-white shrink-0"></span><span class="text-[10px] text-gray-400">Infra</span></div>
+                    <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#FCB615] border border-clay-border shrink-0"></span><span class="text-[10px] text-clay-muted">Residential</span></div>
+                    <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#FF8C00] border border-clay-border shrink-0"></span><span class="text-[10px] text-clay-muted">Commercial</span></div>
+                    <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#C0C0C0] border border-clay-border shrink-0"></span><span class="text-[10px] text-clay-muted">Infra</span></div>
                 </div>
             </div>
         </div>
@@ -214,13 +214,13 @@
         // Guard against missing data file
         if (typeof PROJECT_DATA === 'undefined' || !Array.isArray(PROJECT_DATA)) {
             console.error('PROJECT_DATA not loaded. Check projects-data.js');
-            document.getElementById('listings').innerHTML = '<div class="p-4 text-gray-500 text-sm">Unable to load project data. Please refresh the page.</div>';
+            document.getElementById('listings').innerHTML = '<div class="p-4 text-clay-faint text-sm">Unable to load project data. Please refresh the page.</div>';
             throw new Error('PROJECT_DATA missing');
         }
 
         // Category color palette — single source of truth
         const CATEGORY_COLORS = {
-            residential: '#FFD700',
+            residential: '#FCB615',
             commercial: '#FF8C00',
             infrastructure: '#C0C0C0'
         };
@@ -240,17 +240,17 @@
         locs.forEach(loc => {
             const btn = document.createElement('button');
             const active = loc === 'all';
-            btn.className = 'loc-filter py-1 px-2.5 text-[9px] uppercase font-bold tracking-wider border rounded-sm transition-all duration-300 ' + (active ? 'border-brand-gold bg-brand-gold text-black' : 'border-white/10 text-gray-500 hover:border-brand-gold/50 hover:text-gray-300');
+            btn.className = 'loc-filter py-1 px-2.5 text-[9px] uppercase font-bold tracking-wider border rounded-sm transition-all duration-300 ' + (active ? 'border-brand-gold bg-brand-gold text-black' : 'border-clay-border text-clay-faint hover:border-brand-gold/50 hover:text-clay-muted');
             btn.textContent = loc === 'all' ? 'All Cities' : loc;
             btn.dataset.location = loc;
             btn.setAttribute('aria-pressed', active ? 'true' : 'false');
             btn.addEventListener('click', () => {
                 filters.location = loc;
                 locCont.querySelectorAll('.loc-filter').forEach(b => {
-                    b.className = b.className.replace(/border-brand-gold bg-brand-gold text-black/g, 'border-white/10 text-gray-500');
+                    b.className = b.className.replace(/border-brand-gold bg-brand-gold text-black/g, 'border-clay-border text-clay-faint');
                     b.setAttribute('aria-pressed', 'false');
                 });
-                btn.className = btn.className.replace(/border-white\/10 text-gray-500/g, 'border-brand-gold bg-brand-gold text-black');
+                btn.className = btn.className.replace(/border-clay-border\/10 text-clay-faint/g, 'border-brand-gold bg-brand-gold text-black');
                 btn.setAttribute('aria-pressed', 'true');
                 renderProjects();
             });
@@ -275,25 +275,25 @@
         function buildPopupHTML(p) {
             const img = p.img
                 ? `<img src="${p.img}" alt="${p.title}" class="popup-image" loading="lazy">`
-                : `<div class="h-full w-full bg-gray-900 flex items-center justify-center text-gray-700"><i class="fas fa-building text-4xl opacity-50"></i></div>`;
+                : `<div class="h-full w-full bg-clay-surface flex items-center justify-center text-gray-700"><i class="fas fa-building text-4xl opacity-50"></i></div>`;
             const statusBadge = p.status === 'ongoing'
                 ? `<span class="text-[9px] bg-green-500/20 text-green-400 border border-green-500/30 px-2 py-0.5 rounded-sm font-bold uppercase tracking-wider"><span class="inline-block w-1.5 h-1.5 bg-green-400 rounded-full mr-1 align-middle animate-pulse"></span>Ongoing</span>`
-                : `<span class="text-[9px] text-gray-400 border border-white/10 px-2 py-0.5 rounded-sm font-bold uppercase tracking-wider">Completed</span>`;
+                : `<span class="text-[9px] text-clay-muted border border-clay-border px-2 py-0.5 rounded-sm font-bold uppercase tracking-wider">Completed</span>`;
             return `<div class="font-heading popup-card">
                 <div class="popup-header">${img}</div>
                 <div class="popup-content">
-                    <h3 class="font-bold text-brand-gold uppercase tracking-widest text-lg mb-1 leading-none">${p.title}</h3>
-                    <p class="text-xs text-white mb-3 font-light tracking-wide"><span class="text-gray-500">Client:</span> ${p.client}</p>
+                    <h3 class="font-bold text-brand-darkGold uppercase tracking-widest text-lg mb-1 leading-none">${p.title}</h3>
+                    <p class="text-xs text-clay-ink mb-3 font-light tracking-wide"><span class="text-clay-faint">Client:</span> ${p.client}</p>
                     <div class="flex items-center gap-2 mb-3 flex-wrap">
                         <span class="text-[9px] text-black bg-brand-gold px-2 py-0.5 rounded-sm font-bold uppercase tracking-wider">${p.category}</span>
-                        <span class="text-[9px] text-gray-400 border border-white/10 px-2 py-0.5 rounded-sm font-bold uppercase tracking-wider">${p.location}</span>
+                        <span class="text-[9px] text-clay-muted border border-clay-border px-2 py-0.5 rounded-sm font-bold uppercase tracking-wider">${p.location}</span>
                         ${statusBadge}
                     </div>
-                    <div class="grid grid-cols-2 gap-2 mb-4 pt-3 border-t border-white/10">
-                        <div><span class="block text-[9px] text-gray-500 uppercase tracking-wider">Year</span><span class="text-white text-sm font-bold">${p.year}</span></div>
-                        <div><span class="block text-[9px] text-gray-500 uppercase tracking-wider">Area</span><span class="text-white text-sm font-bold">${p.area}</span></div>
+                    <div class="grid grid-cols-2 gap-2 mb-4 pt-3 border-t border-clay-border">
+                        <div><span class="block text-[9px] text-clay-faint uppercase tracking-wider">Year</span><span class="text-clay-ink text-sm font-bold">${p.year}</span></div>
+                        <div><span class="block text-[9px] text-clay-faint uppercase tracking-wider">Area</span><span class="text-clay-ink text-sm font-bold">${p.area}</span></div>
                     </div>
-                    <a href="projects.html" class="block text-center w-full py-2 border border-brand-gold/30 text-brand-gold text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-brand-gold hover:text-black transition-all duration-300 rounded-sm">View Details</a>
+                    <a href="projects.html" class="block text-center w-full py-2 border border-brand-gold/30 text-brand-darkGold text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-brand-gold hover:text-black transition-all duration-300 rounded-sm">View Details</a>
                 </div>
             </div>`;
         }
@@ -347,8 +347,8 @@
                 listEl.innerHTML = `
                     <div class="text-center py-12 px-4">
                         <i class="fas fa-search text-3xl text-gray-700 mb-3 block"></i>
-                        <p class="text-gray-400 text-sm font-heading uppercase tracking-wider mb-2">No Results</p>
-                        <p class="text-gray-600 text-xs font-light">Try adjusting your filters or search</p>
+                        <p class="text-clay-muted text-sm font-heading uppercase tracking-wider mb-2">No Results</p>
+                        <p class="text-clay-muted text-xs font-light">Try adjusting your filters or search</p>
                     </div>`;
                 return;
             }
@@ -363,39 +363,39 @@
                 bounds.extend(p.coordinates);
 
                 const item = document.createElement('div');
-                item.className = 'project-card p-3 bg-white/10 border border-white/10 hover:border-brand-gold/50 cursor-pointer transition-all duration-300 rounded-sm group hover:bg-white/20 relative overflow-hidden flex items-center gap-3';
+                item.className = 'project-card p-3 bg-clay-surface/10 border border-clay-border hover:border-brand-gold/50 cursor-pointer transition-all duration-300 rounded-sm group hover:bg-clay-surface/20 relative overflow-hidden flex items-center gap-3';
                 item.style.animationDelay = Math.min(i * 40, 800) + 'ms';
                 item.setAttribute('tabindex', '0');
                 item.setAttribute('role', 'button');
                 item.setAttribute('aria-label', `View ${p.title} on map`);
 
                 const thumb = p.img
-                    ? `<img src="${p.img}" class="w-12 h-12 object-cover rounded-sm border border-white/20 group-hover:border-brand-gold/50 transition-colors shrink-0" alt="${p.title}" loading="lazy">`
-                    : `<div class="w-12 h-12 bg-white/10 rounded-sm flex items-center justify-center border border-white/20 shrink-0"><i class="fas fa-building text-gray-400 text-xs"></i></div>`;
+                    ? `<img src="${p.img}" class="w-12 h-12 object-cover rounded-sm border border-clay-border group-hover:border-brand-gold/50 transition-colors shrink-0" alt="${p.title}" loading="lazy">`
+                    : `<div class="w-12 h-12 bg-clay-surface/10 rounded-sm flex items-center justify-center border border-clay-border shrink-0"><i class="fas fa-building text-clay-muted text-xs"></i></div>`;
                 const dotC = getCategoryColor(p.category);
                 const statusDot = p.status === 'ongoing'
                     ? '<span class="inline-block w-1.5 h-1.5 bg-green-400 rounded-full mr-1 animate-pulse"></span>'
                     : '';
-                const featuredStar = p.featured ? '<i class="fas fa-star text-brand-gold text-[8px] mr-1" title="Featured"></i>' : '';
+                const featuredStar = p.featured ? '<i class="fas fa-star text-brand-darkGold text-[8px] mr-1" title="Featured"></i>' : '';
 
                 item.innerHTML = `
                     <div class="card-accent absolute left-0 top-0 w-1 h-full bg-brand-gold transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
                     ${thumb}
                     <div class="flex-grow min-w-0">
                         <div class="flex justify-between items-start gap-2">
-                            <h3 class="text-white font-bold font-heading uppercase text-xs truncate group-hover:text-brand-gold transition-colors tracking-wide">${featuredStar}${p.title}</h3>
-                            <span class="text-[9px] text-brand-gold uppercase tracking-wider whitespace-nowrap shrink-0">${p.location}</span>
+                            <h3 class="text-clay-ink font-bold font-heading uppercase text-xs truncate group-hover:text-brand-darkGold transition-colors tracking-wide">${featuredStar}${p.title}</h3>
+                            <span class="text-[9px] text-brand-darkGold uppercase tracking-wider whitespace-nowrap shrink-0">${p.location}</span>
                         </div>
-                        <p class="text-gray-300 text-[10px] font-body truncate mt-0.5">${p.client}</p>
+                        <p class="text-clay-muted text-[10px] font-body truncate mt-0.5">${p.client}</p>
                         <div class="flex items-center gap-2 mt-1.5 flex-wrap">
-                            <span class="inline-flex items-center gap-1 text-[9px] text-gray-400 uppercase tracking-wider">
+                            <span class="inline-flex items-center gap-1 text-[9px] text-clay-muted uppercase tracking-wider">
                                 <span class="w-2 h-2 rounded-full shrink-0" style="background:${dotC}"></span>${p.category}
                             </span>
-                            <span class="text-[9px] text-gray-500">•</span>
-                            <span class="text-[9px] text-gray-400 font-body">${p.year}</span>
-                            <span class="text-[9px] text-gray-500">•</span>
-                            <span class="text-[9px] text-gray-400 font-body">${p.area}</span>
-                            ${p.status === 'ongoing' ? '<span class="text-[9px] text-gray-500">•</span><span class="text-[9px] text-green-400 uppercase tracking-wider font-bold">' + statusDot + 'Ongoing</span>' : ''}
+                            <span class="text-[9px] text-clay-faint">•</span>
+                            <span class="text-[9px] text-clay-muted font-body">${p.year}</span>
+                            <span class="text-[9px] text-clay-faint">•</span>
+                            <span class="text-[9px] text-clay-muted font-body">${p.area}</span>
+                            ${p.status === 'ongoing' ? '<span class="text-[9px] text-clay-faint">•</span><span class="text-[9px] text-green-400 uppercase tracking-wider font-bold">' + statusDot + 'Ongoing</span>' : ''}
                         </div>
                     </div>`;
 
@@ -417,11 +417,11 @@
             btn.addEventListener('click', e => {
                 document.querySelectorAll('.filter-btn-map').forEach(b => {
                     b.classList.remove('active', 'bg-brand-gold', 'text-black', 'border-brand-gold');
-                    b.classList.add('text-gray-400', 'border-white/10');
+                    b.classList.add('text-clay-muted', 'border-clay-border');
                     b.setAttribute('aria-pressed', 'false');
                 });
                 e.target.classList.add('active', 'bg-brand-gold', 'text-black', 'border-brand-gold');
-                e.target.classList.remove('text-gray-400', 'border-white/10');
+                e.target.classList.remove('text-clay-muted', 'border-clay-border');
                 e.target.setAttribute('aria-pressed', 'true');
                 filters.category = e.target.getAttribute('data-filter');
                 renderProjects();
@@ -433,11 +433,11 @@
             btn.addEventListener('click', e => {
                 document.querySelectorAll('.status-btn').forEach(b => {
                     b.classList.remove('active', 'bg-brand-gold', 'text-black', 'border-brand-gold');
-                    b.classList.add('text-gray-400', 'border-white/10');
+                    b.classList.add('text-clay-muted', 'border-clay-border');
                     b.setAttribute('aria-pressed', 'false');
                 });
                 e.target.classList.add('active', 'bg-brand-gold', 'text-black', 'border-brand-gold');
-                e.target.classList.remove('text-gray-400', 'border-white/10');
+                e.target.classList.remove('text-clay-muted', 'border-clay-border');
                 e.target.setAttribute('aria-pressed', 'true');
                 filters.status = e.target.getAttribute('data-status');
                 renderProjects();
@@ -469,8 +469,8 @@
                 b.classList.toggle('bg-brand-gold', isAll);
                 b.classList.toggle('text-black', isAll);
                 b.classList.toggle('border-brand-gold', isAll);
-                b.classList.toggle('text-gray-400', !isAll);
-                b.classList.toggle('border-white/10', !isAll);
+                b.classList.toggle('text-clay-muted', !isAll);
+                b.classList.toggle('border-clay-border', !isAll);
                 b.setAttribute('aria-pressed', isAll ? 'true' : 'false');
             });
             document.querySelectorAll('.status-btn').forEach(b => {
@@ -479,16 +479,16 @@
                 b.classList.toggle('bg-brand-gold', isAll);
                 b.classList.toggle('text-black', isAll);
                 b.classList.toggle('border-brand-gold', isAll);
-                b.classList.toggle('text-gray-400', !isAll);
-                b.classList.toggle('border-white/10', !isAll);
+                b.classList.toggle('text-clay-muted', !isAll);
+                b.classList.toggle('border-clay-border', !isAll);
                 b.setAttribute('aria-pressed', isAll ? 'true' : 'false');
             });
             document.querySelectorAll('.loc-filter').forEach(b => {
                 const isAll = b.dataset.location === 'all';
                 if (isAll) {
-                    b.className = b.className.replace(/border-white\/10 text-gray-500/g, 'border-brand-gold bg-brand-gold text-black');
+                    b.className = b.className.replace(/border-clay-border\/10 text-clay-faint/g, 'border-brand-gold bg-brand-gold text-black');
                 } else {
-                    b.className = b.className.replace(/border-brand-gold bg-brand-gold text-black/g, 'border-white/10 text-gray-500');
+                    b.className = b.className.replace(/border-brand-gold bg-brand-gold text-black/g, 'border-clay-border text-clay-faint');
                 }
                 b.setAttribute('aria-pressed', isAll ? 'true' : 'false');
             });

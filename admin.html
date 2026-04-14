@@ -1,596 +1,1528 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin — Manage Projects | Strong Built</title>
+  <title>Admin · Strong Built</title>
   <meta name="robots" content="noindex, nofollow">
-
-  <link rel="icon" type="image/png" href="assets/Favicon/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/svg+xml" href="assets/Favicon/favicon.svg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Archivo:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Leaflet for coordinate picker -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="theme-config.js"></script>
 
-  <!-- Load existing project data (works when opened from project folder) -->
-  <script src="projects-data.js"></script>
-
   <style>
-    body { font-family: 'Inter', Helvetica, Arial, sans-serif; background:#F5EEDC; color: #2A2420; }
-    h1, h2, h3, h4, .font-heading, button, input, select, textarea, label { font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif; }
-    .text-gradient-gold { background: linear-gradient(to right, #FCB615, #FFD56B, #C8900F, #FFD56B, #FCB615); background-size: 200% auto; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 5s linear infinite; }
-    @keyframes shine { to { background-position: 200% center; } }
-    .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.05); }
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: #1a1718; }
-    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #FCB615; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(252, 182, 21, 0.06), transparent 60%),
+        linear-gradient(180deg, #1a1718 0%, #141112 100%);
+      background-attachment: fixed;
+      color: #f5f1ec;
+      min-height: 100vh;
+    }
+    h1,h2,h3,h4,.font-heading,button,input,select,textarea,label { font-family: 'Barlow Condensed', sans-serif; }
 
-    input, select, textarea { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color:#2A2420; transition: all 0.3s; }
-    input:focus, select:focus, textarea:focus { outline: none; border-color: #FCB615; box-shadow: 0 0 0 2px rgba(252,182,21,0.15); background: rgba(255,255,255,0.08); }
-    label { display: block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #FCB615; margin-bottom: 0.4rem; }
+    /* ─── INPUTS ─── */
+    input,select,textarea {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #f5f1ec;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      border-radius: 3px;
+    }
+    input::placeholder, textarea::placeholder { color: rgba(184,178,168,0.4); }
+    input:hover:not(:focus), select:hover:not(:focus), textarea:hover:not(:focus) {
+      border-color: rgba(252,182,21,0.25);
+      background: rgba(255,255,255,0.045);
+    }
+    input:focus,select:focus,textarea:focus {
+      outline: none; border-color: #FCB615;
+      box-shadow: 0 0 0 3px rgba(252,182,21,0.15);
+      background: rgba(255,255,255,0.055);
+    }
+    input.invalid,select.invalid,textarea.invalid {
+      border-color: #f87171;
+      box-shadow: 0 0 0 3px rgba(248,113,113,0.18);
+    }
+    /* Native select option list — force dark background so options are legible */
+    select option {
+      background-color: #1a1718;
+      color: #f5f1ec;
+      padding: 8px;
+    }
+    select option:hover,
+    select option:checked {
+      background-color: #FCB615;
+      color: #1a1718;
+    }
+    label {
+      display: block; font-size: .6rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .22em;
+      color: #C8900F; margin-bottom: .4rem;
+    }
+    .field-error {
+      font-size: .65rem; color: #f87171;
+      margin-top: .3rem; display: none; letter-spacing: .05em;
+      font-weight: 600;
+    }
+    .field-error.is-visible { display: block; }
 
-    .btn-primary { background: #FCB615; color: #000; border: 1px solid #FCB615; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.3s; }
-    .btn-primary:hover { background: #fff; border-color:#2A2420; }
-    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
-    .btn-outline { background: transparent; color:#2A2420; border: 1px solid rgba(255,255,255,0.2); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.3s; }
-    .btn-outline:hover { border-color: #FCB615; color: #FCB615; }
-    .btn-danger { background: transparent; color: #f87171; border: 1px solid rgba(248,113,113,0.3); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.3s; }
-    .btn-danger:hover { background: rgba(248,113,113,0.1); border-color: #f87171; }
+    /* ─── GLASS SURFACE ─── */
+    .glass {
+      background: linear-gradient(155deg, rgba(42, 38, 39, 0.55), rgba(20, 18, 19, 0.65));
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
 
-    #pickerMap { height: 220px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
-    .leaflet-container { background: #1a1a1a; }
-    .leaflet-control-zoom a { background: rgba(0,0,0,0.8) !important; color: #FCB615 !important; border: 1px solid rgba(252,182,21,0.2) !important; }
+    /* ─── BUTTONS ─── */
+    .btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; text-transform: uppercase;
+      letter-spacing: .16em; transition: all .25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: .45rem; border-radius: 3px;
+      position: relative; overflow: hidden;
+    }
+    .btn-primary {
+      background: linear-gradient(155deg, #FCB615, #C8900F);
+      color: #1a1718;
+      border: 1px solid rgba(252, 182, 21, 0.8);
+      box-shadow: 0 2px 12px -2px rgba(252, 182, 21, 0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px -4px rgba(252, 182, 21, 0.55), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled { opacity: .3; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-outline {
+      background: rgba(255,255,255,0.02);
+      color: #f5f1ec;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .btn-outline:hover {
+      border-color: rgba(252, 182, 21, 0.6);
+      color: #FCB615;
+      background: rgba(252, 182, 21, 0.05);
+    }
+    .btn-outline:disabled { opacity: .3; cursor: not-allowed; }
+    .btn-danger {
+      background: transparent; color: #f87171;
+      border: 1px solid rgba(248,113,113,0.25);
+    }
+    .btn-danger:hover {
+      background: rgba(248,113,113,0.08);
+      border-color: rgba(248,113,113,0.6);
+    }
 
-    .project-row { transition: all 0.3s; border-left: 2px solid transparent; }
-    .project-row:hover { background: rgba(255,255,255,0.05); border-left-color: #FCB615; }
-    .project-row.editing { background: rgba(252,182,21,0.08); border-left-color: #FCB615; }
+    /* ─── TABS — pill active state with count ─── */
+    .tab {
+      padding: .55rem 1rem;
+      font-size: .65rem; font-weight: 700;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: rgba(184,178,168,0.7);
+      border: 1px solid transparent;
+      border-radius: 999px;
+      transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+      display: inline-flex; align-items: center; gap: .5rem;
+      position: relative;
+    }
+    .tab:hover { color: #f5f1ec; background: rgba(255,255,255,0.03); }
+    .tab.is-active {
+      color: #FCB615;
+      background: linear-gradient(155deg, rgba(252, 182, 21, 0.15), rgba(252, 182, 21, 0.05));
+      border-color: rgba(252, 182, 21, 0.4);
+      box-shadow: 0 2px 12px -4px rgba(252, 182, 21, 0.3);
+    }
+    .tab i { font-size: .75rem; opacity: .75; }
+    .tab.is-active i { opacity: 1; }
+    .tab-count {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 18px; height: 18px; padding: 0 5px;
+      font-size: .55rem; font-weight: 700;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      letter-spacing: 0;
+    }
+    .tab.is-active .tab-count {
+      background: rgba(252, 182, 21, 0.25);
+      color: #FCB615;
+    }
 
-    .badge { font-size: 0.6rem; font-weight: 700; padding: 2px 8px; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 2px; display: inline-block; }
-    .badge-resi { background: rgba(252,182,21,0.15); color: #FCB615; }
-    .badge-comm { background: rgba(255,140,0,0.15); color: #FF8C00; }
-    .badge-infra { background: rgba(192,192,192,0.15); color: #C0C0C0; }
-    .badge-ongoing { background: rgba(34,197,94,0.15); color: #4ade80; }
-    .badge-completed { background: rgba(255,255,255,0.05); color: #9ca3af; }
+    /* ─── LIST ITEMS — tcard premium ─── */
+    .list-item {
+      position: relative;
+      padding: 0.85rem 1rem;
+      background: linear-gradient(155deg, rgba(42, 38, 39, 0.4), rgba(20, 18, 19, 0.5));
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 4px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), border-color .25s, box-shadow .3s;
+    }
+    .list-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, #FCB615, transparent);
+      transform: scaleY(0);
+      transform-origin: center;
+      transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .list-item:hover {
+      border-color: rgba(252, 182, 21, 0.3);
+      transform: translateX(4px);
+      box-shadow: 0 6px 20px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(252, 182, 21, 0.15);
+    }
+    .list-item:hover::before { transform: scaleY(1); }
+    .list-item.is-editing {
+      border-color: rgba(252, 182, 21, 0.5);
+      background: linear-gradient(155deg, rgba(252, 182, 21, 0.1), rgba(42, 38, 39, 0.5));
+      box-shadow: 0 8px 28px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(252, 182, 21, 0.3);
+    }
+    .list-item.is-editing::before { transform: scaleY(1); }
+    .list-item.dragging { opacity: .4; transform: scale(0.98); }
+    .list-item.drag-over-top { border-top: 2px solid #FCB615; transform: translateX(4px) translateY(4px); }
+    .list-item.drag-over-bottom { border-bottom: 2px solid #FCB615; transform: translateX(4px) translateY(-4px); }
 
-    .toast { position: fixed; top: 20px; right: 20px; padding: 12px 20px; background: rgba(10,10,10,0.95); border: 1px solid #FCB615; color: #f5f1ec; border-radius: 4px; z-index: 10000; animation: slideIn 0.3s ease-out; backdrop-filter: blur(10px); }
-    @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+    .drag-handle {
+      cursor: grab; opacity: .25;
+      transition: opacity .2s, color .2s;
+      color: #b8b2a8;
+    }
+    .list-item:hover .drag-handle { opacity: .7; }
+    .drag-handle:hover { opacity: 1 !important; color: #FCB615; }
+    .drag-handle:active { cursor: grabbing; }
 
-    .dirty-indicator { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #f87171; margin-left: 8px; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    /* ─── BADGES ─── */
+    .badge {
+      font-size: .52rem; font-weight: 700; padding: 3px 8px;
+      text-transform: uppercase; letter-spacing: .15em;
+      border-radius: 999px;
+      display: inline-flex; align-items: center; gap: 3px;
+      white-space: nowrap;
+    }
+    .badge-resi { background: rgba(252,182,21,0.15); color: #FCB615; border: 1px solid rgba(252,182,21,0.25); }
+    .badge-comm { background: rgba(255,140,0,0.15); color: #FF8C00; border: 1px solid rgba(255,140,0,0.25); }
+    .badge-infra { background: rgba(192,192,192,0.12); color: #C0C0C0; border: 1px solid rgba(192,192,192,0.2); }
+    .badge-ongoing { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+    .badge-ongoing::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: #4ade80; box-shadow: 0 0 6px #4ade80;
+      animation: pulse-dot 2s infinite;
+    }
+    .badge-completed { background: rgba(255,255,255,0.04); color: #b8b2a8; border: 1px solid rgba(255,255,255,0.1); }
+    .badge-featured {
+      background: linear-gradient(155deg, rgba(252,182,21,0.22), rgba(252,182,21,0.08));
+      color: #FCB615; border: 1px solid rgba(252,182,21,0.4);
+    }
+
+    /* ─── STATS STRIP (above list) ─── */
+    .stats-strip {
+      display: flex; gap: 0.5rem 1.25rem; flex-wrap: wrap;
+      padding: 0.65rem 0.25rem 0;
+      font-size: .6rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: #b8b2a8;
+    }
+    .stats-strip .stat-num { color: #FCB615; font-family: 'Oswald', sans-serif; font-size: 0.85rem; margin-right: 4px; letter-spacing: 0; }
+
+    /* ─── TOAST ─── */
+    .toast {
+      position: fixed; bottom: 1.5rem; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      padding: .85rem 1.4rem;
+      background: linear-gradient(155deg, rgba(30, 26, 27, 0.98), rgba(20, 18, 19, 0.98));
+      border: 1px solid rgba(252, 182, 21, 0.5);
+      color: #f5f1ec;
+      border-radius: 8px;
+      z-index: 10000;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 16px 40px -8px rgba(0,0,0,0.8), 0 0 24px -8px rgba(252, 182, 21, 0.25);
+      opacity: 0; pointer-events: none;
+      transition: all .35s cubic-bezier(0.16,1,0.3,1);
+      display: flex; align-items: center; gap: .75rem;
+      max-width: 90vw;
+    }
+    .toast.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+    .toast::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: #FCB615; box-shadow: 0 0 10px currentColor;
+    }
+    .toast.success { border-color: rgba(74,222,128,0.6); color: #4ade80; }
+    .toast.success::before { background: #4ade80; }
+    .toast.error { border-color: rgba(248,113,113,0.6); color: #f87171; }
+    .toast.error::before { background: #f87171; }
+    .toast.warn { border-color: rgba(252,182,21,0.6); color: #FCB615; }
+    .toast-action {
+      text-decoration: none; cursor: pointer; font-weight: 700;
+      padding: 3px 8px; border-radius: 3px;
+      background: rgba(252,182,21,0.15);
+      color: #FCB615;
+      border: 1px solid rgba(252,182,21,0.3);
+      transition: all .2s;
+    }
+    .toast-action:hover { background: rgba(252,182,21,0.3); }
+
+    /* ─── DIRTY INDICATOR ─── */
+    .dirty-dot {
+      display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+      background: #f87171;
+      animation: pulse-dot 2s infinite;
+      box-shadow: 0 0 8px #f87171;
+    }
+    @keyframes pulse-dot { 0%,100%{opacity:1}50%{opacity:.4} }
+
+    /* ─── EDITOR BREADCRUMB ─── */
+    .editor-crumb {
+      font-size: .55rem; font-weight: 700;
+      letter-spacing: .3em; text-transform: uppercase;
+      color: #C8900F;
+      margin-bottom: .25rem;
+      display: flex; align-items: center; gap: .4rem;
+    }
+    .editor-crumb i { font-size: .5rem; opacity: .5; }
+
+    /* ─── FORM SECTIONS ─── */
+    .form-section {
+      padding-top: 1rem;
+      margin-top: 0.5rem;
+      border-top: 1px dashed rgba(255,255,255,0.05);
+    }
+    .form-section:first-child { padding-top: 0; margin-top: 0; border-top: none; }
+
+    /* ─── MAP PICKER ─── */
+    #pickerMap { height: 240px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
+    .leaflet-container { background: #1a1a1a; font-family: 'Inter', sans-serif; }
+    .leaflet-control-zoom a { background: rgba(0,0,0,0.85) !important; color: #FCB615 !important; border: 1px solid rgba(252,182,21,0.25) !important; }
+    .leaflet-popup-content-wrapper { background: rgba(20,18,19,0.97); color: #f5f1ec; border: 1px solid rgba(252,182,21,0.3); border-radius: 4px; }
+    .geo-result {
+      padding: .5rem .75rem; cursor: pointer;
+      font-size: .72rem; border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: #f5f1ec; transition: background .2s;
+    }
+    .geo-result:hover { background: rgba(252,182,21,0.1); }
+    .context-marker { background: transparent !important; border: none !important; }
+    .context-marker-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(252,182,21,0.4); border: 1px solid rgba(252,182,21,0.7); }
+
+    /* ─── IMAGE PREVIEW ─── */
+    .img-preview {
+      display: none;
+      width: 100%; height: 140px; object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid rgba(252,182,21,0.3);
+      margin-top: .5rem;
+    }
+    .img-preview.is-visible { display: block; }
+    .img-drop {
+      border: 1px dashed rgba(252,182,21,0.3);
+      padding: .75rem; border-radius: 4px;
+      text-align: center; font-size: .7rem;
+      color: #b8b2a8; margin-top: .5rem;
+      transition: all .25s;
+    }
+    .img-drop.is-dragover { border-color: #FCB615; background: rgba(252,182,21,0.08); color: #FCB615; }
+
+    /* ─── MOBILE DRAWER ─── */
+    @media (max-width: 1023px) {
+      .editor-panel {
+        position: fixed !important;
+        inset: 0;
+        z-index: 50;
+        background: #1a1718;
+        transform: translateY(100%);
+        transition: transform .35s cubic-bezier(0.16,1,0.3,1);
+        overflow-y: auto;
+      }
+      .editor-panel.is-open { transform: translateY(0); }
+      .editor-backdrop {
+        position: fixed; inset: 0; z-index: 49;
+        background: rgba(0,0,0,0.6);
+        opacity: 0; pointer-events: none;
+        transition: opacity .3s;
+      }
+      .editor-backdrop.is-open { opacity: 1; pointer-events: auto; }
+      .editor-close-mobile { display: inline-flex !important; }
+    }
+    .editor-close-mobile { display: none; }
+
+    /* Keyboard shortcut hint */
+    .kbd {
+      display: inline-block; padding: 1px 5px;
+      font-size: .6rem; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 3px; letter-spacing: .02em;
+      font-family: monospace;
+    }
+
+    /* Progress bar for Active Projects form */
+    .progress-slider { accent-color: #FCB615; }
   </style>
 </head>
 <body class="min-h-screen">
 
-  <!-- Header -->
-  <header class="border-b border-clay-border bg-clay-base/40 backdrop-blur-xl sticky top-0 z-30">
-    <div class="container mx-auto px-4 md:px-6 py-4 flex items-center justify-between gap-4">
-      <div class="flex items-center gap-3 md:gap-4">
-        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-10 md:h-14 w-auto">
-        <div>
-          <h1 class="text-lg md:text-2xl font-bold text-clay-ink font-heading uppercase tracking-wider leading-none">Project <span class="text-gradient-gold">Admin</span></h1>
-          <p class="text-[10px] md:text-xs text-clay-faint uppercase tracking-widest mt-1">
-            Local editor <span id="dirtyBadge" class="hidden"><span class="dirty-indicator"></span><span class="text-red-400">Unsaved changes</span></span>
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 glass border-b border-clay-border">
+    <div class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 md:gap-4 min-w-0">
+        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-10 md:h-12 w-auto shrink-0">
+        <div class="min-w-0">
+          <h1 class="text-base md:text-xl font-bold uppercase tracking-wider leading-none truncate">Admin <span class="text-brand-gold">Studio</span></h1>
+          <p class="text-[10px] text-clay-faint uppercase tracking-widest mt-1 flex items-center">
+            <span id="currentTabLabel">Projects</span>
+            <span id="dirtyIndicator" class="hidden flex items-center"><span class="dirty-dot"></span><span class="ml-2 text-red-400">Unsaved</span></span>
           </p>
         </div>
       </div>
-      <div class="flex items-center gap-2 md:gap-3">
-        <button id="importBtn" class="btn-outline px-3 md:px-4 py-2 text-[10px] md:text-xs rounded-sm" title="Import projects-data.js"><i class="fas fa-upload"></i> <span class="hidden md:inline">Import</span></button>
-        <button id="downloadBtn" class="btn-primary px-3 md:px-5 py-2 text-[10px] md:text-xs rounded-sm"><i class="fas fa-download"></i> <span class="hidden md:inline">Download</span> projects-data.js</button>
+      <div class="flex items-center gap-1 md:gap-2">
+        <button id="undoBtn" class="btn btn-outline p-2 md:px-3 md:py-2 text-[10px] rounded-sm" title="Undo (Ctrl+Z)" aria-label="Undo last change"><i class="fas fa-undo"></i><span class="hidden md:inline">Undo</span></button>
+        <button id="redoBtn" class="btn btn-outline p-2 md:px-3 md:py-2 text-[10px] rounded-sm" title="Redo (Ctrl+Shift+Z)" aria-label="Redo"><i class="fas fa-redo"></i><span class="hidden md:inline">Redo</span></button>
+        <button id="importBtn" class="btn btn-outline px-3 py-2 text-[10px] rounded-sm" title="Import data file"><i class="fas fa-upload"></i><span class="hidden md:inline">Import</span></button>
+        <button id="downloadBtn" class="btn btn-primary px-3 md:px-4 py-2 text-[10px] rounded-sm" title="Download current tab's data file (Ctrl+S)"><i class="fas fa-download"></i><span class="hidden md:inline">Download</span></button>
       </div>
     </div>
+    <!-- TABS -->
+    <nav class="container mx-auto px-4 md:px-6 flex gap-1.5 overflow-x-auto pb-3 pt-1" aria-label="Admin sections">
+      <button class="tab is-active" data-type="projects"><i class="fas fa-building"></i>Projects<span class="tab-count" data-count="projects">0</span></button>
+      <button class="tab" data-type="testimonials"><i class="fas fa-quote-left"></i>Testimonials<span class="tab-count" data-count="testimonials">0</span></button>
+      <button class="tab" data-type="timeline"><i class="fas fa-timeline"></i>Timeline<span class="tab-count" data-count="timeline">0</span></button>
+      <button class="tab" data-type="awards"><i class="fas fa-trophy"></i>Awards<span class="tab-count" data-count="awards">0</span></button>
+      <button class="tab" data-type="activeProjects"><i class="fas fa-hard-hat"></i>Active<span class="tab-count" data-count="activeProjects">0</span></button>
+      <button class="tab" data-type="siteInfo"><i class="fas fa-cog"></i>Site Info</button>
+    </nav>
   </header>
 
   <input type="file" id="importFile" accept=".js,.json" class="hidden">
 
-  <!-- Main layout -->
-  <main class="container mx-auto px-4 md:px-6 py-6 md:py-10 grid lg:grid-cols-[1fr_420px] gap-6 md:gap-8">
+  <!-- MAIN LAYOUT -->
+  <main class="container mx-auto px-4 md:px-6 py-4 md:py-8 grid lg:grid-cols-[1fr_440px] gap-4 md:gap-6">
 
-    <!-- LEFT: Project list -->
-    <section class="glass rounded-sm p-4 md:p-6">
-      <div class="flex items-center justify-between mb-4 gap-3">
+    <!-- LEFT: LIST -->
+    <section class="glass rounded-md p-3 md:p-5 relative">
+      <div class="flex items-start justify-between mb-3 gap-3 flex-wrap">
         <div>
-          <h2 class="text-xl md:text-2xl font-bold text-clay-ink uppercase">Projects <span id="countBadge" class="text-brand-darkGold text-sm ml-2">0</span></h2>
-          <p class="text-xs text-clay-faint mt-1">Click a row to edit, or Add New</p>
+          <h2 id="listTitle" class="text-lg md:text-2xl font-bold uppercase tracking-tight">Projects</h2>
+          <div id="statsStrip" class="stats-strip"></div>
         </div>
-        <button id="addNewBtn" class="btn-primary px-4 py-2 text-xs rounded-sm flex-shrink-0"><i class="fas fa-plus mr-1"></i> Add New</button>
+        <div class="flex items-center gap-2 flex-wrap">
+          <div class="relative">
+            <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-clay-faint text-[10px] pointer-events-none"></i>
+            <input id="listSearch" type="search" placeholder="Search..." class="text-xs pl-8 pr-3 py-2 w-36 md:w-48">
+          </div>
+          <select id="sortBy" class="text-xs px-2 py-2">
+            <option value="order">Custom order</option>
+            <option value="title">Title A–Z</option>
+            <option value="year-desc">Year ↓</option>
+            <option value="year-asc">Year ↑</option>
+            <option value="status">Status</option>
+          </select>
+          <button id="addNewBtn" class="btn btn-primary px-3 py-2 text-[10px]" title="New item (Ctrl+N)"><i class="fas fa-plus text-[9px]"></i><span class="hidden md:inline">New</span></button>
+        </div>
       </div>
-
-      <div class="mb-4">
-        <input id="searchInput" type="search" placeholder="Search by title, client, or location..." class="w-full px-3 py-2 text-sm rounded-sm">
-      </div>
-
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="border-b border-clay-border text-[10px] text-clay-faint uppercase tracking-widest">
-              <th class="text-left py-3 px-2 font-heading">Title</th>
-              <th class="text-left py-3 px-2 font-heading hidden md:table-cell">Client</th>
-              <th class="text-left py-3 px-2 font-heading hidden sm:table-cell">Location</th>
-              <th class="text-left py-3 px-2 font-heading">Status</th>
-              <th class="text-right py-3 px-2 font-heading">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="projectList"></tbody>
-        </table>
-      </div>
-
-      <div id="emptyState" class="hidden text-center py-12">
-        <i class="fas fa-folder-open text-4xl text-gray-700 mb-3 block"></i>
-        <p class="text-clay-muted text-sm">No projects yet. Click <strong>Add New</strong> to get started.</p>
+      <div id="listContainer" class="space-y-2"></div>
+      <div id="emptyListMsg" class="hidden text-center py-12 text-clay-faint">
+        <i class="fas fa-inbox text-3xl mb-3"></i>
+        <p class="text-sm uppercase tracking-widest">No items yet</p>
+        <p class="text-xs mt-1">Click <strong>New</strong> to start or Import a data file.</p>
       </div>
     </section>
 
-    <!-- RIGHT: Edit Form -->
-    <aside class="glass rounded-sm p-4 md:p-6 sticky top-24 self-start max-h-[calc(100vh-120px)] overflow-y-auto">
-      <h2 id="formTitle" class="text-xl md:text-2xl font-bold text-clay-ink uppercase mb-5">New Project</h2>
+    <!-- EDITOR BACKDROP (mobile only) -->
+    <div id="editorBackdrop" class="editor-backdrop"></div>
 
-      <form id="projectForm" class="space-y-4">
-        <input type="hidden" id="fieldIndex" value="">
-
-        <div>
-          <label for="fieldTitle">Title *</label>
-          <input id="fieldTitle" type="text" required class="w-full px-3 py-2 rounded-sm text-sm" placeholder="Monticello">
+    <!-- RIGHT: EDITOR -->
+    <aside class="editor-panel glass rounded-md p-4 md:p-5 lg:sticky lg:top-[9rem] lg:self-start lg:max-h-[calc(100vh-10rem)] lg:overflow-y-auto">
+      <div class="flex items-start justify-between mb-4">
+        <div class="min-w-0 flex-1">
+          <div id="editorCrumb" class="editor-crumb"><span>New Item</span></div>
+          <h2 id="formTitle" class="text-lg md:text-xl font-bold uppercase tracking-tight truncate">New Item</h2>
         </div>
-
-        <div>
-          <label for="fieldId">ID (slug) *</label>
-          <input id="fieldId" type="text" required class="w-full px-3 py-2 rounded-sm text-sm" placeholder="monticello" pattern="[a-z0-9-]+" title="lowercase letters, numbers, and hyphens only">
-          <p class="text-[10px] text-clay-muted mt-1">Auto-generated from title. Use lowercase, hyphens only.</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label for="fieldClient">Client *</label>
-            <input id="fieldClient" type="text" required class="w-full px-3 py-2 rounded-sm text-sm" placeholder="Dheeraj Realty">
-          </div>
-          <div>
-            <label for="fieldYear">Year *</label>
-            <input id="fieldYear" type="number" required min="2000" max="2050" class="w-full px-3 py-2 rounded-sm text-sm" placeholder="2024">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label for="fieldCategory">Category *</label>
-            <select id="fieldCategory" required class="w-full px-3 py-2 rounded-sm text-sm">
-              <option value="residential">Residential</option>
-              <option value="commercial">Commercial</option>
-              <option value="infrastructure">Infrastructure</option>
-            </select>
-          </div>
-          <div>
-            <label for="fieldStatus">Status *</label>
-            <select id="fieldStatus" required class="w-full px-3 py-2 rounded-sm text-sm">
-              <option value="completed">Completed</option>
-              <option value="ongoing">Ongoing</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label for="fieldLocation">Location *</label>
-            <input id="fieldLocation" type="text" required class="w-full px-3 py-2 rounded-sm text-sm" placeholder="Mumbai">
-          </div>
-          <div>
-            <label for="fieldArea">Area *</label>
-            <input id="fieldArea" type="text" required class="w-full px-3 py-2 rounded-sm text-sm" placeholder="1.5L Sq.ft">
-          </div>
-        </div>
-
-        <div>
-          <label for="fieldImg">Image Path</label>
-          <input id="fieldImg" type="text" class="w-full px-3 py-2 rounded-sm text-sm" placeholder="assets/Projects/project-name.jpg">
-          <p class="text-[10px] text-clay-muted mt-1">Save image to <code class="text-brand-darkGold">assets/Projects/</code> folder first. Leave blank to use placeholder icon.</p>
-        </div>
-
-        <div>
-          <label>Coordinates (click map to set) *</label>
-          <div id="pickerMap"></div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
-            <div>
-              <input id="fieldLat" type="number" step="0.0001" required class="w-full px-3 py-2 rounded-sm text-xs" placeholder="Latitude">
-            </div>
-            <div>
-              <input id="fieldLng" type="number" step="0.0001" required class="w-full px-3 py-2 rounded-sm text-xs" placeholder="Longitude">
-            </div>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-3 pt-2">
-          <label class="flex items-center gap-2 cursor-pointer select-none" style="text-transform:none; letter-spacing:0; color:#2A2420; font-weight:400; font-size: 0.875rem; margin:0;">
-            <input id="fieldFeatured" type="checkbox" class="w-4 h-4 accent-yellow-400">
-            <i class="fas fa-star text-brand-darkGold text-xs"></i>
-            Featured (shown larger on projects page)
-          </label>
-        </div>
-
-        <div class="flex gap-2 pt-4 border-t border-clay-border">
-          <button type="submit" class="btn-primary px-4 py-2 text-xs rounded-sm flex-1"><i class="fas fa-save mr-1"></i> Save</button>
-          <button type="button" id="cancelBtn" class="btn-outline px-4 py-2 text-xs rounded-sm"><i class="fas fa-times"></i></button>
-        </div>
-      </form>
+        <button id="editorCloseMobile" class="editor-close-mobile btn btn-outline p-2 text-[10px] rounded-sm ml-2" aria-label="Close editor"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="itemForm" class="space-y-3" autocomplete="off" novalidate></form>
+      <div class="flex gap-2 pt-4 mt-4 border-t border-white/5">
+        <button id="saveBtn" form="itemForm" type="submit" class="btn btn-primary flex-1 py-2.5 text-xs" title="Save (Ctrl+Enter)"><i class="fas fa-check text-[10px]"></i>Save</button>
+        <button id="cancelBtn" type="button" class="btn btn-outline px-4 py-2.5 text-xs">Cancel</button>
+        <button id="deleteBtn" type="button" class="btn btn-danger px-4 py-2.5 text-xs hidden" title="Delete (Ctrl+Del)"><i class="fas fa-trash text-[10px]"></i></button>
+      </div>
+      <div class="mt-4 pt-3 border-t border-white/5">
+        <p class="text-[9px] text-clay-faint leading-relaxed flex flex-wrap items-center gap-x-3 gap-y-1.5 justify-end" id="shortcutHints">
+          <span><span class="kbd"><span class="kbd-mod">Ctrl</span>+S</span> download</span>
+          <span><span class="kbd"><span class="kbd-mod">Ctrl</span>+N</span> new</span>
+          <span><span class="kbd"><span class="kbd-mod">Ctrl</span>+Z</span> undo</span>
+          <span><span class="kbd">Esc</span> cancel</span>
+        </p>
+      </div>
     </aside>
   </main>
 
-  <!-- Footer help -->
-  <footer class="container mx-auto px-4 md:px-6 py-6 border-t border-clay-border mt-10">
-    <div class="glass rounded-sm p-4 md:p-6 text-xs md:text-sm">
-      <h3 class="text-brand-darkGold font-bold uppercase tracking-widest mb-3 text-xs">How to publish changes</h3>
-      <ol class="space-y-2 text-clay-muted list-decimal list-inside">
-        <li>Save your project image to <code class="text-brand-darkGold bg-clay-base/50 px-2 py-0.5 rounded">assets/Projects/</code></li>
-        <li>Edit / Add / Delete projects above</li>
-        <li>Click <strong class="text-clay-ink">Download projects-data.js</strong> in the header</li>
-        <li>Replace <code class="text-brand-darkGold bg-clay-base/50 px-2 py-0.5 rounded">projects-data.js</code> in the project folder with the downloaded file</li>
-        <li>Commit and push to git — Netlify auto-deploys</li>
-      </ol>
-    </div>
-  </footer>
+  <!-- TOAST -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <div id="toast" class="hidden"></div>
+  <!-- DATA FILES (pre-seed) -->
+  <script src="projects-data.js"></script>
+  <script src="testimonials-data.js"></script>
+  <script src="timeline-data.js"></script>
+  <script src="awards-data.js"></script>
+  <script src="active-projects-data.js"></script>
+  <script src="site-info.js"></script>
 
   <script>
-    // ─── State ───
-    let projects = [];
-    let editingIndex = -1;
-    let isDirty = false;
+  (function(){
+    'use strict';
 
-    const STORAGE_KEY = 'strongbuilt_admin_projects';
-
-    // ─── Load Initial Data ───
-    function loadProjects() {
-      // Priority: localStorage > projects-data.js > empty
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        try {
-          projects = JSON.parse(stored);
-          setDirty(true);
-          toast('Loaded unsaved changes from local storage', 'info');
-          return;
-        } catch (e) { console.warn('Failed to parse stored data', e); }
+    // ════════════════════════════════════════════════════════════
+    // DATA TYPE SCHEMAS
+    // ════════════════════════════════════════════════════════════
+    const TYPES = {
+      projects: {
+        label: 'Projects', icon: 'fa-building',
+        storageKey: 'sb_admin_projects',
+        filename: 'projects-data.js',
+        constName: 'PROJECT_DATA',
+        globalVar: 'PROJECT_DATA',
+        isList: true, isKeyed: false,
+        idField: 'id',
+        columns: ['title', 'client', 'location'],
+        features: { mapPicker: true, imageUpload: true, reorder: true, featured: true, search: ['title','client','location'] },
+        fields: [
+          { name: 'title', label: 'Title', type: 'text', required: true, placeholder: 'e.g. Monticello' },
+          { name: 'id', label: 'ID (slug)', type: 'text', required: true, pattern: '^[a-z0-9-]+$', autoSlug: 'title', hint: 'lowercase, hyphens only — auto-generated from title' },
+          { name: 'client', label: 'Client', type: 'text', required: true, placeholder: 'e.g. Lodha Group' },
+          { name: 'year', label: 'Year', type: 'number', required: true, default: () => new Date().getFullYear(), min: 1990, max: 2099 },
+          { name: 'category', label: 'Category', type: 'select', required: true, options: [['residential','Residential'],['commercial','Commercial'],['infrastructure','Infrastructure']] },
+          { name: 'status', label: 'Status', type: 'select', required: true, options: [['ongoing','Ongoing'],['completed','Completed']] },
+          { name: 'location', label: 'Location', type: 'text', required: true, placeholder: 'e.g. Bandra, Mumbai' },
+          { name: 'area', label: 'Area', type: 'text', placeholder: 'e.g. 2.4 Lakh sq.ft' },
+          { name: 'img', label: 'Image Path', type: 'image', placeholder: 'assets/Projects/monticello.jpg' },
+          { name: 'coordinates', label: 'Coordinates (lat, lng)', type: 'coordinates', required: true, default: () => [19.0596, 72.8295] },
+          { name: 'featured', label: 'Featured', type: 'checkbox' }
+        ]
+      },
+      testimonials: {
+        label: 'Testimonials', icon: 'fa-quote-left',
+        storageKey: 'sb_admin_testimonials',
+        filename: 'testimonials-data.js',
+        constName: 'TESTIMONIALS_DATA',
+        globalVar: 'TESTIMONIALS_DATA',
+        isList: true, isKeyed: false,
+        idField: 'id',
+        columns: ['name', 'company'],
+        features: { reorder: true, search: ['name','company','quote'] },
+        fields: [
+          { name: 'name', label: 'Name / Role', type: 'text', required: true, placeholder: 'e.g. Project Director' },
+          { name: 'id', label: 'ID (slug)', type: 'text', required: true, autoSlug: 'name', pattern: '^[a-z0-9-]+$' },
+          { name: 'company', label: 'Company', type: 'text', required: true, placeholder: 'e.g. Lodha Group' },
+          { name: 'initials', label: 'Initials (2-3 chars)', type: 'text', required: true, maxlength: 3, placeholder: 'LG' },
+          { name: 'quote', label: 'Quote', type: 'textarea', required: true, rows: 5, placeholder: 'What the client said...' }
+        ]
+      },
+      timeline: {
+        label: 'Timeline', icon: 'fa-timeline',
+        storageKey: 'sb_admin_timeline',
+        filename: 'timeline-data.js',
+        constName: 'TIMELINE_DATA',
+        globalVar: 'TIMELINE_DATA',
+        isList: true, isKeyed: false,
+        idField: 'id',
+        columns: ['year', 'title'],
+        features: { reorder: true, search: ['year','title','body'] },
+        fields: [
+          { name: 'year', label: 'Year', type: 'text', required: true, placeholder: '2024' },
+          { name: 'id', label: 'ID (slug)', type: 'text', required: true, autoSlug: 'title', pattern: '^[a-z0-9-]+$' },
+          { name: 'tag', label: 'Tag / Chapter Label', type: 'text', required: true, placeholder: 'The Beginning' },
+          { name: 'kicker', label: 'Kicker (e.g. "Chapter One · Nov 2014")', type: 'text', required: true },
+          { name: 'icon', label: 'FontAwesome Icon (e.g. fa-flag)', type: 'text', required: true, placeholder: 'fa-flag' },
+          { name: 'title', label: 'Title', type: 'text', required: true },
+          { name: 'body', label: 'Body', type: 'textarea', required: true, rows: 4 }
+        ]
+      },
+      awards: {
+        label: 'Awards', icon: 'fa-trophy',
+        storageKey: 'sb_admin_awards',
+        filename: 'awards-data.js',
+        constName: 'AWARDS_DATA',
+        globalVar: 'AWARDS_DATA',
+        isList: true, isKeyed: true, // special: 2 sub-lists
+        idField: 'id',
+        groups: [
+          { key: 'industry', label: 'Industry Awards' },
+          { key: 'client', label: 'Client Recognition' }
+        ],
+        columns: ['year', 'title'],
+        features: { reorder: true, search: ['title','issuer','description'] },
+        fields: [
+          { name: 'group', label: 'Group', type: 'select', required: true, options: [['industry','Industry'],['client','Client']] },
+          { name: 'year', label: 'Year', type: 'text', required: true, placeholder: '2024' },
+          { name: 'id', label: 'ID (slug)', type: 'text', required: true, autoSlug: 'title', pattern: '^[a-z0-9-]+$' },
+          { name: 'issuer', label: 'Issuer (industry only)', type: 'text', placeholder: 'Construction World Magazine' },
+          { name: 'meta', label: 'Meta (client only)', type: 'text', placeholder: '2019 · Safety Audit' },
+          { name: 'icon', label: 'FontAwesome Icon', type: 'text', required: true, placeholder: 'fa-trophy' },
+          { name: 'title', label: 'Title', type: 'text', required: true },
+          { name: 'description', label: 'Description', type: 'textarea', required: true, rows: 3 }
+        ]
+      },
+      activeProjects: {
+        label: 'Active Projects', icon: 'fa-hard-hat',
+        storageKey: 'sb_admin_active',
+        filename: 'active-projects-data.js',
+        constName: 'ACTIVE_PROJECTS_DATA',
+        globalVar: 'ACTIVE_PROJECTS_DATA',
+        isList: true, isKeyed: false,
+        idField: 'id',
+        columns: ['name', 'location'],
+        features: { reorder: true, search: ['name','location'] },
+        fields: [
+          { name: 'name', label: 'Project Name', type: 'text', required: true },
+          { name: 'id', label: 'ID (slug)', type: 'text', required: true, autoSlug: 'name', pattern: '^[a-z0-9-]+$' },
+          { name: 'location', label: 'Location & Sector (e.g. "Pune · Mixed Use")', type: 'text', required: true },
+          { name: 'progress', label: 'Progress %', type: 'slider', required: true, min: 0, max: 100, default: 50 },
+          { name: 'eta', label: 'ETA (e.g. Q3 2026)', type: 'text', required: true }
+        ]
+      },
+      siteInfo: {
+        label: 'Site Info', icon: 'fa-cog',
+        storageKey: 'sb_admin_site_info',
+        filename: 'site-info.js',
+        constName: 'SITE_INFO',
+        globalVar: 'SITE_INFO',
+        isList: false,
+        fields: [
+          { name: 'companyName', label: 'Company Name', type: 'text', required: true },
+          { name: 'tagline', label: 'Tagline', type: 'text', required: true },
+          { name: 'phonePrimary', label: 'Phone (Primary)', type: 'text', required: true },
+          { name: 'phoneSecondary', label: 'Phone (Secondary)', type: 'text' },
+          { name: 'email', label: 'Email', type: 'email', required: true },
+          { name: 'emailAlt', label: 'Email (Alt)', type: 'email' },
+          { name: 'whatsapp', label: 'WhatsApp Number (digits only, with country code)', type: 'text', required: true, placeholder: '919619875081' },
+          { name: 'address', label: 'Address', type: 'textarea', required: true, rows: 3 },
+          { name: 'social.linkedin', label: 'LinkedIn URL', type: 'url' },
+          { name: 'social.instagram', label: 'Instagram URL', type: 'url' },
+          { name: 'social.twitter', label: 'Twitter / X URL', type: 'url' }
+        ]
       }
-      if (typeof PROJECT_DATA !== 'undefined' && Array.isArray(PROJECT_DATA)) {
-        projects = JSON.parse(JSON.stringify(PROJECT_DATA)); // deep clone
-        setDirty(false);
-      } else {
-        projects = [];
-        toast('projects-data.js not found. Use Import or start fresh.', 'warn');
-      }
-    }
+    };
 
-    function setDirty(dirty) {
-      isDirty = dirty;
-      document.getElementById('dirtyBadge').classList.toggle('hidden', !dirty);
-      if (dirty) localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
-    }
+    // ════════════════════════════════════════════════════════════
+    // STATE
+    // ════════════════════════════════════════════════════════════
+    const state = {
+      activeType: 'projects',
+      data: {},        // { projects: [...], testimonials: [...], ... }
+      editing: null,   // current item being edited OR null
+      editingIndex: -1,
+      undoStack: [],
+      redoStack: [],
+      dirty: new Set(), // which types have unsaved changes
+      search: '',
+      sortBy: 'order'
+    };
 
-    // ─── Render list ───
-    function renderList(filter = '') {
-      const tbody = document.getElementById('projectList');
-      const emptyState = document.getElementById('emptyState');
-      const q = filter.trim().toLowerCase();
+    // ════════════════════════════════════════════════════════════
+    // UTILITIES
+    // ════════════════════════════════════════════════════════════
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => document.querySelectorAll(sel);
 
-      const filtered = q
-        ? projects.filter(p => p.title.toLowerCase().includes(q) || p.client.toLowerCase().includes(q) || p.location.toLowerCase().includes(q))
-        : projects;
-
-      document.getElementById('countBadge').textContent = filtered.length + (q ? ` of ${projects.length}` : '');
-
-      if (filtered.length === 0) {
-        tbody.innerHTML = '';
-        emptyState.classList.remove('hidden');
-        return;
-      }
-      emptyState.classList.add('hidden');
-
-      tbody.innerHTML = filtered.map(p => {
-        const idx = projects.indexOf(p);
-        const catBadge = `badge-${p.category === 'residential' ? 'resi' : p.category === 'commercial' ? 'comm' : 'infra'}`;
-        const statusBadge = p.status === 'ongoing' ? 'badge-ongoing' : 'badge-completed';
-        const star = p.featured ? '<i class="fas fa-star text-brand-darkGold text-[9px] ml-1" title="Featured"></i>' : '';
-        return `
-          <tr class="project-row border-b border-clay-border cursor-pointer ${editingIndex === idx ? 'editing' : ''}" data-idx="${idx}">
-            <td class="py-3 px-2">
-              <div class="font-bold text-clay-ink text-sm">${escapeHTML(p.title)}${star}</div>
-              <div class="text-[10px] text-clay-faint mt-0.5"><span class="badge ${catBadge}">${p.category}</span> <span class="md:hidden ml-1">${escapeHTML(p.client)}</span></div>
-            </td>
-            <td class="py-3 px-2 text-clay-muted text-xs hidden md:table-cell">${escapeHTML(p.client)}</td>
-            <td class="py-3 px-2 text-clay-muted text-xs hidden sm:table-cell">${escapeHTML(p.location)} <span class="text-clay-muted">· ${p.year}</span></td>
-            <td class="py-3 px-2"><span class="badge ${statusBadge}">${p.status}</span></td>
-            <td class="py-3 px-2 text-right whitespace-nowrap">
-              <button class="edit-btn text-brand-darkGold hover:text-clay-ink p-2" data-idx="${idx}" title="Edit"><i class="fas fa-pen text-xs"></i></button>
-              <button class="delete-btn text-red-400 hover:text-red-300 p-2" data-idx="${idx}" title="Delete"><i class="fas fa-trash text-xs"></i></button>
-            </td>
-          </tr>`;
-      }).join('');
-
-      // Row click → edit (but not action buttons)
-      tbody.querySelectorAll('.project-row').forEach(row => {
-        row.addEventListener('click', (e) => {
-          if (e.target.closest('.delete-btn, .edit-btn')) return;
-          editProject(parseInt(row.dataset.idx));
-        });
-      });
-      tbody.querySelectorAll('.edit-btn').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); editProject(parseInt(b.dataset.idx)); }));
-      tbody.querySelectorAll('.delete-btn').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); deleteProject(parseInt(b.dataset.idx)); }));
-    }
-
-    function escapeHTML(s) {
-      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    }
-
-    // ─── Form logic ───
     function slugify(s) {
-      return s.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+      return String(s || '').toLowerCase().trim()
+        .replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
     }
-
-    const form = document.getElementById('projectForm');
-    const formTitle = document.getElementById('formTitle');
-    const titleInput = document.getElementById('fieldTitle');
-    const idInput = document.getElementById('fieldId');
-
-    // Auto-generate ID from title (only if new or ID matches old slug)
-    titleInput.addEventListener('input', () => {
-      const existingIdx = parseInt(document.getElementById('fieldIndex').value);
-      const currentSlug = existingIdx >= 0 && projects[existingIdx] ? slugify(projects[existingIdx].title) : '';
-      if (!idInput.value || idInput.value === currentSlug) {
-        idInput.value = slugify(titleInput.value);
+    function deepClone(v) { return JSON.parse(JSON.stringify(v)); }
+    function getPath(obj, path) {
+      return path.split('.').reduce((o, k) => (o == null ? o : o[k]), obj);
+    }
+    function setPath(obj, path, val) {
+      const keys = path.split('.');
+      let o = obj;
+      while (keys.length > 1) {
+        const k = keys.shift();
+        if (o[k] == null || typeof o[k] !== 'object') o[k] = {};
+        o = o[k];
       }
-    });
-
-    function resetForm() {
-      form.reset();
-      document.getElementById('fieldIndex').value = '';
-      document.getElementById('fieldCategory').value = 'residential';
-      document.getElementById('fieldStatus').value = 'completed';
-      document.getElementById('fieldYear').value = new Date().getFullYear();
-      document.getElementById('fieldLat').value = '19.0596';
-      document.getElementById('fieldLng').value = '72.8295';
-      formTitle.innerHTML = 'New Project';
-      updateMapMarker(19.0596, 72.8295);
-      editingIndex = -1;
-      renderList(document.getElementById('searchInput').value);
+      o[keys[0]] = val;
     }
 
-    function editProject(idx) {
-      const p = projects[idx];
-      if (!p) return;
-      editingIndex = idx;
-      document.getElementById('fieldIndex').value = idx;
-      titleInput.value = p.title;
-      idInput.value = p.id;
-      document.getElementById('fieldClient').value = p.client;
-      document.getElementById('fieldYear').value = p.year;
-      document.getElementById('fieldCategory').value = p.category;
-      document.getElementById('fieldStatus').value = p.status;
-      document.getElementById('fieldLocation').value = p.location;
-      document.getElementById('fieldArea').value = p.area;
-      document.getElementById('fieldImg').value = p.img || '';
-      document.getElementById('fieldLat').value = p.coordinates ? p.coordinates[0] : 19.0596;
-      document.getElementById('fieldLng').value = p.coordinates ? p.coordinates[1] : 72.8295;
-      document.getElementById('fieldFeatured').checked = !!p.featured;
-      formTitle.innerHTML = `Edit: <span class="text-brand-darkGold">${escapeHTML(p.title)}</span>`;
-      updateMapMarker(p.coordinates ? p.coordinates[0] : 19.0596, p.coordinates ? p.coordinates[1] : 72.8295);
-      renderList(document.getElementById('searchInput').value);
-      document.querySelector('aside').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    function toast(msg, kind = 'info', opts = {}) {
+      const el = $('#toast');
+      el.className = 'toast is-visible ' + kind;
+      const actionHTML = opts.action ? `<span class="toast-action" id="toastAction">${opts.action.label}</span>` : '';
+      el.innerHTML = `<span>${msg}</span>${actionHTML}`;
+      if (opts.action && opts.action.onClick) {
+        const a = $('#toastAction');
+        if (a) a.onclick = () => { opts.action.onClick(); el.classList.remove('is-visible'); };
+      }
+      clearTimeout(el._t);
+      el._t = setTimeout(() => el.classList.remove('is-visible'), opts.duration || 4500);
     }
 
-    function deleteProject(idx) {
-      const p = projects[idx];
-      if (!p) return;
-      if (!confirm(`Delete "${p.title}"?\n\nThis only affects the admin editor. You must also Download + replace projects-data.js + git push to publish.`)) return;
-      projects.splice(idx, 1);
-      if (editingIndex === idx) resetForm();
-      setDirty(true);
-      renderList(document.getElementById('searchInput').value);
-      toast(`Deleted "${p.title}"`, 'success');
+    function markDirty(type = state.activeType) {
+      state.dirty.add(type);
+      renderDirtyIndicator();
+      autoSave(type);
+    }
+    function clearDirty(type = state.activeType) {
+      state.dirty.delete(type);
+      renderDirtyIndicator();
+    }
+    function renderDirtyIndicator() {
+      $('#dirtyIndicator').classList.toggle('hidden', !state.dirty.has(state.activeType));
     }
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const data = {
-        id: idInput.value.trim(),
-        title: titleInput.value.trim(),
-        client: document.getElementById('fieldClient').value.trim(),
-        category: document.getElementById('fieldCategory').value,
-        location: document.getElementById('fieldLocation').value.trim(),
-        area: document.getElementById('fieldArea').value.trim(),
-        status: document.getElementById('fieldStatus').value,
-        year: parseInt(document.getElementById('fieldYear').value),
-        img: document.getElementById('fieldImg').value.trim() || null,
-        featured: document.getElementById('fieldFeatured').checked,
-        coordinates: [parseFloat(document.getElementById('fieldLat').value), parseFloat(document.getElementById('fieldLng').value)]
-      };
+    // ════════════════════════════════════════════════════════════
+    // AUTO-SAVE (debounced)
+    // ════════════════════════════════════════════════════════════
+    const autoSaveTimers = {};
+    function autoSave(type) {
+      clearTimeout(autoSaveTimers[type]);
+      autoSaveTimers[type] = setTimeout(() => {
+        try {
+          localStorage.setItem(TYPES[type].storageKey, JSON.stringify(state.data[type]));
+        } catch (e) { console.error('autoSave failed', e); }
+      }, 400);
+    }
 
-      // Validate ID uniqueness
-      const idxStr = document.getElementById('fieldIndex').value;
-      const currentIdx = idxStr === '' ? -1 : parseInt(idxStr);
-      const dupe = projects.findIndex((p, i) => p.id === data.id && i !== currentIdx);
-      if (dupe >= 0) {
-        toast(`ID "${data.id}" already used by "${projects[dupe].title}"`, 'error');
+    // ════════════════════════════════════════════════════════════
+    // UNDO / REDO
+    // ════════════════════════════════════════════════════════════
+    function pushUndo(description) {
+      state.undoStack.push({ type: state.activeType, snapshot: deepClone(state.data[state.activeType]), desc: description });
+      if (state.undoStack.length > 50) state.undoStack.shift();
+      state.redoStack = [];
+      renderUndoButtons();
+    }
+    function undo() {
+      if (!state.undoStack.length) return toast('Nothing to undo', 'warn');
+      const entry = state.undoStack.pop();
+      state.redoStack.push({ type: entry.type, snapshot: deepClone(state.data[entry.type]), desc: entry.desc });
+      state.data[entry.type] = entry.snapshot;
+      markDirty(entry.type);
+      if (entry.type === state.activeType) { render(); closeEditor(); }
+      toast('Undid: ' + entry.desc, 'info');
+      renderUndoButtons();
+    }
+    function redo() {
+      if (!state.redoStack.length) return toast('Nothing to redo', 'warn');
+      const entry = state.redoStack.pop();
+      state.undoStack.push({ type: entry.type, snapshot: deepClone(state.data[entry.type]), desc: entry.desc });
+      state.data[entry.type] = entry.snapshot;
+      markDirty(entry.type);
+      if (entry.type === state.activeType) { render(); closeEditor(); }
+      toast('Redid: ' + entry.desc, 'info');
+      renderUndoButtons();
+    }
+    function renderUndoButtons() {
+      $('#undoBtn').disabled = !state.undoStack.length;
+      $('#redoBtn').disabled = !state.redoStack.length;
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // LOAD DATA (localStorage → global data file → empty)
+    // ════════════════════════════════════════════════════════════
+    function loadData() {
+      Object.keys(TYPES).forEach(type => {
+        const cfg = TYPES[type];
+        try {
+          const cached = localStorage.getItem(cfg.storageKey);
+          if (cached) {
+            state.data[type] = JSON.parse(cached);
+            state.dirty.add(type);
+            return;
+          }
+        } catch (e) { console.warn(`Bad cache for ${type}`); }
+
+        const globalData = window[cfg.globalVar];
+        if (globalData != null) {
+          state.data[type] = deepClone(globalData);
+        } else {
+          state.data[type] = cfg.isList ? (cfg.isKeyed ? Object.fromEntries(cfg.groups.map(g => [g.key, []])) : []) : {};
+        }
+      });
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // TABS
+    // ════════════════════════════════════════════════════════════
+    function switchTab(type) {
+      state.activeType = type;
+      closeEditor();
+      $$('.tab').forEach(b => b.classList.toggle('is-active', b.dataset.type === type));
+      $('#currentTabLabel').textContent = TYPES[type].label;
+      $('#listTitle').textContent = TYPES[type].label;
+      const cfg = TYPES[type];
+      $('#addNewBtn').style.display = cfg.isList ? '' : 'none';
+      $('#sortBy').style.display = cfg.isList ? '' : 'none';
+      const searchWrap = $('#listSearch')?.parentElement;
+      if (searchWrap) searchWrap.style.display = (cfg.isList && cfg.features?.search) ? '' : 'none';
+      state.search = '';
+      $('#listSearch').value = '';
+      render();
+      renderDirtyIndicator();
+      renderTabCounts();
+      if (!cfg.isList) openEditor(null, 'Site Info');
+    }
+
+    // ── Tab count badges ──
+    function renderTabCounts() {
+      Object.keys(TYPES).forEach(type => {
+        const cfg = TYPES[type];
+        const el = document.querySelector(`.tab-count[data-count="${type}"]`);
+        if (!el || !cfg.isList) return;
+        const data = state.data[type];
+        let count = 0;
+        if (cfg.isKeyed) count = cfg.groups.reduce((n, g) => n + ((data?.[g.key] || []).length), 0);
+        else count = (data || []).length;
+        el.textContent = count;
+      });
+    }
+
+    // ── Stats strip (per tab context) ──
+    function renderStatsStrip() {
+      const strip = $('#statsStrip');
+      if (!strip) return;
+      const type = state.activeType;
+      const cfg = TYPES[type];
+      if (!cfg.isList) { strip.innerHTML = ''; return; }
+      const data = state.data[type];
+      let stats = [];
+      if (type === 'projects') {
+        const arr = data || [];
+        const ongoing = arr.filter(p => p.status === 'ongoing').length;
+        const completed = arr.filter(p => p.status === 'completed').length;
+        const featured = arr.filter(p => p.featured).length;
+        stats = [
+          ['Total', arr.length],
+          ['Ongoing', ongoing],
+          ['Completed', completed],
+          ['Featured', featured]
+        ];
+      } else if (type === 'awards') {
+        stats = [
+          ['Industry', (data?.industry || []).length],
+          ['Client', (data?.client || []).length]
+        ];
+      } else if (type === 'activeProjects') {
+        const arr = data || [];
+        const avg = arr.length ? Math.round(arr.reduce((s,p) => s + (p.progress || 0), 0) / arr.length) : 0;
+        stats = [['Live', arr.length], ['Avg Progress', avg + '%']];
+      } else {
+        const n = (data || []).length;
+        stats = [['Items', n], ['Drag', 'to reorder']];
+      }
+      strip.innerHTML = stats.map(([k,v]) => `<span><span class="stat-num">${v}</span>${k}</span>`).join('');
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // FLATTEN AWARDS (it's keyed by group → list)
+    // ════════════════════════════════════════════════════════════
+    function getFlatList(type) {
+      const cfg = TYPES[type];
+      const data = state.data[type];
+      if (!cfg.isList) return [];
+      if (!cfg.isKeyed) return (data || []).map((item, idx) => ({ item, idx, group: null }));
+      // keyed: awards
+      const out = [];
+      cfg.groups.forEach(g => {
+        (data[g.key] || []).forEach((item, idx) => out.push({ item, idx, group: g.key }));
+      });
+      return out;
+    }
+
+    function updateFlatList(type, flatEntries) {
+      // Rebuild data from reordered flat list
+      const cfg = TYPES[type];
+      if (!cfg.isKeyed) {
+        state.data[type] = flatEntries.map(e => e.item);
+      } else {
+        const groups = Object.fromEntries(cfg.groups.map(g => [g.key, []]));
+        flatEntries.forEach(e => groups[e.group].push(e.item));
+        state.data[type] = groups;
+      }
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // RENDER LIST
+    // ════════════════════════════════════════════════════════════
+    function render() {
+      const cfg = TYPES[state.activeType];
+      const listEl = $('#listContainer');
+      const emptyEl = $('#emptyListMsg');
+      listEl.innerHTML = '';
+
+      if (!cfg.isList) {
+        listEl.innerHTML = `<div class="text-center py-10 text-clay-faint">
+          <i class="fas fa-cog text-3xl mb-3"></i>
+          <p class="text-sm uppercase tracking-widest">Site-wide settings</p>
+          <p class="text-xs mt-1">Edit in the panel on the right.</p>
+        </div>`;
+        $('#itemCount').textContent = '—';
+        emptyEl.classList.add('hidden');
         return;
       }
 
-      if (currentIdx === -1) {
-        projects.push(data);
-        toast(`Added "${data.title}"`, 'success');
-      } else {
-        projects[currentIdx] = data;
-        toast(`Saved "${data.title}"`, 'success');
+      let entries = getFlatList(state.activeType);
+      const q = state.search.trim().toLowerCase();
+      if (q && cfg.features?.search) {
+        entries = entries.filter(e => cfg.features.search.some(f => String(e.item[f] || '').toLowerCase().includes(q)));
       }
 
-      setDirty(true);
-      resetForm();
-    });
+      // Sort
+      if (state.sortBy === 'title') entries.sort((a,b) => String(a.item.title || a.item.name || '').localeCompare(String(b.item.title || b.item.name || '')));
+      else if (state.sortBy === 'year-desc') entries.sort((a,b) => String(b.item.year || '').localeCompare(String(a.item.year || '')));
+      else if (state.sortBy === 'year-asc') entries.sort((a,b) => String(a.item.year || '').localeCompare(String(b.item.year || '')));
+      else if (state.sortBy === 'status') entries.sort((a,b) => String(a.item.status || '').localeCompare(String(b.item.status || '')));
 
-    document.getElementById('addNewBtn').addEventListener('click', resetForm);
-    document.getElementById('cancelBtn').addEventListener('click', resetForm);
+      // Featured pinning for projects
+      if (state.activeType === 'projects' && state.sortBy === 'order') {
+        entries.sort((a,b) => (b.item.featured ? 1 : 0) - (a.item.featured ? 1 : 0));
+      }
 
-    // ─── Search ───
-    let searchTimer;
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-      clearTimeout(searchTimer);
-      searchTimer = setTimeout(() => renderList(e.target.value), 150);
-    });
+      emptyEl.classList.toggle('hidden', entries.length > 0);
 
-    // ─── Import ───
-    // Parse the project array without using eval/new Function().
-    // Accepts strict JSON and the JS-literal format produced by Download
-    // (unquoted object keys, trailing commas).
-    function parseProjectsInput(src) {
-      try {
-        return JSON.parse(src);
-      } catch (_) { /* fall through to normalization */ }
-
-      let s = src;
-      // Quote bare object keys:  id:  →  "id":  (only after { or , to avoid
-      // touching URLs or other colons inside string values).
-      s = s.replace(/([{,]\s*)([A-Za-z_$][A-Za-z0-9_$]*)(\s*:)/g, '$1"$2"$3');
-      // Strip trailing commas before } or ].
-      s = s.replace(/,(\s*[}\]])/g, '$1');
-
-      return JSON.parse(s);
+      entries.forEach(entry => listEl.appendChild(buildListItem(entry)));
+      renderStatsStrip();
+      renderTabCounts();
     }
 
-    document.getElementById('importBtn').addEventListener('click', () => {
-      if (isDirty && !confirm('You have unsaved changes. Import will replace them. Continue?')) return;
-      document.getElementById('importFile').click();
+    function buildListItem(entry) {
+      const cfg = TYPES[state.activeType];
+      const { item, group } = entry;
+      const el = document.createElement('div');
+      el.className = 'list-item p-3 rounded-sm flex items-center gap-3 bg-white/[0.02]';
+      el.dataset.id = item[cfg.idField];
+      if (group) el.dataset.group = group;
+      el.draggable = !!cfg.features?.reorder;
+      if (state.editing && state.editing[cfg.idField] === item[cfg.idField]) el.classList.add('is-editing');
+
+      const handleHTML = cfg.features?.reorder ? `<i class="fas fa-grip-vertical drag-handle text-xs"></i>` : '';
+
+      let label = '';
+      let sublabel = '';
+      let meta = '';
+
+      if (state.activeType === 'projects') {
+        label = item.title;
+        sublabel = `${item.client} · ${item.location} · ${item.year}`;
+        const catBadge = `<span class="badge badge-${item.category === 'residential' ? 'resi' : item.category === 'commercial' ? 'comm' : 'infra'}">${item.category}</span>`;
+        const statusBadge = `<span class="badge badge-${item.status}">${item.status}</span>`;
+        const feat = item.featured ? `<span class="badge badge-featured"><i class="fas fa-star text-[8px]"></i> Feat</span>` : '';
+        meta = `<div class="flex items-center gap-1 flex-wrap">${feat}${catBadge}${statusBadge}</div>`;
+      } else if (state.activeType === 'testimonials') {
+        label = item.name;
+        sublabel = item.company;
+        meta = `<p class="text-[10px] text-clay-faint italic truncate max-w-[14rem]">"${String(item.quote || '').slice(0, 60)}..."</p>`;
+      } else if (state.activeType === 'timeline') {
+        label = `${item.year} · ${item.title}`;
+        sublabel = item.tag;
+        meta = `<span class="badge badge-resi"><i class="fas ${item.icon} text-[8px]"></i></span>`;
+      } else if (state.activeType === 'awards') {
+        label = `${item.year} · ${item.title}`;
+        sublabel = item.issuer || item.meta || '';
+        meta = `<span class="badge badge-${group === 'industry' ? 'resi' : 'completed'}">${group}</span>`;
+      } else if (state.activeType === 'activeProjects') {
+        label = item.name;
+        sublabel = `${item.location} · ETA ${item.eta}`;
+        meta = `<div class="flex items-center gap-2 w-32">
+          <div class="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-brand-gold" style="width:${item.progress}%"></div></div>
+          <span class="text-[10px] text-brand-gold font-bold">${item.progress}%</span>
+        </div>`;
+      }
+
+      el.innerHTML = `
+        ${handleHTML}
+        <div class="flex-1 min-w-0">
+          <div class="font-bold text-sm uppercase truncate">${label}</div>
+          <div class="text-[11px] text-clay-faint truncate mt-0.5">${sublabel}</div>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">${meta}</div>
+        <button class="btn btn-outline p-1.5 text-[10px] rounded-sm shrink-0" aria-label="Edit"><i class="fas fa-pencil-alt"></i></button>
+      `;
+
+      el.addEventListener('click', (e) => {
+        if (e.target.closest('.drag-handle')) return;
+        openEditor(deepClone(item), 'Edit', entry);
+      });
+
+      if (cfg.features?.reorder) attachDragHandlers(el, entry);
+      return el;
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // DRAG-AND-DROP REORDER
+    // ════════════════════════════════════════════════════════════
+    let dragSrc = null;
+    function attachDragHandlers(el, entry) {
+      el.addEventListener('dragstart', (e) => {
+        dragSrc = entry;
+        el.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+      });
+      el.addEventListener('dragend', () => {
+        el.classList.remove('dragging');
+        $$('.list-item').forEach(i => i.classList.remove('drag-over-top', 'drag-over-bottom'));
+      });
+      el.addEventListener('dragover', (e) => {
+        if (!dragSrc || dragSrc === entry) return;
+        e.preventDefault();
+        const rect = el.getBoundingClientRect();
+        const isAbove = e.clientY < rect.top + rect.height / 2;
+        el.classList.toggle('drag-over-top', isAbove);
+        el.classList.toggle('drag-over-bottom', !isAbove);
+      });
+      el.addEventListener('dragleave', () => {
+        el.classList.remove('drag-over-top', 'drag-over-bottom');
+      });
+      el.addEventListener('drop', (e) => {
+        e.preventDefault();
+        if (!dragSrc || dragSrc === entry) return;
+        const rect = el.getBoundingClientRect();
+        const isAbove = e.clientY < rect.top + rect.height / 2;
+        reorderItems(dragSrc, entry, isAbove);
+        dragSrc = null;
+      });
+    }
+    function reorderItems(src, dest, before) {
+      const cfg = TYPES[state.activeType];
+      pushUndo('Reorder ' + (src.item.title || src.item.name));
+      // Awards: reorder only allowed within same group
+      if (cfg.isKeyed && src.group !== dest.group) {
+        toast('Cannot move between groups', 'warn');
+        return;
+      }
+      let entries = getFlatList(state.activeType);
+      entries = entries.filter(e => e.item[cfg.idField] !== src.item[cfg.idField]);
+      const destIdx = entries.findIndex(e => e.item[cfg.idField] === dest.item[cfg.idField]);
+      const insertAt = before ? destIdx : destIdx + 1;
+      entries.splice(insertAt, 0, src);
+      updateFlatList(state.activeType, entries);
+      markDirty();
+      render();
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // EDITOR
+    // ════════════════════════════════════════════════════════════
+    function openEditor(item, title = 'Edit', entry = null) {
+      const cfg = TYPES[state.activeType];
+      state.editing = item || createDefaultItem();
+      state.editingEntry = entry;
+      state.isNew = !item;
+      const singular = cfg.label.replace(/s$/, '');
+      const itemName = item ? (item.title || item.name || item.id || 'item') : '';
+      $('#formTitle').textContent = state.isNew ? `New ${singular}` : (itemName || 'Editing');
+      const crumb = $('#editorCrumb');
+      if (crumb) {
+        crumb.innerHTML = state.isNew
+          ? `<i class="fas fa-plus"></i><span>${cfg.label}</span><i class="fas fa-chevron-right"></i><span>New</span>`
+          : `<i class="fas ${cfg.icon}"></i><span>${cfg.label}</span><i class="fas fa-chevron-right"></i><span>Editing</span>`;
+      }
+      $('#deleteBtn').classList.toggle('hidden', state.isNew || !cfg.isList);
+      buildForm();
+      renderActiveListHighlight();
+      $('.editor-panel').classList.add('is-open');
+      $('#editorBackdrop').classList.add('is-open');
+      setTimeout(() => $('#itemForm').querySelector('input,select,textarea')?.focus(), 50);
+    }
+    function closeEditor() {
+      state.editing = null;
+      state.editingEntry = null;
+      state.isNew = false;
+      $('.editor-panel').classList.remove('is-open');
+      $('#editorBackdrop').classList.remove('is-open');
+      $('#formTitle').textContent = 'Select an item or click New';
+      const crumb = $('#editorCrumb');
+      if (crumb) crumb.innerHTML = '<i class="fas fa-pencil-alt"></i><span>No selection</span>';
+      renderActiveListHighlight();
+    }
+    function renderActiveListHighlight() {
+      $$('.list-item').forEach(el => {
+        el.classList.toggle('is-editing', state.editing && el.dataset.id === state.editing[TYPES[state.activeType].idField]);
+      });
+    }
+
+    function createDefaultItem() {
+      const cfg = TYPES[state.activeType];
+      if (!cfg.isList) return deepClone(state.data[state.activeType]);
+      const item = {};
+      cfg.fields.forEach(f => {
+        if (f.default) item[f.name] = typeof f.default === 'function' ? f.default() : f.default;
+        else if (f.type === 'checkbox') item[f.name] = false;
+        else if (f.type === 'slider') item[f.name] = f.default || 50;
+      });
+      return item;
+    }
+
+    // Build form dynamically from schema
+    function buildForm() {
+      const cfg = TYPES[state.activeType];
+      const form = $('#itemForm');
+      form.innerHTML = '';
+      cfg.fields.forEach(f => form.appendChild(buildField(f, state.editing)));
+
+      // Wire auto-slug
+      cfg.fields.forEach(f => {
+        if (f.autoSlug) {
+          const srcEl = form.querySelector(`[name="${f.autoSlug}"]`);
+          const idEl = form.querySelector(`[name="${f.name}"]`);
+          if (srcEl && idEl) {
+            srcEl.addEventListener('input', () => {
+              if (state.isNew || !idEl.value || idEl.dataset.autoFilled === 'true') {
+                idEl.value = slugify(srcEl.value);
+                idEl.dataset.autoFilled = 'true';
+              }
+            });
+            idEl.addEventListener('input', () => { idEl.dataset.autoFilled = 'false'; });
+          }
+        }
+      });
+
+      // Initialize map picker if needed
+      if (cfg.features?.mapPicker) initMapPicker();
+    }
+
+    function buildField(f, data) {
+      const wrap = document.createElement('div');
+      const val = getPath(data, f.name);
+      const required = f.required ? '<span class="text-red-400 ml-0.5">*</span>' : '';
+      const hint = f.hint ? `<p class="text-[10px] text-clay-faint mt-1">${f.hint}</p>` : '';
+      const errorId = 'err-' + f.name.replace(/\./g, '-');
+
+      if (f.type === 'text' || f.type === 'email' || f.type === 'url' || f.type === 'number') {
+        wrap.innerHTML = `
+          <label>${f.label}${required}</label>
+          <input name="${f.name}" type="${f.type === 'number' ? 'number' : f.type}" class="w-full rounded-sm px-3 py-2"
+            ${f.placeholder ? `placeholder="${f.placeholder}"` : ''}
+            ${f.pattern ? `pattern="${f.pattern}"` : ''}
+            ${f.maxlength ? `maxlength="${f.maxlength}"` : ''}
+            ${f.min != null ? `min="${f.min}"` : ''} ${f.max != null ? `max="${f.max}"` : ''}
+            ${f.required ? 'data-required="true"' : ''}
+            value="${val != null ? String(val).replace(/"/g, '&quot;') : ''}">
+          <p class="field-error" id="${errorId}"></p>
+          ${hint}`;
+      } else if (f.type === 'textarea') {
+        wrap.innerHTML = `
+          <label>${f.label}${required}</label>
+          <textarea name="${f.name}" rows="${f.rows || 3}" class="w-full rounded-sm px-3 py-2 resize-y"
+            ${f.placeholder ? `placeholder="${f.placeholder}"` : ''}
+            ${f.required ? 'data-required="true"' : ''}>${val != null ? String(val) : ''}</textarea>
+          <p class="field-error" id="${errorId}"></p>
+          ${hint}`;
+      } else if (f.type === 'select') {
+        const opts = f.options.map(([v, lbl]) => `<option value="${v}"${val === v ? ' selected' : ''}>${lbl}</option>`).join('');
+        wrap.innerHTML = `
+          <label>${f.label}${required}</label>
+          <select name="${f.name}" class="w-full rounded-sm px-3 py-2" ${f.required ? 'data-required="true"' : ''}>
+            <option value="">—</option>${opts}
+          </select>
+          <p class="field-error" id="${errorId}"></p>`;
+      } else if (f.type === 'checkbox') {
+        wrap.innerHTML = `
+          <label class="flex items-center gap-2 cursor-pointer !normal-case !tracking-normal !text-sm !text-clay-ink">
+            <input name="${f.name}" type="checkbox" ${val ? 'checked' : ''} class="accent-brand-gold w-4 h-4">
+            ${f.label}
+          </label>`;
+      } else if (f.type === 'slider') {
+        const pct = val != null ? val : f.default || 50;
+        wrap.innerHTML = `
+          <label>${f.label}${required}: <span id="sliderVal-${f.name}" class="text-brand-gold">${pct}</span>%</label>
+          <input name="${f.name}" type="range" min="${f.min || 0}" max="${f.max || 100}" value="${pct}" class="w-full progress-slider">`;
+        setTimeout(() => {
+          const sl = wrap.querySelector('input');
+          const out = wrap.querySelector(`#sliderVal-${f.name}`);
+          sl.addEventListener('input', () => out.textContent = sl.value);
+        });
+      } else if (f.type === 'image') {
+        wrap.innerHTML = `
+          <label>${f.label}${required}</label>
+          <input name="${f.name}" type="text" class="w-full rounded-sm px-3 py-2" placeholder="${f.placeholder || ''}" value="${val != null ? String(val).replace(/"/g, '&quot;') : ''}">
+          <div class="img-drop" id="imgDrop-${f.name}">
+            <i class="fas fa-image mr-1"></i> Drop image to preview · path is manual
+          </div>
+          <img class="img-preview${val ? ' is-visible' : ''}" id="imgPrev-${f.name}" src="${val || ''}" alt="preview" onerror="this.classList.remove('is-visible')">`;
+        setTimeout(() => wireImagePreview(f.name));
+      } else if (f.type === 'coordinates') {
+        const coords = Array.isArray(val) ? val : (f.default ? f.default() : [19.0596, 72.8295]);
+        wrap.innerHTML = `
+          <label>${f.label}${required}</label>
+          <div class="flex gap-2">
+            <input name="${f.name}_lat" type="number" step="any" class="flex-1 rounded-sm px-3 py-2" placeholder="Latitude" value="${coords[0]}">
+            <input name="${f.name}_lng" type="number" step="any" class="flex-1 rounded-sm px-3 py-2" placeholder="Longitude" value="${coords[1]}">
+          </div>
+          <div class="relative mt-2">
+            <input id="geoSearch" type="text" class="w-full rounded-sm px-3 py-2 text-xs" placeholder="Search address (e.g. Bandra, Mumbai)">
+            <div id="geoResults" class="absolute z-20 left-0 right-0 mt-1 bg-[#1a1718] border border-white/10 rounded-sm max-h-48 overflow-y-auto hidden"></div>
+          </div>
+          <div id="pickerMap" class="mt-2"></div>
+          <p class="text-[10px] text-clay-faint mt-1">Click map to set · drag marker to adjust · search address above</p>
+          <p class="field-error" id="${errorId}"></p>`;
+      }
+      return wrap;
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // IMAGE PREVIEW (path input + drop area)
+    // ════════════════════════════════════════════════════════════
+    function wireImagePreview(fieldName) {
+      const input = $(`#itemForm [name="${fieldName}"]`);
+      const drop = $(`#imgDrop-${fieldName}`);
+      const prev = $(`#imgPrev-${fieldName}`);
+      if (!input || !drop || !prev) return;
+      input.addEventListener('input', () => {
+        if (input.value) { prev.src = input.value; prev.classList.add('is-visible'); }
+        else prev.classList.remove('is-visible');
+      });
+      ['dragover','dragenter'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('is-dragover'); }));
+      ['dragleave','drop'].forEach(ev => drop.addEventListener(ev, () => drop.classList.remove('is-dragover')));
+      drop.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const file = e.dataTransfer.files?.[0];
+        if (!file || !file.type.startsWith('image/')) return toast('Drop an image file', 'error');
+        const reader = new FileReader();
+        reader.onload = (ev) => { prev.src = ev.target.result; prev.classList.add('is-visible'); toast('Preview loaded — remember to save file to assets/ and update the path manually', 'warn', { duration: 6000 }); };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // MAP PICKER (with Nominatim geocoding + context markers)
+    // ════════════════════════════════════════════════════════════
+    let pickerMap = null, pickerMarker = null, contextLayer = null, geoTimer;
+    function initMapPicker() {
+      setTimeout(() => {
+        const container = $('#pickerMap');
+        if (!container) return;
+        if (pickerMap) { pickerMap.remove(); pickerMap = null; }
+        const lat = parseFloat($('#itemForm [name="coordinates_lat"]').value) || 19.0596;
+        const lng = parseFloat($('#itemForm [name="coordinates_lng"]').value) || 72.8295;
+        pickerMap = L.map('pickerMap', { zoomControl: true }).setView([lat, lng], 11);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+          subdomains: 'abcd', maxZoom: 20,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> · <a href="https://carto.com/attributions">CARTO</a>'
+        }).addTo(pickerMap);
+
+        // Context: all OTHER projects as faded dots
+        contextLayer = L.layerGroup().addTo(pickerMap);
+        (state.data.projects || []).forEach(p => {
+          if (!p.coordinates || p.id === state.editing?.id) return;
+          L.marker(p.coordinates, {
+            icon: L.divIcon({ className: 'context-marker', html: '<div class="context-marker-dot"></div>', iconSize: [8,8] }),
+            interactive: false
+          }).addTo(contextLayer).bindTooltip(p.title, { direction: 'top' });
+        });
+
+        pickerMarker = L.marker([lat, lng], { draggable: true }).addTo(pickerMap);
+        pickerMarker.on('dragend', () => {
+          const { lat, lng } = pickerMarker.getLatLng();
+          $('#itemForm [name="coordinates_lat"]').value = lat.toFixed(6);
+          $('#itemForm [name="coordinates_lng"]').value = lng.toFixed(6);
+        });
+        pickerMap.on('click', (e) => {
+          pickerMarker.setLatLng(e.latlng);
+          $('#itemForm [name="coordinates_lat"]').value = e.latlng.lat.toFixed(6);
+          $('#itemForm [name="coordinates_lng"]').value = e.latlng.lng.toFixed(6);
+        });
+
+        // Sync fields → map
+        ['coordinates_lat','coordinates_lng'].forEach(n => {
+          $(`#itemForm [name="${n}"]`)?.addEventListener('change', () => {
+            const la = parseFloat($('#itemForm [name="coordinates_lat"]').value);
+            const lo = parseFloat($('#itemForm [name="coordinates_lng"]').value);
+            if (!isNaN(la) && !isNaN(lo)) { pickerMarker.setLatLng([la, lo]); pickerMap.panTo([la, lo]); }
+          });
+        });
+
+        // Geocoding search (Nominatim, free)
+        const geoInput = $('#geoSearch'), geoResults = $('#geoResults');
+        geoInput?.addEventListener('input', () => {
+          clearTimeout(geoTimer);
+          const q = geoInput.value.trim();
+          if (q.length < 3) { geoResults.classList.add('hidden'); return; }
+          geoTimer = setTimeout(async () => {
+            try {
+              const r = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&limit=5&countrycodes=in`);
+              const results = await r.json();
+              geoResults.innerHTML = '';
+              if (!results.length) { geoResults.innerHTML = '<div class="geo-result text-clay-faint">No results</div>'; geoResults.classList.remove('hidden'); return; }
+              results.forEach(res => {
+                const d = document.createElement('div');
+                d.className = 'geo-result';
+                d.innerHTML = `<strong>${res.display_name.split(',')[0]}</strong><div class="text-[10px] text-clay-faint truncate">${res.display_name}</div>`;
+                d.addEventListener('click', () => {
+                  const la = parseFloat(res.lat), lo = parseFloat(res.lon);
+                  $('#itemForm [name="coordinates_lat"]').value = la.toFixed(6);
+                  $('#itemForm [name="coordinates_lng"]').value = lo.toFixed(6);
+                  pickerMarker.setLatLng([la, lo]); pickerMap.setView([la, lo], 15);
+                  geoResults.classList.add('hidden');
+                  geoInput.value = res.display_name.split(',')[0];
+                });
+                geoResults.appendChild(d);
+              });
+              geoResults.classList.remove('hidden');
+            } catch (e) { toast('Geocoding failed', 'error'); }
+          }, 500);
+        });
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('#geoSearch') && !e.target.closest('#geoResults')) geoResults?.classList.add('hidden');
+        });
+
+        setTimeout(() => pickerMap.invalidateSize(), 200);
+      }, 100);
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // VALIDATION
+    // ════════════════════════════════════════════════════════════
+    function validateForm(formData) {
+      const cfg = TYPES[state.activeType];
+      $$('#itemForm .field-error').forEach(e => e.classList.remove('is-visible'));
+      $$('#itemForm .invalid').forEach(e => e.classList.remove('invalid'));
+      let firstInvalid = null;
+
+      for (const f of cfg.fields) {
+        const val = formData[f.name];
+        const showErr = (msg) => {
+          const el = $(`#err-${f.name.replace(/\./g, '-')}`);
+          const inp = $(`#itemForm [name="${f.name}"]`) || $(`#itemForm [name="${f.name}_lat"]`);
+          if (el) { el.textContent = msg; el.classList.add('is-visible'); }
+          if (inp) inp.classList.add('invalid');
+          if (!firstInvalid) firstInvalid = inp;
+        };
+        if (f.required && (val == null || val === '' || (Array.isArray(val) && val.length === 0))) { showErr('Required'); continue; }
+        if (f.pattern && val && !new RegExp('^' + f.pattern + '$').test(val)) { showErr('Invalid format'); continue; }
+        if (f.type === 'email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) { showErr('Invalid email'); continue; }
+        if (f.type === 'coordinates' && Array.isArray(val)) {
+          const [la, lo] = val;
+          if (isNaN(la) || la < -90 || la > 90) { showErr('Lat must be -90 to 90'); continue; }
+          if (isNaN(lo) || lo < -180 || lo > 180) { showErr('Lng must be -180 to 180'); continue; }
+        }
+      }
+      if (firstInvalid) firstInvalid.focus();
+      return !firstInvalid;
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // SUBMIT
+    // ════════════════════════════════════════════════════════════
+    $('#itemForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const cfg = TYPES[state.activeType];
+      const form = e.target;
+      const formData = {};
+      cfg.fields.forEach(f => {
+        if (f.type === 'checkbox') {
+          formData[f.name] = form.querySelector(`[name="${f.name}"]`)?.checked || false;
+        } else if (f.type === 'coordinates') {
+          const la = parseFloat(form.querySelector(`[name="${f.name}_lat"]`)?.value);
+          const lo = parseFloat(form.querySelector(`[name="${f.name}_lng"]`)?.value);
+          formData[f.name] = [la, lo];
+        } else if (f.type === 'number' || f.type === 'slider') {
+          const v = form.querySelector(`[name="${f.name}"]`)?.value;
+          formData[f.name] = v === '' ? null : Number(v);
+        } else {
+          formData[f.name] = form.querySelector(`[name="${f.name}"]`)?.value ?? '';
+        }
+      });
+
+      if (!validateForm(formData)) { toast('Fix errors first', 'error'); return; }
+
+      // ID uniqueness
+      if (cfg.isList) {
+        const flat = getFlatList(state.activeType);
+        const dup = flat.find(e => e.item[cfg.idField] === formData[cfg.idField] && (state.isNew || e.item[cfg.idField] !== state.editing[cfg.idField]));
+        if (dup) { toast('ID already exists', 'error'); return; }
+      }
+
+      pushUndo(state.isNew ? 'Add ' + (formData.title || formData.name || 'item') : 'Edit ' + (formData.title || formData.name || 'item'));
+
+      if (!cfg.isList) {
+        // Site Info: flat object with nested fields
+        const next = {};
+        cfg.fields.forEach(f => setPath(next, f.name, formData[f.name]));
+        state.data[state.activeType] = next;
+      } else if (cfg.isKeyed) {
+        const group = formData.group;
+        const item = { ...formData };
+        delete item.group;
+        if (!state.isNew) {
+          // remove old from whatever group it was in
+          cfg.groups.forEach(g => {
+            state.data[state.activeType][g.key] = (state.data[state.activeType][g.key] || []).filter(i => i[cfg.idField] !== state.editing[cfg.idField]);
+          });
+        }
+        (state.data[state.activeType][group] = state.data[state.activeType][group] || []).push(item);
+      } else {
+        if (state.isNew) state.data[state.activeType].push(formData);
+        else {
+          const idx = state.data[state.activeType].findIndex(i => i[cfg.idField] === state.editing[cfg.idField]);
+          if (idx !== -1) state.data[state.activeType][idx] = formData;
+        }
+      }
+      markDirty();
+      render();
+      closeEditor();
+      toast('Saved locally — Download to publish', 'success');
     });
-    document.getElementById('importFile').addEventListener('change', (e) => {
-      const file = e.target.files[0];
+
+    $('#cancelBtn').addEventListener('click', closeEditor);
+    $('#editorCloseMobile').addEventListener('click', closeEditor);
+    $('#editorBackdrop').addEventListener('click', closeEditor);
+
+    $('#deleteBtn').addEventListener('click', () => {
+      const cfg = TYPES[state.activeType];
+      const name = state.editing?.title || state.editing?.name || 'this item';
+      if (!confirm(`Delete "${name}"?\n\nThis can be undone with Ctrl+Z.`)) return;
+      pushUndo('Delete ' + name);
+      if (cfg.isKeyed) {
+        cfg.groups.forEach(g => {
+          state.data[state.activeType][g.key] = (state.data[state.activeType][g.key] || []).filter(i => i[cfg.idField] !== state.editing[cfg.idField]);
+        });
+      } else {
+        state.data[state.activeType] = state.data[state.activeType].filter(i => i[cfg.idField] !== state.editing[cfg.idField]);
+      }
+      markDirty();
+      render();
+      closeEditor();
+      toast('Deleted — Ctrl+Z to undo', 'info', { action: { label: 'UNDO', onClick: undo } });
+    });
+
+    $('#addNewBtn').addEventListener('click', () => openEditor(null, 'New'));
+
+    // ════════════════════════════════════════════════════════════
+    // SEARCH + SORT
+    // ════════════════════════════════════════════════════════════
+    let searchTimer;
+    $('#listSearch').addEventListener('input', (e) => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => { state.search = e.target.value; render(); }, 150);
+    });
+    $('#sortBy').addEventListener('change', (e) => { state.sortBy = e.target.value; render(); });
+
+    // ════════════════════════════════════════════════════════════
+    // TAB CLICKS
+    // ════════════════════════════════════════════════════════════
+    $$('.tab').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.type)));
+
+    // ════════════════════════════════════════════════════════════
+    // DOWNLOAD
+    // ════════════════════════════════════════════════════════════
+    $('#downloadBtn').addEventListener('click', download);
+    function download() {
+      const cfg = TYPES[state.activeType];
+      const body = `/**\n * ${cfg.label} Data — generated by Admin Studio on ${new Date().toISOString()}\n */\nconst ${cfg.constName} = ${JSON.stringify(state.data[state.activeType], null, 2)};\nif (typeof window !== 'undefined') window.${cfg.constName} = ${cfg.constName};\n`;
+      const blob = new Blob([body], { type: 'application/javascript' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = cfg.filename; a.click();
+      URL.revokeObjectURL(url);
+      toast(`Downloaded ${cfg.filename} — replace on server to publish`, 'success', { duration: 6000 });
+      clearDirty();
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // IMPORT (with backup snapshot)
+    // ════════════════════════════════════════════════════════════
+    $('#importBtn').addEventListener('click', () => $('#importFile').click());
+    $('#importFile').addEventListener('change', (e) => {
+      const file = e.target.files?.[0];
       if (!file) return;
       const reader = new FileReader();
-      reader.onload = (evt) => {
+      reader.onload = (ev) => {
         try {
-          let text = evt.target.result;
-          // Handle `const PROJECT_DATA = [...]` format by extracting the array
-          const match = text.match(/=\s*(\[[\s\S]*\])\s*;?\s*$/m);
-          const jsonLike = (match ? match[1] : text).trim();
-          const data = parseProjectsInput(jsonLike);
-          if (!Array.isArray(data)) throw new Error('Not an array');
-          projects = data;
-          setDirty(true);
-          resetForm();
-          toast(`Imported ${data.length} projects`, 'success');
+          let text = ev.target.result;
+          // Try matching by active type first
+          const cfg = TYPES[state.activeType];
+          const match = text.match(new RegExp(`const\\s+${cfg.constName}\\s*=\\s*([\\s\\S]*?);?\\s*(?:if\\s*\\(|$)`));
+          let parsed;
+          if (match) {
+            // Normalize JS to JSON
+            let jsonish = match[1].trim();
+            if (jsonish.endsWith(';')) jsonish = jsonish.slice(0, -1);
+            jsonish = jsonish.replace(/([{,]\s*)([a-zA-Z_$][\w$]*)(\s*:)/g, '$1"$2"$3').replace(/,(\s*[}\]])/g, '$1').replace(/'/g, '"');
+            parsed = JSON.parse(jsonish);
+          } else {
+            parsed = JSON.parse(text);
+          }
+          if (!confirm(`Replace all ${cfg.label} with imported data?\n\nYou can Undo with Ctrl+Z.`)) return;
+          pushUndo('Import ' + cfg.label);
+          state.data[state.activeType] = parsed;
+          markDirty();
+          render();
+          closeEditor();
+          toast(`Imported ${Array.isArray(parsed) ? parsed.length : 1} item(s)`, 'success');
         } catch (err) {
-          toast('Import failed: ' + err.message, 'error');
+          console.error(err);
+          toast('Import failed — check file format', 'error');
         }
       };
       reader.readAsText(file);
-      e.target.value = ''; // allow re-import same file
+      e.target.value = '';
     });
 
-    // ─── Download ───
-    document.getElementById('downloadBtn').addEventListener('click', () => {
-      const lines = [
-        '// projects-data.js — Single source of truth for all StrongBuilt projects',
-        'const PROJECT_DATA = ['
-      ];
-      projects.forEach((p, i) => {
-        const trail = i === projects.length - 1 ? '' : ',';
-        lines.push('  {');
-        lines.push(`    id: ${JSON.stringify(p.id)},`);
-        lines.push(`    title: ${JSON.stringify(p.title)},`);
-        lines.push(`    client: ${JSON.stringify(p.client)},`);
-        lines.push(`    category: ${JSON.stringify(p.category)},`);
-        lines.push(`    location: ${JSON.stringify(p.location)},`);
-        lines.push(`    area: ${JSON.stringify(p.area)},`);
-        lines.push(`    status: ${JSON.stringify(p.status)},`);
-        lines.push(`    year: ${p.year},`);
-        lines.push(`    img: ${p.img ? JSON.stringify(p.img) : 'null'},`);
-        lines.push(`    featured: ${!!p.featured},`);
-        lines.push(`    coordinates: [${p.coordinates[0]}, ${p.coordinates[1]}]`);
-        lines.push('  }' + trail);
-      });
-      lines.push('];');
-      lines.push('');
-      lines.push('// Helper: Get unique values for filter dropdowns');
-      lines.push('function getFilterOptions(field) {');
-      lines.push('  return [...new Set(PROJECT_DATA.map(p => p[field]).filter(Boolean))].sort();');
-      lines.push('}');
-      lines.push('');
-      lines.push('// Helper: Get project count by field value');
-      lines.push('function getProjectCount(field, value) {');
-      lines.push('  return PROJECT_DATA.filter(p => p[field] === value).length;');
-      lines.push('}');
-      lines.push('');
-
-      const content = lines.join('\n');
-      const blob = new Blob([content], { type: 'text/javascript' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'projects-data.js';
-      a.click();
-      URL.revokeObjectURL(url);
-
-      setDirty(false); // mark clean after download
-      localStorage.removeItem(STORAGE_KEY);
-      toast('Downloaded! Replace the file in your project folder and push to git.', 'success', 5000);
+    // ════════════════════════════════════════════════════════════
+    // KEYBOARD SHORTCUTS
+    // ════════════════════════════════════════════════════════════
+    document.addEventListener('keydown', (e) => {
+      const tag = e.target.tagName;
+      const inField = /^(INPUT|TEXTAREA|SELECT)$/.test(tag);
+      const mod = e.ctrlKey || e.metaKey;
+      if (mod && e.key === 's') { e.preventDefault(); download(); }
+      else if (mod && e.key === 'n' && !inField) { e.preventDefault(); openEditor(null, 'New'); }
+      else if (mod && e.shiftKey && e.key === 'Z') { e.preventDefault(); redo(); }
+      else if (mod && e.key === 'z' && !e.shiftKey) { e.preventDefault(); undo(); }
+      else if (mod && e.key === 'Enter' && inField) { e.preventDefault(); $('#itemForm').dispatchEvent(new Event('submit', { cancelable: true })); }
+      else if (e.key === 'Escape') { if (state.editing) closeEditor(); }
     });
 
-    // ─── Map coordinate picker ───
-    let pickerMap, pickerMarker;
-    function initMap() {
-      pickerMap = L.map('pickerMap', { zoomControl: true, attributionControl: false }).setView([19.0596, 72.8295], 11);
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { subdomains: 'abcd', maxZoom: 19 }).addTo(pickerMap);
-      pickerMarker = L.marker([19.0596, 72.8295], { draggable: true }).addTo(pickerMap);
-      pickerMarker.on('dragend', (e) => {
-        const ll = e.target.getLatLng();
-        document.getElementById('fieldLat').value = ll.lat.toFixed(4);
-        document.getElementById('fieldLng').value = ll.lng.toFixed(4);
-      });
-      pickerMap.on('click', (e) => {
-        updateMapMarker(e.latlng.lat, e.latlng.lng);
-        document.getElementById('fieldLat').value = e.latlng.lat.toFixed(4);
-        document.getElementById('fieldLng').value = e.latlng.lng.toFixed(4);
-      });
-    }
-    function updateMapMarker(lat, lng) {
-      if (!pickerMap) return;
-      pickerMarker.setLatLng([lat, lng]);
-      pickerMap.setView([lat, lng], pickerMap.getZoom() < 11 ? 11 : pickerMap.getZoom());
-    }
-    // Sync form fields → map
-    ['fieldLat', 'fieldLng'].forEach(id => {
-      document.getElementById(id).addEventListener('change', () => {
-        const lat = parseFloat(document.getElementById('fieldLat').value);
-        const lng = parseFloat(document.getElementById('fieldLng').value);
-        if (!isNaN(lat) && !isNaN(lng)) updateMapMarker(lat, lng);
-      });
-    });
+    $('#undoBtn').addEventListener('click', undo);
+    $('#redoBtn').addEventListener('click', redo);
 
-    // ─── Toast ───
-    function toast(msg, type = 'info', duration = 3000) {
-      const el = document.getElementById('toast');
-      const colors = { success: '#4ade80', error: '#f87171', warn: '#fbbf24', info: '#FCB615' };
-      el.style.cssText = `position: fixed; top: 20px; right: 20px; padding: 12px 20px; background: rgba(10,10,10,0.95); border: 1px solid ${colors[type]}; color: ${colors[type]}; border-radius: 4px; z-index: 10000; backdrop-filter: blur(10px); font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; animation: slideIn 0.3s ease-out;`;
-      el.textContent = msg;
-      el.classList.remove('hidden');
-      clearTimeout(el._timer);
-      el._timer = setTimeout(() => el.classList.add('hidden'), duration);
-    }
-
-    // ─── Prevent accidental close with unsaved changes ───
+    // Warn before unload with unsaved changes
     window.addEventListener('beforeunload', (e) => {
-      if (isDirty) { e.preventDefault(); e.returnValue = ''; }
+      if (state.dirty.size > 0) { e.preventDefault(); e.returnValue = ''; }
     });
 
-    // ─── Init ───
-    loadProjects();
-    initMap();
-    resetForm();
-    renderList();
+    // ════════════════════════════════════════════════════════════
+    // PLATFORM-AWARE KEYBOARD HINTS
+    // ════════════════════════════════════════════════════════════
+    (function platformiseShortcuts() {
+      const isMac = /Mac|iPhone|iPad|iPod/.test(navigator.platform) || /Mac/.test(navigator.userAgent);
+      if (!isMac) return; // Ctrl is already in the markup for Windows/Linux
+      document.querySelectorAll('.kbd-mod').forEach(el => el.textContent = '⌘');
+      document.querySelectorAll('.kbd-mod').forEach(el => {
+        // Replace "Ctrl+X" → "⌘X" (no plus sign on mac convention)
+        const parent = el.parentElement;
+        if (parent && parent.textContent.includes('+')) {
+          const letter = parent.textContent.replace('Ctrl+', '').trim();
+          parent.textContent = '';
+          parent.innerHTML = `<span class="kbd-mod">⌘</span>${letter}`;
+        }
+      });
+    })();
+
+    // ════════════════════════════════════════════════════════════
+    // BOOT
+    // ════════════════════════════════════════════════════════════
+    loadData();
+    switchTab('projects');
+    if (state.dirty.size > 0) toast('Restored unsaved changes from last session', 'warn', { duration: 5500 });
+
+    // Expose for console debugging
+    window._admin = { state, TYPES, download, undo, redo };
+  })();
   </script>
 </body>
 </html>

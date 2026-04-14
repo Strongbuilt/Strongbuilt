@@ -40,6 +40,7 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="theme-config.js"></script>
+  <script src="timeline-data.js"></script>
 
   <style>
     /* Timeline graphic card */
@@ -660,6 +661,26 @@
       '2023': { tag: 'Mastery', icon: 'fa-award', title: 'High-Rise Expertise', body: 'Proven mastery in super high-rise and premium residential across the MMR.' },
       '2024': { tag: 'Present Day', icon: 'fa-rocket', title: 'Today & Beyond', body: '33+ projects delivered, 90+ buildings built, 5.7 million+ sq. ft. constructed — and an order book of ₹808 Cr powering the next chapter.' }
     };
+
+    // ── Hydrate timeline from data file (if present) ──
+    (function hydrateTimeline() {
+      const stream = document.getElementById('ss-stream');
+      const yearEl = document.getElementById('ss-year');
+      const tagEl = document.getElementById('ss-tag');
+      const iconEl = document.getElementById('ss-icon');
+      if (!stream || !window.TIMELINE_DATA || !Array.isArray(window.TIMELINE_DATA) || !window.TIMELINE_DATA.length) return;
+      const data = window.TIMELINE_DATA;
+      stream.innerHTML = data.map(m => `
+        <article class="ss-card" data-year="${m.year}" data-tag="${m.tag}" data-icon="${m.icon}">
+          <div class="ss-card-kicker">${m.kicker}</div>
+          <h3 class="ss-card-title">${m.title}</h3>
+          <p class="ss-card-body">${m.body}</p>
+        </article>`).join('');
+      const first = data[0];
+      if (yearEl) yearEl.textContent = first.year;
+      if (tagEl)  tagEl.textContent  = first.tag;
+      if (iconEl) iconEl.className = 'fas ' + first.icon;
+    })();
 
     // Timeline — sticky year panel (desktop) + active-card tracking (all devices)
     (function initTimeline() {

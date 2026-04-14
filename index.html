@@ -871,7 +871,7 @@
         </div>
         <p class="text-clay-muted text-sm max-w-md font-body">Eleven live sites across the MMR. A snapshot of momentum, not a list of intentions.</p>
       </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5" id="ix-active-grid">
         <article class="ix-active-card reveal-up">
           <div class="ix-active-status">Live</div>
           <div class="ix-active-name">Splendora Phase II</div>
@@ -1134,7 +1134,7 @@
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6">
+      <div class="grid md:grid-cols-3 gap-6" id="ix-testimonials-grid">
         <!-- Review 1 -->
         <div class="glass-panel p-6 md:p-8 reveal-up hover:border-brand-gold/30 transition duration-500 flex flex-col">
           <i class="fas fa-quote-left text-brand-darkGold/20 text-3xl mb-4"></i>
@@ -1278,7 +1278,53 @@
   <!-- SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+  <!-- Admin-managed data files -->
+  <script src="testimonials-data.js"></script>
+  <script src="active-projects-data.js"></script>
+  <script src="site-info.js"></script>
   <script src="script.js"></script>
+  <script>
+    // ── Hydrate testimonials from data file ──
+    (function hydrateTestimonials() {
+      const grid = document.getElementById('ix-testimonials-grid');
+      if (!grid || !window.TESTIMONIALS_DATA || !Array.isArray(window.TESTIMONIALS_DATA) || !window.TESTIMONIALS_DATA.length) return;
+      grid.innerHTML = window.TESTIMONIALS_DATA.map((t, i) => `
+        <div class="glass-panel p-6 md:p-8 reveal-up hover:border-brand-gold/30 transition duration-500 flex flex-col" ${i > 0 ? `style="transition-delay: ${i * 150}ms;"` : ''}>
+          <i class="fas fa-quote-left text-brand-darkGold/20 text-3xl mb-4"></i>
+          <p class="text-sm md:text-lg text-clay-muted italic mb-6 md:mb-8 leading-relaxed font-light flex-1">"${t.quote}"</p>
+          <div class="flex items-center gap-4 border-t border-clay-border pt-6">
+            <div class="ix-avatar"><span>${t.initials}</span></div>
+            <div>
+              <h4 class="text-clay-ink font-bold font-heading">${t.name}</h4>
+              <p class="text-brand-darkGold/70 text-[10px] uppercase tracking-widest font-bold">${t.company}</p>
+            </div>
+          </div>
+        </div>`).join('');
+    })();
+
+    // ── Hydrate active projects ──
+    (function hydrateActive() {
+      const grid = document.getElementById('ix-active-grid');
+      if (!grid || !window.ACTIVE_PROJECTS_DATA || !Array.isArray(window.ACTIVE_PROJECTS_DATA) || !window.ACTIVE_PROJECTS_DATA.length) return;
+      grid.innerHTML = window.ACTIVE_PROJECTS_DATA.map((p, i) => `
+        <article class="ix-active-card reveal-up" ${i > 0 ? `style="transition-delay: ${i * 100}ms;"` : ''}>
+          <div class="ix-active-status">Live</div>
+          <div class="ix-active-name">${p.name}</div>
+          <div class="ix-active-loc">${p.location}</div>
+          <div class="ix-active-progress"><div class="ix-active-progress-fill" style="width: ${p.progress}%"></div></div>
+          <div class="ix-active-meta"><span><strong>${p.progress}%</strong> Complete</span><span>${p.eta}</span></div>
+        </article>`).join('');
+    })();
+
+    // ── Hydrate site info (phone/email/whatsapp/social) ──
+    (function hydrateSiteInfo() {
+      const s = window.SITE_INFO;
+      if (!s) return;
+      // Update FAB hrefs
+      document.querySelectorAll('.ix-fab-whatsapp').forEach(a => a.href = `https://wa.me/${s.whatsapp}`);
+      document.querySelectorAll('.ix-fab-phone').forEach(a => a.href = `tel:${s.phonePrimary}`);
+    })();
+  </script>
   <script>
     // Floating CTA visibility — show after first 400px of scroll
     (function initFab() {

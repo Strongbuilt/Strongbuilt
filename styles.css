@@ -997,6 +997,23 @@ picture,
     -webkit-filter: none !important;
 }
 
+/* ── Native <select> dropdown options — force legible dark-theme styling site-wide.
+   Chrome on Windows/Linux ignores CSS on <option> when the page background is dark,
+   producing invisible white-on-white text. Explicit bg/color fixes it. */
+select option {
+    background-color: #1a1718;
+    color: #f5f1ec;
+    padding: 8px;
+}
+select option:disabled {
+    color: #6b7280;
+}
+select option:hover,
+select option:checked {
+    background-color: #FCB615;
+    color: #1a1718;
+}
+
 /* Hide Swiper navigation arrows on mobile — touch users swipe instead */
 @media (max-width: 767px) {
     .swiper-button-prev,

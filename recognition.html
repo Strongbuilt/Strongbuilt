@@ -453,7 +453,7 @@
       <p class="text-clay-muted max-w-2xl mx-auto font-body text-sm md:text-base">National-level recognition from publications, industry bodies, and government — validating our work at scale.</p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+    <div class="grid md:grid-cols-2 gap-6 md:gap-8" id="rec-industry-grid">
       <article class="awr-card reveal-up">
         <div class="awr-year">2021</div>
         <div class="awr-icon"><i class="fas fa-trophy"></i></div>
@@ -498,7 +498,7 @@
         <p class="text-clay-muted max-w-2xl mx-auto font-body text-sm md:text-base">Appreciation certificates received directly from marquee developers for performance on their sites.</p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto" id="rec-client-grid">
         <div class="cap-card reveal-up">
           <div class="cap-icon"><i class="fas fa-hard-hat"></i></div>
           <div class="flex-1">
@@ -658,7 +658,38 @@
     handleScrollAnimations();
 
   </script>
+  <script src="awards-data.js"></script>
   <script src="script.js"></script>
+  <script>
+    // Hydrate awards from data file if present
+    (function hydrateAwards() {
+      const d = window.AWARDS_DATA;
+      if (!d) return;
+      const ind = document.getElementById('rec-industry-grid');
+      if (ind && Array.isArray(d.industry) && d.industry.length) {
+        ind.innerHTML = d.industry.map((a, i) => `
+          <article class="awr-card reveal-up" ${i > 0 ? `style="transition-delay: ${i * 100}ms;"` : ''}>
+            <div class="awr-year">${a.year}</div>
+            <div class="awr-icon"><i class="fas ${a.icon}"></i></div>
+            <div class="awr-issuer">${a.issuer || ''}</div>
+            <h3 class="awr-title">${a.title}</h3>
+            <p class="awr-desc">${a.description}</p>
+          </article>`).join('');
+      }
+      const cli = document.getElementById('rec-client-grid');
+      if (cli && Array.isArray(d.client) && d.client.length) {
+        cli.innerHTML = d.client.map((c, i) => `
+          <div class="cap-card reveal-up" ${i > 0 ? `style="transition-delay: ${i * 100}ms;"` : ''}>
+            <div class="cap-icon"><i class="fas ${c.icon}"></i></div>
+            <div class="flex-1">
+              <div class="cap-meta">${c.meta || c.year}</div>
+              <div class="cap-title">${c.title}</div>
+              <p class="cap-desc">${c.description}</p>
+            </div>
+          </div>`).join('');
+      }
+    })();
+  </script>
 </body>
 
 </html>

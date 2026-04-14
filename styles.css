@@ -498,32 +498,55 @@ textarea {
 }
 
 /* --- RESPONSIVE NAV ADJUSTMENTS --- */
+/* Goal: fit the entire mobile menu (8 links + contact + socials) on one viewport without scrolling */
 @media (max-width: 640px) {
     .nav-overlay-content {
-        max-width: 100%;
+        max-width: 100% !important;
         border-left: none;
-        padding: 1.5rem;
+        padding: 1rem 1.25rem !important;
+    }
+
+    /* Compact the header row (logo + close button) */
+    .nav-overlay-content > div:first-child {
+        margin-bottom: 1rem !important;
+    }
+    .nav-overlay-content > div:first-child img {
+        height: 3.5rem !important;
     }
 
     .sidebar-link,
     .sidebar-dropdown-btn {
-        font-size: 1.6rem;
-        padding: 12px 0;
+        font-size: 1.05rem !important;
+        padding: 8px 0 !important;
+        letter-spacing: 0.04em;
     }
 
     .sidebar-sublink {
-        font-size: 0.9rem;
+        font-size: 0.8rem !important;
+        padding: 6px 0 !important;
     }
 
-    /* Stack nav contact info on small screens */
+    /* Tighten contact info block */
+    .nav-info-block {
+        margin-top: 0.75rem !important;
+        padding-top: 0.75rem !important;
+    }
     .nav-info-block .grid {
         grid-template-columns: 1fr;
-        gap: 0.5rem;
+        gap: 0.4rem !important;
+        margin-bottom: 0.5rem !important;
     }
-
+    .nav-info-label {
+        font-size: 0.55rem !important;
+    }
     .nav-info-value {
-        font-size: 0.75rem;
+        font-size: 0.7rem !important;
         word-break: break-word;
+    }
+    .nav-social-link {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.75rem !important;
     }
 }
 
@@ -972,4 +995,41 @@ picture,
 .img-wrap {
     filter: none !important;
     -webkit-filter: none !important;
+}
+
+/* Hide Swiper navigation arrows on mobile — touch users swipe instead */
+@media (max-width: 767px) {
+    .swiper-button-prev,
+    .swiper-button-next {
+        display: none !important;
+    }
+}
+
+/* Mobile paragraph density — slim down body copy on small screens. !important needed because Tailwind CDN injects after styles.css */
+@media (max-width: 767px) {
+    body {
+        font-size: 0.9375rem !important;
+    }
+    p {
+        font-size: 0.875rem !important;
+        line-height: 1.55 !important;
+    }
+    .text-lg,
+    p.text-lg {
+        font-size: 0.9rem !important;
+        line-height: 1.55 !important;
+    }
+    .text-xl,
+    p.text-xl {
+        font-size: 1rem !important;
+        line-height: 1.5 !important;
+    }
+    .text-base {
+        font-size: 0.85rem !important;
+        line-height: 1.55 !important;
+    }
+    .text-sm {
+        font-size: 0.8rem !important;
+        line-height: 1.5 !important;
+    }
 }

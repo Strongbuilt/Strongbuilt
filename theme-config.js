@@ -14,10 +14,12 @@ tailwind.config = {
         clay: {
           base: '#231F20',
           mist: '#1a1718',
+          sunken: '#15110f',
           paper: '#2a2627',
           surface: '#ffffff',
           ink: '#f5f1ec',
           muted: '#b8b2a8',
+          faint: '#8a857d',
           border: 'rgba(255, 255, 255, 0.10)',
         }
       },

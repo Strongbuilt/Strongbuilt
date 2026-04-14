@@ -226,10 +226,10 @@
     .ss-bigyear {
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
-      font-size: clamp(5rem, 9vw, 9rem);
+      font-size: clamp(7rem, 12vw, 12rem);
       line-height: 0.85;
       letter-spacing: -0.04em;
-      background: linear-gradient(180deg, #f5f1ec 0%, #f5f1ec 50%, rgba(245, 241, 236, 0.15) 100%);
+      background: linear-gradient(180deg, #FCB615 0%, #FCB615 50%, rgba(252, 182, 21, 0.15) 100%);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -288,6 +288,25 @@
     @media (min-width: 1024px) { .ss-card { padding: 3rem 0; } }
     .ss-card:first-child { border-top: none; padding-top: 0; }
     .ss-card.is-active { opacity: 1; }
+
+    /* Mobile/tablet only — big gold year at top of each card (desktop has the sticky panel instead) */
+    .ss-card::before {
+      content: attr(data-year);
+      display: block;
+      font-family: 'Oswald', 'Agency FB', 'Barlow Condensed', Impact, sans-serif;
+      font-weight: 700;
+      font-size: clamp(3.75rem, 14vw, 6rem);
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      background: linear-gradient(180deg, #FCB615 0%, #FCB615 50%, rgba(252, 182, 21, 0.15) 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.25rem;
+    }
+    @media (min-width: 1024px) {
+      .ss-card::before { display: none; }
+    }
 
     .ss-card-kicker {
       font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
@@ -642,8 +661,8 @@
       '2024': { tag: 'Present Day', icon: 'fa-rocket', title: 'Today & Beyond', body: '33+ projects delivered, 90+ buildings built, 5.7 million+ sq. ft. constructed — and an order book of ₹808 Cr powering the next chapter.' }
     };
 
-    // Option B — Sticky scroll: pin year panel to viewport center while grid is in view, swap content as cards pass center
-    (function initSticky() {
+    // Timeline — sticky year panel (desktop) + active-card tracking (all devices)
+    (function initTimeline() {
       const yearEl = document.getElementById('ss-year');
       const tagEl = document.getElementById('ss-tag');
       const iconEl = document.getElementById('ss-icon');
@@ -652,26 +671,45 @@
       const grid = document.getElementById('ss-grid');
       if (!yearEl || !cards.length || !sticky || !grid) return;
 
-      // ---- Content swap as cards cross viewport center ----
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isDesktop = () => window.matchMedia('(min-width: 1024px)').matches;
+
+      // ──────── Active-card + sticky-content swap ────────
+      let currentYear = yearEl.textContent.trim();
+      let swapTimer = null;
       const update = (card) => {
         cards.forEach(c => c.classList.remove('is-active'));
         card.classList.add('is-active');
         const y = card.dataset.year;
-        yearEl.style.opacity = '0';
-        setTimeout(() => {
+        if (y === currentYear) return;
+        currentYear = y;
+        const tag = card.dataset.tag;
+        const icon = card.dataset.icon;
+        if (prefersReduced) {
           yearEl.textContent = y;
-          tagEl.textContent = card.dataset.tag;
-          iconEl.className = 'fas ' + card.dataset.icon;
-          yearEl.style.opacity = '1';
-        }, 150);
+          tagEl.textContent = tag;
+          iconEl.className = 'fas ' + icon;
+          return;
+        }
+        yearEl.classList.add('is-swapping');
+        tagEl.classList.add('is-swapping');
+        iconEl.parentElement.classList.add('is-swapping');
+        clearTimeout(swapTimer);
+        swapTimer = setTimeout(() => {
+          yearEl.textContent = y;
+          tagEl.textContent = tag;
+          iconEl.className = 'fas ' + icon;
+          yearEl.classList.remove('is-swapping');
+          tagEl.classList.remove('is-swapping');
+          iconEl.parentElement.classList.remove('is-swapping');
+        }, 220);
       };
       const io = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) update(e.target); });
-      }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
       cards.forEach(c => io.observe(c));
 
-      // ---- Viewport-center pinning (replacement for position:sticky) ----
-      const isDesktop = () => window.matchMedia('(min-width: 1024px)').matches;
+      // ──────── Viewport-center pinning (desktop only) ────────
       const reset = () => {
         sticky.classList.remove('is-pinned', 'is-end');
         sticky.style.left = sticky.style.width = '';
@@ -682,31 +720,45 @@
         const stickyHeight = sticky.offsetHeight;
         const vh = window.innerHeight;
         const center = vh / 2;
-        // Pin while viewport-center sits inside the grid (with room for the panel)
         const shouldPin = gridRect.top <= center - stickyHeight / 2 && gridRect.bottom >= center + stickyHeight / 2;
         const pastEnd = gridRect.bottom < center + stickyHeight / 2;
 
         if (shouldPin) {
-          sticky.classList.add('is-pinned');
-          sticky.classList.remove('is-end');
-          // Match the left column geometry exactly
-          const cols = getComputedStyle(grid).gridTemplateColumns.split(' ');
+          if (!sticky.classList.contains('is-pinned')) {
+            sticky.classList.add('is-pinned');
+            sticky.classList.remove('is-end');
+          }
+          const gridStyle = getComputedStyle(grid);
+          const cols = gridStyle.gridTemplateColumns.split(' ');
           const leftColWidth = parseFloat(cols[0]) || (gridRect.width * 5 / 12);
-          sticky.style.left = gridRect.left + 'px';
-          sticky.style.width = leftColWidth + 'px';
+          const paddingLeft = parseFloat(gridStyle.paddingLeft) || 0;
+          const nextLeft = (gridRect.left + paddingLeft) + 'px';
+          const nextWidth = leftColWidth + 'px';
+          if (sticky.style.left !== nextLeft) sticky.style.left = nextLeft;
+          if (sticky.style.width !== nextWidth) sticky.style.width = nextWidth;
         } else if (pastEnd) {
-          sticky.classList.remove('is-pinned');
-          sticky.classList.add('is-end');
-          sticky.style.left = sticky.style.width = '';
+          if (!sticky.classList.contains('is-end')) {
+            sticky.classList.remove('is-pinned');
+            sticky.classList.add('is-end');
+            sticky.style.left = sticky.style.width = '';
+          }
         } else {
-          reset();
+          if (sticky.classList.contains('is-pinned') || sticky.classList.contains('is-end')) reset();
         }
       };
-      window.addEventListener('scroll', sync, { passive: true });
-      window.addEventListener('resize', sync);
-      // Run once on load + after layout settles
-      sync();
+
+      // rAF-throttled scroll for smooth 60fps updates even on lower-end devices
+      let ticking = false;
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => { sync(); ticking = false; });
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      window.addEventListener('orientationchange', onScroll, { passive: true });
       window.addEventListener('load', sync);
+      sync();
     })();
 
   </script>

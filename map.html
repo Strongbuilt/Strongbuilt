@@ -37,52 +37,310 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Archivo:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Leaflet -->
+    <!-- Leaflet + MarkerCluster -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="theme-config.js"></script>
 
     <style>
-        .sidebar-optimized { background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-right: 1px solid rgba(255,255,255,0.1); }
+        .sidebar-optimized { background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-right: 1px solid rgba(255,255,255,0.08); }
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background:#F5EEDC; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #C8900F; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(252,182,21,0.3); border-radius: 2px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #FCB615; }
 
-        .leaflet-popup-content-wrapper { background: rgba(10,10,10,0.95); color: #f5f1ec; border: 1px solid rgba(200,144,15,0.3); border-radius: 4px; backdrop-filter: blur(10px); padding: 0; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-        .leaflet-popup-content { margin: 0; width: 280px !important; }
-        .leaflet-popup-tip { background: rgba(10,10,10,0.95); border: 1px solid rgba(200,144,15,0.3); }
-        .leaflet-container a.leaflet-popup-close-button { color: #f5f1ec; background: rgba(0,0,0,0.5); border-radius: 50%; top: 8px; right: 8px; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font: 16px/14px Tahoma, Verdana, sans-serif; text-shadow: none; transition: all 0.3s ease; z-index: 10; }
-        .leaflet-container a.leaflet-popup-close-button:hover { color: #C8900F; background: rgba(0,0,0,0.9); transform: rotate(90deg); }
+        /* ─────── Tcard-style popup ─────── */
+        .leaflet-popup-content-wrapper {
+            background: linear-gradient(155deg, rgba(42, 38, 39, 0.97), rgba(20, 18, 19, 0.97));
+            color: #f5f1ec;
+            border: 1px solid rgba(252,182,21,0.35);
+            border-radius: 6px;
+            backdrop-filter: blur(14px);
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.7), 0 0 30px -10px rgba(252,182,21,0.25);
+            position: relative;
+        }
+        .leaflet-popup-content-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, #FCB615, transparent);
+            z-index: 5;
+        }
+        .leaflet-popup-content { margin: 0; width: 300px !important; }
+        .leaflet-popup-tip { background: rgba(20, 18, 19, 0.97); border: 1px solid rgba(252,182,21,0.3); }
+        .leaflet-container a.leaflet-popup-close-button {
+            color: #f5f1ec;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(252,182,21,0.3);
+            border-radius: 50%;
+            top: 10px; right: 10px;
+            width: 26px; height: 26px;
+            display: flex; align-items: center; justify-content: center;
+            font: 16px/14px Tahoma, Verdana, sans-serif;
+            text-shadow: none;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .leaflet-container a.leaflet-popup-close-button:hover { color: #1a1718; background: #FCB615; transform: rotate(90deg); }
 
-        .marker-icon { background: transparent !important; border: none !important; transition: none !important; }
-        .marker-inner { width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 10px rgba(200,144,15,0.6); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease; }
-        .marker-icon:hover .marker-inner { transform: scale(1.5); box-shadow: 0 0 20px rgba(200,144,15,1); }
+        .popup-image { width: 100%; height: 150px; object-fit: cover; transition: transform 0.7s ease; }
+        .leaflet-popup:hover .popup-image { transform: scale(1.06); }
+        .popup-header { overflow: hidden; position: relative; height: 150px; background: #1a1718; }
+        .popup-header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(20,18,19,0.85) 100%);
+            pointer-events: none;
+        }
+        .popup-icon-badge {
+            position: absolute;
+            bottom: -20px;
+            left: 18px;
+            z-index: 3;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(252, 182, 21, 0.28), rgba(252, 182, 21, 0.06) 70%);
+            border: 1px solid rgba(252, 182, 21, 0.5);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #FCB615;
+            font-size: 1.1rem;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 16px -4px rgba(252,182,21,0.5);
+        }
+        .popup-content { padding: 32px 20px 20px; position: relative; }
+        .popup-kicker {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: #C8900F;
+            margin-bottom: 0.5rem;
+        }
+        .popup-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            color: #f5f1ec;
+            letter-spacing: 0.02em;
+            line-height: 1.15;
+            margin-bottom: 0.5rem;
+        }
+        .popup-client {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: #b8b2a8;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        .popup-meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin: 1rem 0;
+            padding: 0.75rem 0;
+            border-top: 1px solid rgba(252, 182, 21, 0.2);
+            border-bottom: 1px solid rgba(252, 182, 21, 0.2);
+        }
+        .popup-meta-k {
+            display: block;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.55rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #C8900F;
+            margin-bottom: 0.25rem;
+        }
+        .popup-meta-v {
+            display: block;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #f5f1ec;
+        }
+        .popup-badges { display: flex; gap: 0.4rem; margin-bottom: 0.85rem; flex-wrap: wrap; }
+        .popup-badge {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 999px;
+        }
+        .popup-badge-cat { background: rgba(252, 182, 21, 0.15); color: #FCB615; border: 1px solid rgba(252, 182, 21, 0.3); }
+        .popup-badge-loc { color: #b8b2a8; border: 1px solid rgba(255,255,255,0.1); }
+        .popup-badge-live { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.35); }
+        .popup-badge-live::before {
+            content: '';
+            display: inline-block;
+            width: 5px; height: 5px;
+            background: #4ade80;
+            border-radius: 50%;
+            margin-right: 4px;
+            vertical-align: middle;
+            animation: popup-dot 2s ease infinite;
+            box-shadow: 0 0 8px #4ade80;
+        }
+        .popup-badge-done { color: #b8b2a8; border: 1px solid rgba(255,255,255,0.1); }
+        @keyframes popup-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .popup-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.65rem 1rem;
+            background: linear-gradient(155deg, #FCB615, #C8900F);
+            color: #1a1718 !important;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 3px;
+            transition: all 0.35s ease;
+        }
+        .popup-cta:hover { box-shadow: 0 8px 24px -4px rgba(252, 182, 21, 0.5); transform: translateY(-2px); }
 
-        /* Active/selected marker — pulsing ring */
-        .marker-icon.is-active .marker-inner { transform: scale(1.4); box-shadow: 0 0 25px rgba(200,144,15,1); animation: markerPulse 1.5s ease-in-out infinite; }
-        @keyframes markerPulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(200,144,15,0.8), 0 0 25px rgba(200,144,15,1); }
-            50% { box-shadow: 0 0 0 10px rgba(200,144,15,0), 0 0 25px rgba(200,144,15,1); }
+        /* ─────── SVG Teardrop Pin ─────── */
+        .sb-pin { background: transparent !important; border: none !important; cursor: pointer; }
+        .sb-pin svg { width: 36px; height: 44px; display: block; transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); }
+        .sb-pin:hover svg { transform: scale(1.15) translateY(-3px); }
+        .sb-pin.is-active svg { transform: scale(1.2) translateY(-4px); filter: drop-shadow(0 8px 14px rgba(252,182,21,0.6)); }
+        .sb-pin.is-active .sb-pin-ring { opacity: 1; animation: pinPulse 1.8s ease-in-out infinite; }
+        .sb-pin-ring { opacity: 0; transform-origin: center; }
+        @keyframes pinPulse {
+            0%, 100% { r: 4; opacity: 0.9; }
+            50% { r: 14; opacity: 0; }
         }
 
-        .popup-image { width: 100%; height: 160px; object-fit: cover; border-bottom: 1px solid rgba(255,255,255,0.1); transition: transform 0.5s ease; }
-        .leaflet-popup:hover .popup-image { transform: scale(1.05); }
-        .popup-header { overflow: hidden; position: relative; height: 160px; }
-        .popup-content { padding: 20px; position: relative; }
-        .filter-btn-map.active { background-color: #C8900F; color: black; border-color: #C8900F; }
+        /* ─────── Marker Cluster (Strong Built style) ─────── */
+        .sb-cluster {
+            background: transparent !important;
+            border: none !important;
+        }
+        .sb-cluster > div {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: radial-gradient(circle at 30% 30%, #FCB615, #C8900F 70%);
+            border: 2px solid rgba(255,255,255,0.85);
+            color: #1a1718;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: -0.01em;
+            box-shadow: 0 6px 18px -4px rgba(0,0,0,0.6), 0 0 0 6px rgba(252,182,21,0.18);
+            transition: transform 0.35s ease;
+        }
+        .sb-cluster:hover > div { transform: scale(1.08); }
+        .sb-cluster-xl > div { width: 52px; height: 52px; font-size: 1.05rem; }
+        .leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
+            transition: transform 0.4s ease-out, opacity 0.3s ease-in;
+        }
 
-        /* Card enter animation (replaces GSAP) */
+        /* ─────── Project card ─────── */
+        .filter-btn-map.active { background-color: #FCB615 !important; color: #1a1718 !important; border-color: #FCB615 !important; }
+        .status-btn.active { background-color: #FCB615 !important; color: #1a1718 !important; border-color: #FCB615 !important; }
+        .loc-filter.active { background-color: #FCB615; color: #1a1718; border-color: #FCB615; }
+
         .project-card { opacity: 0; transform: translateY(15px); animation: cardIn 0.4s cubic-bezier(0.16,1,0.3,1) forwards; }
         @keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
-        .project-card.is-selected { border-color: #C8900F !important; background: rgba(200,144,15,0.08); box-shadow: 0 0 20px rgba(200,144,15,0.15); }
+        .project-card.is-selected { border-color: #FCB615 !important; background: rgba(252,182,21,0.08); box-shadow: 0 0 24px -4px rgba(252,182,21,0.25); }
         .project-card.is-selected .card-accent { transform: translateX(0) !important; }
+        .project-card:focus-visible { outline: 2px solid #FCB615; outline-offset: 2px; border-radius: 4px; }
 
-        /* Search input focus ring */
-        #projectSearch:focus { border-color: #C8900F; box-shadow: 0 0 0 2px rgba(200,144,15,0.2); }
+        #projectSearch:focus { border-color: #FCB615; box-shadow: 0 0 0 2px rgba(252,182,21,0.2); }
+
+        /* ─────── Filter chip bar ─────── */
+        .filter-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 3px 8px 3px 10px;
+            background: rgba(252, 182, 21, 0.12);
+            border: 1px solid rgba(252, 182, 21, 0.35);
+            color: #FCB615;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .filter-chip:hover { background: rgba(252, 182, 21, 0.22); border-color: #FCB615; }
+        .filter-chip i { font-size: 0.5rem; opacity: 0.7; }
+        .filter-chip:hover i { opacity: 1; }
+
+        /* ─────── Mobile Map/List toggle ─────── */
+        .m-toggle { display: none; }
+        @media (max-width: 767px) {
+            .m-toggle {
+                display: flex;
+                position: fixed;
+                bottom: 1rem; left: 50%;
+                transform: translateX(-50%);
+                z-index: 30;
+                gap: 4px;
+                padding: 4px;
+                background: rgba(10, 10, 10, 0.92);
+                border: 1px solid rgba(252, 182, 21, 0.3);
+                border-radius: 999px;
+                backdrop-filter: blur(12px);
+                box-shadow: 0 10px 30px -6px rgba(0,0,0,0.7);
+            }
+            .m-toggle button {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 700;
+                font-size: 0.7rem;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                padding: 0.5rem 1.1rem;
+                border-radius: 999px;
+                color: #b8b2a8;
+                transition: all 0.3s ease;
+                display: inline-flex; align-items: center; gap: 0.4rem;
+            }
+            .m-toggle button.is-on {
+                background: linear-gradient(155deg, #FCB615, #C8900F);
+                color: #1a1718;
+            }
+            /* Mobile: show only one panel at a time, full-screen */
+            .main-layout { flex-direction: column; }
+            .map-sidebar {
+                max-height: none !important;
+                width: 100%;
+                height: calc(100vh - 5rem);
+                position: absolute;
+                inset: 0;
+                z-index: 15;
+            }
+            .map-canvas {
+                width: 100%;
+                height: calc(100vh - 5rem);
+                position: absolute;
+                inset: 0;
+                z-index: 10;
+            }
+            .main-layout[data-view="map"] .map-sidebar { display: none; }
+            .main-layout[data-view="list"] .map-canvas { visibility: hidden; }
+        }
     </style>
 </head>
 
@@ -146,10 +404,16 @@
         </div>
     </header>
 
+    <!-- Mobile Map/List toggle — floating segmented control -->
+    <div class="m-toggle" role="tablist" aria-label="Switch between map and list view">
+        <button type="button" class="is-on" data-view="map" role="tab" aria-selected="true"><i class="fas fa-map-marked-alt"></i> Map</button>
+        <button type="button" data-view="list" role="tab" aria-selected="false"><i class="fas fa-list"></i> List</button>
+    </div>
+
     <!-- MAIN LAYOUT: Sidebar + Map -->
-    <div class="flex-grow flex flex-col md:flex-row h-full overflow-hidden">
+    <div class="main-layout flex-grow flex flex-col md:flex-row h-full overflow-hidden relative" data-view="map">
         <!-- Sidebar -->
-        <div class="w-full md:w-1/3 lg:w-1/4 sidebar-optimized flex flex-col relative z-20 max-h-[50vh] md:max-h-none">
+        <div class="map-sidebar w-full md:w-1/3 lg:w-1/4 sidebar-optimized flex flex-col relative z-20 md:max-h-none">
             <div class="p-4 md:p-6 pb-4 border-b border-clay-border shrink-0 bg-clay-base/40">
                 <h2 class="text-3xl md:text-5xl font-bold text-clay-ink mb-1 uppercase font-heading tracking-tight leading-tight"><span>Project</span> <span class="text-brand-darkGold">Locations</span></h2>
                 <div class="flex gap-4 mt-3 text-xs font-heading tracking-widest text-clay-muted">
@@ -192,6 +456,9 @@
                 </div>
             </div>
 
+            <!-- Applied filter chips -->
+            <div id="filterChips" class="px-3 md:px-4 pt-3 flex flex-wrap gap-1.5 shrink-0"></div>
+
             <div class="flex-grow overflow-y-auto custom-scrollbar p-3 md:p-4 space-y-2 md:space-y-3" id="listings"></div>
 
             <!-- Legend -->
@@ -206,7 +473,7 @@
         </div>
 
         <!-- Map -->
-        <div id='map' class="w-full md:w-2/3 lg:w-3/4 flex-grow md:h-full bg-[#1a1a1a] relative z-0 min-h-[400px]"></div>
+        <div id='map' class="map-canvas w-full md:w-2/3 lg:w-3/4 flex-grow md:h-full bg-[#1a1a1a] relative z-0 min-h-[400px]"></div>
     </div>
 
     <script src="projects-data.js"></script>
@@ -218,93 +485,124 @@
             throw new Error('PROJECT_DATA missing');
         }
 
-        // Category color palette — single source of truth
-        const CATEGORY_COLORS = {
-            residential: '#FCB615',
-            commercial: '#FF8C00',
-            infrastructure: '#C0C0C0'
+        // ─── Category palette + icons ───
+        const CATEGORY_COLORS = { residential: '#FCB615', commercial: '#FF8C00', infrastructure: '#C0C0C0' };
+        const CATEGORY_ICONS  = { residential: 'fa-home', commercial: 'fa-city', infrastructure: 'fa-road' };
+        const getCategoryColor = c => CATEGORY_COLORS[c] || CATEGORY_COLORS.residential;
+        const getCategoryIcon  = c => CATEGORY_ICONS[c]  || 'fa-building';
+
+        // ─── Filter state (seeded from URL) ───
+        const initialParams = new URLSearchParams(location.search);
+        const filters = {
+            category: initialParams.get('category') || 'all',
+            location: initialParams.get('location') || 'all',
+            status:   initialParams.get('status')   || 'all',
+            search:   initialParams.get('q') || ''
         };
-        const getCategoryColor = cat => CATEGORY_COLORS[cat] || CATEGORY_COLORS.residential;
 
-        // Filter state
-        const filters = { category: 'all', location: 'all', status: 'all', search: '' };
-
-        // Populate overall stats
+        // ─── Stats header ───
         document.getElementById('total-projects').textContent = PROJECT_DATA.length;
-        document.getElementById('total-cities').textContent = new Set(PROJECT_DATA.map(p => p.location)).size;
-        document.getElementById('totalCount').textContent = PROJECT_DATA.length;
+        document.getElementById('total-cities').textContent   = new Set(PROJECT_DATA.map(p => p.location)).size;
+        document.getElementById('totalCount').textContent      = PROJECT_DATA.length;
 
-        // Build location filter buttons
+        // ─── Location filter pills ───
         const locs = ['all', ...new Set(PROJECT_DATA.map(p => p.location))].sort();
         const locCont = document.getElementById('locationFilterMap');
         locs.forEach(loc => {
             const btn = document.createElement('button');
-            const active = loc === 'all';
-            btn.className = 'loc-filter py-1 px-2.5 text-[9px] uppercase font-bold tracking-wider border rounded-sm transition-all duration-300 ' + (active ? 'border-brand-gold bg-brand-gold text-black' : 'border-clay-border text-clay-faint hover:border-brand-gold/50 hover:text-clay-muted');
+            btn.className = 'loc-filter py-1 px-2.5 text-[9px] uppercase font-bold tracking-wider border rounded-sm transition-all duration-300 border-clay-border text-clay-faint hover:border-brand-gold/50 hover:text-clay-muted';
             btn.textContent = loc === 'all' ? 'All Cities' : loc;
             btn.dataset.location = loc;
-            btn.setAttribute('aria-pressed', active ? 'true' : 'false');
-            btn.addEventListener('click', () => {
-                filters.location = loc;
-                locCont.querySelectorAll('.loc-filter').forEach(b => {
-                    b.className = b.className.replace(/border-brand-gold bg-brand-gold text-black/g, 'border-clay-border text-clay-faint');
-                    b.setAttribute('aria-pressed', 'false');
-                });
-                btn.className = btn.className.replace(/border-clay-border\/10 text-clay-faint/g, 'border-brand-gold bg-brand-gold text-black');
-                btn.setAttribute('aria-pressed', 'true');
-                renderProjects();
-            });
+            btn.setAttribute('aria-pressed', 'false');
+            btn.addEventListener('click', () => { filters.location = loc; syncUI(); renderProjects(); });
             locCont.appendChild(btn);
         });
 
-        // Leaflet Map
-        const map = L.map('map', { zoomControl: false, center: [19.1, 72.9], zoom: 11, attributionControl: false });
+        // ─── Leaflet Map ───
+        const map = L.map('map', { zoomControl: false, center: [19.1, 72.9], zoom: 11 });
         L.control.zoom({ position: 'bottomright' }).addTo(map);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { subdomains: 'abcd', maxZoom: 20 }).addTo(map);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            subdomains: 'abcd',
+            maxZoom: 20,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        }).addTo(map);
 
+        // ─── Cluster group (Strong Built style) ───
+        const cluster = L.markerClusterGroup({
+            maxClusterRadius: 50,
+            spiderfyOnMaxZoom: true,
+            showCoverageOnHover: false,
+            iconCreateFunction: (c) => {
+                const n = c.getChildCount();
+                const size = n >= 10 ? ' sb-cluster-xl' : '';
+                return L.divIcon({
+                    html: `<div>${n}</div>`,
+                    className: 'sb-cluster' + size,
+                    iconSize: L.point(44, 44)
+                });
+            }
+        });
+        map.addLayer(cluster);
+
+        // ─── SVG Teardrop Pin ───
         function getIcon(cat, isActive = false) {
-            const c = getCategoryColor(cat);
+            const core = getCategoryColor(cat);
+            const html = `<svg viewBox="0 0 36 44" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="pinG" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#FCB615"/>
+                        <stop offset="1" stop-color="#C8900F"/>
+                    </linearGradient>
+                </defs>
+                <circle class="sb-pin-ring" cx="18" cy="16" r="4" fill="none" stroke="#FCB615" stroke-width="2"/>
+                <path d="M18 2 C9.2 2 2 9.2 2 18 c0 12 16 24 16 24 s16-12 16-24 C34 9.2 26.8 2 18 2 z" fill="url(#pinG)" stroke="#fff" stroke-width="1.5"/>
+                <circle cx="18" cy="16" r="6" fill="${core}" stroke="#1a1718" stroke-width="1.5"/>
+            </svg>`;
             return L.divIcon({
-                className: 'marker-icon' + (isActive ? ' is-active' : ''),
-                html: '<div class="marker-inner" style="background-color:' + c + ';"></div>',
-                iconSize: [14, 14], iconAnchor: [7, 7], popupAnchor: [0, -10]
+                className: 'sb-pin' + (isActive ? ' is-active' : ''),
+                html,
+                iconSize: [36, 44], iconAnchor: [18, 42], popupAnchor: [0, -38]
             });
         }
 
-        // Popup HTML extracted for readability
+        // ─── Popup (tcard style) ───
         function buildPopupHTML(p) {
             const img = p.img
                 ? `<img src="${p.img}" alt="${p.title}" class="popup-image" loading="lazy">`
-                : `<div class="h-full w-full bg-clay-surface flex items-center justify-center text-gray-700"><i class="fas fa-building text-4xl opacity-50"></i></div>`;
+                : `<div class="h-full w-full flex items-center justify-center text-clay-muted"><i class="fas fa-building text-4xl opacity-40"></i></div>`;
             const statusBadge = p.status === 'ongoing'
-                ? `<span class="text-[9px] bg-green-500/20 text-green-400 border border-green-500/30 px-2 py-0.5 rounded-sm font-bold uppercase tracking-wider"><span class="inline-block w-1.5 h-1.5 bg-green-400 rounded-full mr-1 align-middle animate-pulse"></span>Ongoing</span>`
-                : `<span class="text-[9px] text-clay-muted border border-clay-border px-2 py-0.5 rounded-sm font-bold uppercase tracking-wider">Completed</span>`;
-            return `<div class="font-heading popup-card">
+                ? `<span class="popup-badge popup-badge-live">Ongoing</span>`
+                : `<span class="popup-badge popup-badge-done">Completed</span>`;
+            return `<article class="popup-card">
                 <div class="popup-header">${img}</div>
+                <div class="popup-icon-badge"><i class="fas ${getCategoryIcon(p.category)}"></i></div>
                 <div class="popup-content">
-                    <h3 class="font-bold text-brand-darkGold uppercase tracking-widest text-lg mb-1 leading-none">${p.title}</h3>
-                    <p class="text-xs text-clay-ink mb-3 font-light tracking-wide"><span class="text-clay-faint">Client:</span> ${p.client}</p>
-                    <div class="flex items-center gap-2 mb-3 flex-wrap">
-                        <span class="text-[9px] text-black bg-brand-gold px-2 py-0.5 rounded-sm font-bold uppercase tracking-wider">${p.category}</span>
-                        <span class="text-[9px] text-clay-muted border border-clay-border px-2 py-0.5 rounded-sm font-bold uppercase tracking-wider">${p.location}</span>
+                    <div class="popup-kicker">${p.category} &middot; ${p.year}</div>
+                    <h3 class="popup-title">${p.title}</h3>
+                    <p class="popup-client">${p.client}</p>
+                    <div class="popup-badges">
+                        <span class="popup-badge popup-badge-cat">${p.category}</span>
+                        <span class="popup-badge popup-badge-loc">${p.location}</span>
                         ${statusBadge}
                     </div>
-                    <div class="grid grid-cols-2 gap-2 mb-4 pt-3 border-t border-clay-border">
-                        <div><span class="block text-[9px] text-clay-faint uppercase tracking-wider">Year</span><span class="text-clay-ink text-sm font-bold">${p.year}</span></div>
-                        <div><span class="block text-[9px] text-clay-faint uppercase tracking-wider">Area</span><span class="text-clay-ink text-sm font-bold">${p.area}</span></div>
+                    <div class="popup-meta-grid">
+                        <div><span class="popup-meta-k">Year</span><span class="popup-meta-v">${p.year}</span></div>
+                        <div><span class="popup-meta-k">Area</span><span class="popup-meta-v">${p.area}</span></div>
                     </div>
-                    <a href="projects.html" class="block text-center w-full py-2 border border-brand-gold/30 text-brand-darkGold text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-brand-gold hover:text-black transition-all duration-300 rounded-sm">View Details</a>
+                    <a href="projects.html" class="popup-cta"><i class="fas fa-arrow-right text-[0.6rem]"></i> View Project</a>
                 </div>
-            </div>`;
+            </article>`;
         }
 
         let markers = [];
-        let markerMap = new Map(); // project id -> marker
+        const markerMap = new Map();
         const listEl = document.getElementById('listings');
         const searchInput = document.getElementById('projectSearch');
         const resultCountEl = document.getElementById('resultCount');
         const clearBtn = document.getElementById('clearFilters');
+        const chipBar = document.getElementById('filterChips');
 
+        // ─── Filtering ───
         function getFiltered() {
             const q = filters.search.trim().toLowerCase();
             return PROJECT_DATA.filter(p => {
@@ -315,40 +613,99 @@
                 return true;
             });
         }
+        const hasActiveFilters = () => filters.category !== 'all' || filters.location !== 'all' || filters.status !== 'all' || filters.search.trim() !== '';
 
-        function hasActiveFilters() {
-            return filters.category !== 'all' || filters.location !== 'all' || filters.status !== 'all' || filters.search.trim() !== '';
+        // ─── URL sync ───
+        function updateURL() {
+            const p = new URLSearchParams();
+            if (filters.category !== 'all') p.set('category', filters.category);
+            if (filters.location !== 'all') p.set('location', filters.location);
+            if (filters.status !== 'all')   p.set('status', filters.status);
+            if (filters.search.trim())      p.set('q', filters.search.trim());
+            const qs = p.toString();
+            history.replaceState(null, '', qs ? '?' + qs : location.pathname);
         }
 
+        // ─── Filter chips bar ───
+        function renderChips() {
+            chipBar.innerHTML = '';
+            const chips = [];
+            if (filters.category !== 'all') chips.push({ label: filters.category, key: 'category' });
+            if (filters.location !== 'all') chips.push({ label: filters.location, key: 'location' });
+            if (filters.status !== 'all')   chips.push({ label: filters.status, key: 'status' });
+            if (filters.search.trim())      chips.push({ label: `"${filters.search.trim()}"`, key: 'search' });
+            chips.forEach(c => {
+                const el = document.createElement('button');
+                el.className = 'filter-chip';
+                el.innerHTML = `${c.label} <i class="fas fa-times"></i>`;
+                el.setAttribute('aria-label', `Remove ${c.label} filter`);
+                el.addEventListener('click', () => {
+                    if (c.key === 'search') { filters.search = ''; searchInput.value = ''; }
+                    else filters[c.key] = 'all';
+                    syncUI(); renderProjects();
+                });
+                chipBar.appendChild(el);
+            });
+        }
+
+        // ─── UI state sync (buttons + chips + URL) ───
+        function syncUI() {
+            // Category
+            document.querySelectorAll('.filter-btn-map').forEach(b => {
+                const on = b.dataset.filter === filters.category;
+                b.classList.toggle('active', on);
+                b.setAttribute('aria-pressed', on ? 'true' : 'false');
+            });
+            // Status
+            document.querySelectorAll('.status-btn').forEach(b => {
+                const on = b.dataset.status === filters.status;
+                b.classList.toggle('active', on);
+                b.setAttribute('aria-pressed', on ? 'true' : 'false');
+            });
+            // Locations
+            document.querySelectorAll('.loc-filter').forEach(b => {
+                const on = b.dataset.location === filters.location;
+                b.classList.toggle('active', on);
+                b.setAttribute('aria-pressed', on ? 'true' : 'false');
+            });
+            clearBtn.classList.toggle('hidden', !hasActiveFilters());
+            renderChips();
+            updateURL();
+        }
+
+        // ─── Selection ───
         function selectProject(p, item) {
-            map.flyTo(p.coordinates, 15, { duration: 1.2 });
+            map.flyTo(p.coordinates, 15, { duration: 1.1 });
             const marker = markerMap.get(p.id);
             if (marker) {
-                // Re-create icon with active state
                 markers.forEach(m => m.setIcon(getIcon(m._category, false)));
                 marker.setIcon(getIcon(p.category, true));
-                marker.openPopup();
+                cluster.zoomToShowLayer(marker, () => marker.openPopup());
             }
             document.querySelectorAll('.project-card').forEach(d => d.classList.remove('is-selected'));
             if (item) item.classList.add('is-selected');
+            // Mobile: switching selection from list → jump to map view
+            const layout = document.querySelector('.main-layout');
+            if (layout && window.innerWidth < 768) setView('map');
         }
 
+        // ─── Render ───
         function renderProjects() {
-            markers.forEach(m => map.removeLayer(m));
+            // Teardown
+            cluster.clearLayers();
             markers = [];
             markerMap.clear();
             listEl.innerHTML = '';
 
             const filtered = getFiltered();
             resultCountEl.textContent = filtered.length;
-            clearBtn.classList.toggle('hidden', !hasActiveFilters());
 
             if (filtered.length === 0) {
                 listEl.innerHTML = `
                     <div class="text-center py-12 px-4">
                         <i class="fas fa-search text-3xl text-gray-700 mb-3 block"></i>
                         <p class="text-clay-muted text-sm font-heading uppercase tracking-wider mb-2">No Results</p>
-                        <p class="text-clay-muted text-xs font-light">Try adjusting your filters or search</p>
+                        <p class="text-clay-muted text-xs font-light">Try adjusting filters or search</p>
                     </div>`;
                 return;
             }
@@ -356,15 +713,19 @@
             const bounds = L.latLngBounds();
 
             filtered.forEach((p, i) => {
-                const marker = L.marker(p.coordinates, { icon: getIcon(p.category) }).addTo(map).bindPopup(buildPopupHTML(p));
+                if (!p.coordinates || p.coordinates.length !== 2) return;
+                const marker = L.marker(p.coordinates, { icon: getIcon(p.category) }).bindPopup(buildPopupHTML(p), { closeButton: true, maxWidth: 320 });
                 marker._category = p.category;
+                marker._projectId = p.id;
+                cluster.addLayer(marker);
                 markers.push(marker);
                 markerMap.set(p.id, marker);
                 bounds.extend(p.coordinates);
 
+                // List card
                 const item = document.createElement('div');
                 item.className = 'project-card p-3 bg-clay-surface/10 border border-clay-border hover:border-brand-gold/50 cursor-pointer transition-all duration-300 rounded-sm group hover:bg-clay-surface/20 relative overflow-hidden flex items-center gap-3';
-                item.style.animationDelay = Math.min(i * 40, 800) + 'ms';
+                item.style.animationDelay = Math.min(i * 35, 800) + 'ms';
                 item.setAttribute('tabindex', '0');
                 item.setAttribute('role', 'button');
                 item.setAttribute('aria-label', `View ${p.title} on map`);
@@ -373,9 +734,6 @@
                     ? `<img src="${p.img}" class="w-12 h-12 object-cover rounded-sm border border-clay-border group-hover:border-brand-gold/50 transition-colors shrink-0" alt="${p.title}" loading="lazy">`
                     : `<div class="w-12 h-12 bg-clay-surface/10 rounded-sm flex items-center justify-center border border-clay-border shrink-0"><i class="fas fa-building text-clay-muted text-xs"></i></div>`;
                 const dotC = getCategoryColor(p.category);
-                const statusDot = p.status === 'ongoing'
-                    ? '<span class="inline-block w-1.5 h-1.5 bg-green-400 rounded-full mr-1 animate-pulse"></span>'
-                    : '';
                 const featuredStar = p.featured ? '<i class="fas fa-star text-brand-darkGold text-[8px] mr-1" title="Featured"></i>' : '';
 
                 item.innerHTML = `
@@ -391,115 +749,70 @@
                             <span class="inline-flex items-center gap-1 text-[9px] text-clay-muted uppercase tracking-wider">
                                 <span class="w-2 h-2 rounded-full shrink-0" style="background:${dotC}"></span>${p.category}
                             </span>
-                            <span class="text-[9px] text-clay-faint">•</span>
+                            <span class="text-[9px] text-clay-faint">&middot;</span>
                             <span class="text-[9px] text-clay-muted font-body">${p.year}</span>
-                            <span class="text-[9px] text-clay-faint">•</span>
+                            <span class="text-[9px] text-clay-faint">&middot;</span>
                             <span class="text-[9px] text-clay-muted font-body">${p.area}</span>
-                            ${p.status === 'ongoing' ? '<span class="text-[9px] text-clay-faint">•</span><span class="text-[9px] text-green-400 uppercase tracking-wider font-bold">' + statusDot + 'Ongoing</span>' : ''}
+                            ${p.status === 'ongoing' ? '<span class="text-[9px] text-clay-faint">&middot;</span><span class="text-[9px] text-green-400 uppercase tracking-wider font-bold"><span class="inline-block w-1.5 h-1.5 bg-green-400 rounded-full mr-1 animate-pulse"></span>Ongoing</span>' : ''}
                         </div>
                     </div>`;
-
                 item.addEventListener('click', () => selectProject(p, item));
-                item.addEventListener('keydown', (e) => {
+                item.addEventListener('keydown', e => {
                     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectProject(p, item); }
                 });
                 listEl.appendChild(item);
             });
 
-            if (markers.length > 0) map.fitBounds(bounds, { padding: [50, 50], maxZoom: 12 });
+            if (bounds.isValid()) map.fitBounds(bounds, { padding: [50, 50], maxZoom: 12 });
         }
 
-        // Initial render
-        renderProjects();
-
-        // Category filter buttons
+        // ─── Bindings ───
         document.querySelectorAll('.filter-btn-map').forEach(btn => {
-            btn.addEventListener('click', e => {
-                document.querySelectorAll('.filter-btn-map').forEach(b => {
-                    b.classList.remove('active', 'bg-brand-gold', 'text-black', 'border-brand-gold');
-                    b.classList.add('text-clay-muted', 'border-clay-border');
-                    b.setAttribute('aria-pressed', 'false');
-                });
-                e.target.classList.add('active', 'bg-brand-gold', 'text-black', 'border-brand-gold');
-                e.target.classList.remove('text-clay-muted', 'border-clay-border');
-                e.target.setAttribute('aria-pressed', 'true');
-                filters.category = e.target.getAttribute('data-filter');
-                renderProjects();
-            });
+            btn.addEventListener('click', () => { filters.category = btn.dataset.filter; syncUI(); renderProjects(); });
         });
-
-        // Status filter buttons
         document.querySelectorAll('.status-btn').forEach(btn => {
-            btn.addEventListener('click', e => {
-                document.querySelectorAll('.status-btn').forEach(b => {
-                    b.classList.remove('active', 'bg-brand-gold', 'text-black', 'border-brand-gold');
-                    b.classList.add('text-clay-muted', 'border-clay-border');
-                    b.setAttribute('aria-pressed', 'false');
-                });
-                e.target.classList.add('active', 'bg-brand-gold', 'text-black', 'border-brand-gold');
-                e.target.classList.remove('text-clay-muted', 'border-clay-border');
-                e.target.setAttribute('aria-pressed', 'true');
-                filters.status = e.target.getAttribute('data-status');
-                renderProjects();
-            });
+            btn.addEventListener('click', () => { filters.status = btn.dataset.status; syncUI(); renderProjects(); });
         });
 
-        // Search input (debounced)
         let searchTimer;
-        searchInput.addEventListener('input', (e) => {
+        searchInput.value = filters.search;
+        searchInput.addEventListener('input', e => {
             clearTimeout(searchTimer);
             searchTimer = setTimeout(() => {
                 filters.search = e.target.value;
-                renderProjects();
+                syncUI(); renderProjects();
             }, 200);
         });
 
-        // Clear filters
         clearBtn.addEventListener('click', () => {
-            filters.category = 'all';
-            filters.location = 'all';
-            filters.status = 'all';
-            filters.search = '';
+            filters.category = 'all'; filters.location = 'all'; filters.status = 'all'; filters.search = '';
             searchInput.value = '';
-
-            // Reset all filter UI
-            document.querySelectorAll('.filter-btn-map').forEach(b => {
-                const isAll = b.dataset.filter === 'all';
-                b.classList.toggle('active', isAll);
-                b.classList.toggle('bg-brand-gold', isAll);
-                b.classList.toggle('text-black', isAll);
-                b.classList.toggle('border-brand-gold', isAll);
-                b.classList.toggle('text-clay-muted', !isAll);
-                b.classList.toggle('border-clay-border', !isAll);
-                b.setAttribute('aria-pressed', isAll ? 'true' : 'false');
-            });
-            document.querySelectorAll('.status-btn').forEach(b => {
-                const isAll = b.dataset.status === 'all';
-                b.classList.toggle('active', isAll);
-                b.classList.toggle('bg-brand-gold', isAll);
-                b.classList.toggle('text-black', isAll);
-                b.classList.toggle('border-brand-gold', isAll);
-                b.classList.toggle('text-clay-muted', !isAll);
-                b.classList.toggle('border-clay-border', !isAll);
-                b.setAttribute('aria-pressed', isAll ? 'true' : 'false');
-            });
-            document.querySelectorAll('.loc-filter').forEach(b => {
-                const isAll = b.dataset.location === 'all';
-                if (isAll) {
-                    b.className = b.className.replace(/border-clay-border\/10 text-clay-faint/g, 'border-brand-gold bg-brand-gold text-black');
-                } else {
-                    b.className = b.className.replace(/border-brand-gold bg-brand-gold text-black/g, 'border-clay-border text-clay-faint');
-                }
-                b.setAttribute('aria-pressed', isAll ? 'true' : 'false');
-            });
-            renderProjects();
+            syncUI(); renderProjects();
         });
 
-        // Clear active marker state when popup closes
+        // ─── Mobile Map/List toggle ───
+        function setView(v) {
+            const layout = document.querySelector('.main-layout');
+            if (!layout) return;
+            layout.setAttribute('data-view', v);
+            document.querySelectorAll('.m-toggle button').forEach(b => {
+                const on = b.dataset.view === v;
+                b.classList.toggle('is-on', on);
+                b.setAttribute('aria-selected', on ? 'true' : 'false');
+            });
+            if (v === 'map') setTimeout(() => map.invalidateSize(), 100);
+        }
+        document.querySelectorAll('.m-toggle button').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
+
+        // ─── Clear selection on popup close ───
         map.on('popupclose', () => {
             markers.forEach(m => m.setIcon(getIcon(m._category, false)));
             document.querySelectorAll('.project-card').forEach(d => d.classList.remove('is-selected'));
         });
+
+        // ─── Initial paint ───
+        syncUI();
+        renderProjects();
     </script>
     <script src="script.js"></script>
 </body>

@@ -69,6 +69,456 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
   <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ── Stats Bar (premium) ── */
+    .ix-stat {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+      transition: background 0.4s ease;
+    }
+    .ix-stat:first-child { border-left: none; }
+    .ix-stat:hover { background: rgba(252, 182, 21, 0.03); }
+    .ix-stat-num {
+      font-family: 'Oswald', 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.75rem, 6vw, 4.5rem);
+      line-height: 1;
+      color: #FCB615;
+      letter-spacing: -0.02em;
+    }
+    .ix-stat-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #b8b2a8;
+      margin-top: 0.75rem;
+    }
+    @media (max-width: 767px) {
+      .ix-stat { padding: 1.5rem 0.75rem; border-left: none; border-top: 1px solid rgba(255, 255, 255, 0.06); }
+      .ix-stat:first-child, .ix-stat:nth-child(2) { border-top: none; }
+    }
+
+    /* ── Core Value cards (editorial tcard) ── */
+    .ix-vcard {
+      position: relative;
+      padding: 2.5rem 2rem;
+      background: linear-gradient(155deg, rgba(42, 38, 39, 0.85) 0%, rgba(26, 23, 24, 0.9) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.5s ease;
+    }
+    .ix-vcard::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 40%;
+      height: 2px;
+      background: linear-gradient(90deg, #FCB615, transparent);
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .ix-vcard:hover {
+      transform: translateY(-6px);
+      border-color: rgba(252, 182, 21, 0.35);
+      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(252, 182, 21, 0.15);
+    }
+    .ix-vcard:hover::before { width: 100%; }
+    .ix-vcard-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(252, 182, 21, 0.2), rgba(252, 182, 21, 0.04) 70%);
+      border: 1px solid rgba(252, 182, 21, 0.3);
+      color: #FCB615;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 20px -8px rgba(252, 182, 21, 0.4);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .ix-vcard:hover .ix-vcard-icon { transform: scale(1.08) rotate(-4deg); }
+    .ix-vcard-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #C8900F;
+      margin-bottom: 0.5rem;
+    }
+    .ix-vcard-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      color: #f5f1ec;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+    }
+    .ix-vcard-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: #b8b2a8;
+      font-weight: 300;
+    }
+    .ix-vcard-num {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: rgba(252, 182, 21, 0.18);
+      line-height: 1;
+      transition: color 0.4s ease;
+    }
+    .ix-vcard:hover .ix-vcard-num { color: rgba(252, 182, 21, 0.45); }
+
+    /* ── Project carousel metadata ── */
+    .ix-slide-meta {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(252, 182, 21, 0.15);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .ix-slide-meta-item { text-align: center; min-width: 70px; }
+    .ix-slide-meta-k {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #C8900F;
+      margin-bottom: 0.25rem;
+    }
+    .ix-slide-meta-v {
+      display: block;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #f5f1ec;
+      letter-spacing: 0.02em;
+    }
+    @media (min-width: 768px) { .ix-slide-meta-v { font-size: 1.15rem; } }
+
+    /* ── Client Logo chips (real brand marks) ── */
+    .ix-logo-tile {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 80px;
+      min-width: 140px;
+      padding: 0 1.5rem;
+      background: linear-gradient(155deg, rgba(42, 38, 39, 0.7), rgba(26, 23, 24, 0.85));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 4px;
+      transition: all 0.4s ease;
+      flex-shrink: 0;
+    }
+    .ix-logo-tile:hover {
+      border-color: rgba(252, 182, 21, 0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px -10px rgba(252, 182, 21, 0.3);
+    }
+    .ix-logo-tile img {
+      max-height: 48px;
+      max-width: 130px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      filter: brightness(1.3) contrast(1.1);
+      transition: filter 0.4s ease;
+    }
+    .ix-logo-tile:hover img { filter: brightness(1.5) contrast(1.2); }
+    .ix-logo-group { display: inline-flex; align-items: center; padding: 0 0.75rem; }
+
+    /* ── Process step (enhanced) ── */
+    .ix-step-duration {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #FCB615;
+      padding: 4px 10px;
+      border: 1px solid rgba(252, 182, 21, 0.35);
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    .ix-step-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.75rem 0 0;
+      text-align: left;
+    }
+    .ix-step-list li {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: #b8b2a8;
+      padding: 0.25rem 0 0.25rem 1.1rem;
+      position: relative;
+      line-height: 1.4;
+    }
+    .ix-step-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0.6rem;
+      width: 5px; height: 5px;
+      background: #FCB615;
+      border-radius: 50%;
+    }
+    /* Mobile vertical connector for process */
+    @media (max-width: 767px) {
+      .ix-process-grid > .ix-step:not(:last-child)::after {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 2rem;
+        background: linear-gradient(to bottom, rgba(252, 182, 21, 0.35), transparent);
+        margin: 1rem auto 0;
+      }
+    }
+
+    /* ── Hero cross-fade slideshow ── */
+    .ix-hero-bg { position: absolute; inset: 0; }
+    .ix-hero-slide {
+      position: absolute; inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      animation: heroFade 18s infinite;
+      will-change: opacity, transform;
+    }
+    .ix-hero-slide:nth-child(1) { animation-delay: 0s; }
+    .ix-hero-slide:nth-child(2) { animation-delay: 6s; }
+    .ix-hero-slide:nth-child(3) { animation-delay: 12s; }
+    @keyframes heroFade {
+      0% { opacity: 0; transform: scale(1.05); }
+      8% { opacity: 0.4; }
+      33% { opacity: 0.4; transform: scale(1.12); }
+      41% { opacity: 0; }
+      100% { opacity: 0; transform: scale(1.05); }
+    }
+
+    /* ── Awards Strip ── */
+    .ix-awards-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem 2rem;
+      padding: 2.5rem 1.5rem;
+    }
+    .ix-award-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.65rem 1.25rem;
+      background: linear-gradient(155deg, rgba(42, 38, 39, 0.7), rgba(26, 23, 24, 0.85));
+      border: 1px solid rgba(252, 182, 21, 0.2);
+      border-radius: 999px;
+      transition: all 0.4s ease;
+    }
+    .ix-award-pill:hover {
+      border-color: rgba(252, 182, 21, 0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px -8px rgba(252, 182, 21, 0.3);
+    }
+    .ix-award-pill i { color: #FCB615; font-size: 0.95rem; }
+    .ix-award-pill-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #f5f1ec;
+    }
+    .ix-award-pill-year { color: #C8900F; font-size: 0.65rem; margin-left: 0.4rem; }
+
+    /* ── Active Projects ── */
+    .ix-active-card {
+      position: relative;
+      padding: 1.75rem 1.5rem;
+      background: linear-gradient(155deg, rgba(42, 38, 39, 0.85), rgba(26, 23, 24, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 4px;
+      transition: all 0.4s ease;
+      overflow: hidden;
+    }
+    .ix-active-card:hover {
+      border-color: rgba(252, 182, 21, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px -16px rgba(0, 0, 0, 0.6);
+    }
+    .ix-active-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #4ade80;
+      margin-bottom: 0.85rem;
+    }
+    .ix-active-status::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulse-dot 2s ease infinite;
+      box-shadow: 0 0 12px #4ade80;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .ix-active-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #f5f1ec;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.25rem;
+    }
+    .ix-active-loc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: #b8b2a8;
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+    .ix-active-progress {
+      height: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+    .ix-active-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #C8900F, #FCB615);
+      border-radius: 999px;
+      box-shadow: 0 0 10px rgba(252, 182, 21, 0.5);
+    }
+    .ix-active-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(184, 178, 168, 0.7);
+    }
+    .ix-active-meta strong { color: #FCB615; font-weight: 700; }
+
+    /* ── Press / Featured In ── */
+    .ix-press-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem 3rem;
+      padding: 1.5rem 0;
+    }
+    .ix-press-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(245, 241, 236, 0.5);
+      transition: color 0.4s ease, transform 0.4s ease;
+      cursor: default;
+    }
+    .ix-press-name:hover { color: #FCB615; transform: translateY(-2px); }
+
+    /* ── Testimonial avatar (premium medal) ── */
+    .ix-avatar {
+      position: relative;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(252, 182, 21, 0.25), rgba(252, 182, 21, 0.04) 70%),
+        linear-gradient(155deg, rgba(42, 38, 39, 0.95), rgba(20, 18, 19, 0.95));
+      border: 1px solid rgba(252, 182, 21, 0.4);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 16px -4px rgba(252, 182, 21, 0.3);
+      flex-shrink: 0;
+    }
+    .ix-avatar span {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #FCB615;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Sticky Floating CTA (WhatsApp + phone) ── */
+    .ix-fab {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .ix-fab.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .ix-fab a {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.25rem;
+      box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+    .ix-fab a:hover { transform: scale(1.08); box-shadow: 0 12px 32px -4px rgba(252, 182, 21, 0.5); }
+    .ix-fab-whatsapp { background: linear-gradient(155deg, #25D366, #128C7E); }
+    .ix-fab-phone { background: linear-gradient(155deg, #FCB615, #C8900F); color: #1a1718 !important; }
+    @media (min-width: 768px) {
+      .ix-fab { bottom: 2rem; right: 2rem; }
+      .ix-fab a { width: 56px; height: 56px; font-size: 1.4rem; }
+    }
+
+    /* ── Accessibility ── */
+    *:focus-visible {
+      outline: 2px solid #FCB615;
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+    .menu-btn:focus-visible,
+    .nav-close-btn:focus-visible { outline-color: #FCB615; }
+  </style>
 </head>
 
 <body class="bg-clay-base text-clay-ink font-body overflow-x-hidden selection:bg-brand-gold selection:text-black">
@@ -158,7 +608,7 @@
 
       <div class="flex items-center">
         <!-- Menu Trigger -->
-        <button id="menuToggle" class="menu-btn group">
+        <button id="menuToggle" class="menu-btn group" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navOverlay">
           <div class="menu-icon">
             <span></span>
             <span></span>
@@ -171,10 +621,11 @@
 
   <!-- HERO SECTION (Unified site-wide pattern) -->
   <section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
-    <!-- Background -->
-    <div class="absolute inset-0 z-0">
-      <img src="assets/images/home.png" alt="Strong Built Hero Background"
-        class="w-full h-full object-cover animate-ken-burns opacity-40">
+    <!-- Background — 3-image cross-fade slideshow -->
+    <div class="ix-hero-bg z-0" aria-hidden="true">
+      <div class="ix-hero-slide" style="background-image: url('assets/images/home.png');"></div>
+      <div class="ix-hero-slide" style="background-image: url('assets/Projects/monticello.jpg');"></div>
+      <div class="ix-hero-slide" style="background-image: url('assets/Projects/Tree Top.jpg');"></div>
     </div>
     <div class="absolute inset-0 bg-gradient-to-b from-clay-base/70 via-clay-mist/50 to-clay-mist z-0"></div>
 
@@ -213,26 +664,42 @@
     </div>
   </section>
 
-  <!-- STATS BAR -->
-  <section class="border-b border-clay-border bg-clay-base relative z-20">
+  <!-- IMPACT STATS STRIP -->
+  <section class="border-b border-clay-border bg-clay-mist/60 relative z-20">
     <div class="container mx-auto px-6">
-      <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-clay-border">
-        <div class="group py-8 md:py-12 text-center cursor-default reveal-up">
-          <span class="block text-3xl md:text-5xl font-bold text-clay-ink mb-1 group-hover:text-brand-darkGold transition duration-300 font-heading stat-counter" data-target="12">0</span>
-          <span class="text-[10px] md:text-xs uppercase tracking-widest text-clay-faint font-heading">Years Excellence</span>
+      <div class="grid grid-cols-2 md:grid-cols-4">
+        <div class="ix-stat reveal-up">
+          <div class="ix-stat-num"><span class="stat-counter" data-target="12">0</span></div>
+          <div class="ix-stat-label">Years Excellence</div>
         </div>
-        <div class="group py-8 md:py-12 text-center cursor-default reveal-up" style="transition-delay: 100ms;">
-          <span class="block text-3xl md:text-5xl font-bold text-clay-ink mb-1 group-hover:text-brand-darkGold transition duration-300 font-heading stat-counter" data-target="33">0</span>
-          <span class="text-[10px] md:text-xs uppercase tracking-widest text-clay-faint font-heading">Projects Delivered</span>
+        <div class="ix-stat reveal-up" style="transition-delay: 100ms;">
+          <div class="ix-stat-num"><span class="stat-counter" data-target="33">0</span></div>
+          <div class="ix-stat-label">Projects Delivered</div>
         </div>
-        <div class="group py-8 md:py-12 text-center cursor-default reveal-up" style="transition-delay: 200ms;">
-          <span class="block text-3xl md:text-5xl font-bold text-clay-ink mb-1 group-hover:text-brand-darkGold transition duration-300 font-heading stat-counter" data-target="90">0</span>
-          <span class="text-[10px] md:text-xs uppercase tracking-widest text-clay-faint font-heading">Buildings Built</span>
+        <div class="ix-stat reveal-up" style="transition-delay: 200ms;">
+          <div class="ix-stat-num"><span class="stat-counter" data-target="90">0</span></div>
+          <div class="ix-stat-label">Buildings Built</div>
         </div>
-        <div class="group py-8 md:py-12 text-center cursor-default reveal-up" style="transition-delay: 300ms;">
-          <span class="block text-3xl md:text-5xl font-bold text-clay-ink mb-1 group-hover:text-brand-darkGold transition duration-300 font-heading stat-counter" data-target="100">0</span>
-          <span class="text-[10px] md:text-xs uppercase tracking-widest text-clay-faint font-heading">Safety Record %</span>
+        <div class="ix-stat reveal-up" style="transition-delay: 300ms;">
+          <div class="ix-stat-num">5.7M</div>
+          <div class="ix-stat-label">Sq.Ft Constructed</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARDS STRIP — quick credibility from recognition.html -->
+  <section class="bg-clay-base border-b border-clay-border relative z-20">
+    <div class="container mx-auto px-6">
+      <div class="text-center pt-10 reveal-up">
+        <span class="text-brand-darkGold text-[10px] font-bold tracking-[0.4em] uppercase font-heading">Industry Honours</span>
+      </div>
+      <div class="ix-awards-strip reveal-up">
+        <a href="recognition.html" class="ix-award-pill"><i class="fas fa-trophy"></i><span class="ix-award-pill-text">Fastest Growing Firm <span class="ix-award-pill-year">'21</span></span></a>
+        <a href="recognition.html" class="ix-award-pill"><i class="fas fa-landmark"></i><span class="ix-award-pill-text">Maharashtra Governor's Award <span class="ix-award-pill-year">'22</span></span></a>
+        <a href="recognition.html" class="ix-award-pill"><i class="fas fa-medal"></i><span class="ix-award-pill-text">Times Network Excellence <span class="ix-award-pill-year">'23</span></span></a>
+        <a href="recognition.html" class="ix-award-pill"><i class="fas fa-shield-alt"></i><span class="ix-award-pill-text">ET Best Safety Practices <span class="ix-award-pill-year">'24</span></span></a>
+        <a href="recognition.html" class="ix-award-pill"><i class="fas fa-certificate"></i><span class="ix-award-pill-text">ISO 9001 · 14001 · 45001</span></a>
       </div>
     </div>
   </section>
@@ -264,8 +731,8 @@
             <img src="assets/Projects/monticello.jpg" alt="Strong Built Monticello Project" class="w-full h-64 md:h-[500px] object-cover transition duration-700 hover:scale-105">
           </div>
           <div class="absolute -bottom-6 -left-6 bg-clay-base border border-brand-gold/20 p-6 backdrop-blur-sm">
-            <span class="block text-4xl font-bold text-clay-ink font-heading">12<span class="text-brand-darkGold">+</span></span>
-            <span class="text-xs text-clay-muted uppercase tracking-widest font-heading">Years of<br>Excellence</span>
+            <span class="block text-4xl font-bold text-clay-ink font-heading">25<span class="text-brand-darkGold">+</span></span>
+            <span class="text-xs text-clay-muted uppercase tracking-widest font-heading">Construction<br>Veterans</span>
           </div>
         </div>
       </div>
@@ -286,45 +753,28 @@
         </div>
         <h2 class="text-4xl md:text-5xl font-bold text-clay-ink font-heading uppercase">Core <span class="text-gradient-gold">Values</span></h2>
       </div>
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Card 1 -->
-        <div
-          class="glass-panel p-10 text-center group hover:bg-brand-gold/5 transition duration-500 reveal-up border-t-0 hover:border-brand-gold/30">
-          <div
-            class="w-20 h-20 mx-auto rounded-full bg-clay-mist border border-brand-gold/30 flex items-center justify-center mb-8 group-hover:scale-110 transition duration-500 shadow-[0_0_30px_rgba(200,144,15,0.1)] group-hover:shadow-[0_0_30px_rgba(200,144,15,0.4)]">
-            <i class="fas fa-leaf text-3xl text-brand-darkGold"></i>
-          </div>
-          <h3 class="text-2xl font-bold text-clay-ink font-heading mb-4 group-hover:text-brand-darkGold transition">
-            Sustainability</h3>
-          <p class="text-clay-muted text-sm leading-relaxed">We engineer for the future, utilizing eco-friendly materials
-            and energy-efficient designs that respect our planet and reduce carbon footprints.</p>
-        </div>
-        <!-- Card 2 -->
-        <div
-          class="glass-panel p-10 text-center group hover:bg-brand-gold/5 transition duration-500 reveal-up border-t-0 hover:border-brand-gold/30"
-          style="transition-delay: 100ms;">
-          <div
-            class="w-20 h-20 mx-auto rounded-full bg-clay-mist border border-brand-gold/30 flex items-center justify-center mb-8 group-hover:scale-110 transition duration-500 shadow-[0_0_30px_rgba(200,144,15,0.1)] group-hover:shadow-[0_0_30px_rgba(200,144,15,0.4)]">
-            <i class="fas fa-lightbulb text-3xl text-brand-darkGold"></i>
-          </div>
-          <h3 class="text-2xl font-bold text-clay-ink font-heading mb-4 group-hover:text-brand-darkGold transition">Innovation
-          </h3>
-          <p class="text-clay-muted text-sm leading-relaxed">Embracing cutting-edge technology and modern engineering
-            marvels to build smarter, safer, and more enduring structures.</p>
-        </div>
-        <!-- Card 3 -->
-        <div
-          class="glass-panel p-10 text-center group hover:bg-brand-gold/5 transition duration-500 reveal-up border-t-0 hover:border-brand-gold/30"
-          style="transition-delay: 200ms;">
-          <div
-            class="w-20 h-20 mx-auto rounded-full bg-clay-mist border border-brand-gold/30 flex items-center justify-center mb-8 group-hover:scale-110 transition duration-500 shadow-[0_0_30px_rgba(200,144,15,0.1)] group-hover:shadow-[0_0_30px_rgba(200,144,15,0.4)]">
-            <i class="fas fa-handshake text-3xl text-brand-darkGold"></i>
-          </div>
-          <h3 class="text-2xl font-bold text-clay-ink font-heading mb-4 group-hover:text-brand-darkGold transition">Integrity
-          </h3>
-          <p class="text-clay-muted text-sm leading-relaxed">Built on trust. We maintain transparent communication and
-            honest practices in every brick we lay and every contract we sign.</p>
-        </div>
+      <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+        <article class="ix-vcard reveal-up">
+          <div class="ix-vcard-num">01</div>
+          <div class="ix-vcard-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="ix-vcard-tag">Non-Negotiable</div>
+          <h3 class="ix-vcard-title">Safety First</h3>
+          <p class="ix-vcard-body">ELCB checks, fall-protection nets, daily toolbox meetings. Every site, every shift — engineered so the only thing that ever breaks ground is concrete.</p>
+        </article>
+        <article class="ix-vcard reveal-up" style="transition-delay: 100ms;">
+          <div class="ix-vcard-num">02</div>
+          <div class="ix-vcard-icon"><i class="fas fa-hard-hat"></i></div>
+          <div class="ix-vcard-tag">Engineered To Last</div>
+          <h3 class="ix-vcard-title">Strength &amp; Quality</h3>
+          <p class="ix-vcard-body">Reinforcement audits, shuttering checklists, pour cards on every floor. Zero-defect delivery isn't a slogan — it's the documentation we ship with the keys.</p>
+        </article>
+        <article class="ix-vcard reveal-up" style="transition-delay: 200ms;">
+          <div class="ix-vcard-num">03</div>
+          <div class="ix-vcard-icon"><i class="fas fa-stopwatch"></i></div>
+          <div class="ix-vcard-tag">No Compromises</div>
+          <h3 class="ix-vcard-title">Speed &amp; Efficiency</h3>
+          <p class="ix-vcard-body">Pre-engineered shuttering systems and ERP-driven cost control mean we hand over on time, on budget — without trading quality for either.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -347,11 +797,14 @@
               class="block text-brand-darkGold font-bold tracking-[0.3em] uppercase mb-4 text-sm animate-fade-in">Residential
               Icon</span>
             <h2 class="text-4xl sm:text-5xl md:text-8xl font-bold text-clay-ink font-heading mb-6 leading-none">MONTICELLO</h2>
-            <p class="text-clay-muted text-lg font-light mb-10 max-w-2xl mx-auto">A testament to vertical luxury living.
-            </p>
-            <a href="projects.html"
-              class="inline-block border-b border-brand-gold text-clay-ink pb-1 hover:text-brand-darkGold transition">View
-              Details</a>
+            <p class="text-clay-muted text-base md:text-lg font-light mb-2 max-w-2xl mx-auto">A testament to vertical luxury living on Mumbai's western waterfront.</p>
+            <div class="ix-slide-meta">
+              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Year</span><span class="ix-slide-meta-v">2019</span></div>
+              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Sector</span><span class="ix-slide-meta-v">Residential</span></div>
+              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Floors</span><span class="ix-slide-meta-v">3B+P+14</span></div>
+              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Location</span><span class="ix-slide-meta-v">Bandra</span></div>
+            </div>
+            <a href="projects.html" class="inline-block mt-8 border-b border-brand-gold text-clay-ink pb-1 hover:text-brand-darkGold transition font-heading text-xs tracking-widest uppercase">View Project</a>
           </div>
         </div>
 
@@ -365,11 +818,14 @@
           <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
             <span class="block text-brand-darkGold font-bold tracking-[0.3em] uppercase mb-4 text-sm">Eco-Conscious</span>
             <h2 class="text-4xl sm:text-5xl md:text-8xl font-bold text-clay-ink font-heading mb-6 leading-none">TREE TOP</h2>
-            <p class="text-clay-muted text-lg font-light mb-10 max-w-2xl mx-auto">Merging modern architecture with nature.
-            </p>
-            <a href="projects.html"
-              class="inline-block border-b border-brand-gold text-clay-ink pb-1 hover:text-brand-darkGold transition">View
-              Details</a>
+            <p class="text-clay-muted text-base md:text-lg font-light mb-2 max-w-2xl mx-auto">Merging modern architecture with nature — a green-certified high-rise.</p>
+            <div class="ix-slide-meta">
+              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Year</span><span class="ix-slide-meta-v">2020</span></div>
+              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Sector</span><span class="ix-slide-meta-v">Residential</span></div>
+              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Type</span><span class="ix-slide-meta-v">Eco-High-Rise</span></div>
+              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Built-Up</span><span class="ix-slide-meta-v">3.1L sf</span></div>
+            </div>
+            <a href="projects.html" class="inline-block mt-8 border-b border-brand-gold text-clay-ink pb-1 hover:text-brand-darkGold transition font-heading text-xs tracking-widest uppercase">View Project</a>
           </div>
         </div>
 
@@ -383,10 +839,14 @@
           <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
             <span class="block text-brand-darkGold font-bold tracking-[0.3em] uppercase mb-4 text-sm">Mixed Use</span>
             <h2 class="text-4xl sm:text-5xl md:text-8xl font-bold text-clay-ink font-heading mb-6 leading-none">SPLENDORA</h2>
-            <p class="text-clay-muted text-lg font-light mb-10 max-w-2xl mx-auto">Self-sustaining urban ecosystem.</p>
-            <a href="projects.html"
-              class="inline-block border-b border-brand-gold text-clay-ink pb-1 hover:text-brand-darkGold transition">View
-              Details</a>
+            <p class="text-clay-muted text-base md:text-lg font-light mb-2 max-w-2xl mx-auto">A self-sustaining urban ecosystem of homes, retail, and shared green space.</p>
+            <div class="ix-slide-meta">
+              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Year</span><span class="ix-slide-meta-v">2022</span></div>
+              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Sector</span><span class="ix-slide-meta-v">Mixed Use</span></div>
+              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Towers</span><span class="ix-slide-meta-v">4</span></div>
+              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Built-Up</span><span class="ix-slide-meta-v">5.2L sf</span></div>
+            </div>
+            <a href="projects.html" class="inline-block mt-8 border-b border-brand-gold text-clay-ink pb-1 hover:text-brand-darkGold transition font-heading text-xs tracking-widest uppercase">View Project</a>
           </div>
         </div>
 
@@ -398,6 +858,49 @@
           class="fas fa-chevron-left text-3xl"></i></div>
       <div class="swiper-button-next text-brand-darkGold/50 hover:text-brand-darkGold transition absolute right-8 z-20"><i
           class="fas fa-chevron-right text-3xl"></i></div>
+    </div>
+  </section>
+
+  <!-- ACTIVE PROJECTS — Currently Building -->
+  <section class="py-16 md:py-20 bg-clay-base border-t border-clay-border relative z-10">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-12 reveal-up">
+        <div>
+          <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">In Motion</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-clay-ink font-heading uppercase mt-2">Currently <span class="text-brand-darkGold">Building</span></h2>
+        </div>
+        <p class="text-clay-muted text-sm max-w-md font-body">Eleven live sites across the MMR. A snapshot of momentum, not a list of intentions.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+        <article class="ix-active-card reveal-up">
+          <div class="ix-active-status">Live</div>
+          <div class="ix-active-name">Splendora Phase II</div>
+          <div class="ix-active-loc">Pune · Mixed Use</div>
+          <div class="ix-active-progress"><div class="ix-active-progress-fill" style="width: 78%"></div></div>
+          <div class="ix-active-meta"><span><strong>78%</strong> Complete</span><span>Q3 2026</span></div>
+        </article>
+        <article class="ix-active-card reveal-up" style="transition-delay: 100ms;">
+          <div class="ix-active-status">Live</div>
+          <div class="ix-active-name">Lodha Highrise</div>
+          <div class="ix-active-loc">Thane · Residential</div>
+          <div class="ix-active-progress"><div class="ix-active-progress-fill" style="width: 54%"></div></div>
+          <div class="ix-active-meta"><span><strong>54%</strong> Complete</span><span>Q1 2027</span></div>
+        </article>
+        <article class="ix-active-card reveal-up" style="transition-delay: 200ms;">
+          <div class="ix-active-status">Live</div>
+          <div class="ix-active-name">Mahindra Serenes</div>
+          <div class="ix-active-loc">Alibaug · Premium</div>
+          <div class="ix-active-progress"><div class="ix-active-progress-fill" style="width: 42%"></div></div>
+          <div class="ix-active-meta"><span><strong>42%</strong> Complete</span><span>Q4 2027</span></div>
+        </article>
+        <article class="ix-active-card reveal-up" style="transition-delay: 300ms;">
+          <div class="ix-active-status">Live</div>
+          <div class="ix-active-name">Hiranandani Block C</div>
+          <div class="ix-active-loc">Powai · Residential</div>
+          <div class="ix-active-progress"><div class="ix-active-progress-fill" style="width: 31%"></div></div>
+          <div class="ix-active-meta"><span><strong>31%</strong> Complete</span><span>Q2 2027</span></div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -413,71 +916,63 @@
         <h2 class="text-4xl md:text-5xl font-bold text-clay-ink font-heading uppercase">Our <span class="text-gradient-gold">Expertise</span></h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto md:auto-rows-[300px]">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-        <!-- Card 1: Residential (Tall) -->
-        <div
-          class="md:row-span-2 glass-panel p-8 relative overflow-hidden group hover:border-brand-gold/30 transition duration-500 reveal-up">
-          <div
-            class="absolute top-0 right-0 p-6 text-6xl text-clay-ink/5 font-heading group-hover:text-brand-darkGold/10 transition">
-            01</div>
-          <i class="fas fa-home text-4xl text-brand-darkGold mb-6 block"></i>
-          <h3 class="text-2xl font-bold text-clay-ink font-heading mb-4">Residential</h3>
-          <p class="text-clay-muted text-sm leading-relaxed mb-6">High-end villas and skyscraper apartments designed for
-            luxury and comfort.</p>
-          <ul class="text-xs text-clay-faint space-y-2">
-            <li><i class="fas fa-check text-brand-darkGold mr-2"></i> Custom Villas</li>
-            <li><i class="fas fa-check text-brand-darkGold mr-2"></i> High Rise Towers</li>
-            <li><i class="fas fa-check text-brand-darkGold mr-2"></i> Townships</li>
+        <!-- Card 1: Residential -->
+        <article class="ix-vcard reveal-up">
+          <div class="ix-vcard-num">01</div>
+          <div class="ix-vcard-icon"><i class="fas fa-home"></i></div>
+          <div class="ix-vcard-tag">25+ Projects</div>
+          <h3 class="ix-vcard-title">Residential</h3>
+          <p class="ix-vcard-body">High-end villas, premium high-rises, and integrated townships.</p>
+          <ul class="ix-step-list" style="margin-top: 1rem;">
+            <li>Custom Villas &amp; Penthouses</li>
+            <li>Super High-Rise Towers</li>
+            <li>Mixed-Use Townships</li>
           </ul>
-          <div
-            class="absolute bottom-0 left-0 w-full h-1 bg-brand-gold transform scale-x-0 group-hover:scale-x-100 transition duration-500">
-          </div>
-        </div>
+        </article>
 
         <!-- Card 2: Commercial -->
-        <div
-          class="glass-panel p-8 relative overflow-hidden group hover:border-brand-gold/30 transition duration-500 reveal-up"
-          style="transition-delay: 100ms;">
-          <div
-            class="absolute top-0 right-0 p-6 text-6xl text-clay-ink/5 font-heading group-hover:text-brand-darkGold/10 transition">
-            02</div>
-          <i class="fas fa-city text-4xl text-brand-darkGold mb-6 block"></i>
-          <h3 class="text-2xl font-bold text-clay-ink font-heading mb-4">Commercial</h3>
-          <p class="text-clay-muted text-sm leading-relaxed">Office spaces and IT parks optimized for productivity.</p>
-        </div>
+        <article class="ix-vcard reveal-up" style="transition-delay: 100ms;">
+          <div class="ix-vcard-num">02</div>
+          <div class="ix-vcard-icon"><i class="fas fa-city"></i></div>
+          <div class="ix-vcard-tag">12+ Projects</div>
+          <h3 class="ix-vcard-title">Commercial</h3>
+          <p class="ix-vcard-body">Grade-A office towers, retail, and IT parks built for daily life.</p>
+          <ul class="ix-step-list" style="margin-top: 1rem;">
+            <li>Office &amp; IT Parks</li>
+            <li>Retail &amp; Hospitality</li>
+            <li>Mixed-Use Commercial</li>
+          </ul>
+        </article>
 
-        <!-- Card 3: Industrial -->
-        <div
-          class="glass-panel p-8 relative overflow-hidden group hover:border-brand-gold/30 transition duration-500 reveal-up"
-          style="transition-delay: 200ms;">
-          <div
-            class="absolute top-0 right-0 p-6 text-6xl text-clay-ink/5 font-heading group-hover:text-brand-darkGold/10 transition">
-            03</div>
-          <i class="fas fa-industry text-4xl text-brand-darkGold mb-6 block"></i>
-          <h3 class="text-2xl font-bold text-clay-ink font-heading mb-4">Industrial</h3>
-          <p class="text-clay-muted text-sm leading-relaxed">Warehousing and manufacturing units built to last.</p>
-        </div>
+        <!-- Card 3: Industrial / Public -->
+        <article class="ix-vcard reveal-up" style="transition-delay: 200ms;">
+          <div class="ix-vcard-num">03</div>
+          <div class="ix-vcard-icon"><i class="fas fa-industry"></i></div>
+          <div class="ix-vcard-tag">8+ Projects</div>
+          <h3 class="ix-vcard-title">Institutional</h3>
+          <p class="ix-vcard-body">Government turnkey housing, civic infrastructure, and warehousing at scale.</p>
+          <ul class="ix-step-list" style="margin-top: 1rem;">
+            <li>Government Turnkey</li>
+            <li>Warehousing &amp; Logistics</li>
+            <li>Civic &amp; Educational</li>
+          </ul>
+        </article>
 
-        <!-- Card 4: Architecture (Wide) -->
-        <div
-          class="md:col-span-2 glass-panel p-8 relative overflow-hidden group hover:border-brand-gold/30 transition duration-500 flex items-center reveal-up"
-          style="transition-delay: 300ms;">
-          <div
-            class="absolute inset-0 bg-gradient-to-r from-brand-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
-          </div>
-          <div class="relative z-10 grid md:grid-cols-2 gap-8 items-center w-full">
-            <div>
-              <h3 class="text-2xl font-bold text-clay-ink font-heading mb-4">Design & Planning</h3>
-              <p class="text-clay-muted text-sm leading-relaxed">We don't just build; we design. Our in-house
-                architectural team ensures every project is aesthetically pleasing and structurally sound.</p>
-            </div>
-            <div class="text-right hidden md:block">
-              <i
-                class="fas fa-drafting-compass text-6xl text-brand-darkGold/20 group-hover:text-brand-darkGold/80 transition transform group-hover:rotate-12"></i>
-            </div>
-          </div>
-        </div>
+        <!-- Card 4: Design & Planning -->
+        <article class="ix-vcard reveal-up" style="transition-delay: 300ms;">
+          <div class="ix-vcard-num">04</div>
+          <div class="ix-vcard-icon"><i class="fas fa-drafting-compass"></i></div>
+          <div class="ix-vcard-tag">In-House Studio</div>
+          <h3 class="ix-vcard-title">Design &amp; Planning</h3>
+          <p class="ix-vcard-body">An in-house architecture team translating intent into precise drawings.</p>
+          <ul class="ix-step-list" style="margin-top: 1rem;">
+            <li>Architectural Design</li>
+            <li>Structural Engineering</li>
+            <li>RERA Documentation</li>
+          </ul>
+        </article>
 
       </div>
     </div>
@@ -500,89 +995,123 @@
         <h2 class="text-4xl md:text-5xl font-bold text-clay-ink font-heading uppercase">How We <span class="text-gradient-gold">Build</span></h2>
       </div>
 
-      <div class="grid md:grid-cols-4 gap-8 relative">
-        <!-- Connecting Line (hidden on mobile) -->
+      <div class="ix-process-grid grid md:grid-cols-4 gap-8 relative">
+        <!-- Connecting Line (desktop only) -->
         <div class="absolute top-8 left-0 w-full h-0.5 bg-clay-surface/10 hidden md:block z-0"></div>
 
         <!-- Step 1 -->
-        <div class="relative group reveal-up z-10">
-          <div
-            class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(200,144,15,0.3)]">
+        <div class="ix-step relative group reveal-up z-10">
+          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(200,144,15,0.3)]">
             <span>01</span>
           </div>
           <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
-            <h3 class="text-xl font-bold text-clay-ink font-heading mb-3 text-brand-darkGold">Consultation</h3>
-            <p class="text-clay-muted text-sm leading-relaxed">We start by deeply understanding your vision, requirements,
-              and site potential.</p>
+            <span class="ix-step-duration">2 – 4 Weeks</span>
+            <h3 class="text-xl font-bold font-heading mb-3 text-brand-darkGold">Consultation</h3>
+            <p class="text-clay-muted text-sm leading-relaxed mb-3">Deeply understanding your vision, site potential, and feasibility constraints.</p>
+            <ul class="ix-step-list">
+              <li>Site survey &amp; soil report</li>
+              <li>Brief alignment workshop</li>
+              <li>Indicative cost estimate</li>
+            </ul>
           </div>
         </div>
 
         <!-- Step 2 -->
-        <div class="relative group reveal-up z-10" style="transition-delay: 150ms;">
-          <div
-            class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(200,144,15,0.3)]">
+        <div class="ix-step relative group reveal-up z-10" style="transition-delay: 150ms;">
+          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(200,144,15,0.3)]">
             <span>02</span>
           </div>
           <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
-            <h3 class="text-xl font-bold text-clay-ink font-heading mb-3 text-brand-darkGold">Design & Plan</h3>
-            <p class="text-clay-muted text-sm leading-relaxed">Our architects create detailed blueprints, 3D models, and
-              structural plans.</p>
+            <span class="ix-step-duration">6 – 12 Weeks</span>
+            <h3 class="text-xl font-bold font-heading mb-3 text-brand-darkGold">Design &amp; Plan</h3>
+            <p class="text-clay-muted text-sm leading-relaxed mb-3">In-house architects build detailed BOQ, structural plans, and 3D walkthroughs.</p>
+            <ul class="ix-step-list">
+              <li>Architectural &amp; structural drawings</li>
+              <li>Material selection &amp; BOQ</li>
+              <li>RERA / approvals coordination</li>
+            </ul>
           </div>
         </div>
 
         <!-- Step 3 -->
-        <div class="relative group reveal-up z-10" style="transition-delay: 300ms;">
-          <div
-            class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(200,144,15,0.3)]">
+        <div class="ix-step relative group reveal-up z-10" style="transition-delay: 300ms;">
+          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(200,144,15,0.3)]">
             <span>03</span>
           </div>
           <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
-            <h3 class="text-xl font-bold text-clay-ink font-heading mb-3 text-brand-darkGold">Construction</h3>
-            <p class="text-clay-muted text-sm leading-relaxed">We execute with precision, using premium materials and
-              adhering to safety standards.</p>
+            <span class="ix-step-duration">12 – 36 Months</span>
+            <h3 class="text-xl font-bold font-heading mb-3 text-brand-darkGold">Construction</h3>
+            <p class="text-clay-muted text-sm leading-relaxed mb-3">5-S methodology in motion — daily safety briefings, ERP-tracked progress, weekly client reports.</p>
+            <ul class="ix-step-list">
+              <li>Daily toolbox &amp; safety drills</li>
+              <li>Quality checklist per pour</li>
+              <li>Live ERP cost tracking</li>
+            </ul>
           </div>
         </div>
 
         <!-- Step 4 -->
-        <div class="relative group reveal-up z-10" style="transition-delay: 450ms;">
-          <div
-            class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(200,144,15,0.3)]">
+        <div class="ix-step relative group reveal-up z-10" style="transition-delay: 450ms;">
+          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(200,144,15,0.3)]">
             <span>04</span>
           </div>
           <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
-            <h3 class="text-xl font-bold text-clay-ink font-heading mb-3 text-brand-darkGold">Handover</h3>
-            <p class="text-clay-muted text-sm leading-relaxed">Final inspections, quality checks, and delivering the keys
-              to your legacy.</p>
+            <span class="ix-step-duration">2 – 4 Weeks</span>
+            <h3 class="text-xl font-bold font-heading mb-3 text-brand-darkGold">Handover</h3>
+            <p class="text-clay-muted text-sm leading-relaxed mb-3">Snag-list closure, final inspections, and a 12-month defect-liability commitment.</p>
+            <ul class="ix-step-list">
+              <li>Snag &amp; defect resolution</li>
+              <li>OC / completion certificates</li>
+              <li>12-month warranty support</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CLIENTS (Ticker) -->
-  <section class="py-10 bg-clay-mist border-y border-clay-border relative overflow-hidden">
-    <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-clay-mist to-transparent z-10 pointer-events-none"></div>
-    <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-clay-mist to-transparent z-10 pointer-events-none"></div>
-    <div class="flex animate-marquee whitespace-nowrap w-max">
-      <div class="flex gap-12 md:gap-20 px-6 items-center">
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 hover:text-brand-darkGold/60 transition duration-300 cursor-default">LODHA</span>
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 hover:text-brand-darkGold/60 transition duration-300 cursor-default">RUSTOMJEE</span>
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 hover:text-brand-darkGold/60 transition duration-300 cursor-default">MAHINDRA LIFESPACES</span>
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 hover:text-brand-darkGold/60 transition duration-300 cursor-default">HIRANANDANI</span>
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 hover:text-brand-darkGold/60 transition duration-300 cursor-default">DHEERAJ REALTY</span>
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 hover:text-brand-darkGold/60 transition duration-300 cursor-default">EKTA WORLD</span>
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 hover:text-brand-darkGold/60 transition duration-300 cursor-default">AJMERA</span>
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 hover:text-brand-darkGold/60 transition duration-300 cursor-default">PURANIKS</span>
+  <!-- CLIENTS (Monogram Ticker) -->
+  <section class="py-12 bg-clay-mist border-y border-clay-border relative overflow-hidden">
+    <div class="container mx-auto px-6 mb-6 reveal-up">
+      <div class="text-center">
+        <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">Trusted By</span>
+        <h3 class="text-2xl md:text-3xl font-bold text-clay-ink font-heading uppercase mt-2">8+ Marquee Developers</h3>
       </div>
-      <div class="flex gap-12 md:gap-20 px-6 items-center" aria-hidden="true">
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 cursor-default">LODHA</span>
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 cursor-default">RUSTOMJEE</span>
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 cursor-default">MAHINDRA LIFESPACES</span>
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 cursor-default">HIRANANDANI</span>
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 cursor-default">DHEERAJ REALTY</span>
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 cursor-default">EKTA WORLD</span>
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 cursor-default">AJMERA</span>
-        <span class="text-xl md:text-2xl font-bold font-heading text-clay-ink/15 cursor-default">PURANIKS</span>
+    </div>
+    <div class="absolute left-0 top-1/2 bottom-0 w-24 bg-gradient-to-r from-clay-mist to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute right-0 top-1/2 bottom-0 w-24 bg-gradient-to-l from-clay-mist to-transparent z-10 pointer-events-none"></div>
+    <div class="flex animate-marquee whitespace-nowrap w-max mt-4">
+      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/lodha.png" alt="Lodha Group" loading="lazy"></div></div>
+      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/rustomjee.png" alt="Rustomjee" loading="lazy"></div></div>
+      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/mahindra-lifespaces.png" alt="Mahindra Lifespaces" loading="lazy"></div></div>
+      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/hiranandani.png" alt="Hiranandani" loading="lazy"></div></div>
+      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/dheeraj.png" alt="Dheeraj Realty" loading="lazy"></div></div>
+      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/ekta-world.png" alt="Ekta World" loading="lazy"></div></div>
+      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/ajmera.png" alt="Ajmera Group" loading="lazy"></div></div>
+      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/puraniks.png" alt="Puraniks" loading="lazy"></div></div>
+      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/lodha.png" alt="" loading="lazy"></div></div>
+      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/rustomjee.png" alt="" loading="lazy"></div></div>
+      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/mahindra-lifespaces.png" alt="" loading="lazy"></div></div>
+      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/hiranandani.png" alt="" loading="lazy"></div></div>
+      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/dheeraj.png" alt="" loading="lazy"></div></div>
+      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/ekta-world.png" alt="" loading="lazy"></div></div>
+      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/ajmera.png" alt="" loading="lazy"></div></div>
+      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/puraniks.png" alt="" loading="lazy"></div></div>
+    </div>
+  </section>
+
+  <!-- PRESS / FEATURED IN -->
+  <section class="py-12 md:py-16 bg-clay-base border-b border-clay-border relative z-10">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-6 reveal-up">
+        <span class="text-brand-darkGold text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase font-heading">As Featured In</span>
+      </div>
+      <div class="ix-press-row reveal-up">
+        <span class="ix-press-name">Construction World</span>
+        <span class="ix-press-name">Times Network</span>
+        <span class="ix-press-name">Economic Times</span>
+        <span class="ix-press-name">Mid-Day Mumbai</span>
+        <span class="ix-press-name">Maharashtra Govt.</span>
       </div>
     </div>
   </section>
@@ -611,9 +1140,7 @@
           <i class="fas fa-quote-left text-brand-darkGold/20 text-3xl mb-4"></i>
           <p class="text-sm md:text-lg text-clay-muted italic mb-6 md:mb-8 leading-relaxed font-light flex-1">"Strong Built has been an exceptional partner across multiple projects including Monticello, Del-Sol, and Insignia. Their engineering precision and commitment to timelines is rare in this industry."</p>
           <div class="flex items-center gap-4 border-t border-clay-border pt-6">
-            <div class="w-12 h-12 bg-clay-sunken rounded-full flex items-center justify-center border border-clay-border shrink-0">
-              <span class="text-lg font-heading font-bold text-brand-darkGold">DR</span>
-            </div>
+            <div class="ix-avatar"><span>DR</span></div>
             <div>
               <h4 class="text-clay-ink font-bold font-heading">Project Director</h4>
               <p class="text-brand-darkGold/70 text-[10px] uppercase tracking-widest font-bold">Dheeraj Realty</p>
@@ -626,9 +1153,7 @@
           <i class="fas fa-quote-left text-brand-darkGold/20 text-3xl mb-4"></i>
           <p class="text-sm md:text-lg text-clay-muted italic mb-6 md:mb-8 leading-relaxed font-light flex-1">"From Tree Top to Splendora and Luxaria, Strong Built has consistently delivered projects that exceed our specifications. Their safety record and on-site discipline are truly industry-leading."</p>
           <div class="flex items-center gap-4 border-t border-clay-border pt-6">
-            <div class="w-12 h-12 bg-clay-sunken rounded-full flex items-center justify-center border border-clay-border shrink-0">
-              <span class="text-lg font-heading font-bold text-brand-darkGold">LG</span>
-            </div>
+            <div class="ix-avatar"><span>LG</span></div>
             <div>
               <h4 class="text-clay-ink font-bold font-heading">Construction Head</h4>
               <p class="text-brand-darkGold/70 text-[10px] uppercase tracking-widest font-bold">Lodha Group</p>
@@ -641,9 +1166,7 @@
           <i class="fas fa-quote-left text-brand-darkGold/20 text-3xl mb-4"></i>
           <p class="text-sm md:text-lg text-clay-muted italic mb-6 md:mb-8 leading-relaxed font-light flex-1">"Our 5 lakh sq ft Bloomdale township in Nagpur was delivered with zero compromises on quality. Strong Built brings a refreshing level of professionalism and transparency to every engagement."</p>
           <div class="flex items-center gap-4 border-t border-clay-border pt-6">
-            <div class="w-12 h-12 bg-clay-sunken rounded-full flex items-center justify-center border border-clay-border shrink-0">
-              <span class="text-lg font-heading font-bold text-brand-darkGold">ML</span>
-            </div>
+            <div class="ix-avatar"><span>ML</span></div>
             <div>
               <h4 class="text-clay-ink font-bold font-heading">Project Lead</h4>
               <p class="text-brand-darkGold/70 text-[10px] uppercase tracking-widest font-bold">Mahindra Lifespaces</p>
@@ -666,12 +1189,17 @@
       <div class="bg-brand-gold flex items-center relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
         <div class="relative z-10 p-10 md:p-16 lg:p-20">
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-black font-heading mb-6 leading-tight uppercase">Ready to<br>Build?</h2>
-          <p class="text-black/70 text-base md:text-lg mb-8 max-w-md font-light">Let's discuss how we can turn your architectural dreams into lasting structures.</p>
-          <a href="contact.html"
-            class="inline-block px-10 py-4 bg-clay-base text-clay-ink font-bold uppercase tracking-widest hover:bg-clay-surface hover:text-black transition duration-300 font-heading text-sm">
-            Get a Quote
-          </a>
+          <span class="inline-block text-black/60 text-xs font-bold tracking-[0.4em] uppercase mb-4 font-heading">See It In Person</span>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-black font-heading mb-6 leading-tight uppercase">Walk a Live<br>Site With Us</h2>
+          <p class="text-black/70 text-base md:text-lg mb-8 max-w-md font-light">Spec sheets only tell half the story. Visit one of our active projects with our team and see the discipline up close.</p>
+          <div class="flex flex-wrap gap-3">
+            <a href="contact.html" class="inline-flex items-center gap-2 px-8 md:px-10 py-4 bg-clay-base text-clay-ink font-bold uppercase tracking-widest hover:bg-clay-surface hover:text-black transition duration-300 font-heading text-sm">
+              <i class="fas fa-calendar-check text-xs"></i> Schedule a Site Visit
+            </a>
+            <a href="projects.html" class="inline-flex items-center gap-2 px-8 md:px-10 py-4 border border-black/40 text-black font-bold uppercase tracking-widest hover:bg-black hover:text-brand-gold transition duration-300 font-heading text-sm">
+              <i class="fas fa-arrow-down text-xs"></i> Download Portfolio
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -741,10 +1269,35 @@
     </div>
   </footer>
 
+  <!-- Sticky Floating CTA — appears after first scroll -->
+  <div class="ix-fab" id="ixFab" aria-hidden="true">
+    <a href="https://wa.me/919619875081" target="_blank" rel="noopener" class="ix-fab-whatsapp" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="tel:+919619875081" class="ix-fab-phone" aria-label="Call Strong Built"><i class="fas fa-phone"></i></a>
+  </div>
+
   <!-- SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
   <script src="script.js"></script>
+  <script>
+    // Floating CTA visibility — show after first 400px of scroll
+    (function initFab() {
+      const fab = document.getElementById('ixFab');
+      if (!fab) return;
+      let ticking = false;
+      const sync = () => {
+        const visible = window.scrollY > 400;
+        fab.classList.toggle('is-visible', visible);
+        fab.setAttribute('aria-hidden', visible ? 'false' : 'true');
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(sync);
+      }, { passive: true });
+    })();
+  </script>
 
 </body>
 

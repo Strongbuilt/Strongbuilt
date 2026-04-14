@@ -40,6 +40,273 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="theme-config.js"></script>
+
+  <style>
+    /* ── Recognition Hero ── */
+    .rec-hero-bg {
+      background:
+        radial-gradient(ellipse at 30% 40%, rgba(252, 182, 21, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 75% 70%, rgba(200, 144, 15, 0.08) 0%, transparent 50%),
+        linear-gradient(180deg, rgba(26, 23, 24, 0.85) 0%, rgba(35, 31, 32, 0.95) 100%);
+    }
+    .rec-hero-orbs::before,
+    .rec-hero-orbs::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .rec-hero-orbs::before {
+      width: 400px; height: 400px;
+      top: 10%; left: 10%;
+      background: radial-gradient(circle, rgba(252, 182, 21, 0.15), transparent 70%);
+      animation: float 10s ease-in-out infinite;
+    }
+    .rec-hero-orbs::after {
+      width: 300px; height: 300px;
+      bottom: 10%; right: 15%;
+      background: radial-gradient(circle, rgba(200, 144, 15, 0.12), transparent 70%);
+      animation: float 12s ease-in-out 2s infinite;
+    }
+
+    /* ── Impact Stats Strip ── */
+    .rec-stat {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .rec-stat:first-child { border-left: none; }
+    .rec-stat-num {
+      font-family: 'Oswald', 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1;
+      color: #FCB615;
+      letter-spacing: -0.02em;
+    }
+    .rec-stat-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #b8b2a8;
+      margin-top: 0.75rem;
+    }
+
+    /* ── Premium Award Card ── */
+    .awr-card {
+      position: relative;
+      padding: 2.5rem 2rem;
+      background: linear-gradient(155deg, rgba(42, 38, 39, 0.9) 0%, rgba(26, 23, 24, 0.95) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.5s ease;
+    }
+    .awr-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 40%;
+      height: 2px;
+      background: linear-gradient(90deg, #FCB615, transparent);
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .awr-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at top right, rgba(252, 182, 21, 0.06), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .awr-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(252, 182, 21, 0.35);
+      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(252, 182, 21, 0.15);
+    }
+    .awr-card:hover::before { width: 100%; }
+    .awr-card:hover::after { opacity: 1; }
+
+    .awr-year {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 2.5rem;
+      color: #FCB615;
+      opacity: 0.18;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      transition: opacity 0.4s ease;
+    }
+    .awr-card:hover .awr-year { opacity: 0.55; }
+
+    .awr-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(252, 182, 21, 0.2), rgba(252, 182, 21, 0.04) 70%);
+      border: 1px solid rgba(252, 182, 21, 0.3);
+      color: #FCB615;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 20px -8px rgba(252, 182, 21, 0.4);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .awr-card:hover .awr-icon { transform: scale(1.08) rotate(-4deg); }
+
+    .awr-issuer {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #C8900F;
+      margin-bottom: 0.75rem;
+    }
+    .awr-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      line-height: 1.15;
+      text-transform: uppercase;
+      color: #f5f1ec;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+    }
+    .awr-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #b8b2a8;
+      font-weight: 300;
+    }
+
+    /* ── Client Appreciation (secondary tier) ── */
+    .cap-card {
+      position: relative;
+      padding: 1.75rem 1.5rem;
+      background: rgba(26, 23, 24, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-left: 3px solid rgba(252, 182, 21, 0.3);
+      border-radius: 2px;
+      transition: all 0.4s ease;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+    .cap-card:hover {
+      border-left-color: #FCB615;
+      background: rgba(35, 31, 32, 0.7);
+      transform: translateX(4px);
+    }
+    .cap-icon {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #C8900F;
+      font-size: 1.1rem;
+      border: 1px solid rgba(200, 144, 15, 0.3);
+      border-radius: 50%;
+      background: rgba(252, 182, 21, 0.05);
+    }
+    .cap-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f5f1ec;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.35rem;
+    }
+    .cap-meta {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #C8900F;
+      margin-bottom: 0.5rem;
+    }
+    .cap-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: #b8b2a8;
+      font-weight: 300;
+    }
+
+    /* ── ISO Certification Badge ── */
+    .iso-badge {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 30%, rgba(252, 182, 21, 0.12) 0%, rgba(26, 23, 24, 0.9) 70%);
+      border: 1px solid rgba(252, 182, 21, 0.3);
+      border-radius: 50%;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    .iso-badge::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px dashed rgba(252, 182, 21, 0.25);
+      border-radius: 50%;
+      animation: spin-slow 20s linear infinite;
+    }
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+    .iso-badge:hover {
+      border-color: #FCB615;
+      transform: scale(1.05);
+      box-shadow: 0 0 40px -10px rgba(252, 182, 21, 0.4);
+    }
+    .iso-badge i {
+      font-size: 1.5rem;
+      color: #FCB615;
+      margin-bottom: 0.5rem;
+      z-index: 2;
+    }
+    .iso-code {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      color: #f5f1ec;
+      line-height: 1;
+      z-index: 2;
+    }
+    .iso-year {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      color: #C8900F;
+      letter-spacing: 0.2em;
+      margin-top: 0.25rem;
+      z-index: 2;
+    }
+
+    @media (max-width: 767px) {
+      .awr-card { padding: 2rem 1.5rem; }
+      .awr-title { font-size: 1.2rem; }
+      .awr-year { font-size: 2rem; top: 1.25rem; right: 1.25rem; }
+      .awr-icon { width: 52px; height: 52px; font-size: 1.2rem; margin-bottom: 1.25rem; }
+      .rec-stat { border-left: none; border-top: 1px solid rgba(255, 255, 255, 0.06); padding: 1.25rem 1rem; }
+      .rec-stat:first-child { border-top: none; }
+    }
+  </style>
 </head>
 
 <body class="bg-noise antialiased overflow-x-hidden selection:bg-brand-gold selection:text-black">
@@ -127,157 +394,182 @@
     </div>
   </header>
 
-  <div class="h-24"></div>
+  <div class="h-20 md:h-24"></div>
 
-  <section class="relative h-[50vh] md:h-[60vh] flex items-center justify-center text-center overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <img src="https://images.unsplash.com/photo-1590674899505-1c5c4195c326?auto=format&fit=crop&w=1920&q=80"
-        alt="Strong Built awards and recognition" class="w-full h-full object-cover opacity-30 animate-pulse-slow">
-    </div>
-    <div class="absolute inset-0 bg-gradient-to-b from-clay-base/80 via-clay-mist/60 to-clay-base z-0"></div>
-    <div class="relative z-30 container mx-auto px-6 mt-20">
-      <div class="inline-block mb-4 overflow-hidden">
-        <span class="block text-brand-darkGold text-sm font-bold tracking-[0.5em] uppercase reveal-up"
-          style="transition-delay: 100ms;">Excellence Appreciated</span>
+  <!-- ══════════ HERO ══════════ -->
+  <section class="rec-hero-bg rec-hero-orbs relative min-h-[70vh] md:min-h-[75vh] flex items-center justify-center text-center overflow-hidden border-b border-clay-border">
+    <div class="relative z-30 container mx-auto px-6 py-16">
+      <div class="inline-flex items-center gap-4 mb-6 reveal-up" style="transition-delay: 100ms;">
+        <span class="h-px w-10 bg-brand-gold"></span>
+        <span class="text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase font-heading">Excellence Appreciated</span>
+        <span class="h-px w-10 bg-brand-gold"></span>
       </div>
-      <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold mb-6 text-clay-ink uppercase tracking-tighter leading-none reveal-up font-hero"
-        style="transition-delay: 200ms;">
-        Awards & <span class="text-gradient-gold">Recognition</span>
+      <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold mb-8 text-clay-ink uppercase tracking-tighter leading-none reveal-up font-hero" style="transition-delay: 200ms;">
+        Awards &amp;<br class="md:hidden"> <span class="text-gradient-gold">Recognition</span>
       </h1>
-      <div class="h-px w-24 bg-brand-gold mx-auto my-8 reveal-up" style="transition-delay: 300ms;"></div>
-      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-3xl mx-auto leading-relaxed reveal-up"
-        style="transition-delay: 400ms;">
-        Celebrating our commitment to quality, safety, and innovation.
+      <p class="text-base md:text-xl font-light text-clay-muted max-w-2xl mx-auto leading-relaxed reveal-up mb-10" style="transition-delay: 300ms;">
+        A decade of delivery, independently verified — by industry bodies, government, and the clients we've built for.
       </p>
+      <div class="flex items-center justify-center gap-3 reveal-up" style="transition-delay: 400ms;">
+        <i class="fas fa-trophy text-brand-gold"></i>
+        <i class="fas fa-medal text-brand-darkGold"></i>
+        <i class="fas fa-award text-brand-gold"></i>
+        <i class="fas fa-shield-alt text-brand-darkGold"></i>
+        <i class="fas fa-certificate text-brand-gold"></i>
+      </div>
     </div>
   </section>
 
-  <!-- Awards Section -->
-  <section class="py-24 container mx-auto px-6 relative z-10">
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 uppercase font-heading text-clay-ink reveal-up">Industry
-      <span class="text-brand-darkGold">Accolades</span>
-    </h2>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Award Item 1 -->
-      <div class="glass-panel p-8 border border-clay-border hover:border-brand-gold transition-colors group reveal-up">
-        <div class="text-brand-darkGold text-5xl mb-6 opacity-80 group-hover:scale-110 transition-transform duration-500">
-          <i class="fas fa-trophy"></i>
+  <!-- ══════════ IMPACT STATS STRIP ══════════ -->
+  <section class="bg-clay-mist/60 border-b border-clay-border relative z-10">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 reveal-up">
+        <div class="rec-stat">
+          <div class="rec-stat-num">04</div>
+          <div class="rec-stat-label">Industry Awards</div>
         </div>
-        <h3 class="text-2xl font-bold text-clay-ink mb-2 uppercase font-heading">Fastest Growing Construction Company</h3>
-        <p class="text-xs text-brand-darkGold uppercase tracking-widest mb-4">Construction World Magazine Award 2021</p>
-        <p class="text-clay-muted font-body leading-relaxed">
-          Recognized for rapid expansion and consistent project delivery excellence across multiple sectors.
-        </p>
-      </div>
-
-      <!-- Award Item 2 -->
-      <div class="glass-panel p-8 border border-clay-border hover:border-brand-gold transition-colors group reveal-up"
-        style="transition-delay: 100ms;">
-        <div class="text-brand-darkGold text-5xl mb-6 opacity-80 group-hover:scale-110 transition-transform duration-500">
-          <i class="fas fa-medal"></i>
+        <div class="rec-stat">
+          <div class="rec-stat-num">02</div>
+          <div class="rec-stat-label">Client Recognition</div>
         </div>
-        <h3 class="text-2xl font-bold text-clay-ink mb-2 uppercase font-heading">Contribution to Urban Development</h3>
-        <p class="text-xs text-brand-darkGold uppercase tracking-widest mb-4">Maharashtra Governor’s Award 2022</p>
-        <p class="text-clay-muted font-body leading-relaxed">
-          honored for significant contributions towards modernizing urban infrastructure in Mumbai and beyond.
-        </p>
-      </div>
-
-      <!-- Award Item 3 -->
-      <div class="glass-panel p-8 border border-clay-border hover:border-brand-gold transition-colors group reveal-up"
-        style="transition-delay: 200ms;">
-        <div class="text-brand-darkGold text-5xl mb-6 opacity-80 group-hover:scale-110 transition-transform duration-500">
-          <i class="fas fa-award"></i>
+        <div class="rec-stat">
+          <div class="rec-stat-num">04</div>
+          <div class="rec-stat-label">ISO Certifications</div>
         </div>
-        <h3 class="text-2xl font-bold text-clay-ink mb-2 uppercase font-heading">Excellence in Infrastructure</h3>
-        <p class="text-xs text-brand-darkGold uppercase tracking-widest mb-4">Times Network Award 2023</p>
-        <p class="text-clay-muted font-body leading-relaxed">
-          Celebrating outstanding achievements in delivering complex infrastructure projects with superior quality.
-        </p>
-      </div>
-
-      <!-- Award Item 4 -->
-      <div class="glass-panel p-8 border border-clay-border hover:border-brand-gold transition-colors group reveal-up"
-        style="transition-delay: 300ms;">
-        <div class="text-brand-darkGold text-5xl mb-6 opacity-80 group-hover:scale-110 transition-transform duration-500">
-          <i class="fas fa-shield-alt"></i>
+        <div class="rec-stat">
+          <div class="rec-stat-num">10+</div>
+          <div class="rec-stat-label">Years of Honours</div>
         </div>
-        <h3 class="text-2xl font-bold text-clay-ink mb-2 uppercase font-heading">Best Safety Practices</h3>
-        <p class="text-xs text-brand-darkGold uppercase tracking-widest mb-4">Economic Times Award 2024</p>
-        <p class="text-clay-muted font-body leading-relaxed">
-          Awarded for maintaining the highest standards of safety protocols and accident-free operational hours.
-        </p>
       </div>
-      <!-- Upper Thane Safety Appreciation (from PDF) -->
-      <div class="glass-panel p-8 border border-clay-border hover:border-brand-gold transition-colors group reveal-up">
-        <div class="text-brand-darkGold text-5xl mb-6 opacity-80 group-hover:scale-110 transition-transform duration-500">
-          <i class="fas fa-hard-hat"></i>
-        </div>
-        <h3 class="text-2xl font-bold text-clay-ink mb-2 uppercase font-heading">Upper Thane Safety Recognition</h3>
-        <p class="text-xs text-brand-darkGold uppercase tracking-widest mb-4">Certification of Appreciation &mdash; 2019</p>
-        <p class="text-clay-muted font-body leading-relaxed">
-          Recognised for the implementation of safety practices and procedures as per standards on the Upper Thane project site.
-        </p>
-      </div>
-
-      <!-- Mahindra Serenes MSA Audit Appreciation (from PDF) -->
-      <div class="glass-panel p-8 border border-clay-border hover:border-brand-gold transition-colors group reveal-up">
-        <div class="text-brand-darkGold text-5xl mb-6 opacity-80 group-hover:scale-110 transition-transform duration-500">
-          <i class="fas fa-certificate"></i>
-        </div>
-        <h3 class="text-2xl font-bold text-clay-ink mb-2 uppercase font-heading">Mahindra Serenes Appreciation</h3>
-        <p class="text-xs text-brand-darkGold uppercase tracking-widest mb-4">MSA Safety Audit &mdash; October 2019</p>
-        <p class="text-clay-muted font-body leading-relaxed">
-          Certificate of Appreciation from Mahindra Lifespaces for outstanding performance in the MSA Audit on the Serenes project.
-        </p>
-      </div>
-
     </div>
   </section>
 
-  <!-- Certifications -->
-  <section class="py-20 bg-clay-surface/5 overflow-hidden relative">
-    <div class="absolute inset-0 bg-brand-gold/5"></div>
+  <!-- ══════════ INDUSTRY AWARDS ══════════ -->
+  <section class="py-20 md:py-28 container mx-auto px-6 relative z-10">
+    <div class="text-center mb-12 md:mb-16 reveal-up">
+      <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase mb-3 block font-heading">Tier One</span>
+      <h2 class="text-3xl md:text-5xl font-bold text-clay-ink mb-4 uppercase font-heading tracking-tight">Industry <span class="text-brand-darkGold">Awards</span></h2>
+      <div class="h-1 w-24 bg-brand-gold mx-auto mb-6"></div>
+      <p class="text-clay-muted max-w-2xl mx-auto font-body text-sm md:text-base">National-level recognition from publications, industry bodies, and government — validating our work at scale.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+      <article class="awr-card reveal-up">
+        <div class="awr-year">2021</div>
+        <div class="awr-icon"><i class="fas fa-trophy"></i></div>
+        <div class="awr-issuer">Construction World Magazine</div>
+        <h3 class="awr-title">Fastest Growing Construction Company</h3>
+        <p class="awr-desc">Recognised for rapid expansion and consistent project delivery excellence across residential, commercial, and institutional sectors.</p>
+      </article>
+
+      <article class="awr-card reveal-up" style="transition-delay: 100ms;">
+        <div class="awr-year">2022</div>
+        <div class="awr-icon"><i class="fas fa-landmark"></i></div>
+        <div class="awr-issuer">Maharashtra Governor's Award</div>
+        <h3 class="awr-title">Contribution to Urban Development</h3>
+        <p class="awr-desc">Honoured for significant contributions towards modernising urban infrastructure in Mumbai and the Metropolitan Region.</p>
+      </article>
+
+      <article class="awr-card reveal-up" style="transition-delay: 200ms;">
+        <div class="awr-year">2023</div>
+        <div class="awr-icon"><i class="fas fa-medal"></i></div>
+        <div class="awr-issuer">Times Network Award</div>
+        <h3 class="awr-title">Excellence in Infrastructure</h3>
+        <p class="awr-desc">Celebrating outstanding achievements in delivering complex infrastructure projects with superior quality and schedule discipline.</p>
+      </article>
+
+      <article class="awr-card reveal-up" style="transition-delay: 300ms;">
+        <div class="awr-year">2024</div>
+        <div class="awr-icon"><i class="fas fa-shield-alt"></i></div>
+        <div class="awr-issuer">Economic Times Award</div>
+        <h3 class="awr-title">Best Safety Practices</h3>
+        <p class="awr-desc">Awarded for maintaining the highest standards of safety protocols and accident-free operational hours across active project sites.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ══════════ CLIENT RECOGNITION ══════════ -->
+  <section class="py-20 md:py-24 bg-clay-mist/50 border-y border-clay-border relative z-10">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-10 md:mb-14 reveal-up">
+        <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase mb-3 block font-heading">On-Site Excellence</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-clay-ink mb-4 uppercase font-heading tracking-tight">Client <span class="text-brand-darkGold">Recognition</span></h2>
+        <div class="h-1 w-20 bg-brand-gold mx-auto mb-6"></div>
+        <p class="text-clay-muted max-w-2xl mx-auto font-body text-sm md:text-base">Appreciation certificates received directly from marquee developers for performance on their sites.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+        <div class="cap-card reveal-up">
+          <div class="cap-icon"><i class="fas fa-hard-hat"></i></div>
+          <div class="flex-1">
+            <div class="cap-meta">2019 · Safety Audit</div>
+            <div class="cap-title">Upper Thane Recognition</div>
+            <p class="cap-desc">Certificate of Appreciation for exemplary safety practices and procedures on the Upper Thane project site.</p>
+          </div>
+        </div>
+        <div class="cap-card reveal-up" style="transition-delay: 100ms;">
+          <div class="cap-icon"><i class="fas fa-certificate"></i></div>
+          <div class="flex-1">
+            <div class="cap-meta">Oct 2019 · Mahindra Lifespaces</div>
+            <div class="cap-title">Serenes MSA Audit</div>
+            <p class="cap-desc">Certificate of Appreciation from Mahindra Lifespaces for outstanding performance in the MSA Audit on the Serenes project.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ CERTIFICATIONS ══════════ -->
+  <section class="py-20 md:py-28 relative z-10 overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(rgba(252, 182, 21, 0.6) 1px, transparent 1px); background-size: 24px 24px;"></div>
     <div class="container mx-auto px-6 relative z-10">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-12">
-        <div class="md:w-1/2 reveal-up">
-          <span class="text-brand-darkGold text-xs font-bold tracking-[0.2em] uppercase mb-2 block font-heading">ISO
-            Certified</span>
-          <h2 class="text-3xl md:text-5xl font-bold text-clay-ink mb-6 uppercase font-heading">Standard of <span
-              class="italic text-brand-darkGold font-body">Excellence</span></h2>
-          <p class="text-clay-muted text-lg mb-6 font-body">
-            We adhere to the highest international standards for quality, safety, and environmental management. Our
-            certifications are a testament to our relentless pursuit of perfection.
+      <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+        <div class="reveal-up">
+          <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase mb-3 block font-heading">International Standards</span>
+          <h2 class="text-3xl md:text-5xl font-bold text-clay-ink mb-6 uppercase font-heading tracking-tight">Certified <span class="text-brand-darkGold">Excellence</span></h2>
+          <div class="h-1 w-20 bg-brand-gold mb-6"></div>
+          <p class="text-clay-muted mb-8 font-body leading-relaxed">
+            We adhere to the highest international standards for quality, safety, and environmental management. Every site, every process, independently audited.
           </p>
-          <ul class="space-y-4 text-clay-muted font-heading tracking-wide uppercase text-sm">
-            <li class="flex items-center gap-3">
-              <i class="fas fa-check-circle text-brand-darkGold"></i> ISO 9001:2015 Quality Management
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3 text-clay-muted font-heading tracking-wider uppercase text-sm">
+              <i class="fas fa-check-circle text-brand-gold mt-0.5"></i>
+              <div><span class="text-clay-ink">ISO 9001:2015</span> · Quality Management</div>
             </li>
-            <li class="flex items-center gap-3">
-              <i class="fas fa-check-circle text-brand-darkGold"></i> ISO 14001:2015 Environmental Management
+            <li class="flex items-start gap-3 text-clay-muted font-heading tracking-wider uppercase text-sm">
+              <i class="fas fa-check-circle text-brand-gold mt-0.5"></i>
+              <div><span class="text-clay-ink">ISO 14001:2015</span> · Environmental Management</div>
             </li>
-            <li class="flex items-center gap-3">
-              <i class="fas fa-check-circle text-brand-darkGold"></i> ISO 45001:2018 Occupational Health & Safety
+            <li class="flex items-start gap-3 text-clay-muted font-heading tracking-wider uppercase text-sm">
+              <i class="fas fa-check-circle text-brand-gold mt-0.5"></i>
+              <div><span class="text-clay-ink">ISO 45001:2018</span> · Occupational Health &amp; Safety</div>
             </li>
-            <li class="flex items-center gap-3">
-              <i class="fas fa-check-circle text-brand-darkGold"></i> OHSAS 18001:2007 Health & Safety
+            <li class="flex items-start gap-3 text-clay-muted font-heading tracking-wider uppercase text-sm">
+              <i class="fas fa-check-circle text-brand-gold mt-0.5"></i>
+              <div><span class="text-clay-ink">OHSAS 18001:2007</span> · Health &amp; Safety Legacy</div>
             </li>
           </ul>
         </div>
-        <div class="md:w-1/2 grid grid-cols-2 gap-4 md:gap-6 reveal-up">
-          <!-- Certification Badges -->
-          <div class="aspect-square border border-clay-border rounded-full flex items-center justify-center bg-clay-base hover:border-brand-gold transition">
-            <span class="text-clay-ink font-bold text-xs text-center font-heading">ISO<br>9001:2015</span>
+        <div class="grid grid-cols-2 gap-4 md:gap-6 reveal-up">
+          <div class="iso-badge">
+            <i class="fas fa-award"></i>
+            <div class="iso-code">ISO 9001</div>
+            <div class="iso-year">Quality · 2015</div>
           </div>
-          <div class="aspect-square border border-clay-border rounded-full flex items-center justify-center bg-clay-base hover:border-brand-gold transition">
-            <span class="text-clay-ink font-bold text-xs text-center font-heading">ISO<br>14001:2015</span>
+          <div class="iso-badge">
+            <i class="fas fa-leaf"></i>
+            <div class="iso-code">ISO 14001</div>
+            <div class="iso-year">Environment · 2015</div>
           </div>
-          <div class="aspect-square border border-clay-border rounded-full flex items-center justify-center bg-clay-base hover:border-brand-gold transition">
-            <span class="text-clay-ink font-bold text-xs text-center font-heading">ISO<br>45001:2018</span>
+          <div class="iso-badge">
+            <i class="fas fa-hard-hat"></i>
+            <div class="iso-code">ISO 45001</div>
+            <div class="iso-year">Safety · 2018</div>
           </div>
-          <div class="aspect-square border border-clay-border rounded-full flex items-center justify-center bg-clay-base hover:border-brand-gold transition">
-            <span class="text-clay-ink font-bold text-[10px] text-center font-heading">OHSAS<br>18001:2007</span>
+          <div class="iso-badge">
+            <i class="fas fa-shield-alt"></i>
+            <div class="iso-code">OHSAS</div>
+            <div class="iso-year">18001 · 2007</div>
           </div>
         </div>
       </div>

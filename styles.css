@@ -516,14 +516,14 @@ textarea {
 
     .sidebar-link,
     .sidebar-dropdown-btn {
-        font-size: 1.05rem !important;
-        padding: 8px 0 !important;
+        font-size: 1.45rem !important;
+        padding: 11px 0 !important;
         letter-spacing: 0.04em;
     }
 
     .sidebar-sublink {
-        font-size: 0.8rem !important;
-        padding: 6px 0 !important;
+        font-size: 0.95rem !important;
+        padding: 8px 0 !important;
     }
 
     /* Tighten contact info block */

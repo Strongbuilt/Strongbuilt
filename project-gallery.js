@@ -1,17 +1,35 @@
-// project-gallery.js — Filterable gallery + map toggle logic
+// project-gallery.js — Cinematic portfolio: filterable gallery + map toggle
 (function () {
   'use strict';
 
   // ── State ──
-  const activeFilters = { category: 'all', location: 'all', status: 'all', search: '', sort: 'newest' };
-  let currentView = 'grid';
+  const activeFilters = { category: 'all', status: 'all', search: '', sort: 'newest' };
+  let currentView = 'grid'; // 'grid' | 'list'
+  let totalProjects = 0;
 
-  // ── Initialize Filter Buttons ──
+  // Escape untrusted strings before interpolating into innerHTML templates.
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c => (
+      { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+    ));
+  }
+
+  function hasData() {
+    return typeof PROJECT_DATA !== 'undefined' && Array.isArray(PROJECT_DATA);
+  }
+
+  function capitalize(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+
+  // ── Filter Pills ──
   function initFilters() {
+    if (!hasData()) return;
+    totalProjects = PROJECT_DATA.length;
     buildFilterRow('categoryFilters', 'category');
-    buildFilterRow('locationFilters', 'location');
     buildFilterRow('statusFilters', 'status');
-    document.getElementById('totalCount').textContent = PROJECT_DATA.length;
+    const total = document.getElementById('totalCount');
+    if (total) total.textContent = totalProjects;
   }
 
   function buildFilterRow(containerId, field) {
@@ -28,7 +46,6 @@
     btn.textContent = value === 'all' ? 'All' : capitalize(value);
     btn.dataset.filter = filterType;
     btn.dataset.value = value;
-
     btn.addEventListener('click', () => {
       activeFilters[filterType] = value;
       btn.parentElement.querySelectorAll('button').forEach(b => b.className = pillClass(false));
@@ -39,22 +56,18 @@
   }
 
   function pillClass(active) {
-    const base = 'px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 border cursor-pointer ';
+    const base = 'px-3 py-1 rounded-full text-[10px] font-heading font-bold uppercase tracking-[0.2em] transition-all duration-300 border cursor-pointer ';
     return base + (active
-      ? 'bg-brand-gold text-black border-brand-gold shadow-[0_0_15px_rgba(191,149,63,0.3)]'
-      : 'text-gray-400 border-white/10 hover:border-brand-gold/30 hover:text-white');
-  }
-
-  function capitalize(s) {
-    return s.charAt(0).toUpperCase() + s.slice(1);
+      ? 'bg-brand-gold text-black border-brand-gold'
+      : 'text-gray-400 border-white/10 hover:border-brand-gold/40 hover:text-white');
   }
 
   // ── Filter + Sort ──
   function getFiltered() {
+    if (!hasData()) return [];
     return PROJECT_DATA
       .filter(p => {
         if (activeFilters.category !== 'all' && p.category !== activeFilters.category) return false;
-        if (activeFilters.location !== 'all' && p.location !== activeFilters.location) return false;
         if (activeFilters.status !== 'all' && p.status !== activeFilters.status) return false;
         if (activeFilters.search) {
           const q = activeFilters.search;
@@ -74,13 +87,16 @@
   }
 
   // ── Render Gallery ──
+  const FALLBACK_IMG = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80';
+
   function renderGallery() {
     const grid = document.getElementById('project-grid');
     if (!grid) return;
     const filtered = getFiltered();
     grid.innerHTML = '';
 
-    document.getElementById('resultCount').textContent = filtered.length;
+    const rc = document.getElementById('resultCount');
+    if (rc) rc.textContent = filtered.length;
 
     const noRes = document.getElementById('noResults');
     if (noRes) {
@@ -89,88 +105,82 @@
     }
 
     if (currentView === 'list') {
-      grid.className = 'flex flex-col gap-4';
+      grid.className = 'flex flex-col gap-3';
     } else {
-      grid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-[400px] grid-flow-dense';
+      grid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 auto-rows-[280px] sm:auto-rows-[340px] md:auto-rows-[380px] lg:auto-rows-[420px] grid-flow-dense';
     }
 
-    filtered.forEach(p => grid.appendChild(currentView === 'grid' ? gridCard(p) : listCard(p)));
+    filtered.forEach((p, i) => {
+      const card = currentView === 'grid' ? gridCard(p, i) : listCard(p, i);
+      grid.appendChild(card);
+    });
 
     if (typeof gsap !== 'undefined') {
-      gsap.from(grid.children, { y: 30, opacity: 0, duration: 0.5, stagger: 0.04, ease: 'power2.out', clearProps: 'all' });
+      gsap.from(grid.children, { y: 40, opacity: 0, duration: 0.7, stagger: 0.05, ease: 'power3.out', clearProps: 'all' });
     }
   }
 
-  // ── Grid Card ──
-  function gridCard(p) {
-    const div = document.createElement('div');
-    const imgSrc = p.img || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80';
-    div.className = 'project-item group relative h-full w-full overflow-hidden rounded-sm cursor-pointer border border-white/5 hover:border-brand-gold/30 transition-colors duration-500' + (p.featured ? ' md:col-span-2' : '');
+  function numberLabel(i) {
+    return String(i + 1).padStart(3, '0');
+  }
+
+  // ── Grid Card (cinematic, numbered) ──
+  function gridCard(p, i) {
+    const div = document.createElement('article');
+    const imgSrc = p.img || FALLBACK_IMG;
+    div.className = 'project-card group' + (p.featured ? ' md:col-span-2' : '');
     div.dataset.category = p.category;
 
-    const statusBadge = p.status === 'ongoing'
-      ? '<span class="absolute top-4 right-4 z-10 flex items-center gap-1.5 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full border border-green-500/30"><span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span><span class="text-[9px] text-green-300 font-heading uppercase tracking-wider">Ongoing</span></span>'
-      : '';
-
-    const pad = p.featured ? '10' : '8';
-    const ptFrom = p.featured ? '40' : '32';
-    const ptTo = p.featured ? '36' : '28';
-    const headSize = p.featured ? '4xl' : '2xl';
+    const ongoingTag = p.status === 'ongoing' ? '<span class="ongoing-tag">Ongoing</span>' : '';
 
     div.innerHTML = `
-      ${statusBadge}
-      <img src="${imgSrc}" alt="${p.title}" class="w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110 grayscale group-hover:grayscale-0" loading="lazy">
-      <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-500"></div>
-      <div class="absolute bottom-0 left-0 w-full p-${pad} bg-gradient-to-t from-black via-black/90 to-transparent pt-${ptFrom} group-hover:pt-${ptTo} transition-all duration-500">
-        <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block font-heading mb-2">${p.category}</span>
-        <h3 class="text-${headSize} font-bold text-white uppercase font-heading group-hover:pl-2 transition-all duration-300">${p.title}</h3>
-        <p class="text-gray-400 text-sm mt-1 font-body opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Client: ${p.client}</p>
-        <div class="grid grid-cols-4 gap-2 mt-4 pt-4 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 delay-200">
-          <div><span class="block text-[10px] text-brand-gold uppercase tracking-wider font-body" data-i18n="common.location">Loc</span><span class="block text-xs text-white font-heading">${p.location}</span></div>
-          <div><span class="block text-[10px] text-brand-gold uppercase tracking-wider font-body" data-i18n="common.area">Area</span><span class="block text-xs text-white font-heading">${p.area}</span></div>
-          <div><span class="block text-[10px] text-brand-gold uppercase tracking-wider font-body" data-i18n="common.year">Year</span><span class="block text-xs text-white font-heading">${p.year}</span></div>
-          <div><span class="block text-[10px] text-brand-gold uppercase tracking-wider font-body" data-i18n="common.status">Status</span><span class="block text-xs text-white font-heading">${capitalize(p.status)}</span></div>
+      <span class="num">${numberLabel(i)} / ${String(totalProjects).padStart(3, '0')}</span>
+      ${ongoingTag}
+      <div class="img-wrap"><img src="${esc(imgSrc)}" alt="${esc(p.title)}" loading="lazy"></div>
+      <div class="shade"></div>
+      <div class="meta">
+        <h3>${esc(p.title)}</h3>
+        <div class="row">
+          <span><span class="dot"></span>${esc(capitalize(p.category))}</span>
+          <span>${esc(p.client)}</span>
+          <span>${esc(p.location)}</span>
+          <span>${esc(p.year)}</span>
         </div>
       </div>`;
 
     div.addEventListener('click', () => {
-      if (typeof openLightbox === 'function') openLightbox(imgSrc, p.title + ' | ' + p.client);
+      if (typeof openLightbox === 'function') openLightbox(imgSrc, p.title + ' — ' + p.client);
     });
     return div;
   }
 
-  // ── List Card ──
-  function listCard(p) {
-    const div = document.createElement('div');
-    div.className = 'group flex items-center gap-6 p-4 border border-white/5 hover:border-brand-gold/30 rounded-sm cursor-pointer transition-all duration-300 hover:bg-white/5';
-
-    const thumb = p.img
-      ? `<img src="${p.img}" class="w-20 h-20 object-cover rounded-sm grayscale group-hover:grayscale-0 transition-all duration-500 shrink-0" loading="lazy">`
-      : '<div class="w-20 h-20 bg-white/5 rounded-sm flex items-center justify-center shrink-0"><i class="fas fa-building text-gray-600 text-xl"></i></div>';
-
-    const statusCls = p.status === 'ongoing'
-      ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-      : 'bg-brand-gold/10 text-brand-gold border border-brand-gold/20';
+  // ── List Card (compact row) ──
+  function listCard(p, i) {
+    const div = document.createElement('article');
+    const imgSrc = p.img || FALLBACK_IMG;
+    div.className = 'project-card list-mode group';
+    const ongoingCls = p.status === 'ongoing' ? ' <span class="text-[10px] text-green-400 tracking-[0.25em] ml-2">●&nbsp;ONGOING</span>' : '';
 
     div.innerHTML = `
-      ${thumb}
-      <div class="flex-grow min-w-0">
-        <div class="flex items-center gap-3 mb-1 flex-wrap">
-          <h3 class="text-lg font-bold text-white uppercase font-heading group-hover:text-brand-gold transition-colors">${p.title}</h3>
-          <span class="text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${statusCls}">${p.status}</span>
+      <div class="img-wrap"><img src="${esc(imgSrc)}" alt="${esc(p.title)}" loading="lazy"></div>
+      <div class="meta">
+        <div class="flex items-center gap-6 min-w-0 flex-1">
+          <span class="num">${numberLabel(i)}</span>
+          <div class="min-w-0">
+            <h3 class="truncate">${esc(p.title)}${ongoingCls}</h3>
+            <div class="row"><span>${esc(capitalize(p.category))}</span><span>${esc(p.client)}</span></div>
+          </div>
         </div>
-        <p class="text-gray-400 text-sm font-body">Client: ${p.client}</p>
-      </div>
-      <div class="hidden md:flex items-center gap-8 shrink-0 text-center">
-        <div><span class="block text-[10px] text-gray-500 uppercase tracking-wider font-heading">Location</span><span class="block text-sm text-white font-heading">${p.location}</span></div>
-        <div><span class="block text-[10px] text-gray-500 uppercase tracking-wider font-heading">Area</span><span class="block text-sm text-white font-heading">${p.area}</span></div>
-        <div><span class="block text-[10px] text-gray-500 uppercase tracking-wider font-heading">Year</span><span class="block text-sm text-white font-heading">${p.year}</span></div>
-      </div>
-      <i class="fas fa-arrow-right text-gray-600 group-hover:text-brand-gold transition-colors shrink-0"></i>`;
+        <div class="hidden md:flex items-center gap-8 text-right">
+          <div class="reel-kv"><span class="k">Location</span><span class="v">${esc(p.location)}</span></div>
+          <div class="reel-kv"><span class="k">Area</span><span class="v">${esc(p.area)}</span></div>
+          <div class="reel-kv"><span class="k">Year</span><span class="v">${esc(p.year)}</span></div>
+          <i class="fas fa-arrow-right text-gray-500 group-hover:text-brand-gold transition-colors"></i>
+        </div>
+      </div>`;
 
     div.addEventListener('click', () => {
-      const imgSrc = p.img || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80';
-      if (typeof openLightbox === 'function') openLightbox(imgSrc, p.title + ' | ' + p.client);
+      if (typeof openLightbox === 'function') openLightbox(imgSrc, p.title + ' — ' + p.client);
     });
     return div;
   }
@@ -178,12 +188,11 @@
   // ── Reset ──
   window.resetFilters = function () {
     activeFilters.category = 'all';
-    activeFilters.location = 'all';
     activeFilters.status = 'all';
     activeFilters.search = '';
     const si = document.getElementById('projectSearch');
     if (si) si.value = '';
-    document.querySelectorAll('#categoryFilters button, #locationFilters button, #statusFilters button').forEach(b => {
+    document.querySelectorAll('#categoryFilters button, #statusFilters button').forEach(b => {
       b.className = pillClass(b.dataset.value === 'all');
     });
     renderGallery();
@@ -199,38 +208,50 @@
 
     document.querySelectorAll('.view-toggle').forEach(btn => {
       btn.addEventListener('click', () => {
+        // Ensure gallery container is visible (switch away from map)
+        const galleryCont = document.getElementById('galleryContainer');
+        const mapCont = document.getElementById('mapContainer');
+        if (galleryCont && mapCont) {
+          galleryCont.classList.remove('hidden');
+          mapCont.classList.add('hidden');
+        }
+
         currentView = btn.dataset.view;
+        // Visually update grid/list toggle buttons
         document.querySelectorAll('.view-toggle').forEach(b => {
           const isActive = b === btn;
           b.classList.toggle('bg-brand-gold', isActive);
           b.classList.toggle('text-black', isActive);
           b.classList.toggle('text-gray-500', !isActive);
         });
+        // Reset map button visual
+        const mapBtn = document.getElementById('mapViewBtn');
+        if (mapBtn) {
+          mapBtn.classList.remove('bg-brand-gold', 'text-black');
+          mapBtn.classList.add('text-gray-500');
+        }
         renderGallery();
       });
     });
   }
 
-  // ── Map Integration (embedded in projects page) ──
+  // ── Map Integration ──
   let projectMap = null;
   let mapMarkers = [];
 
   function initProjectMap() {
     const container = document.getElementById('projectMapEmbed');
     if (!container || projectMap) return;
-
     projectMap = L.map('projectMapEmbed', {
       zoomControl: false,
       center: [19.1000, 72.9000],
       zoom: 11,
       attributionControl: false
     });
-
     L.control.zoom({ position: 'bottomright' }).addTo(projectMap);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
       subdomains: 'abcd', maxZoom: 20
     }).addTo(projectMap);
-
     renderMapMarkers();
   }
 
@@ -257,7 +278,7 @@
       });
 
       const imgHtml = p.img
-        ? '<img src="' + p.img + '" alt="' + p.title + '" style="width:100%;height:140px;object-fit:cover;border-bottom:1px solid rgba(255,255,255,0.1);">'
+        ? '<img src="' + esc(p.img) + '" alt="' + esc(p.title) + '" style="width:100%;height:140px;object-fit:cover;border-bottom:1px solid rgba(255,255,255,0.1);">'
         : '<div style="width:100%;height:140px;background:#111;display:flex;align-items:center;justify-content:center;"><i class="fas fa-building" style="font-size:2rem;color:#333;"></i></div>';
 
       const marker = L.marker(p.coordinates, { icon })
@@ -266,11 +287,11 @@
           '<div style="font-family:Oswald,sans-serif;">' +
           '<div style="overflow:hidden;">' + imgHtml + '</div>' +
           '<div style="padding:16px;">' +
-          '<h3 style="color:#FFD700;font-weight:bold;text-transform:uppercase;letter-spacing:0.1em;font-size:1rem;margin:0 0 4px;">' + p.title + '</h3>' +
-          '<p style="font-size:0.75rem;color:#fff;margin:0 0 8px;"><span style="color:#666;">Client:</span> ' + p.client + '</p>' +
+          '<h3 style="color:#FFD700;font-weight:bold;text-transform:uppercase;letter-spacing:0.1em;font-size:1rem;margin:0 0 4px;">' + esc(p.title) + '</h3>' +
+          '<p style="font-size:0.75rem;color:#fff;margin:0 0 8px;"><span style="color:#666;">Client:</span> ' + esc(p.client) + '</p>' +
           '<div style="display:flex;gap:6px;">' +
-          '<span style="font-size:9px;background:#FFD700;color:#000;padding:2px 8px;font-weight:bold;text-transform:uppercase;letter-spacing:0.05em;">' + p.category + '</span>' +
-          '<span style="font-size:9px;color:#999;border:1px solid rgba(255,255,255,0.1);padding:2px 8px;text-transform:uppercase;letter-spacing:0.05em;">' + p.location + '</span>' +
+          '<span style="font-size:9px;background:#FFD700;color:#000;padding:2px 8px;font-weight:bold;text-transform:uppercase;letter-spacing:0.05em;">' + esc(p.category) + '</span>' +
+          '<span style="font-size:9px;color:#999;border:1px solid rgba(255,255,255,0.1);padding:2px 8px;text-transform:uppercase;letter-spacing:0.05em;">' + esc(p.location) + '</span>' +
           '</div></div></div>',
           { maxWidth: 280, className: '' }
         );
@@ -286,44 +307,120 @@
 
   // ── View Mode Toggle (Gallery vs Map) ──
   function initViewModeToggle() {
-    const galleryBtn = document.getElementById('galleryViewBtn');
     const mapBtn = document.getElementById('mapViewBtn');
     const galleryCont = document.getElementById('galleryContainer');
     const mapCont = document.getElementById('mapContainer');
-
-    if (!galleryBtn || !mapBtn) return;
-
-    galleryBtn.addEventListener('click', () => {
-      galleryCont.classList.remove('hidden');
-      mapCont.classList.add('hidden');
-      galleryBtn.classList.add('bg-brand-gold', 'text-black');
-      galleryBtn.classList.remove('text-gray-400');
-      mapBtn.classList.remove('bg-brand-gold', 'text-black');
-      mapBtn.classList.add('text-gray-400');
-    });
+    if (!mapBtn || !galleryCont || !mapCont) return;
 
     mapBtn.addEventListener('click', () => {
       galleryCont.classList.add('hidden');
       mapCont.classList.remove('hidden');
       mapBtn.classList.add('bg-brand-gold', 'text-black');
-      mapBtn.classList.remove('text-gray-400');
-      galleryBtn.classList.remove('bg-brand-gold', 'text-black');
-      galleryBtn.classList.add('text-gray-400');
+      mapBtn.classList.remove('text-gray-500');
+      document.querySelectorAll('.view-toggle').forEach(b => {
+        b.classList.remove('bg-brand-gold', 'text-black');
+        b.classList.add('text-gray-500');
+      });
 
-      if (!projectMap) {
-        initProjectMap();
-      } else {
-        projectMap.invalidateSize();
-        renderMapMarkers();
-      }
+      if (!projectMap) initProjectMap();
+      else { projectMap.invalidateSize(); renderMapMarkers(); }
+    });
+  }
+
+  // ── Scroll reveal for .cine-up ──
+  function initCineReveal() {
+    const items = document.querySelectorAll('.cine-up');
+    if (!items.length || !('IntersectionObserver' in window)) {
+      items.forEach(el => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(el => io.observe(el));
+  }
+
+  // ── Cinematic Hero Reel ──
+  function initHeroReel() {
+    if (!hasData()) return;
+    const slidesHost = document.getElementById('reelSlides');
+    const dotsHost = document.getElementById('reelDots');
+    const titleEl = document.getElementById('reelTitle');
+    const catEl = document.getElementById('reelCategory');
+    const clientEl = document.getElementById('reelClient');
+    const locEl = document.getElementById('reelLocation');
+    const areaEl = document.getElementById('reelArea');
+    const yearEl = document.getElementById('reelYear');
+    const indexEl = document.getElementById('reelIndex');
+    if (!slidesHost || !dotsHost) return;
+
+    const featured = PROJECT_DATA.filter(p => p.featured && p.img);
+    const reel = featured.length >= 3 ? featured.slice(0, 6) : PROJECT_DATA.filter(p => p.img).slice(0, 6);
+    if (reel.length === 0) return;
+
+    // Build slides
+    reel.forEach((p, i) => {
+      const s = document.createElement('div');
+      s.className = 'reel-slide' + (i === 0 ? ' active' : '');
+      s.style.backgroundImage = `url("${p.img.replace(/"/g, '\\"')}")`;
+      slidesHost.appendChild(s);
+
+      const d = document.createElement('button');
+      d.className = i === 0 ? 'active' : '';
+      d.setAttribute('aria-label', 'Show project ' + (i + 1));
+      d.addEventListener('click', () => go(i));
+      dotsHost.appendChild(d);
+    });
+
+    let idx = 0;
+    let timer = null;
+
+    function apply(i) {
+      const p = reel[i];
+      titleEl.textContent = p.title;
+      catEl.textContent = capitalize(p.category);
+      clientEl.textContent = p.client || '—';
+      locEl.textContent = p.location || '—';
+      areaEl.textContent = p.area || '—';
+      yearEl.textContent = p.year || '—';
+      if (indexEl) indexEl.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(reel.length).padStart(2, '0');
+      slidesHost.querySelectorAll('.reel-slide').forEach((el, j) => el.classList.toggle('active', j === i));
+      dotsHost.querySelectorAll('button').forEach((el, j) => el.classList.toggle('active', j === i));
+    }
+
+    function go(i) {
+      idx = (i + reel.length) % reel.length;
+      apply(idx);
+      resetTimer();
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => go(idx + 1), 6000);
+    }
+
+    apply(0);
+    resetTimer();
+
+    // Pause on tab hidden to save CPU
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) clearInterval(timer);
+      else resetTimer();
     });
   }
 
   // ── Init ──
   document.addEventListener('DOMContentLoaded', () => {
+    initHeroReel();
     initFilters();
     initEvents();
     initViewModeToggle();
     renderGallery();
+    initCineReveal();
   });
 })();

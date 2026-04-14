@@ -35,7 +35,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Outfit:wght@300;400;500;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Archivo:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -84,11 +84,11 @@
       position: absolute;
       bottom: 12px; right: 12px;
       background: rgba(10,10,10,0.92);
-      color: #FFD700;
-      border: 1px solid rgba(255,215,0,0.3);
+      color: #FCB615;
+      border: 1px solid rgba(252,182,21,0.3);
       padding: 8px 14px;
       font-size: 11px;
-      font-family: 'Oswald', sans-serif;
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -100,7 +100,7 @@
       align-items: center;
       gap: 6px;
     }
-    .map-overlay-link:hover { background: #FFD700; color: #000; transform: translateY(-2px); }
+    .map-overlay-link:hover { background: #FCB615; color: #000; transform: translateY(-2px); }
 
     /* Quick contact tiles */
     .quick-contact {
@@ -113,8 +113,8 @@
       transition: all 0.3s ease;
     }
     .quick-contact:hover {
-      border-color: rgba(255,215,0,0.4);
-      background: rgba(255,215,0,0.04);
+      border-color: rgba(252,182,21,0.4);
+      background: rgba(252,182,21,0.04);
       transform: translateY(-2px);
     }
     @media (min-width: 768px) { .quick-contact { padding: 1rem; } }
@@ -177,7 +177,7 @@
 
       <!-- Contact Info -->
       <div class="nav-info-block">
-        <div class="grid grid-cols-2 gap-4 mb-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
           <div class="nav-info-item">
             <span class="nav-info-label">Call</span>
             <p class="nav-info-value">+91 9619875081</p>
@@ -223,20 +223,20 @@
         alt="Strong Built Contact Page"
         class="w-full h-full object-cover opacity-40 animate-pulse-slow">
     </div>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-[#050505] z-0"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-clay-base/80 via-clay-mist/60 to-[#050505] z-0"></div>
 
     <div class="relative z-30 container mx-auto px-6 mt-20">
       <div class="inline-block mb-4 overflow-hidden">
-        <span class="block text-brand-gold text-sm font-bold tracking-[0.5em] uppercase reveal-up"
+        <span class="block text-brand-darkGold text-sm font-bold tracking-[0.5em] uppercase reveal-up"
           style="transition-delay: 100ms;">Connect With Us</span>
       </div>
       <h1
-        class="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold mb-6 text-white uppercase tracking-tight leading-[0.9] reveal-up font-heading"
+        class="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold mb-6 text-clay-ink uppercase tracking-tight leading-[0.9] reveal-up font-hero"
         style="transition-delay: 200ms;">
         Get In <span class="gold-gradient-text">Touch</span>
       </h1>
       <div class="h-px w-24 bg-brand-gold mx-auto my-8 reveal-up" style="transition-delay: 300ms;"></div>
-      <p class="text-lg md:text-2xl font-light text-gray-300 max-w-3xl mx-auto leading-relaxed reveal-up"
+      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-3xl mx-auto leading-relaxed reveal-up"
         style="transition-delay: 400ms;">
         We are ready to build your vision. Reach out to discuss your next project.
       </p>
@@ -244,31 +244,31 @@
   </section>
 
   <!-- QUICK CONTACT BAR (tappable on mobile) -->
-  <section class="py-8 md:py-10 border-y border-white/5 bg-white/5 relative z-20">
+  <section class="py-8 md:py-10 border-y border-clay-border bg-clay-surface/5 relative z-20">
     <div class="container mx-auto px-4 md:px-6 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
 
       <a href="tel:+919619875081" class="quick-contact group reveal-up">
-        <i class="fas fa-phone text-brand-gold text-xl md:text-2xl mb-2 block group-hover:scale-110 transition"></i>
-        <span class="block text-white font-bold text-xs md:text-sm font-heading group-hover:text-brand-gold transition truncate">+91 9619875081</span>
-        <span class="text-[10px] text-gray-500 uppercase tracking-widest font-heading">Call Us</span>
+        <i class="fas fa-phone text-brand-darkGold text-xl md:text-2xl mb-2 block group-hover:scale-110 transition"></i>
+        <span class="block text-clay-ink font-bold text-xs md:text-sm font-heading group-hover:text-brand-darkGold transition truncate">+91 9619875081</span>
+        <span class="text-[10px] text-clay-faint uppercase tracking-widest font-heading">Call Us</span>
       </a>
 
       <a href="https://wa.me/919619875081?text=Hi%20Strong%20Built%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="quick-contact group reveal-up" style="transition-delay: 75ms;">
-        <i class="fab fa-whatsapp text-brand-gold text-xl md:text-2xl mb-2 block group-hover:scale-110 transition"></i>
-        <span class="block text-white font-bold text-xs md:text-sm font-heading group-hover:text-brand-gold transition">Quick Chat</span>
-        <span class="text-[10px] text-gray-500 uppercase tracking-widest font-heading">WhatsApp</span>
+        <i class="fab fa-whatsapp text-brand-darkGold text-xl md:text-2xl mb-2 block group-hover:scale-110 transition"></i>
+        <span class="block text-clay-ink font-bold text-xs md:text-sm font-heading group-hover:text-brand-darkGold transition">Quick Chat</span>
+        <span class="text-[10px] text-clay-faint uppercase tracking-widest font-heading">WhatsApp</span>
       </a>
 
       <a href="mailto:strongbuilt@skywaygroup.co.in" class="quick-contact group reveal-up" style="transition-delay: 150ms;">
-        <i class="fas fa-envelope text-brand-gold text-xl md:text-2xl mb-2 block group-hover:scale-110 transition"></i>
-        <span class="block text-white font-bold text-xs md:text-sm font-heading group-hover:text-brand-gold transition truncate">Email Us</span>
-        <span class="text-[10px] text-gray-500 uppercase tracking-widest font-heading truncate">strongbuilt@skywaygroup.co.in</span>
+        <i class="fas fa-envelope text-brand-darkGold text-xl md:text-2xl mb-2 block group-hover:scale-110 transition"></i>
+        <span class="block text-clay-ink font-bold text-xs md:text-sm font-heading group-hover:text-brand-darkGold transition truncate">Email Us</span>
+        <span class="text-[10px] text-clay-faint uppercase tracking-widest font-heading truncate">strongbuilt@skywaygroup.co.in</span>
       </a>
 
       <a href="https://maps.google.com/?q=HDIL+Tower+Kaledonia+Andheri+East+Mumbai" target="_blank" rel="noopener" class="quick-contact group reveal-up" style="transition-delay: 225ms;">
-        <i class="fas fa-map-marker-alt text-brand-gold text-xl md:text-2xl mb-2 block group-hover:scale-110 transition"></i>
-        <span class="block text-white font-bold text-xs md:text-sm font-heading group-hover:text-brand-gold transition">Visit</span>
-        <span class="text-[10px] text-gray-500 uppercase tracking-widest font-heading">Andheri-East</span>
+        <i class="fas fa-map-marker-alt text-brand-darkGold text-xl md:text-2xl mb-2 block group-hover:scale-110 transition"></i>
+        <span class="block text-clay-ink font-bold text-xs md:text-sm font-heading group-hover:text-brand-darkGold transition">Visit</span>
+        <span class="text-[10px] text-clay-faint uppercase tracking-widest font-heading">Andheri-East</span>
       </a>
 
     </div>
@@ -278,20 +278,20 @@
     <div class="grid md:grid-cols-2 gap-8 md:gap-16">
 
       <div class="reveal-up">
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-8 uppercase font-heading">Head <span
-            class="text-brand-gold">Office</span></h2>
+        <h2 class="text-4xl md:text-5xl font-bold text-clay-ink mb-8 uppercase font-heading">Head <span
+            class="text-brand-darkGold">Office</span></h2>
         <div class="space-y-8 mb-12">
           <div class="flex items-start">
             <div
-              class="w-12 h-12 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold flex-shrink-0">
+              class="w-12 h-12 border border-brand-gold rounded-full flex items-center justify-center text-brand-darkGold flex-shrink-0">
               <i class="fas fa-map-marker-alt text-xl"></i>
             </div>
             <div class="ml-4 md:ml-6">
-              <h4 class="font-bold text-white uppercase mb-1 tracking-wider font-heading">Location</h4>
-              <a href="https://maps.google.com/?q=HDIL+Tower+Kaledonia+Andheri+East+Mumbai" target="_blank" rel="noopener" class="text-gray-400 font-body hover:text-brand-gold transition block">
+              <h4 class="font-bold text-clay-ink uppercase mb-1 tracking-wider font-heading">Location</h4>
+              <a href="https://maps.google.com/?q=HDIL+Tower+Kaledonia+Andheri+East+Mumbai" target="_blank" rel="noopener" class="text-clay-muted font-body hover:text-brand-darkGold transition block">
                 901-B Wing, 9th Floor, HDIL Kaledonia, Sahar Road,<br>Opp D'Mart, Sambhaji Nagar, Andheri-East,<br>Mumbai - 400069.
               </a>
-              <span class="inline-flex items-center gap-2 text-[10px] text-brand-gold uppercase tracking-widest font-heading font-bold mt-2">
+              <span class="inline-flex items-center gap-2 text-[10px] text-brand-darkGold uppercase tracking-widest font-heading font-bold mt-2">
                 <i class="fas fa-train"></i> Nearest: Andheri Station &middot; <i class="fas fa-subway"></i> Sahar Road Metro
               </span>
             </div>
@@ -299,36 +299,36 @@
 
           <div class="flex items-start">
             <div
-              class="w-12 h-12 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold flex-shrink-0">
+              class="w-12 h-12 border border-brand-gold rounded-full flex items-center justify-center text-brand-darkGold flex-shrink-0">
               <i class="fas fa-phone-alt text-xl"></i>
             </div>
             <div class="ml-4 md:ml-6">
-              <h4 class="font-bold text-white uppercase mb-1 tracking-wider font-heading">Contact</h4>
-              <p class="text-gray-400 font-body">
-                <a href="tel:+919619875081" class="hover:text-brand-gold transition">+91 9619875081</a>
-                <span class="text-gray-600">/</span>
-                <a href="tel:+912261232500" class="hover:text-brand-gold transition">022-6123-2500</a>
+              <h4 class="font-bold text-clay-ink uppercase mb-1 tracking-wider font-heading">Contact</h4>
+              <p class="text-clay-muted font-body">
+                <a href="tel:+919619875081" class="hover:text-brand-darkGold transition">+91 9619875081</a>
+                <span class="text-clay-muted">/</span>
+                <a href="tel:+912261232500" class="hover:text-brand-darkGold transition">022-6123-2500</a>
               </p>
-              <p class="text-gray-400 font-body">
-                <a href="mailto:strongbuilt@skywaygroup.co.in" class="hover:text-brand-gold transition break-all">strongbuilt@skywaygroup.co.in</a>
+              <p class="text-clay-muted font-body">
+                <a href="mailto:strongbuilt@skywaygroup.co.in" class="hover:text-brand-darkGold transition break-all">strongbuilt@skywaygroup.co.in</a>
               </p>
             </div>
           </div>
 
           <div class="flex items-start">
             <div
-              class="w-12 h-12 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold flex-shrink-0">
+              class="w-12 h-12 border border-brand-gold rounded-full flex items-center justify-center text-brand-darkGold flex-shrink-0">
               <i class="far fa-clock text-xl"></i>
             </div>
             <div class="ml-4 md:ml-6">
-              <h4 class="font-bold text-white uppercase mb-1 tracking-wider font-heading">Hours <span class="text-[10px] text-gray-500 normal-case tracking-normal">(IST)</span></h4>
-              <p class="text-gray-400 font-body">Mon &ndash; Sat: 9:00 AM &ndash; 7:00 PM</p>
-              <p class="text-xs text-gray-500 font-body mt-1">Closed on Sundays &amp; public holidays</p>
+              <h4 class="font-bold text-clay-ink uppercase mb-1 tracking-wider font-heading">Hours <span class="text-[10px] text-clay-faint normal-case tracking-normal">(IST)</span></h4>
+              <p class="text-clay-muted font-body">Mon &ndash; Sat: 9:00 AM &ndash; 7:00 PM</p>
+              <p class="text-xs text-clay-faint font-body mt-1">Closed on Sundays &amp; public holidays</p>
             </div>
           </div>
         </div>
 
-        <div class="map-wrap h-64 md:h-72 w-full rounded-sm border border-white/10 overflow-hidden shadow-2xl">
+        <div class="map-wrap h-64 md:h-72 w-full rounded-sm border border-clay-border overflow-hidden shadow-2xl">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1188.331379068811!2d72.84661444475961!3d19.11321707503275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9cc34bb0531%3A0x25f0bd25aab78d88!2sHDIL%20TOWER%20Kaledonia!5e1!3m2!1sen!2sin!4v1775904078945!5m2!1sen!2sin"
             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Strong Built Office Location"></iframe>
@@ -340,8 +340,8 @@
 
       <div class="glass-panel p-6 md:p-10 rounded-sm reveal-up relative overflow-hidden" style="transition-delay: 200ms;">
         <div id="contactFormContainer">
-          <h3 class="text-2xl font-bold text-white mb-6 uppercase font-heading">Send a <span
-              class="text-brand-gold">Message</span></h3>
+          <h3 class="text-2xl font-bold text-clay-ink mb-6 uppercase font-heading">Send a <span
+              class="text-brand-darkGold">Message</span></h3>
           <form id="contactForm" action="https://formsubmit.co/strongbuilt@skywaygroup.co.in" method="POST" class="space-y-5">
             <!-- FormSubmit.co configuration -->
             <input type="hidden" name="_subject" value="New Contact Enquiry — Strong Built Website">
@@ -353,45 +353,45 @@
             <div class="grid md:grid-cols-2 gap-5">
               <div>
                 <label for="userName"
-                  class="block text-xs font-bold text-brand-gold mb-2 uppercase tracking-widest font-heading">Name *</label>
+                  class="block text-xs font-bold text-brand-darkGold mb-2 uppercase tracking-widest font-heading">Name *</label>
                 <input type="text" name="name" id="userName" required autocomplete="name"
-                  class="w-full bg-black/50 border border-white/10 p-3 md:p-4 text-white text-sm md:text-base font-body focus:outline-none focus:border-brand-gold transition"
+                  class="w-full bg-clay-base/50 border border-clay-border p-3 md:p-4 text-clay-ink text-sm md:text-base font-body focus:outline-none focus:border-brand-gold transition"
                   placeholder="Your name">
               </div>
               <div>
                 <label for="userEmail"
-                  class="block text-xs font-bold text-brand-gold mb-2 uppercase tracking-widest font-heading">Email *</label>
+                  class="block text-xs font-bold text-brand-darkGold mb-2 uppercase tracking-widest font-heading">Email *</label>
                 <input type="email" name="email" id="userEmail" required autocomplete="email"
-                  class="w-full bg-black/50 border border-white/10 p-3 md:p-4 text-white text-sm md:text-base font-body focus:outline-none focus:border-brand-gold transition"
+                  class="w-full bg-clay-base/50 border border-clay-border p-3 md:p-4 text-clay-ink text-sm md:text-base font-body focus:outline-none focus:border-brand-gold transition"
                   placeholder="you@example.com">
               </div>
             </div>
             <div class="grid md:grid-cols-2 gap-5">
               <div>
                 <label for="userPhone"
-                  class="block text-xs font-bold text-brand-gold mb-2 uppercase tracking-widest font-heading">Phone</label>
+                  class="block text-xs font-bold text-brand-darkGold mb-2 uppercase tracking-widest font-heading">Phone</label>
                 <input type="tel" name="phone" id="userPhone" autocomplete="tel"
-                  class="w-full bg-black/50 border border-white/10 p-3 md:p-4 text-white text-sm md:text-base font-body focus:outline-none focus:border-brand-gold transition"
+                  class="w-full bg-clay-base/50 border border-clay-border p-3 md:p-4 text-clay-ink text-sm md:text-base font-body focus:outline-none focus:border-brand-gold transition"
                   placeholder="+91 ...">
               </div>
               <div>
                 <label for="userSubject"
-                  class="block text-xs font-bold text-brand-gold mb-2 uppercase tracking-widest font-heading">Subject *</label>
+                  class="block text-xs font-bold text-brand-darkGold mb-2 uppercase tracking-widest font-heading">Subject *</label>
                 <input type="text" name="subject" id="userSubject" required
-                  class="w-full bg-black/50 border border-white/10 p-3 md:p-4 text-white text-sm md:text-base font-body focus:outline-none focus:border-brand-gold transition"
+                  class="w-full bg-clay-base/50 border border-clay-border p-3 md:p-4 text-clay-ink text-sm md:text-base font-body focus:outline-none focus:border-brand-gold transition"
                   placeholder="Project enquiry">
               </div>
             </div>
             <div>
               <label for="userMessage"
-                class="block text-xs font-bold text-brand-gold mb-2 uppercase tracking-widest font-heading">Message *</label>
+                class="block text-xs font-bold text-brand-darkGold mb-2 uppercase tracking-widest font-heading">Message *</label>
               <textarea rows="5" name="message" id="userMessage" required
-                class="w-full bg-black/50 border border-white/10 p-3 md:p-4 text-white text-sm md:text-base font-body focus:outline-none focus:border-brand-gold transition resize-none"
+                class="w-full bg-clay-base/50 border border-clay-border p-3 md:p-4 text-clay-ink text-sm md:text-base font-body focus:outline-none focus:border-brand-gold transition resize-none"
                 placeholder="Tell us about your project, timelines, and requirements..."></textarea>
             </div>
-            <p class="text-[11px] text-gray-500 font-body">By submitting, you agree to be contacted by Strong Built. Your data is kept private &mdash; see our <a href="privacy.html" class="text-brand-gold hover:underline">Privacy Policy</a>.</p>
+            <p class="text-[11px] text-clay-faint font-body">By submitting, you agree to be contacted by Strong Built. Your data is kept private &mdash; see our <a href="privacy.html" class="text-brand-darkGold hover:underline">Privacy Policy</a>.</p>
             <button type="submit" id="submitBtn"
-              class="w-full bg-brand-gold text-black font-bold uppercase tracking-widest py-3 md:py-4 hover:bg-white transition duration-300 font-heading text-sm md:text-base">
+              class="w-full bg-brand-gold text-black font-bold uppercase tracking-widest py-3 md:py-4 hover:bg-clay-surface transition duration-300 font-heading text-sm md:text-base">
               <span id="btnText">Send Message</span>
               <span id="btnLoader" class="hidden"><i class="fas fa-spinner fa-spin"></i> Sending...</span>
             </button>
@@ -401,34 +401,34 @@
         <!-- Success Message -->
         <div id="formSuccess" class="py-12 text-center">
           <div class="w-16 h-16 bg-brand-gold/10 border border-brand-gold rounded-full flex items-center justify-center mx-auto mb-6">
-            <i class="fas fa-check text-brand-gold text-2xl"></i>
+            <i class="fas fa-check text-brand-darkGold text-2xl"></i>
           </div>
-          <h3 class="text-3xl font-bold text-white mb-4 uppercase font-heading">Message Sent!</h3>
-          <p class="text-gray-400 mb-8 max-w-xs mx-auto">Thanks <span id="successName" class="text-brand-gold"></span>, we've received your inquiry about <span id="successSubject" class="text-white italic"></span>.</p>
-          <button onclick="resetForm()" class="text-brand-gold border-b border-brand-gold uppercase text-xs tracking-widest font-bold hover:text-white hover:border-white transition">Send another message</button>
+          <h3 class="text-3xl font-bold text-clay-ink mb-4 uppercase font-heading">Message Sent!</h3>
+          <p class="text-clay-muted mb-8 max-w-xs mx-auto">Thanks <span id="successName" class="text-brand-darkGold"></span>, we've received your inquiry about <span id="successSubject" class="text-clay-ink italic"></span>.</p>
+          <button onclick="resetForm()" class="text-brand-darkGold border-b border-brand-gold uppercase text-xs tracking-widest font-bold hover:text-clay-ink hover:border-clay-border transition">Send another message</button>
         </div>
       </div>
 
     </div>
   </section>
 
-  <section class="py-16 md:py-24 bg-white/5 border-t border-white/5">
+  <section class="py-16 md:py-24 bg-clay-surface/5 border-t border-clay-border">
     <div class="container mx-auto px-6 max-w-3xl">
       <div class="text-center mb-16 reveal-up">
-        <h2 class="text-3xl font-bold text-white mb-4 uppercase font-heading">Common <span
-            class="text-brand-gold">Questions</span></h2>
+        <h2 class="text-3xl font-bold text-clay-ink mb-4 uppercase font-heading">Common <span
+            class="text-brand-darkGold">Questions</span></h2>
       </div>
 
       <div class="space-y-4">
         <div class="glass-panel rounded-sm overflow-hidden cursor-pointer group reveal-up faq-item" onclick="toggleFaq(this)">
           <div class="p-6 flex justify-between items-center">
             <h4
-              class="font-bold text-white uppercase text-sm tracking-wide group-hover:text-brand-gold transition font-heading">
+              class="font-bold text-clay-ink uppercase text-sm tracking-wide group-hover:text-brand-darkGold transition font-heading">
               Do you handle commercial projects?</h4>
-            <i class="fas fa-chevron-down text-brand-gold transition duration-300"></i>
+            <i class="fas fa-chevron-down text-brand-darkGold transition duration-300"></i>
           </div>
-          <div class="faq-content px-6 bg-black/20">
-            <p class="pb-6 text-gray-400 text-sm leading-relaxed font-body">Yes, we specialize in both large-scale
+          <div class="faq-content px-6 bg-clay-base/20">
+            <p class="pb-6 text-clay-muted text-sm leading-relaxed font-body">Yes, we specialize in both large-scale
               commercial complexes and high-end office renovations across Mumbai.</p>
           </div>
         </div>
@@ -436,12 +436,12 @@
         <div class="glass-panel rounded-sm overflow-hidden cursor-pointer group reveal-up faq-item" onclick="toggleFaq(this)">
           <div class="p-6 flex justify-between items-center">
             <h4
-              class="font-bold text-white uppercase text-sm tracking-wide group-hover:text-brand-gold transition font-heading">
+              class="font-bold text-clay-ink uppercase text-sm tracking-wide group-hover:text-brand-darkGold transition font-heading">
               What areas do you serve?</h4>
-            <i class="fas fa-chevron-down text-brand-gold transition duration-300"></i>
+            <i class="fas fa-chevron-down text-brand-darkGold transition duration-300"></i>
           </div>
-          <div class="faq-content px-6 bg-black/20">
-            <p class="pb-6 text-gray-400 text-sm leading-relaxed font-body">We currently serve the greater Mumbai area
+          <div class="faq-content px-6 bg-clay-base/20">
+            <p class="pb-6 text-clay-muted text-sm leading-relaxed font-body">We currently serve the greater Mumbai area
               and surrounding districts including Thane, Navi Mumbai, and Pune for large projects.</p>
           </div>
         </div>
@@ -449,12 +449,12 @@
         <div class="glass-panel rounded-sm overflow-hidden cursor-pointer group reveal-up faq-item" onclick="toggleFaq(this)">
           <div class="p-6 flex justify-between items-center">
             <h4
-              class="font-bold text-white uppercase text-sm tracking-wide group-hover:text-brand-gold transition font-heading">
+              class="font-bold text-clay-ink uppercase text-sm tracking-wide group-hover:text-brand-darkGold transition font-heading">
               Is the initial consultation free?</h4>
-            <i class="fas fa-chevron-down text-brand-gold transition duration-300"></i>
+            <i class="fas fa-chevron-down text-brand-darkGold transition duration-300"></i>
           </div>
-          <div class="faq-content px-6 bg-black/20">
-            <p class="pb-6 text-gray-400 text-sm leading-relaxed font-body">Absolutely. Our initial consultation is
+          <div class="faq-content px-6 bg-clay-base/20">
+            <p class="pb-6 text-clay-muted text-sm leading-relaxed font-body">Absolutely. Our initial consultation is
               complimentary. We discuss your vision, budget, and timeline to see if we are the right fit.</p>
           </div>
         </div>
@@ -462,34 +462,34 @@
         <div class="glass-panel rounded-sm overflow-hidden cursor-pointer group reveal-up faq-item" onclick="toggleFaq(this)">
           <div class="p-6 flex justify-between items-center">
             <h4
-              class="font-bold text-white uppercase text-sm tracking-wide group-hover:text-brand-gold transition font-heading">
+              class="font-bold text-clay-ink uppercase text-sm tracking-wide group-hover:text-brand-darkGold transition font-heading">
               How long before you respond to enquiries?</h4>
-            <i class="fas fa-chevron-down text-brand-gold transition duration-300"></i>
+            <i class="fas fa-chevron-down text-brand-darkGold transition duration-300"></i>
           </div>
-          <div class="faq-content px-6 bg-black/20">
-            <p class="pb-6 text-gray-400 text-sm leading-relaxed font-body">Most enquiries receive a response within 1&ndash;2 working days. For urgent project timelines, please call <a href="tel:+919619875081" class="text-brand-gold hover:underline">+91 9619875081</a> or WhatsApp us directly.</p>
+          <div class="faq-content px-6 bg-clay-base/20">
+            <p class="pb-6 text-clay-muted text-sm leading-relaxed font-body">Most enquiries receive a response within 1&ndash;2 working days. For urgent project timelines, please call <a href="tel:+919619875081" class="text-brand-darkGold hover:underline">+91 9619875081</a> or WhatsApp us directly.</p>
           </div>
         </div>
 
         <div class="glass-panel rounded-sm overflow-hidden cursor-pointer group reveal-up faq-item" onclick="toggleFaq(this)">
           <div class="p-6 flex justify-between items-center">
             <h4
-              class="font-bold text-white uppercase text-sm tracking-wide group-hover:text-brand-gold transition font-heading">
+              class="font-bold text-clay-ink uppercase text-sm tracking-wide group-hover:text-brand-darkGold transition font-heading">
               What information should I include in my enquiry?</h4>
-            <i class="fas fa-chevron-down text-brand-gold transition duration-300"></i>
+            <i class="fas fa-chevron-down text-brand-darkGold transition duration-300"></i>
           </div>
-          <div class="faq-content px-6 bg-black/20">
-            <p class="pb-6 text-gray-400 text-sm leading-relaxed font-body">Share the project type (residential / commercial / institutional), estimated size (sq.ft.), target location, desired start date, and your role (developer, architect, principal). The more context you provide, the faster we can route your enquiry to the right lead.</p>
+          <div class="faq-content px-6 bg-clay-base/20">
+            <p class="pb-6 text-clay-muted text-sm leading-relaxed font-body">Share the project type (residential / commercial / institutional), estimated size (sq.ft.), target location, desired start date, and your role (developer, architect, principal). The more context you provide, the faster we can route your enquiry to the right lead.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="py-16 bg-black border-t border-white/10 text-center">
+  <section class="py-16 bg-clay-base border-t border-clay-border text-center">
     <div class="container mx-auto px-4 md:px-6">
-      <h2 class="text-xl font-bold mb-2 uppercase text-white font-heading">Stay Updated</h2>
-      <p class="text-gray-500 text-xs mb-8 uppercase tracking-widest font-body">Project announcements &amp; industry insights.</p>
+      <h2 class="text-xl font-bold mb-2 uppercase text-clay-ink font-heading">Stay Updated</h2>
+      <p class="text-clay-faint text-xs mb-8 uppercase tracking-widest font-body">Project announcements &amp; industry insights.</p>
 
       <form id="newsletterForm" action="https://formsubmit.co/strongbuilt@skywaygroup.co.in" method="POST" class="max-w-md mx-auto flex flex-col sm:flex-row gap-3 sm:gap-0">
         <input type="hidden" name="_subject" value="Newsletter Subscription — Strong Built Website">
@@ -498,75 +498,75 @@
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
 
         <input type="email" name="email" required autocomplete="email" placeholder="Your email address"
-          class="flex-1 bg-white/5 border border-white/10 px-4 py-3 text-white text-sm font-body focus:outline-none focus:border-brand-gold transition">
+          class="flex-1 bg-clay-surface/5 border border-clay-border px-4 py-3 text-clay-ink text-sm font-body focus:outline-none focus:border-brand-gold transition">
         <button type="submit" id="newsletterBtn"
-          class="bg-brand-gold text-black px-6 py-3 font-bold uppercase text-xs tracking-widest hover:bg-white transition font-heading whitespace-nowrap">
+          class="bg-brand-gold text-black px-6 py-3 font-bold uppercase text-xs tracking-widest hover:bg-clay-surface transition font-heading whitespace-nowrap">
           <span id="newsletterBtnText">Join</span>
           <span id="newsletterBtnLoader" class="hidden"><i class="fas fa-spinner fa-spin"></i></span>
         </button>
       </form>
-      <p id="newsletterMsg" class="hidden text-xs text-brand-gold mt-4 font-body"></p>
+      <p id="newsletterMsg" class="hidden text-xs text-brand-darkGold mt-4 font-body"></p>
     </div>
   </section>
 
-  <footer class="bg-black text-white pt-16 md:pt-20 pb-10 border-t border-white/10 relative overflow-hidden">
+  <footer class="bg-clay-mist text-clay-muted pt-16 md:pt-20 pb-10 border-t border-clay-border relative overflow-hidden">
     <div class="absolute inset-0 opacity-10"
-      style="background-image: radial-gradient(#333 1px, transparent 1px); background-size: 20px 20px;"></div>
+      style="background-image: radial-gradient(rgba(184, 130, 12, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
     <div class="container mx-auto px-6 relative z-10">
       <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
         <div class="col-span-1">
-          <div class="text-2xl font-bold text-white mb-6 font-heading tracking-widest flex items-center gap-2">
+          <div class="text-2xl font-bold text-clay-ink mb-6 font-heading tracking-widest flex items-center gap-2">
             <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto">
           </div>
-          <p class="text-gray-500 text-sm mb-6 font-light leading-relaxed">
+          <p class="text-clay-faint text-sm mb-6 font-light leading-relaxed">
             Forging the future with concrete, steel, and integrity.
           </p>
           <div class="flex gap-4">
             <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram"
-              class="w-10 h-10 border border-white/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition"><i
+              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
                 class="fab fa-instagram"></i></a>
             <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn"
-              class="w-10 h-10 border border-white/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition"><i
+              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
                 class="fab fa-linkedin-in"></i></a>
             <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter"
-              class="w-10 h-10 border border-white/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition"><i
+              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
                 class="fab fa-twitter"></i></a>
           </div>
         </div>
         <div>
-          <h4 class="text-brand-gold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Navigation</h4>
-          <ul class="space-y-3 text-sm text-gray-400 font-body">
-            <li><a href="story.html" class="hover:text-white transition">About</a></li>
-            <li><a href="services.html" class="hover:text-white transition">Services</a></li>
-            <li><a href="projects.html" class="hover:text-white transition">Projects</a></li>
-            <li><a href="clients.html" class="hover:text-white transition">Clients</a></li>
+          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Navigation</h4>
+          <ul class="space-y-3 text-sm text-clay-muted font-body">
+            <li><a href="story.html" class="hover:text-clay-ink transition">About</a></li>
+            <li><a href="services.html" class="hover:text-clay-ink transition">Services</a></li>
+            <li><a href="projects.html" class="hover:text-clay-ink transition">Projects</a></li>
+            <li><a href="clients.html" class="hover:text-clay-ink transition">Clients</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="text-brand-gold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Services</h4>
-          <ul class="space-y-3 text-sm text-gray-400 font-body">
-            <li><a href="services.html" class="hover:text-white transition">Residential</a></li>
-            <li><a href="services.html" class="hover:text-white transition">Commercial</a></li>
-            <li><a href="services.html" class="hover:text-white transition">Industrial</a></li>
-            <li><a href="services.html" class="hover:text-white transition">Infrastructure</a></li>
+          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Services</h4>
+          <ul class="space-y-3 text-sm text-clay-muted font-body">
+            <li><a href="services.html" class="hover:text-clay-ink transition">Residential</a></li>
+            <li><a href="services.html" class="hover:text-clay-ink transition">Commercial</a></li>
+            <li><a href="services.html" class="hover:text-clay-ink transition">Industrial</a></li>
+            <li><a href="services.html" class="hover:text-clay-ink transition">Infrastructure</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="text-brand-gold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Contact</h4>
-          <ul class="space-y-3 text-sm text-gray-400 font-body">
-            <li><i class="fas fa-map-marker-alt text-brand-gold mr-2"></i> 901-B Wing, 9th Floor, HDIL Kaledonia, Sahar
+          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Contact</h4>
+          <ul class="space-y-3 text-sm text-clay-muted font-body">
+            <li><i class="fas fa-map-marker-alt text-brand-darkGold mr-2"></i> 901-B Wing, 9th Floor, HDIL Kaledonia, Sahar
               Road, Opp D'Mart, Sambhaji Nagar, Andheri-East, Mumbai - 400069.</li>
-            <li><i class="fas fa-phone text-brand-gold mr-2"></i> +91 9619875081 / 022-6123-2500</li>
-            <li><i class="fas fa-envelope text-brand-gold mr-2"></i> strongbuilt@skywaygroup.co.in</li>
+            <li><i class="fas fa-phone text-brand-darkGold mr-2"></i> +91 9619875081 / 022-6123-2500</li>
+            <li><i class="fas fa-envelope text-brand-darkGold mr-2"></i> strongbuilt@skywaygroup.co.in</li>
           </ul>
         </div>
       </div>
       <div
-        class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 font-light uppercase tracking-wider">
+        class="border-t border-clay-border pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-clay-muted font-light uppercase tracking-wider">
         <p class="font-body">&copy; 2026 Strong Built. All rights reserved.</p>
         <div class="flex gap-6 mt-4 md:mt-0 font-heading">
-          <a href="privacy.html" class="hover:text-white">Privacy</a>
-          <a href="terms.html" class="hover:text-white">Terms</a>
+          <a href="privacy.html" class="hover:text-clay-ink">Privacy</a>
+          <a href="terms.html" class="hover:text-clay-ink">Terms</a>
         </div>
       </div>
     </div>

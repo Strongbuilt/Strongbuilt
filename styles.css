@@ -52,20 +52,13 @@ textarea {
 
 .text-gradient-gold,
 .gold-gradient-text {
-    background: linear-gradient(to right, #FFD700, #FFF100, #B39700, #FFF100, #FFD700);
-    background-size: 200% auto;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 5s linear infinite;
-    /* Slower, more elegant shine */
-    text-shadow: 0 0 20px rgba(179, 151, 0, 0.2);
-}
-
-@keyframes shine {
-    to {
-        background-position: 200% center;
-    }
+    background: none;
+    background-clip: initial;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: currentColor;
+    color: #EFBF04;
+    animation: none;
+    text-shadow: none;
 }
 
 /* --- GLASSMORPHISM --- */
@@ -73,7 +66,7 @@ textarea {
     background: rgba(5, 5, 5, 0.6);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 215, 0, 0.05);
+    border-bottom: 1px solid rgba(239, 191, 4, 0.05);
 }
 
 .glass-panel {
@@ -91,10 +84,10 @@ textarea {
 
 .glass-panel:hover {
     background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(179, 151, 0, 0.3);
+    border-color: rgba(239, 191, 4, 0.3);
     /* Gold tint on hover */
     transform: translateY(-5px);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 20px rgba(179, 151, 0, 0.1);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 20px rgba(239, 191, 4, 0.1);
     /* Glow */
 }
 
@@ -111,7 +104,7 @@ textarea {
     top: 0;
     bottom: 0;
     width: 2px;
-    background: rgba(255, 215, 0, 0.2);
+    background: rgba(239, 191, 4, 0.2);
     transform: translateX(-50%);
 }
 
@@ -121,8 +114,8 @@ textarea {
     top: 0;
     width: 100%;
     height: 0%;
-    background: linear-gradient(to bottom, #FFD700, #B39700);
-    box-shadow: 0 0 15px #FFD700;
+    background: linear-gradient(to bottom, #EFBF04, #EFBF04);
+    box-shadow: 0 0 15px #EFBF04;
     transition: height 0.1s linear;
 }
 
@@ -131,7 +124,7 @@ textarea {
 .menu-btn {
     width: 50px;
     height: 50px;
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(239, 191, 4, 0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -148,7 +141,7 @@ textarea {
 }
 
 .menu-btn:hover {
-    border-color: #FFD700;
+    border-color: #EFBF04;
     transform: scale(1.05);
 }
 
@@ -235,7 +228,7 @@ textarea {
     background: linear-gradient(180deg, rgba(8, 8, 8, 0.97) 0%, rgba(5, 5, 3, 0.99) 100%);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    border-left: 1px solid rgba(255, 215, 0, 0.1);
+    border-left: 1px solid rgba(239, 191, 4, 0.1);
     transform: translateX(100%);
     transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
     display: flex;
@@ -254,7 +247,7 @@ textarea {
 .nav-close-btn {
     width: 48px;
     height: 48px;
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(239, 191, 4, 0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -268,17 +261,17 @@ textarea {
 }
 
 .nav-close-btn:hover {
-    border-color: #FFD700;
-    color: #FFD700;
+    border-color: #EFBF04;
+    color: #EFBF04;
     transform: rotate(90deg);
-    background: rgba(255, 215, 0, 0.05);
+    background: rgba(239, 191, 4, 0.05);
 }
 
 /* Link numbering */
 .nav-link-num {
     font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
     font-size: 0.6rem;
-    color: rgba(255, 215, 0, 0.35);
+    color: rgba(239, 191, 4, 0.35);
     letter-spacing: 0.15em;
     margin-right: 12px;
     transition: color 0.3s ease;
@@ -346,18 +339,18 @@ textarea {
     left: 0;
     width: 0;
     height: 1px;
-    background: linear-gradient(to right, #FFD700, transparent);
+    background: linear-gradient(to right, #EFBF04, transparent);
     transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sidebar-link:hover {
     color: #fff;
     padding-left: 8px;
-    text-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+    text-shadow: 0 0 30px rgba(239, 191, 4, 0.1);
 }
 
 .sidebar-link:hover .nav-link-num {
-    color: #FFD700;
+    color: #EFBF04;
 }
 
 .sidebar-link:hover::after {
@@ -390,22 +383,22 @@ textarea {
 }
 
 .sidebar-dropdown-btn.active {
-    color: #FFD700;
+    color: #EFBF04;
 }
 
 .sidebar-dropdown-btn i {
     font-size: 0.55em;
     transition: transform 0.4s ease;
-    color: rgba(255, 215, 0, 0.3);
+    color: rgba(239, 191, 4, 0.3);
 }
 
 .sidebar-dropdown-btn:hover i {
-    color: #FFD700;
+    color: #EFBF04;
 }
 
 .sidebar-dropdown-btn.active i {
     transform: rotate(180deg);
-    color: #FFD700;
+    color: #EFBF04;
 }
 
 .sidebar-submenu {
@@ -434,19 +427,19 @@ textarea {
     content: '';
     width: 14px;
     height: 1px;
-    background: rgba(255, 215, 0, 0.2);
+    background: rgba(239, 191, 4, 0.2);
     transition: all 0.3s ease;
     flex-shrink: 0;
 }
 
 .sidebar-sublink:hover {
-    color: #FFD700;
+    color: #EFBF04;
     transform: translateX(6px);
 }
 
 .sidebar-sublink:hover::before {
     width: 22px;
-    background: #FFD700;
+    background: #EFBF04;
 }
 
 /* Nav social links */
@@ -463,9 +456,9 @@ textarea {
 }
 
 .nav-social-link:hover {
-    border-color: #FFD700;
-    color: #FFD700;
-    background: rgba(255, 215, 0, 0.05);
+    border-color: #EFBF04;
+    color: #EFBF04;
+    background: rgba(239, 191, 4, 0.05);
     transform: translateY(-2px);
 }
 
@@ -483,7 +476,7 @@ textarea {
 .nav-info-label {
     font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
     font-size: 0.55rem;
-    color: rgba(255, 215, 0, 0.5);
+    color: rgba(239, 191, 4, 0.5);
     text-transform: uppercase;
     letter-spacing: 0.2em;
     margin-bottom: 0.3rem;
@@ -605,11 +598,11 @@ textarea {
 
     0%,
     100% {
-        box-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700;
+        box-shadow: 0 0 5px #EFBF04, 0 0 10px #EFBF04;
     }
 
     50% {
-        box-shadow: 0 0 20px #B39700, 0 0 30px #9A6E0B;
+        box-shadow: 0 0 20px #EFBF04, 0 0 30px #EFBF04;
     }
 }
 
@@ -618,7 +611,7 @@ textarea {
     position: absolute;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(179, 151, 0, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+    background: radial-gradient(circle, rgba(239, 191, 4, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
     border-radius: 50%;
     pointer-events: none;
     z-index: 0;
@@ -640,7 +633,7 @@ textarea {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #FFD700;
+    background: #EFBF04;
 }
 
 /* --- GLOBAL ANIMATIONS --- */
@@ -751,7 +744,7 @@ textarea {
     max-height: 90vh;
     object-fit: contain;
     animation: zoom 0.4s;
-    border: 1px solid rgba(179, 151, 0, 0.3);
+    border: 1px solid rgba(239, 191, 4, 0.3);
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
 }
 
@@ -780,7 +773,7 @@ textarea {
 }
 
 .close:hover {
-    color: #B39700;
+    color: #EFBF04;
     transform: rotate(90deg);
 }
 
@@ -800,7 +793,7 @@ textarea {
     left: 0;
     width: 0;
     height: 100%;
-    background-color: #B39700;
+    background-color: #EFBF04;
     transition: width 0.3s ease;
     z-index: -1;
 }
@@ -813,13 +806,13 @@ textarea {
 .filter-btn:hover,
 .filter-btn.active {
     color: #000;
-    border-color: #B39700;
-    box-shadow: 0 0 20px rgba(179, 151, 0, 0.3);
+    border-color: #EFBF04;
+    box-shadow: 0 0 20px rgba(239, 191, 4, 0.3);
 }
 
 /* Utility Components */
 .caution-tape {
-    background: repeating-linear-gradient(45deg, #FFD700, #FFD700 10px, #000 10px, #000 20px);
+    background: repeating-linear-gradient(45deg, #EFBF04, #EFBF04 10px, #000 10px, #000 20px);
 }
 
 /* --- LENIS SMOOTH SCROLL --- */
@@ -931,7 +924,7 @@ html.lenis {
     height: 50px !important;
     background: rgba(0, 0, 0, 0.4) !important;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(239, 191, 4, 0.1);
     border-radius: 50%;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
     display: flex !important;
@@ -941,10 +934,10 @@ html.lenis {
 
 .swiper-button-next:hover, 
 .swiper-button-prev:hover {
-    background: rgba(255, 215, 0, 0.1) !important;
-    border-color: #FFD700 !important;
+    background: rgba(239, 191, 4, 0.1) !important;
+    border-color: #EFBF04 !important;
     transform: scale(1.15);
-    box-shadow: 0 0 20px rgba(179, 151, 0, 0.2);
+    box-shadow: 0 0 20px rgba(239, 191, 4, 0.2);
 }
 
 .swiper-button-next i, 
@@ -1010,7 +1003,7 @@ select option:disabled {
 }
 select option:hover,
 select option:checked {
-    background-color: #FFD700;
+    background-color: #EFBF04;
     color: #1a1718;
 }
 
@@ -1049,4 +1042,93 @@ select option:checked {
         font-size: 0.8rem !important;
         line-height: 1.5 !important;
     }
+}
+
+/* ─────────────────────────────────────────────
+   SONAR CURSOR (site-wide)
+   Solid gold dot + continuous pulse rings
+   ───────────────────────────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+    html.sb-sonar,
+    html.sb-sonar body,
+    html.sb-sonar a,
+    html.sb-sonar button,
+    html.sb-sonar [role="button"],
+    html.sb-sonar input,
+    html.sb-sonar textarea,
+    html.sb-sonar select,
+    html.sb-sonar label {
+        cursor: none;
+    }
+}
+
+.sb-cursor-dot {
+    position: fixed;
+    top: 0; left: 0;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #EFBF04;
+    box-shadow: 0 0 12px #EFBF04, 0 0 24px rgba(239, 191, 4, 0.4);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 99999;
+    opacity: 0;
+    transition: opacity .3s ease, width .25s ease, height .25s ease, background .25s ease;
+    will-change: transform, left, top;
+    mix-blend-mode: screen;
+}
+.sb-cursor-dot.sb-active { opacity: 1; }
+.sb-cursor-dot.sb-hover {
+    width: 30px; height: 30px;
+    background: #EFBF04;
+    box-shadow: 0 0 18px #EFBF04, 0 0 36px rgba(239, 191, 4, 0.6);
+}
+
+.sb-cursor-pulse {
+    position: fixed;
+    top: 0; left: 0;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid #EFBF04;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 99998;
+    opacity: 0.7;
+    animation: sbCursorPulse 1.6s cubic-bezier(.16, 1, .3, 1) forwards;
+    mix-blend-mode: screen;
+}
+@keyframes sbCursorPulse {
+    to { width: 240px; height: 240px; opacity: 0; border-width: 1px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sb-cursor-pulse { animation: none; opacity: 0; }
+}
+@media (hover: none), (pointer: coarse) {
+    .sb-cursor-dot, .sb-cursor-pulse { display: none; }
+}
+
+/* ─────────────────────────────────────────────
+   SITE-WIDE YELLOW TEXT COLOR — solid #EFBF04
+   Override every gold/yellow text utility to one flat tone
+   ───────────────────────────────────────────── */
+.text-brand-gold,
+.text-brand-darkGold,
+.text-brand-lightGold,
+.text-yellow-300,
+.text-yellow-400,
+.text-yellow-500,
+.text-yellow-600,
+.text-\[\#EFBF04\],
+.text-\[\#EFBF04\],
+.text-\[\#EFBF04\] {
+    color: #EFBF04 !important;
+}
+.text-gradient-gold,
+.gold-gradient-text {
+    color: #EFBF04 !important;
+    -webkit-text-fill-color: #EFBF04 !important;
+    background: none !important;
+    animation: none !important;
+    text-shadow: none !important;
 }

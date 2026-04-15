@@ -32,7 +32,7 @@
     .leaflet-popup-content-wrapper {
       background: rgba(10, 10, 10, 0.95);
       color: #EEEEEE;
-      border: 1px solid rgba(179, 151, 0, 0.3);
+      border: 1px solid rgba(239, 191, 4, 0.3);
       border-radius: 4px;
       backdrop-filter: blur(10px);
       padding: 0;
@@ -47,7 +47,7 @@
 
     .leaflet-popup-tip {
       background: rgba(10, 10, 10, 0.95);
-      border: 1px solid rgba(179, 151, 0, 0.3);
+      border: 1px solid rgba(239, 191, 4, 0.3);
     }
 
     .leaflet-container a.leaflet-popup-close-button {
@@ -68,7 +68,7 @@
     }
 
     .leaflet-container a.leaflet-popup-close-button:hover {
-      color: #B39700;
+      color: #EFBF04;
       background: rgba(0, 0, 0, 0.9);
       transform: rotate(90deg);
     }
@@ -121,14 +121,14 @@
       gap: 2rem; flex-wrap: wrap;
     }
     .reel-kv { font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif; }
-    .reel-kv .k { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: #B39700; display:block; margin-bottom: 6px; }
+    .reel-kv .k { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: #EFBF04; display:block; margin-bottom: 6px; }
     .reel-kv .v { font-size: 0.9rem; color: #EEEEEE; text-transform: uppercase; letter-spacing: 0.12em; }
     .reel-dots { display: flex; gap: 10px; }
     .reel-dots button {
       width: 28px; height: 2px; background: rgba(255,255,255,0.2);
       transition: all 0.4s ease; cursor: pointer;
     }
-    .reel-dots button.active { background: #B39700; width: 56px; }
+    .reel-dots button.active { background: #EFBF04; width: 56px; }
     .reel-scroll {
       position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
       font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif; font-size: 10px;
@@ -137,7 +137,7 @@
     }
     .reel-scroll .line {
       width: 1px; height: 40px;
-      background: linear-gradient(to bottom, transparent, #B39700, transparent);
+      background: linear-gradient(to bottom, transparent, #EFBF04, transparent);
       animation: scroll-line 2.2s ease infinite;
     }
     @keyframes scroll-line {
@@ -166,7 +166,7 @@
       cursor: pointer;
       transition: border-color 0.6s ease;
     }
-    .project-card:hover { border-color: rgba(179, 151, 0,0.3); }
+    .project-card:hover { border-color: rgba(239, 191, 4,0.3); }
     .project-card .num {
       position: absolute; top: 16px; left: 16px; z-index: 5;
       font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
@@ -199,7 +199,7 @@
     }
     .project-card:hover .meta h3 { transform: translateY(-4px); }
     .project-card .meta .row { display: flex; gap: 14px; font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.65); }
-    .project-card .meta .row span .dot { width: 4px; height: 4px; border-radius: 50%; background: #B39700; display: inline-block; vertical-align: middle; margin-right: 6px; }
+    .project-card .meta .row span .dot { width: 4px; height: 4px; border-radius: 50%; background: #EFBF04; display: inline-block; vertical-align: middle; margin-right: 6px; }
     .project-card .ongoing-tag {
       position: absolute; top: 16px; right: 16px; z-index: 5;
       display: inline-flex; align-items: center; gap: 6px;
@@ -472,7 +472,7 @@
         <div class="absolute bottom-6 left-6 z-[1000] bg-clay-base/75 backdrop-blur-md border border-clay-border p-4 rounded-sm">
           <p class="text-[10px] text-brand-darkGold font-heading uppercase tracking-[0.3em] mb-3">Legend</p>
           <div class="space-y-2">
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#FFD700] border border-clay-border shrink-0"></span><span class="text-xs text-clay-muted">Residential</span></div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#EFBF04] border border-clay-border shrink-0"></span><span class="text-xs text-clay-muted">Residential</span></div>
             <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#FF8C00] border border-clay-border shrink-0"></span><span class="text-xs text-clay-muted">Commercial</span></div>
             <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#C0C0C0] border border-clay-border shrink-0"></span><span class="text-xs text-clay-muted">Infrastructure</span></div>
           </div>
@@ -512,7 +512,7 @@
           </a>
         </div>
         <div class="grid gap-6">
-          <div class="group bg-clay-surface/5 backdrop-blur-md p-8 border border-clay-border hover:border-brand-gold/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(179, 151, 0,0.2)] rounded-sm reveal-up" style="transition-delay: 100ms;">
+          <div class="group bg-clay-surface/5 backdrop-blur-md p-8 border border-clay-border hover:border-brand-gold/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(239, 191, 4,0.2)] rounded-sm reveal-up" style="transition-delay: 100ms;">
             <div class="flex items-start gap-6">
               <div class="w-14 h-14 bg-brand-gold/10 flex items-center justify-center rounded-sm text-brand-darkGold text-2xl group-hover:bg-brand-gold group-hover:text-black transition-colors duration-500 shrink-0">
                 <i class="fas fa-shield-alt"></i>
@@ -523,7 +523,7 @@
               </div>
             </div>
           </div>
-          <div class="group bg-clay-surface/5 backdrop-blur-md p-8 border border-clay-border hover:border-brand-gold/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(179, 151, 0,0.2)] rounded-sm reveal-up" style="transition-delay: 200ms;">
+          <div class="group bg-clay-surface/5 backdrop-blur-md p-8 border border-clay-border hover:border-brand-gold/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(239, 191, 4,0.2)] rounded-sm reveal-up" style="transition-delay: 200ms;">
             <div class="flex items-start gap-6">
               <div class="w-14 h-14 bg-brand-gold/10 flex items-center justify-center rounded-sm text-brand-darkGold text-2xl group-hover:bg-brand-gold group-hover:text-black transition-colors duration-500 shrink-0">
                 <i class="fas fa-hard-hat"></i>
@@ -534,7 +534,7 @@
               </div>
             </div>
           </div>
-          <div class="group bg-clay-surface/5 backdrop-blur-md p-8 border border-clay-border hover:border-brand-gold/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(179, 151, 0,0.2)] rounded-sm reveal-up" style="transition-delay: 300ms;">
+          <div class="group bg-clay-surface/5 backdrop-blur-md p-8 border border-clay-border hover:border-brand-gold/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(239, 191, 4,0.2)] rounded-sm reveal-up" style="transition-delay: 300ms;">
             <div class="flex items-start gap-6">
               <div class="w-14 h-14 bg-brand-gold/10 flex items-center justify-center rounded-sm text-brand-darkGold text-2xl group-hover:bg-brand-gold group-hover:text-black transition-colors duration-500 shrink-0">
                 <i class="fas fa-stopwatch"></i>
@@ -577,7 +577,7 @@
   <!-- FOOTER -->
   <footer class="bg-clay-mist text-clay-muted pt-16 md:pt-20 pb-10 border-t border-clay-border relative overflow-hidden">
     <div class="absolute inset-0 opacity-10"
-      style="background-image: radial-gradient(rgba(179, 151, 0, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
+      style="background-image: radial-gradient(rgba(239, 191, 4, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
     <div class="container mx-auto px-6 relative z-10">
       <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
         <div class="col-span-1">

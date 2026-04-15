@@ -59,7 +59,7 @@
       top: 0; left: 0;
       width: 40%;
       height: 2px;
-      background: linear-gradient(90deg, #FFD700, transparent);
+      background: linear-gradient(90deg, #EFBF04, transparent);
       transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .tcard::after {
@@ -67,14 +67,14 @@
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: radial-gradient(circle at top right, rgba(255, 215, 0, 0.06), transparent 50%);
+      background: radial-gradient(circle at top right, rgba(239, 191, 4, 0.06), transparent 50%);
       opacity: 0;
       transition: opacity 0.5s ease;
     }
     .tcard:hover {
       transform: translateY(-6px);
-      border-color: rgba(255, 215, 0, 0.35);
-      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(255, 215, 0, 0.15);
+      border-color: rgba(239, 191, 4, 0.35);
+      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(239, 191, 4, 0.15);
     }
     .tcard:hover::before { width: 100%; }
     .tcard:hover::after { opacity: 1; }
@@ -86,17 +86,17 @@
       width: 64px;
       height: 64px;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.18), rgba(255, 215, 0, 0.04) 70%);
-      border: 1px solid rgba(255, 215, 0, 0.25);
-      color: #FFD700;
+      background: radial-gradient(circle at 30% 30%, rgba(239, 191, 4, 0.18), rgba(239, 191, 4, 0.04) 70%);
+      border: 1px solid rgba(239, 191, 4, 0.25);
+      color: #EFBF04;
       font-size: 1.5rem;
       margin-bottom: 1.25rem;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 20px -8px rgba(255, 215, 0, 0.4);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 20px -8px rgba(239, 191, 4, 0.4);
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
     }
     .tcard:hover .tcard-icon {
       transform: scale(1.08) rotate(-4deg);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 6px 28px -6px rgba(255, 215, 0, 0.55);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 6px 28px -6px rgba(239, 191, 4, 0.55);
     }
 
     .tcard-tag {
@@ -106,9 +106,9 @@
       font-weight: 700;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: #B39700;
+      color: #EFBF04;
       padding: 4px 10px;
-      border: 1px solid rgba(179, 151, 0, 0.3);
+      border: 1px solid rgba(239, 191, 4, 0.3);
       border-radius: 999px;
       margin-bottom: 0.75rem;
     }
@@ -139,28 +139,28 @@
       font-size: 0.65rem;
       font-weight: 700;
       letter-spacing: 0.35em;
-      color: rgba(255, 215, 0, 0.35);
+      color: rgba(239, 191, 4, 0.35);
     }
 
     /* Finale variant — gold-tinted */
     .tcard-finale {
-      background: linear-gradient(155deg, rgba(255, 215, 0, 0.08) 0%, rgba(42, 38, 39, 0.85) 70%);
-      border-color: rgba(255, 215, 0, 0.3);
-      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.5), 0 0 40px -8px rgba(255, 215, 0, 0.12);
+      background: linear-gradient(155deg, rgba(239, 191, 4, 0.08) 0%, rgba(42, 38, 39, 0.85) 70%);
+      border-color: rgba(239, 191, 4, 0.3);
+      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.5), 0 0 40px -8px rgba(239, 191, 4, 0.12);
     }
     .tcard-finale::before { width: 100%; height: 2px; }
     .tcard-finale .tcard-icon {
       width: 72px;
       height: 72px;
       font-size: 1.75rem;
-      background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.35), rgba(255, 215, 0, 0.08) 70%);
-      border-color: rgba(255, 215, 0, 0.5);
+      background: radial-gradient(circle at 30% 30%, rgba(239, 191, 4, 0.35), rgba(239, 191, 4, 0.08) 70%);
+      border-color: rgba(239, 191, 4, 0.5);
     }
     .tcard-finale .tcard-stat-num {
       font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
       font-size: 1.6rem;
       font-weight: 700;
-      color: #FFD700;
+      color: #EFBF04;
       line-height: 1;
     }
     .tcard-finale .tcard-stat-label {
@@ -230,7 +230,7 @@
       font-size: clamp(7rem, 12vw, 12rem);
       line-height: 0.85;
       letter-spacing: -0.04em;
-      background: linear-gradient(180deg, #FFD700 0%, #FFD700 50%, rgba(255, 215, 0, 0.15) 100%);
+      background: linear-gradient(180deg, #EFBF04 0%, #EFBF04 50%, rgba(239, 191, 4, 0.15) 100%);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -245,7 +245,7 @@
       font-weight: 700;
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: #B39700;
+      color: #EFBF04;
       margin-bottom: 1.25rem;
       transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -255,15 +255,15 @@
       width: 72px;
       height: 72px;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.25), rgba(255, 215, 0, 0.06) 70%);
-      border: 1px solid rgba(255, 215, 0, 0.35);
+      background: radial-gradient(circle at 30% 30%, rgba(239, 191, 4, 0.25), rgba(239, 191, 4, 0.06) 70%);
+      border: 1px solid rgba(239, 191, 4, 0.35);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: #FFD700;
+      color: #EFBF04;
       font-size: 1.6rem;
       margin-top: 1.5rem;
-      box-shadow: 0 8px 30px -8px rgba(255, 215, 0, 0.4);
+      box-shadow: 0 8px 30px -8px rgba(239, 191, 4, 0.4);
       transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
     }
     .ss-bigicon.is-swapping { opacity: 0; transform: scale(0.85); }
@@ -299,7 +299,7 @@
       font-size: clamp(3.75rem, 14vw, 6rem);
       line-height: 0.9;
       letter-spacing: -0.03em;
-      background: linear-gradient(180deg, #FFD700 0%, #FFD700 50%, rgba(255, 215, 0, 0.15) 100%);
+      background: linear-gradient(180deg, #EFBF04 0%, #EFBF04 50%, rgba(239, 191, 4, 0.15) 100%);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -315,7 +315,7 @@
       font-weight: 700;
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: #B39700;
+      color: #EFBF04;
       margin-bottom: 0.75rem;
     }
     @media (min-width: 768px) { .ss-card-kicker { font-size: 0.7rem; margin-bottom: 1rem; } }
@@ -813,7 +813,7 @@
   <!-- FOOTER -->
   <footer class="bg-clay-mist text-clay-muted pt-16 md:pt-20 pb-10 border-t border-clay-border relative overflow-hidden">
     <div class="absolute inset-0 opacity-10"
-      style="background-image: radial-gradient(rgba(179, 151, 0, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
+      style="background-image: radial-gradient(rgba(239, 191, 4, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
     <div class="container mx-auto px-6 relative z-10">
       <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
         <div class="col-span-1">

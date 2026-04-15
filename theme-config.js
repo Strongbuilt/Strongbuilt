@@ -5,9 +5,9 @@ tailwind.config = {
         brand: {
           black: '#231F20',
           dark: '#1a1718',
-          gold: '#FFD700',
-          darkGold: '#B39700',
-          lightGold: '#FFF100',
+          gold: '#EFBF04',
+          darkGold: '#EFBF04',
+          lightGold: '#EFBF04',
           gray: '#AAAAAA',
           silver: '#EEEEEE',
         },
@@ -51,8 +51,8 @@ tailwind.config = {
           '50%': { transform: 'translateY(-15px)' },
         },
         glow: {
-          '0%, 100%': { boxShadow: '0 0 5px #FFD700, 0 0 10px #FFD700' },
-          '50%': { boxShadow: '0 0 20px #FFD700, 0 0 30px #B39700' },
+          '0%, 100%': { boxShadow: '0 0 5px #EFBF04, 0 0 10px #EFBF04' },
+          '50%': { boxShadow: '0 0 20px #EFBF04, 0 0 30px #EFBF04' },
         },
         scroll: {
           '0%': { transform: 'translateX(0)' },

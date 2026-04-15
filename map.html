@@ -51,19 +51,19 @@
         .sidebar-optimized { background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-right: 1px solid rgba(255,255,255,0.08); }
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 215, 0,0.3); border-radius: 2px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #FFD700; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(239, 191, 4,0.3); border-radius: 2px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #EFBF04; }
 
         /* ─────── Tcard-style popup ─────── */
         .leaflet-popup-content-wrapper {
             background: linear-gradient(155deg, rgba(42, 38, 39, 0.97), rgba(20, 18, 19, 0.97));
             color: #EEEEEE;
-            border: 1px solid rgba(255, 215, 0,0.35);
+            border: 1px solid rgba(239, 191, 4,0.35);
             border-radius: 6px;
             backdrop-filter: blur(14px);
             padding: 0;
             overflow: hidden;
-            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.7), 0 0 30px -10px rgba(255, 215, 0,0.25);
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.7), 0 0 30px -10px rgba(239, 191, 4,0.25);
             position: relative;
         }
         .leaflet-popup-content-wrapper::before {
@@ -72,15 +72,15 @@
             top: 0; left: 0;
             width: 60%;
             height: 2px;
-            background: linear-gradient(90deg, #FFD700, transparent);
+            background: linear-gradient(90deg, #EFBF04, transparent);
             z-index: 5;
         }
         .leaflet-popup-content { margin: 0; width: 300px !important; }
-        .leaflet-popup-tip { background: rgba(20, 18, 19, 0.97); border: 1px solid rgba(255, 215, 0,0.3); }
+        .leaflet-popup-tip { background: rgba(20, 18, 19, 0.97); border: 1px solid rgba(239, 191, 4,0.3); }
         .leaflet-container a.leaflet-popup-close-button {
             color: #EEEEEE;
             background: rgba(0,0,0,0.6);
-            border: 1px solid rgba(255, 215, 0,0.3);
+            border: 1px solid rgba(239, 191, 4,0.3);
             border-radius: 50%;
             top: 10px; right: 10px;
             width: 26px; height: 26px;
@@ -90,7 +90,7 @@
             transition: all 0.3s ease;
             z-index: 10;
         }
-        .leaflet-container a.leaflet-popup-close-button:hover { color: #1a1718; background: #FFD700; transform: rotate(90deg); }
+        .leaflet-container a.leaflet-popup-close-button:hover { color: #1a1718; background: #EFBF04; transform: rotate(90deg); }
 
         .popup-image { width: 100%; height: 150px; object-fit: cover; transition: transform 0.7s ease; }
         .leaflet-popup:hover .popup-image { transform: scale(1.06); }
@@ -109,14 +109,14 @@
             z-index: 3;
             width: 44px; height: 44px;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.28), rgba(255, 215, 0, 0.06) 70%);
-            border: 1px solid rgba(255, 215, 0, 0.5);
+            background: radial-gradient(circle at 30% 30%, rgba(239, 191, 4, 0.28), rgba(239, 191, 4, 0.06) 70%);
+            border: 1px solid rgba(239, 191, 4, 0.5);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            color: #FFD700;
+            color: #EFBF04;
             font-size: 1.1rem;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 16px -4px rgba(255, 215, 0,0.5);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 16px -4px rgba(239, 191, 4,0.5);
         }
         .popup-content { padding: 32px 20px 20px; position: relative; }
         .popup-kicker {
@@ -125,7 +125,7 @@
             font-weight: 700;
             letter-spacing: 0.35em;
             text-transform: uppercase;
-            color: #B39700;
+            color: #EFBF04;
             margin-bottom: 0.5rem;
         }
         .popup-title {
@@ -151,8 +151,8 @@
             gap: 0.75rem;
             margin: 1rem 0;
             padding: 0.75rem 0;
-            border-top: 1px solid rgba(255, 215, 0, 0.2);
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            border-top: 1px solid rgba(239, 191, 4, 0.2);
+            border-bottom: 1px solid rgba(239, 191, 4, 0.2);
         }
         .popup-meta-k {
             display: block;
@@ -160,7 +160,7 @@
             font-size: 0.55rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            color: #B39700;
+            color: #EFBF04;
             margin-bottom: 0.25rem;
         }
         .popup-meta-v {
@@ -180,7 +180,7 @@
             padding: 3px 8px;
             border-radius: 999px;
         }
-        .popup-badge-cat { background: rgba(255, 215, 0, 0.15); color: #FFD700; border: 1px solid rgba(255, 215, 0, 0.3); }
+        .popup-badge-cat { background: rgba(239, 191, 4, 0.15); color: #EFBF04; border: 1px solid rgba(239, 191, 4, 0.3); }
         .popup-badge-loc { color: #AAAAAA; border: 1px solid rgba(255,255,255,0.1); }
         .popup-badge-live { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.35); }
         .popup-badge-live::before {
@@ -203,7 +203,7 @@
             gap: 0.5rem;
             width: 100%;
             padding: 0.65rem 1rem;
-            background: linear-gradient(155deg, #FFD700, #B39700);
+            background: linear-gradient(155deg, #EFBF04, #EFBF04);
             color: #1a1718 !important;
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 0.7rem;
@@ -214,13 +214,13 @@
             border-radius: 3px;
             transition: all 0.35s ease;
         }
-        .popup-cta:hover { box-shadow: 0 8px 24px -4px rgba(255, 215, 0, 0.5); transform: translateY(-2px); }
+        .popup-cta:hover { box-shadow: 0 8px 24px -4px rgba(239, 191, 4, 0.5); transform: translateY(-2px); }
 
         /* ─────── SVG Teardrop Pin ─────── */
         .sb-pin { background: transparent !important; border: none !important; cursor: pointer; }
         .sb-pin svg { width: 36px; height: 44px; display: block; transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); }
         .sb-pin:hover svg { transform: scale(1.15) translateY(-3px); }
-        .sb-pin.is-active svg { transform: scale(1.2) translateY(-4px); filter: drop-shadow(0 8px 14px rgba(255, 215, 0,0.6)); }
+        .sb-pin.is-active svg { transform: scale(1.2) translateY(-4px); filter: drop-shadow(0 8px 14px rgba(239, 191, 4,0.6)); }
         .sb-pin.is-active .sb-pin-ring { opacity: 1; animation: pinPulse 1.8s ease-in-out infinite; }
         .sb-pin-ring { opacity: 0; transform-origin: center; }
         @keyframes pinPulse {
@@ -237,14 +237,14 @@
             width: 44px; height: 44px;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            background: radial-gradient(circle at 30% 30%, #FFD700, #B39700 70%);
+            background: radial-gradient(circle at 30% 30%, #EFBF04, #EFBF04 70%);
             border: 2px solid rgba(255,255,255,0.85);
             color: #1a1718;
             font-family: 'Oswald', sans-serif;
             font-weight: 700;
             font-size: 0.95rem;
             letter-spacing: -0.01em;
-            box-shadow: 0 6px 18px -4px rgba(0,0,0,0.6), 0 0 0 6px rgba(255, 215, 0,0.18);
+            box-shadow: 0 6px 18px -4px rgba(0,0,0,0.6), 0 0 0 6px rgba(239, 191, 4,0.18);
             transition: transform 0.35s ease;
         }
         .sb-cluster:hover > div { transform: scale(1.08); }
@@ -254,17 +254,17 @@
         }
 
         /* ─────── Project card ─────── */
-        .filter-btn-map.active { background-color: #FFD700 !important; color: #1a1718 !important; border-color: #FFD700 !important; }
-        .status-btn.active { background-color: #FFD700 !important; color: #1a1718 !important; border-color: #FFD700 !important; }
-        .loc-filter.active { background-color: #FFD700; color: #1a1718; border-color: #FFD700; }
+        .filter-btn-map.active { background-color: #EFBF04 !important; color: #1a1718 !important; border-color: #EFBF04 !important; }
+        .status-btn.active { background-color: #EFBF04 !important; color: #1a1718 !important; border-color: #EFBF04 !important; }
+        .loc-filter.active { background-color: #EFBF04; color: #1a1718; border-color: #EFBF04; }
 
         .project-card { opacity: 0; transform: translateY(15px); animation: cardIn 0.4s cubic-bezier(0.16,1,0.3,1) forwards; }
         @keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
-        .project-card.is-selected { border-color: #FFD700 !important; background: rgba(255, 215, 0,0.08); box-shadow: 0 0 24px -4px rgba(255, 215, 0,0.25); }
+        .project-card.is-selected { border-color: #EFBF04 !important; background: rgba(239, 191, 4,0.08); box-shadow: 0 0 24px -4px rgba(239, 191, 4,0.25); }
         .project-card.is-selected .card-accent { transform: translateX(0) !important; }
-        .project-card:focus-visible { outline: 2px solid #FFD700; outline-offset: 2px; border-radius: 4px; }
+        .project-card:focus-visible { outline: 2px solid #EFBF04; outline-offset: 2px; border-radius: 4px; }
 
-        #projectSearch:focus { border-color: #FFD700; box-shadow: 0 0 0 2px rgba(255, 215, 0,0.2); }
+        #projectSearch:focus { border-color: #EFBF04; box-shadow: 0 0 0 2px rgba(239, 191, 4,0.2); }
 
         /* ─────── Filter chip bar ─────── */
         .filter-chip {
@@ -272,9 +272,9 @@
             align-items: center;
             gap: 0.4rem;
             padding: 3px 8px 3px 10px;
-            background: rgba(255, 215, 0, 0.12);
-            border: 1px solid rgba(255, 215, 0, 0.35);
-            color: #FFD700;
+            background: rgba(239, 191, 4, 0.12);
+            border: 1px solid rgba(239, 191, 4, 0.35);
+            color: #EFBF04;
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 0.6rem;
             font-weight: 700;
@@ -284,7 +284,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        .filter-chip:hover { background: rgba(255, 215, 0, 0.22); border-color: #FFD700; }
+        .filter-chip:hover { background: rgba(239, 191, 4, 0.22); border-color: #EFBF04; }
         .filter-chip i { font-size: 0.5rem; opacity: 0.7; }
         .filter-chip:hover i { opacity: 1; }
 
@@ -300,7 +300,7 @@
                 gap: 4px;
                 padding: 4px;
                 background: rgba(10, 10, 10, 0.92);
-                border: 1px solid rgba(255, 215, 0, 0.3);
+                border: 1px solid rgba(239, 191, 4, 0.3);
                 border-radius: 999px;
                 backdrop-filter: blur(12px);
                 box-shadow: 0 10px 30px -6px rgba(0,0,0,0.7);
@@ -318,7 +318,7 @@
                 display: inline-flex; align-items: center; gap: 0.4rem;
             }
             .m-toggle button.is-on {
-                background: linear-gradient(155deg, #FFD700, #B39700);
+                background: linear-gradient(155deg, #EFBF04, #EFBF04);
                 color: #1a1718;
             }
             /* Mobile: show only one panel at a time, full-screen */
@@ -465,7 +465,7 @@
             <div class="p-3 md:p-4 border-t border-clay-border shrink-0 bg-clay-base/40">
                 <p class="text-[10px] text-clay-faint font-heading uppercase tracking-widest mb-2">Legend</p>
                 <div class="flex gap-3 md:gap-4 flex-wrap">
-                    <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#FFD700] border border-clay-border shrink-0"></span><span class="text-[10px] text-clay-muted">Residential</span></div>
+                    <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#EFBF04] border border-clay-border shrink-0"></span><span class="text-[10px] text-clay-muted">Residential</span></div>
                     <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#FF8C00] border border-clay-border shrink-0"></span><span class="text-[10px] text-clay-muted">Commercial</span></div>
                     <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#C0C0C0] border border-clay-border shrink-0"></span><span class="text-[10px] text-clay-muted">Infra</span></div>
                 </div>
@@ -486,7 +486,7 @@
         }
 
         // ─── Category palette + icons ───
-        const CATEGORY_COLORS = { residential: '#FFD700', commercial: '#FF8C00', infrastructure: '#C0C0C0' };
+        const CATEGORY_COLORS = { residential: '#EFBF04', commercial: '#FF8C00', infrastructure: '#C0C0C0' };
         const CATEGORY_ICONS  = { residential: 'fa-home', commercial: 'fa-city', infrastructure: 'fa-road' };
         const getCategoryColor = c => CATEGORY_COLORS[c] || CATEGORY_COLORS.residential;
         const getCategoryIcon  = c => CATEGORY_ICONS[c]  || 'fa-building';
@@ -550,11 +550,11 @@
             const html = `<svg viewBox="0 0 36 44" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient id="pinG" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0" stop-color="#FFD700"/>
-                        <stop offset="1" stop-color="#B39700"/>
+                        <stop offset="0" stop-color="#EFBF04"/>
+                        <stop offset="1" stop-color="#EFBF04"/>
                     </linearGradient>
                 </defs>
-                <circle class="sb-pin-ring" cx="18" cy="16" r="4" fill="none" stroke="#FFD700" stroke-width="2"/>
+                <circle class="sb-pin-ring" cx="18" cy="16" r="4" fill="none" stroke="#EFBF04" stroke-width="2"/>
                 <path d="M18 2 C9.2 2 2 9.2 2 18 c0 12 16 24 16 24 s16-12 16-24 C34 9.2 26.8 2 18 2 z" fill="url(#pinG)" stroke="#fff" stroke-width="1.5"/>
                 <circle cx="18" cy="16" r="6" fill="${core}" stroke="#1a1718" stroke-width="1.5"/>
             </svg>`;

@@ -52,7 +52,7 @@ function openLeadForm() {
     '<input type="email" name="email" placeholder="Email" class="w-full mb-2 p-2 border" required>' +
     '<input type="tel" name="phone" placeholder="Phone" class="w-full mb-2 p-2 border" required>' +
     '<textarea name="message" placeholder="Message" class="w-full mb-2 p-2 border" required></textarea>' +
-    '<button type="submit" class="bg-[#FFD700] text-black px-4 py-2">Submit</button>';
+    '<button type="submit" class="bg-[#EFBF04] text-black px-4 py-2">Submit</button>';
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     modal.remove();
@@ -201,3 +201,53 @@ window.addEventListener('load', () => {
     setTimeout(() => preloader.remove(), 500);
   }
 });
+
+// ─────────────────────────────────────────────
+// SONAR CURSOR (site-wide)
+// Gold dot follows pointer + continuous pulse rings
+// ─────────────────────────────────────────────
+(() => {
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  const dot = document.createElement('div');
+  dot.className = 'sb-cursor-dot';
+  document.body.appendChild(dot);
+  document.documentElement.classList.add('sb-sonar');
+
+  let x = innerWidth / 2, y = innerHeight / 2;
+  let active = false;
+
+  document.addEventListener('pointermove', e => {
+    x = e.clientX; y = e.clientY;
+    if (!active) { active = true; dot.classList.add('sb-active'); }
+    dot.style.left = x + 'px';
+    dot.style.top  = y + 'px';
+    const over = e.target.closest('a, button, [role="button"], input, textarea, select, label');
+    dot.classList.toggle('sb-hover', !!over);
+  }, { passive: true });
+
+  document.addEventListener('pointerleave', () => {
+    active = false; dot.classList.remove('sb-active');
+  });
+
+  document.addEventListener('pointerdown', () => {
+    dot.style.transition = 'transform .12s ease, opacity .3s ease, width .25s ease, height .25s ease, background .25s ease';
+    dot.style.transform = 'translate(-50%, -50%) scale(0.6)';
+    setTimeout(() => {
+      dot.style.transform = 'translate(-50%, -50%) scale(1)';
+      setTimeout(() => { dot.style.transition = ''; }, 160);
+    }, 120);
+  });
+
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setInterval(() => {
+      if (!active) return;
+      const ring = document.createElement('div');
+      ring.className = 'sb-cursor-pulse';
+      ring.style.left = x + 'px';
+      ring.style.top  = y + 'px';
+      document.body.appendChild(ring);
+      setTimeout(() => ring.remove(), 1700);
+    }, 600);
+  }
+})();

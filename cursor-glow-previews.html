@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth overflow-x-hidden">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursor Glow Previews — Strong Built</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0e0c0d; color: #EEEEEE; font-family: 'Barlow Condensed', sans-serif; overflow-x: hidden; }
+
+    .label {
+      position: sticky; top: 0; z-index: 50;
+      background: #231F20; color: #EFBF04;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      font-size: 0.75rem; padding: 14px 24px;
+      border-bottom: 1px solid #EFBF04;
+    }
+    .label small { color: #AAAAAA; letter-spacing: 0.05em; font-size: 0.7rem; text-transform: none; margin-left: 14px; }
+
+    .stage {
+      position: relative; min-height: 80vh; overflow: hidden;
+      background: #1a1718; cursor: none;
+      display: flex; align-items: center; justify-content: center;
+      padding: 4rem 2rem;
+    }
+    .stage::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(239, 191, 4,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(239, 191, 4,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .stage-content {
+      position: relative; z-index: 4; text-align: center; max-width: 800px;
+    }
+    .stage-eyebrow {
+      color: #EFBF04; letter-spacing: 0.5em; font-weight: 700; font-size: 0.7rem;
+      text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .stage-title {
+      font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase;
+      font-size: clamp(2.5rem, 7vw, 5rem); line-height: 1; letter-spacing: -0.025em;
+      color: #EEEEEE;
+    }
+    .stage-title em { font-style: normal; color: #EFBF04; }
+    .stage-lede {
+      color: #AAAAAA; font-size: 1rem; line-height: 1.6;
+      max-width: 480px; margin: 1.5rem auto 2rem;
+    }
+    .stage-cta {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 14px 30px; background: #EFBF04; color: #231F20;
+      letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; font-size: 0.8rem;
+      cursor: none; transition: transform .25s ease, background .25s ease;
+    }
+    .stage-cta:hover { transform: translateY(-2px); background: #FFFFFF; }
+    .stage-cta + .stage-cta {
+      background: transparent; color: #EEEEEE; border: 1px solid rgba(255,255,255,0.25);
+      margin-left: 8px;
+    }
+    .stage-cta + .stage-cta:hover { border-color: #EFBF04; color: #EFBF04; background: rgba(239, 191, 4,0.05); }
+    @media (max-width: 600px) { .stage { cursor: auto; } .stage-cta { cursor: pointer; } }
+
+    .chooser {
+      position: fixed; top: 12px; right: 12px; z-index: 100;
+      background: rgba(35,31,32,0.92); backdrop-filter: blur(10px);
+      padding: 10px; border: 1px solid #EFBF04; border-radius: 6px;
+      display: flex; flex-direction: column; gap: 4px;
+      max-height: 90vh; overflow-y: auto;
+    }
+    .chooser a {
+      color: #EEEEEE; padding: 6px 14px; text-transform: uppercase; letter-spacing: 0.15em;
+      font-size: 0.65rem; border-left: 2px solid transparent; transition: all 0.25s;
+      text-decoration: none;
+    }
+    .chooser a:hover { color: #EFBF04; border-color: #EFBF04; background: rgba(239, 191, 4,0.06); }
+
+    /* ─── 11. MAGNETIC FIELD ─── */
+    .stage[data-glow="magfield"] { overflow: hidden; }
+    .g11-dot {
+      position: absolute; width: 4px; height: 4px; border-radius: 50%;
+      background: rgba(239, 191, 4,0.4);
+      pointer-events: none;
+      transition: transform .8s cubic-bezier(.16,1,.3,1), background .4s, box-shadow .4s;
+    }
+    .g11-dot.active { background: #EFBF04; box-shadow: 0 0 10px #EFBF04; }
+
+    /* ─── 12. PULSE WAVE ─── */
+    .g12-cursor {
+      position: absolute; width: 14px; height: 14px; border-radius: 50%;
+      background: #EFBF04; box-shadow: 0 0 12px #EFBF04;
+      pointer-events: none; opacity: 0;
+      transform: translate(-50%, -50%); z-index: 5;
+      transition: opacity .25s ease;
+    }
+    .stage.lit .g12-cursor { opacity: 1; }
+    .g12-pulse {
+      position: absolute; width: 14px; height: 14px; border-radius: 50%;
+      border: 2px solid #EFBF04; pointer-events: none;
+      transform: translate(-50%, -50%); z-index: 4; opacity: 0.7;
+      animation: g12Wave 1.6s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    @keyframes g12Wave { to { width: 280px; height: 280px; opacity: 0; border-width: 1px; } }
+
+    /* ─── 14. LIQUID BLOB ─── */
+    .stage[data-glow="blob"] { overflow: hidden; }
+    .g14-blob-layer {
+      position: absolute; inset: 0; pointer-events: none; z-index: 2;
+      filter: url(#g14-goo); mix-blend-mode: screen;
+    }
+    .g14-blob {
+      position: absolute; border-radius: 50%; opacity: 0;
+      background: radial-gradient(circle, rgba(239, 191, 4,0.95), rgba(239, 191, 4,0.6) 60%, transparent);
+      transform: translate(-50%, -50%); transition: opacity .4s ease;
+    }
+    .stage.lit .g14-blob { opacity: 0.85; }
+    .g14-blob.b1 { width: 110px; height: 110px; }
+    .g14-blob.b2 { width: 70px; height: 70px; }
+    .g14-blob.b3 { width: 90px; height: 90px; }
+    .g14-blob.b4 { width: 50px; height: 50px; }
+
+    /* ─── 21. GRID WARP ─── */
+    .stage[data-glow="warp"] { background: #0e0c0d; }
+    .stage[data-glow="warp"]::before { display: none; }
+    .g21-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+    .g21-svg line { stroke: rgba(239, 191, 4,0.18); stroke-width: 1; transition: stroke .3s; }
+    .g21-cursor {
+      position: absolute; width: 10px; height: 10px; border-radius: 50%;
+      background: #EFBF04; box-shadow: 0 0 12px #EFBF04;
+      pointer-events: none; opacity: 0;
+      transform: translate(-50%, -50%); z-index: 4; transition: opacity .3s;
+    }
+    .stage.lit .g21-cursor { opacity: 1; }
+
+    /* ─── 28. MAGNETIC STRINGS ─── */
+    .g28-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+    .g28-anchor {
+      position: absolute; width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(239, 191, 4,0.4); z-index: 2; pointer-events: none;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 6px rgba(239, 191, 4,0.4);
+    }
+
+    /* ─── 30. CONSTELLATION ─── */
+    .g30-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+    .g30-cursor {
+      position: absolute; width: 12px; height: 12px; border-radius: 50%;
+      border: 1px solid #EFBF04; pointer-events: none; opacity: 0;
+      transform: translate(-50%, -50%); transition: opacity .3s; z-index: 5;
+    }
+    .stage.lit .g30-cursor { opacity: 1; }
+    .g30-hint {
+      position: absolute; top: 1rem; left: 50%; transform: translateX(-50%);
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem;
+      letter-spacing: 0.3em; color: rgba(239, 191, 4,0.5); text-transform: uppercase; z-index: 6;
+    }
+
+    /* ─── 34. CRANE HOOK ─── */
+    .g34-crane {
+      position: absolute; width: 40px; pointer-events: none; opacity: 0; transition: opacity .3s;
+      transform: translateX(-50%); z-index: 4;
+    }
+    .stage.lit .g34-crane { opacity: 1; }
+    .g34-chain {
+      width: 2px; margin: 0 auto;
+      background: repeating-linear-gradient(180deg, #EFBF04 0, #EFBF04 6px, transparent 6px, transparent 10px);
+    }
+    .g34-hook { width: 40px; height: 40px; position: relative; }
+    .g34-hook svg { width: 100%; height: 100%; display: block; }
+    .g34-hook path { fill: none; stroke: #EFBF04; stroke-width: 2.5; stroke-linecap: round; }
+
+    /* ─── 38. CHALK LINE SNAP ─── */
+    .g38-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+    .g38-cursor {
+      position: absolute; width: 12px; height: 12px; border-radius: 50%;
+      background: rgba(239, 191, 4,0.3); border: 1.5px solid #EFBF04;
+      pointer-events: none; opacity: 0; transition: opacity .25s;
+      transform: translate(-50%, -50%); z-index: 5;
+    }
+    .stage.lit .g38-cursor { opacity: 1; }
+    .g38-hint {
+      position: absolute; top: 1rem; left: 50%; transform: translateX(-50%);
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem;
+      letter-spacing: 0.3em; color: rgba(239, 191, 4,0.5); text-transform: uppercase; z-index: 6;
+    }
+
+    /* ─── 48. SAW BLADE ─── */
+    .g48-blade {
+      position: absolute; width: 70px; height: 70px; pointer-events: none;
+      opacity: 0; transform: translate(-50%, -50%); z-index: 5; transition: opacity .25s;
+    }
+    .stage.lit .g48-blade { opacity: 1; }
+    .g48-blade svg { width: 100%; height: 100%; animation: g48Spin .12s linear infinite; }
+    @keyframes g48Spin { to { transform: rotate(360deg); } }
+    .g48-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+
+    /* ─── 57. MEASURING WHEEL ─── */
+    .g57-wheel {
+      position: absolute; width: 64px; height: 64px; border-radius: 50%;
+      border: 4px solid #EFBF04; background: rgba(0,0,0,0.3);
+      pointer-events: none; opacity: 0;
+      transform: translate(-50%, -50%); z-index: 5; transition: opacity .3s;
+    }
+    .stage.lit .g57-wheel { opacity: 1; }
+    .g57-wheel::before, .g57-wheel::after {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      background: #EFBF04; transform-origin: center;
+    }
+    .g57-wheel::before { width: 2px; height: 48px; margin: -24px 0 0 -1px; }
+    .g57-wheel::after { width: 48px; height: 2px; margin: -1px 0 0 -24px; }
+    .g57-wheel .hub {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 10px; height: 10px; border-radius: 50%; background: #231F20;
+      border: 2px solid #EFBF04; z-index: 2;
+    }
+    .g57-odometer {
+      position: absolute; bottom: 1rem; left: 1rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+      padding: 8px 14px; background: #0e0c0d; color: #EFBF04;
+      letter-spacing: 0.15em; border: 1px solid rgba(239, 191, 4,0.3); z-index: 4;
+    }
+    .g57-odometer span { color: #EFBF04; }
+  </style>
+</head>
+
+<body>
+
+  <nav class="chooser" aria-label="Cursor effects">
+    <a href="#g11">11 — Magnetic Field</a>
+    <a href="#g12">12 — Pulse Wave</a>
+    <a href="#g14">14 — Liquid Blob</a>
+    <a href="#g21">21 — Grid Warp</a>
+    <a href="#g28">28 — Magnetic Strings</a>
+    <a href="#g30">30 — Constellation</a>
+    <a href="#g34" style="color:#EFBF04">— CONSTRUCTION —</a>
+    <a href="#g34">34 — Crane Hook</a>
+    <a href="#g38">38 — Chalk Line Snap</a>
+    <a href="#g48">48 — Saw Blade</a>
+    <a href="#g57">57 — Measuring Wheel</a>
+  </nav>
+
+  <!-- 11. MAGNETIC FIELD -->
+  <div id="g11" class="label">11 — Magnetic Field <small>scattered gold dots get pushed away from the cursor</small></div>
+  <section class="stage" data-glow="magfield">
+    <div class="stage-content">
+      <div class="stage-eyebrow">Effect 11</div>
+      <h2 class="stage-title">A magnetic <em>field</em></h2>
+      <p class="stage-lede">A grid of gold dots fills the hero. As the cursor moves, nearby dots glow and recoil — like iron filings near a magnet.</p>
+      <a href="#" class="stage-cta">Primary Action</a>
+      <a href="#" class="stage-cta">Secondary</a>
+    </div>
+  </section>
+
+  <!-- 12. PULSE WAVE -->
+  <div id="g12" class="label">12 — Pulse Wave <small>solid cursor dot + continuously emitting expanding rings</small></div>
+  <section class="stage" data-glow="pulse">
+    <div class="g12-cursor"></div>
+    <div class="stage-content">
+      <div class="stage-eyebrow">Effect 12 — sonar</div>
+      <h2 class="stage-title">A pulsing <em>sonar</em></h2>
+      <p class="stage-lede">A solid gold cursor that emits a fresh expanding ring every half-second. Reads as an active beacon / sonar ping.</p>
+      <a href="#" class="stage-cta">Primary Action</a>
+      <a href="#" class="stage-cta">Secondary</a>
+    </div>
+  </section>
+
+  <!-- 14. LIQUID BLOB -->
+  <div id="g14" class="label">14 — Liquid Blob <small>SVG-goo filter · main blob + smaller satellites blend like mercury</small></div>
+  <section class="stage" data-glow="blob">
+    <svg width="0" height="0" style="position:absolute;">
+      <defs>
+        <filter id="g14-goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="14" />
+          <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -10" />
+        </filter>
+      </defs>
+    </svg>
+    <div class="g14-blob-layer">
+      <div class="g14-blob b1"></div>
+      <div class="g14-blob b2"></div>
+      <div class="g14-blob b3"></div>
+      <div class="g14-blob b4"></div>
+    </div>
+    <div class="stage-content">
+      <div class="stage-eyebrow">Effect 14 — gooey</div>
+      <h2 class="stage-title">A liquid <em>blob</em></h2>
+      <p class="stage-lede">A main gold blob with three smaller satellites that lag behind, all blended through an SVG goo filter — like mercury or molten gold.</p>
+      <a href="#" class="stage-cta">Primary Action</a>
+      <a href="#" class="stage-cta">Secondary</a>
+    </div>
+  </section>
+
+  <!-- 21. GRID WARP -->
+  <div id="g21" class="label">21 — Grid Warp <small>architectural grid bends toward cursor · gravitational well</small></div>
+  <section class="stage" data-glow="warp">
+    <svg class="g21-svg" aria-hidden="true"></svg>
+    <div class="g21-cursor"></div>
+    <div class="stage-content">
+      <div class="stage-eyebrow">Effect 21</div>
+      <h2 class="stage-title">A warping <em>grid</em></h2>
+      <p class="stage-lede">An architectural grid of lines bends toward the cursor like space-time near a mass. Nearby lines glow brighter, farther lines stay flat.</p>
+      <a href="#" class="stage-cta">Primary Action</a>
+      <a href="#" class="stage-cta">Secondary</a>
+    </div>
+  </section>
+
+  <!-- 28. MAGNETIC STRINGS -->
+  <div id="g28" class="label">28 — Magnetic Strings <small>elastic gold strings connect cursor to scattered anchor points</small></div>
+  <section class="stage" data-glow="strings">
+    <canvas class="g28-canvas" aria-hidden="true"></canvas>
+    <div class="stage-content">
+      <div class="stage-eyebrow">Effect 28</div>
+      <h2 class="stage-title">Elastic <em>strings</em></h2>
+      <p class="stage-lede">Invisible anchor points across the hero send gold elastic strings to the cursor when you come near. Strings snap tight and then relax.</p>
+      <a href="#" class="stage-cta">Primary Action</a>
+      <a href="#" class="stage-cta">Secondary</a>
+    </div>
+  </section>
+
+  <!-- 30. CONSTELLATION -->
+  <div id="g30" class="label">30 — Constellation <small>click to place a star · stars auto-connect to nearest neighbours</small></div>
+  <section class="stage" data-glow="constellation">
+    <canvas class="g30-canvas" aria-hidden="true"></canvas>
+    <div class="g30-cursor"></div>
+    <div class="g30-hint">Click to place stars · they auto-connect</div>
+    <div class="stage-content">
+      <div class="stage-eyebrow">Effect 30 — click to add stars</div>
+      <h2 class="stage-title">Build a <em>constellation</em></h2>
+      <p class="stage-lede">Click anywhere to place a gold star; it automatically connects to its nearest neighbours. Build patterns across the hero one click at a time.</p>
+      <a href="#" class="stage-cta">Primary Action</a>
+      <a href="#" class="stage-cta">Secondary</a>
+    </div>
+  </section>
+
+  <!-- ════════════════ CONSTRUCTION-THEMED ════════════════ -->
+
+  <!-- 34. CRANE HOOK -->
+  <div id="g34" class="label">34 — Crane Hook <small>hanging chain drops from top · hook sways on lag · pendulum physics</small></div>
+  <section class="stage" data-glow="hook">
+    <div class="g34-crane">
+      <div class="g34-chain"></div>
+      <div class="g34-hook">
+        <svg viewBox="0 0 40 40">
+          <path d="M20,0 L20,10"/>
+          <path d="M14,10 L26,10 L26,14 L14,14 Z" fill="#EFBF04" stroke="none"/>
+          <path d="M20,14 Q14,22 20,30 Q26,30 26,24"/>
+          <path d="M20,30 Q22,32 24,30"/>
+        </svg>
+      </div>
+    </div>
+    <div class="stage-content">
+      <div class="stage-eyebrow">Effect 34 — tower crane</div>
+      <h2 class="stage-title">A crane <em>hook</em></h2>
+      <p class="stage-lede">A chain drops from the top of the hero with a gold hook at its tip. The hook follows the cursor with a gentle pendulum sway — just like a real crane load.</p>
+      <a href="#" class="stage-cta">Primary Action</a>
+      <a href="#" class="stage-cta">Secondary</a>
+    </div>
+  </section>
+
+  <!-- 38. CHALK LINE SNAP -->
+  <div id="g38" class="label">38 — Chalk Line Snap <small>click to drop anchor · click again to snap a chalk line · dust + perfectly straight line</small></div>
+  <section class="stage" data-glow="chalk">
+    <canvas class="g38-canvas" aria-hidden="true"></canvas>
+    <div class="g38-cursor"></div>
+    <div class="g38-hint">Click two points to snap a chalk line</div>
+    <div class="stage-content">
+      <div class="stage-eyebrow">Effect 38 — layout tool</div>
+      <h2 class="stage-title">Snap a <em>chalk line</em></h2>
+      <p class="stage-lede">Click to drop the first anchor; click again anywhere else to snap a chalk line between them — complete with a puff of gold dust on impact.</p>
+      <a href="#" class="stage-cta">Primary Action</a>
+      <a href="#" class="stage-cta">Secondary</a>
+    </div>
+  </section>
+
+  <!-- 48. SAW BLADE -->
+  <div id="g48" class="label">48 — Saw Blade <small>spinning circular saw cursor · sparks fly along path of motion</small></div>
+  <section class="stage" data-glow="saw">
+    <canvas class="g48-canvas" aria-hidden="true"></canvas>
+    <div class="g48-blade">
+      <svg viewBox="0 0 70 70">
+        <circle cx="35" cy="35" r="30" fill="#EFBF04" stroke="#231F20" stroke-width="2"/>
+        <g fill="#231F20">
+          <polygon points="35,2 38,8 32,8"/><polygon points="68,35 62,38 62,32"/>
+          <polygon points="35,68 32,62 38,62"/><polygon points="2,35 8,32 8,38"/>
+          <polygon points="58,12 56,18 50,15"/><polygon points="58,58 50,55 56,52"/>
+          <polygon points="12,58 18,52 15,58"/><polygon points="12,12 15,12 18,18"/>
+        </g>
+        <circle cx="35" cy="35" r="6" fill="#231F20"/>
+      </svg>
+    </div>
+    <div class="stage-content">
+      <div class="stage-eyebrow">Effect 48</div>
+      <h2 class="stage-title">A circular <em>saw</em></h2>
+      <p class="stage-lede">A spinning circular saw blade follows the cursor. As you drag, hot orange sparks spray off the cutting edge and bounce on the page.</p>
+      <a href="#" class="stage-cta">Primary Action</a>
+      <a href="#" class="stage-cta">Secondary</a>
+    </div>
+  </section>
+
+  <!-- 57. MEASURING WHEEL -->
+  <div id="g57" class="label">57 — Measuring Wheel <small>spoked wheel rotates as cursor moves · live odometer in metres</small></div>
+  <section class="stage" data-glow="wheel">
+    <div class="g57-wheel"><div class="hub"></div></div>
+    <div class="g57-odometer">DISTANCE: <span>0.00</span>M</div>
+    <div class="stage-content">
+      <div class="stage-eyebrow">Effect 57</div>
+      <h2 class="stage-title">A measuring <em>wheel</em></h2>
+      <p class="stage-lede">A spoked surveyor's wheel follows the cursor, rotating proportional to distance travelled. A live odometer in the corner totals every metre walked across the hero.</p>
+      <a href="#" class="stage-cta">Primary Action</a>
+      <a href="#" class="stage-cta">Secondary</a>
+    </div>
+  </section>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('.stage').forEach(stage => {
+    const type = stage.dataset.glow;
+
+    const track = (cb) => {
+      stage.addEventListener('pointerenter', () => stage.classList.add('lit'));
+      stage.addEventListener('pointerleave', () => stage.classList.remove('lit'));
+      stage.addEventListener('pointermove', e => {
+        const r = stage.getBoundingClientRect();
+        cb(e.clientX - r.left, e.clientY - r.top, e);
+      }, { passive: true });
+    };
+
+    const setupCanvas = (canvas, onTick) => {
+      const ctx = canvas.getContext('2d');
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      let w, h, raf;
+      const fit = () => {
+        const r = stage.getBoundingClientRect();
+        w = r.width; h = r.height;
+        canvas.width = w * dpr; canvas.height = h * dpr;
+        canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      };
+      fit(); addEventListener('resize', fit, { passive: true });
+      const tick = () => { onTick(ctx, w, h); raf = requestAnimationFrame(tick); };
+      new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) { if (!raf) raf = requestAnimationFrame(tick); }
+        else { cancelAnimationFrame(raf); raf = 0; }
+      }), { threshold: 0.1 }).observe(stage);
+    };
+
+    if (type === 'magfield') {
+      const r = stage.getBoundingClientRect();
+      const stepX = 32, stepY = 32;
+      const dots = [];
+      for (let y = stepY/2; y < r.height; y += stepY) {
+        for (let x = stepX/2; x < r.width; x += stepX) {
+          const d = document.createElement('div');
+          d.className = 'g11-dot';
+          d.style.left = x + 'px'; d.style.top = y + 'px';
+          d._x = x; d._y = y;
+          stage.appendChild(d);
+          dots.push(d);
+        }
+      }
+      const RADIUS = 120, R2 = RADIUS * RADIUS, MAX_PUSH = 32;
+      track((mx, my) => {
+        for (let i = 0; i < dots.length; i++) {
+          const d = dots[i];
+          const dx = d._x - mx, dy = d._y - my;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < R2) {
+            const dist = Math.sqrt(d2) || 1;
+            const force = (1 - dist / RADIUS) * MAX_PUSH;
+            d.style.transform = `translate(${(dx/dist)*force}px, ${(dy/dist)*force}px)`;
+            d.classList.add('active');
+          } else {
+            d.style.transform = ''; d.classList.remove('active');
+          }
+        }
+      });
+      stage.addEventListener('pointerleave', () => {
+        dots.forEach(d => { d.style.transform = ''; d.classList.remove('active'); });
+      });
+    }
+
+    if (type === 'pulse') {
+      const cur = stage.querySelector('.g12-cursor');
+      let lastX = 0, lastY = 0;
+      track((x, y) => { cur.style.left = x + 'px'; cur.style.top = y + 'px'; lastX = x; lastY = y; });
+      setInterval(() => {
+        if (!stage.classList.contains('lit')) return;
+        const ring = document.createElement('div');
+        ring.className = 'g12-pulse';
+        ring.style.left = lastX + 'px';
+        ring.style.top  = lastY + 'px';
+        stage.appendChild(ring);
+        setTimeout(() => ring.remove(), 1700);
+      }, 600);
+    }
+
+    if (type === 'blob') {
+      const blobs = stage.querySelectorAll('.g14-blob');
+      let tx = 0, ty = 0;
+      const positions = Array.from(blobs, () => ({ x: 0, y: 0 }));
+      track((x, y) => { tx = x; ty = y; });
+      let raf;
+      const tick = () => {
+        positions[0].x += (tx - positions[0].x) * 0.25;
+        positions[0].y += (ty - positions[0].y) * 0.25;
+        for (let i = 1; i < positions.length; i++) {
+          positions[i].x += (positions[i-1].x - positions[i].x) * 0.18;
+          positions[i].y += (positions[i-1].y - positions[i].y) * 0.18;
+        }
+        blobs.forEach((b, i) => { b.style.left = positions[i].x + 'px'; b.style.top = positions[i].y + 'px'; });
+        raf = requestAnimationFrame(tick);
+      };
+      new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) { if (!raf) raf = requestAnimationFrame(tick); }
+        else { cancelAnimationFrame(raf); raf = 0; }
+      }), { threshold: 0.1 }).observe(stage);
+    }
+
+    if (type === 'warp') {
+      const svg = stage.querySelector('.g21-svg');
+      const cur = stage.querySelector('.g21-cursor');
+      const r = stage.getBoundingClientRect();
+      const W = r.width, H = r.height;
+      const STEP = 40;
+      const cols = Math.ceil(W / STEP) + 1;
+      const rows = Math.ceil(H / STEP) + 1;
+      svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+      const nodes = [];
+      for (let iy = 0; iy < rows; iy++) for (let ix = 0; ix < cols; ix++)
+        nodes.push({ ox: ix * STEP, oy: iy * STEP, x: ix * STEP, y: iy * STEP });
+      const idx = (ix, iy) => iy * cols + ix;
+      const lines = [];
+      for (let iy = 0; iy < rows; iy++) for (let ix = 0; ix < cols - 1; ix++) {
+        const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        svg.appendChild(l); lines.push({ el: l, a: idx(ix, iy), b: idx(ix + 1, iy) });
+      }
+      for (let iy = 0; iy < rows - 1; iy++) for (let ix = 0; ix < cols; ix++) {
+        const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        svg.appendChild(l); lines.push({ el: l, a: idx(ix, iy), b: idx(ix, iy + 1) });
+      }
+      let mx = -9999, my = -9999;
+      track((x, y) => { mx = x; my = y; cur.style.left = x + 'px'; cur.style.top = y + 'px'; });
+      stage.addEventListener('pointerleave', () => { mx = -9999; my = -9999; });
+      let raf;
+      const R2 = 200 * 200;
+      const tick = () => {
+        for (let i = 0; i < nodes.length; i++) {
+          const n = nodes[i];
+          const dx = mx - n.ox, dy = my - n.oy;
+          const d2 = dx * dx + dy * dy;
+          let tx = n.ox, ty = n.oy;
+          if (d2 < R2) {
+            const falloff = 1 - d2 / R2;
+            tx = n.ox + dx * falloff * 0.35;
+            ty = n.oy + dy * falloff * 0.35;
+          }
+          n.x += (tx - n.x) * 0.18;
+          n.y += (ty - n.y) * 0.18;
+        }
+        for (let i = 0; i < lines.length; i++) {
+          const l = lines[i];
+          const a = nodes[l.a], b = nodes[l.b];
+          l.el.setAttribute('x1', a.x); l.el.setAttribute('y1', a.y);
+          l.el.setAttribute('x2', b.x); l.el.setAttribute('y2', b.y);
+        }
+        raf = requestAnimationFrame(tick);
+      };
+      new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) { if (!raf) raf = requestAnimationFrame(tick); }
+        else { cancelAnimationFrame(raf); raf = 0; }
+      }), { threshold: 0.1 }).observe(stage);
+    }
+
+    if (type === 'strings' && !reduce) {
+      const canvas = stage.querySelector('.g28-canvas');
+      const r0 = stage.getBoundingClientRect();
+      const anchors = [];
+      const COUNT = 14;
+      for (let i = 0; i < COUNT; i++) {
+        const ax = 60 + Math.random() * (r0.width - 120);
+        const ay = 60 + Math.random() * (r0.height - 120);
+        const d = document.createElement('div');
+        d.className = 'g28-anchor';
+        d.style.left = ax + 'px'; d.style.top = ay + 'px';
+        stage.appendChild(d);
+        anchors.push({ x: ax, y: ay });
+      }
+      let mx = -9999, my = -9999;
+      track((x, y) => { mx = x; my = y; });
+      stage.addEventListener('pointerleave', () => { mx = -9999; my = -9999; });
+      setupCanvas(canvas, (ctx, w, h) => {
+        ctx.clearRect(0, 0, w, h);
+        if (mx < -1000) return;
+        ctx.lineCap = 'round';
+        for (let i = 0; i < anchors.length; i++) {
+          const a = anchors[i];
+          const dx = a.x - mx, dy = a.y - my;
+          const d = Math.sqrt(dx*dx + dy*dy);
+          if (d > 220) continue;
+          const alpha = 1 - d / 220;
+          const midX = (a.x + mx) / 2;
+          const midY = (a.y + my) / 2 + (1 - alpha) * 20;
+          ctx.strokeStyle = `rgba(239, 191, 4, ${alpha * 0.8})`;
+          ctx.lineWidth = 0.8 + alpha * 1.5;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.quadraticCurveTo(midX, midY, mx, my);
+          ctx.stroke();
+        }
+      });
+    }
+
+    if (type === 'constellation') {
+      const canvas = stage.querySelector('.g30-canvas');
+      const cur = stage.querySelector('.g30-cursor');
+      const stars = [];
+      track((x, y) => { cur.style.left = x + 'px'; cur.style.top = y + 'px'; });
+      stage.addEventListener('click', e => {
+        const r = stage.getBoundingClientRect();
+        stars.push({ x: e.clientX - r.left, y: e.clientY - r.top, twinkle: Math.random() * Math.PI * 2 });
+      });
+      setupCanvas(canvas, (ctx, w, h) => {
+        ctx.clearRect(0, 0, w, h);
+        ctx.strokeStyle = 'rgba(239, 191, 4, 0.35)';
+        ctx.lineWidth = 0.8;
+        for (let i = 0; i < stars.length; i++) {
+          const a = stars[i];
+          const dists = stars.map((b, j) => ({ j, d: (b.x-a.x)**2 + (b.y-a.y)**2 }))
+                             .filter(o => o.j !== i)
+                             .sort((p, q) => p.d - q.d)
+                             .slice(0, 2);
+          for (const n of dists) {
+            const b = stars[n.j];
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+        for (let i = 0; i < stars.length; i++) {
+          const s = stars[i];
+          s.twinkle += 0.06;
+          const pulse = (Math.sin(s.twinkle) + 1) * 0.5;
+          const r = 3 + pulse * 2;
+          const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, r * 4);
+          g.addColorStop(0, 'rgba(239, 191, 4, 0.9)');
+          g.addColorStop(1, 'rgba(239, 191, 4, 0)');
+          ctx.fillStyle = g;
+          ctx.beginPath(); ctx.arc(s.x, s.y, r * 4, 0, Math.PI * 2); ctx.fill();
+          ctx.fillStyle = '#EFBF04';
+          ctx.beginPath(); ctx.arc(s.x, s.y, 1.8, 0, Math.PI * 2); ctx.fill();
+        }
+      });
+    }
+
+    if (type === 'hook' && !reduce) {
+      const crane = stage.querySelector('.g34-crane');
+      const chain = stage.querySelector('.g34-chain');
+      const r0 = stage.getBoundingClientRect();
+      let tx = r0.width / 2, ty = 100, cx = tx, cy = ty, vx = 0, vy = 0;
+      track((x, y) => { tx = x; ty = y; });
+      const tick = () => {
+        const ax = (tx - cx) * 0.06, ay = (ty - cy) * 0.06;
+        vx += ax; vy += ay; vx *= 0.88; vy *= 0.88;
+        cx += vx; cy += vy;
+        crane.style.left = cx + 'px'; crane.style.top = '0';
+        chain.style.height = Math.max(0, cy - 20) + 'px';
+        const hook = crane.querySelector('.g34-hook');
+        hook.style.transform = `rotate(${vx * 3}deg)`;
+        requestAnimationFrame(tick);
+      };
+      tick();
+    }
+
+    if (type === 'chalk') {
+      const canvas = stage.querySelector('.g38-canvas');
+      const cur = stage.querySelector('.g38-cursor');
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      const ctx = canvas.getContext('2d');
+      const r0 = stage.getBoundingClientRect();
+      canvas.width = r0.width * dpr; canvas.height = r0.height * dpr;
+      canvas.style.width = r0.width + 'px'; canvas.style.height = r0.height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      let anchor = null, lines = [], dust = [];
+      track((x, y) => { cur.style.left = x + 'px'; cur.style.top = y + 'px'; });
+      stage.addEventListener('click', e => {
+        const r = stage.getBoundingClientRect();
+        const x = e.clientX - r.left, y = e.clientY - r.top;
+        if (!anchor) { anchor = { x, y }; }
+        else {
+          lines.push({ a: anchor, b: { x, y }, life: 1 });
+          for (let i = 0; i < 14; i++) {
+            dust.push({ x: anchor.x, y: anchor.y, vx: (Math.random()-.5)*2, vy: (Math.random()-.5)*2, life: 1, r: Math.random()*2+1 });
+            dust.push({ x, y, vx: (Math.random()-.5)*2, vy: (Math.random()-.5)*2, life: 1, r: Math.random()*2+1 });
+          }
+          anchor = null;
+        }
+      });
+      let raf;
+      const tick = () => {
+        ctx.clearRect(0, 0, r0.width, r0.height);
+        if (anchor) {
+          ctx.strokeStyle = '#EFBF04'; ctx.lineWidth = 1.5;
+          ctx.beginPath(); ctx.arc(anchor.x, anchor.y, 6, 0, Math.PI*2); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(anchor.x - 10, anchor.y); ctx.lineTo(anchor.x + 10, anchor.y); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(anchor.x, anchor.y - 10); ctx.lineTo(anchor.x, anchor.y + 10); ctx.stroke();
+        }
+        for (let i = lines.length - 1; i >= 0; i--) {
+          const L = lines[i]; L.life -= 0.0008;
+          if (L.life <= 0) { lines.splice(i, 1); continue; }
+          ctx.strokeStyle = `rgba(239, 191, 4,${L.life})`;
+          ctx.lineWidth = 2; ctx.lineCap = 'round';
+          ctx.beginPath(); ctx.moveTo(L.a.x, L.a.y); ctx.lineTo(L.b.x, L.b.y); ctx.stroke();
+        }
+        for (let i = dust.length - 1; i >= 0; i--) {
+          const d = dust[i];
+          d.x += d.vx; d.y += d.vy; d.vx *= 0.92; d.vy *= 0.92;
+          d.life -= 0.03;
+          if (d.life <= 0) { dust.splice(i, 1); continue; }
+          ctx.fillStyle = `rgba(239, 191, 4,${d.life * 0.7})`;
+          ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI*2); ctx.fill();
+        }
+        raf = requestAnimationFrame(tick);
+      };
+      new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) { if (!raf) raf = requestAnimationFrame(tick); }
+        else { cancelAnimationFrame(raf); raf = 0; }
+      }), { threshold: 0.1 }).observe(stage);
+    }
+
+    if (type === 'saw' && !reduce) {
+      const blade = stage.querySelector('.g48-blade');
+      const canvas = stage.querySelector('.g48-canvas');
+      let mx = 0, my = 0, lit = false, lastX = 0, lastY = 0, sparks = [];
+      track((x, y) => { mx = x; my = y; lit = true; blade.style.left = x + 'px'; blade.style.top = y + 'px'; });
+      stage.addEventListener('pointerleave', () => lit = false);
+      setupCanvas(canvas, (ctx, w, h) => {
+        if (lit) {
+          const dx = mx - lastX, dy = my - lastY;
+          const speed = Math.sqrt(dx*dx + dy*dy);
+          if (speed > 1) {
+            for (let i = 0; i < 4; i++) {
+              const a = Math.atan2(-dy, -dx) + (Math.random() - 0.5) * 1.2;
+              const sp = Math.random() * 6 + 3;
+              sparks.push({ x: mx, y: my, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 1, size: Math.random() + 0.5, hue: 25 + Math.random() * 25 });
+            }
+          }
+          lastX = mx; lastY = my;
+        }
+        ctx.clearRect(0, 0, w, h);
+        for (let i = sparks.length - 1; i >= 0; i--) {
+          const p = sparks[i];
+          p.vy += 0.2; p.x += p.vx; p.y += p.vy; p.life -= 0.025;
+          if (p.life <= 0) { sparks.splice(i, 1); continue; }
+          ctx.fillStyle = `hsla(${p.hue}, 100%, 55%, ${p.life})`;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+        }
+      });
+    }
+
+    if (type === 'wheel') {
+      const wheel = stage.querySelector('.g57-wheel');
+      const odo = stage.querySelector('.g57-odometer span');
+      let lastX = 0, lastY = 0, dist = 0, rot = 0, init = false;
+      track((x, y) => {
+        wheel.style.left = x + 'px'; wheel.style.top = y + 'px';
+        if (init) {
+          const dx = x - lastX, dy = y - lastY;
+          const d = Math.sqrt(dx*dx + dy*dy);
+          dist += d * 0.04;
+          rot += d * 3;
+          wheel.style.transform = `translate(-50%, -50%) rotate(${rot}deg)`;
+          odo.textContent = dist.toFixed(2);
+        }
+        init = true; lastX = x; lastY = y;
+      });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

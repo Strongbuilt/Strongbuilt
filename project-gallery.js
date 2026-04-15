@@ -256,8 +256,8 @@
   }
 
   function getMarkerColor(category) {
-    const colors = { residential: '#FFD700', commercial: '#FF8C00', infrastructure: '#C0C0C0' };
-    return colors[category] || '#FFD700';
+    const colors = { residential: '#EFBF04', commercial: '#FF8C00', infrastructure: '#C0C0C0' };
+    return colors[category] || '#EFBF04';
   }
 
   function renderMapMarkers() {
@@ -287,10 +287,10 @@
           '<div style="font-family:Oswald,sans-serif;">' +
           '<div style="overflow:hidden;">' + imgHtml + '</div>' +
           '<div style="padding:16px;">' +
-          '<h3 style="color:#FFD700;font-weight:bold;text-transform:uppercase;letter-spacing:0.1em;font-size:1rem;margin:0 0 4px;">' + esc(p.title) + '</h3>' +
+          '<h3 style="color:#EFBF04;font-weight:bold;text-transform:uppercase;letter-spacing:0.1em;font-size:1rem;margin:0 0 4px;">' + esc(p.title) + '</h3>' +
           '<p style="font-size:0.75rem;color:#fff;margin:0 0 8px;"><span style="color:#666;">Client:</span> ' + esc(p.client) + '</p>' +
           '<div style="display:flex;gap:6px;">' +
-          '<span style="font-size:9px;background:#FFD700;color:#000;padding:2px 8px;font-weight:bold;text-transform:uppercase;letter-spacing:0.05em;">' + esc(p.category) + '</span>' +
+          '<span style="font-size:9px;background:#EFBF04;color:#000;padding:2px 8px;font-weight:bold;text-transform:uppercase;letter-spacing:0.05em;">' + esc(p.category) + '</span>' +
           '<span style="font-size:9px;color:#999;border:1px solid rgba(255,255,255,0.1);padding:2px 8px;text-transform:uppercase;letter-spacing:0.05em;">' + esc(p.location) + '</span>' +
           '</div></div></div>',
           { maxWidth: 280, className: '' }

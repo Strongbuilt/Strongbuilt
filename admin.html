@@ -20,10 +20,10 @@
     body {
       font-family: 'Inter', sans-serif;
       background:
-        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(252, 182, 21, 0.06), transparent 60%),
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 215, 0, 0.06), transparent 60%),
         linear-gradient(180deg, #1a1718 0%, #141112 100%);
       background-attachment: fixed;
-      color: #f5f1ec;
+      color: #EEEEEE;
       min-height: 100vh;
     }
     h1,h2,h3,h4,.font-heading,button,input,select,textarea,label { font-family: 'Barlow Condensed', sans-serif; }
@@ -32,20 +32,20 @@
     input,select,textarea {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.08);
-      color: #f5f1ec;
+      color: #EEEEEE;
       transition: border-color .2s, box-shadow .2s, background .2s;
       font-family: 'Inter', sans-serif;
       font-size: 0.85rem;
       border-radius: 3px;
     }
-    input::placeholder, textarea::placeholder { color: rgba(184,178,168,0.4); }
+    input::placeholder, textarea::placeholder { color: rgba(170, 170, 170,0.4); }
     input:hover:not(:focus), select:hover:not(:focus), textarea:hover:not(:focus) {
-      border-color: rgba(252,182,21,0.25);
+      border-color: rgba(255, 215, 0,0.25);
       background: rgba(255,255,255,0.045);
     }
     input:focus,select:focus,textarea:focus {
-      outline: none; border-color: #FCB615;
-      box-shadow: 0 0 0 3px rgba(252,182,21,0.15);
+      outline: none; border-color: #FFD700;
+      box-shadow: 0 0 0 3px rgba(255, 215, 0,0.15);
       background: rgba(255,255,255,0.055);
     }
     input.invalid,select.invalid,textarea.invalid {
@@ -55,18 +55,18 @@
     /* Native select option list — force dark background so options are legible */
     select option {
       background-color: #1a1718;
-      color: #f5f1ec;
+      color: #EEEEEE;
       padding: 8px;
     }
     select option:hover,
     select option:checked {
-      background-color: #FCB615;
+      background-color: #FFD700;
       color: #1a1718;
     }
     label {
       display: block; font-size: .6rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: .22em;
-      color: #C8900F; margin-bottom: .4rem;
+      color: #B39700; margin-bottom: .4rem;
     }
     .field-error {
       font-size: .65rem; color: #f87171;
@@ -92,26 +92,26 @@
       position: relative; overflow: hidden;
     }
     .btn-primary {
-      background: linear-gradient(155deg, #FCB615, #C8900F);
+      background: linear-gradient(155deg, #FFD700, #B39700);
       color: #1a1718;
-      border: 1px solid rgba(252, 182, 21, 0.8);
-      box-shadow: 0 2px 12px -2px rgba(252, 182, 21, 0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+      border: 1px solid rgba(255, 215, 0, 0.8);
+      box-shadow: 0 2px 12px -2px rgba(255, 215, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.15);
     }
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px -4px rgba(252, 182, 21, 0.55), inset 0 1px 0 rgba(255,255,255,0.2);
+      box-shadow: 0 6px 20px -4px rgba(255, 215, 0, 0.55), inset 0 1px 0 rgba(255,255,255,0.2);
     }
     .btn-primary:active { transform: translateY(0); }
     .btn-primary:disabled { opacity: .3; cursor: not-allowed; transform: none; box-shadow: none; }
     .btn-outline {
       background: rgba(255,255,255,0.02);
-      color: #f5f1ec;
+      color: #EEEEEE;
       border: 1px solid rgba(255,255,255,0.1);
     }
     .btn-outline:hover {
-      border-color: rgba(252, 182, 21, 0.6);
-      color: #FCB615;
-      background: rgba(252, 182, 21, 0.05);
+      border-color: rgba(255, 215, 0, 0.6);
+      color: #FFD700;
+      background: rgba(255, 215, 0, 0.05);
     }
     .btn-outline:disabled { opacity: .3; cursor: not-allowed; }
     .btn-danger {
@@ -128,7 +128,7 @@
       padding: .55rem 1rem;
       font-size: .65rem; font-weight: 700;
       letter-spacing: .22em; text-transform: uppercase;
-      color: rgba(184,178,168,0.7);
+      color: rgba(170, 170, 170,0.7);
       border: 1px solid transparent;
       border-radius: 999px;
       transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -136,12 +136,12 @@
       display: inline-flex; align-items: center; gap: .5rem;
       position: relative;
     }
-    .tab:hover { color: #f5f1ec; background: rgba(255,255,255,0.03); }
+    .tab:hover { color: #EEEEEE; background: rgba(255,255,255,0.03); }
     .tab.is-active {
-      color: #FCB615;
-      background: linear-gradient(155deg, rgba(252, 182, 21, 0.15), rgba(252, 182, 21, 0.05));
-      border-color: rgba(252, 182, 21, 0.4);
-      box-shadow: 0 2px 12px -4px rgba(252, 182, 21, 0.3);
+      color: #FFD700;
+      background: linear-gradient(155deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+      border-color: rgba(255, 215, 0, 0.4);
+      box-shadow: 0 2px 12px -4px rgba(255, 215, 0, 0.3);
     }
     .tab i { font-size: .75rem; opacity: .75; }
     .tab.is-active i { opacity: 1; }
@@ -154,8 +154,8 @@
       letter-spacing: 0;
     }
     .tab.is-active .tab-count {
-      background: rgba(252, 182, 21, 0.25);
-      color: #FCB615;
+      background: rgba(255, 215, 0, 0.25);
+      color: #FFD700;
     }
 
     /* ─── LIST ITEMS — tcard premium ─── */
@@ -174,34 +174,34 @@
       position: absolute;
       left: 0; top: 0; bottom: 0;
       width: 2px;
-      background: linear-gradient(180deg, transparent, #FCB615, transparent);
+      background: linear-gradient(180deg, transparent, #FFD700, transparent);
       transform: scaleY(0);
       transform-origin: center;
       transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .list-item:hover {
-      border-color: rgba(252, 182, 21, 0.3);
+      border-color: rgba(255, 215, 0, 0.3);
       transform: translateX(4px);
-      box-shadow: 0 6px 20px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(252, 182, 21, 0.15);
+      box-shadow: 0 6px 20px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(255, 215, 0, 0.15);
     }
     .list-item:hover::before { transform: scaleY(1); }
     .list-item.is-editing {
-      border-color: rgba(252, 182, 21, 0.5);
-      background: linear-gradient(155deg, rgba(252, 182, 21, 0.1), rgba(42, 38, 39, 0.5));
-      box-shadow: 0 8px 28px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(252, 182, 21, 0.3);
+      border-color: rgba(255, 215, 0, 0.5);
+      background: linear-gradient(155deg, rgba(255, 215, 0, 0.1), rgba(42, 38, 39, 0.5));
+      box-shadow: 0 8px 28px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(255, 215, 0, 0.3);
     }
     .list-item.is-editing::before { transform: scaleY(1); }
     .list-item.dragging { opacity: .4; transform: scale(0.98); }
-    .list-item.drag-over-top { border-top: 2px solid #FCB615; transform: translateX(4px) translateY(4px); }
-    .list-item.drag-over-bottom { border-bottom: 2px solid #FCB615; transform: translateX(4px) translateY(-4px); }
+    .list-item.drag-over-top { border-top: 2px solid #FFD700; transform: translateX(4px) translateY(4px); }
+    .list-item.drag-over-bottom { border-bottom: 2px solid #FFD700; transform: translateX(4px) translateY(-4px); }
 
     .drag-handle {
       cursor: grab; opacity: .25;
       transition: opacity .2s, color .2s;
-      color: #b8b2a8;
+      color: #AAAAAA;
     }
     .list-item:hover .drag-handle { opacity: .7; }
-    .drag-handle:hover { opacity: 1 !important; color: #FCB615; }
+    .drag-handle:hover { opacity: 1 !important; color: #FFD700; }
     .drag-handle:active { cursor: grabbing; }
 
     /* ─── BADGES ─── */
@@ -212,7 +212,7 @@
       display: inline-flex; align-items: center; gap: 3px;
       white-space: nowrap;
     }
-    .badge-resi { background: rgba(252,182,21,0.15); color: #FCB615; border: 1px solid rgba(252,182,21,0.25); }
+    .badge-resi { background: rgba(179, 151, 0, 0.2); color: #FFD700; border: 1px solid rgba(179, 151, 0, 0.45); }
     .badge-comm { background: rgba(255,140,0,0.15); color: #FF8C00; border: 1px solid rgba(255,140,0,0.25); }
     .badge-infra { background: rgba(192,192,192,0.12); color: #C0C0C0; border: 1px solid rgba(192,192,192,0.2); }
     .badge-ongoing { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
@@ -221,10 +221,10 @@
       background: #4ade80; box-shadow: 0 0 6px #4ade80;
       animation: pulse-dot 2s infinite;
     }
-    .badge-completed { background: rgba(255,255,255,0.04); color: #b8b2a8; border: 1px solid rgba(255,255,255,0.1); }
+    .badge-completed { background: rgba(255,255,255,0.04); color: #AAAAAA; border: 1px solid rgba(255,255,255,0.1); }
     .badge-featured {
-      background: linear-gradient(155deg, rgba(252,182,21,0.22), rgba(252,182,21,0.08));
-      color: #FCB615; border: 1px solid rgba(252,182,21,0.4);
+      background: linear-gradient(155deg, rgba(255, 215, 0,0.22), rgba(255, 215, 0,0.08));
+      color: #FFD700; border: 1px solid rgba(255, 215, 0,0.4);
     }
 
     /* ─── STATS STRIP (above list) ─── */
@@ -233,9 +233,9 @@
       padding: 0.65rem 0.25rem 0;
       font-size: .6rem; font-weight: 700;
       letter-spacing: .18em; text-transform: uppercase;
-      color: #b8b2a8;
+      color: #AAAAAA;
     }
-    .stats-strip .stat-num { color: #FCB615; font-family: 'Oswald', sans-serif; font-size: 0.85rem; margin-right: 4px; letter-spacing: 0; }
+    .stats-strip .stat-num { color: #FFD700; font-family: 'Oswald', sans-serif; font-size: 0.85rem; margin-right: 4px; letter-spacing: 0; }
 
     /* ─── TOAST ─── */
     .toast {
@@ -243,8 +243,8 @@
       transform: translateX(-50%) translateY(20px);
       padding: .85rem 1.4rem;
       background: linear-gradient(155deg, rgba(30, 26, 27, 0.98), rgba(20, 18, 19, 0.98));
-      border: 1px solid rgba(252, 182, 21, 0.5);
-      color: #f5f1ec;
+      border: 1px solid rgba(255, 215, 0, 0.5);
+      color: #EEEEEE;
       border-radius: 8px;
       z-index: 10000;
       font-size: .7rem;
@@ -252,7 +252,7 @@
       letter-spacing: .14em;
       text-transform: uppercase;
       backdrop-filter: blur(16px);
-      box-shadow: 0 16px 40px -8px rgba(0,0,0,0.8), 0 0 24px -8px rgba(252, 182, 21, 0.25);
+      box-shadow: 0 16px 40px -8px rgba(0,0,0,0.8), 0 0 24px -8px rgba(255, 215, 0, 0.25);
       opacity: 0; pointer-events: none;
       transition: all .35s cubic-bezier(0.16,1,0.3,1);
       display: flex; align-items: center; gap: .75rem;
@@ -261,37 +261,37 @@
     .toast.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
     .toast::before {
       content: ''; width: 6px; height: 6px; border-radius: 50%;
-      background: #FCB615; box-shadow: 0 0 10px currentColor;
+      background: #FFD700; box-shadow: 0 0 10px currentColor;
     }
     .toast.success { border-color: rgba(74,222,128,0.6); color: #4ade80; }
     .toast.success::before { background: #4ade80; }
     .toast.error { border-color: rgba(248,113,113,0.6); color: #f87171; }
     .toast.error::before { background: #f87171; }
-    .toast.warn { border-color: rgba(252,182,21,0.6); color: #FCB615; }
+    .toast.warn { border-color: rgba(255, 215, 0,0.6); color: #FFD700; }
     .toast-action {
       text-decoration: none; cursor: pointer; font-weight: 700;
       padding: 3px 8px; border-radius: 3px;
-      background: rgba(252,182,21,0.15);
-      color: #FCB615;
-      border: 1px solid rgba(252,182,21,0.3);
+      background: rgba(255, 215, 0,0.15);
+      color: #FFD700;
+      border: 1px solid rgba(255, 215, 0,0.3);
       transition: all .2s;
     }
-    .toast-action:hover { background: rgba(252,182,21,0.3); }
+    .toast-action:hover { background: rgba(255, 215, 0,0.3); }
 
-    /* ─── DIRTY INDICATOR ─── */
+    /* ─── DIRTY INDICATOR — softer amber pulse instead of alarming red ─── */
     .dirty-dot {
       display: inline-block; width: 7px; height: 7px; border-radius: 50%;
-      background: #f87171;
-      animation: pulse-dot 2s infinite;
-      box-shadow: 0 0 8px #f87171;
+      background: #FFD700;
+      animation: pulse-dot 2.5s ease-in-out infinite;
+      box-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
     }
-    @keyframes pulse-dot { 0%,100%{opacity:1}50%{opacity:.4} }
+    @keyframes pulse-dot { 0%,100%{opacity:1}50%{opacity:.5} }
 
     /* ─── EDITOR BREADCRUMB ─── */
     .editor-crumb {
       font-size: .55rem; font-weight: 700;
       letter-spacing: .3em; text-transform: uppercase;
-      color: #C8900F;
+      color: #B39700;
       margin-bottom: .25rem;
       display: flex; align-items: center; gap: .4rem;
     }
@@ -308,34 +308,34 @@
     /* ─── MAP PICKER ─── */
     #pickerMap { height: 240px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
     .leaflet-container { background: #1a1a1a; font-family: 'Inter', sans-serif; }
-    .leaflet-control-zoom a { background: rgba(0,0,0,0.85) !important; color: #FCB615 !important; border: 1px solid rgba(252,182,21,0.25) !important; }
-    .leaflet-popup-content-wrapper { background: rgba(20,18,19,0.97); color: #f5f1ec; border: 1px solid rgba(252,182,21,0.3); border-radius: 4px; }
+    .leaflet-control-zoom a { background: rgba(0,0,0,0.85) !important; color: #FFD700 !important; border: 1px solid rgba(255, 215, 0,0.25) !important; }
+    .leaflet-popup-content-wrapper { background: rgba(20,18,19,0.97); color: #EEEEEE; border: 1px solid rgba(255, 215, 0,0.3); border-radius: 4px; }
     .geo-result {
       padding: .5rem .75rem; cursor: pointer;
       font-size: .72rem; border-bottom: 1px solid rgba(255,255,255,0.05);
-      color: #f5f1ec; transition: background .2s;
+      color: #EEEEEE; transition: background .2s;
     }
-    .geo-result:hover { background: rgba(252,182,21,0.1); }
+    .geo-result:hover { background: rgba(255, 215, 0,0.1); }
     .context-marker { background: transparent !important; border: none !important; }
-    .context-marker-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(252,182,21,0.4); border: 1px solid rgba(252,182,21,0.7); }
+    .context-marker-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 215, 0, 0.85); border: 1px solid #1a1718; box-shadow: 0 0 8px rgba(255, 215, 0, 0.6); }
 
     /* ─── IMAGE PREVIEW ─── */
     .img-preview {
       display: none;
       width: 100%; height: 140px; object-fit: cover;
       border-radius: 4px;
-      border: 1px solid rgba(252,182,21,0.3);
+      border: 1px solid rgba(255, 215, 0,0.3);
       margin-top: .5rem;
     }
     .img-preview.is-visible { display: block; }
     .img-drop {
-      border: 1px dashed rgba(252,182,21,0.3);
+      border: 1px dashed rgba(255, 215, 0,0.3);
       padding: .75rem; border-radius: 4px;
       text-align: center; font-size: .7rem;
-      color: #b8b2a8; margin-top: .5rem;
+      color: #AAAAAA; margin-top: .5rem;
       transition: all .25s;
     }
-    .img-drop.is-dragover { border-color: #FCB615; background: rgba(252,182,21,0.08); color: #FCB615; }
+    .img-drop.is-dragover { border-color: #FFD700; background: rgba(255, 215, 0,0.08); color: #FFD700; }
 
     /* ─── MOBILE DRAWER ─── */
     @media (max-width: 1023px) {
@@ -370,7 +370,7 @@
     }
 
     /* Progress bar for Active Projects form */
-    .progress-slider { accent-color: #FCB615; }
+    .progress-slider { accent-color: #FFD700; }
   </style>
 </head>
 <body class="min-h-screen">
@@ -433,7 +433,7 @@
           <button id="addNewBtn" class="btn btn-primary px-3 py-2 text-[10px]" title="New item (Ctrl+N)"><i class="fas fa-plus text-[9px]"></i><span class="hidden md:inline">New</span></button>
         </div>
       </div>
-      <div id="listContainer" class="space-y-2"></div>
+      <div id="listContainer" class="space-y-2" role="listbox" aria-label="Items in current tab"></div>
       <div id="emptyListMsg" class="hidden text-center py-12 text-clay-faint">
         <i class="fas fa-inbox text-3xl mb-3"></i>
         <p class="text-sm uppercase tracking-widest">No items yet</p>
@@ -453,7 +453,7 @@
         </div>
         <button id="editorCloseMobile" class="editor-close-mobile btn btn-outline p-2 text-[10px] rounded-sm ml-2" aria-label="Close editor"><i class="fas fa-times"></i></button>
       </div>
-      <form id="itemForm" class="space-y-3" autocomplete="off" novalidate></form>
+      <form id="itemForm" class="space-y-3" autocomplete="off" novalidate aria-labelledby="formTitle"></form>
       <div class="flex gap-2 pt-4 mt-4 border-t border-white/5">
         <button id="saveBtn" form="itemForm" type="submit" class="btn btn-primary flex-1 py-2.5 text-xs" title="Save (Ctrl+Enter)"><i class="fas fa-check text-[10px]"></i>Save</button>
         <button id="cancelBtn" type="button" class="btn btn-outline px-4 py-2.5 text-xs">Cancel</button>
@@ -687,12 +687,20 @@
     // AUTO-SAVE (debounced)
     // ════════════════════════════════════════════════════════════
     const autoSaveTimers = {};
+    let _quotaWarned = false;
     function autoSave(type) {
       clearTimeout(autoSaveTimers[type]);
       autoSaveTimers[type] = setTimeout(() => {
         try {
           localStorage.setItem(TYPES[type].storageKey, JSON.stringify(state.data[type]));
-        } catch (e) { console.error('autoSave failed', e); }
+        } catch (e) {
+          console.error('autoSave failed', e);
+          // Surface storage failure so user knows work isn't persisted
+          if (!_quotaWarned) {
+            _quotaWarned = true;
+            toast('Auto-save failed — download now to avoid losing work', 'error', { duration: 8000, action: { label: 'DOWNLOAD', onClick: download } });
+          }
+        }
       }, 400);
     }
 
@@ -757,10 +765,24 @@
     // ════════════════════════════════════════════════════════════
     // TABS
     // ════════════════════════════════════════════════════════════
+    // Keep per-tab search so "monticello" survives a tab switch and back
+    const searchByType = {};
     function switchTab(type) {
+      // Warn if there are unsaved edits mid-flight on the current tab
+      if (state.editing && !state.isNew) {
+        const hasActiveEdit = !!state.editing[TYPES[state.activeType]?.idField];
+        if (hasActiveEdit && !confirm('You have an item open in the editor. Switching tabs will discard unsaved edits.\n\nContinue?')) return;
+      }
+      // Save current search before leaving
+      searchByType[state.activeType] = state.search;
       state.activeType = type;
       closeEditor();
-      $$('.tab').forEach(b => b.classList.toggle('is-active', b.dataset.type === type));
+      $$('.tab').forEach(b => {
+        const on = b.dataset.type === type;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+        b.setAttribute('aria-current', on ? 'page' : 'false');
+      });
       $('#currentTabLabel').textContent = TYPES[type].label;
       $('#listTitle').textContent = TYPES[type].label;
       const cfg = TYPES[type];
@@ -768,8 +790,9 @@
       $('#sortBy').style.display = cfg.isList ? '' : 'none';
       const searchWrap = $('#listSearch')?.parentElement;
       if (searchWrap) searchWrap.style.display = (cfg.isList && cfg.features?.search) ? '' : 'none';
-      state.search = '';
-      $('#listSearch').value = '';
+      // Restore this tab's previous search instead of blanking
+      state.search = searchByType[type] || '';
+      $('#listSearch').value = state.search;
       render();
       renderDirtyIndicator();
       renderTabCounts();
@@ -942,14 +965,18 @@
         </div>`;
       }
 
+      // Escape HTML for title attrs so quotes in project titles don't break markup
+      const esc = (s) => String(s == null ? '' : s).replace(/"/g, '&quot;');
+      el.setAttribute('role', 'option');
+      el.setAttribute('tabindex', '0');
       el.innerHTML = `
         ${handleHTML}
         <div class="flex-1 min-w-0">
-          <div class="font-bold text-sm uppercase truncate">${label}</div>
-          <div class="text-[11px] text-clay-faint truncate mt-0.5">${sublabel}</div>
+          <div class="font-bold text-sm uppercase truncate" title="${esc(label)}">${label}</div>
+          <div class="text-[11px] text-clay-faint truncate mt-0.5" title="${esc(sublabel)}">${sublabel}</div>
         </div>
         <div class="flex items-center gap-2 shrink-0">${meta}</div>
-        <button class="btn btn-outline p-1.5 text-[10px] rounded-sm shrink-0" aria-label="Edit"><i class="fas fa-pencil-alt"></i></button>
+        <button class="btn btn-outline p-1.5 text-[10px] rounded-sm shrink-0" aria-label="Edit ${esc(label)}"><i class="fas fa-pencil-alt"></i></button>
       `;
 
       el.addEventListener('click', (e) => {
@@ -1036,21 +1063,54 @@
       $('.editor-panel').classList.add('is-open');
       $('#editorBackdrop').classList.add('is-open');
       setTimeout(() => $('#itemForm').querySelector('input,select,textarea')?.focus(), 50);
+      // Mobile focus trap — cycle tab within the editor drawer so keyboard users can't escape into the list behind
+      attachFocusTrap();
+    }
+
+    let _trapHandler = null;
+    function attachFocusTrap() {
+      if (_trapHandler) document.removeEventListener('keydown', _trapHandler);
+      const panel = document.querySelector('.editor-panel');
+      if (!panel) return;
+      _trapHandler = (e) => {
+        if (e.key !== 'Tab' || !panel.classList.contains('is-open') || window.innerWidth >= 1024) return;
+        const focusable = panel.querySelectorAll('input, select, textarea, button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+        if (!focusable.length) return;
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      };
+      document.addEventListener('keydown', _trapHandler);
+    }
+    function detachFocusTrap() {
+      if (_trapHandler) { document.removeEventListener('keydown', _trapHandler); _trapHandler = null; }
     }
     function closeEditor() {
+      const prevEditingId = state.editing && state.editing[TYPES[state.activeType]?.idField];
       state.editing = null;
       state.editingEntry = null;
       state.isNew = false;
+      // Clean up map picker + focus trap (prevents stale fetch + listener leaks)
+      teardownMapPicker();
+      detachFocusTrap();
       $('.editor-panel').classList.remove('is-open');
       $('#editorBackdrop').classList.remove('is-open');
       $('#formTitle').textContent = 'Select an item or click New';
       const crumb = $('#editorCrumb');
       if (crumb) crumb.innerHTML = '<i class="fas fa-pencil-alt"></i><span>No selection</span>';
       renderActiveListHighlight();
+      // Return focus to the previously-edited list item for keyboard continuity
+      if (prevEditingId) {
+        const item = document.querySelector(`.list-item[data-id="${prevEditingId}"]`);
+        if (item) item.focus();
+      }
     }
     function renderActiveListHighlight() {
+      const activeId = state.editing && state.editing[TYPES[state.activeType].idField];
       $$('.list-item').forEach(el => {
-        el.classList.toggle('is-editing', state.editing && el.dataset.id === state.editing[TYPES[state.activeType].idField]);
+        const on = !!(activeId && el.dataset.id === activeId);
+        el.classList.toggle('is-editing', on);
+        el.setAttribute('aria-selected', on ? 'true' : 'false');
       });
     }
 
@@ -1073,19 +1133,30 @@
       form.innerHTML = '';
       cfg.fields.forEach(f => form.appendChild(buildField(f, state.editing)));
 
-      // Wire auto-slug
+      // Wire auto-slug — show a "locked" hint when user takes manual control
       cfg.fields.forEach(f => {
         if (f.autoSlug) {
           const srcEl = form.querySelector(`[name="${f.autoSlug}"]`);
           const idEl = form.querySelector(`[name="${f.name}"]`);
           if (srcEl && idEl) {
+            // Find the hint <p> Rendered by buildField and reuse it for lock messaging
+            const wrap = idEl.closest('div');
+            const hintEl = wrap?.querySelector('.text-clay-faint.mt-1');
+            const setLockHint = (locked) => {
+              if (!hintEl) return;
+              if (locked) { hintEl.innerHTML = '<i class="fas fa-lock text-[9px] mr-1"></i>Manual override — no longer auto-syncs from ' + f.autoSlug; hintEl.style.color = '#FFD700'; }
+              else       { hintEl.textContent = 'lowercase, hyphens only — auto-generated from ' + f.autoSlug; hintEl.style.color = ''; }
+            };
             srcEl.addEventListener('input', () => {
               if (state.isNew || !idEl.value || idEl.dataset.autoFilled === 'true') {
                 idEl.value = slugify(srcEl.value);
                 idEl.dataset.autoFilled = 'true';
+                setLockHint(false);
               }
             });
-            idEl.addEventListener('input', () => { idEl.dataset.autoFilled = 'false'; });
+            idEl.addEventListener('input', () => {
+              if (idEl.dataset.autoFilled !== 'false') { idEl.dataset.autoFilled = 'false'; setLockHint(true); }
+            });
           }
         }
       });
@@ -1201,11 +1272,18 @@
     // MAP PICKER (with Nominatim geocoding + context markers)
     // ════════════════════════════════════════════════════════════
     let pickerMap = null, pickerMarker = null, contextLayer = null, geoTimer;
+    let geoDocClickHandler = null;
+    function teardownMapPicker() {
+      clearTimeout(geoTimer);
+      if (geoDocClickHandler) { document.removeEventListener('click', geoDocClickHandler); geoDocClickHandler = null; }
+      if (contextLayer && pickerMap) { pickerMap.removeLayer(contextLayer); contextLayer = null; }
+      if (pickerMap) { pickerMap.remove(); pickerMap = null; pickerMarker = null; }
+    }
     function initMapPicker() {
       setTimeout(() => {
         const container = $('#pickerMap');
         if (!container) return;
-        if (pickerMap) { pickerMap.remove(); pickerMap = null; }
+        teardownMapPicker();
         const lat = parseFloat($('#itemForm [name="coordinates_lat"]').value) || 19.0596;
         const lng = parseFloat($('#itemForm [name="coordinates_lng"]').value) || 72.8295;
         pickerMap = L.map('pickerMap', { zoomControl: true }).setView([lat, lng], 11);
@@ -1275,9 +1353,11 @@
             } catch (e) { toast('Geocoding failed', 'error'); }
           }, 500);
         });
-        document.addEventListener('click', (e) => {
+        // Store handler so it can be removed in teardownMapPicker (prevents listener accumulation)
+        geoDocClickHandler = (e) => {
           if (!e.target.closest('#geoSearch') && !e.target.closest('#geoResults')) geoResults?.classList.add('hidden');
-        });
+        };
+        document.addEventListener('click', geoDocClickHandler);
 
         setTimeout(() => pickerMap.invalidateSize(), 200);
       }, 100);
@@ -1355,20 +1435,48 @@
         state.data[state.activeType] = next;
       } else if (cfg.isKeyed) {
         const group = formData.group;
+        if (!cfg.groups.some(g => g.key === group)) {
+          toast('Invalid group selection', 'error');
+          state.undoStack.pop();
+          return;
+        }
         const item = { ...formData };
         delete item.group;
         if (!state.isNew) {
-          // remove old from whatever group it was in
+          // Find original position + group so we can preserve index when editing (or on same-group re-save)
+          let originalIdx = -1, originalGroup = null;
           cfg.groups.forEach(g => {
-            state.data[state.activeType][g.key] = (state.data[state.activeType][g.key] || []).filter(i => i[cfg.idField] !== state.editing[cfg.idField]);
+            const arr = state.data[state.activeType][g.key] || [];
+            const idx = arr.findIndex(i => i[cfg.idField] === state.editing[cfg.idField]);
+            if (idx !== -1) { originalIdx = idx; originalGroup = g.key; }
           });
+          if (originalIdx === -1) {
+            toast('Item was deleted elsewhere — saving as new', 'warn');
+            state.undoStack.pop(); // rewind, push clean "Add"
+            pushUndo('Add ' + (formData.title || formData.name || 'item'));
+            (state.data[state.activeType][group] = state.data[state.activeType][group] || []).push(item);
+          } else {
+            // Remove from original group, then insert — preserving position if same group, else append
+            state.data[state.activeType][originalGroup] = state.data[state.activeType][originalGroup].filter(i => i[cfg.idField] !== state.editing[cfg.idField]);
+            const target = state.data[state.activeType][group] = state.data[state.activeType][group] || [];
+            if (group === originalGroup) target.splice(originalIdx, 0, item);
+            else target.push(item);
+          }
+        } else {
+          (state.data[state.activeType][group] = state.data[state.activeType][group] || []).push(item);
         }
-        (state.data[state.activeType][group] = state.data[state.activeType][group] || []).push(item);
       } else {
         if (state.isNew) state.data[state.activeType].push(formData);
         else {
           const idx = state.data[state.activeType].findIndex(i => i[cfg.idField] === state.editing[cfg.idField]);
-          if (idx !== -1) state.data[state.activeType][idx] = formData;
+          if (idx === -1) {
+            toast('Item was deleted elsewhere — saving as new', 'warn');
+            state.undoStack.pop();
+            pushUndo('Add ' + (formData.title || formData.name || 'item'));
+            state.data[state.activeType].push(formData);
+          } else {
+            state.data[state.activeType][idx] = formData;
+          }
         }
       }
       markDirty();
@@ -1407,7 +1515,7 @@
     let searchTimer;
     $('#listSearch').addEventListener('input', (e) => {
       clearTimeout(searchTimer);
-      searchTimer = setTimeout(() => { state.search = e.target.value; render(); }, 150);
+      searchTimer = setTimeout(() => { state.search = e.target.value; searchByType[state.activeType] = state.search; render(); }, 150);
     });
     $('#sortBy').addEventListener('change', (e) => { state.sortBy = e.target.value; render(); });
 
@@ -1445,7 +1553,10 @@
           let text = ev.target.result;
           // Try matching by active type first
           const cfg = TYPES[state.activeType];
-          const match = text.match(new RegExp(`const\\s+${cfg.constName}\\s*=\\s*([\\s\\S]*?);?\\s*(?:if\\s*\\(|$)`));
+          // Tight regex: require word boundary before the const name + terminate at the exact `;\n if (typeof window` sentinel emitted by our download.
+          // Falls back to end-of-file if sentinel missing.
+          const anchored = new RegExp(`\\bconst\\s+${cfg.constName}\\b\\s*=\\s*([\\s\\S]*?);\\s*(?:if\\s*\\(\\s*typeof\\s+window|$)`);
+          const match = text.match(anchored);
           let parsed;
           if (match) {
             // Normalize JS to JSON

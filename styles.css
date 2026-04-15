@@ -52,14 +52,14 @@ textarea {
 
 .text-gradient-gold,
 .gold-gradient-text {
-    background: linear-gradient(to right, #FCB615, #FFD56B, #C8900F, #FFD56B, #FCB615);
+    background: linear-gradient(to right, #FFD700, #FFF100, #B39700, #FFF100, #FFD700);
     background-size: 200% auto;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: shine 5s linear infinite;
     /* Slower, more elegant shine */
-    text-shadow: 0 0 20px rgba(200, 144, 15, 0.2);
+    text-shadow: 0 0 20px rgba(179, 151, 0, 0.2);
 }
 
 @keyframes shine {
@@ -73,7 +73,7 @@ textarea {
     background: rgba(5, 5, 5, 0.6);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(252, 182, 21, 0.05);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.05);
 }
 
 .glass-panel {
@@ -91,10 +91,10 @@ textarea {
 
 .glass-panel:hover {
     background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(200, 144, 15, 0.3);
+    border-color: rgba(179, 151, 0, 0.3);
     /* Gold tint on hover */
     transform: translateY(-5px);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 20px rgba(200, 144, 15, 0.1);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 20px rgba(179, 151, 0, 0.1);
     /* Glow */
 }
 
@@ -111,7 +111,7 @@ textarea {
     top: 0;
     bottom: 0;
     width: 2px;
-    background: rgba(252, 182, 21, 0.2);
+    background: rgba(255, 215, 0, 0.2);
     transform: translateX(-50%);
 }
 
@@ -121,8 +121,8 @@ textarea {
     top: 0;
     width: 100%;
     height: 0%;
-    background: linear-gradient(to bottom, #FCB615, #C8900F);
-    box-shadow: 0 0 15px #FCB615;
+    background: linear-gradient(to bottom, #FFD700, #B39700);
+    box-shadow: 0 0 15px #FFD700;
     transition: height 0.1s linear;
 }
 
@@ -131,7 +131,7 @@ textarea {
 .menu-btn {
     width: 50px;
     height: 50px;
-    border: 1px solid rgba(252, 182, 21, 0.2);
+    border: 1px solid rgba(255, 215, 0, 0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -148,7 +148,7 @@ textarea {
 }
 
 .menu-btn:hover {
-    border-color: #FCB615;
+    border-color: #FFD700;
     transform: scale(1.05);
 }
 
@@ -235,7 +235,7 @@ textarea {
     background: linear-gradient(180deg, rgba(8, 8, 8, 0.97) 0%, rgba(5, 5, 3, 0.99) 100%);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    border-left: 1px solid rgba(252, 182, 21, 0.1);
+    border-left: 1px solid rgba(255, 215, 0, 0.1);
     transform: translateX(100%);
     transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
     display: flex;
@@ -254,7 +254,7 @@ textarea {
 .nav-close-btn {
     width: 48px;
     height: 48px;
-    border: 1px solid rgba(252, 182, 21, 0.2);
+    border: 1px solid rgba(255, 215, 0, 0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -268,17 +268,17 @@ textarea {
 }
 
 .nav-close-btn:hover {
-    border-color: #FCB615;
-    color: #FCB615;
+    border-color: #FFD700;
+    color: #FFD700;
     transform: rotate(90deg);
-    background: rgba(252, 182, 21, 0.05);
+    background: rgba(255, 215, 0, 0.05);
 }
 
 /* Link numbering */
 .nav-link-num {
     font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
     font-size: 0.6rem;
-    color: rgba(252, 182, 21, 0.35);
+    color: rgba(255, 215, 0, 0.35);
     letter-spacing: 0.15em;
     margin-right: 12px;
     transition: color 0.3s ease;
@@ -346,18 +346,18 @@ textarea {
     left: 0;
     width: 0;
     height: 1px;
-    background: linear-gradient(to right, #FCB615, transparent);
+    background: linear-gradient(to right, #FFD700, transparent);
     transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sidebar-link:hover {
     color: #fff;
     padding-left: 8px;
-    text-shadow: 0 0 30px rgba(252, 182, 21, 0.1);
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
 }
 
 .sidebar-link:hover .nav-link-num {
-    color: #FCB615;
+    color: #FFD700;
 }
 
 .sidebar-link:hover::after {
@@ -390,22 +390,22 @@ textarea {
 }
 
 .sidebar-dropdown-btn.active {
-    color: #FCB615;
+    color: #FFD700;
 }
 
 .sidebar-dropdown-btn i {
     font-size: 0.55em;
     transition: transform 0.4s ease;
-    color: rgba(252, 182, 21, 0.3);
+    color: rgba(255, 215, 0, 0.3);
 }
 
 .sidebar-dropdown-btn:hover i {
-    color: #FCB615;
+    color: #FFD700;
 }
 
 .sidebar-dropdown-btn.active i {
     transform: rotate(180deg);
-    color: #FCB615;
+    color: #FFD700;
 }
 
 .sidebar-submenu {
@@ -434,19 +434,19 @@ textarea {
     content: '';
     width: 14px;
     height: 1px;
-    background: rgba(252, 182, 21, 0.2);
+    background: rgba(255, 215, 0, 0.2);
     transition: all 0.3s ease;
     flex-shrink: 0;
 }
 
 .sidebar-sublink:hover {
-    color: #FCB615;
+    color: #FFD700;
     transform: translateX(6px);
 }
 
 .sidebar-sublink:hover::before {
     width: 22px;
-    background: #FCB615;
+    background: #FFD700;
 }
 
 /* Nav social links */
@@ -463,9 +463,9 @@ textarea {
 }
 
 .nav-social-link:hover {
-    border-color: #FCB615;
-    color: #FCB615;
-    background: rgba(252, 182, 21, 0.05);
+    border-color: #FFD700;
+    color: #FFD700;
+    background: rgba(255, 215, 0, 0.05);
     transform: translateY(-2px);
 }
 
@@ -483,7 +483,7 @@ textarea {
 .nav-info-label {
     font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
     font-size: 0.55rem;
-    color: rgba(252, 182, 21, 0.5);
+    color: rgba(255, 215, 0, 0.5);
     text-transform: uppercase;
     letter-spacing: 0.2em;
     margin-bottom: 0.3rem;
@@ -605,11 +605,11 @@ textarea {
 
     0%,
     100% {
-        box-shadow: 0 0 5px #FCB615, 0 0 10px #FCB615;
+        box-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700;
     }
 
     50% {
-        box-shadow: 0 0 20px #C8900F, 0 0 30px #9A6E0B;
+        box-shadow: 0 0 20px #B39700, 0 0 30px #9A6E0B;
     }
 }
 
@@ -618,7 +618,7 @@ textarea {
     position: absolute;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(200, 144, 15, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+    background: radial-gradient(circle, rgba(179, 151, 0, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
     border-radius: 50%;
     pointer-events: none;
     z-index: 0;
@@ -640,7 +640,7 @@ textarea {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #FCB615;
+    background: #FFD700;
 }
 
 /* --- GLOBAL ANIMATIONS --- */
@@ -751,7 +751,7 @@ textarea {
     max-height: 90vh;
     object-fit: contain;
     animation: zoom 0.4s;
-    border: 1px solid rgba(200, 144, 15, 0.3);
+    border: 1px solid rgba(179, 151, 0, 0.3);
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
 }
 
@@ -780,7 +780,7 @@ textarea {
 }
 
 .close:hover {
-    color: #C8900F;
+    color: #B39700;
     transform: rotate(90deg);
 }
 
@@ -800,7 +800,7 @@ textarea {
     left: 0;
     width: 0;
     height: 100%;
-    background-color: #C8900F;
+    background-color: #B39700;
     transition: width 0.3s ease;
     z-index: -1;
 }
@@ -813,13 +813,13 @@ textarea {
 .filter-btn:hover,
 .filter-btn.active {
     color: #000;
-    border-color: #C8900F;
-    box-shadow: 0 0 20px rgba(200, 144, 15, 0.3);
+    border-color: #B39700;
+    box-shadow: 0 0 20px rgba(179, 151, 0, 0.3);
 }
 
 /* Utility Components */
 .caution-tape {
-    background: repeating-linear-gradient(45deg, #FCB615, #FCB615 10px, #000 10px, #000 20px);
+    background: repeating-linear-gradient(45deg, #FFD700, #FFD700 10px, #000 10px, #000 20px);
 }
 
 /* --- LENIS SMOOTH SCROLL --- */
@@ -931,7 +931,7 @@ html.lenis {
     height: 50px !important;
     background: rgba(0, 0, 0, 0.4) !important;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(252, 182, 21, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.1);
     border-radius: 50%;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
     display: flex !important;
@@ -941,10 +941,10 @@ html.lenis {
 
 .swiper-button-next:hover, 
 .swiper-button-prev:hover {
-    background: rgba(252, 182, 21, 0.1) !important;
-    border-color: #FCB615 !important;
+    background: rgba(255, 215, 0, 0.1) !important;
+    border-color: #FFD700 !important;
     transform: scale(1.15);
-    box-shadow: 0 0 20px rgba(200, 144, 15, 0.2);
+    box-shadow: 0 0 20px rgba(179, 151, 0, 0.2);
 }
 
 .swiper-button-next i, 
@@ -1002,7 +1002,7 @@ picture,
    producing invisible white-on-white text. Explicit bg/color fixes it. */
 select option {
     background-color: #1a1718;
-    color: #f5f1ec;
+    color: #EEEEEE;
     padding: 8px;
 }
 select option:disabled {
@@ -1010,7 +1010,7 @@ select option:disabled {
 }
 select option:hover,
 select option:checked {
-    background-color: #FCB615;
+    background-color: #FFD700;
     color: #1a1718;
 }
 

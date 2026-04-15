@@ -79,13 +79,13 @@
       transition: background 0.4s ease;
     }
     .ix-stat:first-child { border-left: none; }
-    .ix-stat:hover { background: rgba(252, 182, 21, 0.03); }
+    .ix-stat:hover { background: rgba(255, 215, 0, 0.03); }
     .ix-stat-num {
       font-family: 'Oswald', 'Barlow Condensed', sans-serif;
       font-weight: 700;
       font-size: clamp(2.75rem, 6vw, 4.5rem);
       line-height: 1;
-      color: #FCB615;
+      color: #FFD700;
       letter-spacing: -0.02em;
     }
     .ix-stat-label {
@@ -94,7 +94,7 @@
       font-weight: 700;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: #b8b2a8;
+      color: #AAAAAA;
       margin-top: 0.75rem;
     }
     @media (max-width: 767px) {
@@ -118,13 +118,13 @@
       top: 0; left: 0;
       width: 40%;
       height: 2px;
-      background: linear-gradient(90deg, #FCB615, transparent);
+      background: linear-gradient(90deg, #FFD700, transparent);
       transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .ix-vcard:hover {
       transform: translateY(-6px);
-      border-color: rgba(252, 182, 21, 0.35);
-      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(252, 182, 21, 0.15);
+      border-color: rgba(255, 215, 0, 0.35);
+      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(255, 215, 0, 0.15);
     }
     .ix-vcard:hover::before { width: 100%; }
     .ix-vcard-icon {
@@ -133,12 +133,12 @@
       justify-content: center;
       width: 64px; height: 64px;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(252, 182, 21, 0.2), rgba(252, 182, 21, 0.04) 70%);
-      border: 1px solid rgba(252, 182, 21, 0.3);
-      color: #FCB615;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.04) 70%);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      color: #FFD700;
       font-size: 1.5rem;
       margin-bottom: 1.5rem;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 20px -8px rgba(252, 182, 21, 0.4);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 20px -8px rgba(255, 215, 0, 0.4);
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .ix-vcard:hover .ix-vcard-icon { transform: scale(1.08) rotate(-4deg); }
@@ -148,7 +148,7 @@
       font-weight: 700;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: #C8900F;
+      color: #B39700;
       margin-bottom: 0.5rem;
     }
     .ix-vcard-title {
@@ -156,7 +156,7 @@
       font-weight: 700;
       font-size: 1.5rem;
       text-transform: uppercase;
-      color: #f5f1ec;
+      color: #EEEEEE;
       letter-spacing: 0.02em;
       margin-bottom: 1rem;
     }
@@ -164,7 +164,7 @@
       font-family: 'Inter', sans-serif;
       font-size: 0.92rem;
       line-height: 1.65;
-      color: #b8b2a8;
+      color: #AAAAAA;
       font-weight: 300;
     }
     .ix-vcard-num {
@@ -174,11 +174,11 @@
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
       font-size: 1.75rem;
-      color: rgba(252, 182, 21, 0.18);
+      color: rgba(255, 215, 0, 0.18);
       line-height: 1;
       transition: color 0.4s ease;
     }
-    .ix-vcard:hover .ix-vcard-num { color: rgba(252, 182, 21, 0.45); }
+    .ix-vcard:hover .ix-vcard-num { color: rgba(255, 215, 0, 0.45); }
 
     /* ── Project carousel metadata ── */
     .ix-slide-meta {
@@ -188,7 +188,7 @@
       flex-wrap: wrap;
       margin-top: 1.5rem;
       padding-top: 1.25rem;
-      border-top: 1px solid rgba(252, 182, 21, 0.15);
+      border-top: 1px solid rgba(255, 215, 0, 0.15);
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
@@ -200,7 +200,7 @@
       font-size: 0.55rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: #C8900F;
+      color: #B39700;
       margin-bottom: 0.25rem;
     }
     .ix-slide-meta-v {
@@ -208,7 +208,7 @@
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
       font-size: 1rem;
-      color: #f5f1ec;
+      color: #EEEEEE;
       letter-spacing: 0.02em;
     }
     @media (min-width: 768px) { .ix-slide-meta-v { font-size: 1.15rem; } }
@@ -228,9 +228,9 @@
       flex-shrink: 0;
     }
     .ix-logo-tile:hover {
-      border-color: rgba(252, 182, 21, 0.5);
+      border-color: rgba(255, 215, 0, 0.5);
       transform: translateY(-3px);
-      box-shadow: 0 10px 30px -10px rgba(252, 182, 21, 0.3);
+      box-shadow: 0 10px 30px -10px rgba(255, 215, 0, 0.3);
     }
     .ix-logo-tile img {
       max-height: 48px;
@@ -252,9 +252,9 @@
       font-weight: 700;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: #FCB615;
+      color: #FFD700;
       padding: 4px 10px;
-      border: 1px solid rgba(252, 182, 21, 0.35);
+      border: 1px solid rgba(255, 215, 0, 0.35);
       border-radius: 999px;
       margin-bottom: 1rem;
     }
@@ -267,7 +267,7 @@
     .ix-step-list li {
       font-family: 'Inter', sans-serif;
       font-size: 0.78rem;
-      color: #b8b2a8;
+      color: #AAAAAA;
       padding: 0.25rem 0 0.25rem 1.1rem;
       position: relative;
       line-height: 1.4;
@@ -277,7 +277,7 @@
       position: absolute;
       left: 0; top: 0.6rem;
       width: 5px; height: 5px;
-      background: #FCB615;
+      background: #FFD700;
       border-radius: 50%;
     }
     /* Mobile vertical connector for process */
@@ -287,30 +287,80 @@
         display: block;
         width: 1px;
         height: 2rem;
-        background: linear-gradient(to bottom, rgba(252, 182, 21, 0.35), transparent);
+        background: linear-gradient(to bottom, rgba(255, 215, 0, 0.35), transparent);
         margin: 1rem auto 0;
       }
     }
 
-    /* ── Hero cross-fade slideshow ── */
-    .ix-hero-bg { position: absolute; inset: 0; }
-    .ix-hero-slide {
-      position: absolute; inset: 0;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      animation: heroFade 18s infinite;
-      will-change: opacity, transform;
+    /* ── Hero — Stacked Polaroid Deck ── */
+    .ix-hero {
+      position: relative; background: #1a1718; overflow: hidden;
+      display: flex; align-items: center;
+      min-height: 560px; height: 85svh;
+      padding: clamp(5rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem) clamp(3rem, 6vw, 5rem);
     }
-    .ix-hero-slide:nth-child(1) { animation-delay: 0s; }
-    .ix-hero-slide:nth-child(2) { animation-delay: 6s; }
-    .ix-hero-slide:nth-child(3) { animation-delay: 12s; }
-    @keyframes heroFade {
-      0% { opacity: 0; transform: scale(1.05); }
-      8% { opacity: 0.4; }
-      33% { opacity: 0.4; transform: scale(1.12); }
-      41% { opacity: 0; }
-      100% { opacity: 0; transform: scale(1.05); }
+    @media (min-width: 768px) { .ix-hero { height: 100svh; } }
+    .ix-hero-particles {
+      position: absolute; inset: 0; z-index: 1;
+      width: 100%; height: 100%; display: block;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse at center, #000 55%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 55%, transparent 100%);
+    }
+    .ix-hero-grid {
+      width: 100%; max-width: 1400px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center;
+      position: relative; z-index: 2;
+    }
+    @media (min-width: 900px) { .ix-hero-grid { grid-template-columns: 1.3fr 1fr; gap: 4rem; } }
+    .ix-hero-num {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-family: 'Oswald', sans-serif; font-weight: 700;
+      font-size: clamp(4rem, 12vw, 9rem); line-height: 1;
+      color: transparent; -webkit-text-stroke: 1px rgba(255,215,0,0.18);
+      letter-spacing: -0.04em; pointer-events: none; user-select: none; z-index: 1;
+    }
+    /* stacked deck */
+    .ix-stack {
+      position: relative; width: 100%; max-width: 440px; margin: 0 auto;
+      aspect-ratio: 4/5; perspective: 1200px;
+    }
+    .ix-stack-card {
+      position: absolute; inset: 0;
+      background: #FFFFFF; padding: 14px 14px 60px;
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6), 0 10px 20px -10px rgba(0,0,0,0.4);
+      transition: transform .6s cubic-bezier(.2,.8,.2,1);
+      will-change: transform;
+    }
+    .ix-stack-card:nth-child(1) { transform: rotate(-8deg) translate(-40px, 20px); z-index: 1; }
+    .ix-stack-card:nth-child(2) { transform: rotate(4deg) translate(20px, 10px); z-index: 2; }
+    .ix-stack-card:nth-child(3) { transform: rotate(-2deg); z-index: 3; }
+    .ix-stack:hover .ix-stack-card:nth-child(1) { transform: rotate(-14deg) translate(-70px, 40px); }
+    .ix-stack:hover .ix-stack-card:nth-child(2) { transform: rotate(10deg) translate(50px, 20px); }
+    .ix-stack:hover .ix-stack-card:nth-child(3) { transform: rotate(0deg) translateY(-10px); }
+    .ix-stack-card img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
+    .ix-stack-caption {
+      position: absolute; bottom: 18px; left: 0; right: 0; text-align: center;
+      font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.3em; font-size: 0.7rem;
+      color: #555; text-transform: uppercase;
+    }
+    .ix-stack-badge {
+      position: absolute; top: -16px; right: -16px;
+      background: #FFD700; color: #231F20;
+      width: 88px; height: 88px; border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-family: 'Oswald', sans-serif; font-weight: 700;
+      box-shadow: 0 10px 30px rgba(179,151,0,0.4);
+      z-index: 4;
+    }
+    .ix-stack-badge strong { font-size: 1.5rem; line-height: 1; }
+    .ix-stack-badge small { font-size: 0.55rem; letter-spacing: 0.15em; margin-top: 4px; text-transform: uppercase; }
+    @media (max-width: 640px) {
+      .ix-stack { max-width: 280px; }
+      .ix-stack-card:nth-child(1) { transform: rotate(-6deg) translate(-24px, 14px); }
+      .ix-stack-card:nth-child(2) { transform: rotate(3deg) translate(14px, 8px); }
+      .ix-stack-badge { width: 70px; height: 70px; top: -12px; right: -12px; }
+      .ix-stack-badge strong { font-size: 1.2rem; }
     }
 
     /* ── Awards Strip ── */
@@ -328,25 +378,25 @@
       gap: 0.75rem;
       padding: 0.65rem 1.25rem;
       background: linear-gradient(155deg, rgba(42, 38, 39, 0.7), rgba(26, 23, 24, 0.85));
-      border: 1px solid rgba(252, 182, 21, 0.2);
+      border: 1px solid rgba(255, 215, 0, 0.2);
       border-radius: 999px;
       transition: all 0.4s ease;
     }
     .ix-award-pill:hover {
-      border-color: rgba(252, 182, 21, 0.6);
+      border-color: rgba(255, 215, 0, 0.6);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px -8px rgba(252, 182, 21, 0.3);
+      box-shadow: 0 8px 24px -8px rgba(255, 215, 0, 0.3);
     }
-    .ix-award-pill i { color: #FCB615; font-size: 0.95rem; }
+    .ix-award-pill i { color: #FFD700; font-size: 0.95rem; }
     .ix-award-pill-text {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #f5f1ec;
+      color: #EEEEEE;
     }
-    .ix-award-pill-year { color: #C8900F; font-size: 0.65rem; margin-left: 0.4rem; }
+    .ix-award-pill-year { color: #B39700; font-size: 0.65rem; margin-left: 0.4rem; }
 
     /* ── Active Projects ── */
     .ix-active-card {
@@ -359,7 +409,7 @@
       overflow: hidden;
     }
     .ix-active-card:hover {
-      border-color: rgba(252, 182, 21, 0.4);
+      border-color: rgba(255, 215, 0, 0.4);
       transform: translateY(-4px);
       box-shadow: 0 16px 40px -16px rgba(0, 0, 0, 0.6);
     }
@@ -391,7 +441,7 @@
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
       font-size: 1.25rem;
-      color: #f5f1ec;
+      color: #EEEEEE;
       text-transform: uppercase;
       letter-spacing: 0.02em;
       margin-bottom: 0.25rem;
@@ -399,7 +449,7 @@
     .ix-active-loc {
       font-family: 'Inter', sans-serif;
       font-size: 0.78rem;
-      color: #b8b2a8;
+      color: #AAAAAA;
       font-weight: 300;
       margin-bottom: 1rem;
     }
@@ -412,9 +462,9 @@
     }
     .ix-active-progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #C8900F, #FCB615);
+      background: linear-gradient(90deg, #B39700, #FFD700);
       border-radius: 999px;
-      box-shadow: 0 0 10px rgba(252, 182, 21, 0.5);
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
     }
     .ix-active-meta {
       display: flex;
@@ -423,9 +473,9 @@
       font-size: 0.65rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(184, 178, 168, 0.7);
+      color: rgba(170, 170, 170, 0.7);
     }
-    .ix-active-meta strong { color: #FCB615; font-weight: 700; }
+    .ix-active-meta strong { color: #FFD700; font-weight: 700; }
 
     /* ── Press / Featured In ── */
     .ix-press-row {
@@ -442,11 +492,11 @@
       font-weight: 700;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: rgba(245, 241, 236, 0.5);
+      color: rgba(238, 238, 238, 0.5);
       transition: color 0.4s ease, transform 0.4s ease;
       cursor: default;
     }
-    .ix-press-name:hover { color: #FCB615; transform: translateY(-2px); }
+    .ix-press-name:hover { color: #FFD700; transform: translateY(-2px); }
 
     /* ── Testimonial avatar (premium medal) ── */
     .ix-avatar {
@@ -454,20 +504,20 @@
       width: 52px; height: 52px;
       border-radius: 50%;
       background:
-        radial-gradient(circle at 35% 30%, rgba(252, 182, 21, 0.25), rgba(252, 182, 21, 0.04) 70%),
+        radial-gradient(circle at 35% 30%, rgba(255, 215, 0, 0.25), rgba(255, 215, 0, 0.04) 70%),
         linear-gradient(155deg, rgba(42, 38, 39, 0.95), rgba(20, 18, 19, 0.95));
-      border: 1px solid rgba(252, 182, 21, 0.4);
+      border: 1px solid rgba(255, 215, 0, 0.4);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 16px -4px rgba(252, 182, 21, 0.3);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 16px -4px rgba(255, 215, 0, 0.3);
       flex-shrink: 0;
     }
     .ix-avatar span {
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
       font-size: 0.95rem;
-      color: #FCB615;
+      color: #FFD700;
       letter-spacing: 0.05em;
     }
 
@@ -502,9 +552,9 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       text-decoration: none;
     }
-    .ix-fab a:hover { transform: scale(1.08); box-shadow: 0 12px 32px -4px rgba(252, 182, 21, 0.5); }
+    .ix-fab a:hover { transform: scale(1.08); box-shadow: 0 12px 32px -4px rgba(255, 215, 0, 0.5); }
     .ix-fab-whatsapp { background: linear-gradient(155deg, #25D366, #128C7E); }
-    .ix-fab-phone { background: linear-gradient(155deg, #FCB615, #C8900F); color: #1a1718 !important; }
+    .ix-fab-phone { background: linear-gradient(155deg, #FFD700, #B39700); color: #1a1718 !important; }
     @media (min-width: 768px) {
       .ix-fab { bottom: 2rem; right: 2rem; }
       .ix-fab a { width: 56px; height: 56px; font-size: 1.4rem; }
@@ -512,12 +562,12 @@
 
     /* ── Accessibility ── */
     *:focus-visible {
-      outline: 2px solid #FCB615;
+      outline: 2px solid #FFD700;
       outline-offset: 3px;
       border-radius: 2px;
     }
     .menu-btn:focus-visible,
-    .nav-close-btn:focus-visible { outline-color: #FCB615; }
+    .nav-close-btn:focus-visible { outline-color: #FFD700; }
   </style>
 </head>
 
@@ -619,41 +669,54 @@
     </div>
   </header>
 
-  <!-- HERO SECTION (Unified site-wide pattern) -->
-  <section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
-    <!-- Background — 3-image cross-fade slideshow -->
-    <div class="ix-hero-bg z-0" aria-hidden="true">
-      <div class="ix-hero-slide" style="background-image: url('assets/images/home.png');"></div>
-      <div class="ix-hero-slide" style="background-image: url('assets/Projects/monticello.jpg');"></div>
-      <div class="ix-hero-slide" style="background-image: url('assets/Projects/Tree Top.jpg');"></div>
-    </div>
-    <div class="absolute inset-0 bg-gradient-to-b from-clay-base/70 via-clay-mist/50 to-clay-mist z-0"></div>
+  <!-- HERO SECTION — Stacked Polaroid Deck + Particle Network -->
+  <section class="ix-hero" data-particles>
+    <canvas class="ix-hero-particles" aria-hidden="true"></canvas>
 
-    <!-- Content -->
-    <div class="relative z-30 container mx-auto px-6 mt-20">
-      <div class="inline-block mb-4 overflow-hidden">
-        <span class="block text-brand-darkGold text-sm font-bold tracking-[0.5em] uppercase reveal-up"
-          style="transition-delay: 100ms;">Est. 2014 &mdash; Mumbai</span>
+    <div class="ix-hero-grid">
+      <!-- Left: original hero copy -->
+      <div>
+        <span class="block text-brand-darkGold text-sm font-bold tracking-[0.5em] uppercase reveal-up mb-4"
+              style="transition-delay: 100ms;">Est. 2014 &mdash; Mumbai</span>
+        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-6 text-clay-ink uppercase tracking-tighter leading-none reveal-up font-hero"
+            style="transition-delay: 200ms;">
+          Building <br><span class="gold-gradient-text">Legacies</span>
+        </h1>
+        <div class="h-px w-24 bg-brand-gold my-8 reveal-up" style="transition-delay: 300ms;"></div>
+        <p class="text-lg md:text-2xl font-light text-clay-muted max-w-xl leading-relaxed reveal-up"
+           style="transition-delay: 400ms;">
+          We construct not just structures, but skylines &mdash; 5.7+ million sq. ft. and 90+ buildings delivered across Mumbai.
+        </p>
+
+        <div class="flex flex-row flex-wrap gap-3 md:gap-4 mt-10 reveal-up" style="transition-delay: 500ms;">
+          <a href="projects.html"
+             class="group relative px-8 md:px-10 py-4 bg-brand-gold text-black overflow-hidden transition-all duration-300 hover:bg-clay-surface">
+            <span class="relative z-10 font-bold tracking-widest uppercase text-xs md:text-sm font-heading">Explore Projects</span>
+          </a>
+          <a href="contact.html"
+             class="group px-8 md:px-10 py-4 border border-clay-border text-clay-ink hover:border-brand-gold hover:text-brand-darkGold transition-all duration-300">
+            <span class="font-bold tracking-widest uppercase text-xs md:text-sm font-heading">Get a Quote</span>
+          </a>
+        </div>
       </div>
-      <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold mb-6 text-clay-ink uppercase tracking-tighter leading-none reveal-up font-hero"
-        style="transition-delay: 200ms;">
-        Building <br><span class="gold-gradient-text">Legacies</span>
-      </h1>
-      <div class="h-px w-24 bg-brand-gold mx-auto my-8 reveal-up" style="transition-delay: 300ms;"></div>
-      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-3xl mx-auto leading-relaxed reveal-up"
-        style="transition-delay: 400ms;">
-        We construct not just structures, but skylines &mdash; 5.7+ million sq. ft. and 90+ buildings delivered across Mumbai.
-      </p>
 
-      <div class="flex flex-row flex-wrap justify-center gap-3 md:gap-4 mt-10 reveal-up" style="transition-delay: 500ms;">
-        <a href="projects.html"
-          class="group relative px-8 md:px-10 py-4 bg-brand-gold text-black overflow-hidden transition-all duration-300 hover:bg-clay-surface">
-          <span class="relative z-10 font-bold tracking-widest uppercase text-xs md:text-sm font-heading">Explore Projects</span>
-        </a>
-        <a href="contact.html"
-          class="group px-8 md:px-10 py-4 border border-clay-border text-clay-ink hover:border-brand-gold hover:text-brand-darkGold transition-all duration-300">
-          <span class="font-bold tracking-widest uppercase text-xs md:text-sm font-heading">Get a Quote</span>
-        </a>
+      <!-- Right: stacked polaroid deck -->
+      <div class="reveal-up" style="transition-delay: 400ms;">
+        <div class="ix-stack">
+          <div class="ix-stack-card">
+            <img src="assets/Projects/Tree Top.jpg" alt="Tree Top project" loading="lazy">
+            <div class="ix-stack-caption">Tree Top · 2022</div>
+          </div>
+          <div class="ix-stack-card">
+            <img src="assets/Projects/Del Sol.jpg" alt="Del Sol project" loading="lazy">
+            <div class="ix-stack-caption">Del Sol · 2023</div>
+          </div>
+          <div class="ix-stack-card">
+            <img src="assets/Projects/monticello.jpg" alt="Monticello Tower" loading="eager" fetchpriority="high">
+            <div class="ix-stack-caption">Monticello · 2024</div>
+            <div class="ix-stack-badge"><strong>90+</strong><small>Buildings</small></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1001,7 +1064,7 @@
 
         <!-- Step 1 -->
         <div class="ix-step relative group reveal-up z-10">
-          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(200,144,15,0.3)]">
+          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(179, 151, 0,0.3)]">
             <span>01</span>
           </div>
           <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
@@ -1018,7 +1081,7 @@
 
         <!-- Step 2 -->
         <div class="ix-step relative group reveal-up z-10" style="transition-delay: 150ms;">
-          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(200,144,15,0.3)]">
+          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(179, 151, 0,0.3)]">
             <span>02</span>
           </div>
           <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
@@ -1035,7 +1098,7 @@
 
         <!-- Step 3 -->
         <div class="ix-step relative group reveal-up z-10" style="transition-delay: 300ms;">
-          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(200,144,15,0.3)]">
+          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(179, 151, 0,0.3)]">
             <span>03</span>
           </div>
           <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
@@ -1052,7 +1115,7 @@
 
         <!-- Step 4 -->
         <div class="ix-step relative group reveal-up z-10" style="transition-delay: 450ms;">
-          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(200,144,15,0.3)]">
+          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(179, 151, 0,0.3)]">
             <span>04</span>
           </div>
           <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
@@ -1136,7 +1199,7 @@
 
       <div class="grid md:grid-cols-3 gap-6" id="ix-testimonials-grid">
         <!-- Review 1 -->
-        <div class="glass-panel p-6 md:p-8 reveal-up hover:border-brand-gold/30 transition duration-500 flex flex-col">
+        <div class="glass-panel p-6 md:p-8 reveal-up reveal-active hover:border-brand-gold/30 transition duration-500 flex flex-col">
           <i class="fas fa-quote-left text-brand-darkGold/20 text-3xl mb-4"></i>
           <p class="text-sm md:text-lg text-clay-muted italic mb-6 md:mb-8 leading-relaxed font-light flex-1">"Strong Built has been an exceptional partner across multiple projects including Monticello, Del-Sol, and Insignia. Their engineering precision and commitment to timelines is rare in this industry."</p>
           <div class="flex items-center gap-4 border-t border-clay-border pt-6">
@@ -1149,7 +1212,7 @@
         </div>
 
         <!-- Review 2 -->
-        <div class="glass-panel p-6 md:p-8 reveal-up hover:border-brand-gold/30 transition duration-500 flex flex-col" style="transition-delay: 150ms;">
+        <div class="glass-panel p-6 md:p-8 reveal-up reveal-active hover:border-brand-gold/30 transition duration-500 flex flex-col" style="transition-delay: 150ms;">
           <i class="fas fa-quote-left text-brand-darkGold/20 text-3xl mb-4"></i>
           <p class="text-sm md:text-lg text-clay-muted italic mb-6 md:mb-8 leading-relaxed font-light flex-1">"From Tree Top to Splendora and Luxaria, Strong Built has consistently delivered projects that exceed our specifications. Their safety record and on-site discipline are truly industry-leading."</p>
           <div class="flex items-center gap-4 border-t border-clay-border pt-6">
@@ -1162,7 +1225,7 @@
         </div>
 
         <!-- Review 3 -->
-        <div class="glass-panel p-6 md:p-8 reveal-up hover:border-brand-gold/30 transition duration-500 flex flex-col" style="transition-delay: 300ms;">
+        <div class="glass-panel p-6 md:p-8 reveal-up reveal-active hover:border-brand-gold/30 transition duration-500 flex flex-col" style="transition-delay: 300ms;">
           <i class="fas fa-quote-left text-brand-darkGold/20 text-3xl mb-4"></i>
           <p class="text-sm md:text-lg text-clay-muted italic mb-6 md:mb-8 leading-relaxed font-light flex-1">"Our 5 lakh sq ft Bloomdale township in Nagpur was delivered with zero compromises on quality. Strong Built brings a refreshing level of professionalism and transparency to every engagement."</p>
           <div class="flex items-center gap-4 border-t border-clay-border pt-6">
@@ -1208,7 +1271,7 @@
   <!-- FOOTER -->
   <footer class="bg-clay-mist text-clay-muted pt-16 md:pt-20 pb-10 border-t border-clay-border relative overflow-hidden">
     <div class="absolute inset-0 opacity-10"
-      style="background-image: radial-gradient(rgba(184, 130, 12, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
+      style="background-image: radial-gradient(rgba(179, 151, 0, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
     <div class="container mx-auto px-6 relative z-10">
       <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
         <div class="col-span-1">
@@ -1289,7 +1352,7 @@
       const grid = document.getElementById('ix-testimonials-grid');
       if (!grid || !window.TESTIMONIALS_DATA || !Array.isArray(window.TESTIMONIALS_DATA) || !window.TESTIMONIALS_DATA.length) return;
       grid.innerHTML = window.TESTIMONIALS_DATA.map((t, i) => `
-        <div class="glass-panel p-6 md:p-8 reveal-up hover:border-brand-gold/30 transition duration-500 flex flex-col" ${i > 0 ? `style="transition-delay: ${i * 150}ms;"` : ''}>
+        <div class="glass-panel p-6 md:p-8 reveal-up reveal-active hover:border-brand-gold/30 transition duration-500 flex flex-col" ${i > 0 ? `style="transition-delay: ${i * 150}ms;"` : ''}>
           <i class="fas fa-quote-left text-brand-darkGold/20 text-3xl mb-4"></i>
           <p class="text-sm md:text-lg text-clay-muted italic mb-6 md:mb-8 leading-relaxed font-light flex-1">"${t.quote}"</p>
           <div class="flex items-center gap-4 border-t border-clay-border pt-6">
@@ -1307,7 +1370,7 @@
       const grid = document.getElementById('ix-active-grid');
       if (!grid || !window.ACTIVE_PROJECTS_DATA || !Array.isArray(window.ACTIVE_PROJECTS_DATA) || !window.ACTIVE_PROJECTS_DATA.length) return;
       grid.innerHTML = window.ACTIVE_PROJECTS_DATA.map((p, i) => `
-        <article class="ix-active-card reveal-up" ${i > 0 ? `style="transition-delay: ${i * 100}ms;"` : ''}>
+        <article class="ix-active-card reveal-up reveal-active" ${i > 0 ? `style="transition-delay: ${i * 100}ms;"` : ''}>
           <div class="ix-active-status">Live</div>
           <div class="ix-active-name">${p.name}</div>
           <div class="ix-active-loc">${p.location}</div>
@@ -1323,6 +1386,16 @@
       // Update FAB hrefs
       document.querySelectorAll('.ix-fab-whatsapp').forEach(a => a.href = `https://wa.me/${s.whatsapp}`);
       document.querySelectorAll('.ix-fab-phone').forEach(a => a.href = `tel:${s.phonePrimary}`);
+    })();
+
+    // ── Activate reveal-up on injected cards (scroll script fired before hydration, so trigger it now) ──
+    (function activateRevealsAfterHydration() {
+      if (typeof handleScrollAnimations === 'function') handleScrollAnimations();
+      // Fallback: any reveal-up element already visible in viewport gets activated directly
+      document.querySelectorAll('.reveal-up').forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 50) el.classList.add('reveal-active');
+      });
     })();
   </script>
   <script>
@@ -1343,6 +1416,148 @@
         requestAnimationFrame(sync);
       }, { passive: true });
     })();
+  </script>
+
+  <!-- Hero particle network background -->
+  <script>
+  (() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('[data-particles]').forEach(sec => {
+      const canvas = sec.querySelector('.ix-hero-particles');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d', { alpha: true });
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      let w = 0, h = 0, particles = [];
+      let mouseX = -9999, mouseY = -9999;
+      let running = false, rafId = 0;
+
+      const CONNECT2 = 150 * 150;
+      const MOUSE2   = 220 * 220;
+
+      function fit() {
+        const r = sec.getBoundingClientRect();
+        w = r.width; h = r.height;
+        canvas.width  = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+        canvas.style.width  = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        build();
+      }
+
+      function targetCount() {
+        const area = w * h;
+        return Math.max(35, Math.min(95, Math.round(area / 16000)));
+      }
+
+      function build() {
+        const count = targetCount();
+        particles.length = 0;
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            r: Math.random() * 1.4 + 0.5,
+          });
+        }
+      }
+
+      function step() {
+        ctx.clearRect(0, 0, w, h);
+
+        ctx.fillStyle = 'rgba(255,215,0,0.45)';
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          if (mouseX > -1000) {
+            const dx = p.x - mouseX, dy = p.y - mouseY;
+            const d2 = dx * dx + dy * dy;
+            if (d2 < MOUSE2) {
+              const d = Math.sqrt(d2) || 1;
+              const f = (1 - d / 220) * 0.18;
+              p.vx += (dx / d) * f;
+              p.vy += (dy / d) * f;
+            }
+          }
+          p.vx *= 0.97; p.vy *= 0.97;
+          p.vx += (Math.random() - 0.5) * 0.008;
+          p.vy += (Math.random() - 0.5) * 0.008;
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < -10) p.x = w + 10; else if (p.x > w + 10) p.x = -10;
+          if (p.y < -10) p.y = h + 10; else if (p.y > h + 10) p.y = -10;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.lineWidth = 0.6;
+        for (let i = 0; i < particles.length; i++) {
+          const a = particles[i];
+          for (let j = i + 1; j < particles.length; j++) {
+            const b = particles[j];
+            const dx = a.x - b.x, dy = a.y - b.y;
+            const d2 = dx * dx + dy * dy;
+            if (d2 < CONNECT2) {
+              const alpha = (1 - d2 / CONNECT2) * 0.13;
+              ctx.strokeStyle = 'rgba(255,215,0,' + alpha + ')';
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        if (mouseX > -1000) {
+          ctx.lineWidth = 1;
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            const dx = p.x - mouseX, dy = p.y - mouseY;
+            const d2 = dx * dx + dy * dy;
+            if (d2 < MOUSE2) {
+              const alpha = (1 - d2 / MOUSE2) * 0.32;
+              ctx.strokeStyle = 'rgba(255,215,0,' + alpha + ')';
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(mouseX, mouseY);
+              ctx.stroke();
+            }
+          }
+          const grad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 80);
+          grad.addColorStop(0, 'rgba(255,215,0,0.14)');
+          grad.addColorStop(1, 'rgba(255,215,0,0)');
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(mouseX, mouseY, 80, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        rafId = requestAnimationFrame(step);
+      }
+
+      function start() { if (running) return; running = true; rafId = requestAnimationFrame(step); }
+      function stop()  { running = false; cancelAnimationFrame(rafId); }
+
+      fit();
+      addEventListener('resize', fit, { passive: true });
+
+      const visIO = new IntersectionObserver((entries) => {
+        entries.forEach(e => e.isIntersecting ? start() : stop());
+      }, { threshold: 0.05 });
+      visIO.observe(sec);
+      document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+
+      sec.addEventListener('pointermove', e => {
+        const r = sec.getBoundingClientRect();
+        mouseX = e.clientX - r.left;
+        mouseY = e.clientY - r.top;
+      }, { passive: true });
+      sec.addEventListener('pointerleave', () => { mouseX = -9999; mouseY = -9999; });
+    });
+  })();
   </script>
 
 </body>

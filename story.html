@@ -59,7 +59,7 @@
       top: 0; left: 0;
       width: 40%;
       height: 2px;
-      background: linear-gradient(90deg, #FCB615, transparent);
+      background: linear-gradient(90deg, #FFD700, transparent);
       transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .tcard::after {
@@ -67,14 +67,14 @@
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: radial-gradient(circle at top right, rgba(252, 182, 21, 0.06), transparent 50%);
+      background: radial-gradient(circle at top right, rgba(255, 215, 0, 0.06), transparent 50%);
       opacity: 0;
       transition: opacity 0.5s ease;
     }
     .tcard:hover {
       transform: translateY(-6px);
-      border-color: rgba(252, 182, 21, 0.35);
-      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(252, 182, 21, 0.15);
+      border-color: rgba(255, 215, 0, 0.35);
+      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(255, 215, 0, 0.15);
     }
     .tcard:hover::before { width: 100%; }
     .tcard:hover::after { opacity: 1; }
@@ -86,17 +86,17 @@
       width: 64px;
       height: 64px;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(252, 182, 21, 0.18), rgba(252, 182, 21, 0.04) 70%);
-      border: 1px solid rgba(252, 182, 21, 0.25);
-      color: #FCB615;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.18), rgba(255, 215, 0, 0.04) 70%);
+      border: 1px solid rgba(255, 215, 0, 0.25);
+      color: #FFD700;
       font-size: 1.5rem;
       margin-bottom: 1.25rem;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 20px -8px rgba(252, 182, 21, 0.4);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 20px -8px rgba(255, 215, 0, 0.4);
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
     }
     .tcard:hover .tcard-icon {
       transform: scale(1.08) rotate(-4deg);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 6px 28px -6px rgba(252, 182, 21, 0.55);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 6px 28px -6px rgba(255, 215, 0, 0.55);
     }
 
     .tcard-tag {
@@ -106,9 +106,9 @@
       font-weight: 700;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: #C8900F;
+      color: #B39700;
       padding: 4px 10px;
-      border: 1px solid rgba(200, 144, 15, 0.3);
+      border: 1px solid rgba(179, 151, 0, 0.3);
       border-radius: 999px;
       margin-bottom: 0.75rem;
     }
@@ -117,7 +117,7 @@
       font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
       font-size: 1.4rem;
       font-weight: 700;
-      color: #f5f1ec;
+      color: #EEEEEE;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       line-height: 1.15;
@@ -127,7 +127,7 @@
       font-family: 'Inter', Helvetica, Arial, sans-serif;
       font-size: 0.85rem;
       font-weight: 300;
-      color: #b8b2a8;
+      color: #AAAAAA;
       line-height: 1.5;
     }
 
@@ -139,28 +139,28 @@
       font-size: 0.65rem;
       font-weight: 700;
       letter-spacing: 0.35em;
-      color: rgba(252, 182, 21, 0.35);
+      color: rgba(255, 215, 0, 0.35);
     }
 
     /* Finale variant — gold-tinted */
     .tcard-finale {
-      background: linear-gradient(155deg, rgba(252, 182, 21, 0.08) 0%, rgba(42, 38, 39, 0.85) 70%);
-      border-color: rgba(252, 182, 21, 0.3);
-      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.5), 0 0 40px -8px rgba(252, 182, 21, 0.12);
+      background: linear-gradient(155deg, rgba(255, 215, 0, 0.08) 0%, rgba(42, 38, 39, 0.85) 70%);
+      border-color: rgba(255, 215, 0, 0.3);
+      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.5), 0 0 40px -8px rgba(255, 215, 0, 0.12);
     }
     .tcard-finale::before { width: 100%; height: 2px; }
     .tcard-finale .tcard-icon {
       width: 72px;
       height: 72px;
       font-size: 1.75rem;
-      background: radial-gradient(circle at 30% 30%, rgba(252, 182, 21, 0.35), rgba(252, 182, 21, 0.08) 70%);
-      border-color: rgba(252, 182, 21, 0.5);
+      background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.35), rgba(255, 215, 0, 0.08) 70%);
+      border-color: rgba(255, 215, 0, 0.5);
     }
     .tcard-finale .tcard-stat-num {
       font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
       font-size: 1.6rem;
       font-weight: 700;
-      color: #FCB615;
+      color: #FFD700;
       line-height: 1;
     }
     .tcard-finale .tcard-stat-label {
@@ -168,7 +168,7 @@
       font-size: 0.6rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: #b8b2a8;
+      color: #AAAAAA;
       margin-top: 4px;
     }
 
@@ -230,7 +230,7 @@
       font-size: clamp(7rem, 12vw, 12rem);
       line-height: 0.85;
       letter-spacing: -0.04em;
-      background: linear-gradient(180deg, #FCB615 0%, #FCB615 50%, rgba(252, 182, 21, 0.15) 100%);
+      background: linear-gradient(180deg, #FFD700 0%, #FFD700 50%, rgba(255, 215, 0, 0.15) 100%);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -245,7 +245,7 @@
       font-weight: 700;
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: #C8900F;
+      color: #B39700;
       margin-bottom: 1.25rem;
       transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -255,15 +255,15 @@
       width: 72px;
       height: 72px;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(252, 182, 21, 0.25), rgba(252, 182, 21, 0.06) 70%);
-      border: 1px solid rgba(252, 182, 21, 0.35);
+      background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.25), rgba(255, 215, 0, 0.06) 70%);
+      border: 1px solid rgba(255, 215, 0, 0.35);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: #FCB615;
+      color: #FFD700;
       font-size: 1.6rem;
       margin-top: 1.5rem;
-      box-shadow: 0 8px 30px -8px rgba(252, 182, 21, 0.4);
+      box-shadow: 0 8px 30px -8px rgba(255, 215, 0, 0.4);
       transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
     }
     .ss-bigicon.is-swapping { opacity: 0; transform: scale(0.85); }
@@ -299,7 +299,7 @@
       font-size: clamp(3.75rem, 14vw, 6rem);
       line-height: 0.9;
       letter-spacing: -0.03em;
-      background: linear-gradient(180deg, #FCB615 0%, #FCB615 50%, rgba(252, 182, 21, 0.15) 100%);
+      background: linear-gradient(180deg, #FFD700 0%, #FFD700 50%, rgba(255, 215, 0, 0.15) 100%);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -315,7 +315,7 @@
       font-weight: 700;
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: #C8900F;
+      color: #B39700;
       margin-bottom: 0.75rem;
     }
     @media (min-width: 768px) { .ss-card-kicker { font-size: 0.7rem; margin-bottom: 1rem; } }
@@ -326,7 +326,7 @@
       font-size: clamp(1.35rem, 2.8vw, 2.25rem);
       line-height: 1.1;
       text-transform: uppercase;
-      color: #f5f1ec;
+      color: #EEEEEE;
       letter-spacing: -0.01em;
       margin-bottom: 1rem;
     }
@@ -337,7 +337,7 @@
       font-weight: 300;
       font-size: 0.95rem;
       line-height: 1.65;
-      color: #b8b2a8;
+      color: #AAAAAA;
       max-width: 56ch;
       margin-bottom: 1.25rem;
     }
@@ -349,7 +349,7 @@
       font-weight: 700;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(184, 178, 168, 0.6);
+      color: rgba(170, 170, 170, 0.6);
       padding-top: 0.85rem;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
@@ -671,7 +671,7 @@
       if (!stream || !window.TIMELINE_DATA || !Array.isArray(window.TIMELINE_DATA) || !window.TIMELINE_DATA.length) return;
       const data = window.TIMELINE_DATA;
       stream.innerHTML = data.map(m => `
-        <article class="ss-card" data-year="${m.year}" data-tag="${m.tag}" data-icon="${m.icon}">
+        <article class="ss-card reveal-up reveal-active" data-year="${m.year}" data-tag="${m.tag}" data-icon="${m.icon}">
           <div class="ss-card-kicker">${m.kicker}</div>
           <h3 class="ss-card-title">${m.title}</h3>
           <p class="ss-card-body">${m.body}</p>
@@ -680,6 +680,11 @@
       if (yearEl) yearEl.textContent = first.year;
       if (tagEl)  tagEl.textContent  = first.tag;
       if (iconEl) iconEl.className = 'fas ' + first.icon;
+      // Re-trigger reveal-up on injected cards (script.js ran before we existed)
+      document.querySelectorAll('.reveal-up').forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 50) el.classList.add('reveal-active');
+      });
     })();
 
     // Timeline — sticky year panel (desktop) + active-card tracking (all devices)
@@ -808,7 +813,7 @@
   <!-- FOOTER -->
   <footer class="bg-clay-mist text-clay-muted pt-16 md:pt-20 pb-10 border-t border-clay-border relative overflow-hidden">
     <div class="absolute inset-0 opacity-10"
-      style="background-image: radial-gradient(rgba(184, 130, 12, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
+      style="background-image: radial-gradient(rgba(179, 151, 0, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
     <div class="container mx-auto px-6 relative z-10">
       <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
         <div class="col-span-1">

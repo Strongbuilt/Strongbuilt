@@ -45,8 +45,8 @@
     /* ── Recognition Hero ── */
     .rec-hero-bg {
       background:
-        radial-gradient(ellipse at 30% 40%, rgba(252, 182, 21, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse at 75% 70%, rgba(200, 144, 15, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 30% 40%, rgba(255, 215, 0, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 75% 70%, rgba(179, 151, 0, 0.08) 0%, transparent 50%),
         linear-gradient(180deg, rgba(26, 23, 24, 0.85) 0%, rgba(35, 31, 32, 0.95) 100%);
     }
     .rec-hero-orbs::before,
@@ -60,13 +60,13 @@
     .rec-hero-orbs::before {
       width: 400px; height: 400px;
       top: 10%; left: 10%;
-      background: radial-gradient(circle, rgba(252, 182, 21, 0.15), transparent 70%);
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.15), transparent 70%);
       animation: float 10s ease-in-out infinite;
     }
     .rec-hero-orbs::after {
       width: 300px; height: 300px;
       bottom: 10%; right: 15%;
-      background: radial-gradient(circle, rgba(200, 144, 15, 0.12), transparent 70%);
+      background: radial-gradient(circle, rgba(179, 151, 0, 0.12), transparent 70%);
       animation: float 12s ease-in-out 2s infinite;
     }
 
@@ -82,7 +82,7 @@
       font-weight: 700;
       font-size: clamp(2.5rem, 6vw, 4.5rem);
       line-height: 1;
-      color: #FCB615;
+      color: #FFD700;
       letter-spacing: -0.02em;
     }
     .rec-stat-label {
@@ -91,7 +91,7 @@
       font-weight: 700;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: #b8b2a8;
+      color: #AAAAAA;
       margin-top: 0.75rem;
     }
 
@@ -111,7 +111,7 @@
       top: 0; left: 0;
       width: 40%;
       height: 2px;
-      background: linear-gradient(90deg, #FCB615, transparent);
+      background: linear-gradient(90deg, #FFD700, transparent);
       transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .awr-card::after {
@@ -119,14 +119,14 @@
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: radial-gradient(circle at top right, rgba(252, 182, 21, 0.06), transparent 50%);
+      background: radial-gradient(circle at top right, rgba(255, 215, 0, 0.06), transparent 50%);
       opacity: 0;
       transition: opacity 0.5s ease;
     }
     .awr-card:hover {
       transform: translateY(-6px);
-      border-color: rgba(252, 182, 21, 0.35);
-      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(252, 182, 21, 0.15);
+      border-color: rgba(255, 215, 0, 0.35);
+      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(255, 215, 0, 0.15);
     }
     .awr-card:hover::before { width: 100%; }
     .awr-card:hover::after { opacity: 1; }
@@ -137,7 +137,7 @@
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
       font-size: 2.5rem;
-      color: #FCB615;
+      color: #FFD700;
       opacity: 0.18;
       letter-spacing: -0.02em;
       line-height: 1;
@@ -151,12 +151,12 @@
       justify-content: center;
       width: 64px; height: 64px;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(252, 182, 21, 0.2), rgba(252, 182, 21, 0.04) 70%);
-      border: 1px solid rgba(252, 182, 21, 0.3);
-      color: #FCB615;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.04) 70%);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      color: #FFD700;
       font-size: 1.5rem;
       margin-bottom: 1.5rem;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 20px -8px rgba(252, 182, 21, 0.4);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 20px -8px rgba(255, 215, 0, 0.4);
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .awr-card:hover .awr-icon { transform: scale(1.08) rotate(-4deg); }
@@ -167,7 +167,7 @@
       font-weight: 700;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: #C8900F;
+      color: #B39700;
       margin-bottom: 0.75rem;
     }
     .awr-title {
@@ -176,7 +176,7 @@
       font-size: 1.35rem;
       line-height: 1.15;
       text-transform: uppercase;
-      color: #f5f1ec;
+      color: #EEEEEE;
       letter-spacing: 0.02em;
       margin-bottom: 1rem;
     }
@@ -184,7 +184,7 @@
       font-family: 'Inter', sans-serif;
       font-size: 0.9rem;
       line-height: 1.6;
-      color: #b8b2a8;
+      color: #AAAAAA;
       font-weight: 300;
     }
 
@@ -194,7 +194,7 @@
       padding: 1.75rem 1.5rem;
       background: rgba(26, 23, 24, 0.5);
       border: 1px solid rgba(255, 255, 255, 0.05);
-      border-left: 3px solid rgba(252, 182, 21, 0.3);
+      border-left: 3px solid rgba(255, 215, 0, 0.3);
       border-radius: 2px;
       transition: all 0.4s ease;
       display: flex;
@@ -202,7 +202,7 @@
       align-items: flex-start;
     }
     .cap-card:hover {
-      border-left-color: #FCB615;
+      border-left-color: #FFD700;
       background: rgba(35, 31, 32, 0.7);
       transform: translateX(4px);
     }
@@ -212,17 +212,17 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: #C8900F;
+      color: #B39700;
       font-size: 1.1rem;
-      border: 1px solid rgba(200, 144, 15, 0.3);
+      border: 1px solid rgba(179, 151, 0, 0.3);
       border-radius: 50%;
-      background: rgba(252, 182, 21, 0.05);
+      background: rgba(255, 215, 0, 0.05);
     }
     .cap-title {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 1rem;
       font-weight: 700;
-      color: #f5f1ec;
+      color: #EEEEEE;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       margin-bottom: 0.35rem;
@@ -233,14 +233,14 @@
       font-weight: 700;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: #C8900F;
+      color: #B39700;
       margin-bottom: 0.5rem;
     }
     .cap-desc {
       font-family: 'Inter', sans-serif;
       font-size: 0.85rem;
       line-height: 1.55;
-      color: #b8b2a8;
+      color: #AAAAAA;
       font-weight: 300;
     }
 
@@ -252,8 +252,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at 50% 30%, rgba(252, 182, 21, 0.12) 0%, rgba(26, 23, 24, 0.9) 70%);
-      border: 1px solid rgba(252, 182, 21, 0.3);
+      background: radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.12) 0%, rgba(26, 23, 24, 0.9) 70%);
+      border: 1px solid rgba(255, 215, 0, 0.3);
       border-radius: 50%;
       padding: 1rem;
       text-align: center;
@@ -264,19 +264,19 @@
       content: '';
       position: absolute;
       inset: 8px;
-      border: 1px dashed rgba(252, 182, 21, 0.25);
+      border: 1px dashed rgba(255, 215, 0, 0.25);
       border-radius: 50%;
       animation: spin-slow 20s linear infinite;
     }
     @keyframes spin-slow { to { transform: rotate(360deg); } }
     .iso-badge:hover {
-      border-color: #FCB615;
+      border-color: #FFD700;
       transform: scale(1.05);
-      box-shadow: 0 0 40px -10px rgba(252, 182, 21, 0.4);
+      box-shadow: 0 0 40px -10px rgba(255, 215, 0, 0.4);
     }
     .iso-badge i {
       font-size: 1.5rem;
-      color: #FCB615;
+      color: #FFD700;
       margin-bottom: 0.5rem;
       z-index: 2;
     }
@@ -285,14 +285,14 @@
       font-weight: 700;
       font-size: 0.95rem;
       letter-spacing: 0.05em;
-      color: #f5f1ec;
+      color: #EEEEEE;
       line-height: 1;
       z-index: 2;
     }
     .iso-year {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 0.65rem;
-      color: #C8900F;
+      color: #B39700;
       letter-spacing: 0.2em;
       margin-top: 0.25rem;
       z-index: 2;
@@ -454,7 +454,7 @@
     </div>
 
     <div class="grid md:grid-cols-2 gap-6 md:gap-8" id="rec-industry-grid">
-      <article class="awr-card reveal-up">
+      <article class="awr-card reveal-up reveal-active">
         <div class="awr-year">2021</div>
         <div class="awr-icon"><i class="fas fa-trophy"></i></div>
         <div class="awr-issuer">Construction World Magazine</div>
@@ -462,7 +462,7 @@
         <p class="awr-desc">Recognised for rapid expansion and consistent project delivery excellence across residential, commercial, and institutional sectors.</p>
       </article>
 
-      <article class="awr-card reveal-up" style="transition-delay: 100ms;">
+      <article class="awr-card reveal-up reveal-active" style="transition-delay: 100ms;">
         <div class="awr-year">2022</div>
         <div class="awr-icon"><i class="fas fa-landmark"></i></div>
         <div class="awr-issuer">Maharashtra Governor's Award</div>
@@ -470,7 +470,7 @@
         <p class="awr-desc">Honoured for significant contributions towards modernising urban infrastructure in Mumbai and the Metropolitan Region.</p>
       </article>
 
-      <article class="awr-card reveal-up" style="transition-delay: 200ms;">
+      <article class="awr-card reveal-up reveal-active" style="transition-delay: 200ms;">
         <div class="awr-year">2023</div>
         <div class="awr-icon"><i class="fas fa-medal"></i></div>
         <div class="awr-issuer">Times Network Award</div>
@@ -478,7 +478,7 @@
         <p class="awr-desc">Celebrating outstanding achievements in delivering complex infrastructure projects with superior quality and schedule discipline.</p>
       </article>
 
-      <article class="awr-card reveal-up" style="transition-delay: 300ms;">
+      <article class="awr-card reveal-up reveal-active" style="transition-delay: 300ms;">
         <div class="awr-year">2024</div>
         <div class="awr-icon"><i class="fas fa-shield-alt"></i></div>
         <div class="awr-issuer">Economic Times Award</div>
@@ -499,7 +499,7 @@
       </div>
 
       <div class="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto" id="rec-client-grid">
-        <div class="cap-card reveal-up">
+        <div class="cap-card reveal-up reveal-active">
           <div class="cap-icon"><i class="fas fa-hard-hat"></i></div>
           <div class="flex-1">
             <div class="cap-meta">2019 · Safety Audit</div>
@@ -507,7 +507,7 @@
             <p class="cap-desc">Certificate of Appreciation for exemplary safety practices and procedures on the Upper Thane project site.</p>
           </div>
         </div>
-        <div class="cap-card reveal-up" style="transition-delay: 100ms;">
+        <div class="cap-card reveal-up reveal-active" style="transition-delay: 100ms;">
           <div class="cap-icon"><i class="fas fa-certificate"></i></div>
           <div class="flex-1">
             <div class="cap-meta">Oct 2019 · Mahindra Lifespaces</div>
@@ -521,7 +521,7 @@
 
   <!-- ══════════ CERTIFICATIONS ══════════ -->
   <section class="py-20 md:py-28 relative z-10 overflow-hidden">
-    <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(rgba(252, 182, 21, 0.6) 1px, transparent 1px); background-size: 24px 24px;"></div>
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(rgba(255, 215, 0, 0.6) 1px, transparent 1px); background-size: 24px 24px;"></div>
     <div class="container mx-auto px-6 relative z-10">
       <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
         <div class="reveal-up">
@@ -578,7 +578,7 @@
 
   <footer class="bg-clay-mist text-clay-muted pt-16 md:pt-20 pb-10 border-t border-clay-border relative overflow-hidden">
     <div class="absolute inset-0 opacity-10"
-      style="background-image: radial-gradient(rgba(184, 130, 12, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
+      style="background-image: radial-gradient(rgba(179, 151, 0, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
     <div class="container mx-auto px-6 relative z-10">
       <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
         <div class="col-span-1">
@@ -668,7 +668,7 @@
       const ind = document.getElementById('rec-industry-grid');
       if (ind && Array.isArray(d.industry) && d.industry.length) {
         ind.innerHTML = d.industry.map((a, i) => `
-          <article class="awr-card reveal-up" ${i > 0 ? `style="transition-delay: ${i * 100}ms;"` : ''}>
+          <article class="awr-card reveal-up reveal-active" ${i > 0 ? `style="transition-delay: ${i * 100}ms;"` : ''}>
             <div class="awr-year">${a.year}</div>
             <div class="awr-icon"><i class="fas ${a.icon}"></i></div>
             <div class="awr-issuer">${a.issuer || ''}</div>
@@ -679,7 +679,7 @@
       const cli = document.getElementById('rec-client-grid');
       if (cli && Array.isArray(d.client) && d.client.length) {
         cli.innerHTML = d.client.map((c, i) => `
-          <div class="cap-card reveal-up" ${i > 0 ? `style="transition-delay: ${i * 100}ms;"` : ''}>
+          <div class="cap-card reveal-up reveal-active" ${i > 0 ? `style="transition-delay: ${i * 100}ms;"` : ''}>
             <div class="cap-icon"><i class="fas ${c.icon}"></i></div>
             <div class="flex-1">
               <div class="cap-meta">${c.meta || c.year}</div>
@@ -688,6 +688,11 @@
             </div>
           </div>`).join('');
       }
+      // Re-trigger reveal-up on injected cards
+      document.querySelectorAll('.reveal-up').forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 50) el.classList.add('reveal-active');
+      });
     })();
   </script>
 </body>

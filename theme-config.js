@@ -5,11 +5,11 @@ tailwind.config = {
         brand: {
           black: '#231F20',
           dark: '#1a1718',
-          gold: '#FCB615',
-          darkGold: '#C8900F',
-          lightGold: '#FFD56B',
-          gray: '#4A4A4A',
-          silver: '#C0C0C0',
+          gold: '#FFD700',
+          darkGold: '#B39700',
+          lightGold: '#FFF100',
+          gray: '#AAAAAA',
+          silver: '#EEEEEE',
         },
         clay: {
           base: '#231F20',
@@ -17,10 +17,10 @@ tailwind.config = {
           sunken: '#15110f',
           paper: '#2a2627',
           surface: '#ffffff',
-          ink: '#f5f1ec',
-          muted: '#b8b2a8',
-          faint: '#8a857d',
-          border: 'rgba(255, 255, 255, 0.10)',
+          ink: '#EEEEEE',
+          muted: '#AAAAAA',
+          faint: '#888888',
+          border: 'rgba(238, 238, 238, 0.10)',
         }
       },
       spacing: {
@@ -51,8 +51,8 @@ tailwind.config = {
           '50%': { transform: 'translateY(-15px)' },
         },
         glow: {
-          '0%, 100%': { boxShadow: '0 0 5px #FCB615, 0 0 10px #FCB615' },
-          '50%': { boxShadow: '0 0 20px #FCB615, 0 0 30px #C8900F' },
+          '0%, 100%': { boxShadow: '0 0 5px #FFD700, 0 0 10px #FFD700' },
+          '50%': { boxShadow: '0 0 20px #FFD700, 0 0 30px #B39700' },
         },
         scroll: {
           '0%': { transform: 'translateX(0)' },

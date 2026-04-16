@@ -35,43 +35,6 @@ function openLightbox(imgSrc) {
 
 
 
-// Lead Gen CRM Form Modal
-function openLeadForm() {
-  const modal = document.createElement('div');
-  modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-
-  const container = document.createElement('div');
-  container.className = 'bg-white p-6 rounded shadow-lg w-96';
-
-  const title = document.createElement('h3');
-  title.className = 'text-xl mb-4';
-  title.textContent = 'Get a Quote';
-
-  const form = document.createElement('form');
-  form.innerHTML = '<input type="text" name="name" placeholder="Name" class="w-full mb-2 p-2 border" required>' +
-    '<input type="email" name="email" placeholder="Email" class="w-full mb-2 p-2 border" required>' +
-    '<input type="tel" name="phone" placeholder="Phone" class="w-full mb-2 p-2 border" required>' +
-    '<textarea name="message" placeholder="Message" class="w-full mb-2 p-2 border" required></textarea>' +
-    '<button type="submit" class="bg-[#EFBF04] text-black px-4 py-2">Submit</button>';
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    modal.remove();
-  });
-
-  const closeBtn = document.createElement('button');
-  closeBtn.className = 'mt-4 text-gray-500';
-  closeBtn.textContent = 'Close';
-  closeBtn.addEventListener('click', function () { modal.remove(); });
-
-  modal.addEventListener('click', function (e) { if (e.target === modal) modal.remove(); });
-
-  container.appendChild(title);
-  container.appendChild(form);
-  container.appendChild(closeBtn);
-  modal.appendChild(container);
-  document.body.appendChild(modal);
-}
-
 // Progress bars animation
 function animateProgressBars() {
   document.querySelectorAll('.progress-fill').forEach(fill => {

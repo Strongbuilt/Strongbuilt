@@ -67,9 +67,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Archivo:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
   <link rel="stylesheet" href="styles.css">
 
@@ -558,50 +558,6 @@
     }
     .ix-active-meta strong { color: #EFBF04; font-weight: 700; }
 
-    /* ── Press / Featured In ── */
-    .ix-press-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem 3rem;
-      padding: 1.5rem 0;
-    }
-    .ix-press-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: rgba(238, 238, 238, 0.5);
-      transition: color 0.4s ease, transform 0.4s ease;
-      cursor: default;
-    }
-    .ix-press-name:hover { color: #EFBF04; transform: translateY(-2px); }
-
-    /* ── Testimonial avatar (premium medal) ── */
-    .ix-avatar {
-      position: relative;
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 35% 30%, rgba(239, 191, 4, 0.25), rgba(239, 191, 4, 0.04) 70%),
-        linear-gradient(155deg, rgba(42, 38, 39, 0.95), rgba(20, 18, 19, 0.95));
-      border: 1px solid rgba(239, 191, 4, 0.4);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 16px -4px rgba(239, 191, 4, 0.3);
-      flex-shrink: 0;
-    }
-    .ix-avatar span {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: #EFBF04;
-      letter-spacing: 0.05em;
-    }
-
     /* ── Sticky Floating CTA (WhatsApp + phone) ── */
     .ix-fab {
       position: fixed;
@@ -649,10 +605,115 @@
     }
     .menu-btn:focus-visible,
     .nav-close-btn:focus-visible { outline-color: #EFBF04; }
+
+    /* ═════════════════════════════════════════════════════════════════
+       INDEX ANIMATIONS — subtle, GPU-only, respects reduced-motion
+       ═════════════════════════════════════════════════════════════════ */
+
+    /* 1. Top scroll-progress indicator */
+    .ix-scroll-progress {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 2px;
+      z-index: 200; pointer-events: none;
+      background: rgba(239, 191, 4, 0.08);
+    }
+    .ix-scroll-progress::after {
+      content: ''; display: block; height: 100%;
+      background: linear-gradient(90deg, #B8960A, #EFBF04, #FFF0B3, #EFBF04);
+      background-size: 200% 100%;
+      transform-origin: left;
+      transform: scaleX(var(--sp, 0));
+      transition: transform 0.05s linear;
+      animation: ix-scroll-shine 4s linear infinite;
+    }
+    @keyframes ix-scroll-shine { to { background-position: 200% 0; } }
+
+    /* 2. Gold rule divider — draw-in on reveal */
+    .reveal-up .h-px.bg-brand-gold {
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+    }
+    .reveal-active .h-px.bg-brand-gold,
+    .reveal-up.reveal-active .h-px.bg-brand-gold { transform: scaleX(1); }
+
+    /* 3. Gentle float on the polaroid badge */
+    @keyframes ix-badge-float {
+      0%, 100% { transform: translate(0, 0) rotate(0); }
+      50%      { transform: translate(2px, -6px) rotate(-3deg); }
+    }
+    .ix-stack-badge {
+      animation: ix-badge-float 5s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* 4. 3D tilt on 5 S Philosophy cards (desktop pointer only) */
+    @media (hover: hover) and (pointer: fine) {
+      .ix-vcard {
+        transform-style: preserve-3d;
+        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.4s;
+        will-change: transform;
+      }
+      .ix-vcard:hover {
+        transform: perspective(1000px) rotateX(var(--ry, 0)) rotateY(var(--rx, 0)) translateY(-6px);
+      }
+      .ix-vcard .ix-vcard-icon,
+      .ix-vcard .ix-vcard-title,
+      .ix-vcard .ix-vcard-num {
+        transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .ix-vcard:hover .ix-vcard-icon  { transform: translateZ(30px) scale(1.08); }
+      .ix-vcard:hover .ix-vcard-title { transform: translateZ(20px); }
+      .ix-vcard:hover .ix-vcard-num   { transform: translateZ(15px); }
+    }
+
+    /* 5. Shine sweep on primary Explore Projects CTA */
+    a[href="projects.html"].bg-brand-gold {
+      position: relative; overflow: hidden;
+    }
+    a[href="projects.html"].bg-brand-gold::before {
+      content: '';
+      position: absolute; top: 0; left: -150%; width: 60%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
+      transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    a[href="projects.html"].bg-brand-gold:hover::before { left: 150%; }
+
+    /* 6. Signature project slide — Ken-Burns zoom on active slide */
+    .swiper-slide-active .ix-sig-slide img,
+    .swiper-slide-active img.object-cover {
+      animation: ix-kenburns 12s ease-out forwards;
+    }
+    @keyframes ix-kenburns {
+      from { transform: scale(1.02); }
+      to   { transform: scale(1.12); }
+    }
+
+    /* 7. Active-project progress bar — fills on reveal */
+    .ix-active-progress-fill {
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-active .ix-active-progress-fill { transform: scaleX(1); }
+
+    /* 8. Disable all motion for users who prefer less */
+    @media (prefers-reduced-motion: reduce) {
+      .ix-stack-badge,
+      .swiper-slide-active .ix-sig-slide img,
+      .swiper-slide-active img.object-cover,
+      .ix-scroll-progress::after { animation: none !important; }
+      .ix-vcard { transition: none !important; }
+      .ix-vcard:hover { transform: translateY(-4px) !important; }
+    }
   </style>
 </head>
 
 <body class="bg-clay-base text-clay-ink font-body overflow-x-hidden selection:bg-brand-gold selection:text-black">
+
+  <!-- Top scroll progress -->
+  <div class="ix-scroll-progress" aria-hidden="true"></div>
 
   <!-- PRELOADER -->
   <div id="preloader" class="fixed inset-0 bg-clay-base z-[9999] flex items-center justify-center">
@@ -774,10 +835,6 @@
           <a href="projects.html"
              class="group relative px-8 md:px-10 py-4 bg-brand-gold text-black overflow-hidden transition-all duration-300 hover:bg-clay-surface">
             <span class="relative z-10 font-bold tracking-widest uppercase text-xs md:text-sm font-heading">Explore Projects</span>
-          </a>
-          <a href="contact.html"
-             class="group px-8 md:px-10 py-4 border border-clay-border text-clay-ink hover:border-brand-gold hover:text-brand-darkGold transition-all duration-300">
-            <span class="font-bold tracking-widest uppercase text-xs md:text-sm font-heading">Get a Quote</span>
           </a>
         </div>
       </div>
@@ -1255,82 +1312,6 @@
     </div>
   </section>
 
-  <!-- PRESS / FEATURED IN -->
-  <section class="py-12 md:py-16 bg-clay-base border-b border-clay-border relative z-10">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-6 reveal-up">
-        <span class="text-brand-darkGold text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase font-heading">As Featured In</span>
-      </div>
-      <div class="ix-press-row reveal-up">
-        <span class="ix-press-name">Construction World</span>
-        <span class="ix-press-name">Times Network</span>
-        <span class="ix-press-name">Economic Times</span>
-        <span class="ix-press-name">Mid-Day Mumbai</span>
-        <span class="ix-press-name">Maharashtra Govt.</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="py-20 md:py-32 bg-clay-base relative border-t border-clay-border">
-    <div class="absolute bottom-0 left-0 w-64 h-64 md:w-[500px] md:h-[500px] bg-brand-gold/5 blur-[120px] rounded-full pointer-events-none"></div>
-
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal-up">
-        <div>
-          <div class="flex items-center gap-4 mb-4">
-            <div class="h-px w-12 bg-brand-gold"></div>
-            <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">Testimonials</span>
-          </div>
-          <h2 class="font-bold text-clay-ink font-heading uppercase">Client <span class="text-gradient-gold">Voices</span></h2>
-        </div>
-        <p class="mt-6 md:mt-0 text-clay-faint max-w-sm text-sm md:text-right">
-          Trusted by leading developers and organizations across the nation.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6" id="ix-testimonials-grid">
-        <!-- Review 1 -->
-        <div class="glass-panel p-6 md:p-8 reveal-up reveal-active hover:border-brand-gold/30 transition duration-500 flex flex-col">
-          <i class="fas fa-quote-left text-brand-darkGold/20 text-3xl mb-4"></i>
-          <p class="text-sm md:text-lg text-clay-muted italic mb-6 md:mb-8 leading-relaxed font-light flex-1">"Strong Built has been an exceptional partner across multiple projects including Monticello, Del-Sol, and Insignia. Their engineering precision and commitment to timelines is rare in this industry."</p>
-          <div class="flex items-center gap-4 border-t border-clay-border pt-6">
-            <div class="ix-avatar"><span>DR</span></div>
-            <div>
-              <h4 class="text-clay-ink font-bold font-heading">Project Director</h4>
-              <p class="text-brand-darkGold/70 text-[10px] uppercase tracking-widest font-bold">Dheeraj Realty</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Review 2 -->
-        <div class="glass-panel p-6 md:p-8 reveal-up reveal-active hover:border-brand-gold/30 transition duration-500 flex flex-col" style="transition-delay: 150ms;">
-          <i class="fas fa-quote-left text-brand-darkGold/20 text-3xl mb-4"></i>
-          <p class="text-sm md:text-lg text-clay-muted italic mb-6 md:mb-8 leading-relaxed font-light flex-1">"From Tree Top to Splendora and Luxaria, Strong Built has consistently delivered projects that exceed our specifications. Their safety record and on-site discipline are truly industry-leading."</p>
-          <div class="flex items-center gap-4 border-t border-clay-border pt-6">
-            <div class="ix-avatar"><span>LG</span></div>
-            <div>
-              <h4 class="text-clay-ink font-bold font-heading">Construction Head</h4>
-              <p class="text-brand-darkGold/70 text-[10px] uppercase tracking-widest font-bold">Lodha Group</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Review 3 -->
-        <div class="glass-panel p-6 md:p-8 reveal-up reveal-active hover:border-brand-gold/30 transition duration-500 flex flex-col" style="transition-delay: 300ms;">
-          <i class="fas fa-quote-left text-brand-darkGold/20 text-3xl mb-4"></i>
-          <p class="text-sm md:text-lg text-clay-muted italic mb-6 md:mb-8 leading-relaxed font-light flex-1">"Our 5 lakh sq ft Bloomdale township in Nagpur was delivered with zero compromises on quality. Strong Built brings a refreshing level of professionalism and transparency to every engagement."</p>
-          <div class="flex items-center gap-4 border-t border-clay-border pt-6">
-            <div class="ix-avatar"><span>ML</span></div>
-            <div>
-              <h4 class="text-clay-ink font-bold font-heading">Project Lead</h4>
-              <p class="text-brand-darkGold/70 text-[10px] uppercase tracking-widest font-bold">Mahindra Lifespaces</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- CTA -->
   <section class="relative overflow-hidden">
@@ -1342,7 +1323,7 @@
       </div>
       <!-- Right: Content -->
       <div class="bg-brand-gold flex items-center relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+        <div class="absolute inset-0 opacity-10"></div>
         <div class="relative z-10 p-10 md:p-16 lg:p-20">
           <span class="inline-block text-black/60 text-xs font-bold tracking-[0.4em] uppercase mb-4 font-heading">See It In Person</span>
           <h2 class="font-bold text-black font-heading mb-6 leading-tight uppercase">Walk a Live<br>Site With Us</h2>
@@ -1431,32 +1412,13 @@
   </div>
 
   <!-- SCRIPTS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js" defer></script>
   <!-- Admin-managed data files -->
-  <script src="testimonials-data.js"></script>
   <script src="active-projects-data.js"></script>
   <script src="site-info.js"></script>
   <script src="script.js"></script>
   <script>
-    // ── Hydrate testimonials from data file ──
-    (function hydrateTestimonials() {
-      const grid = document.getElementById('ix-testimonials-grid');
-      if (!grid || !window.TESTIMONIALS_DATA || !Array.isArray(window.TESTIMONIALS_DATA) || !window.TESTIMONIALS_DATA.length) return;
-      grid.innerHTML = window.TESTIMONIALS_DATA.map((t, i) => `
-        <div class="glass-panel p-6 md:p-8 reveal-up reveal-active hover:border-brand-gold/30 transition duration-500 flex flex-col" ${i > 0 ? `style="transition-delay: ${i * 150}ms;"` : ''}>
-          <i class="fas fa-quote-left text-brand-darkGold/20 text-3xl mb-4"></i>
-          <p class="text-sm md:text-lg text-clay-muted italic mb-6 md:mb-8 leading-relaxed font-light flex-1">"${t.quote}"</p>
-          <div class="flex items-center gap-4 border-t border-clay-border pt-6">
-            <div class="ix-avatar"><span>${t.initials}</span></div>
-            <div>
-              <h4 class="text-clay-ink font-bold font-heading">${t.name}</h4>
-              <p class="text-brand-darkGold/70 text-[10px] uppercase tracking-widest font-bold">${t.company}</p>
-            </div>
-          </div>
-        </div>`).join('');
-    })();
-
     // ── Hydrate active projects ──
     (function hydrateActive() {
       const grid = document.getElementById('ix-active-grid');
@@ -1510,6 +1472,45 @@
     })();
   </script>
 
+  <!-- Page animations: scroll-progress + 5S card tilt -->
+  <script>
+  (() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    /* 1. Scroll-progress bar */
+    const bar = document.querySelector('.ix-scroll-progress');
+    if (bar) {
+      let ticking = false;
+      const update = () => {
+        ticking = false;
+        const max = document.documentElement.scrollHeight - innerHeight;
+        const pct = max > 0 ? scrollY / max : 0;
+        bar.style.setProperty('--sp', pct.toFixed(4));
+      };
+      addEventListener('scroll', () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      update();
+    }
+
+    /* 2. 3D tilt on 5S Philosophy cards — desktop pointer only */
+    if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      document.querySelectorAll('.ix-vcard').forEach(card => {
+        card.addEventListener('pointermove', e => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          card.style.setProperty('--rx', (x * 8) + 'deg');
+          card.style.setProperty('--ry', (-y * 6) + 'deg');
+        });
+        card.addEventListener('pointerleave', () => {
+          card.style.setProperty('--rx', '0deg');
+          card.style.setProperty('--ry', '0deg');
+        });
+      });
+    }
+  })();
+  </script>
 
 </body>
 

@@ -59,8 +59,11 @@
   }
   </script>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="theme-config.js"></script>
+  <link rel="stylesheet" href="dist/app.css">
+
+  <!-- LCP hero-image preload -->
+  <link rel="preload" as="image" href="assets/Projects/monticello.jpg" fetchpriority="high">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -213,6 +216,91 @@
     }
     @media (min-width: 768px) { .ix-slide-meta-v { font-size: 1.15rem; } }
 
+    /* ── Signature Project slide — guaranteed readable over any image ── */
+    .ix-sig-slide {
+      position: relative;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      min-height: 100vh;
+      min-height: 100svh;
+    }
+    .ix-sig-slide .ix-sig-scrim {
+      position: absolute; inset: 0; z-index: 1;
+      background:
+        radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 40%, transparent 70%),
+        linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.05) 40%, rgba(26,23,24,0.95) 100%);
+    }
+    .ix-sig-content {
+      position: relative; z-index: 10;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      max-width: 56rem;
+      margin: auto;
+      color: #EEEEEE;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .ix-sig-eyebrow {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #EFBF04;
+      margin-bottom: 1.25rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(239,191,4,0.4);
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+    }
+    .ix-sig-title {
+      font-family: 'Oswald', 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.75rem, 10vw, 8rem) !important;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      color: #EEEEEE;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.8), 0 2px 6px rgba(0,0,0,0.9);
+    }
+    .ix-sig-lede {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+      line-height: 1.6;
+      color: rgba(238,238,238,0.9);
+      max-width: 40rem;
+      margin: 0 auto 1.5rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+    }
+    .ix-sig-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding: 0.75rem 1.75rem;
+      background: #EFBF04;
+      color: #231F20;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      min-height: 44px;
+    }
+    .ix-sig-cta:hover {
+      background: #fff;
+      transform: translateY(-2px);
+    }
+    /* override the bottom-only gradient that used to sit over slides */
+    .swiper-slide .absolute.inset-0.bg-gradient-to-t { display: none !important; }
+
     /* ── Client Logo chips (real brand marks) ── */
     .ix-logo-tile {
       display: inline-flex;
@@ -300,13 +388,6 @@
       padding: clamp(5rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem) clamp(3rem, 6vw, 5rem);
     }
     @media (min-width: 768px) { .ix-hero { height: 100svh; } }
-    .ix-hero-particles {
-      position: absolute; inset: 0; z-index: 1;
-      width: 100%; height: 100%; display: block;
-      pointer-events: none;
-      mask-image: radial-gradient(ellipse at center, #000 55%, transparent 100%);
-      -webkit-mask-image: radial-gradient(ellipse at center, #000 55%, transparent 100%);
-    }
     .ix-hero-grid {
       width: 100%; max-width: 1400px; margin: 0 auto;
       display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center;
@@ -620,6 +701,8 @@
         </li>
         <li><a href="services.html" class="sidebar-link">Services</a></li>
         <li><a href="clients.html" class="sidebar-link">Clients</a></li>
+        <li><a href="investors.html" class="sidebar-link">Investors</a></li>
+        <li><a href="csr.html" class="sidebar-link">CSR</a></li>
         <li><a href="careers.html" class="sidebar-link">Careers</a></li>
         <li><a href="resources.html" class="sidebar-link">Resources</a></li>
         <li><a href="contact.html" class="sidebar-link">Contact</a></li>
@@ -670,17 +753,16 @@
   </header>
 
   <!-- HERO SECTION — Stacked Polaroid Deck + Particle Network -->
-  <section class="ix-hero" data-particles>
-    <canvas class="ix-hero-particles" aria-hidden="true"></canvas>
+  <section class="ix-hero">
 
     <div class="ix-hero-grid">
       <!-- Left: original hero copy -->
       <div>
-        <span class="block text-brand-darkGold text-sm font-bold tracking-[0.5em] uppercase reveal-up mb-4"
-              style="transition-delay: 100ms;">Est. 2014 &mdash; Mumbai</span>
-        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-6 text-clay-ink uppercase tracking-tighter leading-none reveal-up font-hero"
-            style="transition-delay: 200ms;">
-          Building <br><span class="gold-gradient-text">Legacies</span>
+        <span class="ix-hero-eyebrow block text-brand-darkGold font-bold uppercase mb-4"
+              style="display:block !important;opacity:1 !important;visibility:visible !important;font-size:var(--fs-small);letter-spacing:0.25em;color:#EFBF04;">Est. 2014 &mdash; Mumbai</span>
+        <h1 class="ix-hero-title text-clay-ink uppercase font-hero"
+            style="display:block !important;opacity:1 !important;visibility:visible !important;font-size:var(--fs-hero);line-height:0.92;letter-spacing:-0.02em;font-weight:700;color:#EEEEEE;margin-bottom:1.5rem;">
+          Building <br><span style="color:#EFBF04;">Legacies</span>
         </h1>
         <div class="h-px w-24 bg-brand-gold my-8 reveal-up" style="transition-delay: 300ms;"></div>
         <p class="text-lg md:text-2xl font-light text-clay-muted max-w-xl leading-relaxed reveal-up"
@@ -704,15 +786,18 @@
       <div class="reveal-up" style="transition-delay: 400ms;">
         <div class="ix-stack">
           <div class="ix-stack-card">
-            <img src="assets/Projects/Tree Top.jpg" alt="Tree Top project" loading="lazy">
+            <img src="assets/Projects/Tree Top.jpg" alt="Tree Top Heights · 2022"
+                 width="960" height="1200" loading="lazy" decoding="async">
             <div class="ix-stack-caption">Tree Top · 2022</div>
           </div>
           <div class="ix-stack-card">
-            <img src="assets/Projects/Del Sol.jpg" alt="Del Sol project" loading="lazy">
+            <img src="assets/Projects/Del Sol.jpg" alt="Del Sol · 2023"
+                 width="960" height="1200" loading="lazy" decoding="async">
             <div class="ix-stack-caption">Del Sol · 2023</div>
           </div>
           <div class="ix-stack-card">
-            <img src="assets/Projects/monticello.jpg" alt="Monticello Tower" loading="eager" fetchpriority="high">
+            <img src="assets/Projects/monticello.jpg" alt="Monticello Tower · 2024"
+                 width="960" height="1200" loading="eager" fetchpriority="high" decoding="async">
             <div class="ix-stack-caption">Monticello · 2024</div>
             <div class="ix-stack-badge"><strong>90+</strong><small>Buildings</small></div>
           </div>
@@ -720,11 +805,6 @@
       </div>
     </div>
 
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-2 animate-bounce-slow hidden sm:flex">
-      <span class="text-[9px] text-clay-faint uppercase tracking-[0.3em] font-heading">Scroll</span>
-      <div class="w-px h-10 bg-gradient-to-b from-brand-gold to-transparent"></div>
-    </div>
   </section>
 
   <!-- IMPACT STATS STRIP -->
@@ -777,7 +857,7 @@
             <div class="h-px w-12 bg-brand-gold"></div>
             <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">Who We Are</span>
           </div>
-          <h2 class="text-4xl md:text-5xl font-bold text-clay-ink font-heading mb-6 leading-tight">Engineering <br>the <span class="text-gradient-gold">Future</span></h2>
+          <h2 class="font-bold text-clay-ink font-heading mb-6 leading-tight">Engineering <br>the <span class="text-gradient-gold">Future</span></h2>
           <p class="text-clay-muted leading-relaxed mb-8 font-light text-lg">
             Strong Built is a premier construction firm dedicated to transforming visions into tangible realities.
             With over 33 completed projects and 90+ buildings across residential, commercial, and institutional sectors, we set the benchmark
@@ -790,8 +870,8 @@
 
         <!-- Right: Feature image with overlay stat -->
         <div class="relative reveal-up" style="transition-delay: 200ms;">
-          <div class="overflow-hidden border border-clay-border">
-            <img src="assets/Projects/monticello.jpg" alt="Strong Built Monticello Project" class="w-full h-64 md:h-[500px] object-cover transition duration-700 hover:scale-105">
+          <div class="overflow-hidden border border-clay-border" style="aspect-ratio: 16/9;">
+            <img src="assets/Projects/monticello.jpg" alt="Strong Built Monticello Project" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-700 hover:scale-105">
           </div>
           <div class="absolute -bottom-6 -left-6 bg-clay-base border border-brand-gold/20 p-6 backdrop-blur-sm">
             <span class="block text-4xl font-bold text-clay-ink font-heading">25<span class="text-brand-darkGold">+</span></span>
@@ -814,29 +894,44 @@
           <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">Our Foundation</span>
           <div class="h-px w-12 bg-brand-gold"></div>
         </div>
-        <h2 class="text-4xl md:text-5xl font-bold text-clay-ink font-heading uppercase">Core <span class="text-gradient-gold">Values</span></h2>
+        <h2 class="font-bold text-clay-ink font-heading uppercase">The 5&nbsp;S <span class="text-gradient-gold">Philosophy</span></h2>
+        <p class="text-clay-muted max-w-xl mx-auto mt-5 font-body">The five pillars of our operational excellence — non-negotiable, top-to-bottom.</p>
       </div>
-      <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
         <article class="ix-vcard reveal-up">
           <div class="ix-vcard-num">01</div>
-          <div class="ix-vcard-icon"><i class="fas fa-shield-alt"></i></div>
-          <div class="ix-vcard-tag">Non-Negotiable</div>
-          <h3 class="ix-vcard-title">Safety First</h3>
-          <p class="ix-vcard-body">ELCB checks, fall-protection nets, daily toolbox meetings. Every site, every shift — engineered so the only thing that ever breaks ground is concrete.</p>
+          <div class="ix-vcard-icon"><i class="fas fa-dumbbell"></i></div>
+          <div class="ix-vcard-tag">Built to Outlast</div>
+          <h3 class="ix-vcard-title">Strength</h3>
+          <p class="ix-vcard-body">Reinforcement audits, shuttering checklists, and pour-cards on every floor. Structures engineered to stand for generations, not warranty periods.</p>
         </article>
         <article class="ix-vcard reveal-up" style="transition-delay: 100ms;">
           <div class="ix-vcard-num">02</div>
-          <div class="ix-vcard-icon"><i class="fas fa-hard-hat"></i></div>
-          <div class="ix-vcard-tag">Engineered To Last</div>
-          <h3 class="ix-vcard-title">Strength &amp; Quality</h3>
-          <p class="ix-vcard-body">Reinforcement audits, shuttering checklists, pour cards on every floor. Zero-defect delivery isn't a slogan — it's the documentation we ship with the keys.</p>
+          <div class="ix-vcard-icon"><i class="fas fa-tachometer-alt"></i></div>
+          <div class="ix-vcard-tag">On-Time, Every Time</div>
+          <h3 class="ix-vcard-title">Speed</h3>
+          <p class="ix-vcard-body">Pre-engineered formwork, modular scaffolding, and ERP-driven scheduling. We hand over keys when we said we would — no renegotiated dates.</p>
         </article>
         <article class="ix-vcard reveal-up" style="transition-delay: 200ms;">
           <div class="ix-vcard-num">03</div>
-          <div class="ix-vcard-icon"><i class="fas fa-stopwatch"></i></div>
-          <div class="ix-vcard-tag">No Compromises</div>
-          <h3 class="ix-vcard-title">Speed &amp; Efficiency</h3>
-          <p class="ix-vcard-body">Pre-engineered shuttering systems and ERP-driven cost control mean we hand over on time, on budget — without trading quality for either.</p>
+          <div class="ix-vcard-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="ix-vcard-tag">Non-Negotiable</div>
+          <h3 class="ix-vcard-title">Safety</h3>
+          <p class="ix-vcard-body">ELCB checks, fall-protection nets, daily toolbox meetings. ISO 45001 certified sites with a zero-lost-time record across 24 consecutive months.</p>
+        </article>
+        <article class="ix-vcard reveal-up" style="transition-delay: 300ms;">
+          <div class="ix-vcard-num">04</div>
+          <div class="ix-vcard-icon"><i class="fas fa-leaf"></i></div>
+          <div class="ix-vcard-tag">Future-Ready</div>
+          <h3 class="ix-vcard-title">Sustainability</h3>
+          <p class="ix-vcard-body">IGBC-aligned materials, construction-waste diversion, water-neutrality audits, and 100+ trees planted for every 10,000 sq.ft we build.</p>
+        </article>
+        <article class="ix-vcard reveal-up" style="transition-delay: 400ms;">
+          <div class="ix-vcard-num">05</div>
+          <div class="ix-vcard-icon"><i class="fas fa-ruler-combined"></i></div>
+          <div class="ix-vcard-tag">Benchmarked Globally</div>
+          <h3 class="ix-vcard-title">Standards</h3>
+          <p class="ix-vcard-body">ISO 9001 · 14001 · 45001 certified. Every mix design, every weld, every finish benchmarked against global best-in-class — then raised by 10%.</p>
         </article>
       </div>
     </div>
@@ -848,68 +943,65 @@
       <div class="swiper-wrapper">
 
         <!-- Slide 1: Monticello -->
-        <div class="swiper-slide relative flex items-center justify-center overflow-hidden">
+        <div class="swiper-slide ix-sig-slide relative flex items-center justify-center overflow-hidden">
           <div class="absolute inset-0">
-            <img src="assets/Projects/monticello.jpg"
-              class="w-full h-full object-cover transition duration-[2s] hover:scale-105">
-            <div class="absolute inset-0 bg-gradient-to-t from-clay-base via-clay-mist/40 to-transparent"></div>
+            <img src="assets/Projects/monticello.jpg" alt="Monticello project"
+                 class="w-full h-full object-cover transition duration-[2s] hover:scale-105">
           </div>
-          <div
-            class="relative z-10 text-center px-6 max-w-4xl mx-auto transform transition-all duration-1000 translate-y-0 opacity-100">
-            <span
-              class="block text-brand-darkGold font-bold tracking-[0.3em] uppercase mb-4 text-sm animate-fade-in">Residential
-              Icon</span>
-            <h2 class="text-4xl sm:text-5xl md:text-8xl font-bold text-clay-ink font-heading mb-6 leading-none">MONTICELLO</h2>
-            <p class="text-clay-muted text-base md:text-lg font-light mb-2 max-w-2xl mx-auto">A testament to vertical luxury living on Mumbai's western waterfront.</p>
+          <div class="ix-sig-scrim"></div>
+          <div class="ix-sig-content">
+            <span class="ix-sig-eyebrow">Residential Icon</span>
+            <h2 class="ix-sig-title">MONTICELLO</h2>
+            <p class="ix-sig-lede">A testament to vertical luxury living on Mumbai's western waterfront.</p>
             <div class="ix-slide-meta">
               <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Year</span><span class="ix-slide-meta-v">2019</span></div>
               <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Sector</span><span class="ix-slide-meta-v">Residential</span></div>
               <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Floors</span><span class="ix-slide-meta-v">3B+P+14</span></div>
               <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Location</span><span class="ix-slide-meta-v">Bandra</span></div>
             </div>
-            <a href="projects.html" class="inline-block mt-8 border-b border-brand-gold text-clay-ink pb-1 hover:text-brand-darkGold transition font-heading text-xs tracking-widest uppercase">View Project</a>
+            <a href="projects.html" class="ix-sig-cta">View Project <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
 
         <!-- Slide 2: Tree Top -->
-        <div class="swiper-slide relative flex items-center justify-center overflow-hidden">
+        <div class="swiper-slide ix-sig-slide relative flex items-center justify-center overflow-hidden">
           <div class="absolute inset-0">
-            <img src="assets/Projects/Tree Top.jpg"
-              class="w-full h-full object-cover transition duration-[2s] hover:scale-105">
-            <div class="absolute inset-0 bg-gradient-to-t from-clay-base via-clay-mist/40 to-transparent"></div>
+            <img src="assets/Projects/Tree Top.jpg" alt="Tree Top project"
+                 class="w-full h-full object-cover transition duration-[2s] hover:scale-105">
           </div>
-          <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
-            <span class="block text-brand-darkGold font-bold tracking-[0.3em] uppercase mb-4 text-sm">Eco-Conscious</span>
-            <h2 class="text-4xl sm:text-5xl md:text-8xl font-bold text-clay-ink font-heading mb-6 leading-none">TREE TOP</h2>
-            <p class="text-clay-muted text-base md:text-lg font-light mb-2 max-w-2xl mx-auto">Merging modern architecture with nature — a green-certified high-rise.</p>
+          <div class="ix-sig-scrim"></div>
+          <div class="ix-sig-content">
+            <span class="ix-sig-eyebrow">Eco-Conscious</span>
+            <h2 class="ix-sig-title">TREE TOP</h2>
+            <p class="ix-sig-lede">Merging modern architecture with nature — a green-certified high-rise.</p>
             <div class="ix-slide-meta">
               <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Year</span><span class="ix-slide-meta-v">2020</span></div>
               <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Sector</span><span class="ix-slide-meta-v">Residential</span></div>
               <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Type</span><span class="ix-slide-meta-v">Eco-High-Rise</span></div>
               <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Built-Up</span><span class="ix-slide-meta-v">3.1L sf</span></div>
             </div>
-            <a href="projects.html" class="inline-block mt-8 border-b border-brand-gold text-clay-ink pb-1 hover:text-brand-darkGold transition font-heading text-xs tracking-widest uppercase">View Project</a>
+            <a href="projects.html" class="ix-sig-cta">View Project <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
 
         <!-- Slide 3: Splendora -->
-        <div class="swiper-slide relative flex items-center justify-center overflow-hidden">
+        <div class="swiper-slide ix-sig-slide relative flex items-center justify-center overflow-hidden">
           <div class="absolute inset-0">
-            <img src="assets/Projects/selendora.jpg"
-              class="w-full h-full object-cover transition duration-[2s] hover:scale-105">
-            <div class="absolute inset-0 bg-gradient-to-t from-clay-base via-clay-mist/40 to-transparent"></div>
+            <img src="assets/Projects/selendora.jpg" alt="Splendora project"
+                 class="w-full h-full object-cover transition duration-[2s] hover:scale-105">
           </div>
-          <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
-            <span class="block text-brand-darkGold font-bold tracking-[0.3em] uppercase mb-4 text-sm">Mixed Use</span>
-            <h2 class="text-4xl sm:text-5xl md:text-8xl font-bold text-clay-ink font-heading mb-6 leading-none">SPLENDORA</h2>
-            <p class="text-clay-muted text-base md:text-lg font-light mb-2 max-w-2xl mx-auto">A self-sustaining urban ecosystem of homes, retail, and shared green space.</p>
+          <div class="ix-sig-scrim"></div>
+          <div class="ix-sig-content">
+            <span class="ix-sig-eyebrow">Mixed Use</span>
+            <h2 class="ix-sig-title">SPLENDORA</h2>
+            <p class="ix-sig-lede">A self-sustaining urban ecosystem of homes, retail, and shared green space.</p>
             <div class="ix-slide-meta">
               <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Year</span><span class="ix-slide-meta-v">2022</span></div>
               <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Sector</span><span class="ix-slide-meta-v">Mixed Use</span></div>
               <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Towers</span><span class="ix-slide-meta-v">4</span></div>
               <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Built-Up</span><span class="ix-slide-meta-v">5.2L sf</span></div>
             </div>
-            <a href="projects.html" class="inline-block mt-8 border-b border-brand-gold text-clay-ink pb-1 hover:text-brand-darkGold transition font-heading text-xs tracking-widest uppercase">View Project</a>
+            <a href="projects.html" class="ix-sig-cta">View Project <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -930,7 +1022,7 @@
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-12 reveal-up">
         <div>
           <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">In Motion</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-clay-ink font-heading uppercase mt-2">Currently <span class="text-brand-darkGold">Building</span></h2>
+          <h2 class="font-bold text-clay-ink font-heading uppercase mt-2">Currently <span class="text-brand-darkGold">Building</span></h2>
         </div>
         <p class="text-clay-muted text-sm max-w-md font-body">Eleven live sites across the MMR. A snapshot of momentum, not a list of intentions.</p>
       </div>
@@ -976,7 +1068,7 @@
           <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">What We Do</span>
           <div class="h-px w-12 bg-brand-gold"></div>
         </div>
-        <h2 class="text-4xl md:text-5xl font-bold text-clay-ink font-heading uppercase">Our <span class="text-gradient-gold">Expertise</span></h2>
+        <h2 class="font-bold text-clay-ink font-heading uppercase">Our <span class="text-gradient-gold">Expertise</span></h2>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -1055,7 +1147,7 @@
           <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">Our Process</span>
           <div class="h-px w-12 bg-brand-gold"></div>
         </div>
-        <h2 class="text-4xl md:text-5xl font-bold text-clay-ink font-heading uppercase">How We <span class="text-gradient-gold">Build</span></h2>
+        <h2 class="font-bold text-clay-ink font-heading uppercase">How We <span class="text-gradient-gold">Build</span></h2>
       </div>
 
       <div class="ix-process-grid grid md:grid-cols-4 gap-8 relative">
@@ -1138,7 +1230,7 @@
     <div class="container mx-auto px-6 mb-6 reveal-up">
       <div class="text-center">
         <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">Trusted By</span>
-        <h3 class="text-2xl md:text-3xl font-bold text-clay-ink font-heading uppercase mt-2">8+ Marquee Developers</h3>
+        <h3 class="font-bold text-clay-ink font-heading uppercase mt-2">8+ Marquee Developers</h3>
       </div>
     </div>
     <div class="absolute left-0 top-1/2 bottom-0 w-24 bg-gradient-to-r from-clay-mist to-transparent z-10 pointer-events-none"></div>
@@ -1190,7 +1282,7 @@
             <div class="h-px w-12 bg-brand-gold"></div>
             <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">Testimonials</span>
           </div>
-          <h2 class="text-4xl md:text-5xl font-bold text-clay-ink font-heading uppercase">Client <span class="text-gradient-gold">Voices</span></h2>
+          <h2 class="font-bold text-clay-ink font-heading uppercase">Client <span class="text-gradient-gold">Voices</span></h2>
         </div>
         <p class="mt-6 md:mt-0 text-clay-faint max-w-sm text-sm md:text-right">
           Trusted by leading developers and organizations across the nation.
@@ -1253,7 +1345,7 @@
         <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
         <div class="relative z-10 p-10 md:p-16 lg:p-20">
           <span class="inline-block text-black/60 text-xs font-bold tracking-[0.4em] uppercase mb-4 font-heading">See It In Person</span>
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-black font-heading mb-6 leading-tight uppercase">Walk a Live<br>Site With Us</h2>
+          <h2 class="font-bold text-black font-heading mb-6 leading-tight uppercase">Walk a Live<br>Site With Us</h2>
           <p class="text-black/70 text-base md:text-lg mb-8 max-w-md font-light">Spec sheets only tell half the story. Visit one of our active projects with our team and see the discipline up close.</p>
           <div class="flex flex-wrap gap-3">
             <a href="contact.html" class="inline-flex items-center gap-2 px-8 md:px-10 py-4 bg-clay-base text-clay-ink font-bold uppercase tracking-widest hover:bg-clay-surface hover:text-black transition duration-300 font-heading text-sm">
@@ -1418,147 +1510,6 @@
     })();
   </script>
 
-  <!-- Hero particle network background -->
-  <script>
-  (() => {
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    document.querySelectorAll('[data-particles]').forEach(sec => {
-      const canvas = sec.querySelector('.ix-hero-particles');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d', { alpha: true });
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-      let w = 0, h = 0, particles = [];
-      let mouseX = -9999, mouseY = -9999;
-      let running = false, rafId = 0;
-
-      const CONNECT2 = 150 * 150;
-      const MOUSE2   = 220 * 220;
-
-      function fit() {
-        const r = sec.getBoundingClientRect();
-        w = r.width; h = r.height;
-        canvas.width  = Math.round(w * dpr);
-        canvas.height = Math.round(h * dpr);
-        canvas.style.width  = w + 'px';
-        canvas.style.height = h + 'px';
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        build();
-      }
-
-      function targetCount() {
-        const area = w * h;
-        return Math.max(35, Math.min(95, Math.round(area / 16000)));
-      }
-
-      function build() {
-        const count = targetCount();
-        particles.length = 0;
-        for (let i = 0; i < count; i++) {
-          particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.4,
-            vy: (Math.random() - 0.5) * 0.4,
-            r: Math.random() * 1.4 + 0.5,
-          });
-        }
-      }
-
-      function step() {
-        ctx.clearRect(0, 0, w, h);
-
-        ctx.fillStyle = 'rgba(239, 191, 4,0.45)';
-        for (let i = 0; i < particles.length; i++) {
-          const p = particles[i];
-          if (mouseX > -1000) {
-            const dx = p.x - mouseX, dy = p.y - mouseY;
-            const d2 = dx * dx + dy * dy;
-            if (d2 < MOUSE2) {
-              const d = Math.sqrt(d2) || 1;
-              const f = (1 - d / 220) * 0.18;
-              p.vx += (dx / d) * f;
-              p.vy += (dy / d) * f;
-            }
-          }
-          p.vx *= 0.97; p.vy *= 0.97;
-          p.vx += (Math.random() - 0.5) * 0.008;
-          p.vy += (Math.random() - 0.5) * 0.008;
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < -10) p.x = w + 10; else if (p.x > w + 10) p.x = -10;
-          if (p.y < -10) p.y = h + 10; else if (p.y > h + 10) p.y = -10;
-
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        ctx.lineWidth = 0.6;
-        for (let i = 0; i < particles.length; i++) {
-          const a = particles[i];
-          for (let j = i + 1; j < particles.length; j++) {
-            const b = particles[j];
-            const dx = a.x - b.x, dy = a.y - b.y;
-            const d2 = dx * dx + dy * dy;
-            if (d2 < CONNECT2) {
-              const alpha = (1 - d2 / CONNECT2) * 0.13;
-              ctx.strokeStyle = 'rgba(239, 191, 4,' + alpha + ')';
-              ctx.beginPath();
-              ctx.moveTo(a.x, a.y);
-              ctx.lineTo(b.x, b.y);
-              ctx.stroke();
-            }
-          }
-        }
-
-        if (mouseX > -1000) {
-          ctx.lineWidth = 1;
-          for (let i = 0; i < particles.length; i++) {
-            const p = particles[i];
-            const dx = p.x - mouseX, dy = p.y - mouseY;
-            const d2 = dx * dx + dy * dy;
-            if (d2 < MOUSE2) {
-              const alpha = (1 - d2 / MOUSE2) * 0.32;
-              ctx.strokeStyle = 'rgba(239, 191, 4,' + alpha + ')';
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(mouseX, mouseY);
-              ctx.stroke();
-            }
-          }
-          const grad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 80);
-          grad.addColorStop(0, 'rgba(239, 191, 4,0.14)');
-          grad.addColorStop(1, 'rgba(239, 191, 4,0)');
-          ctx.fillStyle = grad;
-          ctx.beginPath();
-          ctx.arc(mouseX, mouseY, 80, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        rafId = requestAnimationFrame(step);
-      }
-
-      function start() { if (running) return; running = true; rafId = requestAnimationFrame(step); }
-      function stop()  { running = false; cancelAnimationFrame(rafId); }
-
-      fit();
-      addEventListener('resize', fit, { passive: true });
-
-      const visIO = new IntersectionObserver((entries) => {
-        entries.forEach(e => e.isIntersecting ? start() : stop());
-      }, { threshold: 0.05 });
-      visIO.observe(sec);
-      document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
-
-      sec.addEventListener('pointermove', e => {
-        const r = sec.getBoundingClientRect();
-        mouseX = e.clientX - r.left;
-        mouseY = e.clientY - r.top;
-      }, { passive: true });
-      sec.addEventListener('pointerleave', () => { mouseX = -9999; mouseY = -9999; });
-    });
-  })();
-  </script>
 
 </body>
 

@@ -38,8 +38,7 @@
   <!-- Global Styles -->
   <link rel="stylesheet" href="styles.css">
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="theme-config.js"></script>
+  <link rel="stylesheet" href="dist/app.css">
   <script src="timeline-data.js"></script>
 
   <style>
@@ -406,6 +405,8 @@
         </li>
         <li><a href="services.html" class="sidebar-link">Services</a></li>
         <li><a href="clients.html" class="sidebar-link">Clients</a></li>
+        <li><a href="investors.html" class="sidebar-link">Investors</a></li>
+        <li><a href="csr.html" class="sidebar-link">CSR</a></li>
         <li><a href="careers.html" class="sidebar-link">Careers</a></li>
         <li><a href="resources.html" class="sidebar-link">Resources</a></li>
         <li><a href="contact.html" class="sidebar-link">Contact</a></li>
@@ -461,7 +462,7 @@
       <div class="absolute inset-0 bg-clay-base/50 z-10"></div>
       <img src="https://images.unsplash.com/photo-1597843075678-b1187429188d?q=80&w=2070"
         class="w-full h-full object-cover opacity-60 scale-110 animate-pulse-slow contrast-125"
-        alt="Construction Silhouette">
+        alt="Construction Silhouette" fetchpriority="high" loading="eager" decoding="async">
     </div>
 
     <!-- Hero Content -->
@@ -516,7 +517,7 @@
           <div class="relative z-10 glass-panel p-2 rotate-2 hover:rotate-0 transition duration-500 rounded-sm">
             <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1000"
               class="w-full object-cover h-48 md:h-[400px] transition duration-700"
-              alt="Building Structure">
+              alt="Building Structure" loading="lazy" decoding="async">
           </div>
           <div
             class="absolute -bottom-10 -left-10 z-20 glass-panel p-6 border-l-4 border-brand-gold -rotate-3 hover:rotate-0 transition duration-500 custom-bounce">
@@ -530,7 +531,7 @@
 
       <!-- Stats Ribbon -->
       <div
-        class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-32 py-12 border-y border-clay-border bg-clay-surface/5 backdrop-blur-sm reveal-up">
+        class="grid grid-cols-3 gap-8 mt-32 py-12 border-y border-clay-border bg-clay-surface/5 backdrop-blur-sm reveal-up">
         <div class="text-center group cursor-default">
           <i
             class="fas fa-project-diagram text-brand-darkGold/30 text-4xl mb-4 group-hover:text-brand-darkGold group-hover:scale-110 transition duration-300"></i>
@@ -544,13 +545,6 @@
           <div class="text-4xl md:text-5xl font-bold text-clay-ink mb-2 font-heading" data-target="12">0</div>
           <div class="text-xs uppercase tracking-[0.2em] text-clay-faint group-hover:text-brand-darkGold transition">Years
             Exp.</div>
-        </div>
-        <div class="text-center group cursor-default">
-          <i
-            class="fas fa-hard-hat text-brand-darkGold/30 text-4xl mb-4 group-hover:text-brand-darkGold group-hover:scale-110 transition duration-300"></i>
-          <div class="text-4xl md:text-5xl font-bold text-clay-ink mb-2 font-heading" data-target="100">0</div>
-          <div class="text-xs uppercase tracking-[0.2em] text-clay-faint group-hover:text-brand-darkGold transition">% Safety
-          </div>
         </div>
         <div class="text-center group cursor-default">
           <i

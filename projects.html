@@ -18,8 +18,7 @@
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
   <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="theme-config.js"></script>
+  <link rel="stylesheet" href="dist/app.css">
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -272,6 +271,8 @@
         </li>
         <li><a href="services.html" class="sidebar-link">Services</a></li>
         <li><a href="clients.html" class="sidebar-link">Clients</a></li>
+        <li><a href="investors.html" class="sidebar-link">Investors</a></li>
+        <li><a href="csr.html" class="sidebar-link">CSR</a></li>
         <li><a href="careers.html" class="sidebar-link">Careers</a></li>
         <li><a href="resources.html" class="sidebar-link">Resources</a></li>
         <li><a href="contact.html" class="sidebar-link">Contact</a></li>
@@ -318,7 +319,7 @@
   <section class="relative h-[50vh] md:h-[60vh] flex items-center justify-center text-center overflow-hidden">
     <div class="absolute inset-0 z-0">
       <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1920&q=80"
-        alt="Strong Built construction projects" class="w-full h-full object-cover opacity-40 animate-pulse-slow">
+        alt="Strong Built construction projects" class="w-full h-full object-cover opacity-40 animate-pulse-slow" fetchpriority="high" loading="eager" decoding="async">
     </div>
     <div class="absolute inset-0 bg-gradient-to-b from-clay-base/70 via-clay-mist/50 to-[#050505] z-0"></div>
     <div class="relative z-30 container mx-auto px-6 mt-20">

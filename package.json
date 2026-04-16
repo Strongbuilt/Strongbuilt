@@ -1,0 +1,16 @@
+{
+  "name": "strong-built",
+  "version": "1.0.0",
+  "description": "Strong Built construction firm — Mumbai",
+  "private": true,
+  "scripts": {
+    "css:build": "tailwindcss -i ./src/app.css -o ./dist/app.css --minify",
+    "css:watch": "tailwindcss -i ./src/app.css -o ./dist/app.css --watch",
+    "images": "node scripts/optimize-images.js",
+    "build": "npm run css:build && npm run images"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "sharp": "^0.33.2"
+  }
+}

@@ -103,9 +103,11 @@
     }
 
     if (currentView === 'list') {
-      grid.className = 'flex flex-col gap-3';
+      grid.className = 'project-list-view';
+      grid.style.cssText = '';
     } else {
-      grid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 auto-rows-[280px] sm:auto-rows-[340px] md:auto-rows-[380px] lg:auto-rows-[420px] grid-flow-dense';
+      grid.className = 'project-grid-view';
+      grid.style.cssText = '';
     }
 
     filtered.forEach((p, i) => {
@@ -122,7 +124,7 @@
     return String(i + 1).padStart(3, '0');
   }
 
-  // ── Grid Card (cinematic, numbered) ──
+  // ── Grid Card (Glassmorphism) ──
   function gridCard(p, i) {
     const div = document.createElement('article');
     const imgSrc = p.img || FALLBACK_IMG;
@@ -130,16 +132,11 @@
     div.dataset.category = p.category;
 
     div.innerHTML = `
-      <span class="num">${numberLabel(i)} / ${String(totalProjects).padStart(3, '0')}</span>
       <div class="img-wrap"><img src="${esc(imgSrc)}" alt="${esc(p.title)}" loading="lazy"></div>
-      <div class="shade"></div>
-      <div class="meta">
+      <div class="glass-info">
+        <div class="cat">${esc(capitalize(p.category))}</div>
         <h3>${esc(p.title)}</h3>
-        <div class="row">
-          <span><span class="dot"></span>${esc(capitalize(p.category))}</span>
-          <span>${esc(p.client)}</span>
-          <span>${esc(p.location)}</span>
-        </div>
+        <div class="meta-row">${esc(p.client)} · ${esc(p.location)}</div>
       </div>`;
 
     div.addEventListener('click', () => {
@@ -407,6 +404,20 @@
 
   // ── Init ──
   document.addEventListener('DOMContentLoaded', () => {
+    if (!hasData()) {
+      var grid = document.getElementById('project-grid');
+      if (grid) {
+        grid.innerHTML =
+          '<div class="col-span-full flex flex-col items-center justify-center py-24 text-center">' +
+          '<i class="fas fa-exclamation-triangle text-brand-gold text-4xl mb-4"></i>' +
+          '<p class="text-gray-400 text-sm tracking-wide">Unable to load projects. Please refresh the page.</p>' +
+          '</div>';
+      }
+      // Still init non-data features so the page is not completely broken
+      initCineReveal();
+      return;
+    }
+
     initHeroReel();
     initFilters();
     initEvents();

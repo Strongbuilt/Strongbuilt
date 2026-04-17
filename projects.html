@@ -15,14 +15,14 @@
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous" />
 
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="dist/app.css">
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
   <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
@@ -156,59 +156,96 @@
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
-    /* ── Numbered Project Card (cinematic) ── */
+    /* ── Glassmorphism Project Card ── */
+    /* Grid layout */
+    .project-grid-view {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .project-list-view {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
     .project-card {
       position: relative;
       overflow: hidden;
-      background: #1a1718;
-      border: 1px solid rgba(255,255,255,0.08);
+      background: #0a0a0a;
       cursor: pointer;
-      transition: border-color 0.6s ease;
+      border-radius: 8px;
+      height: 420px;
     }
-    .project-card:hover { border-color: rgba(239, 191, 4,0.3); }
-    .project-card .num {
-      position: absolute; top: 16px; left: 16px; z-index: 5;
-      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
-      font-size: 11px; letter-spacing: 0.3em; color: rgba(255,255,255,0.65);
-      mix-blend-mode: difference;
+    .project-card .img-wrap img,
+    .project-card .img-wrap {
+      width: 100%;
+      height: 100%;
+    }
+    .project-card .img-wrap img {
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 1024px) {
+      .project-grid-view { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .project-grid-view { grid-template-columns: 1fr; gap: 12px; }
+      .project-card { height: 300px; }
     }
     .project-card .img-wrap {
       position: absolute; inset: 0;
-      transition: transform 1.4s cubic-bezier(0.19, 1, 0.22, 1), filter 0.8s ease;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .project-card:hover .img-wrap { transform: scale(1.08); filter: none; }
-    .project-card .img-wrap { filter: none; }
+    .project-card:hover .img-wrap { transform: scale(1.1); }
     .project-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .project-card .shade {
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.92) 100%);
+    .project-card .shade { display: none; }
+    .project-card .num { display: none; }
+
+    /* Glass panel — slides up on hover */
+    .project-card .glass-info {
+      position: absolute;
+      bottom: 0; left: 12px; right: 12px;
+      z-index: 2;
+      padding: 22px 20px;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      transform: translateY(120px);
+      opacity: 0;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .project-card .meta {
-      position: absolute; left: 0; right: 0; bottom: 0;
-      padding: 22px 22px 20px;
-      color: #EEEEEE; z-index: 4;
-    }
-    .project-card .meta h3 {
-      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif; font-weight: 700;
-      text-transform: uppercase; letter-spacing: -0.01em;
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
-      margin: 0 0 4px;
+    .project-card:hover .glass-info {
       transform: translateY(0);
-      transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+      opacity: 1;
     }
-    .project-card:hover .meta h3 { transform: translateY(-4px); }
-    .project-card .meta .row { display: flex; gap: 14px; font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.65); }
-    .project-card .meta .row span .dot { width: 4px; height: 4px; border-radius: 50%; background: #EFBF04; display: inline-block; vertical-align: middle; margin-right: 6px; }
-    .project-card .ongoing-tag { display: none; /* status removed */
-      padding: 4px 10px;
-      background: rgba(0,0,0,0.55);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(74,222,128,0.35);
-      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
-      color: #4ade80;
+    .project-card .glass-info .cat {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: #EFBF04;
+      margin-bottom: 6px;
+      display: flex; align-items: center; gap: 8px;
     }
-    .project-card .ongoing-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s ease infinite; }
-    @keyframes pulse { 50% { opacity: 0.4; } }
+    .project-card .glass-info .cat::before {
+      content: ''; width: 6px; height: 6px;
+      border-radius: 50%; background: #EFBF04;
+    }
+    .project-card .glass-info h3 {
+      font-family: 'Oswald', 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1.4rem;
+      text-transform: uppercase; color: #fff;
+      letter-spacing: -0.01em; margin: 0;
+    }
+    .project-card .glass-info .meta-row {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px; color: rgba(255,255,255,0.65);
+      margin-top: 6px;
+    }
 
     /* Scroll reveal (cinematic) */
     .cine-up {
@@ -292,7 +329,7 @@
 
   <!-- HEADER (Glass) -->
   <header class="fixed w-full z-50 transition-all duration-300 glass-header" id="mainHeader">
-    <div class="container mx-auto px-6 h-24 flex items-center justify-between">
+    <div class="container mx-auto px-4 md:px-6 h-20 md:h-24 flex items-center justify-between">
       <a href="index.html" class="flex items-center group relative z-50">
         <img src="assets/Logo/Strongbuilt.png" alt="Strong Built Logo"
           class="h-14 md:h-24 w-auto object-contain transition duration-300 hover:opacity-90">
@@ -454,29 +491,29 @@
         <div class="grid gap-6">
           <div class="group bg-clay-surface/5 backdrop-blur-md p-8 border border-clay-border hover:border-brand-gold/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(239, 191, 4,0.2)] rounded-sm reveal-up" style="transition-delay: 100ms;">
             <div class="flex items-start gap-6">
-              <div class="w-14 h-14 bg-brand-gold/10 flex items-center justify-center rounded-sm text-brand-darkGold text-2xl group-hover:bg-brand-gold group-hover:text-black transition-colors duration-500 shrink-0">
+              <div class="w-14 h-14 bg-brand-gold/10 flex items-center justify-center rounded-sm text-brand-darkGold text-2xl group-hover:bg-brand-gold/20 group-hover:border group-hover:border-brand-gold/40 group-hover:shadow-[0_0_15px_rgba(239,191,4,0.15)] transition-all duration-500 shrink-0">
                 <i class="fas fa-shield-alt"></i>
               </div>
               <div>
                 <h4 class="text-xl font-bold text-clay-ink font-heading mb-2 group-hover:text-brand-darkGold transition-colors">Safety First</h4>
-                <p class="text-sm text-clay-muted leading-relaxed">Rigorous safety committees, ELCB checks, fall protection nets, and daily toolbox meetings to ensure zero accidents.</p>
+                <p class="text-sm text-clay-muted leading-relaxed">Rigorous safety committees, ELCB checks, fall protection nets, and daily toolbox meetings — committed to the highest safety standards.</p>
               </div>
             </div>
           </div>
           <div class="group bg-clay-surface/5 backdrop-blur-md p-8 border border-clay-border hover:border-brand-gold/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(239, 191, 4,0.2)] rounded-sm reveal-up" style="transition-delay: 200ms;">
             <div class="flex items-start gap-6">
-              <div class="w-14 h-14 bg-brand-gold/10 flex items-center justify-center rounded-sm text-brand-darkGold text-2xl group-hover:bg-brand-gold group-hover:text-black transition-colors duration-500 shrink-0">
+              <div class="w-14 h-14 bg-brand-gold/10 flex items-center justify-center rounded-sm text-brand-darkGold text-2xl group-hover:bg-brand-gold/20 group-hover:border group-hover:border-brand-gold/40 group-hover:shadow-[0_0_15px_rgba(239,191,4,0.15)] transition-all duration-500 shrink-0">
                 <i class="fas fa-hard-hat"></i>
               </div>
               <div>
                 <h4 class="text-xl font-bold text-clay-ink font-heading mb-2 group-hover:text-brand-darkGold transition-colors">Strength & Quality</h4>
-                <p class="text-sm text-clay-muted leading-relaxed">Comprehensive checklist systems for reinforcement, shuttering, and pour cards to ensure zero-defect delivery.</p>
+                <p class="text-sm text-clay-muted leading-relaxed">Comprehensive checklist systems for reinforcement, shuttering, and pour cards — driving exceptional build quality.</p>
               </div>
             </div>
           </div>
           <div class="group bg-clay-surface/5 backdrop-blur-md p-8 border border-clay-border hover:border-brand-gold/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(239, 191, 4,0.2)] rounded-sm reveal-up" style="transition-delay: 300ms;">
             <div class="flex items-start gap-6">
-              <div class="w-14 h-14 bg-brand-gold/10 flex items-center justify-center rounded-sm text-brand-darkGold text-2xl group-hover:bg-brand-gold group-hover:text-black transition-colors duration-500 shrink-0">
+              <div class="w-14 h-14 bg-brand-gold/10 flex items-center justify-center rounded-sm text-brand-darkGold text-2xl group-hover:bg-brand-gold/20 group-hover:border group-hover:border-brand-gold/40 group-hover:shadow-[0_0_15px_rgba(239,191,4,0.15)] transition-all duration-500 shrink-0">
                 <i class="fas fa-stopwatch"></i>
               </div>
               <div>
@@ -491,17 +528,17 @@
   </section>
 
   <!-- CTA SECTION -->
-  <section class="py-24 bg-brand-gold relative overflow-hidden">
-    <div class="absolute inset-0 bg-clay-base opacity-10"></div>
+  <section class="sb-cta">
+    <div class="sb-cta-noise"></div>
+    <div class="sb-cta-orb sb-cta-orb-1"></div>
+    <div class="sb-cta-orb sb-cta-orb-2"></div>
+    <div class="sb-cta-orb sb-cta-orb-3"></div>
     <div class="container mx-auto px-6 relative z-10 text-center">
-      <h2 class="text-3xl md:text-5xl font-bold text-black mb-6 uppercase font-heading">Ready to Build Your Legacy?</h2>
-      <p class="text-black/80 text-lg mb-10 max-w-xl mx-auto font-medium font-body">
+      <h2 class="text-3xl md:text-5xl font-bold text-clay-ink mb-6 uppercase font-heading">Ready to Build Your Legacy?</h2>
+      <p class="text-clay-muted text-lg mb-10 max-w-xl mx-auto font-body">
         Partner with Mumbai's most trusted construction firm. Let's discuss your next project.
       </p>
-      <a href="contact.html"
-        class="inline-block bg-clay-base text-clay-ink px-10 py-4 font-bold uppercase tracking-widest hover:scale-105 transition shadow-2xl rounded-sm font-heading">
-        Start a Conversation
-      </a>
+      <a href="contact.html" class="sb-cta-btn">Start a Conversation</a>
     </div>
   </section>
 
@@ -510,7 +547,7 @@
     style="display:none; position:fixed; inset:0; z-index:10000; background:rgba(0,0,0,0.95); backdrop-filter:blur(10px); align-items:center; justify-content:center; flex-direction:column; cursor:zoom-out;">
     <button onclick="closeLightbox()" aria-label="Close lightbox"
       class="absolute top-6 right-8 text-clay-ink/60 hover:text-brand-darkGold text-4xl font-light transition duration-300 hover:rotate-90 cursor-pointer z-10">&times;</button>
-    <img class="max-w-[90%] max-h-[80vh] object-contain border border-clay-border shadow-2xl" id="lightbox-img" alt="">
+    <img class="max-w-[90%] max-h-[80vh] object-contain border border-clay-border shadow-2xl" id="lightbox-img" alt="Project image preview">
     <div id="caption" class="text-center text-clay-ink/70 mt-6 font-heading text-sm tracking-[0.3em] uppercase"></div>
   </div>
 
@@ -562,7 +599,7 @@
           <ul class="space-y-3 text-sm text-clay-muted font-body">
             <li><i class="fas fa-map-marker-alt text-brand-darkGold mr-2"></i> 901-B Wing, 9th Floor, HDIL Kaledonia, Sahar Road, Opp D'Mart, Sambhaji Nagar, Andheri-East, Mumbai - 400069.</li>
             <li><i class="fas fa-phone text-brand-darkGold mr-2"></i> +91 9619875081 / 022-6123-2500</li>
-            <li><i class="fas fa-envelope text-brand-darkGold mr-2"></i> strongbuilt@skywaygroup.co.in <br> strongbuilt@skywaygroup.co.in</li>
+            <li><i class="fas fa-envelope text-brand-darkGold mr-2"></i> strongbuilt@skywaygroup.co.in</li>
           </ul>
         </div>
       </div>

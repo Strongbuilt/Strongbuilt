@@ -7,7 +7,7 @@ const SITE_INFO = {
   "phonePrimary": "+91 9619875081",
   "phoneSecondary": "022-6123-2500",
   "email": "strongbuilt@skywaygroup.co.in",
-  "emailAlt": "strongbuilt@skywaygroup.co.in",
+  "emailAlt": "",
   "address": "901-B Wing, 9th Floor, HDIL Kaledonia, Sahar Road, Opp D'Mart, Sambhaji Nagar, Andheri-East, Mumbai - 400069.",
   "whatsapp": "919619875081",
   "social": {

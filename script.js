@@ -1,14 +1,15 @@
-// Animations for headlines
-const observer = new IntersectionObserver((entries, obs) => {
+// Unified reveal/fade-in observer (handles headlines + reveal elements)
+const revealObserver = new IntersectionObserver((entries, obs) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('animate-fade-in');
-      obs.unobserve(entry.target);
-    }
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    if (el.matches('h1, h2, h3'))        el.classList.add('animate-fade-in');
+    if (el.matches('.reveal, .reveal-up')) el.classList.add('active');
+    obs.unobserve(el);
   });
-});
+}, { threshold: 0.15 });
 
-document.querySelectorAll('h1, h2, h3').forEach(el => observer.observe(el));
+document.querySelectorAll('h1, h2, h3, .reveal, .reveal-up').forEach(el => revealObserver.observe(el));
 
 // Lightbox for Projects
 function openLightbox(imgSrc) {
@@ -89,17 +90,6 @@ document.addEventListener('click', function (e) {
   }
 });
 
-// Reveal Animations (Intersection Observer for better performance)
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('active');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.15 });
-
-document.querySelectorAll(".reveal, .reveal-up").forEach(el => revealObserver.observe(el));
 
 // Swiper Initialization (One robust instance)
 if (typeof Swiper !== 'undefined') {
@@ -203,7 +193,7 @@ window.addEventListener('load', () => {
   });
 
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    setInterval(() => {
+    const startPulse = () => setInterval(() => {
       if (!active) return;
       const ring = document.createElement('div');
       ring.className = 'sb-cursor-pulse';
@@ -212,5 +202,14 @@ window.addEventListener('load', () => {
       document.body.appendChild(ring);
       setTimeout(() => ring.remove(), 1700);
     }, 600);
+
+    let pulseId = startPulse();
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) { clearInterval(pulseId); pulseId = null; }
+      else { pulseId = startPulse(); }
+    });
+
+    window.addEventListener('beforeunload', () => { clearInterval(pulseId); });
   }
 })();

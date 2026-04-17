@@ -1,14 +1,4 @@
 /* --- PREMIUM BASE --- */
-:root {
-    /* Fluid Typography Scale: Mobile -> Desktop */
-    --fs-hero: clamp(4rem, 15vw + 1rem, 9rem);
-    --fs-h1: clamp(2.5rem, 7vw + 1rem, 6.5rem);
-    --fs-h2: clamp(2rem, 5vw + 0.5rem, 4.5rem);
-    --fs-h3: clamp(1.5rem, 3.5vw + 0.5rem, 3rem);
-    --fs-h4: clamp(1.25rem, 2vw + 0.5rem, 2rem);
-    --fs-body: clamp(1rem, 0.5vw + 0.9rem, 1.15rem);
-    --fs-small: clamp(0.75rem, 0.25vw + 0.6rem, 0.9rem);
-}
 
 body {
     font-family: 'Inter', Helvetica, Arial, sans-serif;
@@ -937,9 +927,6 @@ html.lenis {
 }
 
 /* --- SWIPER NAVIGATION OVERRIDES --- */
-:root {
-    --swiper-navigation-size: 0px !important; /* Forces swiper icons to collapse */
-}
 
 .swiper-button-next::after, 
 .swiper-button-prev::after {
@@ -1173,6 +1160,15 @@ select option:checked {
 
 /* ── 1. Fluid design tokens ────────────────────────────────────── */
 :root {
+    /* Original Fluid Typography Scale: Mobile -> Desktop */
+    --fs-hero: clamp(4rem, 15vw + 1rem, 9rem);
+    --fs-h1: clamp(2.5rem, 7vw + 1rem, 6.5rem);
+    --fs-h2: clamp(2rem, 5vw + 0.5rem, 4.5rem);
+    --fs-h3: clamp(1.5rem, 3.5vw + 0.5rem, 3rem);
+    --fs-h4: clamp(1.25rem, 2vw + 0.5rem, 2rem);
+    --fs-body: clamp(1rem, 0.5vw + 0.9rem, 1.15rem);
+    --fs-small: clamp(0.75rem, 0.25vw + 0.6rem, 0.9rem);
+
     /* Font-size scale: clamp(min, preferred, max) — scales 320→2560px */
     --fs-xs:   clamp(0.72rem, 0.68rem + 0.18vw, 0.82rem);
     --fs-sm:   clamp(0.82rem, 0.78rem + 0.22vw, 0.95rem);
@@ -1187,6 +1183,9 @@ select option:checked {
     --fs-7xl:  clamp(3.40rem, 2.60rem + 4.00vw, 6.50rem);
     --fs-8xl:  clamp(4.00rem, 3.00rem + 5.00vw, 8.00rem);
     --fs-9xl:  clamp(5.00rem, 3.50rem + 7.50vw, 10.0rem);
+
+    /* Swiper navigation override */
+    --swiper-navigation-size: 0px !important;
 
     /* Fluid spacing — section rhythm + gutters */
     --space-section: clamp(3rem, 2rem + 5vw, 7rem);
@@ -1450,4 +1449,182 @@ html.no-js .reveal { opacity: 1 !important; transform: none !important; }
 }
 .img-placeholder-sm::before {
     content: '\f007';
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   UNIFIED COMPONENT SYSTEM — buttons, heroes, headers
+   Standardized patterns for cross-page consistency.
+   ═════════════════════════════════════════════════════════════════ */
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.sb-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.875rem 2.5rem;
+    border: 1px solid transparent;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    min-height: 44px;
+    min-width: 44px;
+}
+.sb-btn-primary {
+    background-color: #EFBF04;
+    color: #000;
+    border-color: #EFBF04;
+}
+.sb-btn-primary:hover {
+    background-color: #d4a800;
+    box-shadow: 0 0 20px rgba(239, 191, 4, 0.3);
+    transform: translateY(-2px);
+}
+.sb-btn-secondary {
+    background-color: transparent;
+    color: #EEEEEE;
+    border-color: rgba(238, 238, 238, 0.25);
+}
+.sb-btn-secondary:hover {
+    border-color: #EFBF04;
+    color: #EFBF04;
+    background-color: rgba(239, 191, 4, 0.06);
+    transform: translateY(-2px);
+}
+.sb-btn-sm {
+    padding: 0.625rem 1.5rem;
+    font-size: var(--fs-sm);
+}
+.sb-btn-lg {
+    padding: 1rem 3rem;
+    font-size: var(--fs-lg);
+}
+
+/* ── Standardized page header bar ────────────────────────────── */
+.sb-page-header {
+    height: 5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+@media (min-width: 768px) {
+    .sb-page-header {
+        height: 6rem;
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+}
+
+/* ── Standardized hero section ───────────────────────────────── */
+.sb-hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    padding-top: clamp(6rem, 15vh, 10rem);
+    padding-bottom: clamp(3rem, 8vh, 6rem);
+    overflow: hidden;
+}
+.sb-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(35, 31, 32, 0.85), rgba(35, 31, 32, 0.95));
+    z-index: 1;
+}
+.sb-hero-content {
+    position: relative;
+    z-index: 2;
+}
+.sb-hero-eyebrow {
+    font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    color: #EFBF04;
+    margin-bottom: 1rem;
+}
+.sb-hero-title {
+    font-family: 'Oswald', 'Agency FB', 'Barlow Condensed', Impact, Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    line-height: 1.05;
+    color: #EEEEEE;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+}
+.sb-hero-lede {
+    font-family: 'Inter', Helvetica, Arial, sans-serif;
+    color: rgba(238, 238, 238, 0.7);
+    max-width: 55ch;
+    line-height: 1.6;
+    margin-top: 1.5rem;
+}
+
+/* ── Unified CTA section ─────────────────────────────────────── */
+.sb-cta {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(4rem, 8vw, 7rem) 0;
+    background: linear-gradient(160deg, #1a1718 0%, #231F20 40%, #1a1718 100%);
+    border-top: 1px solid rgba(239, 191, 4, 0.10);
+    border-bottom: 1px solid rgba(239, 191, 4, 0.10);
+}
+.sb-cta-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+    pointer-events: none;
+}
+.sb-cta-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+}
+.sb-cta-orb-1 {
+    width: 500px; height: 500px;
+    top: -200px; right: -100px;
+    background: radial-gradient(circle, rgba(239, 191, 4, 0.10) 0%, transparent 70%);
+}
+.sb-cta-orb-2 {
+    width: 350px; height: 350px;
+    bottom: -150px; left: -50px;
+    background: radial-gradient(circle, rgba(239, 191, 4, 0.08) 0%, transparent 70%);
+}
+.sb-cta-orb-3 {
+    width: 250px; height: 250px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(239, 191, 4, 0.05) 0%, transparent 70%);
+}
+.sb-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 1rem 3rem;
+    background: #EFBF04;
+    color: #000;
+    border: 1px solid #EFBF04;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    min-height: 44px;
+}
+.sb-cta-btn:hover {
+    background: transparent;
+    color: #EFBF04;
+    box-shadow: 0 0 30px rgba(239, 191, 4, 0.25);
+    transform: translateY(-2px);
+}
+@media (max-width: 639px) {
+    .sb-cta-orb-1 { width: 250px; height: 250px; }
+    .sb-cta-orb-2 { width: 180px; height: 180px; }
+    .sb-cta-orb-3 { width: 120px; height: 120px; }
 }

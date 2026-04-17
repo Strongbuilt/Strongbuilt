@@ -131,7 +131,7 @@
     .reel-scroll {
       position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
       font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif; font-size: 10px;
-      letter-spacing: 0.4em; text-transform: uppercase; color: rgba(255,255,255,0.5);
+      letter-spacing: 0.4em; text-transform: uppercase; color: rgba(255,255,255,0.65);
       display: flex; flex-direction: column; align-items: center; gap: 10px;
     }
     .reel-scroll .line {
@@ -161,7 +161,7 @@
       position: relative;
       overflow: hidden;
       background: #1a1718;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
       cursor: pointer;
       transition: border-color 0.6s ease;
     }
@@ -169,7 +169,7 @@
     .project-card .num {
       position: absolute; top: 16px; left: 16px; z-index: 5;
       font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
-      font-size: 11px; letter-spacing: 0.3em; color: rgba(255,255,255,0.55);
+      font-size: 11px; letter-spacing: 0.3em; color: rgba(255,255,255,0.65);
       mix-blend-mode: difference;
     }
     .project-card .img-wrap {
@@ -313,27 +313,15 @@
     </div>
   </header>
 
-  <div class="h-24"></div>
-
-  <!-- HERO SECTION -->
-  <section class="relative h-[50vh] md:h-[60vh] flex items-center justify-center text-center overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1920&q=80"
-        alt="Strong Built construction projects" class="w-full h-full object-cover opacity-40 animate-pulse-slow" fetchpriority="high" loading="eager" decoding="async">
-    </div>
-    <div class="absolute inset-0 bg-gradient-to-b from-clay-base/70 via-clay-mist/50 to-[#050505] z-0"></div>
-    <div class="relative z-30 container mx-auto px-6 mt-20">
-      <div class="inline-block mb-4 overflow-hidden">
-        <span class="block text-brand-darkGold text-sm font-bold tracking-[0.5em] uppercase reveal-up"
-          style="transition-delay: 100ms;">Portfolio</span>
-      </div>
-      <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold mb-6 text-clay-ink uppercase tracking-tighter leading-none reveal-up font-hero"
-        style="transition-delay: 200ms;">
-        Our <br><span class="gold-gradient-text stroke-text">Projects</span>
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-clay-mist flex items-center" style="min-height:100svh;">
+    <div class="w-full max-w-[1400px] mx-auto px-6 md:px-10 pt-28 pb-12 relative z-2 text-center">
+      <span class="block text-brand-darkGold font-bold uppercase mb-4 font-heading reveal-up" style="font-size:var(--fs-small); letter-spacing:0.25em; transition-delay:100ms;">Portfolio</span>
+      <h1 class="text-clay-ink uppercase font-hero reveal-up" style="font-size:var(--fs-hero); line-height:0.92; letter-spacing:-0.02em; font-weight:700; margin-bottom:1.5rem; transition-delay:200ms;">
+        Our <br><span class="gold-gradient-text">Projects</span>
       </h1>
-      <div class="h-px w-24 bg-brand-gold mx-auto my-8 reveal-up" style="transition-delay: 300ms;"></div>
-      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-3xl mx-auto leading-relaxed reveal-up"
-        style="transition-delay: 400ms;">
+      <div class="h-px w-24 bg-brand-gold my-8 mx-auto reveal-up" style="transition-delay:300ms;"></div>
+      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-xl mx-auto leading-relaxed reveal-up" style="transition-delay:400ms;">
         Shaping the skyline with iconic residential, commercial, and industrial landmarks.
       </p>
     </div>

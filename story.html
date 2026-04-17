@@ -85,12 +85,12 @@
       width: 64px;
       height: 64px;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(239, 191, 4, 0.18), rgba(239, 191, 4, 0.04) 70%);
+      background: radial-gradient(circle at 30% 30%, rgba(239, 191, 4, 0.22), rgba(239, 191, 4, 0.08) 70%);
       border: 1px solid rgba(239, 191, 4, 0.25);
       color: #EFBF04;
       font-size: 1.5rem;
       margin-bottom: 1.25rem;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 20px -8px rgba(239, 191, 4, 0.4);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 4px 20px -8px rgba(239, 191, 4, 0.4);
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
     }
     .tcard:hover .tcard-icon {
@@ -126,7 +126,7 @@
       font-family: 'Inter', Helvetica, Arial, sans-serif;
       font-size: 0.85rem;
       font-weight: 300;
-      color: #AAAAAA;
+      color: #B3B3B3;
       line-height: 1.5;
     }
 
@@ -167,7 +167,7 @@
       font-size: 0.6rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: #AAAAAA;
+      color: #B3B3B3;
       margin-top: 4px;
     }
 
@@ -336,7 +336,7 @@
       font-weight: 300;
       font-size: 0.95rem;
       line-height: 1.65;
-      color: #AAAAAA;
+      color: #B3B3B3;
       max-width: 56ch;
       margin-bottom: 1.25rem;
     }
@@ -454,35 +454,17 @@
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="relative min-h-[60vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden">
-    <!-- Backgrounds -->
-    <div class="absolute inset-0 z-0">
-      <div class="absolute inset-0 bg-gradient-to-br from-clay-base via-transparent to-clay-base z-20"></div>
-      <div class="absolute inset-0 bg-clay-base/50 z-10"></div>
-      <img src="https://images.unsplash.com/photo-1597843075678-b1187429188d?q=80&w=2070"
-        class="w-full h-full object-cover opacity-60 scale-110 animate-pulse-slow contrast-125"
-        alt="Construction Silhouette" fetchpriority="high" loading="eager" decoding="async">
-    </div>
-
-    <!-- Hero Content -->
-    <div class="relative z-30 container mx-auto px-6 text-center mt-20">
-      <div class="inline-block mb-4 overflow-hidden">
-        <span class="block text-brand-darkGold text-sm font-bold tracking-[0.5em] uppercase reveal-up"
-          style="transition-delay: 100ms;">Est. 2014</span>
-      </div>
-      <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold mb-6 text-clay-ink uppercase tracking-tighter leading-none reveal-up font-hero"
-        style="transition-delay: 200ms;">
-        Forging <br><span class="gold-gradient-text stroke-text">History</span>
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-clay-mist flex items-center" style="min-height:100svh;">
+    <div class="w-full max-w-[1400px] mx-auto px-6 md:px-10 pt-28 pb-12 relative z-2 text-center">
+      <span class="block text-brand-darkGold font-bold uppercase mb-4 font-heading reveal-up" style="font-size:var(--fs-small); letter-spacing:0.25em; transition-delay:100ms;">Our Story</span>
+      <h1 class="text-clay-ink uppercase font-hero reveal-up" style="font-size:var(--fs-hero); line-height:0.92; letter-spacing:-0.02em; font-weight:700; margin-bottom:1.5rem; transition-delay:200ms;">
+        Forging <br><span class="gold-gradient-text">History</span>
       </h1>
-      <div class="h-px w-24 bg-brand-gold mx-auto my-8 reveal-up" style="transition-delay: 300ms;"></div>
-      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-3xl mx-auto leading-relaxed reveal-up"
-        style="transition-delay: 400ms;">
-        More than just concrete and steel. We are building a legacy of <span class="text-clay-ink font-medium">unwavering
-          integrity</span> and <span class="text-clay-ink font-medium">engineering excellence</span>.
+      <div class="h-px w-24 bg-brand-gold my-8 mx-auto reveal-up" style="transition-delay:300ms;"></div>
+      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-xl mx-auto leading-relaxed reveal-up" style="transition-delay:400ms;">
+        From a single project in Bandra to 33+ landmarks across Mumbai &mdash; a decade of building trust, one floor at a time.
       </p>
-
-
     </div>
   </section>
 
@@ -529,31 +511,6 @@
         </div>
       </div>
 
-      <!-- Stats Ribbon -->
-      <div
-        class="grid grid-cols-3 gap-8 mt-32 py-12 border-y border-clay-border bg-clay-surface/5 backdrop-blur-sm reveal-up">
-        <div class="text-center group cursor-default">
-          <i
-            class="fas fa-project-diagram text-brand-darkGold/30 text-4xl mb-4 group-hover:text-brand-darkGold group-hover:scale-110 transition duration-300"></i>
-          <div class="text-4xl md:text-5xl font-bold text-clay-ink mb-2 font-heading" data-target="33">0</div>
-          <div class="text-xs uppercase tracking-[0.2em] text-clay-faint group-hover:text-brand-darkGold transition">Projects
-          </div>
-        </div>
-        <div class="text-center group cursor-default">
-          <i
-            class="fas fa-hourglass-half text-brand-darkGold/30 text-4xl mb-4 group-hover:text-brand-darkGold group-hover:scale-110 transition duration-300"></i>
-          <div class="text-4xl md:text-5xl font-bold text-clay-ink mb-2 font-heading" data-target="12">0</div>
-          <div class="text-xs uppercase tracking-[0.2em] text-clay-faint group-hover:text-brand-darkGold transition">Years
-            Exp.</div>
-        </div>
-        <div class="text-center group cursor-default">
-          <i
-            class="fas fa-globe-asia text-brand-darkGold/30 text-4xl mb-4 group-hover:text-brand-darkGold group-hover:scale-110 transition duration-300"></i>
-          <div class="text-4xl md:text-5xl font-bold text-clay-ink mb-2 font-heading" data-target="3">0</div>
-          <div class="text-xs uppercase tracking-[0.2em] text-clay-faint group-hover:text-brand-darkGold transition">Cities
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 

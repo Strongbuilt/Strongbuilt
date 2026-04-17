@@ -96,28 +96,28 @@ img {
     background: rgba(5, 5, 5, 0.6);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(239, 191, 4, 0.05);
+    border-bottom: 1px solid rgba(239, 191, 4, 0.12);
 }
 
 .glass-panel {
-    background: rgba(255, 255, 255, 0.03);
-    /* Extremely subtle fill */
+    background: rgba(255, 255, 255, 0.04);
+    /* Subtle fill */
     backdrop-filter: blur(20px);
     /* Heavy Blur */
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
     /* Top light highlight */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .glass-panel:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(239, 191, 4, 0.3);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(239, 191, 4, 0.35);
     /* Gold tint on hover */
     transform: translateY(-5px);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 20px rgba(239, 191, 4, 0.1);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 20px rgba(239, 191, 4, 0.15);
     /* Glow */
 }
 
@@ -134,7 +134,7 @@ img {
     top: 0;
     bottom: 0;
     width: 2px;
-    background: rgba(239, 191, 4, 0.2);
+    background: rgba(239, 191, 4, 0.25);
     transform: translateX(-50%);
 }
 
@@ -154,7 +154,7 @@ img {
 .menu-btn {
     width: 50px;
     height: 50px;
-    border: 1px solid rgba(239, 191, 4, 0.2);
+    border: 1px solid rgba(239, 191, 4, 0.25);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -258,7 +258,7 @@ img {
     background: linear-gradient(180deg, rgba(8, 8, 8, 0.97) 0%, rgba(5, 5, 3, 0.99) 100%);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    border-left: 1px solid rgba(239, 191, 4, 0.1);
+    border-left: 1px solid rgba(239, 191, 4, 0.18);
     transform: translateX(100%);
     transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
     display: flex;
@@ -277,7 +277,7 @@ img {
 .nav-close-btn {
     width: 48px;
     height: 48px;
-    border: 1px solid rgba(239, 191, 4, 0.2);
+    border: 1px solid rgba(239, 191, 4, 0.25);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -285,7 +285,7 @@ img {
     cursor: pointer;
     background: transparent;
     transition: all 0.4s ease;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.65);
     font-size: 1.1rem;
     flex-shrink: 0;
 }
@@ -294,14 +294,14 @@ img {
     border-color: #EFBF04;
     color: #EFBF04;
     transform: rotate(90deg);
-    background: rgba(239, 191, 4, 0.05);
+    background: rgba(239, 191, 4, 0.08);
 }
 
 /* Link numbering */
 .nav-link-num {
     font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
     font-size: 0.6rem;
-    color: rgba(239, 191, 4, 0.35);
+    color: rgba(239, 191, 4, 0.5);
     letter-spacing: 0.15em;
     margin-right: 12px;
     transition: color 0.3s ease;
@@ -353,10 +353,10 @@ img {
     font-size: 1.85rem;
     font-weight: 700;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.7);
     font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
     padding: 14px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     letter-spacing: 0.03em;
@@ -376,7 +376,7 @@ img {
 .sidebar-link:hover {
     color: #fff;
     padding-left: 8px;
-    text-shadow: 0 0 30px rgba(239, 191, 4, 0.1);
+    text-shadow: 0 0 30px rgba(239, 191, 4, 0.15);
 }
 
 .sidebar-link:hover .nav-link-num {
@@ -396,11 +396,11 @@ img {
     font-size: 1.85rem;
     font-weight: 700;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.7);
     font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
     background: none;
     border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding: 14px 0;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -419,7 +419,7 @@ img {
 .sidebar-dropdown-btn i {
     font-size: 0.55em;
     transition: transform 0.4s ease;
-    color: rgba(239, 191, 4, 0.3);
+    color: rgba(239, 191, 4, 0.45);
 }
 
 .sidebar-dropdown-btn:hover i {
@@ -448,7 +448,7 @@ img {
     gap: 10px;
     font-family: 'Inter', Helvetica, Arial, sans-serif;
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.50);
     padding: 10px 0;
     transition: all 0.3s ease;
 }
@@ -457,7 +457,7 @@ img {
     content: '';
     width: 14px;
     height: 1px;
-    background: rgba(239, 191, 4, 0.2);
+    background: rgba(239, 191, 4, 0.3);
     transition: all 0.3s ease;
     flex-shrink: 0;
 }
@@ -476,11 +476,11 @@ img {
 .nav-social-link {
     width: 40px;
     height: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.50);
     font-size: 0.9rem;
     transition: all 0.3s ease;
 }
@@ -488,13 +488,13 @@ img {
 .nav-social-link:hover {
     border-color: #EFBF04;
     color: #EFBF04;
-    background: rgba(239, 191, 4, 0.05);
+    background: rgba(239, 191, 4, 0.08);
     transform: translateY(-2px);
 }
 
 /* Contact info in sidebar */
 .nav-info-block {
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
     padding-top: 1.5rem;
     margin-top: 1.5rem;
 }
@@ -506,7 +506,7 @@ img {
 .nav-info-label {
     font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
     font-size: 0.55rem;
-    color: rgba(239, 191, 4, 0.5);
+    color: rgba(239, 191, 4, 0.65);
     text-transform: uppercase;
     letter-spacing: 0.2em;
     margin-bottom: 0.3rem;
@@ -516,7 +516,7 @@ img {
 .nav-info-value {
     font-family: 'Inter', Helvetica, Arial, sans-serif;
     font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.55);
     line-height: 1.5;
 }
 
@@ -812,7 +812,7 @@ img {
 .filter-btn {
     transition: all 0.3s ease;
     cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     position: relative;
     overflow: hidden;
 }
@@ -956,7 +956,7 @@ html.lenis {
     height: 50px !important;
     background: rgba(0, 0, 0, 0.4) !important;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(239, 191, 4, 0.1);
+    border: 1px solid rgba(239, 191, 4, 0.18);
     border-radius: 50%;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
     display: flex !important;
@@ -966,7 +966,7 @@ html.lenis {
 
 .swiper-button-next:hover, 
 .swiper-button-prev:hover {
-    background: rgba(239, 191, 4, 0.1) !important;
+    background: rgba(239, 191, 4, 0.12) !important;
     border-color: #EFBF04 !important;
     transform: scale(1.15);
     box-shadow: 0 0 20px rgba(239, 191, 4, 0.2);
@@ -1031,7 +1031,7 @@ select option {
     padding: 8px;
 }
 select option:disabled {
-    color: #6b7280;
+    color: #9CA3AF;
 }
 select option:hover,
 select option:checked {
@@ -1351,12 +1351,11 @@ html.no-js .reveal { opacity: 1 !important; transform: none !important; }
         word-spacing: 0.1em;
     }
 
-    /* Hero section: balanced vertical rhythm, avoid cramped look */
+    /* Hero section: full page on mobile too */
     .ix-hero {
         padding-top: clamp(5rem, 18vw, 7rem) !important;
         padding-bottom: clamp(3rem, 8vw, 5rem) !important;
-        min-height: auto;
-        height: auto !important;
+        min-height: 100svh;
     }
 
     /* Rule divider: make it sit tighter to headline */
@@ -1389,4 +1388,36 @@ html.no-js .reveal { opacity: 1 !important; transform: none !important; }
 
     /* Hide the "Scroll" indicator on small phones — it obscures content */
     .ix-hero .animate-bounce-slow { display: none !important; }
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   COLOR CONTRAST & VISUAL DEPTH ENHANCEMENTS
+   Alternating section backgrounds, gold ramp utilities, improved
+   dark-on-dark layering for scroll rhythm and visual hierarchy.
+   ═════════════════════════════════════════════════════════════════ */
+
+/* ── Alternating section backgrounds for scroll rhythm ────────── */
+.section-alt {
+    background-color: #1e1b1c;
+    border-top: 1px solid rgba(239, 191, 4, 0.06);
+    border-bottom: 1px solid rgba(239, 191, 4, 0.06);
+}
+
+/* ── Gold ramp utilities ──────────────────────────────────────── */
+.border-soft-gold {
+    border-color: #D4A84B;
+}
+.text-soft-gold {
+    color: #D4A84B;
+}
+.text-light-gold {
+    color: #F7D94E;
+}
+.bg-soft-gold {
+    background-color: #D4A84B;
+}
+
+/* ── Elevated card surface ────────────────────────────────────── */
+.bg-elevated {
+    background-color: #383234;
 }

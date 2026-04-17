@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Story Hero Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dist/app.css">
+</head>
+<body style="background:#1a1718;">
+
+  <!-- HERO — mirrors index.html structure, simplified for secondary page -->
+  <section style="position:relative; background:#1a1718; overflow:hidden; display:flex; align-items:center; min-height:420px; height:60svh; padding: clamp(5rem,8vw,7rem) clamp(1.5rem,5vw,5rem) clamp(3rem,6vw,5rem);">
+
+    <div style="width:100%; max-width:1400px; margin:0 auto; position:relative; z-index:2;">
+      <span class="block text-brand-darkGold font-bold uppercase mb-4 font-heading reveal-up" style="font-size:var(--fs-small); letter-spacing:0.25em; color:#EFBF04; transition-delay:100ms;">
+        Our Story
+      </span>
+
+      <h1 class="text-clay-ink uppercase font-hero reveal-up" style="font-size:var(--fs-hero); line-height:0.92; letter-spacing:-0.02em; font-weight:700; color:#EEEEEE; margin-bottom:1.5rem; transition-delay:200ms;">
+        Forging <br><span style="color:#EFBF04;">History</span>
+      </h1>
+
+      <div class="h-px w-24 bg-brand-gold my-8 reveal-up" style="transition-delay:300ms;"></div>
+
+      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-xl leading-relaxed reveal-up" style="transition-delay:400ms;">
+        From a single project in Bandra to 33+ landmarks across Mumbai &mdash; a decade of building trust, one floor at a time.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- Spacer -->
+  <div style="height:80vh; display:flex; align-items:center; justify-content:center; border-top:1px solid rgba(238,238,238,0.10);">
+    <p class="font-heading" style="font-size:0.75rem; letter-spacing:0.3em; text-transform:uppercase; color:#888;">
+      Page content continues here
+    </p>
+  </div>
+
+  <script>
+    function handleScrollAnimations() {
+      document.querySelectorAll('.reveal-up').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 60) {
+          el.classList.add('reveal-active');
+        }
+      });
+    }
+    window.addEventListener('scroll', handleScrollAnimations);
+    window.addEventListener('load', handleScrollAnimations);
+  </script>
+</body>
+</html>

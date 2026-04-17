@@ -50,7 +50,7 @@
     .csr-impact .lbl {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: #AAAAAA; margin-top: 0.75rem;
+      color: #B3B3B3; margin-top: 0.75rem;
     }
     .csr-impact .sub {
       font-family: 'Inter', sans-serif; font-size: 0.7rem;
@@ -60,7 +60,7 @@
     /* Focus area card */
     .csr-focus {
       padding: 2rem; border: 1px solid rgba(239, 191, 4, 0.2);
-      background: rgba(255,255,255,0.02);
+      background: rgba(255,255,255,0.03);
       transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
       position: relative; overflow: hidden;
     }
@@ -70,14 +70,14 @@
     }
     .csr-focus:hover {
       border-color: #EFBF04;
-      background: rgba(239, 191, 4, 0.04);
+      background: rgba(239, 191, 4, 0.06);
       transform: translateY(-4px);
     }
     .csr-focus:hover::before { height: 100%; }
     .csr-focus .icon {
       width: 60px; height: 60px;
       display: flex; align-items: center; justify-content: center;
-      background: rgba(239, 191, 4, 0.1);
+      background: rgba(239, 191, 4, 0.12);
       color: #EFBF04; font-size: 1.5rem; margin-bottom: 1.25rem;
     }
     .csr-focus h3 {
@@ -86,7 +86,7 @@
       margin-bottom: 0.75rem; font-size: 1.4rem;
     }
     .csr-focus p {
-      color: #AAAAAA; font-family: 'Inter', sans-serif;
+      color: #B3B3B3; font-family: 'Inter', sans-serif;
       font-size: 0.9rem; line-height: 1.65;
     }
     .csr-focus .tags {
@@ -131,7 +131,7 @@
     }
     .csr-programme h3 em { font-style: normal; color: #EFBF04; }
     .csr-programme .lede {
-      color: #AAAAAA; font-family: 'Inter', sans-serif;
+      color: #B3B3B3; font-family: 'Inter', sans-serif;
       font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;
     }
     .csr-programme .kpis {
@@ -144,7 +144,7 @@
     }
     .csr-programme .kpis span {
       font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem;
-      letter-spacing: 0.2em; text-transform: uppercase; color: #AAAAAA;
+      letter-spacing: 0.2em; text-transform: uppercase; color: #B3B3B3;
       margin-top: 4px; display: block;
     }
 
@@ -170,7 +170,7 @@
       margin: 0.5rem 0 0.5rem; font-size: 1.1rem;
     }
     .csr-timeline-item p {
-      color: #AAAAAA; font-family: 'Inter', sans-serif; font-size: 0.9rem; line-height: 1.65;
+      color: #B3B3B3; font-family: 'Inter', sans-serif; font-size: 0.9rem; line-height: 1.65;
     }
 
     /* Partner logo */
@@ -178,13 +178,13 @@
       display: flex; align-items: center; justify-content: center;
       padding: 1.5rem; min-height: 100px;
       border: 1px solid rgba(239, 191, 4, 0.15);
-      background: rgba(255,255,255,0.02);
+      background: rgba(255,255,255,0.03);
       transition: all 0.3s; text-align: center;
       font-family: 'Oswald', sans-serif; font-weight: 600;
       text-transform: uppercase; letter-spacing: 0.1em;
-      color: #AAAAAA;
+      color: #B3B3B3;
     }
-    .csr-partner:hover { border-color: #EFBF04; background: rgba(239, 191, 4, 0.04); color: #EFBF04; }
+    .csr-partner:hover { border-color: #EFBF04; background: rgba(239, 191, 4, 0.06); color: #EFBF04; }
 
     /* Spend breakdown */
     .csr-spend-row {
@@ -198,7 +198,7 @@
       color: #EEEEEE; text-transform: uppercase; letter-spacing: 0.08em;
     }
     .csr-spend-row .bar {
-      width: 100%; height: 6px; background: rgba(239, 191, 4, 0.1);
+      width: 100%; height: 6px; background: rgba(239, 191, 4, 0.12);
       position: relative; overflow: hidden; grid-column: 1 / -1; margin-top: 0.5rem;
     }
     .csr-spend-row .bar::after {
@@ -210,7 +210,7 @@
       font-family: 'Oswald', sans-serif; color: #EFBF04; font-weight: 700;
     }
     .csr-spend-row .pct {
-      font-family: 'JetBrains Mono', monospace; color: #AAAAAA;
+      font-family: 'JetBrains Mono', monospace; color: #B3B3B3;
       font-size: 0.85rem; min-width: 60px; text-align: right;
     }
 
@@ -314,24 +314,17 @@
       </button>
     </div>
   </header>
-  <div class="h-24"></div>
 
   <!-- HERO -->
-  <section class="relative h-[50vh] md:h-[60vh] flex items-center justify-center text-center overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1920"
-           alt="Strong Built CSR programmes" class="w-full h-full object-cover opacity-40"
-           fetchpriority="high" loading="eager" decoding="async">
-    </div>
-    <div class="absolute inset-0 bg-gradient-to-b from-clay-base/70 via-clay-mist/60 to-[#050505] z-0"></div>
-    <div class="relative z-30 container mx-auto px-6 mt-20">
-      <span class="block text-brand-darkGold text-sm font-bold tracking-[0.5em] uppercase reveal-up" style="transition-delay: 100ms;">Corporate Social Responsibility</span>
-      <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold my-6 text-clay-ink uppercase tracking-tighter leading-none reveal-up font-hero" style="transition-delay: 200ms;">
+  <section class="relative overflow-hidden bg-clay-mist flex items-center" style="min-height:100svh;">
+    <div class="w-full max-w-[1400px] mx-auto px-6 md:px-10 pt-28 pb-12 relative z-2 text-center">
+      <span class="block text-brand-darkGold font-bold uppercase mb-4 font-heading reveal-up" style="font-size:var(--fs-small); letter-spacing:0.25em; transition-delay:100ms;">Corporate Social Responsibility</span>
+      <h1 class="text-clay-ink uppercase font-hero reveal-up" style="font-size:var(--fs-hero); line-height:0.92; letter-spacing:-0.02em; font-weight:700; margin-bottom:1.5rem; transition-delay:200ms;">
         Building <br><span class="gold-gradient-text">Beyond</span>
       </h1>
-      <div class="h-px w-24 bg-brand-gold mx-auto my-8 reveal-up" style="transition-delay: 300ms;"></div>
-      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-3xl mx-auto leading-relaxed reveal-up font-body" style="transition-delay: 400ms;">
-        Our work shapes skylines — our responsibility is to shape lives. Since 2014, we've invested in education, health, livelihoods, and the environment wherever we build.
+      <div class="h-px w-24 bg-brand-gold my-8 mx-auto reveal-up" style="transition-delay:300ms;"></div>
+      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-xl mx-auto leading-relaxed reveal-up" style="transition-delay:400ms;">
+        Our work shapes skylines &mdash; our responsibility is to shape lives. Since 2014, we've invested in education, health, livelihoods, and the environment wherever we build.
       </p>
     </div>
   </section>
@@ -730,7 +723,7 @@
             <div style="flex-shrink:0;width:44px;height:44px;border:1px solid rgba(239,191,4,0.35);display:flex;align-items:center;justify-content:center;color:#EFBF04;"><i class="fas fa-file-pdf"></i></div>
             <div style="flex:1;min-width:0;">
               <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">CSR Annual Report 2024–25</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:#777;">PDF · 5.6 MB · 48 pages</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:#9E9E9E;">PDF · 5.6 MB · 48 pages</div>
             </div>
             <i class="fas fa-download text-brand-darkGold"></i>
           </a>
@@ -738,7 +731,7 @@
             <div style="flex-shrink:0;width:44px;height:44px;border:1px solid rgba(239,191,4,0.35);display:flex;align-items:center;justify-content:center;color:#EFBF04;"><i class="fas fa-file-contract"></i></div>
             <div style="flex:1;min-width:0;">
               <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">CSR Policy</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:#777;">PDF · 1.2 MB · Last revised Apr 2025</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:#9E9E9E;">PDF · 1.2 MB · Last revised Apr 2025</div>
             </div>
             <i class="fas fa-download text-brand-darkGold"></i>
           </a>
@@ -746,7 +739,7 @@
             <div style="flex-shrink:0;width:44px;height:44px;border:1px solid rgba(239,191,4,0.35);display:flex;align-items:center;justify-content:center;color:#EFBF04;"><i class="fas fa-seedling"></i></div>
             <div style="flex:1;min-width:0;">
               <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">BRSR Disclosure FY 2024–25</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:#777;">PDF · 3.4 MB · SEBI-mandated</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:#9E9E9E;">PDF · 3.4 MB · SEBI-mandated</div>
             </div>
             <i class="fas fa-download text-brand-darkGold"></i>
           </a>
@@ -754,7 +747,7 @@
             <div style="flex-shrink:0;width:44px;height:44px;border:1px solid rgba(239,191,4,0.35);display:flex;align-items:center;justify-content:center;color:#EFBF04;"><i class="fas fa-clipboard-check"></i></div>
             <div style="flex:1;min-width:0;">
               <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">Independent Impact Evaluation</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:#777;">PDF · 2.8 MB · Sattva Consulting</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:#9E9E9E;">PDF · 2.8 MB · Sattva Consulting</div>
             </div>
             <i class="fas fa-download text-brand-darkGold"></i>
           </a>

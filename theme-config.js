@@ -36,7 +36,7 @@ tailwind.config = {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'noise': "url('https://www.transparenttextures.com/patterns/stardust.png')",
+        'noise': "none",
       },
       animation: {
         'float': 'float 8s ease-in-out infinite',

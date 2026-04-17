@@ -3,7 +3,7 @@
   'use strict';
 
   // ── State ──
-  const activeFilters = { category: 'all', status: 'all', search: '', sort: 'newest' };
+  const activeFilters = { category: 'all', search: '', sort: 'az' };
   let currentView = 'grid'; // 'grid' | 'list'
   let totalProjects = 0;
 
@@ -27,7 +27,6 @@
     if (!hasData()) return;
     totalProjects = PROJECT_DATA.length;
     buildFilterRow('categoryFilters', 'category');
-    buildFilterRow('statusFilters', 'status');
     const total = document.getElementById('totalCount');
     if (total) total.textContent = totalProjects;
   }
@@ -68,7 +67,6 @@
     return PROJECT_DATA
       .filter(p => {
         if (activeFilters.category !== 'all' && p.category !== activeFilters.category) return false;
-        if (activeFilters.status !== 'all' && p.status !== activeFilters.status) return false;
         if (activeFilters.search) {
           const q = activeFilters.search;
           if (!(p.title.toLowerCase().includes(q) || p.client.toLowerCase().includes(q) || p.location.toLowerCase().includes(q))) return false;
@@ -87,7 +85,7 @@
   }
 
   // ── Render Gallery ──
-  const FALLBACK_IMG = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80';
+  const FALLBACK_IMG = '';
 
   function renderGallery() {
     const grid = document.getElementById('project-grid');
@@ -128,14 +126,11 @@
   function gridCard(p, i) {
     const div = document.createElement('article');
     const imgSrc = p.img || FALLBACK_IMG;
-    div.className = 'project-card group' + (p.featured ? ' md:col-span-2' : '');
+    div.className = 'project-card group';
     div.dataset.category = p.category;
-
-    const ongoingTag = p.status === 'ongoing' ? '<span class="ongoing-tag">Ongoing</span>' : '';
 
     div.innerHTML = `
       <span class="num">${numberLabel(i)} / ${String(totalProjects).padStart(3, '0')}</span>
-      ${ongoingTag}
       <div class="img-wrap"><img src="${esc(imgSrc)}" alt="${esc(p.title)}" loading="lazy"></div>
       <div class="shade"></div>
       <div class="meta">
@@ -144,7 +139,6 @@
           <span><span class="dot"></span>${esc(capitalize(p.category))}</span>
           <span>${esc(p.client)}</span>
           <span>${esc(p.location)}</span>
-          <span>${esc(p.year)}</span>
         </div>
       </div>`;
 
@@ -159,7 +153,6 @@
     const div = document.createElement('article');
     const imgSrc = p.img || FALLBACK_IMG;
     div.className = 'project-card list-mode group';
-    const ongoingCls = p.status === 'ongoing' ? ' <span class="text-[10px] text-green-400 tracking-[0.25em] ml-2">●&nbsp;ONGOING</span>' : '';
 
     div.innerHTML = `
       <div class="img-wrap"><img src="${esc(imgSrc)}" alt="${esc(p.title)}" loading="lazy"></div>
@@ -167,14 +160,13 @@
         <div class="flex items-center gap-6 min-w-0 flex-1">
           <span class="num">${numberLabel(i)}</span>
           <div class="min-w-0">
-            <h3 class="truncate">${esc(p.title)}${ongoingCls}</h3>
+            <h3 class="truncate">${esc(p.title)}</h3>
             <div class="row"><span>${esc(capitalize(p.category))}</span><span>${esc(p.client)}</span></div>
           </div>
         </div>
         <div class="hidden md:flex items-center gap-8 text-right">
           <div class="reel-kv"><span class="k">Location</span><span class="v">${esc(p.location)}</span></div>
-          <div class="reel-kv"><span class="k">Area</span><span class="v">${esc(p.area)}</span></div>
-          <div class="reel-kv"><span class="k">Year</span><span class="v">${esc(p.year)}</span></div>
+          <div class="reel-kv"><span class="k">Area</span><span class="v">${esc(p.area || '—')}</span></div>
           <i class="fas fa-arrow-right text-gray-500 group-hover:text-brand-gold transition-colors"></i>
         </div>
       </div>`;
@@ -188,11 +180,10 @@
   // ── Reset ──
   window.resetFilters = function () {
     activeFilters.category = 'all';
-    activeFilters.status = 'all';
     activeFilters.search = '';
     const si = document.getElementById('projectSearch');
     if (si) si.value = '';
-    document.querySelectorAll('#categoryFilters button, #statusFilters button').forEach(b => {
+    document.querySelectorAll('#categoryFilters button').forEach(b => {
       b.className = pillClass(b.dataset.value === 'all');
     });
     renderGallery();

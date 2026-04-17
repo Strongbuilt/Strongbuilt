@@ -1420,4 +1420,34 @@ html.no-js .reveal { opacity: 1 !important; transform: none !important; }
 /* ── Elevated card surface ────────────────────────────────────── */
 .bg-elevated {
     background-color: #383234;
+}
+
+/* ── Image placeholder — replaces removed stock/generic images ── */
+.img-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1718 0%, #231F20 50%, #1a1718 100%);
+    border: 1px solid rgba(239, 191, 4, 0.10);
+    color: rgba(239, 191, 4, 0.25);
+    font-size: 2rem;
+    min-height: 200px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.img-placeholder::before {
+    content: '\f03e';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 400;
+}
+.img-placeholder-sm {
+    min-height: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 1rem;
+}
+.img-placeholder-sm::before {
+    content: '\f007';
 }

@@ -48,6 +48,24 @@
 
     <style>
         .sidebar-optimized { background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-right: 1px solid rgba(255,255,255,0.08); }
+
+        /* Map style switcher */
+        .style-opt {
+            display: flex; align-items: center; gap: 8px;
+            width: 100%; padding: 8px 12px;
+            font-size: 11px; font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+            color: rgba(255,255,255,0.55);
+            background: transparent; border: none; cursor: pointer;
+            transition: all 0.2s ease; text-align: left;
+        }
+        .style-opt:hover { background: rgba(239,191,4,0.08); color: #EEEEEE; }
+        .style-opt.active { color: #EFBF04; background: rgba(239,191,4,0.1); }
+        .style-dot {
+            width: 10px; height: 10px; border-radius: 2px; border: 1px solid rgba(255,255,255,0.15);
+            flex-shrink: 0;
+        }
+        .style-opt.active .style-dot { border-color: #EFBF04; box-shadow: 0 0 6px rgba(239,191,4,0.4); }
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(239, 191, 4,0.3); border-radius: 2px; }
@@ -405,6 +423,14 @@
         </div>
     </header>
 
+    <!-- Map Version Switcher -->
+    <div style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;gap:4px;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);border:1px solid rgba(239,191,4,0.2);border-radius:4px;padding:4px;font-family:'Barlow Condensed',sans-serif;">
+        <a href="map.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:#EFBF04;color:#000;border-radius:2px;text-decoration:none;">Leaflet</a>
+        <a href="map-mapbox.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.color='#EFBF04'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Mapbox</a>
+        <a href="map-svg.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.color='#EFBF04'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">SVG</a>
+        <a href="map-google.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.color='#EFBF04'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Google</a>
+    </div>
+
     <!-- Mobile Map/List toggle — floating segmented control -->
     <div class="m-toggle" role="tablist" aria-label="Switch between map and list view">
         <button type="button" class="is-on" data-view="map" role="tab" aria-selected="true"><i class="fas fa-map-marked-alt"></i> Map</button>
@@ -474,7 +500,49 @@
         </div>
 
         <!-- Map -->
-        <div id='map' class="map-canvas w-full md:w-2/3 lg:w-3/4 flex-grow md:h-full bg-[#1a1a1a] relative z-0 min-h-[400px]"></div>
+        <div id='map' class="map-canvas w-full md:w-2/3 lg:w-3/4 flex-grow md:h-full bg-[#1a1a1a] relative z-0 min-h-[400px]">
+            <!-- Map Style Switcher -->
+            <div id="mapStyleSwitcher" class="absolute top-3 right-3 z-[1000]">
+                <button id="styleToggleBtn" class="w-9 h-9 bg-black/70 backdrop-blur-md border border-clay-border rounded-sm flex items-center justify-center text-clay-muted hover:text-brand-darkGold hover:border-brand-gold/50 transition-all" title="Change map style">
+                    <i class="fas fa-layer-group text-sm"></i>
+                </button>
+                <div id="styleDropdown" class="hidden absolute top-11 right-0 w-48 bg-black/90 backdrop-blur-xl border border-clay-border rounded-sm shadow-2xl overflow-hidden">
+                    <p class="px-3 py-2 text-[9px] text-brand-darkGold uppercase tracking-widest font-heading font-bold border-b border-clay-border">Map Style</p>
+                    <div class="max-h-[320px] overflow-y-auto custom-scrollbar">
+                        <button class="style-opt active" data-style="dark">
+                            <span class="style-dot" style="background:#333"></span> Dark
+                        </button>
+                        <button class="style-opt" data-style="dark-nolabels">
+                            <span class="style-dot" style="background:#222"></span> Dark (No Labels)
+                        </button>
+                        <button class="style-opt" data-style="voyager">
+                            <span class="style-dot" style="background:#e8e0d8"></span> Voyager
+                        </button>
+                        <button class="style-opt" data-style="positron">
+                            <span class="style-dot" style="background:#d4d4d4"></span> Positron (Light)
+                        </button>
+                        <button class="style-opt" data-style="satellite">
+                            <span class="style-dot" style="background:#2a4a2a"></span> Satellite
+                        </button>
+                        <button class="style-opt" data-style="toner">
+                            <span class="style-dot" style="background:#000"></span> Toner (B&W)
+                        </button>
+                        <button class="style-opt" data-style="terrain">
+                            <span class="style-dot" style="background:#c9d4a5"></span> Terrain
+                        </button>
+                        <button class="style-opt" data-style="smooth-dark">
+                            <span class="style-dot" style="background:#2b2b3a"></span> Smooth Dark
+                        </button>
+                        <button class="style-opt" data-style="osm-bright">
+                            <span class="style-dot" style="background:#aad3df"></span> OSM Bright
+                        </button>
+                        <button class="style-opt" data-style="watercolor">
+                            <span class="style-dot" style="background:#d4c4a8"></span> Watercolor
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="projects-data.js"></script>
@@ -519,13 +587,85 @@
             locCont.appendChild(btn);
         });
 
-        // ─── Leaflet Map ───
-        const map = L.map('map', { zoomControl: false, center: [19.1, 72.9], zoom: 11 });
+        // ─── Leaflet Map (Mumbai focused) ───
+        const mumbaiBounds = L.latLngBounds([18.85, 72.75], [19.35, 73.05]);
+        const map = L.map('map', {
+            zoomControl: false,
+            center: [19.076, 72.877],
+            zoom: 12,
+            minZoom: 10,
+            maxBounds: mumbaiBounds.pad(0.3),
+            maxBoundsViscosity: 0.8
+        });
         L.control.zoom({ position: 'bottomright' }).addTo(map);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            subdomains: 'abcd',
+
+        // ─── Tile layer styles ───
+        const OSM_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>';
+        const CARTO_ATTR = OSM_ATTR + ' &copy; <a href="https://carto.com/attributions">CARTO</a>';
+        const STADIA_ATTR = OSM_ATTR + ' &copy; <a href="https://stadiamaps.com/">Stadia</a>';
+        const ESRI_ATTR = '&copy; <a href="https://www.esri.com/">Esri</a>, Maxar, Earthstar Geographics';
+
+        const MAP_STYLES = {
+            'dark':           { url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', attr: CARTO_ATTR, sub: 'abcd' },
+            'dark-nolabels':  { url: 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', attr: CARTO_ATTR, sub: 'abcd' },
+            'voyager':        { url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', attr: CARTO_ATTR, sub: 'abcd' },
+            'positron':       { url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', attr: CARTO_ATTR, sub: 'abcd' },
+            'satellite':      { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', attr: ESRI_ATTR },
+            'toner':          { url: 'https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', attr: STADIA_ATTR },
+            'terrain':        { url: 'https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png', attr: STADIA_ATTR },
+            'smooth-dark':    { url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', attr: STADIA_ATTR },
+            'osm-bright':     { url: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png', attr: STADIA_ATTR },
+            'watercolor':     { url: 'https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}{r}.jpg', attr: STADIA_ATTR }
+        };
+
+        let currentTileLayer = L.tileLayer(MAP_STYLES['dark'].url, {
+            subdomains: MAP_STYLES['dark'].sub || 'abc',
             maxZoom: 20,
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            attribution: MAP_STYLES['dark'].attr
+        }).addTo(map);
+
+        // ─── Style switcher logic ───
+        const styleBtn = document.getElementById('styleToggleBtn');
+        const styleDropdown = document.getElementById('styleDropdown');
+
+        styleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            styleDropdown.classList.toggle('hidden');
+        });
+        document.addEventListener('click', () => styleDropdown.classList.add('hidden'));
+        styleDropdown.addEventListener('click', (e) => e.stopPropagation());
+
+        document.querySelectorAll('.style-opt').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const key = btn.dataset.style;
+                const style = MAP_STYLES[key];
+                if (!style) return;
+
+                // Swap tile layer
+                map.removeLayer(currentTileLayer);
+                currentTileLayer = L.tileLayer(style.url, {
+                    subdomains: style.sub || 'abc',
+                    maxZoom: 20,
+                    attribution: style.attr
+                }).addTo(map);
+
+                // Update active state
+                document.querySelectorAll('.style-opt').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Close dropdown
+                styleDropdown.classList.add('hidden');
+            });
+        });
+
+        // ─── Mumbai region highlight (subtle gold tint) ───
+        L.rectangle(mumbaiBounds, {
+            color: '#EFBF04',
+            weight: 0.8,
+            opacity: 0.2,
+            fillColor: '#EFBF04',
+            fillOpacity: 0.03,
+            interactive: false
         }).addTo(map);
 
         // ─── Cluster group (Strong Built style) ───
@@ -764,7 +904,7 @@
                 listEl.appendChild(item);
             });
 
-            if (bounds.isValid()) map.fitBounds(bounds, { padding: [50, 50], maxZoom: 12 });
+            if (bounds.isValid()) map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14, minZoom: 10 });
         }
 
         // ─── Bindings ───

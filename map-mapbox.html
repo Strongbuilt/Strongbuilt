@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Map — Mapbox | Strong Built</title>
+  <meta name="description" content="Explore Strong Built's construction projects across Mumbai, Thane, and beyond on an interactive Mapbox map.">
+  <meta name="keywords" content="Strong Built, construction Mumbai, construction company, building contractors, civil construction, residential construction, commercial construction">
+  <meta name="author" content="Strong Built">
+  <meta name="robots" content="index, follow">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/Favicon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="assets/Favicon/favicon.svg">
+  <link rel="shortcut icon" href="assets/Favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/Favicon/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-title" content="Strong Built">
+  <link rel="manifest" href="assets/Favicon/site.webmanifest">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Strong Built">
+  <meta property="og:title" content="Project Map — Mapbox | Strong Built">
+  <meta property="og:description" content="Explore Strong Built's construction projects across Mumbai, Thane, and beyond on an interactive Mapbox GL map.">
+  <meta property="og:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
+  <meta property="og:locale" content="en_IN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Project Map — Mapbox | Strong Built">
+  <meta name="twitter:description" content="Explore Strong Built's construction projects across Mumbai, Thane, and beyond.">
+  <meta name="twitter:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+  <!-- Mapbox GL CSS -->
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dist/app.css">
+
+  <!-- Mapbox GL JS -->
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+
+  <style>
+    /* ── Map Page Layout ── */
+    .map-page-wrapper {
+      display: flex;
+      height: calc(100vh - 80px);
+      margin-top: 80px;
+      position: relative;
+    }
+    @media (min-width: 768px) {
+      .map-page-wrapper { height: calc(100vh - 96px); margin-top: 96px; }
+    }
+
+    /* ── Sidebar ── */
+    .map-sidebar {
+      width: 100%;
+      max-width: 380px;
+      background: rgba(15, 13, 14, 0.97);
+      border-right: 1px solid rgba(239, 191, 4, 0.12);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 10;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    @media (max-width: 767px) {
+      .map-sidebar {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        max-width: 100%;
+        height: 45vh;
+        border-right: none;
+        border-top: 1px solid rgba(239, 191, 4, 0.15);
+        border-radius: 16px 16px 0 0;
+        z-index: 20;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .map-sidebar.collapsed {
+        transform: translateY(calc(100% - 52px));
+      }
+    }
+
+    .sidebar-header {
+      padding: 20px 20px 0;
+      flex-shrink: 0;
+    }
+    .sidebar-title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #EEEEEE;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 4px;
+    }
+    .sidebar-count {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      color: rgba(238, 238, 238, 0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 500;
+    }
+
+    /* ── Category Filters ── */
+    .filter-bar {
+      display: flex;
+      gap: 6px;
+      padding: 14px 20px;
+      flex-shrink: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 6px 14px;
+      border-radius: 2px;
+      border: 1px solid rgba(238, 238, 238, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(238, 238, 238, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .filter-btn:hover {
+      border-color: rgba(239, 191, 4, 0.3);
+      color: #EFBF04;
+      background: rgba(239, 191, 4, 0.06);
+    }
+    .filter-btn.active {
+      background: #EFBF04;
+      color: #000;
+      border-color: #EFBF04;
+    }
+
+    /* ── Project List ── */
+    .project-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 12px 12px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(239, 191, 4, 0.2) transparent;
+    }
+    .project-list::-webkit-scrollbar { width: 4px; }
+    .project-list::-webkit-scrollbar-track { background: transparent; }
+    .project-list::-webkit-scrollbar-thumb { background: rgba(239, 191, 4, 0.2); border-radius: 2px; }
+
+    .project-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      margin-bottom: 2px;
+    }
+    .project-item:hover {
+      background: rgba(239, 191, 4, 0.04);
+      border-color: rgba(239, 191, 4, 0.12);
+    }
+    .project-item.active {
+      background: rgba(239, 191, 4, 0.08);
+      border-color: rgba(239, 191, 4, 0.25);
+    }
+
+    .project-item-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 4px;
+      background: rgba(239, 191, 4, 0.08);
+      border: 1px solid rgba(239, 191, 4, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #EFBF04;
+      font-size: 0.8rem;
+    }
+    .project-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .project-item-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #EEEEEE;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .project-item-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      color: rgba(238, 238, 238, 0.35);
+      margin-top: 2px;
+    }
+    .project-item-status {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .status-completed {
+      color: #4ade80;
+      background: rgba(74, 222, 128, 0.08);
+      border: 1px solid rgba(74, 222, 128, 0.15);
+    }
+    .status-ongoing {
+      color: #EFBF04;
+      background: rgba(239, 191, 4, 0.08);
+      border: 1px solid rgba(239, 191, 4, 0.15);
+    }
+
+    /* ── Map Container ── */
+    .map-container {
+      flex: 1;
+      position: relative;
+    }
+    #mapboxMap {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── Mapbox Popup ── */
+    .maplibregl-popup-content {
+      background: rgba(10, 10, 10, 0.96) !important;
+      color: #EEEEEE !important;
+      border: 1px solid rgba(239, 191, 4, 0.25) !important;
+      border-radius: 6px !important;
+      padding: 0 !important;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(239, 191, 4, 0.05) !important;
+      backdrop-filter: blur(16px) !important;
+      -webkit-backdrop-filter: blur(16px) !important;
+      overflow: hidden;
+      min-width: 260px;
+    }
+    .maplibregl-popup-tip {
+      border-top-color: rgba(10, 10, 10, 0.96) !important;
+    }
+    .maplibregl-popup-close-button {
+      color: #EEEEEE !important;
+      font-size: 18px;
+      padding: 4px 8px;
+      right: 4px !important;
+      top: 4px !important;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+    .maplibregl-popup-close-button:hover {
+      color: #EFBF04 !important;
+      background: rgba(0, 0, 0, 0.85);
+    }
+
+    .popup-inner {
+      padding: 16px 18px 14px;
+    }
+    .popup-category {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: #EFBF04;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 6px;
+    }
+    .popup-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #EEEEEE;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .popup-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .popup-detail-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .popup-detail-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.55rem;
+      color: rgba(238, 238, 238, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 600;
+    }
+    .popup-detail-value {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: #EEEEEE;
+      font-weight: 500;
+      margin-top: 1px;
+    }
+    .popup-divider {
+      height: 1px;
+      background: rgba(239, 191, 4, 0.12);
+      margin: 10px 0;
+    }
+
+    /* ── Gold Marker ── */
+    .mapbox-gold-marker {
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mapbox-gold-marker:hover {
+      transform: scale(1.25);
+    }
+    .mapbox-gold-marker svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 8px rgba(239, 191, 4, 0.25));
+    }
+
+    /* ── Version Badge ── */
+    .map-version-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(10, 10, 10, 0.92);
+      border: 1px solid rgba(239, 191, 4, 0.3);
+      color: #EFBF04;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 6px 12px;
+      border-radius: 3px;
+      z-index: 5;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      pointer-events: none;
+    }
+    .map-version-badge i {
+      font-size: 0.7rem;
+    }
+
+    /* ── Mobile Toggle ── */
+    .sidebar-toggle {
+      display: none;
+      width: 40px;
+      height: 4px;
+      background: rgba(238, 238, 238, 0.25);
+      border-radius: 4px;
+      margin: 10px auto 6px;
+      cursor: grab;
+    }
+    @media (max-width: 767px) {
+      .sidebar-toggle { display: block; }
+    }
+
+    /* ── Mapbox Controls ── */
+    .maplibregl-ctrl-group {
+      background: rgba(10, 10, 10, 0.9) !important;
+      border: 1px solid rgba(239, 191, 4, 0.15) !important;
+      border-radius: 4px !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .maplibregl-ctrl-group button {
+      background-color: transparent !important;
+      border-bottom: 1px solid rgba(239, 191, 4, 0.08) !important;
+    }
+    .maplibregl-ctrl-group button:hover {
+      background-color: rgba(239, 191, 4, 0.08) !important;
+    }
+    .maplibregl-ctrl-group button span {
+      filter: invert(1) brightness(0.85);
+    }
+    .maplibregl-ctrl-attrib {
+      background: rgba(10, 10, 10, 0.7) !important;
+      font-size: 9px !important;
+    }
+    .maplibregl-ctrl-attrib a {
+      color: rgba(238, 238, 238, 0.4) !important;
+    }
+
+    /* ── No-results message ── */
+    .no-results {
+      text-align: center;
+      padding: 40px 20px;
+      color: rgba(238, 238, 238, 0.3);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+    }
+    .no-results i {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: block;
+      color: rgba(239, 191, 4, 0.2);
+    }
+  </style>
+</head>
+
+<body class="bg-noise antialiased overflow-x-hidden selection:bg-brand-gold selection:text-black">
+
+  <!-- NAVIGATION OVERLAY (Side Drawer) -->
+  <div id="navOverlay" class="nav-overlay">
+    <div id="navBackdrop" class="nav-overlay-backdrop"></div>
+    <div class="nav-overlay-content p-8 md:p-10">
+
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-12">
+        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto opacity-80">
+        <button id="closeMenuBtn" class="nav-close-btn"><i class="fas fa-times"></i></button>
+      </div>
+
+      <!-- Links -->
+      <ul class="space-y-0 flex-1">
+        <li><a href="index.html" class="sidebar-link">Home</a></li>
+        <li>
+          <button class="sidebar-dropdown-btn">
+            <span>About</span> <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="sidebar-submenu">
+            <a href="story.html" class="sidebar-sublink">Our Story</a>
+            <a href="leadership.html" class="sidebar-sublink">Leadership</a>
+            <a href="culture.html" class="sidebar-sublink">Culture</a>
+            <a href="recognition.html" class="sidebar-sublink">Recognition</a>
+          </div>
+        </li>
+        <li>
+          <button class="sidebar-dropdown-btn">
+            <span>Projects</span> <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="sidebar-submenu">
+            <a href="projects.html" class="sidebar-sublink">Portfolio</a>
+            <a href="map.html" class="sidebar-sublink">Project Map</a>
+          </div>
+        </li>
+        <li><a href="services.html" class="sidebar-link">Services</a></li>
+        <li><a href="clients.html" class="sidebar-link">Clients</a></li>
+        <li><a href="investors.html" class="sidebar-link">Investors</a></li>
+        <li><a href="csr.html" class="sidebar-link">CSR</a></li>
+        <li><a href="careers.html" class="sidebar-link">Careers</a></li>
+        <li><a href="resources.html" class="sidebar-link">Resources</a></li>
+        <li><a href="contact.html" class="sidebar-link">Contact</a></li>
+      </ul>
+
+      <!-- Contact Info -->
+      <div class="nav-info-block">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+          <div class="nav-info-item">
+            <span class="nav-info-label">Call</span>
+            <p class="nav-info-value">+91 9619875081</p>
+          </div>
+          <div class="nav-info-item">
+            <span class="nav-info-label">Email</span>
+            <p class="nav-info-value">strongbuilt@skywaygroup.co.in</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav-social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram" class="nav-social-link"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter" class="nav-social-link"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HEADER (Glass) -->
+  <header class="fixed w-full z-50 transition-all duration-300 glass-header" id="mainHeader">
+    <div class="container mx-auto px-4 md:px-6 h-20 md:h-24 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center group relative z-50">
+        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built Logo"
+          class="h-12 md:h-24 w-auto object-contain transition duration-300 hover:opacity-90">
+      </a>
+
+      <div class="flex items-center">
+        <!-- Menu Trigger -->
+        <button id="menuToggle" class="menu-btn group">
+          <div class="menu-icon"><span></span><span></span><span></span></div>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Map Version Switcher -->
+  <div style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;gap:4px;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);border:1px solid rgba(239,191,4,0.2);border-radius:4px;padding:4px;font-family:'Barlow Condensed',sans-serif;">
+      <a href="map.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.color='#EFBF04'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Leaflet</a>
+      <a href="map-mapbox.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:#EFBF04;color:#000;border-radius:2px;text-decoration:none;">Mapbox</a>
+      <a href="map-svg.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.color='#EFBF04'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">SVG</a>
+      <a href="map-google.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.color='#EFBF04'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Google</a>
+  </div>
+
+  <!-- MAP PAGE -->
+  <div class="map-page-wrapper">
+
+    <!-- Sidebar -->
+    <aside class="map-sidebar" id="mapSidebar">
+      <div class="sidebar-toggle" id="sidebarToggle"></div>
+
+      <div class="sidebar-header">
+        <h2 class="sidebar-title">Project Locations</h2>
+        <p class="sidebar-count" id="projectCount">Loading projects...</p>
+      </div>
+
+      <!-- Category Filters -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="residential"><i class="fas fa-home" style="margin-right:4px;font-size:0.6rem;"></i> Residential</button>
+        <button class="filter-btn" data-filter="commercial"><i class="fas fa-building" style="margin-right:4px;font-size:0.6rem;"></i> Commercial</button>
+        <button class="filter-btn" data-filter="infrastructure"><i class="fas fa-road" style="margin-right:4px;font-size:0.6rem;"></i> Infrastructure</button>
+      </div>
+
+      <!-- Project List -->
+      <div class="project-list" id="projectList"></div>
+    </aside>
+
+    <!-- Map -->
+    <div class="map-container">
+      <div id="mapboxMap"></div>
+      <div class="map-version-badge">
+        <i class="fas fa-globe-americas"></i>
+        MapLibre GL
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-clay-mist text-clay-muted pt-16 md:pt-20 pb-10 border-t border-clay-border relative overflow-hidden" style="display:none;">
+    <div class="absolute inset-0 opacity-10"
+      style="background-image: radial-gradient(rgba(239, 191, 4, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
+        <div class="col-span-1">
+          <div class="text-2xl font-bold text-clay-ink mb-6 font-heading tracking-widest flex items-center gap-2">
+            <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto">
+          </div>
+          <p class="text-clay-faint text-sm mb-6 font-light leading-relaxed">
+            Forging the future with concrete, steel, and integrity.
+          </p>
+          <div class="flex gap-4">
+            <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram"
+              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
+                class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn"
+              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
+                class="fab fa-linkedin-in"></i></a>
+            <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter"
+              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
+                class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Navigation</h4>
+          <ul class="space-y-3 text-sm text-clay-muted font-body">
+            <li><a href="story.html" class="hover:text-clay-ink transition">About</a></li>
+            <li><a href="services.html" class="hover:text-clay-ink transition">Services</a></li>
+            <li><a href="projects.html" class="hover:text-clay-ink transition">Projects</a></li>
+            <li><a href="clients.html" class="hover:text-clay-ink transition">Clients</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Services</h4>
+          <ul class="space-y-3 text-sm text-clay-muted font-body">
+            <li><a href="services.html" class="hover:text-clay-ink transition">Residential</a></li>
+            <li><a href="services.html" class="hover:text-clay-ink transition">Commercial</a></li>
+            <li><a href="services.html" class="hover:text-clay-ink transition">Industrial</a></li>
+            <li><a href="services.html" class="hover:text-clay-ink transition">Infrastructure</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Contact</h4>
+          <ul class="space-y-3 text-sm text-clay-muted font-body">
+            <li><i class="fas fa-map-marker-alt text-brand-darkGold mr-2"></i> 901-B Wing, 9th Floor, HDIL Kaledonia, Sahar
+              Road, Opp D'Mart, Sambhaji Nagar, Andheri-East, Mumbai - 400069.</li>
+            <li><i class="fas fa-phone text-brand-darkGold mr-2"></i> +91 9619875081 / 022-6123-2500</li>
+            <li><i class="fas fa-envelope text-brand-darkGold mr-2"></i> strongbuilt@skywaygroup.co.in</li>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="border-t border-clay-border pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-clay-muted font-light uppercase tracking-wider">
+        <p class="font-body">&copy; 2026 Strong Built. All rights reserved.</p>
+        <div class="flex gap-6 mt-4 md:mt-0 font-heading">
+          <a href="privacy.html" class="hover:text-clay-ink">Privacy</a>
+          <a href="terms.html" class="hover:text-clay-ink">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Project Data -->
+  <script src="projects-data.js"></script>
+
+  <script>
+    // ── MapLibre GL Initialization (free, no API key) ──
+    const map = new maplibregl.Map({
+      container: 'mapboxMap',
+      style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
+      center: [72.877, 19.076],
+      zoom: 11,
+      pitch: 0,
+      bearing: 0,
+      antialias: true
+    });
+
+    // Add navigation controls
+    map.addControl(new maplibregl.NavigationControl({
+      showCompass: true,
+      showZoom: true,
+      visualizePitch: true
+    }), 'bottom-right');
+
+    // Add scale control
+    map.addControl(new maplibregl.ScaleControl({
+      maxWidth: 120,
+      unit: 'metric'
+    }), 'bottom-left');
+
+    // ── State ──
+    let activeFilter = 'all';
+    let activeProjectId = null;
+    let markers = [];
+    let currentPopup = null;
+
+    // ── Category Icons ──
+    const categoryIcons = {
+      residential: 'fa-home',
+      commercial: 'fa-building',
+      infrastructure: 'fa-road'
+    };
+
+    // ── Create Gold Marker SVG ──
+    function createMarkerElement(project) {
+      const el = document.createElement('div');
+      el.className = 'mapbox-gold-marker';
+      el.innerHTML = `
+        <svg viewBox="0 0 24 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="goldGrad_${project.id}" x1="12" y1="0" x2="12" y2="36" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FFD700"/>
+              <stop offset="50%" stop-color="#EFBF04"/>
+              <stop offset="100%" stop-color="#C49B00"/>
+            </linearGradient>
+          </defs>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 9 12 24 12 24s12-15 12-24c0-6.627-5.373-12-12-12z"
+                fill="url(#goldGrad_${project.id})" stroke="rgba(0,0,0,0.3)" stroke-width="0.5"/>
+          <circle cx="12" cy="12" r="5" fill="rgba(35,31,32,0.85)"/>
+          <circle cx="12" cy="12" r="3" fill="none" stroke="#EFBF04" stroke-width="0.8" opacity="0.6"/>
+        </svg>
+      `;
+      return el;
+    }
+
+    // ── Build Popup HTML ──
+    function buildPopupHTML(project) {
+      return `
+        <div class="popup-inner">
+          <div class="popup-category">
+            <i class="fas ${categoryIcons[project.category] || 'fa-building'}" style="margin-right:4px;"></i>
+            ${project.category}
+          </div>
+          <div class="popup-title">${project.title}</div>
+          <div class="popup-divider"></div>
+          <div class="popup-details">
+            <div class="popup-detail-item">
+              <span class="popup-detail-label">Client</span>
+              <span class="popup-detail-value">${project.client}</span>
+            </div>
+            <div class="popup-detail-item">
+              <span class="popup-detail-label">Category</span>
+              <span class="popup-detail-value" style="text-transform:capitalize;">${project.category}</span>
+            </div>
+            <div class="popup-detail-item">
+              <span class="popup-detail-label">Area</span>
+              <span class="popup-detail-value">${project.area}</span>
+            </div>
+            <div class="popup-detail-item">
+              <span class="popup-detail-label">Year</span>
+              <span class="popup-detail-value">${project.year}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ── Render Project List ──
+    function renderProjectList(filter) {
+      const listEl = document.getElementById('projectList');
+      const countEl = document.getElementById('projectCount');
+      const filtered = filter === 'all'
+        ? PROJECT_DATA
+        : PROJECT_DATA.filter(p => p.category === filter);
+
+      countEl.textContent = `${filtered.length} project${filtered.length !== 1 ? 's' : ''} found`;
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = `
+          <div class="no-results">
+            <i class="fas fa-search"></i>
+            No projects in this category.
+          </div>
+        `;
+        return;
+      }
+
+      listEl.innerHTML = filtered.map(p => `
+        <div class="project-item ${activeProjectId === p.id ? 'active' : ''}" data-id="${p.id}">
+          <div class="project-item-icon">
+            <i class="fas ${categoryIcons[p.category] || 'fa-building'}"></i>
+          </div>
+          <div class="project-item-info">
+            <div class="project-item-name">${p.title}</div>
+            <div class="project-item-meta">${p.client} &middot; ${p.location} &middot; ${p.area}</div>
+          </div>
+          <span class="project-item-status ${p.status === 'completed' ? 'status-completed' : 'status-ongoing'}">
+            ${p.status}
+          </span>
+        </div>
+      `).join('');
+
+      // Add click handlers
+      listEl.querySelectorAll('.project-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const projectId = item.dataset.id;
+          const project = PROJECT_DATA.find(p => p.id === projectId);
+          if (project) {
+            flyToProject(project);
+            highlightProject(projectId);
+          }
+        });
+      });
+    }
+
+    // ── Fly To Project ──
+    function flyToProject(project) {
+      map.flyTo({
+        center: [project.coordinates[1], project.coordinates[0]],
+        zoom: 15,
+        pitch: 45,
+        bearing: -15,
+        duration: 2000,
+        essential: true
+      });
+
+      // Close existing popup
+      if (currentPopup) currentPopup.remove();
+
+      // Open popup after flight
+      setTimeout(() => {
+        currentPopup = new maplibregl.Popup({
+          offset: [0, -20],
+          closeButton: true,
+          closeOnClick: false,
+          maxWidth: '300px'
+        })
+          .setLngLat([project.coordinates[1], project.coordinates[0]])
+          .setHTML(buildPopupHTML(project))
+          .addTo(map);
+      }, 1200);
+    }
+
+    // ── Highlight Project in List ──
+    function highlightProject(projectId) {
+      activeProjectId = projectId;
+      document.querySelectorAll('.project-item').forEach(item => {
+        item.classList.toggle('active', item.dataset.id === projectId);
+      });
+
+      // Scroll into view
+      const activeItem = document.querySelector(`.project-item[data-id="${projectId}"]`);
+      if (activeItem) {
+        activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    // ── Add Markers ──
+    function addMarkers(filter) {
+      // Remove existing markers
+      markers.forEach(m => m.marker.remove());
+      markers = [];
+
+      const filtered = filter === 'all'
+        ? PROJECT_DATA
+        : PROJECT_DATA.filter(p => p.category === filter);
+
+      filtered.forEach(project => {
+        const el = createMarkerElement(project);
+
+        const marker = new maplibregl.Marker({
+          element: el,
+          anchor: 'bottom'
+        })
+          .setLngLat([project.coordinates[1], project.coordinates[0]])
+          .addTo(map);
+
+        // Click handler
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          highlightProject(project.id);
+
+          if (currentPopup) currentPopup.remove();
+
+          currentPopup = new maplibregl.Popup({
+            offset: [0, -20],
+            closeButton: true,
+            closeOnClick: false,
+            maxWidth: '300px'
+          })
+            .setLngLat([project.coordinates[1], project.coordinates[0]])
+            .setHTML(buildPopupHTML(project))
+            .addTo(map);
+
+          map.flyTo({
+            center: [project.coordinates[1], project.coordinates[0]],
+            zoom: 14,
+            duration: 1000
+          });
+        });
+
+        markers.push({ marker, project });
+      });
+    }
+
+    // ── Filter Buttons ──
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active state
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        activeFilter = btn.dataset.filter;
+        activeProjectId = null;
+
+        // Close popup
+        if (currentPopup) currentPopup.remove();
+
+        // Re-render
+        renderProjectList(activeFilter);
+        addMarkers(activeFilter);
+
+        // Reset view
+        map.flyTo({
+          center: [72.877, 19.076],
+          zoom: 11,
+          pitch: 0,
+          bearing: 0,
+          duration: 1500
+        });
+      });
+    });
+
+    // ── Mobile Sidebar Toggle ──
+    const sidebarEl = document.getElementById('mapSidebar');
+    const toggleEl = document.getElementById('sidebarToggle');
+    if (toggleEl) {
+      toggleEl.addEventListener('click', () => {
+        sidebarEl.classList.toggle('collapsed');
+      });
+    }
+
+    // ── Initialize ──
+    map.on('load', () => {
+      renderProjectList('all');
+      addMarkers('all');
+    });
+
+    // Close popup on map click (empty area)
+    map.on('click', (e) => {
+      // Only close if not clicking a marker
+      const target = e.originalEvent.target;
+      if (!target.closest('.mapbox-gold-marker')) {
+        if (currentPopup) currentPopup.remove();
+        activeProjectId = null;
+        document.querySelectorAll('.project-item').forEach(item => {
+          item.classList.remove('active');
+        });
+      }
+    });
+  </script>
+
+  <!-- Site Scripts -->
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Map — Google Maps | Strong Built</title>
+  <meta name="description" content="Explore Strong Built project locations across India on an interactive Google Maps view.">
+  <meta name="keywords" content="Strong Built, construction Mumbai, project locations, construction map, building contractors">
+  <meta name="author" content="Strong Built">
+  <meta name="robots" content="index, follow">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/Favicon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="assets/Favicon/favicon.svg">
+  <link rel="shortcut icon" href="assets/Favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/Favicon/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-title" content="Strong Built">
+  <link rel="manifest" href="assets/Favicon/site.webmanifest">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Strong Built">
+  <meta property="og:title" content="Project Map — Google Maps | Strong Built">
+  <meta property="og:description" content="Explore Strong Built project locations across India on Google Maps.">
+  <meta property="og:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
+  <meta property="og:locale" content="en_IN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Project Map | Strong Built">
+  <meta name="twitter:description" content="Explore Strong Built project locations across India on Google Maps.">
+  <meta name="twitter:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dist/app.css">
+
+  <style>
+    /* ── Full-page map layout ── */
+    .map-page-wrapper {
+      display: flex;
+      height: calc(100vh - 80px);
+      margin-top: 80px;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      .map-page-wrapper { height: calc(100vh - 96px); margin-top: 96px; }
+    }
+
+    /* ── Left sidebar ── */
+    .map-sidebar {
+      width: 100%;
+      max-width: 420px;
+      background: #1a1a1a;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .map-sidebar-header {
+      padding: 24px 24px 0;
+      flex-shrink: 0;
+    }
+
+    .map-sidebar-header h2 {
+      font-family: 'Oswald', 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      color: #EEEEEE;
+      letter-spacing: 0.05em;
+      margin: 0 0 4px;
+    }
+
+    .map-sidebar-header .subtitle {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      color: rgba(238,238,238,0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    /* ── Category filters ── */
+    .map-filters {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding: 16px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      flex-shrink: 0;
+    }
+
+    .map-filter-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: transparent;
+      color: rgba(238,238,238,0.6);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .map-filter-btn:hover {
+      border-color: rgba(239,191,4,0.4);
+      color: #EFBF04;
+    }
+    .map-filter-btn.active {
+      background: #EFBF04;
+      border-color: #EFBF04;
+      color: #000;
+    }
+
+    /* ── Project list ── */
+    .map-project-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(239,191,4,0.3) transparent;
+    }
+    .map-project-list::-webkit-scrollbar { width: 4px; }
+    .map-project-list::-webkit-scrollbar-track { background: transparent; }
+    .map-project-list::-webkit-scrollbar-thumb { background: rgba(239,191,4,0.3); border-radius: 2px; }
+
+    .map-project-card {
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.02);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+      margin-bottom: 6px;
+    }
+    .map-project-card:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(239,191,4,0.2);
+      transform: translateX(4px);
+    }
+    .map-project-card.active {
+      background: rgba(239,191,4,0.08);
+      border-color: rgba(239,191,4,0.4);
+      box-shadow: 0 0 20px rgba(239,191,4,0.06);
+    }
+
+    .map-project-card .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .map-project-card .project-name {
+      font-family: 'Oswald', 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      text-transform: uppercase;
+      color: #EEEEEE;
+      letter-spacing: 0.02em;
+    }
+    .map-project-card.active .project-name {
+      color: #EFBF04;
+    }
+
+    .map-project-card .category-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .category-dot.residential { background: #EFBF04; }
+    .category-dot.commercial { background: #FF8C00; }
+    .category-dot.infrastructure { background: #C0C0C0; }
+
+    .map-project-card .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: rgba(238,238,238,0.4);
+    }
+
+    .map-project-card .card-meta span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .map-project-card .client-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      color: rgba(238,238,238,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Right map area ── */
+    .map-container {
+      flex: 1;
+      position: relative;
+      background: #1a1a1a;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      filter: contrast(1.05) saturate(0.9) brightness(0.95);
+      transition: filter 0.4s ease;
+    }
+    .map-container:hover iframe {
+      filter: contrast(1) saturate(1) brightness(1);
+    }
+
+    /* ── Google Maps badge ── */
+    .gmaps-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      background: rgba(10,10,10,0.92);
+      border: 1px solid rgba(239,191,4,0.3);
+      padding: 8px 14px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #EFBF04;
+      border-radius: 4px;
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: none;
+    }
+
+    /* ── Stats overlay ── */
+    .map-stats {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      z-index: 10;
+      background: rgba(10,10,10,0.88);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 18px;
+      border-radius: 6px;
+      backdrop-filter: blur(10px);
+      display: flex;
+      gap: 20px;
+    }
+
+    .map-stats .stat {
+      text-align: center;
+    }
+    .map-stats .stat-val {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #EEEEEE;
+      display: block;
+      line-height: 1;
+    }
+    .map-stats .stat-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(238,238,238,0.4);
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* ── Sidebar count badge ── */
+    .count-badge {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      background: rgba(239,191,4,0.15);
+      color: #EFBF04;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+    }
+
+    /* ── No results ── */
+    .no-results {
+      text-align: center;
+      padding: 40px 20px;
+      color: rgba(238,238,238,0.3);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    /* ── Mobile responsive ── */
+    @media (max-width: 768px) {
+      .map-page-wrapper {
+        flex-direction: column;
+        height: auto;
+        min-height: calc(100vh - 80px);
+      }
+      .map-sidebar {
+        max-width: 100%;
+        max-height: 45vh;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .map-container {
+        min-height: 55vh;
+      }
+      .map-sidebar-header { padding: 16px 16px 0; }
+      .map-filters { padding: 12px 16px; }
+      .map-project-list { padding: 8px; }
+      .map-stats { bottom: 8px; left: 8px; padding: 8px 12px; gap: 14px; }
+      .gmaps-badge { top: 8px; right: 8px; }
+    }
+  </style>
+</head>
+
+<body class="bg-noise antialiased overflow-x-hidden selection:bg-brand-gold selection:text-black">
+
+  <!-- NAVIGATION OVERLAY (Side Drawer) -->
+  <div id="navOverlay" class="nav-overlay">
+    <div id="navBackdrop" class="nav-overlay-backdrop"></div>
+    <div class="nav-overlay-content p-8 md:p-10">
+
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-12">
+        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto opacity-80">
+        <button id="closeMenuBtn" class="nav-close-btn"><i class="fas fa-times"></i></button>
+      </div>
+
+      <!-- Links -->
+      <ul class="space-y-0 flex-1">
+        <li><a href="index.html" class="sidebar-link">Home</a></li>
+        <li>
+          <button class="sidebar-dropdown-btn">
+            <span>About</span> <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="sidebar-submenu">
+            <a href="story.html" class="sidebar-sublink">Our Story</a>
+            <a href="leadership.html" class="sidebar-sublink">Leadership</a>
+            <a href="culture.html" class="sidebar-sublink">Culture</a>
+            <a href="recognition.html" class="sidebar-sublink">Recognition</a>
+          </div>
+        </li>
+        <li>
+          <button class="sidebar-dropdown-btn">
+            <span>Projects</span> <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="sidebar-submenu">
+            <a href="projects.html" class="sidebar-sublink">Portfolio</a>
+            <a href="map-google.html" class="sidebar-sublink">Project Map</a>
+          </div>
+        </li>
+        <li><a href="services.html" class="sidebar-link">Services</a></li>
+        <li><a href="clients.html" class="sidebar-link">Clients</a></li>
+        <li><a href="investors.html" class="sidebar-link">Investors</a></li>
+        <li><a href="csr.html" class="sidebar-link">CSR</a></li>
+        <li><a href="careers.html" class="sidebar-link">Careers</a></li>
+        <li><a href="resources.html" class="sidebar-link">Resources</a></li>
+        <li><a href="contact.html" class="sidebar-link">Contact</a></li>
+      </ul>
+
+      <!-- Contact Info -->
+      <div class="nav-info-block">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+          <div class="nav-info-item">
+            <span class="nav-info-label">Call</span>
+            <p class="nav-info-value">+91 9619875081</p>
+          </div>
+          <div class="nav-info-item">
+            <span class="nav-info-label">Email</span>
+            <p class="nav-info-value">strongbuilt@skywaygroup.co.in</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav-social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram" class="nav-social-link"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter" class="nav-social-link"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HEADER (Glass) -->
+  <header class="fixed w-full z-50 transition-all duration-300 glass-header" id="mainHeader">
+    <div class="container mx-auto px-4 md:px-6 h-20 md:h-24 flex items-center justify-between">
+      <a href="index.html" class="flex items-center group relative z-50">
+        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built Logo"
+          class="h-12 md:h-24 w-auto object-contain transition duration-300 hover:opacity-90">
+      </a>
+      <div class="flex items-center">
+        <button id="menuToggle" class="menu-btn group">
+          <div class="menu-icon"><span></span><span></span><span></span></div>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Map Version Switcher -->
+  <div style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;gap:4px;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);border:1px solid rgba(239,191,4,0.2);border-radius:4px;padding:4px;font-family:'Barlow Condensed',sans-serif;">
+      <a href="map.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.color='#EFBF04'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Leaflet</a>
+      <a href="map-mapbox.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.color='#EFBF04'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Mapbox</a>
+      <a href="map-svg.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.color='#EFBF04'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">SVG</a>
+      <a href="map-google.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:#EFBF04;color:#000;border-radius:2px;text-decoration:none;">Google</a>
+  </div>
+
+  <!-- MAIN MAP LAYOUT -->
+  <div class="map-page-wrapper">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="map-sidebar">
+
+      <div class="map-sidebar-header">
+        <h2>Project Locations <span class="count-badge" id="projectCount">0</span></h2>
+        <p class="subtitle">Click a project to locate on map</p>
+      </div>
+
+      <!-- Category Filters -->
+      <div class="map-filters">
+        <button class="map-filter-btn active" data-filter="all">All</button>
+        <button class="map-filter-btn" data-filter="residential">Residential</button>
+        <button class="map-filter-btn" data-filter="commercial">Commercial</button>
+        <button class="map-filter-btn" data-filter="infrastructure">Infrastructure</button>
+      </div>
+
+      <!-- Project Cards List -->
+      <div class="map-project-list" id="projectList">
+        <!-- Rendered by JS -->
+      </div>
+
+    </aside>
+
+    <!-- RIGHT MAP AREA -->
+    <div class="map-container">
+      <iframe
+        id="googleMapIframe"
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d120694.52889987498!2d72.85!3d19.08!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4t5!5e0!3m2!1sen!2sin"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Strong Built Project Locations">
+      </iframe>
+
+      <!-- Google Maps Badge -->
+      <div class="gmaps-badge">
+        <i class="fab fa-google"></i> Google Maps
+      </div>
+
+      <!-- Stats Overlay -->
+      <div class="map-stats">
+        <div class="stat">
+          <span class="stat-val" id="statProjects">0</span>
+          <span class="stat-label">Projects</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val" id="statCities">0</span>
+          <span class="stat-label">Cities</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">16M+</span>
+          <span class="stat-label">Sq. Ft</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PROJECT DATA + SCRIPTS -->
+  <script src="projects-data.js"></script>
+  <script>
+    (function () {
+      const DEFAULT_EMBED = 'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d120694.52889987498!2d72.85!3d19.08!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4t5!5e0!3m2!1sen!2sin';
+      const iframe = document.getElementById('googleMapIframe');
+      const listEl = document.getElementById('projectList');
+      const countEl = document.getElementById('projectCount');
+      const filterBtns = document.querySelectorAll('.map-filter-btn');
+
+      let activeFilter = 'all';
+      let activeProjectId = null;
+
+      // ── Build embed URL for a given lat/lng ──
+      function buildEmbedUrl(lat, lng) {
+        return 'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3000!2d' + lng + '!3d' + lat + '!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4t5!5e0!3m2!1sen!2sin';
+      }
+
+      // ── Render project list ──
+      function renderList() {
+        var filtered = PROJECT_DATA.filter(function (p) {
+          return activeFilter === 'all' || p.category === activeFilter;
+        });
+
+        countEl.textContent = filtered.length;
+
+        if (filtered.length === 0) {
+          listEl.innerHTML = '<div class="no-results"><i class="fas fa-search" style="display:block;font-size:1.5rem;margin-bottom:12px;opacity:0.3;"></i>No projects in this category</div>';
+          return;
+        }
+
+        var html = '';
+        filtered.forEach(function (p) {
+          var isActive = p.id === activeProjectId;
+          html += '<div class="map-project-card' + (isActive ? ' active' : '') + '" data-id="' + p.id + '">';
+          html += '  <div class="card-top">';
+          html += '    <span class="project-name">' + p.title + '</span>';
+          html += '    <span class="category-dot ' + p.category + '" title="' + p.category + '"></span>';
+          html += '  </div>';
+          html += '  <div class="client-name">' + p.client + '</div>';
+          html += '  <div class="card-meta">';
+          html += '    <span><i class="fas fa-map-marker-alt" style="color:#EFBF04;"></i> ' + p.location + '</span>';
+          html += '    <span><i class="far fa-calendar"></i> ' + p.year + '</span>';
+          html += '    <span><i class="fas fa-vector-square"></i> ' + p.area + '</span>';
+          html += '  </div>';
+          html += '</div>';
+        });
+
+        listEl.innerHTML = html;
+
+        // Attach click handlers
+        listEl.querySelectorAll('.map-project-card').forEach(function (card) {
+          card.addEventListener('click', function () {
+            var id = this.getAttribute('data-id');
+            selectProject(id);
+          });
+        });
+      }
+
+      // ── Select a project ──
+      function selectProject(id) {
+        var project = PROJECT_DATA.find(function (p) { return p.id === id; });
+        if (!project || !project.coordinates) return;
+
+        activeProjectId = id;
+
+        // Update iframe
+        var lat = project.coordinates[0];
+        var lng = project.coordinates[1];
+        iframe.src = buildEmbedUrl(lat, lng);
+
+        // Update active states
+        listEl.querySelectorAll('.map-project-card').forEach(function (card) {
+          if (card.getAttribute('data-id') === id) {
+            card.classList.add('active');
+            // Scroll the card into view
+            card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          } else {
+            card.classList.remove('active');
+          }
+        });
+      }
+
+      // ── Filter buttons ──
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          activeFilter = this.getAttribute('data-filter');
+
+          // Update button states
+          filterBtns.forEach(function (b) { b.classList.remove('active'); });
+          this.classList.add('active');
+
+          // Re-render
+          renderList();
+        });
+      });
+
+      // ── Init ──
+      function init() {
+        if (typeof PROJECT_DATA === 'undefined') return;
+
+        // Stats
+        document.getElementById('statProjects').textContent = PROJECT_DATA.length;
+        document.getElementById('statCities').textContent = new Set(PROJECT_DATA.map(function (p) { return p.location; })).size;
+
+        // Render
+        renderList();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -76,33 +76,71 @@
   <style>
     /* ── Stats Bar (premium) ── */
     .ix-stat {
-      text-align: center;
-      padding: 2rem 1rem;
-      border-left: 1px solid rgba(255, 255, 255, 0.10);
+      position: relative;
+      text-align: left;
+      padding: clamp(1.75rem, 3.5vw, 2.75rem) clamp(1rem, 2.5vw, 2rem);
+      border-left: 1px solid rgba(255, 255, 255, 0.08);
       transition: background 0.4s ease;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
     }
     .ix-stat:first-child { border-left: none; }
-    .ix-stat:hover { background: rgba(239, 191, 4, 0.05); }
+    .ix-stat::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #EFBF04, transparent);
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .ix-stat:hover::before { width: 60%; }
+    .ix-stat:hover { background: rgba(239, 191, 4, 0.03); }
+    .ix-stat-icon {
+      font-size: 0.9rem;
+      color: rgba(239, 191, 4, 0.6);
+      margin-bottom: 0.25rem;
+    }
     .ix-stat-num {
       font-family: 'Oswald', 'Barlow Condensed', sans-serif;
       font-weight: 700;
-      font-size: clamp(2.75rem, 6vw, 4.5rem);
+      font-size: clamp(2.25rem, 6vw, 4.5rem);
       line-height: 1;
       color: #EFBF04;
       letter-spacing: -0.02em;
+      display: flex;
+      align-items: baseline;
+      gap: 0.1rem;
+    }
+    .ix-stat-num-suffix {
+      font-size: 0.5em;
+      color: rgba(239, 191, 4, 0.7);
+      font-weight: 600;
+      margin-left: 0.1em;
     }
     .ix-stat-label {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 0.65rem;
       font-weight: 700;
-      letter-spacing: 0.3em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
       color: #B3B3B3;
       margin-top: 0.75rem;
     }
     @media (max-width: 767px) {
-      .ix-stat { padding: 1.5rem 0.75rem; border-left: none; border-top: 1px solid rgba(255, 255, 255, 0.10); }
+      .ix-stat {
+        padding: 1.5rem 1.25rem;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
       .ix-stat:first-child, .ix-stat:nth-child(2) { border-top: none; }
+      .ix-stat:nth-child(odd) { border-right: 1px solid rgba(255, 255, 255, 0.08); }
+      .ix-stat-label { font-size: 0.55rem; letter-spacing: 0.2em; }
+      .ix-stat-num { font-size: clamp(2rem, 9vw, 2.75rem); }
+      .ix-stat-icon { font-size: 0.8rem; }
     }
 
     /* ── Core Value cards (editorial tcard) ── */
@@ -864,23 +902,27 @@
   </section>
 
   <!-- IMPACT STATS STRIP -->
-  <section class="border-b border-clay-border bg-clay-mist/60 relative z-20">
-    <div class="container mx-auto px-6">
+  <section class="border-y border-clay-border bg-clay-mist/60 relative z-20">
+    <div class="container mx-auto px-4 md:px-6">
       <div class="grid grid-cols-2 md:grid-cols-4">
         <div class="ix-stat reveal-up">
-          <div class="ix-stat-num"><span class="stat-counter" data-target="12">0</span></div>
+          <div class="ix-stat-icon"><i class="fas fa-award"></i></div>
+          <div class="ix-stat-num"><span class="stat-counter" data-target="12">0</span><span class="ix-stat-num-suffix">+</span></div>
           <div class="ix-stat-label">Years Excellence</div>
         </div>
         <div class="ix-stat reveal-up" style="transition-delay: 100ms;">
-          <div class="ix-stat-num"><span class="stat-counter" data-target="33">0</span></div>
+          <div class="ix-stat-icon"><i class="fas fa-check-circle"></i></div>
+          <div class="ix-stat-num"><span class="stat-counter" data-target="33">0</span><span class="ix-stat-num-suffix">+</span></div>
           <div class="ix-stat-label">Projects Delivered</div>
         </div>
         <div class="ix-stat reveal-up" style="transition-delay: 200ms;">
-          <div class="ix-stat-num"><span class="stat-counter" data-target="90">0</span></div>
+          <div class="ix-stat-icon"><i class="fas fa-building"></i></div>
+          <div class="ix-stat-num"><span class="stat-counter" data-target="90">0</span><span class="ix-stat-num-suffix">+</span></div>
           <div class="ix-stat-label">Buildings Built</div>
         </div>
         <div class="ix-stat reveal-up" style="transition-delay: 300ms;">
-          <div class="ix-stat-num">5.7M</div>
+          <div class="ix-stat-icon"><i class="fas fa-ruler-combined"></i></div>
+          <div class="ix-stat-num">5.7<span class="ix-stat-num-suffix">M</span></div>
           <div class="ix-stat-label">Sq.Ft Constructed</div>
         </div>
       </div>

@@ -364,11 +364,17 @@ body::before[data-md-noise] {
   .md-header-inner { padding: 0 3.5rem; height: var(--header-h-xl); }
 }
 
-.md-logo { display: flex; align-items: center; gap: 0.75rem; }
-.md-logo img { height: 2.75rem; width: auto; transition: filter var(--t-base-ms); }
-@media (min-width: 1024px) { .md-logo img { height: 3.25rem; } }
-@media (min-width: 1280px) { .md-logo img { height: 4rem; } }
-.md-logo:hover img { filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.35)); }
+.md-logo { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
+.md-logo img {
+  height: 2.75rem;
+  width: auto;
+  display: block;
+  transition: filter var(--t-base-ms), opacity var(--t-base-ms);
+}
+@media (min-width: 768px)  { .md-logo img { height: 3.75rem; } }
+@media (min-width: 1280px) { .md-logo img { height: 4.5rem; } }
+@media (min-width: 1680px) { .md-logo img { height: 5rem; } }
+.md-logo:hover img { filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.35)); opacity: 0.9; }
 
 .md-nav {
   display: none;

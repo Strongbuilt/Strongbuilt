@@ -5,293 +5,280 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terms of Service | Strong Built</title>
-  <meta name="description" content="Terms of Service for Strong Built - the terms and conditions governing use of our website and services.">
-  <meta name="keywords" content="Strong Built terms, terms of service, terms and conditions">
-  <meta name="author" content="Strong Built">
-  <meta name="robots" content="index, follow">
+  <meta name="description" content="Strong Built terms of service — rules governing use of our website and services.">
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/Favicon/favicon-96x96.png" sizes="96x96">
   <link rel="icon" type="image/svg+xml" href="assets/Favicon/favicon.svg">
   <link rel="shortcut icon" href="assets/Favicon/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Favicon/apple-touch-icon.png">
-  <meta name="apple-mobile-web-app-title" content="Strong Built">
-  <link rel="manifest" href="assets/Favicon/site.webmanifest">
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Strong Built">
-  <meta property="og:title" content="Terms of Service | Strong Built">
-  <meta property="og:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
-  <meta property="og:locale" content="en_IN">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
-  <!-- Global Styles -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="theme.css">
 
-  <link rel="stylesheet" href="dist/app.css">
+  <style>
+    .lg-hero { position: relative; padding: clamp(7rem,12vw,10rem) 0 clamp(2rem,4vw,3.5rem); text-align: center; overflow: hidden; }
+    .lg-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at top, rgba(245,158,11,0.08) 0%, transparent 55%); pointer-events: none; }
+    .lg-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem,6vw,5rem); font-weight: 600; line-height: 0.95; margin: 1.5rem 0 1.5rem; }
+    .lg-hero h1 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .lg-hero .lede { color: var(--fg-muted); font-family: var(--font-label); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; }
+
+    .lg-content { padding-block: clamp(3rem,5vw,5rem) clamp(4rem,7vw,6rem); }
+    .lg-card {
+      max-width: 52rem;
+      margin: 0 auto;
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: clamp(1.75rem,4vw,3rem);
+      display: flex;
+      flex-direction: column;
+      gap: 2.25rem;
+    }
+    .lg-card section h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem,2.2vw,1.6rem);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--fg);
+      margin: 0 0 1rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+    .lg-card section h2::before {
+      content: '';
+      width: 1.75rem;
+      height: 1px;
+      background: var(--accent);
+      transform: translateY(-0.35em);
+      flex-shrink: 0;
+    }
+    .lg-card p { color: var(--fg-muted); line-height: 1.75; margin: 0 0 0.9rem; font-size: 0.95rem; }
+    .lg-card p:last-child { margin-bottom: 0; }
+    .lg-card p strong { color: var(--fg); font-weight: 500; }
+    .lg-card ul { list-style: none; padding: 0; margin: 0.4rem 0 0; display: flex; flex-direction: column; gap: 0.75rem; }
+    .lg-card ul li { display: flex; align-items: flex-start; gap: 0.75rem; color: var(--fg-muted); line-height: 1.65; font-size: 0.95rem; }
+    .lg-card ul li::before { content: '\f054'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--accent); font-size: 0.6rem; margin-top: 0.55rem; flex-shrink: 0; }
+    .lg-card ul li strong { color: var(--fg); font-weight: 500; }
+
+    .lg-contact { padding-left: 1.25rem; border-left: 2px solid var(--accent); margin-top: 0.5rem; }
+    .lg-contact p { margin-bottom: 0.4rem; }
+    .lg-contact .name { color: var(--fg); font-family: var(--font-display); font-weight: 500; letter-spacing: 0.02em; }
+    .lg-contact a { color: var(--fg-muted); transition: color var(--t-base-ms); }
+    .lg-contact a:hover { color: var(--accent); }
+    .lg-contact i { color: var(--accent); margin-right: 0.5rem; font-size: 0.85rem; }
+  </style>
 </head>
 
-<body class="bg-noise antialiased overflow-x-hidden selection:bg-brand-gold selection:text-black">
+<body class="md-atmospheric">
 
-  <!-- NAVIGATION OVERLAY (Side Drawer) -->
-  <div id="navOverlay" class="nav-overlay">
-    <div id="navBackdrop" class="nav-overlay-backdrop"></div>
-    <div class="nav-overlay-content p-8 md:p-10">
-      <div class="flex justify-between items-center mb-12">
-        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto opacity-80">
-        <button id="closeMenuBtn" class="nav-close-btn"><i class="fas fa-times"></i></button>
-      </div>      <ul class="space-y-0 flex-1">
-        <li><a href="index.html" class="sidebar-link">Home</a></li>
-        <li>
-          <button class="sidebar-dropdown-btn">
-            <span>About</span> <i class="fas fa-chevron-down"></i>
-          </button>
-          <div class="sidebar-submenu">
-            <a href="story.html" class="sidebar-sublink">Our Story</a>
-            <a href="leadership.html" class="sidebar-sublink">Leadership</a>
-            <a href="culture.html" class="sidebar-sublink">Culture</a>
-            <a href="recognition.html" class="sidebar-sublink">Recognition</a>
-          </div>
-        </li>
-        <li>
-          <button class="sidebar-dropdown-btn">
-            <span>Projects</span> <i class="fas fa-chevron-down"></i>
-          </button>
-          <div class="sidebar-submenu">
-            <a href="projects.html" class="sidebar-sublink">Portfolio</a>
-            <a href="map.html" class="sidebar-sublink">Project Map</a>
-          </div>
-        </li>
-        <li><a href="services.html" class="sidebar-link">Services</a></li>
-        <li><a href="clients.html" class="sidebar-link">Clients</a></li>
-        <li><a href="investors.html" class="sidebar-link">Investors</a></li>
-        <li><a href="csr.html" class="sidebar-link">CSR</a></li>
-        <li><a href="careers.html" class="sidebar-link">Careers</a></li>
-        <li><a href="resources.html" class="sidebar-link">Resources</a></li>
-        <li><a href="contact.html" class="sidebar-link">Contact</a></li>
-      </ul>
-      <div class="nav-info-block">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
-          <div class="nav-info-item">
-            <span class="nav-info-label">Call</span>
-            <p class="nav-info-value">+91 9619875081</p>
-          </div>
-          <div class="nav-info-item">
-            <span class="nav-info-label">Email</span>
-            <p class="nav-info-value">strongbuilt@skywaygroup.co.in</p>
+  <div class="md-orb" style="top:-180px;left:10%;width:480px;height:480px;" aria-hidden="true"></div>
+  <div class="md-orb" style="bottom:10%;right:-80px;width:380px;height:380px;" aria-hidden="true"></div>
+
+  <header class="md-header" id="mainHeader">
+    <div class="md-header-inner">
+      <a href="index.html" class="md-logo" aria-label="Strong Built — Home"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built"></a>
+      <nav class="md-nav" aria-label="Primary">
+        <div class="md-nav-item">
+          <button class="md-nav-link" type="button" aria-haspopup="true" aria-expanded="false">About <i class="fas fa-chevron-down"></i></button>
+          <div class="md-nav-dropdown" role="menu">
+            <a href="story.html" role="menuitem"><i class="fas fa-book-open"></i> Our Story</a>
+            <a href="leadership.html" role="menuitem"><i class="fas fa-users"></i> Leadership</a>
+            <a href="culture.html" role="menuitem"><i class="fas fa-heart"></i> Culture</a>
+            <a href="recognition.html" role="menuitem"><i class="fas fa-trophy"></i> Recognition</a>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- HEADER -->
-  <header class="fixed w-full z-50 transition-all duration-300 glass-header" id="mainHeader">
-    <div class="container mx-auto px-4 md:px-6 h-20 md:h-24 flex items-center justify-between">
-      <a href="index.html" class="flex items-center group relative z-50">
-        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built Logo" class="h-14 md:h-24 w-auto object-contain transition duration-300 hover:opacity-90">
-      </a>
-      <div class="flex items-center">
-        <button id="menuToggle" class="menu-btn group">
-          <div class="menu-icon"><span></span><span></span><span></span></div>
-        </button>
-      </div>
+        <div class="md-nav-item">
+          <button class="md-nav-link" type="button" aria-haspopup="true" aria-expanded="false">Projects <i class="fas fa-chevron-down"></i></button>
+          <div class="md-nav-dropdown" role="menu">
+            <a href="projects.html" role="menuitem"><i class="fas fa-th"></i> Portfolio</a>
+            <a href="map.html" role="menuitem"><i class="fas fa-map-marked-alt"></i> Project Map</a>
+          </div>
+        </div>
+        <a href="services.html" class="md-nav-link">Services</a>
+        <a href="clients.html" class="md-nav-link">Clients</a>
+        <a href="investors.html" class="md-nav-link">Investors</a>
+        <a href="csr.html" class="md-nav-link">CSR</a>
+        <a href="careers.html" class="md-nav-link">Careers</a>
+        <a href="resources.html" class="md-nav-link">Resources</a>
+      </nav>
+      <a href="contact.html" class="md-btn md-btn-primary md-header-cta">Contact Us</a>
+      <button id="menuToggle" class="md-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer"><i class="fas fa-bars"></i></button>
     </div>
   </header>
 
-  <div class="h-24"></div>
+  <div id="navDrawer" class="md-drawer" aria-hidden="true">
+    <div class="md-drawer-backdrop" id="drawerBackdrop"></div>
+    <aside class="md-drawer-panel" role="dialog" aria-label="Navigation">
+      <div class="md-drawer-header">
+        <div class="md-logo"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built" style="height:2.75rem;width:auto;display:block;"></div>
+        <button class="md-menu-btn" id="drawerClose" aria-label="Close menu" style="display:flex;"><i class="fas fa-times"></i></button>
+      </div>
+      <nav>
+        <a href="index.html" class="md-drawer-link">Home</a>
+        <button class="md-drawer-dropbtn" data-dropdown>About <i class="fas fa-chevron-down"></i></button>
+        <div class="md-drawer-sub"><a href="story.html">Our Story</a><a href="leadership.html">Leadership</a><a href="culture.html">Culture</a><a href="recognition.html">Recognition</a></div>
+        <button class="md-drawer-dropbtn" data-dropdown>Projects <i class="fas fa-chevron-down"></i></button>
+        <div class="md-drawer-sub"><a href="projects.html">Portfolio</a><a href="map.html">Project Map</a></div>
+        <a href="services.html" class="md-drawer-link">Services</a>
+        <a href="clients.html" class="md-drawer-link">Clients</a>
+        <a href="investors.html" class="md-drawer-link">Investors</a>
+        <a href="csr.html" class="md-drawer-link">CSR</a>
+        <a href="careers.html" class="md-drawer-link">Careers</a>
+        <a href="resources.html" class="md-drawer-link">Resources</a>
+        <a href="contact.html" class="md-drawer-link">Contact</a>
+      </nav>
+      <div style="margin-top:auto;padding-top:2rem;border-top:1px solid var(--border);">
+        <p class="md-mono" style="font-size:0.75rem;color:var(--fg-subtle);margin-bottom:1rem;">Connect</p>
+        <div style="display:flex;gap:0.5rem;">
+          <a href="https://www.linkedin.com/company/strongbuilt" class="md-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/strongbuilt" class="md-social-btn" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/strongbuilt" class="md-social-btn" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </aside>
+  </div>
 
   <!-- HERO -->
-  <section class="relative overflow-hidden bg-clay-mist flex items-center" style="min-height:360px; height:50svh;">
-    <div class="w-full max-w-[1400px] mx-auto px-6 md:px-10 pt-28 pb-12 relative z-2 text-center">
-      <span class="block text-brand-darkGold font-bold uppercase mb-4 font-heading reveal-up" style="font-size:var(--fs-small); letter-spacing:0.25em; transition-delay:100ms;">Legal</span>
-      <h1 class="text-clay-ink uppercase font-hero reveal-up" style="font-size:var(--fs-hero); line-height:0.92; letter-spacing:-0.02em; font-weight:700; margin-bottom:1.5rem; transition-delay:200ms;">
-        Terms of <span class="gold-gradient-text">Service</span>
-      </h1>
-      <div class="h-px w-24 bg-brand-gold my-8 mx-auto reveal-up" style="transition-delay:300ms;"></div>
-      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-xl mx-auto leading-relaxed reveal-up" style="transition-delay:400ms;">
-        Last updated: January 2026
-      </p>
+  <section class="lg-hero">
+    <div class="md-container">
+      <div class="md-reveal">
+        <div class="md-badge" style="margin-inline:auto;">
+          <span class="md-badge-dot" aria-hidden="true"></span>
+          <span>Legal</span>
+        </div>
+      </div>
+      <h1 class="md-reveal">Terms of <span class="accent">service.</span></h1>
+      <p class="lede md-reveal">Last updated · January 2026</p>
     </div>
   </section>
 
   <!-- CONTENT -->
-  <section class="py-16 md:py-24 relative z-10">
-    <div class="container mx-auto px-6 max-w-4xl">
-      <div class="glass-panel p-6 md:p-12 rounded-sm space-y-8">
+  <section class="lg-content">
+    <div class="md-container">
+      <div class="lg-card md-reveal">
 
-        <div>
-          <h2 class="text-2xl font-bold text-clay-ink font-heading uppercase mb-4 tracking-wide">1. Acceptance of Terms</h2>
-          <p class="text-clay-muted leading-relaxed font-light">
-            By accessing or using the Strong Built website (strongbuilt.netlify.app), you agree to be bound by these
-            Terms of Service. If you disagree with any part of these terms, you may not access the website or use
-            our services.
-          </p>
-        </div>
+        <section><h2>1. Acceptance of Terms</h2>
+          <p>By accessing or using the Strong Built website (strongbuilt.netlify.app), you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access the website or use our services.</p>
+        </section>
 
-        <div>
-          <h2 class="text-2xl font-bold text-clay-ink font-heading uppercase mb-4 tracking-wide">2. Use of the Website</h2>
-          <p class="text-clay-muted leading-relaxed font-light mb-4">You agree to use this website only for lawful purposes. You agree not to:</p>
-          <ul class="space-y-3 text-clay-muted font-light leading-relaxed">
-            <li class="flex gap-3"><i class="fas fa-chevron-right text-brand-darkGold text-[10px] mt-2 flex-shrink-0"></i><span>Use the website in any way that violates applicable laws or regulations.</span></li>
-            <li class="flex gap-3"><i class="fas fa-chevron-right text-brand-darkGold text-[10px] mt-2 flex-shrink-0"></i><span>Engage in fraudulent, harmful, or abusive behavior.</span></li>
-            <li class="flex gap-3"><i class="fas fa-chevron-right text-brand-darkGold text-[10px] mt-2 flex-shrink-0"></i><span>Attempt to gain unauthorized access to any part of the website or its systems.</span></li>
-            <li class="flex gap-3"><i class="fas fa-chevron-right text-brand-darkGold text-[10px] mt-2 flex-shrink-0"></i><span>Transmit viruses, malware, or any other harmful code.</span></li>
-            <li class="flex gap-3"><i class="fas fa-chevron-right text-brand-darkGold text-[10px] mt-2 flex-shrink-0"></i><span>Scrape, copy, or republish content without written permission.</span></li>
+        <section><h2>2. Use of the Website</h2>
+          <p>You agree to use this website only for lawful purposes. You agree not to:</p>
+          <ul>
+            <li>Use the website in any way that violates applicable laws or regulations.</li>
+            <li>Engage in fraudulent, harmful, or abusive behaviour.</li>
+            <li>Attempt to gain unauthorised access to any part of the website or its systems.</li>
+            <li>Transmit viruses, malware, or any other harmful code.</li>
+            <li>Scrape, copy, or republish content without written permission.</li>
           </ul>
-        </div>
+        </section>
 
-        <div>
-          <h2 class="text-2xl font-bold text-clay-ink font-heading uppercase mb-4 tracking-wide">3. Intellectual Property</h2>
-          <p class="text-clay-muted leading-relaxed font-light">
-            All content, trademarks, logos, images, designs, graphics, and materials on this website are the
-            exclusive property of Strong Built or its licensors and are protected by Indian and international
-            copyright, trademark, and intellectual property laws. You may not reproduce, distribute, modify, or
-            create derivative works without our prior written consent.
-          </p>
-        </div>
+        <section><h2>3. Intellectual Property</h2>
+          <p>All content, trademarks, logos, images, designs, graphics, and materials on this website are the exclusive property of Strong Built or its licensors and are protected by Indian and international copyright, trademark, and intellectual property laws. You may not reproduce, distribute, modify, or create derivative works without our prior written consent.</p>
+        </section>
 
-        <div>
-          <h2 class="text-2xl font-bold text-clay-ink font-heading uppercase mb-4 tracking-wide">4. Project Quotes and Inquiries</h2>
-          <p class="text-clay-muted leading-relaxed font-light">
-            Any quotes, estimates, or project information provided through inquiry forms are preliminary and
-            non-binding. Final terms, scope of work, and pricing are only confirmed through formal written contracts
-            executed between Strong Built and the client. Quotes are valid for the period specified in the
-            communication.
-          </p>
-        </div>
+        <section><h2>4. Project Quotes and Inquiries</h2>
+          <p>Any quotes, estimates, or project information provided through inquiry forms are preliminary and non-binding. Final terms, scope of work, and pricing are only confirmed through formal written contracts executed between Strong Built and the client. Quotes are valid for the period specified in the communication.</p>
+        </section>
 
-        <div>
-          <h2 class="text-2xl font-bold text-clay-ink font-heading uppercase mb-4 tracking-wide">5. Construction Services</h2>
-          <p class="text-clay-muted leading-relaxed font-light">
-            All construction, engineering, and consulting services are provided subject to separate written
-            agreements. Project scope, timelines, payment terms, warranties, and deliverables will be defined in
-            each service contract. Nothing on this website constitutes a service agreement or contract.
-          </p>
-        </div>
+        <section><h2>5. Construction Services</h2>
+          <p>All construction, engineering, and consulting services are provided subject to separate written agreements. Project scope, timelines, payment terms, warranties, and deliverables will be defined in each service contract. Nothing on this website constitutes a service agreement or contract.</p>
+        </section>
 
-        <div>
-          <h2 class="text-2xl font-bold text-clay-ink font-heading uppercase mb-4 tracking-wide">6. Third-Party Links</h2>
-          <p class="text-clay-muted leading-relaxed font-light">
-            Our website may contain links to third-party websites or services that are not owned or controlled by
-            Strong Built. We have no control over and assume no responsibility for the content, privacy policies,
-            or practices of any third-party websites.
-          </p>
-        </div>
+        <section><h2>6. Third-Party Links</h2>
+          <p>Our website may contain links to third-party websites or services that are not owned or controlled by Strong Built. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party websites.</p>
+        </section>
 
-        <div>
-          <h2 class="text-2xl font-bold text-clay-ink font-heading uppercase mb-4 tracking-wide">7. Disclaimer of Warranties</h2>
-          <p class="text-clay-muted leading-relaxed font-light">
-            The website and its content are provided "as is" and "as available" without any warranties of any kind,
-            express or implied. Strong Built does not warrant that the website will be uninterrupted, error-free,
-            secure, or free from viruses or other harmful components. While we make every effort to ensure accuracy,
-            we do not guarantee that all information on the website is complete or current.
-          </p>
-        </div>
+        <section><h2>7. Disclaimer of Warranties</h2>
+          <p>The website and its content are provided "as is" and "as available" without any warranties of any kind, express or implied. Strong Built does not warrant that the website will be uninterrupted, error-free, secure, or free from viruses or other harmful components. While we make every effort to ensure accuracy, we do not guarantee that all information on the website is complete or current.</p>
+        </section>
 
-        <div>
-          <h2 class="text-2xl font-bold text-clay-ink font-heading uppercase mb-4 tracking-wide">8. Limitation of Liability</h2>
-          <p class="text-clay-muted leading-relaxed font-light">
-            To the fullest extent permitted by applicable law, Strong Built shall not be liable for any indirect,
-            incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill,
-            arising from your use of or inability to use the website or our services.
-          </p>
-        </div>
+        <section><h2>8. Limitation of Liability</h2>
+          <p>To the fullest extent permitted by applicable law, Strong Built shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill, arising from your use of or inability to use the website or our services.</p>
+        </section>
 
-        <div>
-          <h2 class="text-2xl font-bold text-clay-ink font-heading uppercase mb-4 tracking-wide">9. Indemnification</h2>
-          <p class="text-clay-muted leading-relaxed font-light">
-            You agree to indemnify and hold harmless Strong Built, its officers, directors, employees, and agents
-            from any claims, damages, liabilities, or expenses arising from your violation of these terms or your
-            misuse of the website.
-          </p>
-        </div>
+        <section><h2>9. Indemnification</h2>
+          <p>You agree to indemnify and hold harmless Strong Built, its officers, directors, employees, and agents from any claims, damages, liabilities, or expenses arising from your violation of these terms or your misuse of the website.</p>
+        </section>
 
-        <div>
-          <h2 class="text-2xl font-bold text-clay-ink font-heading uppercase mb-4 tracking-wide">10. Governing Law</h2>
-          <p class="text-clay-muted leading-relaxed font-light">
-            These Terms of Service are governed by and construed in accordance with the laws of India. Any disputes
-            arising out of or related to these terms shall be subject to the exclusive jurisdiction of the courts
-            located in Mumbai, Maharashtra.
-          </p>
-        </div>
+        <section><h2>10. Governing Law</h2>
+          <p>These Terms of Service are governed by and construed in accordance with the laws of India. Any disputes arising out of or related to these terms shall be subject to the exclusive jurisdiction of the courts located in Mumbai, Maharashtra.</p>
+        </section>
 
-        <div>
-          <h2 class="text-2xl font-bold text-clay-ink font-heading uppercase mb-4 tracking-wide">11. Changes to Terms</h2>
-          <p class="text-clay-muted leading-relaxed font-light">
-            We reserve the right to modify these Terms of Service at any time. Any changes will be posted on this
-            page with an updated revision date. Continued use of the website after changes are posted constitutes
-            acceptance of the revised terms.
-          </p>
-        </div>
+        <section><h2>11. Changes to Terms</h2>
+          <p>We reserve the right to modify these Terms of Service at any time. Any changes will be posted on this page with an updated revision date. Continued use of the website after changes are posted constitutes acceptance of the revised terms.</p>
+        </section>
 
-        <div>
-          <h2 class="text-2xl font-bold text-clay-ink font-heading uppercase mb-4 tracking-wide">12. Contact Information</h2>
-          <p class="text-clay-muted leading-relaxed font-light mb-4">
-            For questions about these Terms of Service, please contact:
-          </p>
-          <div class="border-l-2 border-brand-gold pl-4 text-clay-muted font-light">
-            <p class="font-bold text-clay-ink mb-2">Strong Built</p>
-            <p>901-B Wing, 9th Floor, HDIL Kaledonia, Sahar Road,<br>Opp D'Mart, Sambhaji Nagar, Andheri-East,<br>Mumbai - 400069, India</p>
-            <p class="mt-3"><i class="fas fa-envelope text-brand-darkGold mr-2"></i>strongbuilt@skywaygroup.co.in</p>
-            <p><i class="fas fa-phone text-brand-darkGold mr-2"></i>+91 9619875081</p>
+        <section><h2>12. Contact Information</h2>
+          <p>For questions about these Terms of Service, please contact:</p>
+          <div class="lg-contact">
+            <p class="name">Strong Built</p>
+            <p>901-B Wing, 9th Floor, HDIL Kaledonia, Sahar Road,<br>Opp D'Mart, Sambhaji Nagar, Andheri-East,<br>Mumbai — 400069, India</p>
+            <p><i class="fas fa-envelope"></i><a href="mailto:strongbuilt@skywaygroup.co.in">strongbuilt@skywaygroup.co.in</a></p>
+            <p><i class="fas fa-phone"></i><a href="tel:+919619875081">+91 96198 75081</a></p>
           </div>
-        </div>
+        </section>
 
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="bg-clay-mist text-clay-muted pt-16 md:pt-20 pb-10 border-t border-clay-border">
-    <div class="container mx-auto px-6">
-      <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
-        <div>
-          <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto mb-6">
-          <p class="text-clay-faint text-sm font-light leading-relaxed">Forging the future with concrete, steel, and integrity.</p>
+  <footer class="md-footer">
+    <div class="md-container">
+      <div class="md-footer-top">
+        <div class="md-footer-brand">
+          <a href="index.html" aria-label="Strong Built — Home"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="md-footer-logo"></a>
+          <p class="md-footer-tagline">Building <em>legacies</em>, not just structures. Since 2014.</p>
         </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Navigation</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><a href="story.html" class="hover:text-clay-ink transition">About</a></li>
-            <li><a href="services.html" class="hover:text-clay-ink transition">Services</a></li>
-            <li><a href="projects.html" class="hover:text-clay-ink transition">Projects</a></li>
-            <li><a href="clients.html" class="hover:text-clay-ink transition">Clients</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Legal</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><a href="privacy.html" class="hover:text-clay-ink transition">Privacy Policy</a></li>
-            <li><a href="terms.html" class="hover:text-clay-ink transition">Terms of Service</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Contact</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><i class="fas fa-map-marker-alt text-brand-darkGold mr-2"></i> Mumbai, India</li>
-            <li><i class="fas fa-phone text-brand-darkGold mr-2"></i> +91 9619875081</li>
-            <li><i class="fas fa-envelope text-brand-darkGold mr-2"></i> strongbuilt@skywaygroup.co.in</li>
-          </ul>
+        <div class="md-footer-contact-card">
+          <div class="md-fc-item">
+            <span class="md-fc-k"><i class="fas fa-location-dot"></i> Address</span>
+            <p class="md-fc-v">901-B Wing, HDIL Kaledonia,<br>Sahar Road, Andheri-East,<br>Mumbai — 400069</p>
+          </div>
+          <div class="md-fc-item">
+            <span class="md-fc-k"><i class="fas fa-phone"></i> Phone</span>
+            <a class="md-fc-v" href="tel:+919619875081">+91 96198 75081</a>
+            <a class="md-fc-v" href="tel:+912261232500">022 6123 2500</a>
+          </div>
+          <div class="md-fc-item">
+            <span class="md-fc-k"><i class="fas fa-envelope"></i> Email</span>
+            <a class="md-fc-v" href="mailto:sales@strongbuilt.in">sales@strongbuilt.in</a>
+          </div>
         </div>
       </div>
-      <div class="border-t border-clay-border pt-8 text-xs text-clay-muted text-center font-light uppercase tracking-wider">
-        <p>&copy; 2026 Strong Built. All rights reserved.</p>
+      <div class="md-footer-strip">
+        <div class="md-footer-strip-left">
+          <div class="md-footer-socials">
+            <a href="https://www.instagram.com/strongbuilt" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/strongbuilt" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://x.com/strongbuilt" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+          </div>
+          <div class="md-footer-strip-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html" style="color:var(--accent);">Terms of Service</a>
+          </div>
+        </div>
+        <div class="md-footer-strip-center">© 2026 Strong Built — A Skyway Group Company. All Rights Reserved.</div>
+        <div class="md-footer-strip-right">Designed by <b>Abdul Ahad</b></div>
       </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <div class="md-fab" aria-hidden="true">
+    <a href="https://wa.me/919619875081" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="tel:+919619875081" aria-label="Call Strong Built"><i class="fas fa-phone"></i></a>
+  </div>
+
+  <script src="theme.js"></script>
 </body>
+
 </html>

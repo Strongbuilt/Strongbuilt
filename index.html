@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth overflow-x-hidden">
+<html lang="en" class="scroll-smooth">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Strong Built | Engineering Legacies | Premier Mumbai Construction Firm</title>
-  <meta name="description" content="Strong Built is a premier construction firm building legacies across residential, commercial, and institutional sectors with 12+ years of excellence in Mumbai, India. 33+ projects, 90+ buildings, 5.7M+ sq ft delivered.">
-  <meta name="keywords" content="construction company Mumbai, residential construction, commercial construction, industrial construction, Strong Built, building contractors Mumbai, civil construction India">
-  <meta name="author" content="Strong Built">
+  <meta name="description" content="Strong Built is a premier construction firm building legacies across residential, commercial, and institutional sectors with 12+ years of excellence in Mumbai, India.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://strongbuilt.netlify.app/">
 
@@ -19,1362 +17,2427 @@
   <meta name="apple-mobile-web-app-title" content="Strong Built">
   <link rel="manifest" href="assets/Favicon/site.webmanifest">
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://strongbuilt.netlify.app/">
   <meta property="og:title" content="Strong Built | Engineering Legacies">
-  <meta property="og:description" content="Premier construction firm building legacies across residential, commercial, and industrial sectors with 15+ years of excellence in Mumbai, India.">
+  <meta property="og:description" content="Premier construction firm building legacies across residential, commercial, and industrial sectors in Mumbai, India.">
   <meta property="og:image" content="https://strongbuilt.netlify.app/assets/images/home.png">
-  <meta property="og:site_name" content="Strong Built">
-  <meta property="og:locale" content="en_IN">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://strongbuilt.netlify.app/">
-  <meta name="twitter:title" content="Strong Built | Engineering Legacies">
-  <meta name="twitter:description" content="Premier construction firm building legacies across residential, commercial, and industrial sectors with 15+ years of excellence in Mumbai, India.">
-  <meta name="twitter:image" content="https://strongbuilt.netlify.app/assets/images/home.png">
-
-  <!-- Structured Data (JSON-LD) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "GeneralContractor",
-    "name": "Strong Built",
-    "image": "https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png",
-    "description": "Premier construction firm building legacies across residential, commercial, and industrial sectors in Mumbai, India.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "901-B Wing, 9th Floor, HDIL Kaledonia, Sahar Road, Opp D'Mart, Sambhaji Nagar",
-      "addressLocality": "Andheri-East",
-      "addressRegion": "Mumbai",
-      "postalCode": "400069",
-      "addressCountry": "IN"
-    },
-    "telephone": "+91-9619875081",
-    "email": "strongbuilt@skywaygroup.co.in",
-    "url": "https://strongbuilt.netlify.app/",
-    "foundingDate": "2010",
-    "areaServed": "India"
-  }
-  </script>
-
-  <link rel="stylesheet" href="dist/app.css">
-
-  <!-- LCP hero-image preload -->
   <link rel="preload" as="image" href="assets/Projects/monticello.jpg" fetchpriority="high">
 
+  <!-- Fonts: Oswald (hero display), Barlow Condensed (headings/labels), Inter (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+  <!-- Swiper (for signature slider) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="styles.css">
 
   <style>
-    /* ── Stats Bar (premium) ── */
-    .ix-stat {
+    /* ═══════════════════════════════════════════════════════════════
+       MINIMALIST DARK — DESIGN TOKENS
+       Single source of truth for palette, type, spacing, radii, shadows.
+       All components below reference these variables exclusively.
+       ═══════════════════════════════════════════════════════════════ */
+    :root {
+      /* Palette — layered slate + warm amber */
+      --bg:                #0A0A0F;
+      --bg-alt:            #12121A;
+      --muted:             #1A1A24;
+      --fg:                #FAFAFA;
+      --fg-muted:          #A1A1AA;
+      --fg-subtle:         #71717A;
+      --accent:            #F59E0B;
+      --accent-foreground: #0A0A0F;
+      --accent-muted:      rgba(245, 158, 11, 0.15);
+      --border:            rgba(255, 255, 255, 0.08);
+      --border-hover:      rgba(255, 255, 255, 0.15);
+      --card:              rgba(26, 26, 36, 0.6);
+      --card-solid:        #1A1A24;
+
+      /* Shadows — subtle elevation + amber glows (signature) */
+      --shadow-sm:   0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-md:   0 4px 6px rgba(0, 0, 0, 0.3);
+      --shadow-lg:   0 10px 15px rgba(0, 0, 0, 0.3);
+      --shadow-xl:   0 20px 25px rgba(0, 0, 0, 0.4);
+      --glow-sm:     0 0 20px rgba(245, 158, 11, 0.15);
+      --glow-md:     0 0 40px rgba(245, 158, 11, 0.2);
+      --glow-lg:     0 0 60px rgba(245, 158, 11, 0.25);
+      --glow-btn:    0 0 20px rgba(245, 158, 11, 0.4);
+      --border-glow: 0 0 0 1px rgba(245, 158, 11, 0.3), 0 0 20px rgba(245, 158, 11, 0.15);
+
+      /* Radii — softer than sharp, not as dramatic as modern */
+      --r-sm:   6px;
+      --r-md:   8px;
+      --r-lg:   12px;
+      --r-xl:   16px;
+      --r-2xl:  24px;
+      --r-full: 9999px;
+
+      /* Type scale */
+      --t-xs:   0.75rem;
+      --t-sm:   0.875rem;
+      --t-base: 1rem;
+      --t-lg:   1.125rem;
+      --t-xl:   1.25rem;
+      --t-2xl:  1.5rem;
+      --t-3xl:  2rem;
+      --t-4xl:  2.5rem;
+      --t-5xl:  3.5rem;
+      --t-6xl:  4.5rem;
+      --t-7xl:  6rem;
+
+      /* Spacing tokens */
+      --section-y: clamp(5rem, 10vw, 10rem);
+      --container: 100%;
+      --container-max: 1680px;
+
+      /* Font families */
+      --font-display: 'Oswald', 'Barlow Condensed', Impact, sans-serif;
+      --font-heading: 'Barlow Condensed', 'Oswald', sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-label: 'Barlow Condensed', sans-serif;
+    }
+
+    /* ───────────────────────────────────────────────────────────
+       RESET / BASE
+       ─────────────────────────────────────────────────────────── */
+    *,
+    *::before,
+    *::after { box-sizing: border-box; }
+    html,
+    body { margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      font-family: var(--font-body);
+      font-size: var(--t-base);
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+    ::selection {
+      background: var(--accent);
+      color: var(--accent-foreground);
+    }
+
+    /* Atmospheric background — noise + ambient orbs */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+      opacity: 0.015;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      color: var(--fg);
+      text-transform: uppercase;
+    }
+    .md-display {
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: 0.005em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .md-mono {
+      font-family: var(--font-label);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    a { color: inherit; text-decoration: none; transition: color 200ms ease-out; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ───────────────────────────────────────────────────────────
+       LAYOUT PRIMITIVES
+       ─────────────────────────────────────────────────────────── */
+    .md-container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: 1.5rem;
+    }
+    @media (min-width: 768px) { .md-container { padding-inline: 3rem; } }
+    @media (min-width: 1280px) { .md-container { padding-inline: 5rem; } }
+    @media (min-width: 1680px) { .md-container { padding-inline: 6rem; } }
+
+    .md-section {
+      padding-block: var(--section-y);
       position: relative;
-      text-align: left;
-      padding: clamp(1.75rem, 3.5vw, 2.75rem) clamp(1rem, 2.5vw, 2rem);
-      border-left: 1px solid rgba(255, 255, 255, 0.08);
-      transition: background 0.4s ease;
+    }
+
+    /* ───────────────────────────────────────────────────────────
+       AMBIENT ORBS — signature atmospheric background
+       ─────────────────────────────────────────────────────────── */
+    .md-orb {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    @media (max-width: 767px) {
+      .md-orb { filter: blur(80px); }
+    }
+
+    /* ───────────────────────────────────────────────────────────
+       BUTTONS
+       ─────────────────────────────────────────────────────────── */
+    .md-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: var(--t-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 0 1.75rem;
+      height: 2.875rem;
+      border-radius: var(--r-lg);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 200ms ease-out;
+      white-space: nowrap;
+      text-decoration: none;
+      min-width: 44px;
+    }
+    .md-btn:active { transform: scale(0.98); }
+    .md-btn:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+    }
+
+    .md-btn-primary {
+      background: var(--accent);
+      color: var(--accent-foreground);
+    }
+    .md-btn-primary:hover {
+      filter: brightness(1.1);
+      box-shadow: var(--glow-btn);
+    }
+
+    .md-btn-secondary {
+      background: transparent;
+      color: var(--fg);
+      border-color: var(--border-hover);
+    }
+    .md-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .md-btn-ghost {
+      background: transparent;
+      color: var(--fg);
+    }
+    .md-btn-ghost:hover { background: rgba(255, 255, 255, 0.05); }
+
+    .md-btn-lg { height: 3rem; padding: 0 2rem; font-size: var(--t-base); }
+
+    /* ───────────────────────────────────────────────────────────
+       CARDS — glass effect
+       ─────────────────────────────────────────────────────────── */
+    .md-card {
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      transition: all 300ms ease-out;
+      position: relative;
       overflow: hidden;
+    }
+    .md-card-interactive:hover {
+      border-color: var(--border-hover);
+      background: rgba(26, 26, 36, 0.8);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+    .md-card-highlight {
+      border-color: rgba(245, 158, 11, 0.25);
+      box-shadow: var(--border-glow);
+    }
+
+    /* ───────────────────────────────────────────────────────────
+       PILL / TAG / EYEBROW
+       ─────────────────────────────────────────────────────────── */
+    .md-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-family: var(--font-label);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+    }
+    .md-eyebrow-accent { color: var(--accent); }
+    .md-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.5;
+    }
+
+    .md-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.5rem 1.125rem;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      background: var(--accent-muted);
+      color: var(--accent);
+      border-radius: var(--r-full);
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      box-shadow: var(--glow-sm);
+    }
+    .md-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: md-pulse 2s ease-in-out infinite;
+    }
+    @keyframes md-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.2); }
+    }
+
+    /* ───────────────────────────────────────────────────────────
+       HEADER / NAV
+       ─────────────────────────────────────────────────────────── */
+    .md-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: rgba(10, 10, 15, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .md-header-inner {
+      width: 100%;
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding: 0 1.5rem;
+      height: 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .md-header-inner { padding: 0 2.5rem; height: 5.75rem; }
+    }
+    @media (min-width: 1280px) {
+      .md-header-inner { padding: 0 3.5rem; height: 6.5rem; }
+    }
+    .md-logo {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .md-logo img {
+      height: 2.75rem;
+      width: auto;
+      display: block;
+      transition: opacity 200ms;
+    }
+    .md-logo:hover img { opacity: 0.85; }
+    @media (min-width: 768px) { .md-logo img { height: 3.75rem; } }
+    @media (min-width: 1280px) { .md-logo img { height: 4.5rem; } }
+    @media (min-width: 1680px) { .md-logo img { height: 5rem; } }
+
+    /* Desktop primary nav — all links inline */
+    .md-nav {
+      display: none;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    @media (min-width: 1024px) { .md-nav { display: flex; } }
+    @media (min-width: 1280px) { .md-nav { gap: 0.5rem; } }
+
+    .md-nav-item { position: relative; }
+    .md-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      color: var(--fg-muted);
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--r-md);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 200ms;
+      white-space: nowrap;
+    }
+    @media (min-width: 1280px) {
+      .md-nav-link { font-size: 0.9rem; padding: 0.5rem 0.875rem; }
+    }
+    .md-nav-link:hover,
+    .md-nav-item:hover .md-nav-link,
+    .md-nav-link:focus-visible {
+      color: var(--fg);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .md-nav-link.is-active { color: var(--accent); }
+    .md-nav-link:focus-visible { outline: none; color: var(--accent); }
+    .md-nav-link i.fa-chevron-down {
+      font-size: 0.6rem;
+      opacity: 0.7;
+      transition: transform 200ms;
+    }
+    .md-nav-item:hover .md-nav-link i.fa-chevron-down {
+      transform: rotate(180deg);
+      color: var(--accent);
+    }
+
+    /* Desktop dropdown panel */
+    .md-nav-dropdown {
+      position: absolute;
+      top: calc(100% + 0.25rem);
+      left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      min-width: 13rem;
+      padding: 0.5rem;
+      background: rgba(18, 18, 26, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-hover);
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-xl);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      z-index: 60;
+    }
+    .md-nav-item:hover .md-nav-dropdown,
+    .md-nav-item:focus-within .md-nav-dropdown,
+    .md-nav-link[aria-expanded="true"] + .md-nav-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .md-nav-link[aria-expanded="true"] i.fa-chevron-down {
+      transform: rotate(180deg);
+      color: var(--accent);
+    }
+    .md-nav-dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.625rem 0.875rem;
+      color: var(--fg-muted);
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border-radius: var(--r-md);
+      transition: all 180ms;
+      white-space: nowrap;
+    }
+    .md-nav-dropdown a:hover {
+      color: var(--accent);
+      background: rgba(245, 158, 11, 0.08);
+    }
+    .md-nav-dropdown a i {
+      font-size: 0.65rem;
+      color: var(--fg-subtle);
+      width: 14px;
+      text-align: center;
+    }
+    .md-nav-dropdown a:hover i { color: var(--accent); }
+
+    /* Header CTA button (Contact) */
+    .md-header-cta {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .md-header-cta { display: inline-flex; flex-shrink: 0; }
+    }
+
+    /* Hamburger (mobile + tablet only) */
+    .md-menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--r-md);
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--fg);
+      cursor: pointer;
+      transition: all 200ms;
+      flex-shrink: 0;
+    }
+    .md-menu-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border-hover);
+    }
+    @media (min-width: 1024px) { .md-menu-btn { display: none; } }
+
+    /* Mobile nav drawer */
+    .md-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .md-drawer-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      transition: opacity 300ms;
+    }
+    .md-drawer-panel {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      height: 100%;
+      background: var(--bg-alt);
+      border-left: 1px solid var(--border);
+      padding: 2rem;
+      transform: translateX(100%);
+      transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
     }
-    .ix-stat:first-child { border-left: none; }
-    .ix-stat::before {
+    .md-drawer.is-open { pointer-events: auto; }
+    .md-drawer.is-open .md-drawer-backdrop { opacity: 1; }
+    .md-drawer.is-open .md-drawer-panel { transform: translateX(0); }
+    .md-drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+    .md-drawer-link {
+      display: block;
+      padding: 0.875rem 0;
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--fg);
+      border-bottom: 1px solid var(--border);
+      transition: all 200ms;
+    }
+    .md-drawer-link:hover { color: var(--accent); padding-left: 0.5rem; }
+    .md-drawer-dropbtn {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.875rem 0;
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--fg);
+      border: none;
+      border-bottom: 1px solid var(--border);
+      background: none;
+      cursor: pointer;
+      transition: all 200ms;
+    }
+    .md-drawer-dropbtn:hover { color: var(--accent); }
+    .md-drawer-dropbtn i { font-size: 0.75rem; transition: transform 300ms; opacity: 0.6; }
+    .md-drawer-dropbtn.is-open i { transform: rotate(180deg); color: var(--accent); }
+    .md-drawer-sub {
+      max-height: 0;
+      overflow: hidden;
+      padding-left: 1rem;
+      transition: max-height 400ms ease;
+    }
+    .md-drawer-sub.is-open { max-height: 400px; }
+    .md-drawer-sub a {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--fg-muted);
+      padding: 0.625rem 0;
+      transition: color 200ms;
+    }
+    .md-drawer-sub a:hover { color: var(--accent); }
+
+    /* ───────────────────────────────────────────────────────────
+       HERO
+       ─────────────────────────────────────────────────────────── */
+    .md-hero {
+      position: relative;
+      padding-top: clamp(7rem, 12vw, 9rem);
+      padding-bottom: var(--section-y);
+      overflow: hidden;
+    }
+    .md-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (min-width: 900px) {
+      .md-hero-grid { grid-template-columns: 1.15fr 0.85fr; gap: 5rem; }
+    }
+    @media (min-width: 1440px) {
+      .md-hero-grid { gap: 8rem; }
+    }
+    .md-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin: 1.5rem 0;
+    }
+    .md-hero h1 .md-accent-text {
+      color: var(--accent);
+      font-style: italic;
+      font-weight: 500;
+    }
+    .md-hero-lede {
+      font-size: var(--t-lg);
+      color: var(--fg-muted);
+      max-width: 32rem;
+      line-height: 1.65;
+      margin-bottom: 2.5rem;
+    }
+    .md-hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    /* Hero stack — image cards */
+    .md-hero-visual {
+      position: relative;
+      display: block;
+      width: 100%;
+      max-width: 440px;
+      margin-inline: auto;
+      aspect-ratio: 4 / 4.2;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    @media (min-width: 1440px) { .md-hero-visual { max-width: 500px; } }
+    .md-hero-card {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-xl);
+      transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 500ms ease, box-shadow 500ms ease;
+    }
+    .md-hero-card img { width: 100%; height: 100%; object-fit: cover; }
+    .md-hero-card-caption {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.25rem;
+      right: 1.25rem;
+      padding: 0.75rem 1rem;
+      background: rgba(10, 10, 15, 0.8);
+      backdrop-filter: blur(12px);
+      border-radius: var(--r-md);
+      border: 1px solid var(--border);
+      font-family: var(--font-label);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--fg-muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .md-hero-card:nth-child(1) {
+      transform: translate(-5%, -3%) rotate(-3deg);
+      opacity: 0.55;
+    }
+    .md-hero-card:nth-child(2) {
+      transform: translate(4%, 2%) rotate(2.5deg);
+      opacity: 0.8;
+    }
+    .md-hero-card:nth-child(3) {
+      transform: translate(0, 0);
+      z-index: 2;
+      box-shadow: var(--shadow-xl), var(--glow-md);
+    }
+    .md-hero-visual:hover .md-hero-card:nth-child(1) {
+      transform: translate(-22%, -10%) rotate(-12deg) scale(1.02);
+      opacity: 0.9;
+    }
+    .md-hero-visual:hover .md-hero-card:nth-child(2) {
+      transform: translate(20%, 8%) rotate(10deg) scale(1.02);
+      opacity: 1;
+    }
+    .md-hero-visual:hover .md-hero-card:nth-child(3) {
+      transform: translate(0, -3%) scale(1.04);
+      box-shadow: var(--shadow-xl), var(--glow-lg);
+    }
+
+    .md-hero-badge-float {
+      position: absolute;
+      bottom: 8%;
+      right: -6%;
+      z-index: 3;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-hover);
+      border-radius: var(--r-lg);
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow-lg), var(--glow-sm);
+    }
+    .md-hero-badge-float strong {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+    .md-hero-badge-float small {
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--fg-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      margin-top: 0.4rem;
+      display: block;
+    }
+    @media (max-width: 899px) {
+      .md-hero-badge-float { right: 2%; bottom: 4%; padding: 0.75rem 1rem; }
+      .md-hero-badge-float strong { font-size: 1.35rem; }
+    }
+
+    /* ───────────────────────────────────────────────────────────
+       SECTION HEADERS
+       ─────────────────────────────────────────────────────────── */
+    .md-section-head {
+      max-width: 48rem;
+      margin-bottom: 3.5rem;
+    }
+    .md-section-head.md-center {
+      margin-inline: auto;
+      text-align: center;
+    }
+    .md-section-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 1;
+      margin: 1rem 0 0.75rem;
+      text-transform: uppercase;
+    }
+    .md-section-head p {
+      font-size: var(--t-lg);
+      color: var(--fg-muted);
+      line-height: 1.6;
+      text-transform: none;
+    }
+
+    /* ───────────────────────────────────────────────────────────
+       STATS
+       ─────────────────────────────────────────────────────────── */
+    .md-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .md-stats { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+    }
+    .md-stat {
+      padding: 1.75rem 1.5rem;
+      border-radius: var(--r-lg);
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      transition: all 300ms ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+    .md-stat:hover {
+      border-color: rgba(245, 158, 11, 0.2);
+      background: rgba(26, 26, 36, 0.8);
+      transform: translateY(-2px);
+    }
+    .md-stat::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 0;
       height: 2px;
-      background: linear-gradient(90deg, #EFBF04, transparent);
-      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      background: var(--accent);
+      transition: width 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .ix-stat:hover::before { width: 60%; }
-    .ix-stat:hover { background: rgba(239, 191, 4, 0.03); }
-    .ix-stat-icon {
-      font-size: 0.9rem;
-      color: rgba(239, 191, 4, 0.6);
-      margin-bottom: 0.25rem;
+    .md-stat:hover::before { width: 100%; }
+    .md-stat-icon {
+      width: 2rem;
+      height: 2rem;
+      border-radius: var(--r-md);
+      background: var(--accent-muted);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
     }
-    .ix-stat-num {
-      font-family: 'Oswald', 'Barlow Condensed', sans-serif;
+    .md-stat-num {
+      font-family: var(--font-display);
       font-weight: 700;
-      font-size: clamp(2.25rem, 6vw, 4.5rem);
+      font-size: clamp(2.25rem, 5vw, 3.25rem);
       line-height: 1;
-      color: #EFBF04;
-      letter-spacing: -0.02em;
+      letter-spacing: 0;
+      color: var(--fg);
       display: flex;
       align-items: baseline;
-      gap: 0.1rem;
+      gap: 0.125rem;
     }
-    .ix-stat-num-suffix {
-      font-size: 0.5em;
-      color: rgba(239, 191, 4, 0.7);
+    .md-stat-suffix {
+      color: var(--accent);
+      font-size: 0.55em;
+      font-weight: 500;
+    }
+    .md-stat-label {
+      font-family: var(--font-label);
+      font-size: 0.75rem;
       font-weight: 600;
-      margin-left: 0.1em;
-    }
-    .ix-stat-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.25em;
+      color: var(--fg-subtle);
       text-transform: uppercase;
-      color: #B3B3B3;
-      margin-top: 0.75rem;
-    }
-    @media (max-width: 767px) {
-      .ix-stat {
-        padding: 1.5rem 1.25rem;
-        border-left: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-      }
-      .ix-stat:first-child, .ix-stat:nth-child(2) { border-top: none; }
-      .ix-stat:nth-child(odd) { border-right: 1px solid rgba(255, 255, 255, 0.08); }
-      .ix-stat-label { font-size: 0.55rem; letter-spacing: 0.2em; }
-      .ix-stat-num { font-size: clamp(2rem, 9vw, 2.75rem); }
-      .ix-stat-icon { font-size: 0.8rem; }
+      letter-spacing: 0.22em;
+      margin-top: 0.625rem;
     }
 
-    /* ── Core Value cards (editorial tcard) ── */
-    .ix-vcard {
-      position: relative;
-      padding: 2.5rem 2rem;
-      background: linear-gradient(155deg, rgba(48, 43, 45, 0.85) 0%, rgba(30, 27, 28, 0.9) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      border-radius: 4px;
-      overflow: hidden;
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.5s ease;
+    /* ───────────────────────────────────────────────────────────
+       AWARDS / CREDIBILITY PILLS
+       ─────────────────────────────────────────────────────────── */
+    .md-awards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
     }
-    .ix-vcard::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 40%;
-      height: 2px;
-      background: linear-gradient(90deg, #EFBF04, transparent);
-      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .ix-vcard:hover {
-      transform: translateY(-6px);
-      border-color: rgba(239, 191, 4, 0.35);
-      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(239, 191, 4, 0.15);
-    }
-    .ix-vcard:hover::before { width: 100%; }
-    .ix-vcard-icon {
+    .md-award {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(239, 191, 4, 0.2), rgba(239, 191, 4, 0.08) 70%);
-      border: 1px solid rgba(239, 191, 4, 0.3);
-      color: #EFBF04;
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 4px 20px -8px rgba(239, 191, 4, 0.4);
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .ix-vcard:hover .ix-vcard-icon { transform: scale(1.08) rotate(-4deg); }
-    .ix-vcard-tag {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.3em;
+      gap: 0.5rem;
+      padding: 0.625rem 1.125rem;
+      border-radius: var(--r-full);
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--fg-muted);
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: #EFBF04;
-      margin-bottom: 0.5rem;
+      transition: all 200ms;
     }
-    .ix-vcard-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 1.5rem;
-      text-transform: uppercase;
-      color: #EEEEEE;
-      letter-spacing: 0.02em;
-      margin-bottom: 1rem;
+    .md-award:hover {
+      border-color: rgba(245, 158, 11, 0.25);
+      color: var(--fg);
+      box-shadow: var(--glow-sm);
     }
-    .ix-vcard-body {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.92rem;
-      line-height: 1.65;
-      color: #B3B3B3;
-      font-weight: 300;
-    }
-    .ix-vcard-num {
-      position: absolute;
-      top: 1.25rem;
-      right: 1.25rem;
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 1.75rem;
-      color: rgba(239, 191, 4, 0.18);
-      line-height: 1;
-      transition: color 0.4s ease;
-    }
-    .ix-vcard:hover .ix-vcard-num { color: rgba(239, 191, 4, 0.45); }
+    .md-award i { color: var(--accent); font-size: 0.75rem; }
+    .md-award-year { color: var(--accent); margin-left: 0.25rem; }
 
-    /* ── Project carousel metadata ── */
-    .ix-slide-meta {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      margin-top: 1.5rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid rgba(239, 191, 4, 0.15);
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+    /* ───────────────────────────────────────────────────────────
+       INTRO — 2-col with feature image
+       ─────────────────────────────────────────────────────────── */
+    .md-intro {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
     }
-    .ix-slide-meta-item { text-align: center; min-width: 70px; }
-    .ix-slide-meta-k {
-      display: block;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.55rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: #EFBF04;
-      margin-bottom: 0.25rem;
+    @media (min-width: 900px) {
+      .md-intro { grid-template-columns: 1fr 1fr; gap: 5rem; }
     }
-    .ix-slide-meta-v {
-      display: block;
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: #EEEEEE;
-      letter-spacing: 0.02em;
-    }
-    @media (min-width: 768px) { .ix-slide-meta-v { font-size: 1.15rem; } }
-
-    /* ── Signature Project slide — guaranteed readable over any image ── */
-    .ix-sig-slide {
+    .md-intro-image {
       position: relative;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      min-height: 100vh;
-      min-height: 100svh;
+      aspect-ratio: 4 / 4;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
     }
-    .ix-sig-slide .ix-sig-scrim {
-      position: absolute; inset: 0; z-index: 1;
-      background:
-        radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 40%, transparent 70%),
-        linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.05) 40%, rgba(26,23,24,0.95) 100%);
+    .md-intro-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 700ms ease-out;
     }
-    .ix-sig-content {
-      position: relative; z-index: 10;
-      text-align: center;
-      padding: 2rem 1.5rem;
-      max-width: 56rem;
-      margin: auto;
-      color: #EEEEEE;
-      width: 100%;
+    .md-intro-image:hover img { transform: scale(1.04); }
+    .md-intro-overlay {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 1rem 1.25rem;
+      backdrop-filter: blur(10px);
+    }
+
+    /* ───────────────────────────────────────────────────────────
+       VALUE / EXPERTISE CARDS
+       ─────────────────────────────────────────────────────────── */
+    .md-grid-5 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 640px) { .md-grid-5 { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { .md-grid-5 { grid-template-columns: repeat(5, 1fr); } }
+
+    .md-grid-4 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 640px) { .md-grid-4 { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { .md-grid-4 { grid-template-columns: repeat(4, 1fr); } }
+
+    .md-vcard {
+      padding: 1.75rem;
+      border-radius: var(--r-lg);
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      transition: all 300ms ease-out;
       display: flex;
       flex-direction: column;
+      gap: 0.875rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .md-vcard:hover {
+      border-color: var(--border-hover);
+      background: rgba(26, 26, 36, 0.85);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .md-vcard-num {
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--fg-subtle);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .md-vcard-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--r-md);
+      background: var(--accent-muted);
+      color: var(--accent);
+      display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 1rem;
+      transition: all 300ms ease-out;
     }
-    .ix-sig-eyebrow {
-      display: inline-block;
-      font-family: 'Barlow Condensed', sans-serif;
+    .md-vcard:hover .md-vcard-icon {
+      background: rgba(245, 158, 11, 0.2);
+      box-shadow: var(--glow-sm);
+    }
+    .md-vcard-title {
+      font-family: var(--font-heading);
+      font-size: var(--t-2xl);
       font-weight: 700;
-      font-size: clamp(0.7rem, 1.2vw, 0.85rem);
-      letter-spacing: 0.35em;
+      color: var(--fg);
+      letter-spacing: 0;
       text-transform: uppercase;
-      color: #EFBF04;
-      margin-bottom: 1.25rem;
-      padding: 0.5rem 1rem;
-      border: 1px solid rgba(239,191,4,0.4);
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(4px);
     }
-    .ix-sig-title {
-      font-family: 'Oswald', 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: clamp(2.75rem, 10vw, 8rem) !important;
-      line-height: 0.9;
-      letter-spacing: -0.02em;
-      color: #EEEEEE;
-      text-transform: uppercase;
-      margin-bottom: 1.25rem;
-      text-shadow: 0 4px 24px rgba(0,0,0,0.8), 0 2px 6px rgba(0,0,0,0.9);
-    }
-    .ix-sig-lede {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+    .md-vcard-body {
+      font-size: var(--t-sm);
+      color: var(--fg-muted);
       line-height: 1.6;
-      color: rgba(238,238,238,0.9);
-      max-width: 40rem;
-      margin: 0 auto 1.5rem;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.8);
     }
-    .ix-sig-cta {
+    .md-vcard-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+    }
+    .md-vcard-list li {
+      font-size: 0.8rem;
+      color: var(--fg-subtle);
+      padding-left: 1rem;
+      position: relative;
+    }
+    .md-vcard-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0.55rem;
+      width: 0.5rem; height: 1px;
+      background: var(--accent);
+      opacity: 0.6;
+    }
+
+    /* ───────────────────────────────────────────────────────────
+       SIGNATURE PROJECTS — Swiper slides
+       ─────────────────────────────────────────────────────────── */
+    .md-sig-section {
+      position: relative;
+      height: min(90vh, 720px);
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .md-sig-slide {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .md-sig-slide img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .md-sig-scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10, 10, 15, 0.92) 0%, rgba(10, 10, 15, 0.5) 50%, rgba(10, 10, 15, 0.7) 100%);
+    }
+    .md-sig-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: var(--container);
+      margin-inline: auto;
+      padding: 0 1.5rem;
+      color: var(--fg);
+    }
+    @media (min-width: 768px) {
+      .md-sig-content { padding: 0 3rem; }
+    }
+    .md-sig-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 9vw, 7rem);
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 0.9;
+      margin: 1rem 0;
+      text-transform: uppercase;
+    }
+    .md-sig-lede {
+      font-size: var(--t-lg);
+      color: var(--fg-muted);
+      max-width: 32rem;
+      margin-bottom: 2rem;
+    }
+    .md-sig-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+      gap: 1.5rem;
+      max-width: 36rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+    .md-sig-meta-k {
+      display: block;
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      margin-bottom: 0.5rem;
+    }
+    .md-sig-meta-v {
+      font-family: var(--font-heading);
+      font-size: var(--t-lg);
+      color: var(--fg);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    /* Swiper overrides */
+    .md-sig-section .swiper-pagination {
+      bottom: 2rem !important;
+    }
+    .md-sig-section .swiper-pagination-bullet {
+      background: var(--fg);
+      opacity: 0.3;
+      width: 20px;
+      height: 3px;
+      border-radius: 2px;
+      transition: all 300ms;
+    }
+    .md-sig-section .swiper-pagination-bullet-active {
+      background: var(--accent);
+      opacity: 1;
+      width: 32px;
+    }
+    .md-sig-section .swiper-button-next,
+    .md-sig-section .swiper-button-prev {
+      color: var(--fg) !important;
+      background: rgba(10, 10, 15, 0.5) !important;
+      backdrop-filter: blur(8px);
+      width: 2.75rem !important;
+      height: 2.75rem !important;
+      border-radius: var(--r-full);
+      border: 1px solid var(--border);
+      transition: all 200ms;
+    }
+    @media (max-width: 767px) {
+      .md-sig-section .swiper-button-next,
+      .md-sig-section .swiper-button-prev { display: none !important; }
+    }
+    .md-sig-section .swiper-button-next:hover,
+    .md-sig-section .swiper-button-prev:hover {
+      background: var(--accent-muted) !important;
+      border-color: var(--accent);
+      color: var(--accent) !important;
+    }
+    .md-sig-section .swiper-button-next::after,
+    .md-sig-section .swiper-button-prev::after { font-size: 1rem !important; }
+
+    /* ───────────────────────────────────────────────────────────
+       ACTIVE PROJECTS
+       ─────────────────────────────────────────────────────────── */
+    .md-active-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    @media (min-width: 640px) { .md-active-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { .md-active-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .md-active-card {
+      padding: 1.5rem;
+      border-radius: var(--r-lg);
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      transition: all 300ms ease-out;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .md-active-card:hover {
+      border-color: var(--border-hover);
+      background: rgba(26, 26, 36, 0.85);
+      transform: translateY(-2px);
+    }
+    .md-active-status {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 1rem;
-      padding: 0.75rem 1.75rem;
-      background: #EFBF04;
-      color: #231F20;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.22em;
+      align-self: flex-start;
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
       text-transform: uppercase;
-      transition: all 0.3s;
-      min-height: 44px;
+      letter-spacing: 0.24em;
     }
-    .ix-sig-cta:hover {
-      background: #fff;
-      transform: translateY(-2px);
+    .md-active-status::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--accent);
+      animation: md-pulse 2s ease-in-out infinite;
     }
-    /* override the bottom-only gradient that used to sit over slides */
-    .swiper-slide .absolute.inset-0.bg-gradient-to-t { display: none !important; }
+    .md-active-name {
+      font-family: var(--font-heading);
+      font-size: var(--t-xl);
+      font-weight: 700;
+      color: var(--fg);
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+    }
+    .md-active-loc {
+      font-size: var(--t-sm);
+      color: var(--fg-muted);
+    }
+    .md-active-bar {
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+    }
+    .md-active-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+    }
+    .md-active-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--fg-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+    .md-active-meta strong { color: var(--fg); font-weight: 600; }
 
-    /* ── Client Logo chips (real brand marks) ── */
-    .ix-logo-tile {
-      display: inline-flex;
+    /* ───────────────────────────────────────────────────────────
+       PROCESS TIMELINE
+       ─────────────────────────────────────────────────────────── */
+    .md-process-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      position: relative;
+    }
+    @media (min-width: 900px) {
+      .md-process-grid { grid-template-columns: repeat(4, 1fr); }
+      .md-process-grid::before {
+        content: '';
+        position: absolute;
+        top: 1.75rem;
+        left: 10%;
+        right: 10%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--border-hover), transparent);
+        z-index: 0;
+      }
+    }
+    .md-step {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .md-step-num {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: var(--r-full);
+      background: var(--bg-alt);
+      border: 1px solid var(--border-hover);
+      display: flex;
       align-items: center;
       justify-content: center;
-      height: 80px;
-      min-width: 140px;
-      padding: 0 1.5rem;
-      background: linear-gradient(155deg, rgba(42, 38, 39, 0.7), rgba(26, 23, 24, 0.85));
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 4px;
-      transition: all 0.4s ease;
-      flex-shrink: 0;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: var(--t-lg);
+      color: var(--fg);
+      transition: all 300ms;
     }
-    .ix-logo-tile:hover {
-      border-color: rgba(239, 191, 4, 0.5);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px -10px rgba(239, 191, 4, 0.3);
+    .md-step:hover .md-step-num {
+      background: var(--accent-muted);
+      color: var(--accent);
+      border-color: var(--accent);
+      box-shadow: var(--glow-sm);
     }
-    .ix-logo-tile img {
-      max-height: 48px;
-      max-width: 130px;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      filter: brightness(1.3) contrast(1.1);
-      transition: filter 0.4s ease;
+    .md-step-body {
+      padding: 1.5rem;
+      border-radius: var(--r-lg);
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      width: 100%;
+      transition: all 300ms;
     }
-    .ix-logo-tile:hover img { filter: brightness(1.5) contrast(1.2); }
-    .ix-logo-group { display: inline-flex; align-items: center; padding: 0 0.75rem; }
-
-    /* ── Process step (enhanced) ── */
-    .ix-step-duration {
-      display: inline-block;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.25em;
+    .md-step:hover .md-step-body {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+    .md-step-dur {
+      display: block;
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
       text-transform: uppercase;
-      color: #EFBF04;
-      padding: 4px 10px;
-      border: 1px solid rgba(239, 191, 4, 0.35);
-      border-radius: 999px;
-      margin-bottom: 1rem;
+      letter-spacing: 0.22em;
+      margin-bottom: 0.625rem;
     }
-    .ix-step-list {
-      list-style: none;
-      padding: 0;
-      margin: 0.75rem 0 0;
-      text-align: left;
+    .md-step-title {
+      font-family: var(--font-heading);
+      font-size: var(--t-xl);
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
     }
-    .ix-step-list li {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
-      color: #B3B3B3;
-      padding: 0.25rem 0 0.25rem 1.1rem;
+    .md-step-body p {
+      font-size: var(--t-sm);
+      color: var(--fg-muted);
+      line-height: 1.6;
+      margin-bottom: 0.875rem;
+    }
+
+    /* ───────────────────────────────────────────────────────────
+       CLIENTS MARQUEE
+       ─────────────────────────────────────────────────────────── */
+    .md-marquee-wrap {
       position: relative;
-      line-height: 1.4;
+      overflow: hidden;
     }
-    .ix-step-list li::before {
+    .md-marquee-wrap::before,
+    .md-marquee-wrap::after {
       content: '';
       position: absolute;
-      left: 0; top: 0.6rem;
-      width: 5px; height: 5px;
-      background: #EFBF04;
-      border-radius: 50%;
+      top: 0; bottom: 0;
+      width: 8rem;
+      z-index: 2;
+      pointer-events: none;
     }
-    /* Mobile vertical connector for process */
-    @media (max-width: 767px) {
-      .ix-process-grid > .ix-step:not(:last-child)::after {
-        content: '';
-        display: block;
-        width: 1px;
-        height: 2rem;
-        background: linear-gradient(to bottom, rgba(239, 191, 4, 0.35), transparent);
-        margin: 1rem auto 0;
+    .md-marquee-wrap::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
+    .md-marquee-wrap::after { right: 0; background: linear-gradient(-90deg, var(--bg), transparent); }
+    .md-marquee {
+      display: flex;
+      gap: 3rem;
+      width: max-content;
+      animation: md-marquee-anim 40s linear infinite;
+    }
+    .md-marquee:hover { animation-play-state: paused; }
+    @keyframes md-marquee-anim {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .md-logo-tile {
+      flex-shrink: 0;
+      width: 10rem;
+      height: 4rem;
+      border-radius: var(--r-md);
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      transition: all 300ms;
+    }
+    .md-logo-tile:hover {
+      border-color: var(--border-hover);
+      background: rgba(26, 26, 36, 0.8);
+    }
+    .md-logo-tile img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.45;
+      transition: opacity 300ms;
+    }
+    .md-logo-tile:hover img { opacity: 0.85; }
+
+    /* ───────────────────────────────────────────────────────────
+       CTA BLOCK
+       ─────────────────────────────────────────────────────────── */
+    .md-cta-block {
+      position: relative;
+      border-radius: var(--r-2xl);
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--muted) 0%, var(--bg-alt) 100%);
+      border: 1px solid var(--border);
+      padding: clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 4vw, 4rem);
+      text-align: center;
+    }
+    .md-cta-block::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, transparent 60%);
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .md-cta-content { position: relative; z-index: 1; max-width: 40rem; margin-inline: auto; }
+    .md-cta-block h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 5.5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 1;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .md-cta-block p {
+      font-size: var(--t-lg);
+      color: var(--fg-muted);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .md-cta-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+
+    /* ───────────────────────────────────────────────────────────
+       FOOTER — 3-column brand/nav/signup
+       ─────────────────────────────────────────────────────────── */
+    .md-footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+      position: relative;
+    }
+    .md-footer .md-container {
+      padding-block: clamp(2.5rem, 4vw, 3.5rem) 0;
+    }
+
+    .md-footer-top {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    @media (min-width: 900px) {
+      .md-footer-top {
+        grid-template-columns: 1fr 2fr;
+        gap: 3rem;
+        align-items: start;
+      }
+    }
+    @media (min-width: 1200px) {
+      .md-footer-top {
+        grid-template-columns: 1fr 2.2fr;
+        gap: 4.5rem;
       }
     }
 
-    /* ── Hero — Stacked Polaroid Deck ── */
-    .ix-hero {
-      position: relative; background: #1a1718; overflow: hidden;
-      display: flex; align-items: center;
-      min-height: 100svh;
-      padding: clamp(5rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem) clamp(3rem, 6vw, 5rem);
-    }
-    .ix-hero-grid {
-      width: 100%; max-width: 1400px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center;
-      position: relative; z-index: 2;
-    }
-    @media (min-width: 900px) { .ix-hero-grid { grid-template-columns: 1.3fr 1fr; gap: 4rem; } }
-    .ix-hero-num {
-      position: absolute; top: 1.5rem; right: 1.5rem;
-      font-family: 'Oswald', sans-serif; font-weight: 700;
-      font-size: clamp(4rem, 12vw, 9rem); line-height: 1;
-      color: transparent; -webkit-text-stroke: 1px rgba(239, 191, 4,0.18);
-      letter-spacing: -0.04em; pointer-events: none; user-select: none; z-index: 1;
-    }
-    /* stacked deck */
-    .ix-stack {
-      position: relative; width: 100%; max-width: 440px; margin: 0 auto;
-      aspect-ratio: 4/5; perspective: 1200px;
-    }
-    .ix-stack-card {
-      position: absolute; inset: 0;
-      background: #FFFFFF; padding: 14px 14px 60px;
-      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6), 0 10px 20px -10px rgba(0,0,0,0.4);
-      transition: transform .6s cubic-bezier(.2,.8,.2,1);
-      will-change: transform;
-    }
-    .ix-stack-card:nth-child(1) { transform: rotate(-8deg) translate(-40px, 20px); z-index: 1; }
-    .ix-stack-card:nth-child(2) { transform: rotate(4deg) translate(20px, 10px); z-index: 2; }
-    .ix-stack-card:nth-child(3) { transform: rotate(-2deg); z-index: 3; }
-    .ix-stack:hover .ix-stack-card:nth-child(1) { transform: rotate(-14deg) translate(-70px, 40px); }
-    .ix-stack:hover .ix-stack-card:nth-child(2) { transform: rotate(10deg) translate(50px, 20px); }
-    .ix-stack:hover .ix-stack-card:nth-child(3) { transform: rotate(0deg) translateY(-10px); }
-    .ix-stack-card img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
-    .ix-stack-caption {
-      position: absolute; bottom: 18px; left: 0; right: 0; text-align: center;
-      font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.3em; font-size: 0.7rem;
-      color: #9E9E9E; text-transform: uppercase;
-    }
-    .ix-stack-badge {
-      position: absolute; top: -16px; right: -16px;
-      background: #EFBF04; color: #231F20;
-      width: 88px; height: 88px; border-radius: 50%;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      font-family: 'Oswald', sans-serif; font-weight: 700;
-      box-shadow: 0 10px 30px rgba(239, 191, 4,0.4);
-      z-index: 4;
-    }
-    .ix-stack-badge strong { font-size: 1.5rem; line-height: 1; }
-    .ix-stack-badge small { font-size: 0.55rem; letter-spacing: 0.15em; margin-top: 4px; text-transform: uppercase; }
-    @media (max-width: 640px) {
-      .ix-stack { max-width: 280px; }
-      .ix-stack-card:nth-child(1) { transform: rotate(-6deg) translate(-24px, 14px); }
-      .ix-stack-card:nth-child(2) { transform: rotate(3deg) translate(14px, 8px); }
-      .ix-stack-badge { width: 70px; height: 70px; top: -12px; right: -12px; }
-      .ix-stack-badge strong { font-size: 1.2rem; }
-    }
-
-    /* ── Awards Strip ── */
-    .ix-awards-strip {
+    /* LEFT — brand */
+    .md-footer-brand {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem 2rem;
-      padding: 2.5rem 1.5rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
     }
-    .ix-award-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.65rem 1.25rem;
-      background: linear-gradient(155deg, rgba(42, 38, 39, 0.7), rgba(26, 23, 24, 0.85));
-      border: 1px solid rgba(239, 191, 4, 0.2);
-      border-radius: 999px;
-      transition: all 0.4s ease;
+    .md-footer-brand > a {
+      display: inline-block;
+      line-height: 0;
     }
-    .ix-award-pill:hover {
-      border-color: rgba(239, 191, 4, 0.6);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px -8px rgba(239, 191, 4, 0.3);
+    .md-footer-logo {
+      height: clamp(72px, 7vw, 96px);
+      width: auto;
+      filter: drop-shadow(0 0 24px rgba(245, 158, 11, 0.22));
     }
-    .ix-award-pill i { color: #EFBF04; font-size: 0.95rem; }
-    .ix-award-pill-text {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #EEEEEE;
+    .md-footer-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(1.45rem, 2.1vw, 1.85rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--fg);
+      text-transform: none;
+      letter-spacing: 0;
+      margin: 0;
+      max-width: 20rem;
     }
-    .ix-award-pill-year { color: #EFBF04; font-size: 0.65rem; margin-left: 0.4rem; }
+    .md-footer-tagline em {
+      color: var(--accent);
+      font-style: italic;
+      font-weight: 400;
+    }
 
-    /* ── Active Projects ── */
-    .ix-active-card {
+    /* MIDDLE — nav + CTA */
+    .md-footer-mid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .md-footer-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-flow: column;
+      grid-template-rows: repeat(4, auto);
+      gap: 0.5rem;
+    }
+    .md-footer-nav a {
       position: relative;
-      padding: 1.75rem 1.5rem;
-      background: linear-gradient(155deg, rgba(42, 38, 39, 0.85), rgba(26, 23, 24, 0.95));
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 4px;
-      transition: all 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.9rem 1.1rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      color: var(--fg);
+      font-family: var(--font-label);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
       overflow: hidden;
+      transition: all 260ms ease-out;
     }
-    .ix-active-card:hover {
-      border-color: rgba(239, 191, 4, 0.4);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px -16px rgba(0, 0, 0, 0.6);
+    .md-footer-nav a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 260ms;
+      pointer-events: none;
     }
-    .ix-active-status {
+    .md-footer-nav a::after {
+      content: '→';
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--accent);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: all 260ms ease-out;
+    }
+    .md-footer-nav a:hover {
+      border-color: rgba(245, 158, 11, 0.4);
+      color: var(--accent);
+      box-shadow: 0 0 14px rgba(245, 158, 11, 0.08);
+    }
+    .md-footer-nav a:hover::before { opacity: 1; }
+    .md-footer-nav a:hover::after { opacity: 1; transform: translateX(0); }
+
+    .md-footer-cta {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.5rem 0.5rem 1.25rem;
+      background: var(--accent);
+      color: var(--accent-foreground);
+      border: 1px solid var(--accent);
+      border-radius: var(--r-md);
+      font-family: var(--font-label);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 260ms ease-out;
+      margin-top: 0.15rem;
+      box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+    }
+    .md-footer-cta:hover {
+      background: #FFB526;
+      border-color: #FFB526;
+      box-shadow: 0 0 24px rgba(245, 158, 11, 0.35);
+      transform: translateY(-1px);
+    }
+    .md-footer-cta .arrow {
+      width: 40px; height: 40px;
+      background: var(--bg);
+      color: var(--accent);
+      border-radius: calc(var(--r-md) - 2px);
+      display: grid; place-items: center;
+      font-size: 0.85rem;
+      transition: transform 260ms ease-out;
+    }
+    .md-footer-cta:hover .arrow { transform: translateX(4px); }
+
+    /* RIGHT — signup */
+    .md-footer-signup {
+      background: linear-gradient(155deg, var(--bg-alt) 0%, rgba(245, 158, 11, 0.04) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .md-footer-form {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .md-footer-form input {
+      flex: 1;
+      min-width: 0;
+      background: rgba(10, 10, 15, 0.4);
+      border: 1px solid var(--border-hover);
+      border-radius: var(--r-md);
+      padding: 0.75rem 0.9rem;
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      outline: none;
+      transition: all 200ms;
+    }
+    .md-footer-form input::placeholder { color: var(--fg-subtle); }
+    .md-footer-form input:focus {
+      border-color: var(--accent);
+      background: rgba(10, 10, 15, 0.6);
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+    }
+    .md-footer-form button {
+      width: 44px;
+      background: var(--accent);
+      color: var(--accent-foreground);
+      border: none;
+      border-radius: var(--r-md);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 0.85rem;
+      transition: all 200ms;
+    }
+    .md-footer-form button:hover {
+      background: #FFB526;
+      box-shadow: 0 0 18px rgba(245, 158, 11, 0.4);
+    }
+    .md-footer-signup .note {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      color: var(--fg-subtle);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .md-footer-signup h4 {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--fg);
+      line-height: 1.45;
+      margin: 0.2rem 0 0;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    /* Contact — flat 3-column, no card */
+    .md-footer-contact-card {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 640px) {
+      .md-footer-contact-card {
+        grid-template-columns: 1.4fr 1fr 1fr;
+        gap: 2rem;
+      }
+    }
+    .md-fc-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    @media (max-width: 639px) {
+      .md-fc-item + .md-fc-item {
+        padding-top: 1rem;
+        border-top: 1px solid var(--border);
+      }
+    }
+    .md-fc-k {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.3em;
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: #4ade80;
-      margin-bottom: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
     }
-    .ix-active-status::before {
-      content: '';
-      width: 8px; height: 8px;
-      background: #4ade80;
-      border-radius: 50%;
-      animation: pulse-dot 2s ease infinite;
-      box-shadow: 0 0 12px #4ade80;
+    .md-fc-k i { font-size: 0.72rem; }
+    .md-fc-v {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--fg);
+      line-height: 1.5;
+      margin: 0;
+      text-decoration: none;
+      transition: color 200ms;
     }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-    .ix-active-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: #EEEEEE;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      margin-bottom: 0.25rem;
-    }
-    .ix-active-loc {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
-      color: #B3B3B3;
-      font-weight: 300;
-      margin-bottom: 1rem;
-    }
-    .ix-active-progress {
-      height: 4px;
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 999px;
-      overflow: hidden;
-      margin-bottom: 0.5rem;
-    }
-    .ix-active-progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #EFBF04, #EFBF04);
-      border-radius: 999px;
-      box-shadow: 0 0 10px rgba(239, 191, 4, 0.5);
-    }
-    .ix-active-meta {
-      display: flex;
-      justify-content: space-between;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(170, 170, 170, 0.7);
-    }
-    .ix-active-meta strong { color: #EFBF04; font-weight: 700; }
+    a.md-fc-v { display: block; }
+    a.md-fc-v:hover { color: var(--accent); }
+    p.md-fc-v { color: var(--fg-muted); }
 
-    /* ── Sticky Floating CTA (WhatsApp + phone) ── */
-    .ix-fab {
+    /* BOTTOM STRIP */
+    .md-footer-strip {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: clamp(2rem, 3.5vw, 3rem);
+      padding-block: 1.1rem;
+      border-top: 1px solid var(--border);
+    }
+    .md-footer-strip-left {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .md-footer-socials { display: flex; gap: 0.4rem; }
+    .md-footer-socials a {
+      width: 28px; height: 28px;
+      border-radius: 4px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      display: grid; place-items: center;
+      color: var(--fg-muted);
+      font-size: 0.72rem;
+      text-decoration: none;
+      transition: all 200ms ease-out;
+    }
+    .md-footer-socials a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .md-footer-strip-links {
+      display: flex;
+      gap: 1.25rem;
+    }
+    .md-footer-strip-links a {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: var(--fg-muted);
+      text-decoration: none;
+      transition: color 200ms;
+    }
+    .md-footer-strip-links a:hover { color: var(--accent); }
+    .md-footer-strip-center {
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: var(--fg-subtle);
+    }
+    .md-footer-strip-right {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: var(--fg-subtle);
+    }
+    .md-footer-strip-right b {
+      color: var(--fg-muted);
+      font-weight: 500;
+      transition: color 200ms;
+    }
+    .md-footer-strip-right b:hover { color: var(--accent); }
+
+    @media (max-width: 899px) {
+      .md-footer-top {
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+      }
+      .md-footer-brand { order: 1; }
+      .md-footer-signup { order: 2; }
+      .md-footer-tagline { max-width: 18rem; font-size: 1.15rem; }
+      .md-footer-logo { height: 44px; }
+
+      .md-footer-strip {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 0.8rem;
+      }
+      .md-footer-strip-left { justify-content: flex-start; }
+      .md-footer-strip-right { text-align: center; }
+    }
+    @media (max-width: 520px) {
+      .md-footer-cta { padding-left: 1rem; font-size: 0.8rem; letter-spacing: 0.18em; }
+    }
+
+    /* Shared social-button utility (used by mobile drawer) */
+    .md-social-btn {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--r-md);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--fg-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      transition: all 200ms;
+    }
+    .md-social-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-muted);
+      transform: translateY(-2px);
+      box-shadow: var(--glow-sm);
+    }
+
+    /* ───────────────────────────────────────────────────────────
+       FLOATING CTA
+       ─────────────────────────────────────────────────────────── */
+    .md-fab {
       position: fixed;
-      bottom: 1.25rem;
-      right: 1.25rem;
-      z-index: 60;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 40;
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(1rem);
+      transition: all 400ms;
       pointer-events: none;
-      transition: opacity 0.4s ease, transform 0.4s ease;
     }
-    .ix-fab.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-    .ix-fab a {
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      display: inline-flex;
+    .md-fab.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+    .md-fab a {
+      width: 3rem;
+      height: 3rem;
+      border-radius: var(--r-full);
+      background: var(--bg-alt);
+      border: 1px solid var(--border-hover);
+      color: var(--fg);
+      display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      font-size: 1.25rem;
-      box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      text-decoration: none;
+      font-size: 1rem;
+      box-shadow: var(--shadow-lg);
+      transition: all 200ms;
     }
-    .ix-fab a:hover { transform: scale(1.08); box-shadow: 0 12px 32px -4px rgba(239, 191, 4, 0.5); }
-    .ix-fab-whatsapp { background: linear-gradient(155deg, #25D366, #128C7E); }
-    .ix-fab-phone { background: linear-gradient(155deg, #EFBF04, #EFBF04); color: #1a1718 !important; }
-    @media (min-width: 768px) {
-      .ix-fab { bottom: 2rem; right: 2rem; }
-      .ix-fab a { width: 56px; height: 56px; font-size: 1.4rem; }
+    .md-fab a:hover {
+      background: var(--accent);
+      color: var(--accent-foreground);
+      border-color: var(--accent);
+      box-shadow: var(--shadow-lg), var(--glow-sm);
+      transform: scale(1.08);
     }
 
-    /* ── Accessibility ── */
-    *:focus-visible {
-      outline: 2px solid #EFBF04;
-      outline-offset: 3px;
-      border-radius: 2px;
+    /* ───────────────────────────────────────────────────────────
+       REVEAL ANIMATIONS
+       ─────────────────────────────────────────────────────────── */
+    .md-reveal {
+      opacity: 0;
+      transform: translateY(1.5rem);
+      transition: opacity 800ms ease-out, transform 800ms ease-out;
     }
-    .menu-btn:focus-visible,
-    .nav-close-btn:focus-visible { outline-color: #EFBF04; }
+    .md-reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
 
-    /* ═════════════════════════════════════════════════════════════════
-       INDEX ANIMATIONS — subtle, GPU-only, respects reduced-motion
-       ═════════════════════════════════════════════════════════════════ */
-
-    /* 1. Top scroll-progress indicator */
-    .ix-scroll-progress {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 2px;
-      z-index: 200; pointer-events: none;
-      background: rgba(239, 191, 4, 0.08);
+    /* Split-text mask reveal — words slide up through a clipped mask */
+    .md-split .md-word-mask {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+      line-height: inherit;
+      padding-bottom: 0.12em;
+      margin-bottom: -0.12em;
     }
-    .ix-scroll-progress::after {
-      content: ''; display: block; height: 100%;
-      background: linear-gradient(90deg, #B8960A, #EFBF04, #FFF0B3, #EFBF04);
-      background-size: 200% 100%;
-      transform-origin: left;
-      transform: scaleX(var(--sp, 0));
-      transition: transform 0.05s linear;
-      animation: ix-scroll-shine 4s linear infinite;
-    }
-    @keyframes ix-scroll-shine { to { background-position: 200% 0; } }
-
-    /* 2. Gold rule divider — draw-in on reveal */
-    .reveal-up .h-px.bg-brand-gold {
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
-    }
-    .reveal-active .h-px.bg-brand-gold,
-    .reveal-up.reveal-active .h-px.bg-brand-gold { transform: scaleX(1); }
-
-    /* 3. Gentle float on the polaroid badge */
-    @keyframes ix-badge-float {
-      0%, 100% { transform: translate(0, 0) rotate(0); }
-      50%      { transform: translate(2px, -6px) rotate(-3deg); }
-    }
-    .ix-stack-badge {
-      animation: ix-badge-float 5s ease-in-out infinite;
+    .md-split .md-word {
+      display: inline-block;
+      transform: translateY(110%);
+      transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: var(--d, 0ms);
       will-change: transform;
     }
-
-    /* 4. 3D tilt on 5 S Philosophy cards (desktop pointer only) */
-    @media (hover: hover) and (pointer: fine) {
-      .ix-vcard {
-        transform-style: preserve-3d;
-        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.4s;
-        will-change: transform;
-      }
-      .ix-vcard:hover {
-        transform: perspective(1000px) rotateX(var(--ry, 0)) rotateY(var(--rx, 0)) translateY(-6px);
-      }
-      .ix-vcard .ix-vcard-icon,
-      .ix-vcard .ix-vcard-title,
-      .ix-vcard .ix-vcard-num {
-        transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-      }
-      .ix-vcard:hover .ix-vcard-icon  { transform: translateZ(30px) scale(1.08); }
-      .ix-vcard:hover .ix-vcard-title { transform: translateZ(20px); }
-      .ix-vcard:hover .ix-vcard-num   { transform: translateZ(15px); }
+    .md-reveal.is-visible .md-split .md-word,
+    .md-split.is-visible .md-word {
+      transform: translateY(0);
     }
 
-    /* 5. Shine sweep on primary Explore Projects CTA */
-    a[href="projects.html"].bg-brand-gold {
-      position: relative; overflow: hidden;
-    }
-    a[href="projects.html"].bg-brand-gold::before {
-      content: '';
-      position: absolute; top: 0; left: -150%; width: 60%; height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
-      transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-      pointer-events: none;
-    }
-    a[href="projects.html"].bg-brand-gold:hover::before { left: 150%; }
-
-    /* 6. Signature project slide — Ken-Burns zoom on active slide */
-    .swiper-slide-active .ix-sig-slide img,
-    .swiper-slide-active img.object-cover {
-      animation: ix-kenburns 12s ease-out forwards;
-    }
-    @keyframes ix-kenburns {
-      from { transform: scale(1.02); }
-      to   { transform: scale(1.12); }
-    }
-
-    /* 7. Active-project progress bar — fills on reveal */
-    .ix-active-progress-fill {
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal-active .ix-active-progress-fill { transform: scaleX(1); }
-
-    /* 8. Disable all motion for users who prefer less */
     @media (prefers-reduced-motion: reduce) {
-      .ix-stack-badge,
-      .swiper-slide-active .ix-sig-slide img,
-      .swiper-slide-active img.object-cover,
-      .ix-scroll-progress::after { animation: none !important; }
-      .ix-vcard { transition: none !important; }
-      .ix-vcard:hover { transform: translateY(-4px) !important; }
+      .md-reveal { opacity: 1; transform: none; transition: none; }
+      .md-split .md-word { transform: none; transition: none; }
+      .md-marquee { animation: none; }
+      .md-badge-dot { animation: none; }
+      .md-active-status::before { animation: none; }
     }
+
+    /* Section variant demo navigator (lightweight — links to original) */
+    .md-version-chip {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      z-index: 45;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-full);
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--fg-muted);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: all 200ms;
+    }
+    .md-version-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .md-version-chip i { color: var(--accent); }
   </style>
 </head>
 
-<body class="bg-clay-base text-clay-ink font-body overflow-x-hidden selection:bg-brand-gold selection:text-black">
+<body>
 
-  <!-- Top scroll progress -->
-  <div class="ix-scroll-progress" aria-hidden="true"></div>
+  <!-- ═══ AMBIENT ORBS (fixed backgrounds) ═══ -->
+  <div class="md-orb" style="top: -200px; left: 10%; width: 600px; height: 600px;" aria-hidden="true"></div>
+  <div class="md-orb" style="top: 40%; right: -100px; width: 500px; height: 500px;" aria-hidden="true"></div>
+  <div class="md-orb" style="bottom: 10%; left: -100px; width: 400px; height: 400px;" aria-hidden="true"></div>
 
-  <!-- PRELOADER -->
-  <div id="preloader" class="fixed inset-0 bg-clay-base z-[9999] flex items-center justify-center">
-    <div class="text-center">
-      <div class="text-brand-darkGold text-2xl sm:text-3xl md:text-4xl font-heading font-bold mb-4 tracking-[0.3em] md:tracking-[0.5em] animate-pulse">STRONG BUILT
-      </div>
-      <div class="w-48 h-0.5 bg-clay-sunken mx-auto overflow-hidden">
-        <div class="h-full bg-brand-gold w-0 animate-loading-bar"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- NAVIGATION OVERLAY (Side Drawer) -->
-  <div id="navOverlay" class="nav-overlay">
-    <div id="navBackdrop" class="nav-overlay-backdrop"></div>
-    <div class="nav-overlay-content p-8 md:p-10">
-
-      <!-- Header -->
-      <div class="flex justify-between items-center mb-12">
-        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto opacity-80">
-        <button id="closeMenuBtn" class="nav-close-btn"><i class="fas fa-times"></i></button>
-      </div>
-
-      <!-- Links -->
-      <ul class="space-y-0 flex-1">
-        <li><a href="index.html" class="sidebar-link">Home</a></li>
-        <li>
-          <button class="sidebar-dropdown-btn">
-            <span>About</span> <i class="fas fa-chevron-down"></i>
-          </button>
-          <div class="sidebar-submenu">
-            <a href="story.html" class="sidebar-sublink">Our Story</a>
-            <a href="leadership.html" class="sidebar-sublink">Leadership</a>
-            <a href="culture.html" class="sidebar-sublink">Culture</a>
-            <a href="recognition.html" class="sidebar-sublink">Recognition</a>
-          </div>
-        </li>
-        <li>
-          <button class="sidebar-dropdown-btn">
-            <span>Projects</span> <i class="fas fa-chevron-down"></i>
-          </button>
-          <div class="sidebar-submenu">
-            <a href="projects.html" class="sidebar-sublink">Portfolio</a>
-            <a href="map.html" class="sidebar-sublink">Project Map</a>
-          </div>
-        </li>
-        <li><a href="services.html" class="sidebar-link">Services</a></li>
-        <li><a href="clients.html" class="sidebar-link">Clients</a></li>
-        <li><a href="investors.html" class="sidebar-link">Investors</a></li>
-        <li><a href="csr.html" class="sidebar-link">CSR</a></li>
-        <li><a href="careers.html" class="sidebar-link">Careers</a></li>
-        <li><a href="resources.html" class="sidebar-link">Resources</a></li>
-        <li><a href="contact.html" class="sidebar-link">Contact</a></li>
-      </ul>
-
-      <!-- Contact Info -->
-      <div class="nav-info-block">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
-          <div class="nav-info-item">
-            <span class="nav-info-label">Call</span>
-            <p class="nav-info-value">+91 9619875081</p>
-          </div>
-          <div class="nav-info-item">
-            <span class="nav-info-label">Email</span>
-            <p class="nav-info-value">strongbuilt@skywaygroup.co.in</p>
-          </div>
-        </div>
-        <div class="flex gap-2">
-          <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav-social-link"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram" class="nav-social-link"><i class="fab fa-instagram"></i></a>
-          <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter" class="nav-social-link"><i class="fab fa-twitter"></i></a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- HEADER (Glass) -->
-  <header class="fixed w-full z-50 transition-all duration-300 glass-header" id="mainHeader">
-    <div class="container mx-auto px-4 md:px-6 h-20 md:h-24 flex items-center justify-between">
-      <!-- Logo -->
-      <a href="index.html" class="flex items-center group relative z-50">
-        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built Logo"
-          class="h-14 md:h-24 w-auto object-contain transition duration-300 hover:opacity-90">
+  <!-- ═══ HEADER ═══ -->
+  <header class="md-header">
+    <div class="md-header-inner">
+      <a href="index.html" class="md-logo" aria-label="Strong Built — Home">
+        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built">
       </a>
 
-      <div class="flex items-center">
-        <!-- Menu Trigger -->
-        <button id="menuToggle" class="menu-btn group" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navOverlay">
-          <div class="menu-icon">
-            <span></span>
-            <span></span>
-            <span></span>
+      <nav class="md-nav" aria-label="Primary">
+        <div class="md-nav-item">
+          <button class="md-nav-link" type="button" aria-haspopup="true" aria-expanded="false">
+            About <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="md-nav-dropdown" role="menu">
+            <a href="story.html" role="menuitem"><i class="fas fa-book-open"></i> Our Story</a>
+            <a href="leadership.html" role="menuitem"><i class="fas fa-users"></i> Leadership</a>
+            <a href="culture.html" role="menuitem"><i class="fas fa-heart"></i> Culture</a>
+            <a href="recognition.html" role="menuitem"><i class="fas fa-trophy"></i> Recognition</a>
           </div>
-        </button>
-      </div>
+        </div>
+
+        <div class="md-nav-item">
+          <button class="md-nav-link" type="button" aria-haspopup="true" aria-expanded="false">
+            Projects <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="md-nav-dropdown" role="menu">
+            <a href="projects.html" role="menuitem"><i class="fas fa-th"></i> Portfolio</a>
+            <a href="map.html" role="menuitem"><i class="fas fa-map-marked-alt"></i> Project Map</a>
+          </div>
+        </div>
+
+        <a href="services.html" class="md-nav-link">Services</a>
+        <a href="clients.html" class="md-nav-link">Clients</a>
+        <a href="investors.html" class="md-nav-link">Investors</a>
+        <a href="csr.html" class="md-nav-link">CSR</a>
+        <a href="careers.html" class="md-nav-link">Careers</a>
+        <a href="resources.html" class="md-nav-link">Resources</a>
+      </nav>
+
+      <a href="contact.html" class="md-btn md-btn-primary md-header-cta">Contact Us</a>
+
+      <button id="menuToggle" class="md-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
   </header>
 
-  <!-- HERO SECTION — Stacked Polaroid Deck + Particle Network -->
-  <section class="ix-hero">
-
-    <div class="ix-hero-grid">
-      <!-- Left: original hero copy -->
-      <div>
-        <span class="ix-hero-eyebrow block text-brand-darkGold font-bold uppercase mb-4"
-              style="display:block !important;opacity:1 !important;visibility:visible !important;font-size:var(--fs-small);letter-spacing:0.25em;color:#EFBF04;">Est. 2014 &mdash; Mumbai</span>
-        <h1 class="ix-hero-title text-clay-ink uppercase font-hero"
-            style="display:block !important;opacity:1 !important;visibility:visible !important;font-size:var(--fs-hero);line-height:0.92;letter-spacing:-0.02em;font-weight:700;color:#EEEEEE;margin-bottom:1.5rem;">
-          Building <br><span style="color:#EFBF04;">Legacies</span>
-        </h1>
-        <div class="h-px w-24 bg-brand-gold my-8 reveal-up" style="transition-delay: 300ms;"></div>
-        <p class="text-lg md:text-2xl font-light text-clay-muted max-w-xl leading-relaxed reveal-up"
-           style="transition-delay: 400ms;">
-          We construct not just structures, but skylines &mdash; 5.7+ million sq. ft. and 90+ buildings delivered across Mumbai.
-        </p>
-
-        <div class="flex flex-row flex-wrap gap-3 md:gap-4 mt-10 reveal-up" style="transition-delay: 500ms;">
-          <a href="projects.html"
-             class="group relative px-8 md:px-10 py-4 bg-brand-gold text-black overflow-hidden transition-all duration-300 hover:bg-clay-surface">
-            <span class="relative z-10 font-bold tracking-widest uppercase text-xs md:text-sm font-heading">Explore Projects</span>
-          </a>
+  <!-- ═══ NAV DRAWER ═══ -->
+  <div id="navDrawer" class="md-drawer" aria-hidden="true">
+    <div class="md-drawer-backdrop" id="drawerBackdrop"></div>
+    <aside class="md-drawer-panel" role="dialog" aria-label="Navigation">
+      <div class="md-drawer-header">
+        <div class="md-logo">
+          <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" style="height: 2.75rem; width: auto; display: block;">
+        </div>
+        <button class="md-menu-btn" id="drawerClose" aria-label="Close menu" style="display: flex;"><i class="fas fa-times"></i></button>
+      </div>
+      <nav>
+        <a href="index.html" class="md-drawer-link">Home</a>
+        <button class="md-drawer-dropbtn" data-dropdown>About <i class="fas fa-chevron-down"></i></button>
+        <div class="md-drawer-sub">
+          <a href="story.html">Our Story</a>
+          <a href="leadership.html">Leadership</a>
+          <a href="culture.html">Culture</a>
+          <a href="recognition.html">Recognition</a>
+        </div>
+        <button class="md-drawer-dropbtn" data-dropdown>Projects <i class="fas fa-chevron-down"></i></button>
+        <div class="md-drawer-sub">
+          <a href="projects.html">Portfolio</a>
+          <a href="map.html">Project Map</a>
+        </div>
+        <a href="services.html" class="md-drawer-link">Services</a>
+        <a href="clients.html" class="md-drawer-link">Clients</a>
+        <a href="investors.html" class="md-drawer-link">Investors</a>
+        <a href="csr.html" class="md-drawer-link">CSR</a>
+        <a href="careers.html" class="md-drawer-link">Careers</a>
+        <a href="resources.html" class="md-drawer-link">Resources</a>
+        <a href="contact.html" class="md-drawer-link">Contact</a>
+      </nav>
+      <div style="margin-top: auto; padding-top: 2rem; border-top: 1px solid var(--border);">
+        <p class="md-mono" style="font-size: 0.75rem; color: var(--fg-subtle); margin-bottom: 1rem;">Connect</p>
+        <div style="display: flex; gap: 0.5rem;">
+          <a href="https://www.linkedin.com/company/strongbuilt" class="md-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/strongbuilt" class="md-social-btn" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/strongbuilt" class="md-social-btn" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
+    </aside>
+  </div>
 
-      <!-- Right: stacked polaroid deck -->
-      <div class="reveal-up" style="transition-delay: 400ms;">
-        <div class="ix-stack">
-          <div class="ix-stack-card">
-            <img src="assets/Projects/Tree Top.jpg" alt="Tree Top Heights · 2022"
-                 width="960" height="1200" loading="lazy" decoding="async">
-            <div class="ix-stack-caption">Tree Top · 2022</div>
+  <!-- ═══ HERO ═══ -->
+  <section class="md-hero">
+    <div class="md-container">
+      <div class="md-hero-grid">
+        <div class="md-reveal">
+          <div class="md-badge">
+            <span class="md-badge-dot" aria-hidden="true"></span>
+            <span>Est. 2014 · Mumbai</span>
           </div>
-          <div class="ix-stack-card">
-            <img src="assets/Projects/Del Sol.jpg" alt="Del Sol · 2023"
-                 width="960" height="1200" loading="lazy" decoding="async">
-            <div class="ix-stack-caption">Del Sol · 2023</div>
-          </div>
-          <div class="ix-stack-card">
-            <img src="assets/Projects/monticello.jpg" alt="Monticello Tower · 2024"
-                 width="960" height="1200" loading="eager" fetchpriority="high" decoding="async">
-            <div class="ix-stack-caption">Monticello · 2024</div>
-            <div class="ix-stack-badge"><strong>90+</strong><small>Buildings</small></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- IMPACT STATS STRIP -->
-  <section class="border-y border-clay-border bg-clay-mist/60 relative z-20">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="grid grid-cols-2 md:grid-cols-4">
-        <div class="ix-stat reveal-up">
-          <div class="ix-stat-icon"><i class="fas fa-award"></i></div>
-          <div class="ix-stat-num"><span class="stat-counter" data-target="12">0</span><span class="ix-stat-num-suffix">+</span></div>
-          <div class="ix-stat-label">Years Excellence</div>
-        </div>
-        <div class="ix-stat reveal-up" style="transition-delay: 100ms;">
-          <div class="ix-stat-icon"><i class="fas fa-check-circle"></i></div>
-          <div class="ix-stat-num"><span class="stat-counter" data-target="33">0</span><span class="ix-stat-num-suffix">+</span></div>
-          <div class="ix-stat-label">Projects Delivered</div>
-        </div>
-        <div class="ix-stat reveal-up" style="transition-delay: 200ms;">
-          <div class="ix-stat-icon"><i class="fas fa-building"></i></div>
-          <div class="ix-stat-num"><span class="stat-counter" data-target="90">0</span><span class="ix-stat-num-suffix">+</span></div>
-          <div class="ix-stat-label">Buildings Built</div>
-        </div>
-        <div class="ix-stat reveal-up" style="transition-delay: 300ms;">
-          <div class="ix-stat-icon"><i class="fas fa-ruler-combined"></i></div>
-          <div class="ix-stat-num">5.7<span class="ix-stat-num-suffix">M</span></div>
-          <div class="ix-stat-label">Sq.Ft Constructed</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AWARDS STRIP — quick credibility from recognition.html -->
-  <section class="bg-clay-base border-b border-clay-border relative z-20">
-    <div class="container mx-auto px-6">
-      <div class="text-center pt-10 reveal-up">
-        <span class="text-brand-darkGold text-[10px] font-bold tracking-[0.4em] uppercase font-heading">Industry Honours</span>
-      </div>
-      <div class="ix-awards-strip reveal-up">
-        <a href="recognition.html" class="ix-award-pill"><i class="fas fa-trophy"></i><span class="ix-award-pill-text">Fastest Growing Firm <span class="ix-award-pill-year">'21</span></span></a>
-        <a href="recognition.html" class="ix-award-pill"><i class="fas fa-landmark"></i><span class="ix-award-pill-text">Maharashtra Governor's Award <span class="ix-award-pill-year">'22</span></span></a>
-        <a href="recognition.html" class="ix-award-pill"><i class="fas fa-medal"></i><span class="ix-award-pill-text">Times Network Excellence <span class="ix-award-pill-year">'23</span></span></a>
-        <a href="recognition.html" class="ix-award-pill"><i class="fas fa-shield-alt"></i><span class="ix-award-pill-text">ET Best Safety Practices <span class="ix-award-pill-year">'24</span></span></a>
-        <a href="recognition.html" class="ix-award-pill"><i class="fas fa-certificate"></i><span class="ix-award-pill-text">ISO 9001 · 14001 · 45001</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- INTRO -->
-  <section class="py-20 md:py-32 bg-clay-mist relative">
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
-        <!-- Left: Text -->
-        <div class="reveal-up">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="h-px w-12 bg-brand-gold"></div>
-            <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">Who We Are</span>
-          </div>
-          <h2 class="font-bold text-clay-ink font-heading mb-6 leading-tight">Engineering <br>the <span class="text-gradient-gold">Future</span></h2>
-          <p class="text-clay-muted leading-relaxed mb-8 font-light text-lg">
-            Strong Built is a premier construction firm dedicated to transforming visions into tangible realities.
-            With over 33 completed projects and 90+ buildings across residential, commercial, and institutional sectors, we set the benchmark
-            for quality and safety.
+          <h1 class="md-split">
+            <span class="md-word-mask"><span class="md-word" style="--d: 0ms">Building</span></span>
+            <span class="md-word-mask"><span class="md-word" style="--d: 120ms"><span class="md-accent-text">legacies</span>,</span></span><br>
+            <span class="md-word-mask"><span class="md-word" style="--d: 260ms">not</span></span>
+            <span class="md-word-mask"><span class="md-word" style="--d: 340ms">just</span></span>
+            <span class="md-word-mask"><span class="md-word" style="--d: 420ms">structures.</span></span>
+          </h1>
+          <p class="md-hero-lede">
+            Strong Built delivers 5.7+ million sq.&nbsp;ft across 90+ buildings in Mumbai — residential, commercial, and institutional work anchored by the 5S philosophy.
           </p>
-          <a href="story.html" class="inline-flex items-center gap-3 text-brand-darkGold border-b border-brand-gold/30 pb-1 hover:border-brand-gold transition font-heading text-xs uppercase tracking-widest group">
-            Our Story <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-1 transition duration-300"></i>
+          <div class="md-hero-ctas">
+            <a href="projects.html" class="md-btn md-btn-primary md-btn-lg">
+              Explore Projects <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="contact.html" class="md-btn md-btn-secondary md-btn-lg">Contact Us</a>
+          </div>
+        </div>
+
+        <div class="md-reveal" style="transition-delay: 200ms;">
+          <a href="projects.html" class="md-hero-visual" aria-label="View all projects">
+            <div class="md-hero-card">
+              <img src="assets/Projects/Tree Top.jpg" alt="Tree Top Heights — 2022" loading="lazy" decoding="async">
+              <div class="md-hero-card-caption">Tree Top · 2022</div>
+            </div>
+            <div class="md-hero-card">
+              <img src="assets/Projects/Del Sol.jpg" alt="Del Sol — 2023" loading="lazy" decoding="async">
+              <div class="md-hero-card-caption">Del Sol · 2023</div>
+            </div>
+            <div class="md-hero-card">
+              <img src="assets/Projects/monticello.jpg" alt="Monticello Tower — 2024" loading="eager" fetchpriority="high" decoding="async">
+              <div class="md-hero-card-caption">Monticello · 2024</div>
+            </div>
+            <div class="md-hero-badge-float">
+              <strong>90+</strong>
+              <small>Buildings Delivered</small>
+            </div>
           </a>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Right: Feature image with overlay stat -->
-        <div class="relative reveal-up" style="transition-delay: 200ms;">
-          <div class="overflow-hidden border border-clay-border" style="aspect-ratio: 16/9;">
-            <img src="assets/Projects/monticello.jpg" alt="Strong Built Monticello Project" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-700 hover:scale-105">
-          </div>
-          <div class="absolute -bottom-6 -left-6 bg-clay-base border border-brand-gold/20 p-6 backdrop-blur-sm">
-            <span class="block text-4xl font-bold text-clay-ink font-heading">25<span class="text-brand-darkGold">+</span></span>
-            <span class="text-xs text-clay-muted uppercase tracking-widest font-heading">Construction<br>Veterans</span>
+  <!-- ═══ IMPACT STATS ═══ -->
+  <section class="md-section" style="padding-block: clamp(2rem, 4vw, 4rem);">
+    <div class="md-container">
+      <div class="md-stats">
+        <div class="md-stat md-reveal">
+          <div class="md-stat-icon"><i class="fas fa-award"></i></div>
+          <div class="md-stat-num"><span class="stat-counter" data-target="12">0</span><span class="md-stat-suffix">+</span></div>
+          <div class="md-stat-label">Years Excellence</div>
+        </div>
+        <div class="md-stat md-reveal" style="transition-delay: 80ms;">
+          <div class="md-stat-icon"><i class="fas fa-check-circle"></i></div>
+          <div class="md-stat-num"><span class="stat-counter" data-target="33">0</span><span class="md-stat-suffix">+</span></div>
+          <div class="md-stat-label">Projects Delivered</div>
+        </div>
+        <div class="md-stat md-reveal" style="transition-delay: 160ms;">
+          <div class="md-stat-icon"><i class="fas fa-building"></i></div>
+          <div class="md-stat-num"><span class="stat-counter" data-target="90">0</span><span class="md-stat-suffix">+</span></div>
+          <div class="md-stat-label">Buildings Built</div>
+        </div>
+        <div class="md-stat md-reveal" style="transition-delay: 240ms;">
+          <div class="md-stat-icon"><i class="fas fa-ruler-combined"></i></div>
+          <div class="md-stat-num">5.7<span class="md-stat-suffix">M</span></div>
+          <div class="md-stat-label">Sq.Ft Constructed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AWARDS STRIP ═══ -->
+  <section class="md-section" style="padding-block: 2rem 4rem;">
+    <div class="md-container">
+      <div class="md-reveal" style="text-align: center; margin-bottom: 2rem;">
+        <span class="md-eyebrow md-eyebrow-accent">Industry Honours</span>
+      </div>
+      <div class="md-awards md-reveal" style="transition-delay: 100ms;">
+        <a href="recognition.html" class="md-award"><i class="fas fa-trophy"></i> Fastest Growing Firm <span class="md-award-year">'21</span></a>
+        <a href="recognition.html" class="md-award"><i class="fas fa-landmark"></i> Governor's Award <span class="md-award-year">'22</span></a>
+        <a href="recognition.html" class="md-award"><i class="fas fa-medal"></i> Times Excellence <span class="md-award-year">'23</span></a>
+        <a href="recognition.html" class="md-award"><i class="fas fa-shield-alt"></i> ET Safety Practices <span class="md-award-year">'24</span></a>
+        <a href="recognition.html" class="md-award"><i class="fas fa-certificate"></i> ISO 9001 · 14001 · 45001</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INTRO ═══ -->
+  <section class="md-section">
+    <div class="md-container">
+      <div class="md-intro">
+        <div class="md-reveal">
+          <span class="md-eyebrow md-eyebrow-accent">Who We Are</span>
+          <h2 style="font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; letter-spacing: 0; line-height: 0.95; text-transform: uppercase; margin: 1rem 0 1.25rem;">
+            Engineering<br>
+            <span style="color: var(--accent); font-style: italic; font-weight: 500;">the future.</span>
+          </h2>
+          <p style="color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; margin-bottom: 2rem; max-width: 30rem;">
+            Strong Built is a premier construction firm turning visions into tangible realities. With 33+ completed projects and 90+ buildings across residential, commercial, and institutional sectors, we set the benchmark for discipline, safety, and craftsmanship.
+          </p>
+          <a href="story.html" class="md-btn md-btn-ghost" style="padding-left: 0;">
+            Read our story <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+        <div class="md-reveal" style="transition-delay: 150ms;">
+          <div class="md-intro-image">
+            <img src="assets/Projects/iris.jpg" alt="Strong Built Iris Project" loading="lazy" decoding="async">
+            <div class="md-intro-overlay">
+              <div style="font-family: var(--font-heading); font-weight: 700; font-size: var(--t-3xl); color: var(--fg); line-height: 1; letter-spacing: -0.01em;">
+                25<span style="color: var(--accent);">+</span>
+              </div>
+              <div class="md-mono" style="font-size: 0.7rem; color: var(--fg-subtle); margin-top: 0.4rem;">Construction Veterans</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CORE VALUES (Glassmorphism Cards) -->
-  <section class="py-16 md:py-24 bg-clay-base relative border-t border-clay-border">
-    <div
-      class="absolute inset-0 bg-brand-gold/5 blur-[100px] rounded-full pointer-events-none opacity-20 transform -translate-x-1/2">
-    </div>
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="text-center mb-20 reveal-up">
-        <div class="flex items-center gap-4 justify-center mb-4">
-          <div class="h-px w-12 bg-brand-gold"></div>
-          <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">Our Foundation</span>
-          <div class="h-px w-12 bg-brand-gold"></div>
-        </div>
-        <h2 class="font-bold text-clay-ink font-heading uppercase">The 5&nbsp;S <span class="text-gradient-gold">Philosophy</span></h2>
-        <p class="text-clay-muted max-w-xl mx-auto mt-5 font-body">The five pillars of our operational excellence — non-negotiable, top-to-bottom.</p>
+  <!-- ═══ 5S PHILOSOPHY ═══ -->
+  <section class="md-section" style="position: relative;">
+    <div class="md-container">
+      <div class="md-section-head md-center md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent">Our Foundation</span>
+        <h2>The 5S Philosophy</h2>
+        <p>The five pillars of operational excellence — non-negotiable, top to bottom.</p>
       </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
-        <article class="ix-vcard reveal-up">
-          <div class="ix-vcard-num">01</div>
-          <div class="ix-vcard-icon"><i class="fas fa-dumbbell"></i></div>
-          <div class="ix-vcard-tag">Built to Outlast</div>
-          <h3 class="ix-vcard-title">Strength</h3>
-          <p class="ix-vcard-body">Reinforcement audits, shuttering checklists, and pour-cards on every floor. Structures engineered to stand for generations, not warranty periods.</p>
+      <div class="md-grid-5">
+        <article class="md-vcard md-reveal">
+          <div class="md-vcard-num">01</div>
+          <div class="md-vcard-icon"><i class="fas fa-dumbbell"></i></div>
+          <h3 class="md-vcard-title">Strength</h3>
+          <p class="md-vcard-body">Reinforcement audits, shuttering checklists, and pour-cards on every floor — engineered to last generations.</p>
         </article>
-        <article class="ix-vcard reveal-up" style="transition-delay: 100ms;">
-          <div class="ix-vcard-num">02</div>
-          <div class="ix-vcard-icon"><i class="fas fa-tachometer-alt"></i></div>
-          <div class="ix-vcard-tag">Built for Pace</div>
-          <h3 class="ix-vcard-title">Speed</h3>
-          <p class="ix-vcard-body">Pre-engineered formwork, modular scaffolding, and ERP-driven scheduling — engineered for timely delivery on every project.</p>
+        <article class="md-vcard md-reveal" style="transition-delay: 80ms;">
+          <div class="md-vcard-num">02</div>
+          <div class="md-vcard-icon"><i class="fas fa-tachometer-alt"></i></div>
+          <h3 class="md-vcard-title">Speed</h3>
+          <p class="md-vcard-body">Pre-engineered formwork, modular scaffolding, and ERP-driven scheduling for timely delivery.</p>
         </article>
-        <article class="ix-vcard reveal-up" style="transition-delay: 200ms;">
-          <div class="ix-vcard-num">03</div>
-          <div class="ix-vcard-icon"><i class="fas fa-shield-alt"></i></div>
-          <div class="ix-vcard-tag">Non-Negotiable</div>
-          <h3 class="ix-vcard-title">Safety</h3>
-          <p class="ix-vcard-body">ELCB checks, fall-protection nets, daily toolbox meetings. ISO 45001 certified sites with a zero-lost-time record across 24 consecutive months.</p>
+        <article class="md-vcard md-reveal" style="transition-delay: 160ms;">
+          <div class="md-vcard-num">03</div>
+          <div class="md-vcard-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3 class="md-vcard-title">Safety</h3>
+          <p class="md-vcard-body">ELCB checks, fall-protection nets, and daily toolbox meetings on every ISO 45001 certified site.</p>
         </article>
-        <article class="ix-vcard reveal-up" style="transition-delay: 300ms;">
-          <div class="ix-vcard-num">04</div>
-          <div class="ix-vcard-icon"><i class="fas fa-leaf"></i></div>
-          <div class="ix-vcard-tag">Future-Ready</div>
-          <h3 class="ix-vcard-title">Sustainability</h3>
-          <p class="ix-vcard-body">IGBC-aligned materials, construction-waste diversion, water-neutrality audits, and 100+ trees planted for every 10,000 sq.ft we build.</p>
+        <article class="md-vcard md-reveal" style="transition-delay: 240ms;">
+          <div class="md-vcard-num">04</div>
+          <div class="md-vcard-icon"><i class="fas fa-leaf"></i></div>
+          <h3 class="md-vcard-title">Sustainability</h3>
+          <p class="md-vcard-body">IGBC-aligned materials, waste-diversion audits, and trees planted for every 10,000 sq.ft we build.</p>
         </article>
-        <article class="ix-vcard reveal-up" style="transition-delay: 400ms;">
-          <div class="ix-vcard-num">05</div>
-          <div class="ix-vcard-icon"><i class="fas fa-ruler-combined"></i></div>
-          <div class="ix-vcard-tag">Benchmarked Globally</div>
-          <h3 class="ix-vcard-title">Standards</h3>
-          <p class="ix-vcard-body">ISO 9001 · 14001 · 45001 certified. Every mix design, every weld, every finish benchmarked against global best-in-class — then raised by 10%.</p>
+        <article class="md-vcard md-reveal" style="transition-delay: 320ms;">
+          <div class="md-vcard-num">05</div>
+          <div class="md-vcard-icon"><i class="fas fa-ruler-combined"></i></div>
+          <h3 class="md-vcard-title">Standards</h3>
+          <p class="md-vcard-body">ISO 9001 · 14001 · 45001. Every mix design and finish benchmarked against global best-in-class.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- SIGNATURE PROJECTS (Full Screen Slider) -->
-  <section class="relative bg-clay-base h-screen overflow-hidden">
-    <div class="swiper-container h-full w-full">
+  <!-- ═══ SIGNATURE PROJECTS (Swiper) ═══ -->
+  <section class="md-sig-section">
+    <div class="swiper-container md-sig-swiper" style="width: 100%; height: 100%;">
       <div class="swiper-wrapper">
-
-        <!-- Slide 1: Monticello -->
-        <div class="swiper-slide ix-sig-slide relative flex items-center justify-center overflow-hidden">
-          <div class="absolute inset-0">
-            <img src="assets/Projects/monticello.jpg" alt="Monticello project"
-                 class="w-full h-full object-cover transition duration-[2s] hover:scale-105">
-          </div>
-          <div class="ix-sig-scrim"></div>
-          <div class="ix-sig-content">
-            <span class="ix-sig-eyebrow">Residential Icon</span>
-            <h2 class="ix-sig-title">MONTICELLO</h2>
-            <p class="ix-sig-lede">A testament to vertical luxury living on Mumbai's western waterfront.</p>
-            <div class="ix-slide-meta">
-              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Year</span><span class="ix-slide-meta-v">2019</span></div>
-              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Sector</span><span class="ix-slide-meta-v">Residential</span></div>
-              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Floors</span><span class="ix-slide-meta-v">3B+P+14</span></div>
-              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Location</span><span class="ix-slide-meta-v">Bandra</span></div>
+        <div class="swiper-slide md-sig-slide">
+          <img src="assets/Projects/monticello.jpg" alt="Monticello project">
+          <div class="md-sig-scrim"></div>
+          <div class="md-sig-content">
+            <span class="md-eyebrow md-eyebrow-accent">Residential · Signature</span>
+            <h2 class="md-sig-title">Monticello</h2>
+            <p class="md-sig-lede">A testament to vertical luxury living on Mumbai's western waterfront.</p>
+            <div class="md-sig-meta">
+              <div><span class="md-sig-meta-k">Year</span><span class="md-sig-meta-v">2019</span></div>
+              <div><span class="md-sig-meta-k">Sector</span><span class="md-sig-meta-v">Residential</span></div>
+              <div><span class="md-sig-meta-k">Floors</span><span class="md-sig-meta-v">3B+P+14</span></div>
+              <div><span class="md-sig-meta-k">Location</span><span class="md-sig-meta-v">Bandra</span></div>
             </div>
-            <a href="projects.html" class="ix-sig-cta">View Project <i class="fas fa-arrow-right"></i></a>
+            <a href="projects.html" class="md-btn md-btn-primary">View Project <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
-
-        <!-- Slide 2: Tree Top -->
-        <div class="swiper-slide ix-sig-slide relative flex items-center justify-center overflow-hidden">
-          <div class="absolute inset-0">
-            <img src="assets/Projects/Tree Top.jpg" alt="Tree Top project"
-                 class="w-full h-full object-cover transition duration-[2s] hover:scale-105">
-          </div>
-          <div class="ix-sig-scrim"></div>
-          <div class="ix-sig-content">
-            <span class="ix-sig-eyebrow">Eco-Conscious</span>
-            <h2 class="ix-sig-title">TREE TOP</h2>
-            <p class="ix-sig-lede">Merging modern architecture with nature — a green-certified high-rise.</p>
-            <div class="ix-slide-meta">
-              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Year</span><span class="ix-slide-meta-v">2020</span></div>
-              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Sector</span><span class="ix-slide-meta-v">Residential</span></div>
-              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Type</span><span class="ix-slide-meta-v">Eco-High-Rise</span></div>
-              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Built-Up</span><span class="ix-slide-meta-v">3.1L sf</span></div>
+        <div class="swiper-slide md-sig-slide">
+          <img src="assets/Projects/Tree Top.jpg" alt="Tree Top project">
+          <div class="md-sig-scrim"></div>
+          <div class="md-sig-content">
+            <span class="md-eyebrow md-eyebrow-accent">Eco-Conscious</span>
+            <h2 class="md-sig-title">Tree Top</h2>
+            <p class="md-sig-lede">Merging modern architecture with nature — a green-certified high-rise in the heart of Mumbai.</p>
+            <div class="md-sig-meta">
+              <div><span class="md-sig-meta-k">Year</span><span class="md-sig-meta-v">2020</span></div>
+              <div><span class="md-sig-meta-k">Sector</span><span class="md-sig-meta-v">Residential</span></div>
+              <div><span class="md-sig-meta-k">Type</span><span class="md-sig-meta-v">Eco-High-Rise</span></div>
+              <div><span class="md-sig-meta-k">Built-Up</span><span class="md-sig-meta-v">3.1L sf</span></div>
             </div>
-            <a href="projects.html" class="ix-sig-cta">View Project <i class="fas fa-arrow-right"></i></a>
+            <a href="projects.html" class="md-btn md-btn-primary">View Project <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
-
-        <!-- Slide 3: Splendora -->
-        <div class="swiper-slide ix-sig-slide relative flex items-center justify-center overflow-hidden">
-          <div class="absolute inset-0">
-            <img src="assets/Projects/selendora.jpg" alt="Splendora project"
-                 class="w-full h-full object-cover transition duration-[2s] hover:scale-105">
-          </div>
-          <div class="ix-sig-scrim"></div>
-          <div class="ix-sig-content">
-            <span class="ix-sig-eyebrow">Mixed Use</span>
-            <h2 class="ix-sig-title">SPLENDORA</h2>
-            <p class="ix-sig-lede">A self-sustaining urban ecosystem of homes, retail, and shared green space.</p>
-            <div class="ix-slide-meta">
-              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Year</span><span class="ix-slide-meta-v">2022</span></div>
-              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Sector</span><span class="ix-slide-meta-v">Mixed Use</span></div>
-              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Towers</span><span class="ix-slide-meta-v">4</span></div>
-              <div class="ix-slide-meta-item"><span class="ix-slide-meta-k">Built-Up</span><span class="ix-slide-meta-v">5.2L sf</span></div>
+        <div class="swiper-slide md-sig-slide">
+          <img src="assets/Projects/selendora.jpg" alt="Splendora project">
+          <div class="md-sig-scrim"></div>
+          <div class="md-sig-content">
+            <span class="md-eyebrow md-eyebrow-accent">Mixed Use</span>
+            <h2 class="md-sig-title">Splendora</h2>
+            <p class="md-sig-lede">A self-sustaining urban ecosystem of homes, retail, and shared green space.</p>
+            <div class="md-sig-meta">
+              <div><span class="md-sig-meta-k">Year</span><span class="md-sig-meta-v">2022</span></div>
+              <div><span class="md-sig-meta-k">Sector</span><span class="md-sig-meta-v">Mixed Use</span></div>
+              <div><span class="md-sig-meta-k">Towers</span><span class="md-sig-meta-v">4</span></div>
+              <div><span class="md-sig-meta-k">Built-Up</span><span class="md-sig-meta-v">5.2L sf</span></div>
             </div>
-            <a href="projects.html" class="ix-sig-cta">View Project <i class="fas fa-arrow-right"></i></a>
+            <a href="projects.html" class="md-btn md-btn-primary">View Project <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
-
       </div>
-
-      <!-- Navigation -->
       <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev text-brand-darkGold/50 hover:text-brand-darkGold transition absolute left-8 z-20"><i
-          class="fas fa-chevron-left text-3xl"></i></div>
-      <div class="swiper-button-next text-brand-darkGold/50 hover:text-brand-darkGold transition absolute right-8 z-20"><i
-          class="fas fa-chevron-right text-3xl"></i></div>
+      <div class="swiper-button-prev" aria-label="Previous slide"></div>
+      <div class="swiper-button-next" aria-label="Next slide"></div>
     </div>
   </section>
 
-  <!-- ACTIVE PROJECTS — Currently Building -->
-  <section class="py-16 md:py-20 bg-clay-base border-t border-clay-border relative z-10">
-    <div class="container mx-auto px-6">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-12 reveal-up">
+  <!-- ═══ ACTIVE PROJECTS ═══ -->
+  <section class="md-section">
+    <div class="md-container">
+      <div class="md-section-head md-reveal" style="max-width: 100%; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem;">
         <div>
-          <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">In Motion</span>
-          <h2 class="font-bold text-clay-ink font-heading uppercase mt-2">Currently <span class="text-brand-darkGold">Building</span></h2>
+          <span class="md-eyebrow md-eyebrow-accent">In Motion</span>
+          <h2>Currently building</h2>
         </div>
-        <p class="text-clay-muted text-sm max-w-md font-body">Eleven live sites across the MMR. A snapshot of momentum, not a list of intentions.</p>
+        <p style="color: var(--fg-muted); max-width: 24rem; font-size: var(--t-base);">
+          Live sites across the MMR — a snapshot of momentum, not a list of intentions.
+        </p>
       </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5" id="ix-active-grid">
-        <article class="ix-active-card reveal-up">
-          <div class="ix-active-status">Live</div>
-          <div class="ix-active-name">Splendora Phase II</div>
-          <div class="ix-active-loc">Pune · Mixed Use</div>
-          <div class="ix-active-progress"><div class="ix-active-progress-fill" style="width: 78%"></div></div>
-          <div class="ix-active-meta"><span><strong>78%</strong> Complete</span><span>Q3 2026</span></div>
+      <div class="md-active-grid" id="mdActiveGrid">
+        <article class="md-active-card md-reveal">
+          <div class="md-active-status">Live</div>
+          <div class="md-active-name">Splendora Phase II</div>
+          <div class="md-active-loc">Pune · Mixed Use</div>
+          <div class="md-active-bar"><div class="md-active-bar-fill" style="width: 78%"></div></div>
+          <div class="md-active-meta"><span><strong>78%</strong> Complete</span><span>Q3 2026</span></div>
         </article>
-        <article class="ix-active-card reveal-up" style="transition-delay: 100ms;">
-          <div class="ix-active-status">Live</div>
-          <div class="ix-active-name">Lodha Highrise</div>
-          <div class="ix-active-loc">Thane · Residential</div>
-          <div class="ix-active-progress"><div class="ix-active-progress-fill" style="width: 54%"></div></div>
-          <div class="ix-active-meta"><span><strong>54%</strong> Complete</span><span>Q1 2027</span></div>
+        <article class="md-active-card md-reveal" style="transition-delay: 80ms;">
+          <div class="md-active-status">Live</div>
+          <div class="md-active-name">Lodha Highrise</div>
+          <div class="md-active-loc">Thane · Residential</div>
+          <div class="md-active-bar"><div class="md-active-bar-fill" style="width: 54%"></div></div>
+          <div class="md-active-meta"><span><strong>54%</strong> Complete</span><span>Q1 2027</span></div>
         </article>
-        <article class="ix-active-card reveal-up" style="transition-delay: 200ms;">
-          <div class="ix-active-status">Live</div>
-          <div class="ix-active-name">Mahindra Serenes</div>
-          <div class="ix-active-loc">Alibaug · Premium</div>
-          <div class="ix-active-progress"><div class="ix-active-progress-fill" style="width: 42%"></div></div>
-          <div class="ix-active-meta"><span><strong>42%</strong> Complete</span><span>Q4 2027</span></div>
+        <article class="md-active-card md-reveal" style="transition-delay: 160ms;">
+          <div class="md-active-status">Live</div>
+          <div class="md-active-name">Mahindra Serenes</div>
+          <div class="md-active-loc">Alibaug · Premium</div>
+          <div class="md-active-bar"><div class="md-active-bar-fill" style="width: 42%"></div></div>
+          <div class="md-active-meta"><span><strong>42%</strong> Complete</span><span>Q4 2027</span></div>
         </article>
-        <article class="ix-active-card reveal-up" style="transition-delay: 300ms;">
-          <div class="ix-active-status">Live</div>
-          <div class="ix-active-name">Hiranandani Block C</div>
-          <div class="ix-active-loc">Powai · Residential</div>
-          <div class="ix-active-progress"><div class="ix-active-progress-fill" style="width: 31%"></div></div>
-          <div class="ix-active-meta"><span><strong>31%</strong> Complete</span><span>Q2 2027</span></div>
+        <article class="md-active-card md-reveal" style="transition-delay: 240ms;">
+          <div class="md-active-status">Live</div>
+          <div class="md-active-name">Hiranandani Block C</div>
+          <div class="md-active-loc">Powai · Residential</div>
+          <div class="md-active-bar"><div class="md-active-bar-fill" style="width: 31%"></div></div>
+          <div class="md-active-meta"><span><strong>31%</strong> Complete</span><span>Q2 2027</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ EXPERTISE ═══ -->
+  <section class="md-section">
+    <div class="md-container">
+      <div class="md-section-head md-center md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent">What We Do</span>
+        <h2>Our expertise</h2>
+        <p>Four disciplines, one standard of craft.</p>
+      </div>
+      <div class="md-grid-4">
+        <article class="md-vcard md-reveal">
+          <div class="md-vcard-num">01 · 25+ Projects</div>
+          <div class="md-vcard-icon"><i class="fas fa-home"></i></div>
+          <h3 class="md-vcard-title">Residential</h3>
+          <p class="md-vcard-body">High-end villas, premium high-rises, and integrated townships.</p>
+          <ul class="md-vcard-list">
+            <li>Custom villas &amp; penthouses</li>
+            <li>Super high-rise towers</li>
+            <li>Mixed-use townships</li>
+          </ul>
+        </article>
+        <article class="md-vcard md-reveal" style="transition-delay: 80ms;">
+          <div class="md-vcard-num">02 · 12+ Projects</div>
+          <div class="md-vcard-icon"><i class="fas fa-city"></i></div>
+          <h3 class="md-vcard-title">Commercial</h3>
+          <p class="md-vcard-body">Grade-A office towers, retail, and IT parks built for daily life.</p>
+          <ul class="md-vcard-list">
+            <li>Office &amp; IT parks</li>
+            <li>Retail &amp; hospitality</li>
+            <li>Mixed-use commercial</li>
+          </ul>
+        </article>
+        <article class="md-vcard md-reveal" style="transition-delay: 160ms;">
+          <div class="md-vcard-num">03 · 8+ Projects</div>
+          <div class="md-vcard-icon"><i class="fas fa-industry"></i></div>
+          <h3 class="md-vcard-title">Institutional</h3>
+          <p class="md-vcard-body">Government turnkey housing, civic infrastructure, and warehousing at scale.</p>
+          <ul class="md-vcard-list">
+            <li>Government turnkey</li>
+            <li>Warehousing &amp; logistics</li>
+            <li>Civic &amp; educational</li>
+          </ul>
+        </article>
+        <article class="md-vcard md-reveal" style="transition-delay: 240ms;">
+          <div class="md-vcard-num">04 · In-House</div>
+          <div class="md-vcard-icon"><i class="fas fa-drafting-compass"></i></div>
+          <h3 class="md-vcard-title">Design &amp; Planning</h3>
+          <p class="md-vcard-body">An in-house architecture team translating intent into precise drawings.</p>
+          <ul class="md-vcard-list">
+            <li>Architectural design</li>
+            <li>Structural engineering</li>
+            <li>RERA documentation</li>
+          </ul>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- EXPERTISE (Bento Grid) -->
-  <section class="py-16 md:py-24 bg-clay-mist px-6">
-    <div class="container mx-auto">
-      <div class="text-center mb-16 reveal-up">
-        <div class="flex items-center gap-4 justify-center mb-4">
-          <div class="h-px w-12 bg-brand-gold"></div>
-          <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">What We Do</span>
-          <div class="h-px w-12 bg-brand-gold"></div>
-        </div>
-        <h2 class="font-bold text-clay-ink font-heading uppercase">Our <span class="text-gradient-gold">Expertise</span></h2>
+  <!-- ═══ PROCESS ═══ -->
+  <section class="md-section">
+    <div class="md-container">
+      <div class="md-section-head md-center md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent">Our Process</span>
+        <h2>How we build</h2>
+        <p>From first site visit to 12-month defect-liability — every project follows the same four stages.</p>
       </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-        <!-- Card 1: Residential -->
-        <article class="ix-vcard reveal-up">
-          <div class="ix-vcard-num">01</div>
-          <div class="ix-vcard-icon"><i class="fas fa-home"></i></div>
-          <div class="ix-vcard-tag">25+ Projects</div>
-          <h3 class="ix-vcard-title">Residential</h3>
-          <p class="ix-vcard-body">High-end villas, premium high-rises, and integrated townships.</p>
-          <ul class="ix-step-list" style="margin-top: 1rem;">
-            <li>Custom Villas &amp; Penthouses</li>
-            <li>Super High-Rise Towers</li>
-            <li>Mixed-Use Townships</li>
-          </ul>
-        </article>
-
-        <!-- Card 2: Commercial -->
-        <article class="ix-vcard reveal-up" style="transition-delay: 100ms;">
-          <div class="ix-vcard-num">02</div>
-          <div class="ix-vcard-icon"><i class="fas fa-city"></i></div>
-          <div class="ix-vcard-tag">12+ Projects</div>
-          <h3 class="ix-vcard-title">Commercial</h3>
-          <p class="ix-vcard-body">Grade-A office towers, retail, and IT parks built for daily life.</p>
-          <ul class="ix-step-list" style="margin-top: 1rem;">
-            <li>Office &amp; IT Parks</li>
-            <li>Retail &amp; Hospitality</li>
-            <li>Mixed-Use Commercial</li>
-          </ul>
-        </article>
-
-        <!-- Card 3: Industrial / Public -->
-        <article class="ix-vcard reveal-up" style="transition-delay: 200ms;">
-          <div class="ix-vcard-num">03</div>
-          <div class="ix-vcard-icon"><i class="fas fa-industry"></i></div>
-          <div class="ix-vcard-tag">8+ Projects</div>
-          <h3 class="ix-vcard-title">Institutional</h3>
-          <p class="ix-vcard-body">Government turnkey housing, civic infrastructure, and warehousing at scale.</p>
-          <ul class="ix-step-list" style="margin-top: 1rem;">
-            <li>Government Turnkey</li>
-            <li>Warehousing &amp; Logistics</li>
-            <li>Civic &amp; Educational</li>
-          </ul>
-        </article>
-
-        <!-- Card 4: Design & Planning -->
-        <article class="ix-vcard reveal-up" style="transition-delay: 300ms;">
-          <div class="ix-vcard-num">04</div>
-          <div class="ix-vcard-icon"><i class="fas fa-drafting-compass"></i></div>
-          <div class="ix-vcard-tag">In-House Studio</div>
-          <h3 class="ix-vcard-title">Design &amp; Planning</h3>
-          <p class="ix-vcard-body">An in-house architecture team translating intent into precise drawings.</p>
-          <ul class="ix-step-list" style="margin-top: 1rem;">
-            <li>Architectural Design</li>
-            <li>Structural Engineering</li>
-            <li>RERA Documentation</li>
-          </ul>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- OUR PROCESS (Timeline Style) -->
-  <section class="py-16 md:py-24 bg-clay-mist relative border-t border-clay-border overflow-hidden">
-    <!-- Background styling -->
-    <div
-      class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-gold/5 to-transparent pointer-events-none">
-    </div>
-
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="text-center mb-24 reveal-up">
-        <div class="flex items-center gap-4 justify-center mb-4">
-          <div class="h-px w-12 bg-brand-gold"></div>
-          <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">Our Process</span>
-          <div class="h-px w-12 bg-brand-gold"></div>
-        </div>
-        <h2 class="font-bold text-clay-ink font-heading uppercase">How We <span class="text-gradient-gold">Build</span></h2>
-      </div>
-
-      <div class="ix-process-grid grid md:grid-cols-4 gap-8 relative">
-        <!-- Connecting Line (desktop only) -->
-        <div class="absolute top-8 left-0 w-full h-0.5 bg-clay-surface/10 hidden md:block z-0"></div>
-
-        <!-- Step 1 -->
-        <div class="ix-step relative group reveal-up z-10">
-          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(239, 191, 4,0.3)]">
-            <span>01</span>
-          </div>
-          <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
-            <span class="ix-step-duration">2 – 4 Weeks</span>
-            <h3 class="text-xl font-bold font-heading mb-3 text-brand-darkGold">Discovery</h3>
-            <p class="text-clay-muted text-sm leading-relaxed mb-3">Deeply understanding your vision, site potential, and feasibility constraints.</p>
-            <ul class="ix-step-list">
-              <li>Site survey &amp; soil report</li>
-              <li>Brief alignment workshop</li>
-              <li>Indicative cost estimate</li>
-            </ul>
+      <div class="md-process-grid">
+        <div class="md-step md-reveal">
+          <div class="md-step-num">01</div>
+          <div class="md-step-body">
+            <span class="md-step-dur">2 – 4 Weeks</span>
+            <h3 class="md-step-title">Discovery</h3>
+            <p>Site surveys, brief alignment, feasibility assessment, and an indicative cost estimate.</p>
           </div>
         </div>
-
-        <!-- Step 2 -->
-        <div class="ix-step relative group reveal-up z-10" style="transition-delay: 150ms;">
-          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(239, 191, 4,0.3)]">
-            <span>02</span>
-          </div>
-          <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
-            <span class="ix-step-duration">6 – 12 Weeks</span>
-            <h3 class="text-xl font-bold font-heading mb-3 text-brand-darkGold">Design &amp; Plan</h3>
-            <p class="text-clay-muted text-sm leading-relaxed mb-3">In-house architects build detailed BOQ, structural plans, and 3D walkthroughs.</p>
-            <ul class="ix-step-list">
-              <li>Architectural &amp; structural drawings</li>
-              <li>Material selection &amp; BOQ</li>
-              <li>RERA / approvals coordination</li>
-            </ul>
+        <div class="md-step md-reveal" style="transition-delay: 100ms;">
+          <div class="md-step-num">02</div>
+          <div class="md-step-body">
+            <span class="md-step-dur">6 – 12 Weeks</span>
+            <h3 class="md-step-title">Design &amp; Plan</h3>
+            <p>Detailed BOQ, structural plans, material selection, and RERA/approvals coordination.</p>
           </div>
         </div>
-
-        <!-- Step 3 -->
-        <div class="ix-step relative group reveal-up z-10" style="transition-delay: 300ms;">
-          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(239, 191, 4,0.3)]">
-            <span>03</span>
-          </div>
-          <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
-            <span class="ix-step-duration">12 – 36 Months</span>
-            <h3 class="text-xl font-bold font-heading mb-3 text-brand-darkGold">Construction</h3>
-            <p class="text-clay-muted text-sm leading-relaxed mb-3">5-S methodology in motion — daily safety briefings, ERP-tracked progress, weekly client reports.</p>
-            <ul class="ix-step-list">
-              <li>Daily toolbox &amp; safety drills</li>
-              <li>Quality checklist per pour</li>
-              <li>Live ERP cost tracking</li>
-            </ul>
+        <div class="md-step md-reveal" style="transition-delay: 200ms;">
+          <div class="md-step-num">03</div>
+          <div class="md-step-body">
+            <span class="md-step-dur">12 – 36 Months</span>
+            <h3 class="md-step-title">Construction</h3>
+            <p>5S methodology in motion — daily safety briefings, ERP-tracked progress, weekly client reports.</p>
           </div>
         </div>
-
-        <!-- Step 4 -->
-        <div class="ix-step relative group reveal-up z-10" style="transition-delay: 450ms;">
-          <div class="w-16 h-16 bg-clay-mist border border-brand-gold rounded-full flex items-center justify-center text-2xl font-heading font-bold text-clay-ink mb-6 mx-auto relative group-hover:scale-110 transition duration-500 shadow-[0_0_20px_rgba(239, 191, 4,0.3)]">
-            <span>04</span>
-          </div>
-          <div class="text-center p-6 glass-panel border-t-0 group-hover:-translate-y-2 transition duration-500">
-            <span class="ix-step-duration">2 – 4 Weeks</span>
-            <h3 class="text-xl font-bold font-heading mb-3 text-brand-darkGold">Handover</h3>
-            <p class="text-clay-muted text-sm leading-relaxed mb-3">Snag-list closure, final inspections, and a 12-month defect-liability commitment.</p>
-            <ul class="ix-step-list">
-              <li>Snag &amp; defect resolution</li>
-              <li>OC / completion certificates</li>
-              <li>12-month warranty support</li>
-            </ul>
+        <div class="md-step md-reveal" style="transition-delay: 300ms;">
+          <div class="md-step-num">04</div>
+          <div class="md-step-body">
+            <span class="md-step-dur">2 – 4 Weeks</span>
+            <h3 class="md-step-title">Handover</h3>
+            <p>Snag-list closure, final inspections, and a 12-month defect-liability commitment.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CLIENTS (Monogram Ticker) -->
-  <section class="py-12 bg-clay-mist border-y border-clay-border relative overflow-hidden">
-    <div class="container mx-auto px-6 mb-6 reveal-up">
-      <div class="text-center">
-        <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase font-heading">Trusted By</span>
-        <h3 class="font-bold text-clay-ink font-heading uppercase mt-2">8+ Marquee Developers</h3>
+  <!-- ═══ CLIENTS MARQUEE ═══ -->
+  <section class="md-section" style="padding-block: 4rem;">
+    <div class="md-container" style="margin-bottom: 2rem; text-align: center;">
+      <div class="md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent">Trusted By</span>
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 700; letter-spacing: 0; margin-top: 0.75rem; text-transform: uppercase;">Mumbai's Leading Developers</h2>
       </div>
     </div>
-    <div class="absolute left-0 top-1/2 bottom-0 w-24 bg-gradient-to-r from-clay-mist to-transparent z-10 pointer-events-none"></div>
-    <div class="absolute right-0 top-1/2 bottom-0 w-24 bg-gradient-to-l from-clay-mist to-transparent z-10 pointer-events-none"></div>
-    <div class="flex animate-marquee whitespace-nowrap w-max mt-4">
-      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/lodha.png" alt="Lodha Group" loading="lazy"></div></div>
-      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/rustomjee.png" alt="Rustomjee" loading="lazy"></div></div>
-      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/mahindra-lifespaces.png" alt="Mahindra Lifespaces" loading="lazy"></div></div>
-      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/hiranandani.png" alt="Hiranandani" loading="lazy"></div></div>
-      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/dheeraj.png" alt="Dheeraj Realty" loading="lazy"></div></div>
-      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/ekta-world.png" alt="Ekta World" loading="lazy"></div></div>
-      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/ajmera.png" alt="Ajmera Group" loading="lazy"></div></div>
-      <div class="ix-logo-group"><div class="ix-logo-tile"><img src="assets/Clients/puraniks.png" alt="Puraniks" loading="lazy"></div></div>
-      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/lodha.png" alt="Lodha" loading="lazy"></div></div>
-      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/rustomjee.png" alt="Rustomjee" loading="lazy"></div></div>
-      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/mahindra-lifespaces.png" alt="Mahindra Lifespaces" loading="lazy"></div></div>
-      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/hiranandani.png" alt="Hiranandani" loading="lazy"></div></div>
-      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/dheeraj.png" alt="Dheeraj" loading="lazy"></div></div>
-      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/ekta-world.png" alt="Ekta World" loading="lazy"></div></div>
-      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/ajmera.png" alt="Ajmera" loading="lazy"></div></div>
-      <div class="ix-logo-group" aria-hidden="true"><div class="ix-logo-tile"><img src="assets/Clients/puraniks.png" alt="Puraniks" loading="lazy"></div></div>
+    <div class="md-marquee-wrap md-reveal">
+      <div class="md-marquee">
+        <div class="md-logo-tile"><img src="assets/Clients/lodha.png" alt="Lodha" loading="lazy"></div>
+        <div class="md-logo-tile"><img src="assets/Clients/rustomjee.png" alt="Rustomjee" loading="lazy"></div>
+        <div class="md-logo-tile"><img src="assets/Clients/mahindra-lifespaces.png" alt="Mahindra Lifespaces" loading="lazy"></div>
+        <div class="md-logo-tile"><img src="assets/Clients/hiranandani.png" alt="Hiranandani" loading="lazy"></div>
+        <div class="md-logo-tile"><img src="assets/Clients/dheeraj.png" alt="Dheeraj" loading="lazy"></div>
+        <div class="md-logo-tile"><img src="assets/Clients/ekta-world.png" alt="Ekta World" loading="lazy"></div>
+        <div class="md-logo-tile"><img src="assets/Clients/ajmera.png" alt="Ajmera" loading="lazy"></div>
+        <div class="md-logo-tile"><img src="assets/Clients/puraniks.png" alt="Puraniks" loading="lazy"></div>
+        <!-- duplicate for seamless loop -->
+        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/lodha.png" alt="" loading="lazy"></div>
+        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/rustomjee.png" alt="" loading="lazy"></div>
+        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/mahindra-lifespaces.png" alt="" loading="lazy"></div>
+        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/hiranandani.png" alt="" loading="lazy"></div>
+        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/dheeraj.png" alt="" loading="lazy"></div>
+        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/ekta-world.png" alt="" loading="lazy"></div>
+        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/ajmera.png" alt="" loading="lazy"></div>
+        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/puraniks.png" alt="" loading="lazy"></div>
+      </div>
     </div>
   </section>
 
-
-  <!-- CTA -->
-  <section class="relative overflow-hidden">
-    <div class="grid md:grid-cols-2 min-h-[400px]">
-      <!-- Left: Image -->
-      <div class="relative h-64 md:h-auto overflow-hidden">
-        <img src="assets/Projects/Tree Top.jpg" alt="Strong Built Project" class="w-full h-full object-cover transition duration-700">
-        <div class="absolute inset-0 bg-clay-base/40"></div>
-      </div>
-      <!-- Right: Content -->
-      <div class="bg-brand-gold flex items-center relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10"></div>
-        <div class="relative z-10 p-10 md:p-16 lg:p-20">
-          <span class="inline-block text-black/60 text-xs font-bold tracking-[0.4em] uppercase mb-4 font-heading">See It In Person</span>
-          <h2 class="font-bold text-black font-heading mb-6 leading-tight uppercase">Walk a Live<br>Site With Us</h2>
-          <p class="text-black/70 text-base md:text-lg mb-8 max-w-md font-light">Spec sheets only tell half the story. Visit one of our active projects with our team and see the discipline up close.</p>
-          <div class="flex flex-wrap gap-3">
-            <a href="contact.html" class="inline-flex items-center gap-2 px-8 md:px-10 py-4 bg-clay-base text-clay-ink font-bold uppercase tracking-widest hover:bg-clay-surface hover:text-black transition duration-300 font-heading text-sm">
-              <i class="fas fa-calendar-check text-xs"></i> Schedule a Site Visit
+  <!-- ═══ CTA BLOCK ═══ -->
+  <section class="md-section">
+    <div class="md-container">
+      <div class="md-cta-block md-reveal">
+        <div class="md-cta-content">
+          <span class="md-eyebrow md-eyebrow-accent" style="margin-inline: auto;">Start a conversation</span>
+          <h2 style="margin-top: 1rem;">Let's build something together.</h2>
+          <p>Explore our work or reach out to discuss your next project. Our team responds to every inquiry personally.</p>
+          <div class="md-cta-ctas">
+            <a href="projects.html" class="md-btn md-btn-primary md-btn-lg">
+              View Portfolio <i class="fas fa-arrow-right"></i>
             </a>
-            <a href="projects.html" class="inline-flex items-center gap-2 px-8 md:px-10 py-4 border border-black/40 text-black font-bold uppercase tracking-widest hover:bg-black hover:text-brand-gold transition duration-300 font-heading text-sm">
-              <i class="fas fa-arrow-down text-xs"></i> Download Portfolio
+            <a href="contact.html" class="md-btn md-btn-secondary md-btn-lg">
+              Contact Us
             </a>
           </div>
         </div>
@@ -1382,127 +2445,238 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-clay-mist text-clay-muted pt-16 md:pt-20 pb-10 border-t border-clay-border relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10"
-      style="background-image: radial-gradient(rgba(239, 191, 4, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
-        <div class="col-span-1">
-          <div class="text-2xl font-bold text-clay-ink mb-6 font-heading tracking-widest flex items-center gap-2">
-            <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto">
+  <!-- ═══ FOOTER — 3-COLUMN BRAND / NAV / SIGNUP ═══ -->
+  <footer class="md-footer">
+    <div class="md-container">
+
+      <div class="md-footer-top">
+
+        <!-- LEFT — Brand -->
+        <div class="md-footer-brand">
+          <a href="index.html" aria-label="Strong Built — Home">
+            <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="md-footer-logo">
+          </a>
+          <p class="md-footer-tagline">Building <em>legacies</em>, not just structures. Since 2014.</p>
+        </div>
+
+        <!-- RIGHT — Contact -->
+        <div class="md-footer-signup md-footer-contact-card">
+          <div class="md-fc-item">
+            <span class="md-fc-k"><i class="fas fa-location-dot"></i> Address</span>
+            <p class="md-fc-v">901-B Wing, HDIL Kaledonia,<br>Sahar Road, Andheri-East,<br>Mumbai — 400069</p>
           </div>
-          <p class="text-clay-faint text-sm mb-6 font-light leading-relaxed">
-            Forging the future with concrete, steel, and integrity.
-          </p>
-          <div class="flex gap-4">
-            <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram"
-              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
-                class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn"
-              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
-                class="fab fa-linkedin-in"></i></a>
-            <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter"
-              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
-                class="fab fa-twitter"></i></a>
+          <div class="md-fc-item">
+            <span class="md-fc-k"><i class="fas fa-phone"></i> Phone</span>
+            <a class="md-fc-v" href="tel:+919619875081">+91 96198 75081</a>
+            <a class="md-fc-v" href="tel:+912261232500">022 6123 2500</a>
+          </div>
+          <div class="md-fc-item">
+            <span class="md-fc-k"><i class="fas fa-envelope"></i> Email</span>
+            <a class="md-fc-v" href="mailto:sales@strongbuilt.in">sales@strongbuilt.in</a>
           </div>
         </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Navigation</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><a href="story.html" class="hover:text-clay-ink transition">About</a></li>
-            <li><a href="services.html" class="hover:text-clay-ink transition">Services</a></li>
-            <li><a href="projects.html" class="hover:text-clay-ink transition">Projects</a></li>
-            <li><a href="clients.html" class="hover:text-clay-ink transition">Clients</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Services</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><a href="services.html" class="hover:text-clay-ink transition">Residential</a></li>
-            <li><a href="services.html" class="hover:text-clay-ink transition">Commercial</a></li>
-            <li><a href="services.html" class="hover:text-clay-ink transition">Industrial</a></li>
-            <li><a href="services.html" class="hover:text-clay-ink transition">Infrastructure</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Contact</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><i class="fas fa-map-marker-alt text-brand-darkGold mr-2"></i> 901-B Wing, 9th Floor, HDIL Kaledonia, Sahar
-              Road, Opp D'Mart, Sambhaji Nagar, Andheri-East, Mumbai - 400069.</li>
-            <li><i class="fas fa-phone text-brand-darkGold mr-2"></i> +91 9619875081 / 022-6123-2500</li>
-            <li><i class="fas fa-envelope text-brand-darkGold mr-2"></i> strongbuilt@skywaygroup.co.in</li>
-          </ul>
-        </div>
+
       </div>
-      <div
-        class="border-t border-clay-border pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-clay-muted font-light uppercase tracking-wider">
-        <p class="font-body">&copy; 2026 Strong Built. All rights reserved.</p>
-        <div class="flex gap-6 mt-4 md:mt-0 font-heading">
-          <a href="privacy.html" class="hover:text-clay-ink">Privacy</a>
-          <a href="terms.html" class="hover:text-clay-ink">Terms</a>
+
+      <!-- BOTTOM STRIP -->
+      <div class="md-footer-strip">
+        <div class="md-footer-strip-left">
+          <div class="md-footer-socials">
+            <a href="https://www.instagram.com/strongbuilt" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/strongbuilt" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://x.com/strongbuilt" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+          </div>
+          <div class="md-footer-strip-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
         </div>
+        <div class="md-footer-strip-center">© 2026 Strong Built — A Skyway Group Company. All Rights Reserved.</div>
+        <div class="md-footer-strip-right">Designed by <b>Abdul Ahad</b></div>
       </div>
+
     </div>
   </footer>
 
-  <!-- Sticky Floating CTA — appears after first scroll -->
-  <div class="ix-fab" id="ixFab" aria-hidden="true">
-    <a href="https://wa.me/919619875081" target="_blank" rel="noopener" class="ix-fab-whatsapp" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    <a href="tel:+919619875081" class="ix-fab-phone" aria-label="Call Strong Built"><i class="fas fa-phone"></i></a>
+  <!-- ═══ FLOATING CTA ═══ -->
+  <div class="md-fab" id="mdFab" aria-hidden="true">
+    <a href="https://wa.me/919619875081" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="tel:+919619875081" aria-label="Call Strong Built"><i class="fas fa-phone"></i></a>
   </div>
 
-  <!-- SCRIPTS -->
+  <!-- ═══ SCRIPTS ═══ -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js" defer></script>
-  <!-- Admin-managed data files -->
   <script src="active-projects-data.js"></script>
   <script src="site-info.js"></script>
-  <script src="script.js"></script>
+
   <script>
-    // ── Hydrate active projects ──
+    // ── Desktop nav dropdowns: aria-expanded sync + click-outside close ──
+    (function initDesktopDropdowns() {
+      document.querySelectorAll('.md-nav-item').forEach(item => {
+        const btn = item.querySelector('.md-nav-link');
+        const panel = item.querySelector('.md-nav-dropdown');
+        if (!btn || !panel) return;
+
+        const open = () => btn.setAttribute('aria-expanded', 'true');
+        const close = () => btn.setAttribute('aria-expanded', 'false');
+
+        item.addEventListener('mouseenter', open);
+        item.addEventListener('mouseleave', close);
+        btn.addEventListener('focus', open);
+        item.addEventListener('focusout', e => {
+          if (!item.contains(e.relatedTarget)) close();
+        });
+        // Touch / click toggle for touch-enabled laptops
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          const isOpen = btn.getAttribute('aria-expanded') === 'true';
+          document.querySelectorAll('.md-nav-link[aria-expanded="true"]').forEach(b => b.setAttribute('aria-expanded', 'false'));
+          if (!isOpen) open();
+        });
+      });
+      document.addEventListener('click', e => {
+        if (!e.target.closest('.md-nav-item')) {
+          document.querySelectorAll('.md-nav-link[aria-expanded="true"]').forEach(b => b.setAttribute('aria-expanded', 'false'));
+        }
+      });
+    })();
+
+    // ── Drawer open/close ──
+    (function initDrawer() {
+      const toggle = document.getElementById('menuToggle');
+      const drawer = document.getElementById('navDrawer');
+      const backdrop = document.getElementById('drawerBackdrop');
+      const close = document.getElementById('drawerClose');
+      if (!toggle || !drawer) return;
+
+      const open = () => {
+        drawer.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      };
+      const shut = () => {
+        drawer.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      };
+
+      toggle.addEventListener('click', open);
+      close && close.addEventListener('click', shut);
+      backdrop && backdrop.addEventListener('click', shut);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') shut(); });
+
+      // Drawer dropdown toggles
+      document.querySelectorAll('[data-dropdown]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const sub = btn.nextElementSibling;
+          btn.classList.toggle('is-open');
+          if (sub) sub.classList.toggle('is-open');
+        });
+      });
+    })();
+
+    // ── Reveal on scroll ──
+    (function initReveal() {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+      document.querySelectorAll('.md-reveal').forEach(el => io.observe(el));
+
+      // Fallback — any element still hidden after 2s becomes visible
+      setTimeout(() => {
+        document.querySelectorAll('.md-reveal:not(.is-visible)').forEach(el => el.classList.add('is-visible'));
+      }, 2500);
+    })();
+
+    // ── Stat counter animation ──
+    (function initCounters() {
+      function animateValue(obj, end, duration = 1800) {
+        let start = null;
+        const step = (ts) => {
+          if (!start) start = ts;
+          const progress = Math.min((ts - start) / duration, 1);
+          // Ease-out cubic
+          const eased = 1 - Math.pow(1 - progress, 3);
+          obj.textContent = Math.floor(eased * end);
+          if (progress < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      }
+      const io = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = entry.target;
+            animateValue(target, parseInt(target.getAttribute('data-target'), 10));
+            observer.unobserve(target);
+          }
+        });
+      }, { threshold: 0.5 });
+      document.querySelectorAll('.stat-counter').forEach(el => io.observe(el));
+    })();
+
+    // ── Signature Projects Swiper ──
+    (function initSwiper() {
+      if (typeof Swiper === 'undefined') {
+        // Swiper is deferred — wait until it's loaded
+        window.addEventListener('load', initSwiper);
+        return;
+      }
+      new Swiper('.md-sig-swiper', {
+        slidesPerView: 1,
+        loop: true,
+        effect: 'fade',
+        fadeEffect: { crossFade: true },
+        speed: 1200,
+        autoplay: { delay: 6500, disableOnInteraction: false },
+        navigation: {
+          nextEl: '.md-sig-section .swiper-button-next',
+          prevEl: '.md-sig-section .swiper-button-prev',
+        },
+        pagination: {
+          el: '.md-sig-section .swiper-pagination',
+          clickable: true,
+        },
+      });
+    })();
+
+    // ── Active projects: hydrate from admin-managed data ──
     (function hydrateActive() {
-      const grid = document.getElementById('ix-active-grid');
+      const grid = document.getElementById('mdActiveGrid');
       if (!grid || !window.ACTIVE_PROJECTS_DATA || !Array.isArray(window.ACTIVE_PROJECTS_DATA) || !window.ACTIVE_PROJECTS_DATA.length) return;
       grid.innerHTML = window.ACTIVE_PROJECTS_DATA.map((p, i) => `
-        <article class="ix-active-card reveal-up reveal-active" ${i > 0 ? `style="transition-delay: ${i * 100}ms;"` : ''}>
-          <div class="ix-active-status">Live</div>
-          <div class="ix-active-name">${p.name}</div>
-          <div class="ix-active-loc">${p.location}</div>
-          <div class="ix-active-progress"><div class="ix-active-progress-fill" style="width: ${p.progress}%"></div></div>
-          <div class="ix-active-meta"><span><strong>${p.progress}%</strong> Complete</span><span>${p.eta}</span></div>
+        <article class="md-active-card md-reveal is-visible" ${i > 0 ? `style="transition-delay: ${i * 80}ms;"` : ''}>
+          <div class="md-active-status">Live</div>
+          <div class="md-active-name">${p.name}</div>
+          <div class="md-active-loc">${p.location}</div>
+          <div class="md-active-bar"><div class="md-active-bar-fill" style="width: ${p.progress}%"></div></div>
+          <div class="md-active-meta"><span><strong>${p.progress}%</strong> Complete</span><span>${p.eta}</span></div>
         </article>`).join('');
     })();
 
-    // ── Hydrate site info (phone/email/whatsapp/social) ──
+    // ── Site-info hydration (phone / whatsapp) ──
     (function hydrateSiteInfo() {
       const s = window.SITE_INFO;
       if (!s) return;
-      // Update FAB hrefs
-      document.querySelectorAll('.ix-fab-whatsapp').forEach(a => a.href = `https://wa.me/${s.whatsapp}`);
-      document.querySelectorAll('.ix-fab-phone').forEach(a => a.href = `tel:${s.phonePrimary}`);
+      document.querySelectorAll('.md-fab a[href^="https://wa.me"]').forEach(a => a.href = `https://wa.me/${s.whatsapp}`);
+      document.querySelectorAll('.md-fab a[href^="tel:"]').forEach(a => a.href = `tel:${s.phonePrimary}`);
     })();
 
-    // ── Activate reveal-up on injected cards (scroll script fired before hydration, so trigger it now) ──
-    (function activateRevealsAfterHydration() {
-      if (typeof handleScrollAnimations === 'function') handleScrollAnimations();
-      // Fallback: any reveal-up element already visible in viewport gets activated directly
-      document.querySelectorAll('.reveal-up').forEach(el => {
-        const top = el.getBoundingClientRect().top;
-        if (top < window.innerHeight - 50) el.classList.add('reveal-active');
-      });
-    })();
-  </script>
-  <script>
-    // Floating CTA visibility — show after first 400px of scroll
+    // ── Floating CTA visibility ──
     (function initFab() {
-      const fab = document.getElementById('ixFab');
+      const fab = document.getElementById('mdFab');
       if (!fab) return;
       let ticking = false;
       const sync = () => {
-        const visible = window.scrollY > 400;
-        fab.classList.toggle('is-visible', visible);
-        fab.setAttribute('aria-hidden', visible ? 'false' : 'true');
+        fab.classList.toggle('is-visible', window.scrollY > 500);
+        fab.setAttribute('aria-hidden', window.scrollY > 500 ? 'false' : 'true');
         ticking = false;
       };
       window.addEventListener('scroll', () => {
@@ -1512,47 +2686,5 @@
       }, { passive: true });
     })();
   </script>
-
-  <!-- Page animations: scroll-progress + 5S card tilt -->
-  <script>
-  (() => {
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    /* 1. Scroll-progress bar */
-    const bar = document.querySelector('.ix-scroll-progress');
-    if (bar) {
-      let ticking = false;
-      const update = () => {
-        ticking = false;
-        const max = document.documentElement.scrollHeight - innerHeight;
-        const pct = max > 0 ? scrollY / max : 0;
-        bar.style.setProperty('--sp', pct.toFixed(4));
-      };
-      addEventListener('scroll', () => {
-        if (!ticking) { ticking = true; requestAnimationFrame(update); }
-      }, { passive: true });
-      update();
-    }
-
-    /* 2. 3D tilt on 5S Philosophy cards — desktop pointer only */
-    if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      document.querySelectorAll('.ix-vcard').forEach(card => {
-        card.addEventListener('pointermove', e => {
-          const r = card.getBoundingClientRect();
-          const x = (e.clientX - r.left) / r.width - 0.5;
-          const y = (e.clientY - r.top) / r.height - 0.5;
-          card.style.setProperty('--rx', (x * 8) + 'deg');
-          card.style.setProperty('--ry', (-y * 6) + 'deg');
-        });
-        card.addEventListener('pointerleave', () => {
-          card.style.setProperty('--rx', '0deg');
-          card.style.setProperty('--ry', '0deg');
-        });
-      });
-    }
-  })();
-  </script>
-
 </body>
-
 </html>

@@ -1,927 +1,601 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Corporate Social Responsibility | Strong Built</title>
-  <meta name="description" content="Strong Built's Corporate Social Responsibility programme — education, healthcare, skill development, women's empowerment, and environmental stewardship across Mumbai and beyond.">
-  <meta name="keywords" content="Strong Built CSR, corporate social responsibility Mumbai, construction CSR, education, healthcare, skill development, environment">
-  <meta name="author" content="Strong Built">
-  <meta name="robots" content="index, follow">
-
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSR · Corporate Social Responsibility | Strong Built</title>
+  <meta name="description" content="Strong Built's CSR programme — education, healthcare, skill development, environment, and community infrastructure. ₹18.4 Cr spent in FY25.">
   <link rel="icon" type="image/png" href="assets/Favicon/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/svg+xml" href="assets/Favicon/favicon.svg">
-  <link rel="shortcut icon" href="assets/Favicon/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/Favicon/apple-touch-icon.png">
-  <meta name="apple-mobile-web-app-title" content="Strong Built">
-  <link rel="manifest" href="assets/Favicon/site.webmanifest">
-
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Strong Built">
-  <meta property="og:title" content="CSR | Strong Built">
-  <meta property="og:description" content="Building beyond buildings — education, health, livelihoods, environment.">
-  <meta property="og:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
-  <meta property="og:locale" content="en_IN">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="dist/app.css">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="theme.css">
   <style>
-    /* CSR impact metric card */
-    .csr-impact {
-      position: relative; padding: 2.25rem 1.75rem;
-      background: linear-gradient(180deg, rgba(239, 191, 4, 0.08), rgba(239, 191, 4, 0.02));
-      border: 1px solid rgba(239, 191, 4, 0.25);
-      text-align: center; transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    .cs-hero { position: relative; padding: clamp(8rem,14vw,12rem) 0 clamp(3rem,5vw,5rem); text-align: center; overflow: hidden; }
+    .cs-hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at top, rgba(245,158,11,0.08) 0%, transparent 55%); pointer-events:none; }
+    .cs-hero h1 { font-family: var(--font-display); font-size: clamp(3rem,8vw,7rem); font-weight: 600; line-height: 0.95; margin: 1.5rem 0 1.75rem; }
+    .cs-hero h1 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .cs-hero .lede { max-width: 40rem; margin: 0 auto; color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; }
+    .cs-hero-rule { width: 3.5rem; height: 1px; background: var(--accent); margin: 2.25rem auto 0; }
+
+    .cs-section { padding-block: clamp(4rem,7vw,6rem); position: relative; }
+    .cs-section--alt { background: rgba(18,18,26,0.4); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .cs-head { text-align: center; max-width: 42rem; margin: 0 auto clamp(2.5rem,4vw,3.5rem); }
+    .cs-head h2 { font-family: var(--font-display); font-size: clamp(2.25rem,5vw,3.5rem); font-weight: 600; line-height: 1; margin: 1rem 0 0; }
+    .cs-head h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .cs-head p { color: var(--fg-muted); margin: 1rem auto 0; max-width: 40rem; line-height: 1.65; }
+
+    /* Philosophy */
+    .cs-phil { max-width: 52rem; margin: 0 auto; text-align: center; }
+    .cs-phil h2 { font-family: var(--font-display); font-size: clamp(2rem,4.5vw,3rem); font-weight: 600; line-height: 1.15; text-transform: uppercase; margin: 1rem 0 1.5rem; letter-spacing: 0; }
+    .cs-phil h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .cs-phil p { color: var(--fg-muted); font-size: 1.02rem; line-height: 1.75; margin: 0; }
+    .cs-phil .sig { color: var(--fg-muted); font-style: italic; margin-top: 1.25rem; font-family: var(--font-body); }
+
+    /* Impact metrics */
+    .cs-impact { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.85rem; }
+    @media (min-width: 720px)  { .cs-impact { grid-template-columns: repeat(4,1fr); gap: 1rem; } }
+    .cs-metric {
+      background: var(--card); backdrop-filter: blur(8px);
+      border: 1px solid var(--border); border-radius: var(--r-md);
+      padding: 1.5rem 1.25rem;
+      transition: all var(--t-slow) var(--ease-out);
     }
-    .csr-impact:hover { border-color: #EFBF04; transform: translateY(-4px); background: linear-gradient(180deg, rgba(239, 191, 4, 0.15), rgba(239, 191, 4, 0.03)); }
-    .csr-impact .num {
-      font-family: 'Oswald', sans-serif; font-weight: 700;
-      font-size: clamp(2.75rem, 6vw, 4rem); line-height: 1; color: #EFBF04;
+    .cs-metric:hover { border-color: rgba(245,158,11,0.3); background: rgba(26,26,36,0.8); transform: translateY(-2px); box-shadow: var(--glow-sm); }
+    .cs-metric .n { font-family: var(--font-display); font-size: clamp(1.65rem,3.2vw,2.25rem); font-weight: 500; color: var(--fg); line-height: 1; letter-spacing: -0.01em; }
+    .cs-metric .n em { color: var(--accent); font-style: normal; font-size: 0.75em; font-weight: 500; }
+    .cs-metric .l { font-family: var(--font-label); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg); margin-top: 0.75rem; }
+    .cs-metric .s { font-size: 0.78rem; color: var(--fg-subtle); margin-top: 0.35rem; }
+
+    /* Focus areas */
+    .cs-focus-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    @media (min-width: 720px)  { .cs-focus-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (min-width: 1024px) { .cs-focus-grid { grid-template-columns: repeat(3,1fr); gap: 1.5rem; } }
+    .cs-focus {
+      background: var(--card); backdrop-filter: blur(8px);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: 2rem 1.75rem;
+      transition: all var(--t-slow) var(--ease-out);
     }
-    .csr-impact .lbl {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: #B3B3B3; margin-top: 0.75rem;
+    .cs-focus:hover { border-color: rgba(245,158,11,0.28); background: rgba(26,26,36,0.8); transform: translateY(-3px); box-shadow: var(--glow-sm); }
+    .cs-focus .icon {
+      width: 3rem; height: 3rem; display: grid; place-items: center;
+      border-radius: 50%; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3);
+      color: var(--accent); font-size: 1rem; margin-bottom: 1.25rem;
+      transition: all var(--t-base-ms);
     }
-    .csr-impact .sub {
-      font-family: 'Inter', sans-serif; font-size: 0.7rem;
-      color: #EFBF04; margin-top: 0.25rem;
+    .cs-focus:hover .icon { background: var(--accent); color: var(--accent-foreground); box-shadow: var(--glow-btn); }
+    .cs-focus h3 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 0.75rem; color: var(--fg); }
+    .cs-focus p { color: var(--fg-muted); font-size: 0.9rem; line-height: 1.65; margin: 0 0 1.25rem; }
+    .cs-focus .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .cs-focus .tag {
+      font-family: var(--font-label); font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent);
+      padding: 0.25rem 0.55rem;
+      border: 1px solid rgba(245,158,11,0.3); border-radius: var(--r-sm);
     }
 
-    /* Focus area card */
-    .csr-focus {
-      padding: 2rem; border: 1px solid rgba(239, 191, 4, 0.2);
-      background: rgba(255,255,255,0.03);
-      transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-      position: relative; overflow: hidden;
+    /* Flagship programmes */
+    .cs-prog { display: grid; grid-template-columns: 1fr; gap: clamp(1.5rem,3vw,2.25rem); }
+    @media (min-width: 900px) {
+      .cs-prog { gap: clamp(2rem,4vw,3rem); }
     }
-    .csr-focus::before {
-      content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 0;
-      background: #EFBF04; transition: height 0.5s ease;
+    .cs-prog-card {
+      display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+      background: var(--card); backdrop-filter: blur(8px);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: 1.5rem;
+      transition: all var(--t-slow) var(--ease-out);
     }
-    .csr-focus:hover {
-      border-color: #EFBF04;
-      background: rgba(239, 191, 4, 0.06);
-      transform: translateY(-4px);
+    @media (min-width: 720px) { .cs-prog-card { grid-template-columns: 0.85fr 1.15fr; gap: 2rem; padding: 2rem; } }
+    .cs-prog-card:hover { border-color: rgba(245,158,11,0.28); background: rgba(26,26,36,0.85); box-shadow: var(--glow-sm); }
+    .cs-prog-card.reverse { direction: rtl; }
+    .cs-prog-card.reverse > * { direction: ltr; }
+    @media (max-width: 719px) { .cs-prog-card.reverse { direction: ltr; } }
+    .cs-prog-img {
+      aspect-ratio: 4/3;
+      border-radius: var(--r-md); overflow: hidden;
+      background: var(--muted);
     }
-    .csr-focus:hover::before { height: 100%; }
-    .csr-focus .icon {
-      width: 60px; height: 60px;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(239, 191, 4, 0.12);
-      color: #EFBF04; font-size: 1.5rem; margin-bottom: 1.25rem;
+    .cs-prog-img img { width: 100%; height: 100%; object-fit: cover; }
+    .cs-prog-body { display: flex; flex-direction: column; justify-content: center; }
+    .cs-prog-body .pill {
+      display: inline-flex; align-self: flex-start;
+      font-family: var(--font-label); font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent);
+      padding: 0.3rem 0.65rem;
+      border: 1px solid rgba(245,158,11,0.3); border-radius: var(--r-full);
+      margin-bottom: 1rem;
     }
-    .csr-focus h3 {
-      font-family: 'Oswald', sans-serif; font-weight: 700;
-      color: #EEEEEE; text-transform: uppercase; letter-spacing: 0.05em;
-      margin-bottom: 0.75rem; font-size: 1.4rem;
-    }
-    .csr-focus p {
-      color: #B3B3B3; font-family: 'Inter', sans-serif;
-      font-size: 0.9rem; line-height: 1.65;
-    }
-    .csr-focus .tags {
-      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem;
-    }
-    .csr-focus .tag {
-      font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem;
-      letter-spacing: 0.2em; text-transform: uppercase; color: #EFBF04;
-      padding: 4px 10px; border: 1px solid rgba(239, 191, 4, 0.4);
-    }
-
-    /* Flagship programme card */
-    .csr-programme {
-      display: grid; grid-template-columns: 1fr; gap: 0;
-      background: rgba(26,23,24,0.6); border: 1px solid rgba(239, 191, 4, 0.15);
-      overflow: hidden;
-    }
-    @media (min-width: 768px) {
-      .csr-programme { grid-template-columns: 1.2fr 1fr; }
-      .csr-programme.reverse { grid-template-columns: 1fr 1.2fr; }
-      .csr-programme.reverse .img-col { order: 2; }
-    }
-    .csr-programme .img-col {
-      min-height: 280px; position: relative;
-      background-size: cover; background-position: center;
-    }
-    .csr-programme .img-col::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(90deg, transparent 60%, rgba(26,23,24,0.6));
-    }
-    .csr-programme .text-col { padding: clamp(1.75rem, 4vw, 3rem); }
-    .csr-programme .tag-pill {
-      display: inline-block; font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
-      color: #EFBF04; border: 1px solid #EFBF04;
-      padding: 5px 14px; margin-bottom: 1.25rem;
-    }
-    .csr-programme h3 {
-      font-family: 'Oswald', sans-serif; font-weight: 700;
-      color: #EEEEEE; text-transform: uppercase; line-height: 1.1;
-      font-size: clamp(1.6rem, 3vw, 2.25rem); margin-bottom: 1rem;
-    }
-    .csr-programme h3 em { font-style: normal; color: #EFBF04; }
-    .csr-programme .lede {
-      color: #B3B3B3; font-family: 'Inter', sans-serif;
-      font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;
-    }
-    .csr-programme .kpis {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
-      padding-top: 1.25rem; border-top: 1px solid rgba(239, 191, 4, 0.15);
-    }
-    .csr-programme .kpis strong {
-      display: block; font-family: 'Oswald', sans-serif;
-      font-size: 1.5rem; color: #EFBF04; line-height: 1;
-    }
-    .csr-programme .kpis span {
-      font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem;
-      letter-spacing: 0.2em; text-transform: uppercase; color: #B3B3B3;
-      margin-top: 4px; display: block;
-    }
-
-    /* Timeline */
-    .csr-timeline {
-      position: relative; padding-left: 2rem;
-      border-left: 2px solid rgba(239, 191, 4, 0.3);
-    }
-    .csr-timeline-item { position: relative; padding-bottom: 2.5rem; }
-    .csr-timeline-item:last-child { padding-bottom: 0; }
-    .csr-timeline-item::before {
-      content: ''; position: absolute; left: -2.3rem; top: 0.4rem;
-      width: 14px; height: 14px; border-radius: 50%;
-      background: #EFBF04; box-shadow: 0 0 0 4px rgba(239, 191, 4, 0.2);
-    }
-    .csr-timeline-item .year {
-      font-family: 'Oswald', sans-serif; font-weight: 700;
-      color: #EFBF04; font-size: 1.5rem; display: block; line-height: 1;
-    }
-    .csr-timeline-item h4 {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
-      color: #EEEEEE; text-transform: uppercase; letter-spacing: 0.05em;
-      margin: 0.5rem 0 0.5rem; font-size: 1.1rem;
-    }
-    .csr-timeline-item p {
-      color: #B3B3B3; font-family: 'Inter', sans-serif; font-size: 0.9rem; line-height: 1.65;
-    }
-
-    /* Partner logo */
-    .csr-partner {
-      display: flex; align-items: center; justify-content: center;
-      padding: 1.5rem; min-height: 100px;
-      border: 1px solid rgba(239, 191, 4, 0.15);
-      background: rgba(255,255,255,0.03);
-      transition: all 0.3s; text-align: center;
-      font-family: 'Oswald', sans-serif; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.1em;
-      color: #B3B3B3;
-    }
-    .csr-partner:hover { border-color: #EFBF04; background: rgba(239, 191, 4, 0.06); color: #EFBF04; }
+    .cs-prog-body h3 { font-family: var(--font-display); font-size: clamp(1.35rem,2.5vw,1.75rem); font-weight: 500; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 0.85rem; color: var(--fg); line-height: 1.15; }
+    .cs-prog-body h3 em { color: var(--accent); font-style: italic; font-weight: 500; }
+    .cs-prog-body p { color: var(--fg-muted); line-height: 1.7; margin: 0 0 1.5rem; font-size: 0.95rem; }
+    .cs-prog-kpis { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.85rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .cs-prog-kpis > div { padding-left: 0.75rem; border-left: 2px solid var(--accent); }
+    .cs-prog-kpis strong { display: block; font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; color: var(--fg); line-height: 1; }
+    .cs-prog-kpis span { display: block; font-family: var(--font-label); font-size: 0.58rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-subtle); margin-top: 0.3rem; line-height: 1.3; }
 
     /* Spend breakdown */
-    .csr-spend-row {
-      display: grid; grid-template-columns: 1fr auto auto; gap: 1.5rem;
-      align-items: center; padding: 1rem 0;
-      border-bottom: 1px solid rgba(239, 191, 4, 0.12);
+    .cs-spend { display: grid; grid-template-columns: 1fr; gap: clamp(2rem,4vw,3rem); align-items: start; }
+    @media (min-width: 900px) { .cs-spend { grid-template-columns: 0.9fr 1.1fr; } }
+    .cs-spend h2 { font-family: var(--font-display); font-size: clamp(2rem,4.5vw,3rem); font-weight: 600; line-height: 1; margin: 1rem 0 1.25rem; }
+    .cs-spend h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .cs-spend > div:first-child > p { color: var(--fg-muted); line-height: 1.7; margin: 0 0 2rem; }
+    .cs-spend-chart {
+      background: var(--card); backdrop-filter: blur(8px);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: 1.75rem;
     }
-    .csr-spend-row:last-child { border-bottom: none; }
-    .csr-spend-row .category {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
-      color: #EEEEEE; text-transform: uppercase; letter-spacing: 0.08em;
-    }
-    .csr-spend-row .bar {
-      width: 100%; height: 6px; background: rgba(239, 191, 4, 0.12);
-      position: relative; overflow: hidden; grid-column: 1 / -1; margin-top: 0.5rem;
-    }
-    .csr-spend-row .bar::after {
-      content: ''; position: absolute; top: 0; left: 0; height: 100%;
-      width: var(--w, 50%); background: #EFBF04;
-      transition: width 1s ease;
-    }
-    .csr-spend-row .amt {
-      font-family: 'Oswald', sans-serif; color: #EFBF04; font-weight: 700;
-    }
-    .csr-spend-row .pct {
-      font-family: 'JetBrains Mono', monospace; color: #B3B3B3;
-      font-size: 0.85rem; min-width: 60px; text-align: right;
+    .cs-spend-row { margin-bottom: 1.25rem; }
+    .cs-spend-row:last-child { margin-bottom: 0; }
+    .cs-spend-row .top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
+    .cs-spend-row .cat { font-family: var(--font-label); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg); }
+    .cs-spend-row .amt { font-family: var(--font-display); font-size: 0.95rem; font-weight: 500; color: var(--accent); }
+    .cs-spend-row .bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .cs-spend-row .bar::after {
+      content: '';
+      display: block;
+      height: 100%;
+      width: var(--w);
+      background: linear-gradient(90deg, var(--accent), rgba(245,158,11,0.5));
+      border-radius: 2px;
     }
 
-    /* Testimonial card */
-    .csr-story {
-      padding: 2.5rem 2rem; border: 1px solid rgba(239, 191, 4, 0.2);
-      background: rgba(26, 23, 24, 0.6); position: relative;
+    /* Voices */
+    .cs-voices { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    @media (min-width: 900px) { .cs-voices { grid-template-columns: repeat(3,1fr); } }
+    .cs-voice {
+      background: var(--card); backdrop-filter: blur(8px);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: 2rem 1.75rem;
+      display: flex; flex-direction: column;
     }
-    .csr-story::before {
-      content: '\201C'; position: absolute; top: 0.25rem; left: 1.25rem;
-      font-family: 'Oswald', sans-serif; font-size: 5rem;
-      color: rgba(239, 191, 4, 0.3); line-height: 1;
+    .cs-voice blockquote { font-family: var(--font-body); font-size: 0.95rem; font-style: italic; color: var(--fg-muted); line-height: 1.75; margin: 0 0 1.75rem; flex: 1; }
+    .cs-voice blockquote::before { content: '"'; color: var(--accent); font-size: 2rem; font-family: var(--font-display); line-height: 0; display: inline-block; vertical-align: -0.2em; margin-right: 0.35rem; }
+    .cs-voice .attr { display: flex; gap: 0.85rem; padding-top: 1.1rem; border-top: 1px solid var(--border); }
+    .cs-voice .avatar {
+      width: 2.5rem; height: 2.5rem; flex-shrink: 0;
+      display: grid; place-items: center;
+      background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 50%; color: var(--accent); font-size: 1rem;
     }
-    .csr-story blockquote {
-      font-family: 'Inter', sans-serif; font-size: 1rem;
-      color: #EEEEEE; line-height: 1.75; font-style: italic;
-      padding-left: 1.5rem; margin: 1rem 0;
+    .cs-voice .who { font-family: var(--font-display); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase; color: var(--fg); }
+    .cs-voice .ctx { font-family: var(--font-label); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-top: 0.25rem; }
+
+    /* Partners */
+    .cs-partners { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.6rem; }
+    @media (min-width: 640px)  { .cs-partners { grid-template-columns: repeat(4,1fr); } }
+    @media (min-width: 1024px) { .cs-partners { grid-template-columns: repeat(7,1fr); } }
+    .cs-partner {
+      background: var(--card); backdrop-filter: blur(8px);
+      border: 1px solid var(--border); border-radius: var(--r-md);
+      padding: 1rem 0.75rem; text-align: center;
+      font-family: var(--font-heading); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-muted);
+      line-height: 1.35;
+      transition: all var(--t-base-ms);
+      min-height: 4.5rem; display: grid; place-items: center;
     }
-    .csr-story .attrib {
+    .cs-partner:hover { color: var(--accent); border-color: rgba(245,158,11,0.3); background: rgba(26,26,36,0.8); }
+
+    /* Journey timeline */
+    .cs-journey { max-width: 48rem; margin: 0 auto; position: relative; padding-left: 2.5rem; }
+    .cs-journey::before { content: ''; position: absolute; left: 0.7rem; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, rgba(245,158,11,0.3), transparent); }
+    .cs-j-item { position: relative; padding: 0.5rem 0 clamp(1.5rem,3vw,2.5rem); }
+    .cs-j-item::before {
+      content: '';
+      position: absolute; left: -2.1rem; top: 0.85rem;
+      width: 0.85rem; height: 0.85rem;
+      border-radius: 50%;
+      background: var(--bg); border: 2px solid var(--accent);
+      box-shadow: var(--glow-sm);
+    }
+    .cs-j-item .year { font-family: var(--font-display); font-size: 1.35rem; font-weight: 500; color: var(--accent); line-height: 1; }
+    .cs-j-item h4 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.02em; color: var(--fg); margin: 0.5rem 0 0.5rem; }
+    .cs-j-item p { color: var(--fg-muted); line-height: 1.65; margin: 0; font-size: 0.9rem; }
+
+    /* Downloads */
+    .cs-downloads { display: grid; grid-template-columns: 1fr; gap: clamp(2rem,4vw,3rem); }
+    @media (min-width: 900px) { .cs-downloads { grid-template-columns: 1fr 1fr; gap: 4rem; } }
+    .cs-downloads h2 { font-family: var(--font-display); font-size: clamp(1.75rem,3.5vw,2.5rem); font-weight: 600; line-height: 1; margin: 1rem 0 1.25rem; }
+    .cs-downloads h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .cs-downloads > div > p { color: var(--fg-muted); line-height: 1.7; margin: 0 0 1.75rem; }
+    .cs-doc-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .cs-doc-row {
       display: flex; align-items: center; gap: 1rem;
-      padding-top: 1.25rem; border-top: 1px solid rgba(239, 191, 4, 0.15);
+      padding: 1rem 1.1rem;
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md);
+      color: var(--fg);
+      transition: all var(--t-base-ms) var(--ease-out);
     }
-    .csr-story .attrib img {
-      width: 50px; height: 50px; border-radius: 50%; object-fit: cover;
-      border: 2px solid #EFBF04;
+    .cs-doc-row:hover { border-color: rgba(245,158,11,0.35); background: rgba(26,26,36,0.8); transform: translateX(3px); }
+    .cs-doc-row .ico {
+      width: 2.5rem; height: 2.5rem; flex-shrink: 0;
+      display: grid; place-items: center;
+      background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.28);
+      border-radius: var(--r-sm); color: var(--accent); font-size: 0.95rem;
     }
-    .csr-story .attrib strong {
-      display: block; font-family: 'Barlow Condensed', sans-serif;
-      color: #EEEEEE; text-transform: uppercase; letter-spacing: 0.1em;
-    }
-    .csr-story .attrib span {
-      font-size: 0.75rem; color: #EFBF04; font-family: 'Inter', sans-serif;
-    }
+    .cs-doc-row > div:not(.ico) { flex: 1; min-width: 0; }
+    .cs-doc-row .title { font-family: var(--font-display); font-size: 0.92rem; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase; color: var(--fg); }
+    .cs-doc-row .meta { font-family: var(--font-label); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-subtle); margin-top: 0.25rem; }
+    .cs-doc-row .chev { color: var(--accent); font-size: 0.85rem; transition: transform var(--t-base-ms); }
+    .cs-doc-row:hover .chev { transform: translateX(3px); }
+
+    .d1 { transition-delay: 80ms; } .d2 { transition-delay: 160ms; } .d3 { transition-delay: 240ms; } .d4 { transition-delay: 320ms; } .d5 { transition-delay: 400ms; }
   </style>
 </head>
 
-<body class="bg-noise antialiased overflow-x-hidden selection:bg-brand-gold selection:text-black">
+<body class="md-atmospheric">
+  <div class="md-orb" style="top:-180px;left:10%;width:520px;height:520px;" aria-hidden="true"></div>
+  <div class="md-orb" style="top:45%;right:-120px;width:460px;height:460px;" aria-hidden="true"></div>
+  <div class="md-orb" style="bottom:8%;left:-80px;width:400px;height:400px;" aria-hidden="true"></div>
 
-  <!-- NAV OVERLAY (same as investors page) -->
-  <div id="navOverlay" class="nav-overlay">
-    <div id="navBackdrop" class="nav-overlay-backdrop"></div>
-    <div class="nav-overlay-content p-8 md:p-10">
-      <div class="flex justify-between items-center mb-12">
-        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto opacity-80">
-        <button id="closeMenuBtn" class="nav-close-btn"><i class="fas fa-times"></i></button>
-      </div>
-      <ul class="space-y-0 flex-1">
-        <li><a href="index.html" class="sidebar-link">Home</a></li>
-        <li>
-          <button class="sidebar-dropdown-btn"><span>About</span> <i class="fas fa-chevron-down"></i></button>
-          <div class="sidebar-submenu">
-            <a href="story.html" class="sidebar-sublink">Our Story</a>
-            <a href="leadership.html" class="sidebar-sublink">Leadership</a>
-            <a href="culture.html" class="sidebar-sublink">Culture</a>
-            <a href="recognition.html" class="sidebar-sublink">Recognition</a>
-          </div>
-        </li>
-        <li>
-          <button class="sidebar-dropdown-btn"><span>Projects</span> <i class="fas fa-chevron-down"></i></button>
-          <div class="sidebar-submenu">
-            <a href="projects.html" class="sidebar-sublink">Portfolio</a>
-            <a href="map.html" class="sidebar-sublink">Project Map</a>
-          </div>
-        </li>
-        <li><a href="services.html" class="sidebar-link">Services</a></li>
-        <li><a href="clients.html" class="sidebar-link">Clients</a></li>
-        <li><a href="investors.html" class="sidebar-link">Investors</a></li>
-        <li><a href="csr.html" class="sidebar-link">CSR</a></li>
-        <li><a href="careers.html" class="sidebar-link">Careers</a></li>
-        <li><a href="resources.html" class="sidebar-link">Resources</a></li>
-        <li><a href="contact.html" class="sidebar-link">Contact</a></li>
-      </ul>
-      <div class="nav-info-block">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
-          <div class="nav-info-item">
-            <span class="nav-info-label">Call</span>
-            <p class="nav-info-value">+91 9619875081</p>
-          </div>
-          <div class="nav-info-item">
-            <span class="nav-info-label">Email</span>
-            <p class="nav-info-value">strongbuilt@skywaygroup.co.in</p>
+  <header class="md-header" id="mainHeader">
+    <div class="md-header-inner">
+      <a href="index.html" class="md-logo" aria-label="Strong Built — Home"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built"></a>
+      <nav class="md-nav" aria-label="Primary">
+        <div class="md-nav-item">
+          <button class="md-nav-link" type="button" aria-haspopup="true" aria-expanded="false">About <i class="fas fa-chevron-down"></i></button>
+          <div class="md-nav-dropdown" role="menu">
+            <a href="story.html" role="menuitem"><i class="fas fa-book-open"></i> Our Story</a>
+            <a href="leadership.html" role="menuitem"><i class="fas fa-users"></i> Leadership</a>
+            <a href="culture.html" role="menuitem"><i class="fas fa-heart"></i> Culture</a>
+            <a href="recognition.html" role="menuitem"><i class="fas fa-trophy"></i> Recognition</a>
           </div>
         </div>
-        <div class="flex gap-2">
-          <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav-social-link"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram" class="nav-social-link"><i class="fab fa-instagram"></i></a>
-          <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter" class="nav-social-link"><i class="fab fa-twitter"></i></a>
+        <div class="md-nav-item">
+          <button class="md-nav-link" type="button" aria-haspopup="true" aria-expanded="false">Projects <i class="fas fa-chevron-down"></i></button>
+          <div class="md-nav-dropdown" role="menu">
+            <a href="projects.html" role="menuitem"><i class="fas fa-th"></i> Portfolio</a>
+            <a href="map.html" role="menuitem"><i class="fas fa-map-marked-alt"></i> Project Map</a>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- HEADER -->
-  <header class="fixed w-full z-50 transition-all duration-300 glass-header" id="mainHeader">
-    <div class="container mx-auto px-4 md:px-6 h-20 md:h-24 flex items-center justify-between">
-      <a href="index.html" class="flex items-center group relative z-50">
-        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built Logo" class="h-14 md:h-24 w-auto object-contain transition duration-300 hover:opacity-90">
-      </a>
-      <button id="menuToggle" class="menu-btn group">
-        <div class="menu-icon"><span></span><span></span><span></span></div>
-      </button>
+        <a href="services.html" class="md-nav-link">Services</a>
+        <a href="clients.html" class="md-nav-link">Clients</a>
+        <a href="investors.html" class="md-nav-link">Investors</a>
+        <a href="csr.html" class="md-nav-link is-active" aria-current="page">CSR</a>
+        <a href="careers.html" class="md-nav-link">Careers</a>
+        <a href="resources.html" class="md-nav-link">Resources</a>
+      </nav>
+      <a href="contact.html" class="md-btn md-btn-primary md-header-cta">Contact Us</a>
+      <button id="menuToggle" class="md-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer"><i class="fas fa-bars"></i></button>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="relative overflow-hidden bg-clay-mist flex items-center" style="min-height:100svh;">
-    <div class="w-full max-w-[1400px] mx-auto px-6 md:px-10 pt-28 pb-12 relative z-2 text-center">
-      <span class="block text-brand-darkGold font-bold uppercase mb-4 font-heading reveal-up" style="font-size:var(--fs-small); letter-spacing:0.25em; transition-delay:100ms;">Corporate Social Responsibility</span>
-      <h1 class="text-clay-ink uppercase font-hero reveal-up" style="font-size:var(--fs-hero); line-height:0.92; letter-spacing:-0.02em; font-weight:700; margin-bottom:1.5rem; transition-delay:200ms;">
-        Building <br><span class="gold-gradient-text">Beyond</span>
-      </h1>
-      <div class="h-px w-24 bg-brand-gold my-8 mx-auto reveal-up" style="transition-delay:300ms;"></div>
-      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-xl mx-auto leading-relaxed reveal-up" style="transition-delay:400ms;">
-        Our work shapes skylines &mdash; our responsibility is to shape lives. Since 2014, we've invested in education, health, livelihoods, and the environment wherever we build.
-      </p>
-    </div>
-  </section>
-
-  <!-- PHILOSOPHY -->
-  <section class="py-16 md:py-24 container mx-auto px-6 relative z-10">
-    <div class="max-w-4xl mx-auto text-center reveal-up">
-      <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-5">Our Philosophy</span>
-      <h2 class="text-3xl md:text-5xl font-bold text-clay-ink mb-8 uppercase tracking-tight font-heading leading-tight">
-        Every Building Leaves A <span class="text-brand-darkGold">Legacy</span>.<br>Ours Must Be Worth Living In.
-      </h2>
-      <p class="text-clay-muted font-body leading-relaxed text-lg">
-        A construction company's footprint extends far beyond the concrete it pours. It touches the workers who build the structure, the families who live in the neighbourhood, the ecosystems it displaces, and the generations who will inherit the skyline. Strong Built's CSR programme is our commitment to ensure that every square foot we build repays its debt to the community — in schools opened, hands trained, trees planted, and lives raised.
-      </p>
-      <p class="text-clay-muted font-body mt-6 italic">— Rajiv Sharma, Chairman &amp; Managing Director</p>
-    </div>
-  </section>
-
-  <!-- IMPACT SNAPSHOT -->
-  <section class="py-16 md:py-24 bg-clay-base/40 border-y border-clay-border">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-16 reveal-up">
-        <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">Since 2014</span>
-        <h2 class="text-4xl md:text-5xl font-bold text-clay-ink uppercase tracking-tight font-heading">Impact <span class="text-brand-darkGold">Snapshot</span></h2>
-        <div class="h-1 w-24 bg-brand-gold mx-auto mt-6"></div>
+  <div id="navDrawer" class="md-drawer" aria-hidden="true">
+    <div class="md-drawer-backdrop" id="drawerBackdrop"></div>
+    <aside class="md-drawer-panel" role="dialog" aria-label="Navigation">
+      <div class="md-drawer-header">
+        <div class="md-logo"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built" style="height:2.75rem;width:auto;display:block;"></div>
+        <button class="md-menu-btn" id="drawerClose" aria-label="Close menu" style="display:flex;"><i class="fas fa-times"></i></button>
       </div>
+      <nav>
+        <a href="index.html" class="md-drawer-link">Home</a>
+        <button class="md-drawer-dropbtn" data-dropdown>About <i class="fas fa-chevron-down"></i></button>
+        <div class="md-drawer-sub"><a href="story.html">Our Story</a><a href="leadership.html">Leadership</a><a href="culture.html">Culture</a><a href="recognition.html">Recognition</a></div>
+        <button class="md-drawer-dropbtn" data-dropdown>Projects <i class="fas fa-chevron-down"></i></button>
+        <div class="md-drawer-sub"><a href="projects.html">Portfolio</a><a href="map.html">Project Map</a></div>
+        <a href="services.html" class="md-drawer-link">Services</a>
+        <a href="clients.html" class="md-drawer-link">Clients</a>
+        <a href="investors.html" class="md-drawer-link">Investors</a>
+        <a href="csr.html" class="md-drawer-link" style="color:var(--accent);">CSR</a>
+        <a href="careers.html" class="md-drawer-link">Careers</a>
+        <a href="resources.html" class="md-drawer-link">Resources</a>
+        <a href="contact.html" class="md-drawer-link">Contact</a>
+      </nav>
+      <div style="margin-top:auto;padding-top:2rem;border-top:1px solid var(--border);">
+        <p class="md-mono" style="font-size:0.75rem;color:var(--fg-subtle);margin-bottom:1rem;">Connect</p>
+        <div style="display:flex;gap:0.5rem;">
+          <a href="https://www.linkedin.com/company/strongbuilt" class="md-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/strongbuilt" class="md-social-btn" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/strongbuilt" class="md-social-btn" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </aside>
+  </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-        <div class="csr-impact reveal-up">
-          <div class="num">52,000<span class="text-2xl">+</span></div>
-          <div class="lbl">Lives Impacted</div>
-          <div class="sub">Across 14 districts</div>
-        </div>
-        <div class="csr-impact reveal-up" style="transition-delay: 75ms;">
-          <div class="num">28</div>
-          <div class="lbl">Schools Supported</div>
-          <div class="sub">Infrastructure &amp; scholarships</div>
-        </div>
-        <div class="csr-impact reveal-up" style="transition-delay: 150ms;">
-          <div class="num">3,600<span class="text-2xl">+</span></div>
-          <div class="lbl">Skilled Workers Trained</div>
-          <div class="sub">Certified &amp; placed</div>
-        </div>
-        <div class="csr-impact reveal-up" style="transition-delay: 225ms;">
-          <div class="num">1.2<span class="text-2xl">L</span></div>
-          <div class="lbl">Trees Planted</div>
-          <div class="sub">Urban &amp; peri-urban</div>
-        </div>
-        <div class="csr-impact reveal-up" style="transition-delay: 50ms;">
-          <div class="num">₹18.4<span class="text-2xl">Cr</span></div>
-          <div class="lbl">CSR Spend FY25</div>
-          <div class="sub">2.1% of average PBT</div>
-        </div>
-        <div class="csr-impact reveal-up" style="transition-delay: 125ms;">
-          <div class="num">14</div>
-          <div class="lbl">NGO Partners</div>
-          <div class="sub">Vetted &amp; audited</div>
-        </div>
-        <div class="csr-impact reveal-up" style="transition-delay: 200ms;">
-          <div class="num">7,200<span class="text-2xl">+</span></div>
-          <div class="lbl">Women Empowered</div>
-          <div class="sub">Skill &amp; micro-enterprise</div>
-        </div>
-        <div class="csr-impact reveal-up" style="transition-delay: 275ms;">
-          <div class="num">96%</div>
-          <div class="lbl">Program Evaluation Score</div>
-          <div class="sub">Independent audit, FY25</div>
-        </div>
+  <section class="cs-hero">
+    <div class="md-container">
+      <div class="md-reveal"><div class="md-badge" style="margin-inline:auto;"><span class="md-badge-dot" aria-hidden="true"></span><span>Corporate Social Responsibility</span></div></div>
+      <h1 class="md-reveal d1">Building <span class="accent">beyond.</span></h1>
+      <p class="lede md-reveal d2">Our work shapes skylines — our responsibility is to shape lives. Since 2014, we've invested in education, health, livelihoods, and the environment wherever we build.</p>
+      <div class="cs-hero-rule md-reveal d3"></div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="md-container">
+      <div class="cs-phil md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Our Philosophy</span>
+        <h2>Every building leaves a <span class="accent">legacy.</span><br>Ours must be worth living in.</h2>
+        <p>A construction company's footprint extends far beyond the concrete it pours. It touches the workers who build the structure, the families who live in the neighbourhood, the ecosystems it displaces, and the generations who will inherit the skyline. Strong Built's CSR programme is our commitment to ensure that every square foot we build repays its debt to the community — in schools opened, hands trained, trees planted, and lives raised.</p>
+        <p class="sig">— Rajiv Sharma, Chairman &amp; Managing Director</p>
       </div>
     </div>
   </section>
 
-  <!-- FOCUS AREAS -->
-  <section class="py-16 md:py-24 container mx-auto px-6">
-    <div class="text-center mb-16 reveal-up">
-      <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">Aligned to UN SDGs</span>
-      <h2 class="text-4xl md:text-5xl font-bold text-clay-ink uppercase tracking-tight font-heading">Six Focus <span class="text-brand-darkGold">Areas</span></h2>
-      <div class="h-1 w-24 bg-brand-gold mx-auto mt-6"></div>
-      <p class="text-clay-muted max-w-2xl mx-auto mt-6 font-body">Concentrated, measurable, outcome-driven. We'd rather do six things deeply than twenty things superficially.</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-      <div class="csr-focus reveal-up">
-        <div class="icon"><i class="fas fa-graduation-cap"></i></div>
-        <h3>Education</h3>
-        <p>Rebuilding school infrastructure in under-served municipal schools, running STEM labs, and funding scholarships for meritorious students from construction-worker families.</p>
-        <div class="tags">
-          <span class="tag">SDG 4</span><span class="tag">28 Schools</span><span class="tag">420 Scholars</span>
-        </div>
+  <section class="cs-section cs-section--alt">
+    <div class="md-container">
+      <div class="cs-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Since 2014</span>
+        <h2>Impact <span class="accent">snapshot.</span></h2>
       </div>
-
-      <div class="csr-focus reveal-up" style="transition-delay: 75ms;">
-        <div class="icon"><i class="fas fa-heartbeat"></i></div>
-        <h3>Healthcare</h3>
-        <p>Mobile health clinics, vaccination drives, maternal-care camps, and free preventive-care screenings for migrant construction workers and their families living in site colonies.</p>
-        <div class="tags">
-          <span class="tag">SDG 3</span><span class="tag">22,000+ consultations</span>
-        </div>
-      </div>
-
-      <div class="csr-focus reveal-up" style="transition-delay: 150ms;">
-        <div class="icon"><i class="fas fa-hard-hat"></i></div>
-        <h3>Skill Development</h3>
-        <p>NSDC-certified training in bar-bending, scaffolding, electrical, plumbing, and health-safety — with placement support across our sites and partner contractors.</p>
-        <div class="tags">
-          <span class="tag">SDG 8</span><span class="tag">3,600 Trained</span><span class="tag">94% Placed</span>
-        </div>
-      </div>
-
-      <div class="csr-focus reveal-up" style="transition-delay: 225ms;">
-        <div class="icon"><i class="fas fa-leaf"></i></div>
-        <h3>Environment</h3>
-        <p>Urban reforestation, mangrove restoration along Mumbai's coastline, construction-waste recycling programmes, and water-neutrality audits across all active sites.</p>
-        <div class="tags">
-          <span class="tag">SDG 13 · 15</span><span class="tag">1.2L trees</span><span class="tag">38% waste diverted</span>
-        </div>
-      </div>
-
-      <div class="csr-focus reveal-up" style="transition-delay: 300ms;">
-        <div class="icon"><i class="fas fa-venus"></i></div>
-        <h3>Women's Empowerment</h3>
-        <p>Tailoring &amp; textile centres, financial-literacy workshops, micro-credit partnerships, and a dedicated women-in-construction recruitment drive that has hired 340+ women to date.</p>
-        <div class="tags">
-          <span class="tag">SDG 5</span><span class="tag">7,200+ reached</span>
-        </div>
-      </div>
-
-      <div class="csr-focus reveal-up" style="transition-delay: 375ms;">
-        <div class="icon"><i class="fas fa-home"></i></div>
-        <h3>Community Infrastructure</h3>
-        <p>Building community halls, public toilets, drinking-water facilities, and sanitation infrastructure in tribal villages and urban slums within 10 km of our active project sites.</p>
-        <div class="tags">
-          <span class="tag">SDG 6 · 11</span><span class="tag">48 facilities built</span>
-        </div>
+      <div class="cs-impact">
+        <div class="cs-metric md-reveal"><div class="n">52,000<em>+</em></div><div class="l">Lives Impacted</div><div class="s">Across 14 districts</div></div>
+        <div class="cs-metric md-reveal d1"><div class="n">28</div><div class="l">Schools Supported</div><div class="s">Infra &amp; scholarships</div></div>
+        <div class="cs-metric md-reveal d2"><div class="n">3,600<em>+</em></div><div class="l">Workers Trained</div><div class="s">Certified &amp; placed</div></div>
+        <div class="cs-metric md-reveal d3"><div class="n">1.2<em>L</em></div><div class="l">Trees Planted</div><div class="s">Urban &amp; peri-urban</div></div>
+        <div class="cs-metric md-reveal"><div class="n">₹18.4<em>Cr</em></div><div class="l">CSR Spend FY25</div><div class="s">2.1% of average PBT</div></div>
+        <div class="cs-metric md-reveal d1"><div class="n">14</div><div class="l">NGO Partners</div><div class="s">Vetted &amp; audited</div></div>
+        <div class="cs-metric md-reveal d2"><div class="n">7,200<em>+</em></div><div class="l">Women Empowered</div><div class="s">Skill &amp; micro-enterprise</div></div>
+        <div class="cs-metric md-reveal d3"><div class="n">96%</div><div class="l">Programme Score</div><div class="s">Independent audit FY25</div></div>
       </div>
     </div>
   </section>
 
-  <!-- FLAGSHIP PROGRAMMES -->
-  <section class="py-16 md:py-24 bg-clay-base/40 border-y border-clay-border">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-16 reveal-up">
-        <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">Deep-Impact Programmes</span>
-        <h2 class="text-4xl md:text-5xl font-bold text-clay-ink uppercase tracking-tight font-heading">Our <span class="text-brand-darkGold">Flagships</span></h2>
-        <div class="h-1 w-24 bg-brand-gold mx-auto mt-6"></div>
+  <section class="cs-section">
+    <div class="md-container">
+      <div class="cs-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Aligned to UN SDGs</span>
+        <h2>Six focus <span class="accent">areas.</span></h2>
+        <p>Concentrated, measurable, outcome-driven. We'd rather do six things deeply than twenty things superficially.</p>
       </div>
+      <div class="cs-focus-grid">
+        <article class="cs-focus md-reveal">
+          <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+          <h3>Education</h3>
+          <p>Rebuilding school infrastructure in under-served municipal schools, running STEM labs, and funding scholarships for meritorious students from construction-worker families.</p>
+          <div class="tags"><span class="tag">SDG 4</span><span class="tag">28 Schools</span><span class="tag">420 Scholars</span></div>
+        </article>
+        <article class="cs-focus md-reveal d1">
+          <div class="icon"><i class="fas fa-heartbeat"></i></div>
+          <h3>Healthcare</h3>
+          <p>Mobile health clinics, vaccination drives, maternal-care camps, and free preventive-care screenings for migrant construction workers and their families.</p>
+          <div class="tags"><span class="tag">SDG 3</span><span class="tag">22,000+ consultations</span></div>
+        </article>
+        <article class="cs-focus md-reveal d2">
+          <div class="icon"><i class="fas fa-hard-hat"></i></div>
+          <h3>Skill Development</h3>
+          <p>NSDC-certified training in bar-bending, scaffolding, electrical, plumbing, and health-safety — with placement support across our sites and partner contractors.</p>
+          <div class="tags"><span class="tag">SDG 8</span><span class="tag">3,600 Trained</span><span class="tag">94% Placed</span></div>
+        </article>
+        <article class="cs-focus md-reveal d3">
+          <div class="icon"><i class="fas fa-leaf"></i></div>
+          <h3>Environment</h3>
+          <p>Urban reforestation, mangrove restoration along Mumbai's coastline, construction-waste recycling programmes, and water-neutrality audits across all active sites.</p>
+          <div class="tags"><span class="tag">SDG 13 · 15</span><span class="tag">1.2L trees</span><span class="tag">38% waste diverted</span></div>
+        </article>
+        <article class="cs-focus md-reveal d4">
+          <div class="icon"><i class="fas fa-venus"></i></div>
+          <h3>Women's Empowerment</h3>
+          <p>Tailoring &amp; textile centres, financial-literacy workshops, micro-credit partnerships, and a women-in-construction recruitment drive that has hired 340+ women.</p>
+          <div class="tags"><span class="tag">SDG 5</span><span class="tag">7,200+ reached</span></div>
+        </article>
+        <article class="cs-focus md-reveal d5">
+          <div class="icon"><i class="fas fa-home"></i></div>
+          <h3>Community Infrastructure</h3>
+          <p>Building community halls, public toilets, drinking-water facilities, and sanitation infrastructure in tribal villages and urban slums within 10&nbsp;km of our sites.</p>
+          <div class="tags"><span class="tag">SDG 6 · 11</span><span class="tag">48 facilities built</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-      <div class="space-y-8">
-
-        <div class="csr-programme reveal-up">
-          <div class="img-col img-placeholder"></div>
-          <div class="text-col">
-            <span class="tag-pill">Education · SDG 4</span>
-            <h3>Foundations for <em>Tomorrow</em></h3>
-            <p class="lede">Since 2016, we've partnered with the BMC to refurbish municipal schools within 5km of our construction sites. Full building retrofits, modern STEM labs, libraries, safe sanitation, and solar-powered electrification. Our engineering teams donate time pro-bono to supervise every build.</p>
-            <div class="kpis">
+  <section class="cs-section cs-section--alt">
+    <div class="md-container">
+      <div class="cs-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Deep-Impact Programmes</span>
+        <h2>Our <span class="accent">flagships.</span></h2>
+      </div>
+      <div class="cs-prog">
+        <article class="cs-prog-card md-reveal">
+          <div class="cs-prog-img"><img src="assets/Projects/seasons.jpg" alt="Education programmes" loading="lazy"></div>
+          <div class="cs-prog-body">
+            <span class="pill">Education · SDG 4</span>
+            <h3>Foundations for <em>tomorrow</em></h3>
+            <p>Since 2016, we've partnered with the BMC to refurbish municipal schools within 5&nbsp;km of our construction sites. Full building retrofits, modern STEM labs, libraries, safe sanitation, and solar-powered electrification. Our engineering teams donate time pro-bono to supervise every build.</p>
+            <div class="cs-prog-kpis">
               <div><strong>28</strong><span>Schools Refurbished</span></div>
               <div><strong>12,400</strong><span>Students Reached</span></div>
-              <div><strong>₹6.2 Cr</strong><span>Invested FY21-FY25</span></div>
+              <div><strong>₹6.2 Cr</strong><span>Invested FY21–FY25</span></div>
             </div>
           </div>
-        </div>
-
-        <div class="csr-programme reverse reveal-up">
-          <div class="img-col img-placeholder"></div>
-          <div class="text-col">
-            <span class="tag-pill">Skill · SDG 8</span>
+        </article>
+        <article class="cs-prog-card reverse md-reveal">
+          <div class="cs-prog-img"><img src="assets/Projects/Tree Top.jpg" alt="Karigar Academy" loading="lazy"></div>
+          <div class="cs-prog-body">
+            <span class="pill">Skill · SDG 8</span>
             <h3>The <em>Karigar</em> Academy</h3>
-            <p class="lede">Our Karigar Academy is an NSDC-accredited construction-trades training campus in Bhiwandi. Four-month residential programmes in RCC, formwork, plumbing, electrical, and safety — with stipends, tooling, housing, and dedicated placement support on completion. Designed specifically for first-generation workers from rural Maharashtra.</p>
-            <div class="kpis">
+            <p>Our Karigar Academy is an NSDC-accredited construction-trades training campus in Bhiwandi. Four-month residential programmes in RCC, formwork, plumbing, electrical, and safety — with stipends, tooling, housing, and dedicated placement support on completion.</p>
+            <div class="cs-prog-kpis">
               <div><strong>3,600</strong><span>Graduates Since 2019</span></div>
               <div><strong>94%</strong><span>Placement Rate</span></div>
-              <div><strong>₹22,000</strong><span>Avg. Starting Salary</span></div>
+              <div><strong>₹22K</strong><span>Avg. Starting Salary</span></div>
             </div>
           </div>
-        </div>
-
-        <div class="csr-programme reveal-up">
-          <div class="img-col img-placeholder"></div>
-          <div class="text-col">
-            <span class="tag-pill">Environment · SDG 13</span>
+        </article>
+        <article class="cs-prog-card md-reveal">
+          <div class="cs-prog-img"><img src="assets/Projects/iris.jpg" alt="Sambandhan reforestation" loading="lazy"></div>
+          <div class="cs-prog-body">
+            <span class="pill">Environment · SDG 13</span>
             <h3>The <em>Sambandhan</em> Project</h3>
-            <p class="lede">A decadal mangrove restoration &amp; urban reforestation initiative across Mumbai's salt-pan and coastal-setback lands, in partnership with Mangrove Foundation and the Maharashtra Forest Department. Every 10,000 sq.ft we build triggers the planting of 100 native saplings and 24-month maintenance oversight.</p>
-            <div class="kpis">
-              <div><strong>1.2 L</strong><span>Trees Planted</span></div>
+            <p>A decadal mangrove restoration &amp; urban reforestation initiative across Mumbai's salt-pan and coastal-setback lands, in partnership with Mangrove Foundation and the Maharashtra Forest Department. Every 10,000 sq.ft we build triggers the planting of 100 native saplings and 24-month maintenance oversight.</p>
+            <div class="cs-prog-kpis">
+              <div><strong>1.2L</strong><span>Trees Planted</span></div>
               <div><strong>14 Ha</strong><span>Mangrove Restored</span></div>
-              <div><strong>92%</strong><span>Survival Rate (3yr)</span></div>
+              <div><strong>92%</strong><span>Survival Rate 3yr</span></div>
             </div>
           </div>
-        </div>
-
-        <div class="csr-programme reverse reveal-up">
-          <div class="img-col img-placeholder"></div>
-          <div class="text-col">
-            <span class="tag-pill">Health · SDG 3</span>
+        </article>
+        <article class="cs-prog-card reverse md-reveal">
+          <div class="cs-prog-img"><img src="assets/Projects/Del Sol.jpg" alt="Swastha Clinic Network" loading="lazy"></div>
+          <div class="cs-prog-body">
+            <span class="pill">Health · SDG 3</span>
             <h3>The <em>Swastha</em> Clinic Network</h3>
-            <p class="lede">Three permanent and six mobile clinics deliver primary healthcare to migrant-worker colonies and adjacent slum settlements. MBBS-led teams, specialist visiting rosters, free essential medicines, maternal &amp; child-health camps, and TB / HIV screening partnerships with BMC's public-health network.</p>
-            <div class="kpis">
-              <div><strong>22,000+</strong><span>Consultations / Yr</span></div>
+            <p>Three permanent and six mobile clinics deliver primary healthcare to migrant-worker colonies and adjacent slum settlements. MBBS-led teams, specialist visiting rosters, free essential medicines, and TB/HIV screening partnerships with BMC's public-health network.</p>
+            <div class="cs-prog-kpis">
+              <div><strong>22K+</strong><span>Consultations / Yr</span></div>
               <div><strong>9</strong><span>Clinic Locations</span></div>
               <div><strong>₹3.1 Cr</strong><span>Investment FY25</span></div>
             </div>
           </div>
-        </div>
-
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- ANNUAL SPEND BREAKDOWN -->
-  <section class="py-16 md:py-24 container mx-auto px-6">
-    <div class="grid md:grid-cols-2 gap-12 items-start">
-      <div class="reveal-up">
-        <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">FY 2024–25</span>
-        <h2 class="text-4xl md:text-5xl font-bold text-clay-ink mb-6 uppercase tracking-tight font-heading">Where the <span class="text-brand-darkGold">₹18.4 Cr</span> Went</h2>
-        <p class="text-clay-muted font-body leading-relaxed mb-8">
-          CSR spend aligned to Section 135 of the Companies Act, 2013 — audited, disclosed in the annual report, and independently evaluated for programme effectiveness.
-        </p>
-        <div>
-          <a href="#" class="inline-flex items-center gap-3 px-6 py-3 bg-brand-gold text-black font-bold uppercase tracking-widest text-xs font-heading hover:bg-white transition">
-            <i class="fas fa-file-pdf"></i> Download CSR Report 2024–25
+  <section class="cs-section">
+    <div class="md-container">
+      <div class="cs-spend">
+        <div class="md-reveal">
+          <span class="md-eyebrow md-eyebrow-accent">FY 2024–25</span>
+          <h2>Where the <span class="accent">₹18.4 Cr</span> went.</h2>
+          <p>CSR spend aligned to Section 135 of the Companies Act, 2013 — audited, disclosed in the annual report, and independently evaluated for programme effectiveness.</p>
+          <a href="#" class="md-btn md-btn-primary"><i class="fas fa-file-pdf"></i> Download CSR Report 2024–25</a>
+        </div>
+        <div class="cs-spend-chart md-reveal d2">
+          <div class="cs-spend-row" style="--w:31.5%;"><div class="top"><span class="cat">Education</span><span class="amt">₹5.8 Cr · 31.5%</span></div><div class="bar"></div></div>
+          <div class="cs-spend-row" style="--w:23.9%;"><div class="top"><span class="cat">Skill Development</span><span class="amt">₹4.4 Cr · 23.9%</span></div><div class="bar"></div></div>
+          <div class="cs-spend-row" style="--w:17.4%;"><div class="top"><span class="cat">Environment</span><span class="amt">₹3.2 Cr · 17.4%</span></div><div class="bar"></div></div>
+          <div class="cs-spend-row" style="--w:14.1%;"><div class="top"><span class="cat">Healthcare</span><span class="amt">₹2.6 Cr · 14.1%</span></div><div class="bar"></div></div>
+          <div class="cs-spend-row" style="--w:8.2%;"><div class="top"><span class="cat">Women's Empowerment</span><span class="amt">₹1.5 Cr · 8.2%</span></div><div class="bar"></div></div>
+          <div class="cs-spend-row" style="--w:4.9%;"><div class="top"><span class="cat">Community Infrastructure</span><span class="amt">₹0.9 Cr · 4.9%</span></div><div class="bar"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section cs-section--alt">
+    <div class="md-container">
+      <div class="cs-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Stories</span>
+        <h2>Voices from the <span class="accent">ground.</span></h2>
+      </div>
+      <div class="cs-voices">
+        <article class="cs-voice md-reveal">
+          <blockquote>I came to the Karigar Academy from my village in Akola with nothing but a tenth-standard pass. Four months later I had a bar-bender certificate, my first toolkit, and a job on a Strong Built site in Andheri. I now earn more than my father ever did — and I'm sending my daughter to engineering college.</blockquote>
+          <div class="attr">
+            <div class="avatar"><i class="fas fa-user"></i></div>
+            <div><div class="who">Ramesh Patil</div><div class="ctx">Karigar Academy · Batch of 2021</div></div>
+          </div>
+        </article>
+        <article class="cs-voice md-reveal d1">
+          <blockquote>Our school had broken plaster, no toilets for girls, and books from the 1990s. Strong Built didn't just write a cheque — their engineers came week after week. Today we have a STEM lab, new classrooms, and enrolment has doubled. These children finally believe school is for them.</blockquote>
+          <div class="attr">
+            <div class="avatar"><i class="fas fa-user"></i></div>
+            <div><div class="who">Mrs. Savita Kulkarni</div><div class="ctx">Principal · BMC School No. 214</div></div>
+          </div>
+        </article>
+        <article class="cs-voice md-reveal d2">
+          <blockquote>I was trained at the women's tailoring centre in Goregaon. With the seed micro-loan, I started a uniform-stitching business. I now employ four other women from my colony. My husband used to work on construction sites; now he helps me in the shop.</blockquote>
+          <div class="attr">
+            <div class="avatar"><i class="fas fa-user"></i></div>
+            <div><div class="who">Fatima Sheikh</div><div class="ctx">Women's Empowerment · 2022</div></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="md-container">
+      <div class="cs-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Implementing Partners</span>
+        <h2>We don't do this <span class="accent">alone.</span></h2>
+        <p>Every programme is co-delivered with vetted NGO and government partners with proven ground execution.</p>
+      </div>
+      <div class="cs-partners md-reveal">
+        <div class="cs-partner">Pratham</div><div class="cs-partner">Akshara Foundation</div><div class="cs-partner">Teach For India</div><div class="cs-partner">Magic Bus</div><div class="cs-partner">Mangrove Foundation</div><div class="cs-partner">Smile Foundation</div><div class="cs-partner">SNEHA</div><div class="cs-partner">NSDC</div><div class="cs-partner">BMC Education</div><div class="cs-partner">CRY India</div><div class="cs-partner">SEWA</div><div class="cs-partner">Maharashtra Forest Dept.</div><div class="cs-partner">HelpAge India</div><div class="cs-partner">GiveIndia</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section cs-section--alt">
+    <div class="md-container">
+      <div class="cs-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">2014 — Present</span>
+        <h2>A decade of <span class="accent">giving back.</span></h2>
+      </div>
+      <div class="cs-journey">
+        <article class="cs-j-item md-reveal"><div class="year">2014</div><h4>First Community Initiative</h4><p>Strong Built is founded. The very first site in Kurla includes a small clinic for migrant workers — a seed that grows into the Swastha Network.</p></article>
+        <article class="cs-j-item md-reveal"><div class="year">2016</div><h4>Education Partnership Begins</h4><p>First BMC school refurbishment in partnership with Pratham. A model is set: engineers-as-volunteers, donation + supervision + maintenance warranty.</p></article>
+        <article class="cs-j-item md-reveal"><div class="year">2019</div><h4>Karigar Academy Launched</h4><p>Dedicated 3-acre training campus opens in Bhiwandi with NSDC accreditation. First batch of 60 trainees graduates with strong placement outcomes.</p></article>
+        <article class="cs-j-item md-reveal"><div class="year">2021</div><h4>Sambandhan Reforestation</h4><p>Mangrove restoration partnership formalised with Maharashtra Forest Department. First 40,000 saplings planted across 6 ha of degraded coastal land.</p></article>
+        <article class="cs-j-item md-reveal"><div class="year">2023</div><h4>₹10 Cr CSR Milestone</h4><p>Annual CSR spend crosses ₹10 Cr for the first time. Independent evaluation by Sattva Consulting scores our programmes at 94/100 on outcomes.</p></article>
+        <article class="cs-j-item md-reveal"><div class="year">2025</div><h4>Decade Celebration</h4><p>52,000+ lives impacted. Women's empowerment wing formalised. ESG Committee chaired by Independent Director Meera Kapoor begins quarterly impact reviews.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="md-container">
+      <div class="cs-downloads">
+        <div class="md-reveal">
+          <span class="md-eyebrow md-eyebrow-accent">Reports &amp; Policies</span>
+          <h2>CSR <span class="accent">disclosures.</span></h2>
+          <p>All CSR documentation — annual reports, policies, BRSR alignment, and impact evaluations — is published openly.</p>
+        </div>
+        <div class="cs-doc-list md-reveal d2">
+          <a href="#" class="cs-doc-row">
+            <div class="ico"><i class="fas fa-file-pdf"></i></div>
+            <div><div class="title">CSR Annual Report 2024–25</div><div class="meta">PDF · 5.6 MB · 48 pages</div></div>
+            <i class="fas fa-arrow-down chev"></i>
+          </a>
+          <a href="#" class="cs-doc-row">
+            <div class="ico"><i class="fas fa-file-contract"></i></div>
+            <div><div class="title">CSR Policy</div><div class="meta">PDF · 1.2 MB · Revised Apr 2025</div></div>
+            <i class="fas fa-arrow-down chev"></i>
+          </a>
+          <a href="#" class="cs-doc-row">
+            <div class="ico"><i class="fas fa-chart-pie"></i></div>
+            <div><div class="title">Impact Evaluation FY25</div><div class="meta">PDF · 3.4 MB · Sattva Consulting</div></div>
+            <i class="fas fa-arrow-down chev"></i>
+          </a>
+          <a href="#" class="cs-doc-row">
+            <div class="ico"><i class="fas fa-seedling"></i></div>
+            <div><div class="title">BRSR Disclosure FY25</div><div class="meta">PDF · 2.8 MB · SEBI framework</div></div>
+            <i class="fas fa-arrow-down chev"></i>
           </a>
         </div>
       </div>
-
-      <div class="reveal-up" style="transition-delay: 100ms;">
-        <div class="glass-panel p-8">
-          <div class="csr-spend-row">
-            <div class="category">Education</div>
-            <div class="amt">₹5.8 Cr</div>
-            <div class="pct">31.5%</div>
-            <div class="bar" style="--w: 31.5%;"></div>
-          </div>
-          <div class="csr-spend-row">
-            <div class="category">Skill Development</div>
-            <div class="amt">₹4.4 Cr</div>
-            <div class="pct">23.9%</div>
-            <div class="bar" style="--w: 23.9%;"></div>
-          </div>
-          <div class="csr-spend-row">
-            <div class="category">Environment</div>
-            <div class="amt">₹3.2 Cr</div>
-            <div class="pct">17.4%</div>
-            <div class="bar" style="--w: 17.4%;"></div>
-          </div>
-          <div class="csr-spend-row">
-            <div class="category">Healthcare</div>
-            <div class="amt">₹2.6 Cr</div>
-            <div class="pct">14.1%</div>
-            <div class="bar" style="--w: 14.1%;"></div>
-          </div>
-          <div class="csr-spend-row">
-            <div class="category">Women's Empowerment</div>
-            <div class="amt">₹1.5 Cr</div>
-            <div class="pct">8.2%</div>
-            <div class="bar" style="--w: 8.2%;"></div>
-          </div>
-          <div class="csr-spend-row">
-            <div class="category">Community Infrastructure</div>
-            <div class="amt">₹0.9 Cr</div>
-            <div class="pct">4.9%</div>
-            <div class="bar" style="--w: 4.9%;"></div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- VOICES / TESTIMONIAL -->
-  <section class="py-16 md:py-24 bg-clay-base/40 border-y border-clay-border">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-16 reveal-up">
-        <h2 class="text-4xl md:text-5xl font-bold text-clay-ink uppercase tracking-tight font-heading">Voices From the <span class="text-brand-darkGold">Ground</span></h2>
-        <div class="h-1 w-24 bg-brand-gold mx-auto mt-6"></div>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        <div class="csr-story reveal-up">
-          <blockquote>"I came to the Karigar Academy from my village in Akola with nothing but a tenth-standard pass. Four months later I had a bar-bender certificate, my first toolkit, and a job on a Strong Built site in Andheri. I now earn more than my father ever did — and I'm sending my daughter to engineering college."</blockquote>
-          <div class="attrib">
-            <div class="img-placeholder-sm"></div>
-            <div>
-              <strong>Ramesh Patil</strong>
-              <span>Karigar Academy, Batch of 2021</span>
-            </div>
-          </div>
+  <footer class="md-footer">
+    <div class="md-container">
+      <div class="md-footer-top">
+        <div class="md-footer-brand">
+          <a href="index.html" aria-label="Strong Built — Home"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="md-footer-logo"></a>
+          <p class="md-footer-tagline">Building <em>legacies</em>, not just structures. Since 2014.</p>
         </div>
-
-        <div class="csr-story reveal-up" style="transition-delay: 100ms;">
-          <blockquote>"Our school had broken plaster, no toilets for girls, and books from the 1990s. Strong Built didn't just write a cheque — their engineers came week after week. Today we have a STEM lab, new classrooms, and enrolment has doubled. These children finally believe school is for them."</blockquote>
-          <div class="attrib">
-            <div class="img-placeholder-sm"></div>
-            <div>
-              <strong>Mrs. Savita Kulkarni</strong>
-              <span>Principal, BMC School No. 214</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="csr-story reveal-up" style="transition-delay: 200ms;">
-          <blockquote>"I was trained at the women's tailoring centre in Goregaon. With the seed micro-loan, I started a uniform-stitching business. I now employ four other women from my colony. My husband used to work on construction sites; now he helps me in the shop."</blockquote>
-          <div class="attrib">
-            <div class="img-placeholder-sm"></div>
-            <div>
-              <strong>Fatima Sheikh</strong>
-              <span>Women's Empowerment Programme, 2022</span>
-            </div>
-          </div>
+        <div class="md-footer-contact-card">
+          <div class="md-fc-item"><span class="md-fc-k"><i class="fas fa-location-dot"></i> Address</span><p class="md-fc-v">901-B Wing, HDIL Kaledonia,<br>Sahar Road, Andheri-East,<br>Mumbai — 400069</p></div>
+          <div class="md-fc-item"><span class="md-fc-k"><i class="fas fa-phone"></i> Phone</span><a class="md-fc-v" href="tel:+919619875081">+91 96198 75081</a><a class="md-fc-v" href="tel:+912261232500">022 6123 2500</a></div>
+          <div class="md-fc-item"><span class="md-fc-k"><i class="fas fa-envelope"></i> Email</span><a class="md-fc-v" href="mailto:sales@strongbuilt.in">sales@strongbuilt.in</a></div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- PARTNERS -->
-  <section class="py-16 md:py-24 container mx-auto px-6">
-    <div class="text-center mb-16 reveal-up">
-      <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">Implementing Partners</span>
-      <h2 class="text-4xl md:text-5xl font-bold text-clay-ink uppercase tracking-tight font-heading">We Don't Do This <span class="text-brand-darkGold">Alone</span></h2>
-      <div class="h-1 w-24 bg-brand-gold mx-auto mt-6"></div>
-      <p class="text-clay-muted max-w-2xl mx-auto mt-6 font-body">Every programme is co-delivered with vetted NGO and government partners with proven ground execution.</p>
-    </div>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 reveal-up">
-      <div class="csr-partner">Pratham</div>
-      <div class="csr-partner">Akshara<br>Foundation</div>
-      <div class="csr-partner">Teach For<br>India</div>
-      <div class="csr-partner">Magic Bus</div>
-      <div class="csr-partner">Mangrove<br>Foundation</div>
-      <div class="csr-partner">Smile<br>Foundation</div>
-      <div class="csr-partner">SNEHA</div>
-      <div class="csr-partner">NSDC</div>
-      <div class="csr-partner">BMC<br>Education Dept.</div>
-      <div class="csr-partner">CRY India</div>
-      <div class="csr-partner">SEWA</div>
-      <div class="csr-partner">Maharashtra<br>Forest Dept.</div>
-      <div class="csr-partner">HelpAge<br>India</div>
-      <div class="csr-partner">GiveIndia</div>
-    </div>
-  </section>
-
-  <!-- JOURNEY TIMELINE -->
-  <section class="py-16 md:py-24 bg-clay-base/40 border-y border-clay-border">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-16 reveal-up">
-        <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">2014 — Present</span>
-        <h2 class="text-4xl md:text-5xl font-bold text-clay-ink uppercase tracking-tight font-heading">A Decade of <span class="text-brand-darkGold">Giving Back</span></h2>
-        <div class="h-1 w-24 bg-brand-gold mx-auto mt-6"></div>
-      </div>
-
-      <div class="max-w-3xl mx-auto">
-        <div class="csr-timeline">
-          <div class="csr-timeline-item reveal-up">
-            <span class="year">2014</span>
-            <h4>First Community Initiative</h4>
-            <p>Strong Built is founded. The very first site in Kurla includes a small clinic for migrant workers — a seed that grows into the Swastha Network.</p>
+      <div class="md-footer-strip">
+        <div class="md-footer-strip-left">
+          <div class="md-footer-socials">
+            <a href="https://www.instagram.com/strongbuilt" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/strongbuilt" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://x.com/strongbuilt" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
           </div>
-          <div class="csr-timeline-item reveal-up">
-            <span class="year">2016</span>
-            <h4>Education Partnership Begins</h4>
-            <p>First BMC school refurbishment in partnership with Pratham. A model is set: engineers-as-volunteers, donation + supervision + maintenance warranty.</p>
-          </div>
-          <div class="csr-timeline-item reveal-up">
-            <span class="year">2019</span>
-            <h4>Karigar Academy Launched</h4>
-            <p>Dedicated 3-acre training campus opens in Bhiwandi with NSDC accreditation. First batch of 60 trainees graduates with strong placement outcomes.</p>
-          </div>
-          <div class="csr-timeline-item reveal-up">
-            <span class="year">2021</span>
-            <h4>Sambandhan Reforestation</h4>
-            <p>Mangrove restoration partnership formalised with Maharashtra Forest Department. First 40,000 saplings planted across 6 ha of degraded coastal land.</p>
-          </div>
-          <div class="csr-timeline-item reveal-up">
-            <span class="year">2023</span>
-            <h4>₹10 Cr CSR Milestone</h4>
-            <p>Annual CSR spend crosses ₹10 Cr for the first time. Independent evaluation by Sattva Consulting scores our programmes at 94/100 on outcomes.</p>
-          </div>
-          <div class="csr-timeline-item reveal-up">
-            <span class="year">2025</span>
-            <h4>Decade Celebration</h4>
-            <p>52,000+ lives impacted. Women's empowerment wing formalised. ESG Committee chaired by Independent Director Meera Kapoor begins quarterly impact reviews.</p>
-          </div>
+          <div class="md-footer-strip-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DOWNLOADS + GOVERNANCE -->
-  <section class="py-16 md:py-24 container mx-auto px-6">
-    <div class="grid md:grid-cols-2 gap-12">
-      <div class="reveal-up">
-        <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">Reports &amp; Policies</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-clay-ink mb-6 uppercase tracking-tight font-heading">CSR <span class="text-brand-darkGold">Disclosures</span></h2>
-
-        <div class="space-y-3">
-          <a href="#" class="ir-doc-row" style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;gap:1rem;border:1px solid rgba(239,191,4,0.15);background:rgba(255,255,255,0.02);transition:all .3s;">
-            <div class="text-brand-gold" style="flex-shrink:0;width:44px;height:44px;border:1px solid rgba(239,191,4,0.35);display:flex;align-items:center;justify-content:center;"><i class="fas fa-file-pdf"></i></div>
-            <div style="flex:1;min-width:0;">
-              <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">CSR Annual Report 2024–25</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:#9E9E9E;">PDF · 5.6 MB · 48 pages</div>
-            </div>
-            <i class="fas fa-download text-brand-darkGold"></i>
-          </a>
-          <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;gap:1rem;border:1px solid rgba(239,191,4,0.15);background:rgba(255,255,255,0.02);transition:all .3s;">
-            <div class="text-brand-gold" style="flex-shrink:0;width:44px;height:44px;border:1px solid rgba(239,191,4,0.35);display:flex;align-items:center;justify-content:center;"><i class="fas fa-file-contract"></i></div>
-            <div style="flex:1;min-width:0;">
-              <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">CSR Policy</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:#9E9E9E;">PDF · 1.2 MB · Last revised Apr 2025</div>
-            </div>
-            <i class="fas fa-download text-brand-darkGold"></i>
-          </a>
-          <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;gap:1rem;border:1px solid rgba(239,191,4,0.15);background:rgba(255,255,255,0.02);transition:all .3s;">
-            <div class="text-brand-gold" style="flex-shrink:0;width:44px;height:44px;border:1px solid rgba(239,191,4,0.35);display:flex;align-items:center;justify-content:center;"><i class="fas fa-seedling"></i></div>
-            <div style="flex:1;min-width:0;">
-              <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">BRSR Disclosure FY 2024–25</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:#9E9E9E;">PDF · 3.4 MB · SEBI-mandated</div>
-            </div>
-            <i class="fas fa-download text-brand-darkGold"></i>
-          </a>
-          <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;gap:1rem;border:1px solid rgba(239,191,4,0.15);background:rgba(255,255,255,0.02);transition:all .3s;">
-            <div class="text-brand-gold" style="flex-shrink:0;width:44px;height:44px;border:1px solid rgba(239,191,4,0.35);display:flex;align-items:center;justify-content:center;"><i class="fas fa-clipboard-check"></i></div>
-            <div style="flex:1;min-width:0;">
-              <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">Independent Impact Evaluation</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:#9E9E9E;">PDF · 2.8 MB · Sattva Consulting</div>
-            </div>
-            <i class="fas fa-download text-brand-darkGold"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="reveal-up" style="transition-delay: 150ms;">
-        <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">CSR Committee</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-clay-ink mb-6 uppercase tracking-tight font-heading">Governance &amp; <span class="text-brand-darkGold">Oversight</span></h2>
-
-        <div class="glass-panel p-6 md:p-8 mb-4">
-          <p class="text-clay-muted font-body text-sm leading-relaxed mb-5">
-            Our CSR Committee, chaired by an Independent Director, meets quarterly to approve allocations, review outcomes, and commission third-party audits.
-          </p>
-          <div class="space-y-4 text-sm">
-            <div class="flex justify-between border-b border-clay-border pb-3">
-              <div>
-                <div class="font-heading uppercase text-clay-ink tracking-wider">Meera Kapoor</div>
-                <div class="text-xs text-brand-darkGold">Chair · Independent Director</div>
-              </div>
-              <i class="fas fa-crown text-brand-darkGold"></i>
-            </div>
-            <div class="flex justify-between border-b border-clay-border pb-3">
-              <div>
-                <div class="font-heading uppercase text-clay-ink tracking-wider">Rajiv Sharma</div>
-                <div class="text-xs text-clay-muted">Member · Chairman &amp; MD</div>
-              </div>
-            </div>
-            <div class="flex justify-between border-b border-clay-border pb-3">
-              <div>
-                <div class="font-heading uppercase text-clay-ink tracking-wider">Priya Malhotra</div>
-                <div class="text-xs text-clay-muted">Member · CFO</div>
-              </div>
-            </div>
-            <div class="flex justify-between">
-              <div>
-                <div class="font-heading uppercase text-clay-ink tracking-wider">Dr. Sanjeev Rao</div>
-                <div class="text-xs text-clay-muted">Member · Independent Director</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-3 gap-3 text-center">
-          <div class="glass-panel p-4">
-            <i class="fas fa-calendar-alt text-brand-darkGold text-xl mb-2"></i>
-            <div class="text-[0.65rem] uppercase tracking-widest text-clay-muted font-heading">Quarterly</div>
-            <div class="text-clay-ink text-sm font-heading mt-1">Reviews</div>
-          </div>
-          <div class="glass-panel p-4">
-            <i class="fas fa-search-dollar text-brand-darkGold text-xl mb-2"></i>
-            <div class="text-[0.65rem] uppercase tracking-widest text-clay-muted font-heading">Annual</div>
-            <div class="text-clay-ink text-sm font-heading mt-1">Audit</div>
-          </div>
-          <div class="glass-panel p-4">
-            <i class="fas fa-award text-brand-darkGold text-xl mb-2"></i>
-            <div class="text-[0.65rem] uppercase tracking-widest text-clay-muted font-heading">Independent</div>
-            <div class="text-clay-ink text-sm font-heading mt-1">Evaluation</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GET INVOLVED -->
-  <section class="py-16 md:py-24 bg-clay-base/40 border-y border-clay-border">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-16 reveal-up">
-        <h2 class="text-4xl md:text-5xl font-bold text-clay-ink uppercase tracking-tight font-heading">Get <span class="text-brand-darkGold">Involved</span></h2>
-        <div class="h-1 w-24 bg-brand-gold mx-auto mt-6"></div>
-        <p class="text-clay-muted max-w-2xl mx-auto mt-6 font-body">Partner, volunteer, collaborate — there are many ways to join our work.</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-        <div class="glass-panel p-8 text-center reveal-up">
-          <i class="fas fa-handshake text-4xl text-brand-darkGold mb-5"></i>
-          <h3 class="text-xl font-bold text-clay-ink mb-3 font-heading uppercase">NGO Partnership</h3>
-          <p class="text-clay-muted text-sm font-body leading-relaxed mb-6">Submit a programme proposal aligned to our focus areas. Vetted NGOs with audited accounts &amp; demonstrated ground impact are invited to apply.</p>
-          <a href="mailto:csr@strongbuilt.in" class="inline-flex items-center gap-2 text-brand-darkGold border-b border-brand-gold pb-1 hover:text-clay-ink hover:border-clay-border transition uppercase text-xs tracking-widest font-heading">Submit Proposal <i class="fas fa-arrow-right"></i></a>
-        </div>
-        <div class="glass-panel p-8 text-center reveal-up" style="transition-delay: 100ms;">
-          <i class="fas fa-hands-helping text-4xl text-brand-darkGold mb-5"></i>
-          <h3 class="text-xl font-bold text-clay-ink mb-3 font-heading uppercase">Employee Volunteering</h3>
-          <p class="text-clay-muted text-sm font-body leading-relaxed mb-6">Every Strong Built employee gets 16 paid volunteering hours per year. Students, alumni, and industry professionals can join on weekends.</p>
-          <a href="contact.html" class="inline-flex items-center gap-2 text-brand-darkGold border-b border-brand-gold pb-1 hover:text-clay-ink hover:border-clay-border transition uppercase text-xs tracking-widest font-heading">Volunteer With Us <i class="fas fa-arrow-right"></i></a>
-        </div>
-        <div class="glass-panel p-8 text-center reveal-up" style="transition-delay: 200ms;">
-          <i class="fas fa-graduation-cap text-4xl text-brand-darkGold mb-5"></i>
-          <h3 class="text-xl font-bold text-clay-ink mb-3 font-heading uppercase">Karigar Academy</h3>
-          <p class="text-clay-muted text-sm font-body leading-relaxed mb-6">Applications for skill-training batches are open four times a year. Fully sponsored for selected candidates from eligible backgrounds.</p>
-          <a href="#" class="inline-flex items-center gap-2 text-brand-darkGold border-b border-brand-gold pb-1 hover:text-clay-ink hover:border-clay-border transition uppercase text-xs tracking-widest font-heading">Apply Now <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="sb-cta">
-    <div class="sb-cta-noise"></div>
-    <div class="sb-cta-orb sb-cta-orb-1"></div>
-    <div class="sb-cta-orb sb-cta-orb-2"></div>
-    <div class="sb-cta-orb sb-cta-orb-3"></div>
-    <div class="container mx-auto px-6 relative z-10 text-center">
-      <h2 class="text-3xl md:text-5xl font-bold text-clay-ink mb-6 uppercase tracking-tight font-heading">Let's Build What Lasts</h2>
-      <p class="text-clay-muted text-lg mb-8 max-w-2xl mx-auto font-body">For CSR partnerships, proposal submissions, or programme visits — reach out to our community team.</p>
-      <a href="mailto:csr@strongbuilt.in" class="sb-cta-btn">csr@strongbuilt.in</a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="bg-clay-mist text-clay-muted pt-16 md:pt-20 pb-10 border-t border-clay-border relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(rgba(239, 191, 4, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
-        <div class="col-span-1">
-          <div class="text-2xl font-bold text-clay-ink mb-6 font-heading tracking-widest flex items-center gap-2">
-            <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto">
-          </div>
-          <p class="text-clay-faint text-sm mb-6 font-light leading-relaxed">Forging the future with concrete, steel, and integrity.</p>
-          <div class="flex gap-4">
-            <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter" class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i class="fab fa-twitter"></i></a>
-          </div>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Navigation</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><a href="story.html" class="hover:text-clay-ink transition">About</a></li>
-            <li><a href="services.html" class="hover:text-clay-ink transition">Services</a></li>
-            <li><a href="projects.html" class="hover:text-clay-ink transition">Projects</a></li>
-            <li><a href="clients.html" class="hover:text-clay-ink transition">Clients</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Company</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><a href="investors.html" class="hover:text-clay-ink transition">Investors</a></li>
-            <li><a href="csr.html" class="hover:text-clay-ink transition">CSR</a></li>
-            <li><a href="careers.html" class="hover:text-clay-ink transition">Careers</a></li>
-            <li><a href="recognition.html" class="hover:text-clay-ink transition">Awards</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Contact</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><i class="fas fa-map-marker-alt text-brand-darkGold mr-2"></i> 901-B Wing, 9th Floor, HDIL Kaledonia, Sahar Road, Opp D'Mart, Sambhaji Nagar, Andheri-East, Mumbai - 400069.</li>
-            <li><i class="fas fa-phone text-brand-darkGold mr-2"></i> +91 9619875081 / 022-6123-2500</li>
-            <li><i class="fas fa-envelope text-brand-darkGold mr-2"></i> strongbuilt@skywaygroup.co.in</li>
-          </ul>
-        </div>
-      </div>
-      <div class="border-t border-clay-border pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-clay-muted font-light uppercase tracking-wider">
-        <p class="font-body">&copy; 2026 Strong Built. All rights reserved.</p>
-        <div class="flex gap-6 mt-4 md:mt-0 font-heading">
-          <a href="privacy.html" class="hover:text-clay-ink">Privacy</a>
-          <a href="terms.html" class="hover:text-clay-ink">Terms</a>
-        </div>
+        <div class="md-footer-strip-center">© 2026 Strong Built — A Skyway Group Company. All Rights Reserved.</div>
+        <div class="md-footer-strip-right">Designed by <b>Abdul Ahad</b></div>
       </div>
     </div>
   </footer>
 
-  <script>
-    function handleScrollAnimations() {
-      const reveals = document.querySelectorAll(".reveal-up");
-      const windowHeight = window.innerHeight;
-      reveals.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top;
-        if (elementTop < windowHeight - 100) el.classList.add("reveal-active");
-      });
-    }
-    window.addEventListener("scroll", handleScrollAnimations);
-    handleScrollAnimations();
-  </script>
-  <script src="script.js"></script>
+  <div class="md-fab" aria-hidden="true">
+    <a href="https://wa.me/919619875081" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="tel:+919619875081" aria-label="Call Strong Built"><i class="fas fa-phone"></i></a>
+  </div>
+
+  <script src="theme.js"></script>
 </body>
 </html>

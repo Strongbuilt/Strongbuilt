@@ -5,479 +5,983 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Investor Relations | Strong Built</title>
-  <meta name="description" content="Strong Built Investor Relations — financial highlights, quarterly performance, annual reports, corporate governance, shareholding pattern, and investor contact for India's premier construction firm.">
-  <meta name="keywords" content="Strong Built investors, construction company Mumbai investor relations, Strong Built financials, annual report, corporate governance, shareholders">
-  <meta name="author" content="Strong Built">
-  <meta name="robots" content="index, follow">
+  <meta name="description" content="Strong Built Investor Relations — financial performance, annual reports, shareholding pattern, corporate governance, and IR contacts.">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/Favicon/favicon-96x96.png" sizes="96x96">
   <link rel="icon" type="image/svg+xml" href="assets/Favicon/favicon.svg">
   <link rel="shortcut icon" href="assets/Favicon/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Favicon/apple-touch-icon.png">
-  <meta name="apple-mobile-web-app-title" content="Strong Built">
   <link rel="manifest" href="assets/Favicon/site.webmanifest">
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Strong Built">
-  <meta property="og:title" content="Investor Relations | Strong Built">
-  <meta property="og:description" content="Financial highlights, annual reports, corporate governance, and investor resources for Strong Built.">
-  <meta property="og:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
-  <meta property="og:locale" content="en_IN">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
-
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="dist/app.css">
+  <!-- Font Awesome -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+  <!-- Theme -->
+  <link rel="stylesheet" href="theme.css">
 
   <style>
-    /* Page-specific polish */
+    /* ═══════════════════════════════════════════════════════════════
+       INVESTORS — page-specific compositions
+       ═══════════════════════════════════════════════════════════════ */
+
+    /* ── Hero ── */
+    .ir-hero {
+      position: relative;
+      padding: clamp(8rem, 14vw, 12rem) 0 clamp(3rem, 5vw, 5rem);
+      text-align: center;
+      overflow: hidden;
+    }
+    .ir-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top, rgba(245,158,11,0.08) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .ir-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 600;
+      line-height: 0.95;
+      margin: 1.5rem 0 1.75rem;
+    }
+    .ir-hero h1 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .ir-hero .lede { max-width: 36rem; margin: 0 auto; color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; }
+    .ir-hero-rule { width: 3.5rem; height: 1px; background: var(--accent); margin: 2.25rem auto 0; }
+
+    /* ── Section title utility ── */
+    .ir-head { text-align: center; max-width: 42rem; margin: 0 auto clamp(2.5rem, 4vw, 3.5rem); }
+    .ir-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      font-weight: 600;
+      line-height: 1;
+      margin: 1rem 0 0;
+      letter-spacing: 0;
+    }
+    .ir-head h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .ir-head p { color: var(--fg-muted); margin: 1rem auto 0; max-width: 38rem; line-height: 1.65; }
+
+    .ir-section { padding-block: clamp(4.5rem, 8vw, 7rem); position: relative; }
+    .ir-section--alt { background: rgba(18,18,26,0.4); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    /* ── Metric cards ── */
+    .ir-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+    @media (min-width: 720px) { .ir-metrics { grid-template-columns: repeat(4, 1fr); gap: 1rem; } }
     .ir-metric {
-      position: relative; padding: 2rem 1.5rem;
-      border: 1px solid rgba(239, 191, 4, 0.2);
-      background: rgba(239, 191, 4, 0.05);
-      transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      position: relative;
+      padding: 1.25rem 1.1rem;
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      transition: all var(--t-slow) var(--ease-out);
     }
     .ir-metric:hover {
-      border-color: #EFBF04; background: rgba(239, 191, 4, 0.08);
-      transform: translateY(-4px);
-    }
-    .ir-metric .num {
-      font-family: 'Oswald', sans-serif; font-weight: 700;
-      font-size: clamp(2.25rem, 5vw, 3.25rem); line-height: 1; color: #EFBF04;
-    }
-    .ir-metric .lbl {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: #B3B3B3; margin-top: 0.5rem;
+      border-color: rgba(245,158,11,0.3);
+      background: rgba(26,26,36,0.8);
+      transform: translateY(-2px);
+      box-shadow: var(--glow-sm);
     }
     .ir-metric .delta {
-      position: absolute; top: 1rem; right: 1rem;
-      font-family: 'JetBrains Mono', 'Courier New', monospace;
-      font-size: 0.65rem; color: #00ff88;
+      display: inline-block;
+      font-family: var(--font-label);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .ir-metric .num {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 500;
+      color: var(--fg);
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+    .ir-metric .num span {
+      color: var(--fg-muted);
+      font-size: 0.55em;
+      font-weight: 400;
+      margin-left: 0.1rem;
+    }
+    .ir-metric .lbl {
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      margin-top: 0.6rem;
     }
 
-    .ir-doc-row {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 1.25rem; gap: 1rem;
-      border: 1px solid rgba(239, 191, 4, 0.15);
-      background: rgba(255,255,255,0.03);
-      transition: all 0.3s;
+    /* ── Why Invest pillars ── */
+    .ir-pillars {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
     }
-    .ir-doc-row:hover { border-color: #EFBF04; background: rgba(239, 191, 4, 0.08); transform: translateX(4px); }
+    @media (min-width: 900px) { .ir-pillars { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
+    .ir-pillar {
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 2rem 1.75rem;
+      transition: all var(--t-slow) var(--ease-out);
+    }
+    .ir-pillar:hover {
+      border-color: rgba(245,158,11,0.28);
+      background: rgba(26,26,36,0.8);
+      box-shadow: var(--glow-sm);
+      transform: translateY(-3px);
+    }
+    .ir-pillar .icon {
+      width: 3.25rem; height: 3.25rem;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.3);
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+    .ir-pillar h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin: 0 0 0.85rem;
+      color: var(--fg);
+    }
+    .ir-pillar p {
+      color: var(--fg-muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      margin: 0 0 1.25rem;
+    }
+    .ir-pillar ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.55rem; }
+    .ir-pillar ul li {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+    }
+    .ir-pillar ul li i { color: var(--accent); font-size: 0.78rem; }
+    .ir-pillar .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .ir-pillar .tags span {
+      font-family: var(--font-label);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 0.3rem 0.6rem;
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: var(--r-sm);
+    }
+    .ir-sparkline {
+      width: 100%; height: 60px;
+      display: block;
+      margin-top: 0.5rem;
+    }
+    .ir-sparkline polygon { fill: rgba(245,158,11,0.1); }
+    .ir-sparkline polyline { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+
+    /* ── Data table ── */
+    .ir-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .ir-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      min-width: 720px;
+    }
+    .ir-table thead th {
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-align: left;
+      padding: 1.1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,15,0.3);
+    }
+    .ir-table tbody td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--fg-muted);
+    }
+    .ir-table tbody tr:last-child td { border-bottom: 0; }
+    .ir-table tbody tr:hover td { background: rgba(245,158,11,0.04); color: var(--fg); }
+    .ir-table tbody td:first-child strong { color: var(--fg); font-family: var(--font-display); font-weight: 500; letter-spacing: 0.02em; }
+    .ir-table-note {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      margin-top: 1rem;
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+    }
+    .ir-table-note i { color: var(--accent); }
+
+    /* ── Document rows (reports/filings) ── */
+    .ir-doc-col h2 { font-family: var(--font-display); font-size: clamp(1.65rem, 3.2vw, 2.25rem); font-weight: 600; line-height: 1; margin: 1rem 0 1rem; }
+    .ir-doc-col h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .ir-doc-col > p { color: var(--fg-muted); margin: 0 0 1.5rem; line-height: 1.65; }
+    .ir-docs-grid { display: grid; gap: clamp(2rem, 4vw, 3.5rem); grid-template-columns: 1fr; }
+    @media (min-width: 900px) { .ir-docs-grid { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+
+    .ir-doc-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .ir-doc-row {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      color: var(--fg);
+      transition: all var(--t-base-ms) var(--ease-out);
+    }
+    .ir-doc-row:hover {
+      border-color: rgba(245,158,11,0.35);
+      background: rgba(26,26,36,0.8);
+      transform: translateX(3px);
+    }
     .ir-doc-row .file-icon {
-      flex-shrink: 0; width: 44px; height: 44px;
-      border: 1px solid rgba(239, 191, 4, 0.35);
-      display: flex; align-items: center; justify-content: center;
-      color: #EFBF04;
+      flex-shrink: 0;
+      width: 2.5rem; height: 2.5rem;
+      display: grid; place-items: center;
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.28);
+      border-radius: var(--r-sm);
+      color: var(--accent);
+      font-size: 0.95rem;
+    }
+    .ir-doc-row > div:not(.file-icon) { flex: 1; min-width: 0; }
+    .ir-doc-row .title {
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--fg);
+      line-height: 1.2;
     }
     .ir-doc-row .meta {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
-      letter-spacing: 0.1em; color: #9E9E9E;
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      margin-top: 0.3rem;
     }
+    .ir-doc-row .chev { color: var(--accent); font-size: 0.85rem; transition: transform var(--t-base-ms); }
+    .ir-doc-row:hover .chev { transform: translateX(3px); }
 
-    .ir-table-wrap { overflow-x: auto; }
-    .ir-table {
-      width: 100%; border-collapse: collapse;
-      font-family: 'Barlow Condensed', sans-serif;
-      min-width: 600px;
+    /* ── Shareholding ── */
+    .ir-holding-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: start;
     }
-    .ir-table th {
-      text-align: left; padding: 1rem 1.25rem;
-      font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: #EFBF04; border-bottom: 2px solid #EFBF04;
-      font-weight: 700;
-    }
-    .ir-table td {
-      padding: 1rem 1.25rem; font-size: 0.95rem;
-      border-bottom: 1px solid rgba(239, 191, 4, 0.15);
-      color: #EEEEEE;
-    }
-    .ir-table tr:hover td { background: rgba(239, 191, 4, 0.06); }
-    .ir-table td strong { color: #EFBF04; font-weight: 600; }
+    @media (min-width: 960px) { .ir-holding-grid { grid-template-columns: 1.1fr 0.9fr; } }
 
-    .ir-event {
-      display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem;
-      align-items: center; padding: 1.25rem 0;
-      border-bottom: 1px solid rgba(239, 191, 4, 0.15);
-    }
-    .ir-event .date {
-      font-family: 'Oswald', sans-serif; font-weight: 700;
-      text-align: center; line-height: 1;
-      padding: 0.75rem 1rem; border: 1px solid #EFBF04;
-      color: #EFBF04; min-width: 74px;
-    }
-    .ir-event .date strong { display: block; font-size: 1.75rem; }
-    .ir-event .date small { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #B3B3B3; }
-
-    .ir-accordion summary {
-      list-style: none; cursor: pointer;
-      padding: 1.25rem 1.5rem;
-      border: 1px solid rgba(239, 191, 4, 0.2);
-      background: rgba(255,255,255,0.03);
-      display: flex; align-items: center; justify-content: space-between;
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.95rem;
-      color: #EEEEEE; transition: all 0.3s;
-    }
-    .ir-accordion summary::-webkit-details-marker { display: none; }
-    .ir-accordion summary::after {
-      content: '\f067'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
-      color: #EFBF04; font-size: 0.85rem; transition: transform 0.3s;
-    }
-    .ir-accordion[open] summary::after { content: '\f068'; }
-    .ir-accordion[open] summary { border-color: #EFBF04; background: rgba(239, 191, 4, 0.08); color: #EFBF04; }
-    .ir-accordion .body {
-      padding: 1.5rem; border: 1px solid rgba(239, 191, 4, 0.15);
-      border-top: none; color: #B3B3B3; line-height: 1.75;
-    }
-
-    /* Shareholding pie-ish bar visualisation */
     .ir-holding-bar {
-      display: flex; height: 44px; width: 100%;
-      border: 1px solid rgba(239, 191, 4, 0.2); overflow: hidden;
+      display: flex;
+      height: 2.25rem;
+      border-radius: var(--r-sm);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin: 1.25rem 0 1.5rem;
     }
     .ir-holding-bar > div {
       display: flex; align-items: center; justify-content: center;
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-      font-size: 0.85rem; color: #231F20;
+      color: var(--accent-foreground);
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
     }
 
-    .ir-governance-card {
-      padding: 1.5rem; border: 1px solid rgba(239, 191, 4, 0.15);
-      transition: all 0.35s ease;
+    .ir-holding-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+    .ir-holding-list li {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--fg-muted);
     }
-    .ir-governance-card:hover { border-color: #EFBF04; transform: translateY(-3px); }
-    .ir-governance-card h4 {
-      font-family: 'Oswald', sans-serif; color: #EFBF04;
-      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;
+    .ir-holding-list li:last-child { border-bottom: 0; }
+    .ir-holding-list .swatch { width: 0.6rem; height: 0.6rem; border-radius: 2px; display: inline-block; }
+    .ir-holding-list strong { color: var(--fg); font-family: var(--font-display); font-weight: 500; letter-spacing: 0; }
+    .ir-holding-list li > span:first-child { display: inline-flex; align-items: center; gap: 0.7rem; }
+
+    .ir-stockcard {
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 1.75rem;
     }
-    .ir-governance-card .role {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: #B3B3B3;
-      margin-bottom: 0.75rem;
+    .ir-stockcard h3 {
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 1.25rem;
+    }
+    .ir-stockcard ul { list-style: none; padding: 0; margin: 0 0 1.5rem; display: flex; flex-direction: column; gap: 0; }
+    .ir-stockcard ul li {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+    }
+    .ir-stockcard ul li:last-child { border-bottom: 0; }
+    .ir-stockcard ul li span { color: var(--fg-muted); }
+    .ir-stockcard ul li strong { color: var(--fg); font-family: var(--font-display); font-weight: 500; letter-spacing: 0; }
+    .ir-stockcard .ctas { display: flex; gap: 0.5rem; }
+    .ir-stockcard .ctas a { flex: 1; justify-content: center; font-size: 0.78rem; padding: 0.8rem 1rem; }
+
+    /* ── Governance ── */
+    .ir-boards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (min-width: 640px)  { .ir-boards-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .ir-boards-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
+    .ir-board-card {
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 1.5rem 1.25rem;
+      transition: all var(--t-slow) var(--ease-out);
+    }
+    .ir-board-card:hover {
+      border-color: rgba(245,158,11,0.3);
+      background: rgba(26,26,36,0.8);
+      transform: translateY(-2px);
+      box-shadow: var(--glow-sm);
+    }
+    .ir-board-card .role {
+      font-family: var(--font-label);
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .ir-board-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin: 0 0 0.6rem;
+      color: var(--fg);
+    }
+    .ir-board-card p {
+      color: var(--fg-muted);
+      font-size: 0.85rem;
+      line-height: 1.55;
+      margin: 0;
     }
 
-    /* Sparkline chart (pure CSS/SVG) */
-    .ir-sparkline { width: 100%; height: 80px; }
-    .ir-sparkline polyline { fill: none; stroke: #EFBF04; stroke-width: 2; }
-    .ir-sparkline polygon { fill: rgba(239, 191, 4, 0.12); }
+    .ir-committees {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+    @media (min-width: 720px) { .ir-committees { grid-template-columns: repeat(4, 1fr); gap: 1rem; } }
+    .ir-committee {
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 1.4rem 1rem;
+      text-align: center;
+      transition: all var(--t-slow) var(--ease-out);
+    }
+    .ir-committee:hover {
+      border-color: rgba(245,158,11,0.3);
+      background: rgba(26,26,36,0.8);
+      transform: translateY(-2px);
+    }
+    .ir-committee i { color: var(--accent); font-size: 1.25rem; margin-bottom: 0.75rem; }
+    .ir-committee h5 {
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg);
+      margin: 0 0 0.35rem;
+    }
+    .ir-committee p {
+      font-family: var(--font-label);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      margin: 0;
+    }
+
+    /* ── Events ── */
+    .ir-events { max-width: 48rem; margin: 0 auto; display: flex; flex-direction: column; gap: 0.5rem; }
+    .ir-event {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1.25rem;
+      align-items: center;
+      padding: 1.1rem 1.25rem;
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      transition: all var(--t-base-ms) var(--ease-out);
+    }
+    .ir-event:hover {
+      border-color: rgba(245,158,11,0.3);
+      background: rgba(26,26,36,0.8);
+    }
+    .ir-event .date {
+      display: flex; flex-direction: column; align-items: center;
+      width: 3.25rem;
+      padding: 0.5rem 0;
+      background: rgba(10,10,15,0.4);
+      border: 1px solid rgba(245,158,11,0.22);
+      border-radius: var(--r-sm);
+    }
+    .ir-event .date strong {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .ir-event .date small {
+      font-family: var(--font-label);
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin-top: 0.2rem;
+    }
+    .ir-event h4 {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--fg);
+      margin: 0;
+    }
+    .ir-event p {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: var(--fg-muted);
+      margin: 0.25rem 0 0;
+      line-height: 1.5;
+    }
+    .ir-event .action {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      transition: color var(--t-base-ms);
+      flex-shrink: 0;
+    }
+    .ir-event:hover .action { color: var(--fg); }
+    .ir-event .action i { font-size: 0.8rem; transition: transform var(--t-base-ms); }
+    .ir-event:hover .action i { transform: translateX(3px); }
+    @media (max-width: 639px) {
+      .ir-event { grid-template-columns: auto 1fr; gap: 1rem; }
+      .ir-event .action { grid-column: 2; justify-self: flex-start; margin-top: 0.4rem; }
+    }
+
+    /* ── FAQ accordion ── */
+    .ir-faqs { max-width: 48rem; margin: 0 auto; display: flex; flex-direction: column; gap: 0.5rem; }
+    .ir-accordion {
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      transition: all var(--t-base-ms);
+    }
+    .ir-accordion[open] {
+      border-color: rgba(245,158,11,0.28);
+      background: rgba(26,26,36,0.8);
+      box-shadow: var(--glow-sm);
+    }
+    .ir-accordion summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1.1rem 1.35rem;
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--fg);
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 1rem;
+      transition: color var(--t-base-ms);
+    }
+    .ir-accordion summary::-webkit-details-marker { display: none; }
+    .ir-accordion summary::after {
+      content: '\f078';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: var(--accent);
+      font-size: 0.78rem;
+      transition: transform var(--t-slow);
+      flex-shrink: 0;
+    }
+    .ir-accordion[open] summary::after { transform: rotate(180deg); }
+    .ir-accordion:hover summary,
+    .ir-accordion[open] summary { color: var(--accent); }
+    .ir-accordion .body {
+      padding: 0 1.35rem 1.25rem;
+      color: var(--fg-muted);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+    .ir-accordion .body strong { color: var(--fg); font-weight: 500; }
+    .ir-accordion .body a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ── IR contact ── */
+    .ir-contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(2rem, 4vw, 3.5rem);
+      align-items: start;
+    }
+    @media (min-width: 960px) { .ir-contact-grid { grid-template-columns: 1fr 1fr; gap: 4.5rem; } }
+
+    .ir-contact-col h2 { font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 600; line-height: 1; margin: 1rem 0 1.25rem; }
+    .ir-contact-col h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .ir-contact-col > p { color: var(--fg-muted); line-height: 1.65; margin: 0 0 2rem; }
+    .ir-contact-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .ir-contact-list .eb {
+      font-family: var(--font-label);
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+    .ir-contact-list .name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--fg);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .ir-contact-list .meta { font-size: 0.88rem; color: var(--fg-muted); margin-top: 0.2rem; }
+    .ir-contact-list .sub { font-size: 0.78rem; color: var(--fg-subtle); margin-top: 0.2rem; }
+    .ir-contact-list a { color: inherit; transition: color var(--t-base-ms); }
+    .ir-contact-list a:hover { color: var(--accent); }
+
+    .ir-form {
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      position: relative;
+      overflow: hidden;
+      align-self: start;
+      position: sticky;
+      top: calc(var(--header-h-lg) + 1.5rem);
+    }
+    @media (max-width: 959px) { .ir-form { position: static; } }
+    .ir-form::before { content: ''; position: absolute; top: 0; left: 0; width: 80px; height: 3px; background: linear-gradient(90deg, var(--accent), transparent); }
+    .ir-form h3 {
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 1.5rem;
+    }
+    .ir-form form { display: flex; flex-direction: column; gap: 1.1rem; }
+    .ir-form label {
+      display: block;
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.45rem;
+    }
+    .ir-form input,
+    .ir-form select,
+    .ir-form textarea {
+      width: 100%;
+      background: rgba(10,10,15,0.5);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 0.85rem 1rem;
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      line-height: 1.45;
+      outline: none;
+      transition: all var(--t-base-ms);
+    }
+    .ir-form textarea { resize: vertical; min-height: 6rem; }
+    .ir-form input::placeholder,
+    .ir-form textarea::placeholder { color: var(--fg-subtle); }
+    .ir-form input:focus,
+    .ir-form select:focus,
+    .ir-form textarea:focus {
+      border-color: rgba(245,158,11,0.45);
+      background: rgba(10,10,15,0.7);
+      box-shadow: 0 0 0 3px rgba(245,158,11,0.12);
+    }
+    .ir-form button { justify-content: center; margin-top: 0.4rem; }
+
+    /* ── Subscribe CTA ── */
+    .ir-cta {
+      position: relative;
+      padding-block: clamp(4rem, 7vw, 6rem);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      overflow: hidden;
+    }
+    .ir-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(245,158,11,0.1) 0%, transparent 55%); pointer-events: none; }
+    .ir-cta h2 { font-family: var(--font-display); font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 600; line-height: 1; margin: 1rem 0 0.75rem; }
+    .ir-cta h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .ir-cta .sub { color: var(--fg-muted); margin: 0 auto 2rem; max-width: 32rem; }
+    .ir-cta form { max-width: 28rem; margin: 0 auto; display: flex; gap: 0.5rem; flex-direction: column; }
+    @media (min-width: 500px) { .ir-cta form { flex-direction: row; } }
+    .ir-cta form input {
+      flex: 1;
+      background: rgba(10,10,15,0.5);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 0.85rem 1rem;
+      color: var(--fg);
+      font-size: 0.9rem;
+      outline: none;
+      transition: all var(--t-base-ms);
+    }
+    .ir-cta form input::placeholder { color: var(--fg-subtle); }
+    .ir-cta form input:focus {
+      border-color: rgba(245,158,11,0.45);
+      background: rgba(10,10,15,0.75);
+      box-shadow: 0 0 0 3px rgba(245,158,11,0.12);
+    }
+
+    /* Reveal delays */
+    .d1 { transition-delay: 80ms; }
+    .d2 { transition-delay: 160ms; }
+    .d3 { transition-delay: 240ms; }
+    .d4 { transition-delay: 320ms; }
+    .d5 { transition-delay: 400ms; }
   </style>
 </head>
 
-<body class="bg-noise antialiased overflow-x-hidden selection:bg-brand-gold selection:text-black">
+<body class="md-atmospheric">
 
-  <!-- NAVIGATION OVERLAY -->
-  <div id="navOverlay" class="nav-overlay">
-    <div id="navBackdrop" class="nav-overlay-backdrop"></div>
-    <div class="nav-overlay-content p-8 md:p-10">
-      <div class="flex justify-between items-center mb-12">
-        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto opacity-80">
-        <button id="closeMenuBtn" class="nav-close-btn"><i class="fas fa-times"></i></button>
-      </div>
-      <ul class="space-y-0 flex-1">
-        <li><a href="index.html" class="sidebar-link">Home</a></li>
-        <li>
-          <button class="sidebar-dropdown-btn"><span>About</span> <i class="fas fa-chevron-down"></i></button>
-          <div class="sidebar-submenu">
-            <a href="story.html" class="sidebar-sublink">Our Story</a>
-            <a href="leadership.html" class="sidebar-sublink">Leadership</a>
-            <a href="culture.html" class="sidebar-sublink">Culture</a>
-            <a href="recognition.html" class="sidebar-sublink">Recognition</a>
-          </div>
-        </li>
-        <li>
-          <button class="sidebar-dropdown-btn"><span>Projects</span> <i class="fas fa-chevron-down"></i></button>
-          <div class="sidebar-submenu">
-            <a href="projects.html" class="sidebar-sublink">Portfolio</a>
-            <a href="map.html" class="sidebar-sublink">Project Map</a>
-          </div>
-        </li>
-        <li><a href="services.html" class="sidebar-link">Services</a></li>
-        <li><a href="clients.html" class="sidebar-link">Clients</a></li>
-        <li><a href="investors.html" class="sidebar-link">Investors</a></li>
-        <li><a href="csr.html" class="sidebar-link">CSR</a></li>
-        <li><a href="careers.html" class="sidebar-link">Careers</a></li>
-        <li><a href="resources.html" class="sidebar-link">Resources</a></li>
-        <li><a href="contact.html" class="sidebar-link">Contact</a></li>
-      </ul>
-      <div class="nav-info-block">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
-          <div class="nav-info-item">
-            <span class="nav-info-label">Call</span>
-            <p class="nav-info-value">+91 9619875081</p>
-          </div>
-          <div class="nav-info-item">
-            <span class="nav-info-label">Email</span>
-            <p class="nav-info-value">strongbuilt@skywaygroup.co.in</p>
-          </div>
-        </div>
-        <div class="flex gap-2">
-          <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav-social-link"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram" class="nav-social-link"><i class="fab fa-instagram"></i></a>
-          <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter" class="nav-social-link"><i class="fab fa-twitter"></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Ambient orbs -->
+  <div class="md-orb" style="top: -180px; left: 10%; width: 520px; height: 520px;" aria-hidden="true"></div>
+  <div class="md-orb" style="top: 45%; right: -120px; width: 460px; height: 460px;" aria-hidden="true"></div>
+  <div class="md-orb" style="bottom: 8%; left: -80px; width: 400px; height: 400px;" aria-hidden="true"></div>
 
-  <!-- HEADER -->
-  <header class="fixed w-full z-50 transition-all duration-300 glass-header" id="mainHeader">
-    <div class="container mx-auto px-4 md:px-6 h-20 md:h-24 flex items-center justify-between">
-      <a href="index.html" class="flex items-center group relative z-50">
-        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built Logo" class="h-14 md:h-24 w-auto object-contain transition duration-300 hover:opacity-90">
+  <!-- ═══ HEADER ═══ -->
+  <header class="md-header" id="mainHeader">
+    <div class="md-header-inner">
+      <a href="index.html" class="md-logo" aria-label="Strong Built — Home">
+        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built">
       </a>
-      <button id="menuToggle" class="menu-btn group">
-        <div class="menu-icon"><span></span><span></span><span></span></div>
-      </button>
+      <nav class="md-nav" aria-label="Primary">
+        <div class="md-nav-item">
+          <button class="md-nav-link" type="button" aria-haspopup="true" aria-expanded="false">About <i class="fas fa-chevron-down"></i></button>
+          <div class="md-nav-dropdown" role="menu">
+            <a href="story.html" role="menuitem"><i class="fas fa-book-open"></i> Our Story</a>
+            <a href="leadership.html" role="menuitem"><i class="fas fa-users"></i> Leadership</a>
+            <a href="culture.html" role="menuitem"><i class="fas fa-heart"></i> Culture</a>
+            <a href="recognition.html" role="menuitem"><i class="fas fa-trophy"></i> Recognition</a>
+          </div>
+        </div>
+        <div class="md-nav-item">
+          <button class="md-nav-link" type="button" aria-haspopup="true" aria-expanded="false">Projects <i class="fas fa-chevron-down"></i></button>
+          <div class="md-nav-dropdown" role="menu">
+            <a href="projects.html" role="menuitem"><i class="fas fa-th"></i> Portfolio</a>
+            <a href="map.html" role="menuitem"><i class="fas fa-map-marked-alt"></i> Project Map</a>
+          </div>
+        </div>
+        <a href="services.html" class="md-nav-link">Services</a>
+        <a href="clients.html" class="md-nav-link">Clients</a>
+        <a href="investors.html" class="md-nav-link is-active" aria-current="page">Investors</a>
+        <a href="csr.html" class="md-nav-link">CSR</a>
+        <a href="careers.html" class="md-nav-link">Careers</a>
+        <a href="resources.html" class="md-nav-link">Resources</a>
+      </nav>
+      <a href="contact.html" class="md-btn md-btn-primary md-header-cta">Contact Us</a>
+      <button id="menuToggle" class="md-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer"><i class="fas fa-bars"></i></button>
     </div>
   </header>
-  <!-- HERO -->
-  <section class="relative overflow-hidden bg-clay-mist flex items-center" style="min-height:100svh;">
-    <div class="w-full max-w-[1400px] mx-auto px-6 md:px-10 pt-28 pb-12 relative z-2 text-center">
-      <span class="block text-brand-darkGold font-bold uppercase mb-4 font-heading reveal-up" style="font-size:var(--fs-small); letter-spacing:0.25em; transition-delay:100ms;">Investor Relations</span>
-      <h1 class="text-clay-ink uppercase font-hero reveal-up" style="font-size:var(--fs-hero); line-height:0.92; letter-spacing:-0.02em; font-weight:700; margin-bottom:1.5rem; transition-delay:200ms;">
-        Building <br><span class="gold-gradient-text">Value</span>
-      </h1>
-      <div class="h-px w-24 bg-brand-gold my-8 mx-auto reveal-up" style="transition-delay:300ms;"></div>
-      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-xl mx-auto leading-relaxed reveal-up" style="transition-delay:400ms;">
-        Twelve years of compounding growth, measured execution, and disciplined capital allocation &mdash; translating concrete into long-term shareholder value.
-      </p>
+
+  <!-- ═══ NAV DRAWER ═══ -->
+  <div id="navDrawer" class="md-drawer" aria-hidden="true">
+    <div class="md-drawer-backdrop" id="drawerBackdrop"></div>
+    <aside class="md-drawer-panel" role="dialog" aria-label="Navigation">
+      <div class="md-drawer-header">
+        <div class="md-logo"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built" style="height:2.75rem;width:auto;display:block;"></div>
+        <button class="md-menu-btn" id="drawerClose" aria-label="Close menu" style="display:flex;"><i class="fas fa-times"></i></button>
+      </div>
+      <nav>
+        <a href="index.html" class="md-drawer-link">Home</a>
+        <button class="md-drawer-dropbtn" data-dropdown>About <i class="fas fa-chevron-down"></i></button>
+        <div class="md-drawer-sub"><a href="story.html">Our Story</a><a href="leadership.html">Leadership</a><a href="culture.html">Culture</a><a href="recognition.html">Recognition</a></div>
+        <button class="md-drawer-dropbtn" data-dropdown>Projects <i class="fas fa-chevron-down"></i></button>
+        <div class="md-drawer-sub"><a href="projects.html">Portfolio</a><a href="map.html">Project Map</a></div>
+        <a href="services.html" class="md-drawer-link">Services</a>
+        <a href="clients.html" class="md-drawer-link">Clients</a>
+        <a href="investors.html" class="md-drawer-link" style="color:var(--accent);">Investors</a>
+        <a href="csr.html" class="md-drawer-link">CSR</a>
+        <a href="careers.html" class="md-drawer-link">Careers</a>
+        <a href="resources.html" class="md-drawer-link">Resources</a>
+        <a href="contact.html" class="md-drawer-link">Contact</a>
+      </nav>
+      <div style="margin-top:auto;padding-top:2rem;border-top:1px solid var(--border);">
+        <p class="md-mono" style="font-size:0.75rem;color:var(--fg-subtle);margin-bottom:1rem;">Connect</p>
+        <div style="display:flex;gap:0.5rem;">
+          <a href="https://www.linkedin.com/company/strongbuilt" class="md-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/strongbuilt" class="md-social-btn" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/strongbuilt" class="md-social-btn" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="ir-hero">
+    <div class="md-container">
+      <div class="md-reveal">
+        <div class="md-badge" style="margin-inline:auto;">
+          <span class="md-badge-dot" aria-hidden="true"></span>
+          <span>Investor Relations</span>
+        </div>
+      </div>
+      <h1 class="md-reveal d1">Building <span class="accent">value.</span></h1>
+      <p class="lede md-reveal d2">Twelve years of compounding growth, measured execution, and disciplined capital allocation — translating concrete into long-term shareholder value.</p>
+      <div class="ir-hero-rule md-reveal d3"></div>
     </div>
   </section>
 
-  <!-- COMPANY AT A GLANCE -->
-  <section class="py-16 md:py-24 container mx-auto px-6 relative z-10">
-    <div class="text-center mb-16 reveal-up">
-      <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">FY 2025–26 Snapshot</span>
-      <h2 class="text-4xl md:text-5xl font-bold text-clay-ink uppercase tracking-tight font-heading">Company At A <span class="text-brand-darkGold">Glance</span></h2>
-      <div class="h-1 w-24 bg-brand-gold mx-auto mt-6"></div>
-    </div>
+  <!-- ═══ COMPANY AT A GLANCE ═══ -->
+  <section class="ir-section">
+    <div class="md-container">
+      <div class="ir-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">FY 2025–26 Snapshot</span>
+        <h2>Company at a <span class="accent">glance.</span></h2>
+      </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-      <div class="ir-metric reveal-up">
-        <span class="delta">▲ 24.3% YoY</span>
-        <div class="num">₹486<span class="text-xl">Cr</span></div>
-        <div class="lbl">Revenue FY25</div>
-      </div>
-      <div class="ir-metric reveal-up" style="transition-delay: 100ms;">
-        <span class="delta">▲ 31.8%</span>
-        <div class="num">₹72<span class="text-xl">Cr</span></div>
-        <div class="lbl">EBITDA</div>
-      </div>
-      <div class="ir-metric reveal-up" style="transition-delay: 200ms;">
-        <span class="delta">▲ 18%</span>
-        <div class="num">₹38<span class="text-xl">Cr</span></div>
-        <div class="lbl">PAT</div>
-      </div>
-      <div class="ir-metric reveal-up" style="transition-delay: 300ms;">
-        <span class="delta">▲ 40%</span>
-        <div class="num">₹1,240<span class="text-xl">Cr</span></div>
-        <div class="lbl">Order Book</div>
-      </div>
-      <div class="ir-metric reveal-up" style="transition-delay: 50ms;">
-        <div class="num">90<span class="text-xl">+</span></div>
-        <div class="lbl">Buildings Delivered</div>
-      </div>
-      <div class="ir-metric reveal-up" style="transition-delay: 150ms;">
-        <div class="num">5.7<span class="text-xl">M</span></div>
-        <div class="lbl">Sq.Ft Constructed</div>
-      </div>
-      <div class="ir-metric reveal-up" style="transition-delay: 250ms;">
-        <div class="num">12<span class="text-xl">YR</span></div>
-        <div class="lbl">Operating History</div>
-      </div>
-      <div class="ir-metric reveal-up" style="transition-delay: 350ms;">
-        <div class="num">1,400<span class="text-xl">+</span></div>
-        <div class="lbl">Employees &amp; Skilled Workforce</div>
+      <div class="ir-metrics">
+        <div class="ir-metric md-reveal"><span class="delta">▲ 24.3% YoY</span><div class="num">₹486<span>Cr</span></div><div class="lbl">Revenue FY25</div></div>
+        <div class="ir-metric md-reveal d1"><span class="delta">▲ 31.8%</span><div class="num">₹72<span>Cr</span></div><div class="lbl">EBITDA</div></div>
+        <div class="ir-metric md-reveal d2"><span class="delta">▲ 18%</span><div class="num">₹38<span>Cr</span></div><div class="lbl">PAT</div></div>
+        <div class="ir-metric md-reveal d3"><span class="delta">▲ 40%</span><div class="num">₹1,240<span>Cr</span></div><div class="lbl">Order Book</div></div>
+        <div class="ir-metric md-reveal d1"><div class="num">90<span>+</span></div><div class="lbl">Buildings Delivered</div></div>
+        <div class="ir-metric md-reveal d2"><div class="num">5.7<span>M</span></div><div class="lbl">Sq.Ft Constructed</div></div>
+        <div class="ir-metric md-reveal d3"><div class="num">12<span>YR</span></div><div class="lbl">Operating History</div></div>
+        <div class="ir-metric md-reveal d4"><div class="num">1,400<span>+</span></div><div class="lbl">Employees &amp; Workforce</div></div>
       </div>
     </div>
   </section>
 
-  <!-- WHY INVEST -->
-  <section class="py-16 md:py-24 bg-clay-base/40 border-y border-clay-border">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-16 reveal-up">
-        <h2 class="text-4xl md:text-5xl font-bold text-clay-ink uppercase tracking-tight font-heading">Why <span class="text-brand-darkGold">Invest</span></h2>
-        <div class="h-1 w-24 bg-brand-gold mx-auto mt-6"></div>
-        <p class="text-clay-muted max-w-2xl mx-auto mt-6 font-body">Three pillars that compound into durable returns: growth, execution, and readiness.</p>
+  <!-- ═══ WHY INVEST ═══ -->
+  <section class="ir-section ir-section--alt">
+    <div class="md-container">
+      <div class="ir-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Why Invest</span>
+        <h2>Three pillars, <span class="accent">compounding returns.</span></h2>
+        <p>Growth, execution, and readiness — how we turn capital into durable value.</p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6 md:gap-8">
-        <div class="glass-panel p-8 md:p-10 reveal-up">
-          <div class="w-14 h-14 rounded-full border border-brand-gold/30 flex items-center justify-center text-brand-darkGold mb-6">
-            <i class="fas fa-chart-line text-xl"></i>
-          </div>
-          <h3 class="text-2xl font-bold text-clay-ink mb-4 uppercase font-heading">Growth Trajectory</h3>
-          <p class="text-clay-muted text-sm leading-relaxed mb-4 font-body">
-            Five-year revenue CAGR of 22.4%. EBITDA margin expanding 180 bps year-over-year. Mumbai's redevelopment tailwind projected to add ₹2,000+ Cr in addressable pipeline through FY28.
-          </p>
+      <div class="ir-pillars">
+        <article class="ir-pillar md-reveal">
+          <div class="icon"><i class="fas fa-chart-line"></i></div>
+          <h3>Growth trajectory</h3>
+          <p>Five-year revenue CAGR of 22.4%. EBITDA margin expanding 180 bps year-over-year. Mumbai's redevelopment tailwind projected to add ₹2,000+ Cr in addressable pipeline through FY28.</p>
           <svg class="ir-sparkline" viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true">
             <polygon points="0,80 0,60 50,48 100,42 150,32 200,28 250,18 300,10 300,80"/>
             <polyline points="0,60 50,48 100,42 150,32 200,28 250,18 300,10"/>
           </svg>
-        </div>
+        </article>
 
-        <div class="glass-panel p-8 md:p-10 reveal-up" style="transition-delay: 100ms;">
-          <div class="w-14 h-14 rounded-full border border-brand-gold/30 flex items-center justify-center text-brand-darkGold mb-6">
-            <i class="fas fa-check-double text-xl"></i>
-          </div>
-          <h3 class="text-2xl font-bold text-clay-ink mb-4 uppercase font-heading">Proven Execution</h3>
-          <p class="text-clay-muted text-sm leading-relaxed mb-4 font-body">
-            Strong on-time delivery track record across 33 completed projects. ISO 9001, 14001 &amp; 45001 certified. Committed to the highest safety standards across all active sites.
-          </p>
-          <ul class="text-xs text-clay-faint uppercase tracking-[0.2em] font-heading space-y-2">
-            <li class="flex gap-2"><i class="fas fa-medal text-brand-darkGold"></i> 33 projects delivered</li>
-            <li class="flex gap-2"><i class="fas fa-shield-alt text-brand-darkGold"></i> 5.7M sq.ft built-to-spec</li>
-            <li class="flex gap-2"><i class="fas fa-certificate text-brand-darkGold"></i> ISO 9001 / 14001 / 45001</li>
+        <article class="ir-pillar md-reveal d1">
+          <div class="icon"><i class="fas fa-check-double"></i></div>
+          <h3>Proven execution</h3>
+          <p>Strong on-time delivery across 33 completed projects. ISO 9001, 14001 &amp; 45001 certified. Committed to the highest safety standards across all active sites.</p>
+          <ul>
+            <li><i class="fas fa-medal"></i> 33 projects delivered</li>
+            <li><i class="fas fa-shield-alt"></i> 5.7M sq.ft built-to-spec</li>
+            <li><i class="fas fa-certificate"></i> ISO 9001 / 14001 / 45001</li>
           </ul>
-        </div>
+        </article>
 
-        <div class="glass-panel p-8 md:p-10 reveal-up" style="transition-delay: 200ms;">
-          <div class="w-14 h-14 rounded-full border border-brand-gold/30 flex items-center justify-center text-brand-darkGold mb-6">
-            <i class="fas fa-microchip text-xl"></i>
+        <article class="ir-pillar md-reveal d2">
+          <div class="icon"><i class="fas fa-microchip"></i></div>
+          <h3>Future-ready</h3>
+          <p>Digital-first construction management: BIM 360 across all active sites, proprietary MIS platform for real-time project P&amp;L, and a ₹14 Cr planned capex in FY26 for modular form-work and IGBC-aligned green-building capability.</p>
+          <div class="tags">
+            <span>BIM 360</span><span>IGBC</span><span>ESG</span><span>AI MIS</span>
           </div>
-          <h3 class="text-2xl font-bold text-clay-ink mb-4 uppercase font-heading">Future-Ready</h3>
-          <p class="text-clay-muted text-sm leading-relaxed mb-4 font-body">
-            Digital-first construction management: BIM 360 across all active sites, proprietary MIS platform for real-time project P&amp;L, and a ₹14 Cr planned capex in FY26 for modular form-work and IGBC-aligned green-building capability.
-          </p>
-          <div class="flex gap-2 flex-wrap">
-            <span class="text-[0.6rem] tracking-[0.15em] uppercase px-2 py-1 border border-brand-gold/30 text-brand-darkGold">BIM 360</span>
-            <span class="text-[0.6rem] tracking-[0.15em] uppercase px-2 py-1 border border-brand-gold/30 text-brand-darkGold">IGBC</span>
-            <span class="text-[0.6rem] tracking-[0.15em] uppercase px-2 py-1 border border-brand-gold/30 text-brand-darkGold">ESG</span>
-            <span class="text-[0.6rem] tracking-[0.15em] uppercase px-2 py-1 border border-brand-gold/30 text-brand-darkGold">AI MIS</span>
-          </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- FINANCIAL HIGHLIGHTS -->
-  <section class="py-16 md:py-24 container mx-auto px-6">
-    <div class="text-center mb-16 reveal-up">
-      <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">FY21 – FY25 Performance</span>
-      <h2 class="text-4xl md:text-5xl font-bold text-clay-ink uppercase tracking-tight font-heading">Financial <span class="text-brand-darkGold">Highlights</span></h2>
-      <div class="h-1 w-24 bg-brand-gold mx-auto mt-6"></div>
-    </div>
+  <!-- ═══ FINANCIAL HIGHLIGHTS ═══ -->
+  <section class="ir-section">
+    <div class="md-container">
+      <div class="ir-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">FY21 – FY25 Performance</span>
+        <h2>Financial <span class="accent">highlights.</span></h2>
+      </div>
 
-    <div class="ir-table-wrap reveal-up">
-      <table class="ir-table">
-        <thead>
-          <tr>
-            <th>Fiscal Year</th>
-            <th>Revenue (₹ Cr)</th>
-            <th>EBITDA (₹ Cr)</th>
-            <th>EBITDA Margin</th>
-            <th>PAT (₹ Cr)</th>
-            <th>Order Book (₹ Cr)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>FY2020–21</strong></td><td>212</td><td>28</td><td>13.2%</td><td>14</td><td>480</td></tr>
-          <tr><td><strong>FY2021–22</strong></td><td>268</td><td>36</td><td>13.4%</td><td>19</td><td>620</td></tr>
-          <tr><td><strong>FY2022–23</strong></td><td>334</td><td>46</td><td>13.8%</td><td>24</td><td>780</td></tr>
-          <tr><td><strong>FY2023–24</strong></td><td>391</td><td>55</td><td>14.1%</td><td>29</td><td>885</td></tr>
-          <tr><td><strong>FY2024–25</strong></td><td>486</td><td>72</td><td>14.8%</td><td>38</td><td>1,240</td></tr>
-        </tbody>
-      </table>
-    </div>
+      <div class="ir-table-wrap md-reveal">
+        <table class="ir-table">
+          <thead>
+            <tr>
+              <th>Fiscal Year</th>
+              <th>Revenue (₹ Cr)</th>
+              <th>EBITDA (₹ Cr)</th>
+              <th>EBITDA Margin</th>
+              <th>PAT (₹ Cr)</th>
+              <th>Order Book (₹ Cr)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>FY2020–21</strong></td><td>212</td><td>28</td><td>13.2%</td><td>14</td><td>480</td></tr>
+            <tr><td><strong>FY2021–22</strong></td><td>268</td><td>36</td><td>13.4%</td><td>19</td><td>620</td></tr>
+            <tr><td><strong>FY2022–23</strong></td><td>334</td><td>46</td><td>13.8%</td><td>24</td><td>780</td></tr>
+            <tr><td><strong>FY2023–24</strong></td><td>391</td><td>55</td><td>14.1%</td><td>29</td><td>885</td></tr>
+            <tr><td><strong>FY2024–25</strong></td><td>486</td><td>72</td><td>14.8%</td><td>38</td><td>1,240</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-    <p class="text-xs text-clay-faint font-body mt-4 uppercase tracking-[0.2em]"><i class="fas fa-info-circle text-brand-darkGold mr-2"></i>Figures are standalone audited numbers; consolidated results published in the annual report.</p>
+      <p class="ir-table-note"><i class="fas fa-info-circle"></i> Figures are standalone audited numbers · consolidated results in the annual report.</p>
+    </div>
   </section>
 
-  <!-- ANNUAL REPORTS & FILINGS -->
-  <section class="py-16 md:py-24 bg-clay-base/40 border-y border-clay-border">
-    <div class="container mx-auto px-6">
-      <div class="grid md:grid-cols-2 gap-12">
-        <div class="reveal-up">
-          <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">Downloads</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-clay-ink mb-6 uppercase tracking-tight font-heading">Annual Reports &amp; <span class="text-brand-darkGold">Filings</span></h2>
-          <p class="text-clay-muted font-body leading-relaxed mb-8">
-            Audited financial statements, director's report, management discussion &amp; analysis, and statutory disclosures for each fiscal year.
-          </p>
+  <!-- ═══ REPORTS + DISCLOSURES ═══ -->
+  <section class="ir-section ir-section--alt">
+    <div class="md-container">
+      <div class="ir-docs-grid">
 
-          <div class="space-y-3">
+        <div class="ir-doc-col md-reveal">
+          <span class="md-eyebrow md-eyebrow-accent">Downloads</span>
+          <h2>Annual reports &amp; <span class="accent">filings.</span></h2>
+          <p>Audited financial statements, director's report, management discussion &amp; analysis, and statutory disclosures for each fiscal year.</p>
+
+          <div class="ir-doc-list">
             <a href="#" class="ir-doc-row">
               <div class="file-icon"><i class="fas fa-file-pdf"></i></div>
-              <div class="flex-1 min-w-0">
-                <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">Annual Report FY 2024–25</div>
-                <div class="meta">PDF · 8.2 MB · Published Aug 2025</div>
-              </div>
-              <i class="fas fa-download text-brand-darkGold"></i>
+              <div><div class="title">Annual Report FY 2024–25</div><div class="meta">PDF · 8.2 MB · Published Aug 2025</div></div>
+              <i class="fas fa-arrow-down chev"></i>
             </a>
             <a href="#" class="ir-doc-row">
               <div class="file-icon"><i class="fas fa-file-pdf"></i></div>
-              <div class="flex-1 min-w-0">
-                <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">Annual Report FY 2023–24</div>
-                <div class="meta">PDF · 7.8 MB · Published Aug 2024</div>
-              </div>
-              <i class="fas fa-download text-brand-darkGold"></i>
+              <div><div class="title">Annual Report FY 2023–24</div><div class="meta">PDF · 7.8 MB · Published Aug 2024</div></div>
+              <i class="fas fa-arrow-down chev"></i>
             </a>
             <a href="#" class="ir-doc-row">
               <div class="file-icon"><i class="fas fa-file-pdf"></i></div>
-              <div class="flex-1 min-w-0">
-                <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">Annual Report FY 2022–23</div>
-                <div class="meta">PDF · 7.1 MB · Published Aug 2023</div>
-              </div>
-              <i class="fas fa-download text-brand-darkGold"></i>
+              <div><div class="title">Annual Report FY 2022–23</div><div class="meta">PDF · 7.1 MB · Published Aug 2023</div></div>
+              <i class="fas fa-arrow-down chev"></i>
             </a>
             <a href="#" class="ir-doc-row">
               <div class="file-icon"><i class="fas fa-file-pdf"></i></div>
-              <div class="flex-1 min-w-0">
-                <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">Annual Report FY 2021–22</div>
-                <div class="meta">PDF · 6.4 MB · Published Aug 2022</div>
-              </div>
-              <i class="fas fa-download text-brand-darkGold"></i>
+              <div><div class="title">Annual Report FY 2021–22</div><div class="meta">PDF · 6.4 MB · Published Aug 2022</div></div>
+              <i class="fas fa-arrow-down chev"></i>
             </a>
           </div>
         </div>
 
-        <div class="reveal-up" style="transition-delay: 150ms;">
-          <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">Quarterly Results</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-clay-ink mb-6 uppercase tracking-tight font-heading">Latest <span class="text-brand-darkGold">Disclosures</span></h2>
-          <p class="text-clay-muted font-body leading-relaxed mb-8">
-            Quarterly results, investor presentations, board-meeting outcomes, and regulatory filings with the exchanges.
-          </p>
+        <div class="ir-doc-col md-reveal d2">
+          <span class="md-eyebrow md-eyebrow-accent">Quarterly</span>
+          <h2>Latest <span class="accent">disclosures.</span></h2>
+          <p>Quarterly results, investor presentations, board-meeting outcomes, and regulatory filings with the exchanges.</p>
 
-          <div class="space-y-3">
+          <div class="ir-doc-list">
             <a href="#" class="ir-doc-row">
               <div class="file-icon"><i class="fas fa-chart-bar"></i></div>
-              <div class="flex-1 min-w-0">
-                <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">Q2 FY 2025–26 Results</div>
-                <div class="meta">PDF · 2.1 MB · Released Oct 2025</div>
-              </div>
-              <i class="fas fa-download text-brand-darkGold"></i>
+              <div><div class="title">Q2 FY 2025–26 Results</div><div class="meta">PDF · 2.1 MB · Released Oct 2025</div></div>
+              <i class="fas fa-arrow-down chev"></i>
             </a>
             <a href="#" class="ir-doc-row">
               <div class="file-icon"><i class="fas fa-chart-bar"></i></div>
-              <div class="flex-1 min-w-0">
-                <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">Q1 FY 2025–26 Results</div>
-                <div class="meta">PDF · 1.9 MB · Released Jul 2025</div>
-              </div>
-              <i class="fas fa-download text-brand-darkGold"></i>
+              <div><div class="title">Q1 FY 2025–26 Results</div><div class="meta">PDF · 1.9 MB · Released Jul 2025</div></div>
+              <i class="fas fa-arrow-down chev"></i>
             </a>
             <a href="#" class="ir-doc-row">
-              <div class="file-icon"><i class="fas fa-presentation"></i></div>
-              <div class="flex-1 min-w-0">
-                <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">Investor Presentation — Sep 2025</div>
-                <div class="meta">PDF · 4.5 MB · 42 slides</div>
-              </div>
-              <i class="fas fa-download text-brand-darkGold"></i>
+              <div class="file-icon"><i class="fas fa-file-powerpoint"></i></div>
+              <div><div class="title">Investor Presentation — Sep 2025</div><div class="meta">PDF · 4.5 MB · 42 slides</div></div>
+              <i class="fas fa-arrow-down chev"></i>
             </a>
             <a href="#" class="ir-doc-row">
               <div class="file-icon"><i class="fas fa-file-contract"></i></div>
-              <div class="flex-1 min-w-0">
-                <div class="font-heading font-semibold text-clay-ink uppercase tracking-wider text-sm">Corporate Governance Report FY25</div>
-                <div class="meta">PDF · 1.2 MB</div>
-              </div>
-              <i class="fas fa-download text-brand-darkGold"></i>
+              <div><div class="title">Corporate Governance Report FY25</div><div class="meta">PDF · 1.2 MB</div></div>
+              <i class="fas fa-arrow-down chev"></i>
             </a>
           </div>
         </div>
@@ -485,211 +989,134 @@
     </div>
   </section>
 
-  <!-- SHAREHOLDING PATTERN -->
-  <section class="py-16 md:py-24 container mx-auto px-6">
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div class="reveal-up">
-        <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">As on 30 Sep 2025</span>
-        <h2 class="text-3xl md:text-5xl font-bold text-clay-ink mb-6 uppercase tracking-tight font-heading">Shareholding <span class="text-brand-darkGold">Pattern</span></h2>
-        <p class="text-clay-muted font-body mb-8 leading-relaxed">
-          Balanced cap-table with committed promoter holding, strong institutional backing, and a healthy public float supporting price discovery and liquidity.
-        </p>
+  <!-- ═══ SHAREHOLDING PATTERN ═══ -->
+  <section class="ir-section">
+    <div class="md-container">
+      <div class="ir-holding-grid">
 
-        <div class="ir-holding-bar mb-6">
-          <div style="width: 54%; background: #EFBF04;">54%</div>
-          <div style="width: 22%; background: #B8960A;">22%</div>
-          <div style="width: 14%; background: #7a6807;">14%</div>
-          <div style="width: 10%; background: #3a3103;">10%</div>
-        </div>
+        <div class="md-reveal">
+          <span class="md-eyebrow md-eyebrow-accent">As on 30 Sep 2025</span>
+          <h2 style="font-family:var(--font-display); font-size:clamp(2rem,4.5vw,3rem); font-weight:600; line-height:1; margin:1rem 0 1rem;">Shareholding <span style="color:var(--accent); font-style:italic; font-weight:500;">pattern.</span></h2>
+          <p style="color:var(--fg-muted); line-height:1.65; margin:0 0 1rem;">Balanced cap-table with committed promoter holding, strong institutional backing, and a healthy public float supporting price discovery and liquidity.</p>
 
-        <ul class="space-y-3 text-sm font-body text-clay-muted">
-          <li class="flex justify-between border-b border-clay-border pb-2">
-            <span class="flex items-center gap-3"><span class="inline-block w-3 h-3" style="background: #EFBF04;"></span> Promoter &amp; Promoter Group</span>
-            <strong class="text-clay-ink">54.00%</strong>
-          </li>
-          <li class="flex justify-between border-b border-clay-border pb-2">
-            <span class="flex items-center gap-3"><span class="inline-block w-3 h-3" style="background: #B8960A;"></span> Foreign Institutional Investors (FIIs)</span>
-            <strong class="text-clay-ink">22.00%</strong>
-          </li>
-          <li class="flex justify-between border-b border-clay-border pb-2">
-            <span class="flex items-center gap-3"><span class="inline-block w-3 h-3" style="background: #7a6807;"></span> Domestic Institutional Investors (DIIs)</span>
-            <strong class="text-clay-ink">14.00%</strong>
-          </li>
-          <li class="flex justify-between pb-2">
-            <span class="flex items-center gap-3"><span class="inline-block w-3 h-3" style="background: #3a3103;"></span> Non-Institutional &amp; Retail Public</span>
-            <strong class="text-clay-ink">10.00%</strong>
-          </li>
-        </ul>
-      </div>
-
-      <div class="reveal-up" style="transition-delay: 150ms;">
-        <div class="glass-panel p-8 md:p-10">
-          <h3 class="font-heading uppercase tracking-[0.3em] text-brand-darkGold text-xs mb-6">Stock Information</h3>
-          <div class="space-y-5 text-sm font-body">
-            <div class="flex justify-between border-b border-clay-border pb-3">
-              <span class="text-clay-muted">Listing Exchanges</span>
-              <strong class="text-clay-ink">BSE · NSE</strong>
-            </div>
-            <div class="flex justify-between border-b border-clay-border pb-3">
-              <span class="text-clay-muted">BSE Code</span>
-              <strong class="text-clay-ink">543812</strong>
-            </div>
-            <div class="flex justify-between border-b border-clay-border pb-3">
-              <span class="text-clay-muted">NSE Symbol</span>
-              <strong class="text-clay-ink">STRONGBLT</strong>
-            </div>
-            <div class="flex justify-between border-b border-clay-border pb-3">
-              <span class="text-clay-muted">ISIN</span>
-              <strong class="text-clay-ink">INE0LH901010</strong>
-            </div>
-            <div class="flex justify-between border-b border-clay-border pb-3">
-              <span class="text-clay-muted">Face Value</span>
-              <strong class="text-clay-ink">₹10</strong>
-            </div>
-            <div class="flex justify-between border-b border-clay-border pb-3">
-              <span class="text-clay-muted">Market Cap</span>
-              <strong class="text-clay-ink">₹1,450 Cr</strong>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-clay-muted">Dividend Policy</span>
-              <strong class="text-clay-ink">15–20% of PAT</strong>
-            </div>
+          <div class="ir-holding-bar">
+            <div style="width:54%; background:#F59E0B;">54%</div>
+            <div style="width:22%; background:#B87808;">22%</div>
+            <div style="width:14%; background:#7A5006;">14%</div>
+            <div style="width:10%; background:#3F2903;">10%</div>
           </div>
 
-          <div class="mt-8 pt-6 border-t border-clay-border flex gap-3">
-            <a href="#" class="flex-1 text-center px-4 py-3 bg-brand-gold text-black font-bold tracking-widest uppercase text-xs font-heading hover:bg-white transition">
-              BSE Live <i class="fas fa-external-link-alt ml-1"></i>
-            </a>
-            <a href="#" class="flex-1 text-center px-4 py-3 border border-brand-gold/30 text-clay-ink font-bold tracking-widest uppercase text-xs font-heading hover:border-brand-gold hover:text-brand-darkGold transition">
-              NSE Live <i class="fas fa-external-link-alt ml-1"></i>
-            </a>
+          <ul class="ir-holding-list">
+            <li><span><span class="swatch" style="background:#F59E0B;"></span> Promoter &amp; Promoter Group</span><strong>54.00%</strong></li>
+            <li><span><span class="swatch" style="background:#B87808;"></span> Foreign Institutional Investors (FIIs)</span><strong>22.00%</strong></li>
+            <li><span><span class="swatch" style="background:#7A5006;"></span> Domestic Institutional Investors (DIIs)</span><strong>14.00%</strong></li>
+            <li><span><span class="swatch" style="background:#3F2903;"></span> Non-Institutional &amp; Retail Public</span><strong>10.00%</strong></li>
+          </ul>
+        </div>
+
+        <div class="md-reveal d2">
+          <div class="ir-stockcard">
+            <h3>Stock Information</h3>
+            <ul>
+              <li><span>Listing Exchanges</span><strong>BSE · NSE</strong></li>
+              <li><span>BSE Code</span><strong>543812</strong></li>
+              <li><span>NSE Symbol</span><strong>STRONGBLT</strong></li>
+              <li><span>ISIN</span><strong>INE0LH901010</strong></li>
+              <li><span>Face Value</span><strong>₹10</strong></li>
+              <li><span>Market Cap</span><strong>₹1,450 Cr</strong></li>
+              <li><span>Dividend Policy</span><strong>15–20% of PAT</strong></li>
+            </ul>
+            <div class="ctas">
+              <a href="#" class="md-btn md-btn-primary">BSE Live <i class="fas fa-external-link-alt"></i></a>
+              <a href="#" class="md-btn md-btn-secondary">NSE Live <i class="fas fa-external-link-alt"></i></a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CORPORATE GOVERNANCE -->
-  <section class="py-16 md:py-24 bg-clay-base/40 border-y border-clay-border">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-16 reveal-up">
-        <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">Board of Directors</span>
-        <h2 class="text-4xl md:text-5xl font-bold text-clay-ink uppercase tracking-tight font-heading">Corporate <span class="text-brand-darkGold">Governance</span></h2>
-        <div class="h-1 w-24 bg-brand-gold mx-auto mt-6"></div>
-        <p class="text-clay-muted max-w-2xl mx-auto mt-6 font-body">Independent oversight, transparent disclosure, committee-led decision-making — the foundation of how we compound capital.</p>
+  <!-- ═══ GOVERNANCE ═══ -->
+  <section class="ir-section ir-section--alt">
+    <div class="md-container">
+      <div class="ir-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Board of Directors</span>
+        <h2>Corporate <span class="accent">governance.</span></h2>
+        <p>Independent oversight, transparent disclosure, committee-led decision-making — the foundation of how we compound capital.</p>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-12">
-        <div class="ir-governance-card reveal-up">
-          <div class="role">Chairman &amp; MD</div>
-          <h4>Rajiv Sharma</h4>
-          <p class="text-clay-muted text-sm font-body">Founder. 28 years in real estate &amp; construction. Previously partner at Skyway Group. Civil Engineering, VJTI Mumbai.</p>
-        </div>
-        <div class="ir-governance-card reveal-up" style="transition-delay: 60ms;">
-          <div class="role">Executive Director &amp; CFO</div>
-          <h4>Priya Malhotra</h4>
-          <p class="text-clay-muted text-sm font-body">CA, ICAI rank-holder. 18 years in infra finance. Previously Deputy CFO at Godrej Properties.</p>
-        </div>
-        <div class="ir-governance-card reveal-up" style="transition-delay: 120ms;">
-          <div class="role">Executive Director — Operations</div>
-          <h4>Anand Desai</h4>
-          <p class="text-clay-muted text-sm font-body">IIT Bombay alumnus. Leads site operations across Mumbai MMR. Expert in high-rise RCC and precast.</p>
-        </div>
-        <div class="ir-governance-card reveal-up" style="transition-delay: 180ms;">
-          <div class="role">Independent Director</div>
-          <h4>Dr. Sanjeev Rao</h4>
-          <p class="text-clay-muted text-sm font-body">Former Deputy Governor, SEBI. Chair, Audit Committee. 35 years in financial regulation.</p>
-        </div>
-        <div class="ir-governance-card reveal-up" style="transition-delay: 240ms;">
-          <div class="role">Independent Director</div>
-          <h4>Meera Kapoor</h4>
-          <p class="text-clay-muted text-sm font-body">Chair, ESG Committee. Past CEO of a listed green-building certifier. LEED Fellow.</p>
-        </div>
-        <div class="ir-governance-card reveal-up" style="transition-delay: 300ms;">
-          <div class="role">Independent Director</div>
-          <h4>Arjun Mehta</h4>
-          <p class="text-clay-muted text-sm font-body">Senior partner, infrastructure advisory at a Big-Four firm. Chair, Nomination &amp; Remuneration Committee.</p>
-        </div>
+      <div class="ir-boards-grid">
+        <article class="ir-board-card md-reveal"><div class="role">Chairman &amp; MD</div><h4>Rajiv Sharma</h4><p>Founder. 28 years in real estate &amp; construction. Previously partner at Skyway Group. Civil Engineering, VJTI Mumbai.</p></article>
+        <article class="ir-board-card md-reveal d1"><div class="role">Executive Director &amp; CFO</div><h4>Priya Malhotra</h4><p>CA, ICAI rank-holder. 18 years in infra finance. Previously Deputy CFO at Godrej Properties.</p></article>
+        <article class="ir-board-card md-reveal d2"><div class="role">Executive Director — Operations</div><h4>Anand Desai</h4><p>IIT Bombay alumnus. Leads site operations across Mumbai MMR. Expert in high-rise RCC and precast.</p></article>
+        <article class="ir-board-card md-reveal d3"><div class="role">Independent Director</div><h4>Dr. Sanjeev Rao</h4><p>Former Deputy Governor, SEBI. Chair, Audit Committee. 35 years in financial regulation.</p></article>
+        <article class="ir-board-card md-reveal d4"><div class="role">Independent Director</div><h4>Meera Kapoor</h4><p>Chair, ESG Committee. Past CEO of a listed green-building certifier. LEED Fellow.</p></article>
+        <article class="ir-board-card md-reveal d5"><div class="role">Independent Director</div><h4>Arjun Mehta</h4><p>Senior partner, infrastructure advisory at a Big-Four firm. Chair, Nomination &amp; Remuneration Committee.</p></article>
       </div>
 
-      <div class="grid md:grid-cols-4 gap-4 md:gap-6">
-        <div class="glass-panel p-6 text-center reveal-up">
-          <i class="fas fa-gavel text-3xl text-brand-darkGold mb-3"></i>
-          <h5 class="font-heading uppercase tracking-wider text-clay-ink text-sm">Audit Committee</h5>
-          <p class="text-xs text-clay-faint font-body mt-2">3 Independent Directors</p>
+      <div class="ir-committees">
+        <div class="ir-committee md-reveal"><i class="fas fa-gavel"></i><h5>Audit Committee</h5><p>3 Independent Directors</p></div>
+        <div class="ir-committee md-reveal d1"><i class="fas fa-handshake"></i><h5>NRC</h5><p>Nomination &amp; Remuneration</p></div>
+        <div class="ir-committee md-reveal d2"><i class="fas fa-leaf"></i><h5>ESG &amp; CSR</h5><p>Sustainability Oversight</p></div>
+        <div class="ir-committee md-reveal d3"><i class="fas fa-users"></i><h5>Stakeholder</h5><p>Shareholder Grievances</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CALENDAR ═══ -->
+  <section class="ir-section">
+    <div class="md-container">
+      <div class="ir-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Upcoming Events</span>
+        <h2>Investor <span class="accent">calendar.</span></h2>
+      </div>
+
+      <div class="ir-events md-reveal">
+        <div class="ir-event">
+          <div class="date"><strong>28</strong><small>Jan 2026</small></div>
+          <div>
+            <h4>Q3 FY26 Results &amp; Earnings Call</h4>
+            <p>Board meeting followed by analyst conference call at 5:00 PM IST.</p>
+          </div>
+          <a href="#" class="action">Register <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="glass-panel p-6 text-center reveal-up" style="transition-delay: 75ms;">
-          <i class="fas fa-handshake text-3xl text-brand-darkGold mb-3"></i>
-          <h5 class="font-heading uppercase tracking-wider text-clay-ink text-sm">NRC</h5>
-          <p class="text-xs text-clay-faint font-body mt-2">Nomination &amp; Remuneration</p>
+        <div class="ir-event">
+          <div class="date"><strong>14</strong><small>Feb 2026</small></div>
+          <div>
+            <h4>Morgan Stanley India Summit</h4>
+            <p>Investor 1-on-1s and industry panel, Mumbai. Representation by MD &amp; CFO.</p>
+          </div>
+          <a href="#" class="action">Details <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="glass-panel p-6 text-center reveal-up" style="transition-delay: 150ms;">
-          <i class="fas fa-leaf text-3xl text-brand-darkGold mb-3"></i>
-          <h5 class="font-heading uppercase tracking-wider text-clay-ink text-sm">ESG &amp; CSR</h5>
-          <p class="text-xs text-clay-faint font-body mt-2">Sustainability Oversight</p>
+        <div class="ir-event">
+          <div class="date"><strong>10</strong><small>Mar 2026</small></div>
+          <div>
+            <h4>Site Visit — Monticello Tower, Andheri</h4>
+            <p>Analyst group walk-through of our flagship delivery. Registration required.</p>
+          </div>
+          <a href="#" class="action">Register <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="glass-panel p-6 text-center reveal-up" style="transition-delay: 225ms;">
-          <i class="fas fa-users text-3xl text-brand-darkGold mb-3"></i>
-          <h5 class="font-heading uppercase tracking-wider text-clay-ink text-sm">Stakeholder</h5>
-          <p class="text-xs text-clay-faint font-body mt-2">Shareholder Grievances</p>
+        <div class="ir-event">
+          <div class="date"><strong>15</strong><small>May 2026</small></div>
+          <div>
+            <h4>Q4 FY26 / Full-Year Results</h4>
+            <p>Annual board meeting, results publication, and dividend announcement.</p>
+          </div>
+          <a href="#" class="action">Save Date <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- INVESTOR CALENDAR -->
-  <section class="py-16 md:py-24 container mx-auto px-6">
-    <div class="text-center mb-16 reveal-up">
-      <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">Upcoming Events</span>
-      <h2 class="text-4xl md:text-5xl font-bold text-clay-ink uppercase tracking-tight font-heading">Investor <span class="text-brand-darkGold">Calendar</span></h2>
-      <div class="h-1 w-24 bg-brand-gold mx-auto mt-6"></div>
-    </div>
-
-    <div class="max-w-3xl mx-auto reveal-up">
-      <div class="ir-event">
-        <div class="date"><strong>28</strong><small>Jan 2026</small></div>
-        <div>
-          <h4 class="font-heading uppercase tracking-wider text-clay-ink">Q3 FY26 Results &amp; Earnings Call</h4>
-          <p class="text-sm text-clay-muted font-body mt-1">Board meeting followed by analyst conference call at 5:00 PM IST.</p>
-        </div>
-        <a href="#" class="text-brand-darkGold text-xs uppercase tracking-widest font-heading hover:text-white">Register <i class="fas fa-arrow-right ml-1"></i></a>
-      </div>
-      <div class="ir-event">
-        <div class="date"><strong>14</strong><small>Feb 2026</small></div>
-        <div>
-          <h4 class="font-heading uppercase tracking-wider text-clay-ink">Morgan Stanley India Summit</h4>
-          <p class="text-sm text-clay-muted font-body mt-1">Investor 1-on-1s and industry panel, Mumbai. Representation by MD &amp; CFO.</p>
-        </div>
-        <a href="#" class="text-brand-darkGold text-xs uppercase tracking-widest font-heading hover:text-white">Details <i class="fas fa-arrow-right ml-1"></i></a>
-      </div>
-      <div class="ir-event">
-        <div class="date"><strong>10</strong><small>Mar 2026</small></div>
-        <div>
-          <h4 class="font-heading uppercase tracking-wider text-clay-ink">Site Visit — Monticello Tower, Andheri</h4>
-          <p class="text-sm text-clay-muted font-body mt-1">Analyst group walk-through of our flagship delivery. Registration required.</p>
-        </div>
-        <a href="#" class="text-brand-darkGold text-xs uppercase tracking-widest font-heading hover:text-white">Register <i class="fas fa-arrow-right ml-1"></i></a>
-      </div>
-      <div class="ir-event">
-        <div class="date"><strong>15</strong><small>May 2026</small></div>
-        <div>
-          <h4 class="font-heading uppercase tracking-wider text-clay-ink">Q4 FY26 / Full-Year Results</h4>
-          <p class="text-sm text-clay-muted font-body mt-1">Annual board meeting, results publication, and dividend announcement.</p>
-        </div>
-        <a href="#" class="text-brand-darkGold text-xs uppercase tracking-widest font-heading hover:text-white">Save Date <i class="fas fa-arrow-right ml-1"></i></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- INVESTOR FAQs -->
-  <section class="py-16 md:py-24 bg-clay-base/40 border-y border-clay-border">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-16 reveal-up">
-        <h2 class="text-4xl md:text-5xl font-bold text-clay-ink uppercase tracking-tight font-heading">Investor <span class="text-brand-darkGold">FAQs</span></h2>
-        <div class="h-1 w-24 bg-brand-gold mx-auto mt-6"></div>
+  <!-- ═══ FAQs ═══ -->
+  <section class="ir-section ir-section--alt">
+    <div class="md-container">
+      <div class="ir-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Help</span>
+        <h2>Investor <span class="accent">FAQs.</span></h2>
       </div>
 
-      <div class="max-w-3xl mx-auto space-y-3 reveal-up">
+      <div class="ir-faqs md-reveal">
         <details class="ir-accordion">
           <summary>Where are the shares listed and what are the trading symbols?</summary>
           <div class="body">Strong Built shares are listed on both the Bombay Stock Exchange (BSE code: <strong>543812</strong>) and the National Stock Exchange (NSE symbol: <strong>STRONGBLT</strong>). ISIN number is <strong>INE0LH901010</strong>. Shares can be traded through any SEBI-registered broker during market hours.</div>
@@ -716,160 +1143,145 @@
         </details>
         <details class="ir-accordion">
           <summary>Where can I find ESG and sustainability disclosures?</summary>
-          <div class="body">Our Business Responsibility and Sustainability Report (BRSR) is included in the Annual Report and follows SEBI's mandated framework. Additional ESG disclosures, including emissions intensity, safety KPIs, and CSR spend, are summarised in our <a href="csr.html" class="text-brand-darkGold underline">CSR section</a> and supplemented by the ESG Committee's half-yearly update.</div>
+          <div class="body">Our Business Responsibility and Sustainability Report (BRSR) is included in the Annual Report and follows SEBI's mandated framework. Additional ESG disclosures, including emissions intensity, safety KPIs, and CSR spend, are summarised in our <a href="csr.html">CSR section</a> and supplemented by the ESG Committee's half-yearly update.</div>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- INVESTOR CONTACT -->
-  <section class="py-16 md:py-24 container mx-auto px-6">
-    <div class="grid md:grid-cols-2 gap-12">
-      <div class="reveal-up">
-        <span class="block text-brand-darkGold text-xs font-bold tracking-[0.5em] uppercase mb-4">Investor Relations</span>
-        <h2 class="text-4xl md:text-5xl font-bold text-clay-ink uppercase tracking-tight font-heading mb-6">Get in <span class="text-brand-darkGold">Touch</span></h2>
-        <p class="text-clay-muted font-body leading-relaxed mb-10">
-          For analyst coverage, one-on-one meetings, site-visit requests, or shareholder queries — please reach out through the channels below. We typically respond within 2 business days.
-        </p>
+  <!-- ═══ IR CONTACT ═══ -->
+  <section class="ir-section">
+    <div class="md-container">
+      <div class="ir-contact-grid">
 
-        <div class="space-y-6 text-clay-muted font-body">
-          <div>
-            <div class="text-[0.65rem] tracking-[0.3em] uppercase text-brand-darkGold mb-1">Head of Investor Relations</div>
-            <div class="text-clay-ink text-lg font-heading">Kavita Iyer</div>
-            <div class="text-sm">investors@strongbuilt.in &nbsp;·&nbsp; +91 22 6123 2550</div>
-          </div>
-          <div>
-            <div class="text-[0.65rem] tracking-[0.3em] uppercase text-brand-darkGold mb-1">Company Secretary &amp; Compliance</div>
-            <div class="text-clay-ink text-lg font-heading">Rohit Agarwal</div>
-            <div class="text-sm">cs@strongbuilt.in &nbsp;·&nbsp; +91 22 6123 2575</div>
-          </div>
-          <div>
-            <div class="text-[0.65rem] tracking-[0.3em] uppercase text-brand-darkGold mb-1">Registrar &amp; Transfer Agent</div>
-            <div class="text-clay-ink text-lg font-heading">Link Intime India Pvt Ltd</div>
-            <div class="text-sm">rnt.helpdesk@linkintime.co.in &nbsp;·&nbsp; +91 22 4918 6270</div>
-            <div class="text-xs text-clay-faint mt-1">C-101, 247 Park, LBS Marg, Vikhroli (West), Mumbai 400083</div>
+        <div class="ir-contact-col md-reveal">
+          <span class="md-eyebrow md-eyebrow-accent">Investor Relations</span>
+          <h2>Get in <span class="accent">touch.</span></h2>
+          <p>For analyst coverage, one-on-one meetings, site-visit requests, or shareholder queries — reach out through the channels below. We typically respond within 2 business days.</p>
+
+          <div class="ir-contact-list">
+            <div>
+              <span class="eb">Head of Investor Relations</span>
+              <div class="name">Kavita Iyer</div>
+              <div class="meta"><a href="mailto:investors@strongbuilt.in">investors@strongbuilt.in</a> · <a href="tel:+912261232550">+91 22 6123 2550</a></div>
+            </div>
+            <div>
+              <span class="eb">Company Secretary &amp; Compliance</span>
+              <div class="name">Rohit Agarwal</div>
+              <div class="meta"><a href="mailto:cs@strongbuilt.in">cs@strongbuilt.in</a> · <a href="tel:+912261232575">+91 22 6123 2575</a></div>
+            </div>
+            <div>
+              <span class="eb">Registrar &amp; Transfer Agent</span>
+              <div class="name">Link Intime India Pvt Ltd</div>
+              <div class="meta"><a href="mailto:rnt.helpdesk@linkintime.co.in">rnt.helpdesk@linkintime.co.in</a> · <a href="tel:+912249186270">+91 22 4918 6270</a></div>
+              <div class="sub">C-101, 247 Park, LBS Marg, Vikhroli (West), Mumbai 400083</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="reveal-up" style="transition-delay: 150ms;">
-        <form class="glass-panel p-8 md:p-10 space-y-5">
-          <h3 class="font-heading uppercase tracking-[0.3em] text-brand-darkGold text-xs mb-4">Shareholder Enquiry</h3>
-          <div>
-            <label class="text-xs tracking-[0.2em] uppercase text-clay-muted font-heading">Name</label>
-            <input type="text" class="mt-2 w-full bg-transparent border-b border-clay-border focus:border-brand-gold outline-none py-3 text-clay-ink font-body" required>
-          </div>
-          <div>
-            <label class="text-xs tracking-[0.2em] uppercase text-clay-muted font-heading">Email</label>
-            <input type="email" class="mt-2 w-full bg-transparent border-b border-clay-border focus:border-brand-gold outline-none py-3 text-clay-ink font-body" required>
-          </div>
-          <div>
-            <label class="text-xs tracking-[0.2em] uppercase text-clay-muted font-heading">Folio / DP ID (optional)</label>
-            <input type="text" class="mt-2 w-full bg-transparent border-b border-clay-border focus:border-brand-gold outline-none py-3 text-clay-ink font-body">
-          </div>
-          <div>
-            <label class="text-xs tracking-[0.2em] uppercase text-clay-muted font-heading">Enquiry Type</label>
-            <select class="mt-2 w-full bg-transparent border-b border-clay-border focus:border-brand-gold outline-none py-3 text-clay-ink font-body">
-              <option>Dividend / Payment Query</option>
-              <option>Share Transfer / Demat</option>
-              <option>Analyst / Institutional Meeting</option>
-              <option>Annual Report Request</option>
-              <option>General</option>
-            </select>
-          </div>
-          <div>
-            <label class="text-xs tracking-[0.2em] uppercase text-clay-muted font-heading">Message</label>
-            <textarea rows="4" class="mt-2 w-full bg-transparent border-b border-clay-border focus:border-brand-gold outline-none py-3 text-clay-ink font-body" required></textarea>
-          </div>
-          <button type="submit" class="w-full px-8 py-4 bg-brand-gold text-black font-bold tracking-widest uppercase text-xs font-heading hover:bg-white transition">
-            Submit Enquiry
-          </button>
+        <div class="ir-form md-reveal d2">
+          <h3>Shareholder Enquiry</h3>
+          <form>
+            <div>
+              <label for="irName">Name *</label>
+              <input type="text" id="irName" name="name" required placeholder="Your name">
+            </div>
+            <div>
+              <label for="irEmail">Email *</label>
+              <input type="email" id="irEmail" name="email" required placeholder="you@example.com">
+            </div>
+            <div>
+              <label for="irFolio">Folio / DP ID <span style="color:var(--fg-subtle);font-weight:500;">(optional)</span></label>
+              <input type="text" id="irFolio" name="folio" placeholder="IN...">
+            </div>
+            <div>
+              <label for="irType">Enquiry Type</label>
+              <select id="irType" name="type">
+                <option>Dividend / Payment Query</option>
+                <option>Share Transfer / Demat</option>
+                <option>Analyst / Institutional Meeting</option>
+                <option>Annual Report Request</option>
+                <option>General</option>
+              </select>
+            </div>
+            <div>
+              <label for="irMsg">Message *</label>
+              <textarea id="irMsg" name="message" rows="4" required placeholder="How can we help?"></textarea>
+            </div>
+            <button type="submit" class="md-btn md-btn-primary md-btn-lg">Submit Enquiry <i class="fas fa-arrow-right"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SUBSCRIBE CTA ═══ -->
+  <section class="ir-cta">
+    <div class="md-container">
+      <div class="md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">IR Updates</span>
+        <h2>Subscribe to <span class="accent">IR updates.</span></h2>
+        <p class="sub">Quarterly results, board announcements, and investor events — delivered directly to your inbox.</p>
+        <form>
+          <input type="email" placeholder="your.email@fund.com" required>
+          <button type="submit" class="md-btn md-btn-primary">Subscribe <i class="fas fa-arrow-right"></i></button>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- CTA BAR -->
-  <section class="sb-cta">
-    <div class="sb-cta-noise"></div>
-    <div class="sb-cta-orb sb-cta-orb-1"></div>
-    <div class="sb-cta-orb sb-cta-orb-2"></div>
-    <div class="sb-cta-orb sb-cta-orb-3"></div>
-    <div class="container mx-auto px-6 relative z-10 text-center">
-      <h2 class="text-3xl md:text-5xl font-bold text-clay-ink mb-6 uppercase tracking-tight font-heading">Subscribe to IR Updates</h2>
-      <p class="text-clay-muted text-lg mb-8 max-w-xl mx-auto font-body">Quarterly results, board announcements, and investor events — delivered directly to your inbox.</p>
-      <form class="flex flex-col sm:flex-row max-w-xl mx-auto gap-3">
-        <input type="email" placeholder="your.email@fund.com" class="flex-1 px-5 py-4 bg-clay-surface/5 border border-clay-border text-clay-ink font-body focus:border-brand-gold outline-none" required>
-        <button type="submit" class="sb-cta-btn">Subscribe</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="bg-clay-mist text-clay-muted pt-16 md:pt-20 pb-10 border-t border-clay-border relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(rgba(239, 191, 4, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
-        <div class="col-span-1">
-          <div class="text-2xl font-bold text-clay-ink mb-6 font-heading tracking-widest flex items-center gap-2">
-            <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto">
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="md-footer">
+    <div class="md-container">
+      <div class="md-footer-top">
+        <div class="md-footer-brand">
+          <a href="index.html" aria-label="Strong Built — Home">
+            <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="md-footer-logo">
+          </a>
+          <p class="md-footer-tagline">Building <em>legacies</em>, not just structures. Since 2014.</p>
+        </div>
+        <div class="md-footer-contact-card">
+          <div class="md-fc-item">
+            <span class="md-fc-k"><i class="fas fa-location-dot"></i> Address</span>
+            <p class="md-fc-v">901-B Wing, HDIL Kaledonia,<br>Sahar Road, Andheri-East,<br>Mumbai — 400069</p>
           </div>
-          <p class="text-clay-faint text-sm mb-6 font-light leading-relaxed">Forging the future with concrete, steel, and integrity.</p>
-          <div class="flex gap-4">
-            <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter" class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i class="fab fa-twitter"></i></a>
+          <div class="md-fc-item">
+            <span class="md-fc-k"><i class="fas fa-phone"></i> Phone</span>
+            <a class="md-fc-v" href="tel:+919619875081">+91 96198 75081</a>
+            <a class="md-fc-v" href="tel:+912261232500">022 6123 2500</a>
           </div>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Navigation</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><a href="story.html" class="hover:text-clay-ink transition">About</a></li>
-            <li><a href="services.html" class="hover:text-clay-ink transition">Services</a></li>
-            <li><a href="projects.html" class="hover:text-clay-ink transition">Projects</a></li>
-            <li><a href="clients.html" class="hover:text-clay-ink transition">Clients</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Company</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><a href="investors.html" class="hover:text-clay-ink transition">Investors</a></li>
-            <li><a href="csr.html" class="hover:text-clay-ink transition">CSR</a></li>
-            <li><a href="careers.html" class="hover:text-clay-ink transition">Careers</a></li>
-            <li><a href="recognition.html" class="hover:text-clay-ink transition">Awards</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Contact</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><i class="fas fa-map-marker-alt text-brand-darkGold mr-2"></i> 901-B Wing, 9th Floor, HDIL Kaledonia, Sahar Road, Opp D'Mart, Sambhaji Nagar, Andheri-East, Mumbai - 400069.</li>
-            <li><i class="fas fa-phone text-brand-darkGold mr-2"></i> +91 9619875081 / 022-6123-2500</li>
-            <li><i class="fas fa-envelope text-brand-darkGold mr-2"></i> strongbuilt@skywaygroup.co.in</li>
-          </ul>
+          <div class="md-fc-item">
+            <span class="md-fc-k"><i class="fas fa-envelope"></i> Email</span>
+            <a class="md-fc-v" href="mailto:sales@strongbuilt.in">sales@strongbuilt.in</a>
+          </div>
         </div>
       </div>
-      <div class="border-t border-clay-border pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-clay-muted font-light uppercase tracking-wider">
-        <p class="font-body">&copy; 2026 Strong Built. All rights reserved.</p>
-        <div class="flex gap-6 mt-4 md:mt-0 font-heading">
-          <a href="privacy.html" class="hover:text-clay-ink">Privacy</a>
-          <a href="terms.html" class="hover:text-clay-ink">Terms</a>
+
+      <div class="md-footer-strip">
+        <div class="md-footer-strip-left">
+          <div class="md-footer-socials">
+            <a href="https://www.instagram.com/strongbuilt" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/strongbuilt" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://x.com/strongbuilt" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+          </div>
+          <div class="md-footer-strip-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
         </div>
+        <div class="md-footer-strip-center">© 2026 Strong Built — A Skyway Group Company. All Rights Reserved.</div>
+        <div class="md-footer-strip-right">Designed by <b>Abdul Ahad</b></div>
       </div>
     </div>
   </footer>
 
-  <script>
-    function handleScrollAnimations() {
-      const reveals = document.querySelectorAll(".reveal-up");
-      const windowHeight = window.innerHeight;
-      reveals.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top;
-        if (elementTop < windowHeight - 100) el.classList.add("reveal-active");
-      });
-    }
-    window.addEventListener("scroll", handleScrollAnimations);
-    handleScrollAnimations();
-  </script>
-  <script src="script.js"></script>
+  <!-- ═══ FAB ═══ -->
+  <div class="md-fab" aria-hidden="true">
+    <a href="https://wa.me/919619875081" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="tel:+919619875081" aria-label="Call Strong Built"><i class="fas fa-phone"></i></a>
+  </div>
+
+  <script src="theme.js"></script>
 </body>
+
 </html>

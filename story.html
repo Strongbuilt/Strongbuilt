@@ -4,524 +4,357 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Story | Strong Built - A Legacy of Excellence</title>
-  <meta name="description" content="Learn about Strong Built's journey from humble beginnings to becoming a leading construction company in Mumbai.">
-  <meta name="keywords" content="Strong Built, construction Mumbai, construction company, building contractors, civil construction, residential construction, commercial construction">
-  <meta name="author" content="Strong Built">
-  <meta name="robots" content="index, follow">
+  <title>Our Story | Strong Built</title>
+  <meta name="description" content="From a single project in Bandra to 33+ landmarks across Mumbai — a decade of building trust, one floor at a time.">
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/Favicon/favicon-96x96.png" sizes="96x96">
   <link rel="icon" type="image/svg+xml" href="assets/Favicon/favicon.svg">
   <link rel="shortcut icon" href="assets/Favicon/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Favicon/apple-touch-icon.png">
-  <meta name="apple-mobile-web-app-title" content="Strong Built">
-  <link rel="manifest" href="assets/Favicon/site.webmanifest">
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Strong Built">
-  <meta property="og:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
-  <meta property="og:locale" content="en_IN">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
-  <!-- Global Styles -->
-  <link rel="stylesheet" href="styles.css">
-
-  <link rel="stylesheet" href="dist/app.css">
-  <script src="timeline-data.js"></script>
+  <link rel="stylesheet" href="theme.css">
 
   <style>
-    /* Timeline graphic card */
-    .tcard {
-      position: relative;
-      padding: 2rem 1.75rem 1.75rem;
-      background: linear-gradient(155deg, rgba(42, 38, 39, 0.85) 0%, rgba(26, 23, 24, 0.85) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 4px;
+    .st-hero { position: relative; padding: clamp(8rem,14vw,12rem) 0 clamp(3rem,5vw,5rem); text-align: center; overflow: hidden; }
+    .st-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at top, rgba(245,158,11,0.08) 0%, transparent 55%); pointer-events: none; }
+    .st-hero h1 { font-family: var(--font-display); font-size: clamp(3rem,8vw,7rem); font-weight: 600; line-height: 0.95; margin: 1.5rem 0 1.75rem; }
+    .st-hero h1 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .st-hero .lede { max-width: 36rem; margin: 0 auto; color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; }
+    .st-hero-rule { width: 3.5rem; height: 1px; background: var(--accent); margin: 2.25rem auto 0; }
+
+    .st-section { padding-block: clamp(4.5rem,8vw,7rem); position: relative; }
+    .st-section--alt { background: rgba(18,18,26,0.4); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .st-head { text-align: center; max-width: 42rem; margin: 0 auto clamp(2.5rem,4vw,3.5rem); }
+    .st-head h2 { font-family: var(--font-display); font-size: clamp(2.25rem,5vw,3.75rem); font-weight: 600; line-height: 1; margin: 1rem 0 0; }
+    .st-head h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .st-head p { color: var(--fg-muted); margin: 1rem auto 0; max-width: 38rem; line-height: 1.65; }
+
+    /* Manifesto split */
+    .st-manifesto { display: grid; grid-template-columns: 1fr; gap: clamp(2rem,5vw,4rem); align-items: center; }
+    @media (min-width: 960px) { .st-manifesto { grid-template-columns: 1fr 1fr; gap: 5rem; } }
+    .st-manifesto h2 { font-family: var(--font-display); font-size: clamp(2.25rem,4.5vw,3.5rem); font-weight: 600; line-height: 1; margin: 0 0 1.75rem; }
+    .st-manifesto h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .st-manifesto .body { display: flex; flex-direction: column; gap: 1.25rem; color: var(--fg-muted); line-height: 1.75; font-size: 1rem; }
+    .st-manifesto .body strong { color: var(--fg); font-weight: 500; }
+    .st-sig { margin-top: 1.5rem; opacity: 0.55; }
+    .st-sig img { height: 3rem; width: auto; filter: drop-shadow(0 0 14px rgba(245,158,11,0.18)); }
+
+    .st-visual { position: relative; }
+    .st-visual .img-box {
+      aspect-ratio: 4/4;
+      max-width: 420px;
+      margin-inline: auto;
+      border-radius: var(--r-lg);
       overflow: hidden;
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.5s ease;
+      background: var(--muted);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-xl);
     }
-    .tcard::before {
+    .st-visual .img-box img { width: 100%; height: 100%; object-fit: cover; }
+    .st-visual .stat-chip {
+      position: absolute;
+      bottom: -1.25rem; left: -1.25rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--accent);
+      border-radius: var(--r-md);
+      padding: 1.15rem 1.4rem;
+      box-shadow: var(--shadow-lg), var(--glow-sm);
+    }
+    .st-visual .stat-chip strong {
+      font-family: var(--font-display);
+      font-size: clamp(2rem,4vw,2.75rem);
+      font-weight: 500;
+      color: var(--accent);
+      line-height: 1;
+      display: block;
+    }
+    .st-visual .stat-chip small {
+      font-family: var(--font-label);
+      font-size: 0.66rem;
+      font-weight: 600;
+      color: var(--fg-muted);
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+      display: block;
+    }
+
+    /* ── Sticky Scroll Timeline ── */
+    .ss-grid { display: block; max-width: 72rem; margin: 0 auto; }
+    @media (min-width: 960px) {
+      .ss-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: clamp(3rem, 6vw, 6rem);
+        align-items: start;
+      }
+    }
+    .ss-sticky {
+      position: sticky;
+      top: calc(var(--header-h-lg) + 2rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-block: clamp(2rem, 5vw, 4rem);
+      min-height: 40vh;
+    }
+    @media (max-width: 959px) { .ss-sticky { display: none; } }
+    .ss-bigtag {
+      font-family: var(--font-label);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      transition: opacity 300ms ease, transform 300ms ease;
+    }
+    .ss-bigtag.is-swapping { opacity: 0; transform: translateY(-8px); }
+    .ss-bigyear {
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 14vw, 12rem);
+      font-weight: 500;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      color: var(--fg);
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 60px rgba(245,158,11,0.12);
+      transition: opacity 400ms ease, transform 400ms ease;
+    }
+    .ss-bigyear.is-swapping { opacity: 0; transform: translateY(-12px); }
+    .ss-bigicon {
+      width: 4.5rem; height: 4.5rem;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.3);
+      color: var(--accent);
+      font-size: 1.5rem;
+      box-shadow: var(--glow-sm);
+      transition: opacity 300ms ease, transform 300ms ease;
+    }
+    .ss-bigicon.is-swapping { opacity: 0; transform: scale(0.9); }
+
+    .ss-stream { display: flex; flex-direction: column; gap: clamp(1rem, 2.5vw, 2rem); }
+    .ss-card {
+      position: relative;
+      padding: clamp(1.5rem, 3vw, 2.25rem);
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      transition: all var(--t-slow) var(--ease-out);
+    }
+    .ss-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0;
-      width: 40%;
-      height: 2px;
-      background: linear-gradient(90deg, #EFBF04, transparent);
-      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .tcard::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: radial-gradient(circle at top right, rgba(239, 191, 4, 0.06), transparent 50%);
+      width: 3px; height: 100%;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      border-radius: var(--r-lg) 0 0 var(--r-lg);
       opacity: 0;
-      transition: opacity 0.5s ease;
+      transition: opacity 400ms var(--ease-out);
     }
-    .tcard:hover {
-      transform: translateY(-6px);
-      border-color: rgba(239, 191, 4, 0.35);
-      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(239, 191, 4, 0.15);
+    .ss-card.is-active,
+    .ss-card:hover {
+      border-color: rgba(245,158,11,0.3);
+      background: rgba(26,26,36,0.82);
+      box-shadow: var(--glow-sm);
     }
-    .tcard:hover::before { width: 100%; }
-    .tcard:hover::after { opacity: 1; }
-
-    .tcard-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(239, 191, 4, 0.22), rgba(239, 191, 4, 0.08) 70%);
-      border: 1px solid rgba(239, 191, 4, 0.25);
-      color: #EFBF04;
-      font-size: 1.5rem;
-      margin-bottom: 1.25rem;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 4px 20px -8px rgba(239, 191, 4, 0.4);
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
-    }
-    .tcard:hover .tcard-icon {
-      transform: scale(1.08) rotate(-4deg);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 6px 28px -6px rgba(239, 191, 4, 0.55);
-    }
-
-    .tcard-tag {
-      display: inline-block;
-      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: #EFBF04;
-      padding: 4px 10px;
-      border: 1px solid rgba(239, 191, 4, 0.3);
-      border-radius: 999px;
-      margin-bottom: 0.75rem;
-    }
-
-    .tcard-title {
-      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #EEEEEE;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      line-height: 1.15;
-      margin-bottom: 0.5rem;
-    }
-    .tcard-meta {
-      font-family: 'Inter', Helvetica, Arial, sans-serif;
-      font-size: 0.85rem;
-      font-weight: 300;
-      color: #B3B3B3;
-      line-height: 1.5;
-    }
-
-    .tcard-num {
-      position: absolute;
-      top: 1rem;
-      right: 1.25rem;
-      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.35em;
-      color: rgba(239, 191, 4, 0.35);
-    }
-
-    /* Finale variant — gold-tinted */
-    .tcard-finale {
-      background: linear-gradient(155deg, rgba(239, 191, 4, 0.08) 0%, rgba(42, 38, 39, 0.85) 70%);
-      border-color: rgba(239, 191, 4, 0.3);
-      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.5), 0 0 40px -8px rgba(239, 191, 4, 0.12);
-    }
-    .tcard-finale::before { width: 100%; height: 2px; }
-    .tcard-finale .tcard-icon {
-      width: 72px;
-      height: 72px;
-      font-size: 1.75rem;
-      background: radial-gradient(circle at 30% 30%, rgba(239, 191, 4, 0.35), rgba(239, 191, 4, 0.08) 70%);
-      border-color: rgba(239, 191, 4, 0.5);
-    }
-    .tcard-finale .tcard-stat-num {
-      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #EFBF04;
-      line-height: 1;
-    }
-    .tcard-finale .tcard-stat-label {
-      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: #B3B3B3;
-      margin-top: 4px;
-    }
-
-    @media (max-width: 767px) {
-      .tcard { padding: 1.5rem 1.25rem; }
-      .tcard-title { font-size: 1.15rem; }
-      .tcard-icon { width: 52px; height: 52px; font-size: 1.2rem; margin-bottom: 1rem; }
-    }
-
-    /* === TIMELINE — single responsive layout === */
-    /* Mobile/tablet: cards stack full-width (year shown inline in each card title) */
-    /* Desktop ≥1024px: 5fr / 7fr grid with sticky year panel on the left */
-    .ss-grid {
-      display: block;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-      position: relative;
-    }
-    @media (min-width: 1024px) {
-      .ss-grid {
-        display: grid;
-        grid-template-columns: 5fr 7fr;
-        gap: 5rem;
-      }
-      /* Explicit column placement so the grid reserves slots even when .ss-sticky goes position:fixed */
-      .ss-sticky { grid-column: 1; grid-row: 1; }
-      .ss-stream { grid-column: 2; grid-row: 1; }
-    }
-    /* Sticky year panel — hidden on mobile/tablet, flex on desktop. JS pins to viewport center when grid encloses center. */
-    .ss-sticky {
-      display: none;
-      position: relative;
-      align-self: start;
-      flex-direction: column;
-      padding-top: 2rem;
-    }
-    @media (min-width: 1024px) {
-      .ss-sticky { display: flex; }
-    }
-    .ss-sticky.is-pinned {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      padding-top: 0;
-      z-index: 5;
-    }
-    .ss-sticky.is-end {
-      position: absolute;
-      bottom: 2rem;
-      top: auto;
-      transform: none;
-      padding-top: 0;
-    }
-    /* ── Sticky year — smooth fade+slide on swap ── */
-    .ss-bigyear {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: clamp(7rem, 12vw, 12rem);
-      line-height: 0.85;
-      letter-spacing: -0.04em;
-      background: linear-gradient(180deg, #EFBF04 0%, #EFBF04 50%, rgba(239, 191, 4, 0.15) 100%);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      will-change: opacity, transform;
-      transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .ss-bigyear.is-swapping { opacity: 0; transform: translateY(12px); }
-
-    .ss-bigtag {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: #EFBF04;
-      margin-bottom: 1.25rem;
-      transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .ss-bigtag.is-swapping { opacity: 0; }
-
-    .ss-bigicon {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(239, 191, 4, 0.25), rgba(239, 191, 4, 0.06) 70%);
-      border: 1px solid rgba(239, 191, 4, 0.35);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #EFBF04;
-      font-size: 1.6rem;
-      margin-top: 1.5rem;
-      box-shadow: 0 8px 30px -8px rgba(239, 191, 4, 0.4);
-      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
-    }
-    .ss-bigicon.is-swapping { opacity: 0; transform: scale(0.85); }
-
-    /* ── Stream & cards ── */
-    .ss-stream {
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-      padding-bottom: 3rem;
-    }
-    @media (min-width: 768px) { .ss-stream { gap: 4rem; } }
-    @media (min-width: 1024px) { .ss-stream { gap: 6rem; padding-bottom: 4rem; } }
-
-    .ss-card {
-      padding: 2rem 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      opacity: 0.45;
-      will-change: opacity;
-      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    @media (min-width: 768px) { .ss-card { padding: 2.5rem 0; } }
-    @media (min-width: 1024px) { .ss-card { padding: 3rem 0; } }
-    .ss-card:first-child { border-top: none; padding-top: 0; }
-    .ss-card.is-active { opacity: 1; }
-
-    /* Mobile/tablet only — big gold year at top of each card (desktop has the sticky panel instead) */
-    .ss-card::before {
-      content: attr(data-year);
-      display: block;
-      font-family: 'Oswald', 'Agency FB', 'Barlow Condensed', Impact, sans-serif;
-      font-weight: 700;
-      font-size: clamp(3.75rem, 14vw, 6rem);
-      line-height: 0.9;
-      letter-spacing: -0.03em;
-      background: linear-gradient(180deg, #EFBF04 0%, #EFBF04 50%, rgba(239, 191, 4, 0.15) 100%);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1.25rem;
-    }
-    @media (min-width: 1024px) {
-      .ss-card::before { display: none; }
-    }
-
+    .ss-card.is-active::before { opacity: 1; }
     .ss-card-kicker {
-      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.4em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: #EFBF04;
-      margin-bottom: 0.75rem;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
     }
-    @media (min-width: 768px) { .ss-card-kicker { font-size: 0.7rem; margin-bottom: 1rem; } }
-
     .ss-card-title {
-      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.35rem, 2.8vw, 2.25rem);
-      line-height: 1.1;
+      font-family: var(--font-display);
+      font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+      font-weight: 500;
+      letter-spacing: 0.02em;
       text-transform: uppercase;
-      color: #EEEEEE;
-      letter-spacing: -0.01em;
-      margin-bottom: 1rem;
+      color: var(--fg);
+      margin: 0 0 0.85rem;
+      line-height: 1.1;
     }
-    @media (min-width: 1024px) { .ss-card-title { margin-bottom: 1.25rem; } }
-
     .ss-card-body {
-      font-family: 'Inter', Helvetica, Arial, sans-serif;
-      font-weight: 300;
+      color: var(--fg-muted);
+      line-height: 1.7;
+      margin: 0 0 0.85rem;
       font-size: 0.95rem;
-      line-height: 1.65;
-      color: #B3B3B3;
-      max-width: 56ch;
-      margin-bottom: 1.25rem;
     }
-    @media (min-width: 1024px) { .ss-card-body { font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem; } }
-
     .ss-card-meta {
-      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(170, 170, 170, 0.6);
+      color: var(--fg-subtle);
       padding-top: 0.85rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-top: 1px solid var(--border);
     }
-    @media (min-width: 768px) { .ss-card-meta { font-size: 0.7rem; letter-spacing: 0.25em; padding-top: 1rem; } }
 
-    /* ── Reduced motion ── */
-    @media (prefers-reduced-motion: reduce) {
-      .ss-bigyear, .ss-bigtag, .ss-bigicon, .ss-card,
-      .ss-bigyear.is-swapping, .ss-bigtag.is-swapping, .ss-bigicon.is-swapping {
-        transition: none !important;
-        transform: none !important;
+    /* Mobile — inline year badge replaces sticky */
+    @media (max-width: 959px) {
+      .ss-card { padding-left: clamp(1.5rem, 4vw, 2.25rem); }
+      .ss-card[data-year]::after {
+        content: attr(data-year);
+        position: absolute;
+        top: 1rem; right: 1rem;
+        font-family: var(--font-display);
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: rgba(245,158,11,0.35);
+        letter-spacing: -0.01em;
       }
-      .ss-card { opacity: 1 !important; }
     }
 
+    /* CTA */
+    .st-cta { position: relative; padding-block: clamp(5rem,9vw,8rem); border-top: 1px solid var(--border); text-align: center; overflow: hidden; }
+    .st-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(245,158,11,0.1) 0%, transparent 55%); pointer-events: none; }
+    .st-cta h2 { font-family: var(--font-display); font-size: clamp(2.25rem,5vw,3.75rem); font-weight: 600; line-height: 1; margin: 1rem 0 1.25rem; }
+    .st-cta h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .st-cta p { max-width: 34rem; margin: 0 auto 2.25rem; color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; }
+
+    .d1 { transition-delay: 80ms; } .d2 { transition-delay: 160ms; } .d3 { transition-delay: 240ms; } .d4 { transition-delay: 320ms; }
   </style>
 </head>
 
-<body class="bg-noise antialiased overflow-x-hidden selection:bg-brand-gold selection:text-black">
+<body class="md-atmospheric">
 
-  <!-- NAVIGATION OVERLAY (Side Drawer) -->
-  <div id="navOverlay" class="nav-overlay">
-    <div id="navBackdrop" class="nav-overlay-backdrop"></div>
-    <div class="nav-overlay-content p-8 md:p-10">
+  <div class="md-orb" style="top:-180px;left:10%;width:520px;height:520px;" aria-hidden="true"></div>
+  <div class="md-orb" style="top:45%;right:-120px;width:460px;height:460px;" aria-hidden="true"></div>
+  <div class="md-orb" style="bottom:8%;left:-80px;width:400px;height:400px;" aria-hidden="true"></div>
 
-      <!-- Header -->
-      <div class="flex justify-between items-center mb-12">
-        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto opacity-80">
-        <button id="closeMenuBtn" class="nav-close-btn"><i class="fas fa-times"></i></button>
-      </div>
-
-      <!-- Links -->
-      <ul class="space-y-0 flex-1">
-        <li><a href="index.html" class="sidebar-link">Home</a></li>
-        <li>
-          <button class="sidebar-dropdown-btn">
-            <span>About</span> <i class="fas fa-chevron-down"></i>
-          </button>
-          <div class="sidebar-submenu">
-            <a href="story.html" class="sidebar-sublink">Our Story</a>
-            <a href="leadership.html" class="sidebar-sublink">Leadership</a>
-            <a href="culture.html" class="sidebar-sublink">Culture</a>
-            <a href="recognition.html" class="sidebar-sublink">Recognition</a>
-          </div>
-        </li>
-        <li>
-          <button class="sidebar-dropdown-btn">
-            <span>Projects</span> <i class="fas fa-chevron-down"></i>
-          </button>
-          <div class="sidebar-submenu">
-            <a href="projects.html" class="sidebar-sublink">Portfolio</a>
-            <a href="map.html" class="sidebar-sublink">Project Map</a>
-          </div>
-        </li>
-        <li><a href="services.html" class="sidebar-link">Services</a></li>
-        <li><a href="clients.html" class="sidebar-link">Clients</a></li>
-        <li><a href="investors.html" class="sidebar-link">Investors</a></li>
-        <li><a href="csr.html" class="sidebar-link">CSR</a></li>
-        <li><a href="careers.html" class="sidebar-link">Careers</a></li>
-        <li><a href="resources.html" class="sidebar-link">Resources</a></li>
-        <li><a href="contact.html" class="sidebar-link">Contact</a></li>
-      </ul>
-
-      <!-- Contact Info -->
-      <div class="nav-info-block">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
-          <div class="nav-info-item">
-            <span class="nav-info-label">Call</span>
-            <p class="nav-info-value">+91 9619875081</p>
-          </div>
-          <div class="nav-info-item">
-            <span class="nav-info-label">Email</span>
-            <p class="nav-info-value">strongbuilt@skywaygroup.co.in</p>
+  <header class="md-header" id="mainHeader">
+    <div class="md-header-inner">
+      <a href="index.html" class="md-logo" aria-label="Strong Built — Home"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built"></a>
+      <nav class="md-nav" aria-label="Primary">
+        <div class="md-nav-item">
+          <button class="md-nav-link is-active" type="button" aria-haspopup="true" aria-expanded="false" aria-current="page">About <i class="fas fa-chevron-down"></i></button>
+          <div class="md-nav-dropdown" role="menu">
+            <a href="story.html" role="menuitem" style="color:var(--accent);"><i class="fas fa-book-open"></i> Our Story</a>
+            <a href="leadership.html" role="menuitem"><i class="fas fa-users"></i> Leadership</a>
+            <a href="culture.html" role="menuitem"><i class="fas fa-heart"></i> Culture</a>
+            <a href="recognition.html" role="menuitem"><i class="fas fa-trophy"></i> Recognition</a>
           </div>
         </div>
-        <div class="flex gap-2">
-          <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav-social-link"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram" class="nav-social-link"><i class="fab fa-instagram"></i></a>
-          <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter" class="nav-social-link"><i class="fab fa-twitter"></i></a>
+        <div class="md-nav-item">
+          <button class="md-nav-link" type="button" aria-haspopup="true" aria-expanded="false">Projects <i class="fas fa-chevron-down"></i></button>
+          <div class="md-nav-dropdown" role="menu">
+            <a href="projects.html" role="menuitem"><i class="fas fa-th"></i> Portfolio</a>
+            <a href="map.html" role="menuitem"><i class="fas fa-map-marked-alt"></i> Project Map</a>
+          </div>
         </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- HEADER (Glass) -->
-  <header class="fixed w-full z-50 transition-all duration-300 glass-header" id="mainHeader">
-    <div class="container mx-auto px-4 md:px-6 h-20 md:h-24 flex items-center justify-between">
-      <!-- Logo -->
-      <a href="index.html" class="flex items-center group relative z-50">
-        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built Logo"
-          class="h-14 md:h-24 w-auto object-contain transition duration-300 hover:opacity-90">
-      </a>
-
-      <!-- Menu Trigger -->
-      <button id="menuToggle" class="menu-btn group">
-        <div class="menu-icon">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </button>
+        <a href="services.html" class="md-nav-link">Services</a>
+        <a href="clients.html" class="md-nav-link">Clients</a>
+        <a href="investors.html" class="md-nav-link">Investors</a>
+        <a href="csr.html" class="md-nav-link">CSR</a>
+        <a href="careers.html" class="md-nav-link">Careers</a>
+        <a href="resources.html" class="md-nav-link">Resources</a>
+      </nav>
+      <a href="contact.html" class="md-btn md-btn-primary md-header-cta">Contact Us</a>
+      <button id="menuToggle" class="md-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer"><i class="fas fa-bars"></i></button>
     </div>
   </header>
 
+  <div id="navDrawer" class="md-drawer" aria-hidden="true">
+    <div class="md-drawer-backdrop" id="drawerBackdrop"></div>
+    <aside class="md-drawer-panel" role="dialog" aria-label="Navigation">
+      <div class="md-drawer-header">
+        <div class="md-logo"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built" style="height:2.75rem;width:auto;display:block;"></div>
+        <button class="md-menu-btn" id="drawerClose" aria-label="Close menu" style="display:flex;"><i class="fas fa-times"></i></button>
+      </div>
+      <nav>
+        <a href="index.html" class="md-drawer-link">Home</a>
+        <button class="md-drawer-dropbtn is-open" data-dropdown>About <i class="fas fa-chevron-down"></i></button>
+        <div class="md-drawer-sub is-open"><a href="story.html" style="color:var(--accent);">Our Story</a><a href="leadership.html">Leadership</a><a href="culture.html">Culture</a><a href="recognition.html">Recognition</a></div>
+        <button class="md-drawer-dropbtn" data-dropdown>Projects <i class="fas fa-chevron-down"></i></button>
+        <div class="md-drawer-sub"><a href="projects.html">Portfolio</a><a href="map.html">Project Map</a></div>
+        <a href="services.html" class="md-drawer-link">Services</a>
+        <a href="clients.html" class="md-drawer-link">Clients</a>
+        <a href="investors.html" class="md-drawer-link">Investors</a>
+        <a href="csr.html" class="md-drawer-link">CSR</a>
+        <a href="careers.html" class="md-drawer-link">Careers</a>
+        <a href="resources.html" class="md-drawer-link">Resources</a>
+        <a href="contact.html" class="md-drawer-link">Contact</a>
+      </nav>
+      <div style="margin-top:auto;padding-top:2rem;border-top:1px solid var(--border);">
+        <p class="md-mono" style="font-size:0.75rem;color:var(--fg-subtle);margin-bottom:1rem;">Connect</p>
+        <div style="display:flex;gap:0.5rem;">
+          <a href="https://www.linkedin.com/company/strongbuilt" class="md-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/strongbuilt" class="md-social-btn" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/strongbuilt" class="md-social-btn" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
   <!-- HERO -->
-  <section class="relative overflow-hidden bg-clay-mist flex items-center" style="min-height:100svh;">
-    <div class="w-full max-w-[1400px] mx-auto px-6 md:px-10 pt-28 pb-12 relative z-2 text-center">
-      <span class="block text-brand-darkGold font-bold uppercase mb-4 font-heading reveal-up" style="font-size:var(--fs-small); letter-spacing:0.25em; transition-delay:100ms;">Our Story</span>
-      <h1 class="text-clay-ink uppercase font-hero reveal-up" style="font-size:var(--fs-hero); line-height:0.92; letter-spacing:-0.02em; font-weight:700; margin-bottom:1.5rem; transition-delay:200ms;">
-        Forging <br><span class="gold-gradient-text">History</span>
-      </h1>
-      <div class="h-px w-24 bg-brand-gold my-8 mx-auto reveal-up" style="transition-delay:300ms;"></div>
-      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-xl mx-auto leading-relaxed reveal-up" style="transition-delay:400ms;">
-        From a single project in Bandra to 33+ landmarks across Mumbai &mdash; a decade of building trust, one floor at a time.
-      </p>
+  <section class="st-hero">
+    <div class="md-container">
+      <div class="md-reveal">
+        <div class="md-badge" style="margin-inline:auto;">
+          <span class="md-badge-dot" aria-hidden="true"></span>
+          <span>Our Story</span>
+        </div>
+      </div>
+      <h1 class="md-reveal d1">Forging <span class="accent">history.</span></h1>
+      <p class="lede md-reveal d2">From a single project in Bandra to 33+ landmarks across Mumbai — a decade of building trust, one floor at a time.</p>
+      <div class="st-hero-rule md-reveal d3"></div>
     </div>
   </section>
 
-  <!-- INTRODUCTION / MANIFESTO -->
-  <section class="py-16 md:py-32 relative z-20">
-    <div class="container mx-auto px-6 max-w-6xl">
-      <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
-        <div class="reveal-up">
-          <h2 class="text-4xl md:text-5xl font-bold text-clay-ink mb-8 uppercase leading-tight">
-            From Humble Roots to <span class="text-brand-darkGold">Skyline Icons</span>
-          </h2>
-          <div class="space-y-6 text-clay-muted text-lg leading-relaxed text-justify font-light">
-            <p>
-              <strong class="text-clay-ink font-medium">Strong Built</strong> traces its roots to Mumbai in 2014, starting with a single RCC project at Carter Road, Bandra. Since then we have never looked back &mdash; delivering 33+ projects, 90+ buildings, and over 5.7 million square feet of constructed area across Mumbai and beyond.
-            </p>
-            <p>
-              Recognised for excellence in residential, commercial, and institutional construction, we proudly partner with India's most trusted names &mdash; Rustomjee, Lodha, Mahindra Lifespaces, Hiranandani, Ajmera, Arkade, and Dheeraj Realty, among others.
-            </p>
-            <p>
-              Strong Built is well known for its innovation and by collaborating successfully with customers, designers, sub-contractors, consultants, and suppliers, we deliver a specialised level of service. We are continuously evolving to understand the many aspects of delivering high-value, complex construction projects with ease.
-            </p>
-            <div class="pt-6">
-              <img src="assets/Logo/Strongbuilt.png" alt="Signature"
-                class="h-12 opacity-50 transition duration-500">
-            </div>
+  <!-- MANIFESTO -->
+  <section class="st-section">
+    <div class="md-container">
+      <div class="st-manifesto">
+        <div class="md-reveal">
+          <span class="md-eyebrow md-eyebrow-accent">The Journey</span>
+          <h2>From humble roots to <span class="accent">skyline icons.</span></h2>
+          <div class="body">
+            <p><strong>Strong Built</strong> traces its roots to Mumbai in 2014, starting with a single RCC project at Carter Road, Bandra. Since then we have never looked back — delivering 33+ projects, 90+ buildings, and over 5.7 million square feet of constructed area across Mumbai and beyond.</p>
+            <p>Recognised for excellence in residential, commercial, and institutional construction, we proudly partner with India's most trusted names — <strong>Rustomjee, Lodha, Mahindra Lifespaces, Hiranandani, Ajmera, Arkade,</strong> and Dheeraj Realty, among others.</p>
+            <p>We collaborate closely with clients, designers, sub-contractors, consultants, and suppliers to deliver a specialised level of service. Continuously evolving. Understanding the many aspects of delivering high-value, complex construction projects with ease.</p>
           </div>
+          <div class="st-sig"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built signature"></div>
         </div>
-
-        <!-- Image Collage -->
-        <div class="relative hidden md:block reveal-up" style="transition-delay: 200ms;">
-          <div class="absolute top-0 right-0 w-64 h-64 bg-brand-gold/20 blur-[100px] rounded-full"></div>
-          <div class="relative z-10 glass-panel p-2 rotate-2 hover:rotate-0 transition duration-500 rounded-sm">
-            <div class="img-placeholder w-full h-48 md:h-[400px]"></div>
-          </div>
-          <div
-            class="absolute -bottom-10 -left-10 z-20 glass-panel p-6 border-l-4 border-brand-gold -rotate-3 hover:rotate-0 transition duration-500 custom-bounce">
-            <div class="text-center">
-              <div class="text-5xl font-bold text-brand-darkGold font-heading mb-1" data-target="150">0</div>
-              <div class="text-xs uppercase tracking-widest text-clay-muted">Team Strength</div>
-            </div>
+        <div class="st-visual md-reveal d2">
+          <div class="img-box"><img src="assets/Projects/seasons.jpg" alt="Strong Built Seasons project" loading="lazy"></div>
+          <div class="stat-chip">
+            <strong>1,400<span style="font-size:0.55em;color:var(--fg);">+</span></strong>
+            <small>Team Strength</small>
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- INTERACTIVE TIMELINE — Three Design Options for Review -->
-  <section class="py-16 md:py-24 relative" id="timeline-section">
-    <div class="container mx-auto px-4 relative z-10">
-      <div class="text-center mb-8 reveal-up">
-        <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase mb-3 block font-heading">A Decade of Building</span>
-        <h2 class="text-4xl md:text-6xl font-bold text-clay-ink uppercase tracking-tight">The <span class="text-brand-darkGold">Timeline</span></h2>
+  <!-- TIMELINE -->
+  <section class="st-section st-section--alt">
+    <div class="md-container">
+      <div class="st-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">A Decade of Building</span>
+        <h2>The <span class="accent">timeline.</span></h2>
+        <p>Ten chapters. One continuous story of trust, scale, and craft.</p>
       </div>
 
-
-      <!-- Desktop: Sticky Scroll Storytelling -->
       <div class="ss-grid" id="ss-grid">
         <aside class="ss-sticky">
           <div class="ss-bigtag" id="ss-tag">The Beginning</div>
@@ -530,128 +363,143 @@
         </aside>
         <div class="ss-stream" id="ss-stream">
           <article class="ss-card" data-year="2014" data-tag="The Beginning" data-icon="fa-flag">
-            <div class="ss-card-kicker">Chapter One · Nov 2014</div>
+            <div class="ss-card-kicker"><i class="fas fa-flag"></i> Chapter One · Nov 2014</div>
             <h3 class="ss-card-title">First Project Begins</h3>
             <p class="ss-card-body">Strong Built breaks ground on Del-sol — a 3B + P + 14F structure at Carter Road, Bandra. A modest beginning for what would become a portfolio defining Mumbai's premium residential landscape.</p>
             <div class="ss-card-meta">Del-sol · Carter Road · Bandra</div>
           </article>
           <article class="ss-card" data-year="2015" data-tag="Repeat Trust" data-icon="fa-handshake">
-            <div class="ss-card-kicker">Chapter Two · Dec 2015</div>
+            <div class="ss-card-kicker"><i class="fas fa-handshake"></i> Chapter Two · Dec 2015</div>
             <h3 class="ss-card-title">Trust Multiplies</h3>
             <p class="ss-card-body">A second repeat order from Dheeraj signals client confidence. Ekta places the firm's first ₹100 Cr order — a defining vote of trust within the first eighteen months.</p>
             <div class="ss-card-meta">₹100 Cr Order · Repeat Mandate · Ekta · Dheeraj</div>
           </article>
           <article class="ss-card" data-year="2016" data-tag="Brand Trust" data-icon="fa-star">
-            <div class="ss-card-kicker">Chapter Three · Dec 2016</div>
+            <div class="ss-card-kicker"><i class="fas fa-star"></i> Chapter Three · Dec 2016</div>
             <h3 class="ss-card-title">Marquee Clientele</h3>
             <p class="ss-card-body">Within two years the firm earns the trust of Mumbai's tier-one developers — Rustomjee, Wadhwa, Hiranandani and Mahindra Lifespaces all sign on.</p>
             <div class="ss-card-meta">Rustomjee · Wadhwa · Hiranandani · Mahindra Lifespaces</div>
           </article>
           <article class="ss-card" data-year="2017" data-tag="Delivery" data-icon="fa-building">
-            <div class="ss-card-kicker">Chapter Four · Dec 2017</div>
+            <div class="ss-card-kicker"><i class="fas fa-building"></i> Chapter Four · Dec 2017</div>
             <h3 class="ss-card-title">Seven Projects Delivered</h3>
             <p class="ss-card-body">A milestone year — seven projects handed over, totalling 1.1 million square feet of completed construction across the metropolitan region.</p>
-            <div class="ss-card-meta">7 Projects · 1.1 Million Sq.Ft Delivered</div>
+            <div class="ss-card-meta">7 Projects · 1.1M Sq.Ft Delivered</div>
           </article>
           <article class="ss-card" data-year="2018" data-tag="Growth" data-icon="fa-chart-line">
-            <div class="ss-card-kicker">Chapter Five · Dec 2018</div>
-            <h3 class="ss-card-title">Scaling The Operation</h3>
+            <div class="ss-card-kicker"><i class="fas fa-chart-line"></i> Chapter Five · Dec 2018</div>
+            <h3 class="ss-card-title">Scaling the Operation</h3>
             <p class="ss-card-body">Twenty-one live projects span the city — 2.5 million square feet under simultaneous execution. The team grows; the standard does not slip.</p>
-            <div class="ss-card-meta">21 Live Projects · 2.5 Million Sq.Ft</div>
+            <div class="ss-card-meta">21 Live Projects · 2.5M Sq.Ft</div>
           </article>
           <article class="ss-card" data-year="2019" data-tag="Public Sector" data-icon="fa-landmark">
-            <div class="ss-card-kicker">Chapter Six · Jan 2019</div>
+            <div class="ss-card-kicker"><i class="fas fa-landmark"></i> Chapter Six · Jan 2019</div>
             <h3 class="ss-card-title">Public Sector Mandate</h3>
             <p class="ss-card-body">A 1,500-flat government turnkey project marks Strong Built's entry into public housing. By December, nine towers are completed for Lodha — proof of versatility at scale.</p>
             <div class="ss-card-meta">1,500 Flats · 9 Lodha Towers · Government Turnkey</div>
           </article>
           <article class="ss-card" data-year="2020" data-tag="Resilience" data-icon="fa-shield-alt">
-            <div class="ss-card-kicker">Chapter Seven · Dec 2020</div>
-            <h3 class="ss-card-title">Through The Pandemic</h3>
+            <div class="ss-card-kicker"><i class="fas fa-shield-alt"></i> Chapter Seven · Dec 2020</div>
+            <h3 class="ss-card-title">Through the Pandemic</h3>
             <p class="ss-card-body">Sukrut at Dadar, Pashmina at Powai, Times Square at Andheri — three projects delivered while the rest of the industry stood still. Resilience becomes a brand value.</p>
             <div class="ss-card-meta">3 Deliveries · Sukrut · Pashmina · Times Square</div>
           </article>
           <article class="ss-card" data-year="2022" data-tag="Milestone" data-icon="fa-city">
-            <div class="ss-card-kicker">Chapter Eight · Dec 2022</div>
+            <div class="ss-card-kicker"><i class="fas fa-city"></i> Chapter Eight · Dec 2022</div>
             <h3 class="ss-card-title">Scale, Achieved</h3>
             <p class="ss-card-body">Forty-plus buildings completed. Eleven ongoing. Together, 4.8 million square feet of Strong Built construction now stands across the Mumbai Metropolitan Region.</p>
-            <div class="ss-card-meta">40+ Buildings · 4.8 Million Sq.Ft · 11 Ongoing</div>
+            <div class="ss-card-meta">40+ Buildings · 4.8M Sq.Ft · 11 Ongoing</div>
           </article>
           <article class="ss-card" data-year="2023" data-tag="Mastery" data-icon="fa-award">
-            <div class="ss-card-kicker">Chapter Nine · 2023</div>
+            <div class="ss-card-kicker"><i class="fas fa-award"></i> Chapter Nine · 2023</div>
             <h3 class="ss-card-title">High-Rise Mastery</h3>
             <p class="ss-card-body">A new tier of expertise — super high-rise and premium residential execution across the MMR. The firm cements its reputation as the contractor of choice for Mumbai's most demanding skyline.</p>
             <div class="ss-card-meta">Super High-Rise · Premium Residential · MMR</div>
           </article>
           <article class="ss-card" data-year="2024" data-tag="Present Day" data-icon="fa-rocket">
-            <div class="ss-card-kicker">Present Day · 2024</div>
+            <div class="ss-card-kicker"><i class="fas fa-rocket"></i> Present Day · 2024</div>
             <h3 class="ss-card-title">Today &amp; Beyond</h3>
             <p class="ss-card-body">Thirty-three projects delivered. Ninety buildings standing. Five-point-seven million square feet of Strong Built construction. An order book of ₹808 Cr powers the next chapter.</p>
             <div class="ss-card-meta">33+ Projects · 90+ Buildings · 5.7M Sq.Ft · ₹808 Cr Order Book</div>
           </article>
         </div>
       </div>
-
-
     </div>
   </section>
 
-  <!-- Timeline interactivity (Option B) -->
+  <!-- CTA -->
+  <section class="st-cta">
+    <div class="md-container">
+      <div class="md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">The Next Chapter</span>
+        <h2>Ready to build the <span class="accent">future?</span></h2>
+        <p>Let's write the next chapter together. Your project, our craft.</p>
+        <a href="contact.html" class="md-btn md-btn-primary md-btn-lg">Start a conversation <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="md-footer">
+    <div class="md-container">
+      <div class="md-footer-top">
+        <div class="md-footer-brand">
+          <a href="index.html" aria-label="Strong Built — Home"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="md-footer-logo"></a>
+          <p class="md-footer-tagline">Building <em>legacies</em>, not just structures. Since 2014.</p>
+        </div>
+        <div class="md-footer-contact-card">
+          <div class="md-fc-item">
+            <span class="md-fc-k"><i class="fas fa-location-dot"></i> Address</span>
+            <p class="md-fc-v">901-B Wing, HDIL Kaledonia,<br>Sahar Road, Andheri-East,<br>Mumbai — 400069</p>
+          </div>
+          <div class="md-fc-item">
+            <span class="md-fc-k"><i class="fas fa-phone"></i> Phone</span>
+            <a class="md-fc-v" href="tel:+919619875081">+91 96198 75081</a>
+            <a class="md-fc-v" href="tel:+912261232500">022 6123 2500</a>
+          </div>
+          <div class="md-fc-item">
+            <span class="md-fc-k"><i class="fas fa-envelope"></i> Email</span>
+            <a class="md-fc-v" href="mailto:sales@strongbuilt.in">sales@strongbuilt.in</a>
+          </div>
+        </div>
+      </div>
+      <div class="md-footer-strip">
+        <div class="md-footer-strip-left">
+          <div class="md-footer-socials">
+            <a href="https://www.instagram.com/strongbuilt" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/strongbuilt" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://x.com/strongbuilt" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+          </div>
+          <div class="md-footer-strip-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+        <div class="md-footer-strip-center">© 2026 Strong Built — A Skyway Group Company. All Rights Reserved.</div>
+        <div class="md-footer-strip-right">Designed by <b>Abdul Ahad</b></div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="md-fab" aria-hidden="true">
+    <a href="https://wa.me/919619875081" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="tel:+919619875081" aria-label="Call Strong Built"><i class="fas fa-phone"></i></a>
+  </div>
+
+  <script src="theme.js"></script>
   <script>
-    const tlData = {
-      '2014': { tag: 'The Beginning', icon: 'fa-flag', title: 'First Project', body: 'Started with Del-sol (3B + P + 14F) at Carter Road, Bandra — the first chapter of Strong Built\'s story.' },
-      '2015': { tag: 'Repeat Trust', icon: 'fa-handshake', title: 'Trust Multiplied', body: '2nd repeat from Dheeraj. 1st ₹100 Cr order from Ekta — proof that early clients believed enough to come back, and bring others.' },
-      '2016': { tag: 'Brand Trust', icon: 'fa-star', title: 'Marquee Clients', body: 'Bagged Rustomjee, Wadhwa, Hiranandani and Mahindra Lifespaces in a single year.' },
-      '2017': { tag: 'Delivery', icon: 'fa-building', title: '7 Projects Delivered', body: 'Handed over 7 projects totalling 1.1 million square feet.' },
-      '2018': { tag: 'Growth', icon: 'fa-chart-line', title: 'Scaling Up', body: '21 live projects covering 2.5 million sq.ft across the MMR.' },
-      '2019': { tag: 'Public Sector', icon: 'fa-landmark', title: 'Government Turnkey', body: 'A 1500-flat government turnkey project taken on. By December: 9 Lodha towers completed.' },
-      '2020': { tag: 'Resilience', icon: 'fa-shield-alt', title: 'Covid Resilience', body: 'Sukrut, Pashmina and Times Square delivered through the pandemic.' },
-      '2022': { tag: 'Milestone', icon: 'fa-city', title: 'Scale Achieved', body: '40+ buildings completed. 11 ongoing. 4.8 million sq.ft of Strong Built construction.' },
-      '2023': { tag: 'Mastery', icon: 'fa-award', title: 'High-Rise Expertise', body: 'Proven mastery in super high-rise and premium residential across the MMR.' },
-      '2024': { tag: 'Present Day', icon: 'fa-rocket', title: 'Today & Beyond', body: '33+ projects delivered, 90+ buildings built, 5.7 million+ sq. ft. constructed — and an order book of ₹808 Cr powering the next chapter.' }
-    };
-
-    // ── Hydrate timeline from data file (if present) ──
-    (function hydrateTimeline() {
-      const stream = document.getElementById('ss-stream');
-      const yearEl = document.getElementById('ss-year');
-      const tagEl = document.getElementById('ss-tag');
-      const iconEl = document.getElementById('ss-icon');
-      if (!stream || !window.TIMELINE_DATA || !Array.isArray(window.TIMELINE_DATA) || !window.TIMELINE_DATA.length) return;
-      const data = window.TIMELINE_DATA;
-      stream.innerHTML = data.map(m => `
-        <article class="ss-card reveal-up reveal-active" data-year="${m.year}" data-tag="${m.tag}" data-icon="${m.icon}">
-          <div class="ss-card-kicker">${m.kicker}</div>
-          <h3 class="ss-card-title">${m.title}</h3>
-          <p class="ss-card-body">${m.body}</p>
-        </article>`).join('');
-      const first = data[0];
-      if (yearEl) yearEl.textContent = first.year;
-      if (tagEl)  tagEl.textContent  = first.tag;
-      if (iconEl) iconEl.className = 'fas ' + first.icon;
-      // Re-trigger reveal-up on injected cards (script.js ran before we existed)
-      document.querySelectorAll('.reveal-up').forEach(el => {
-        const top = el.getBoundingClientRect().top;
-        if (top < window.innerHeight - 50) el.classList.add('reveal-active');
-      });
-    })();
-
-    // Timeline — sticky year panel (desktop) + active-card tracking (all devices)
+    // Sticky-scroll timeline — active card tracking + sticky panel swap
     (function initTimeline() {
       const yearEl = document.getElementById('ss-year');
       const tagEl = document.getElementById('ss-tag');
       const iconEl = document.getElementById('ss-icon');
       const cards = document.querySelectorAll('#ss-stream .ss-card');
-      const sticky = document.querySelector('.ss-sticky');
-      const grid = document.getElementById('ss-grid');
-      if (!yearEl || !cards.length || !sticky || !grid) return;
+      if (!yearEl || !cards.length) return;
 
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const isDesktop = () => window.matchMedia('(min-width: 1024px)').matches;
-
-      // ──────── Active-card + sticky-content swap ────────
       let currentYear = yearEl.textContent.trim();
       let swapTimer = null;
+
       const update = (card) => {
         cards.forEach(c => c.classList.remove('is-active'));
         card.classList.add('is-active');
@@ -677,207 +525,22 @@
           yearEl.classList.remove('is-swapping');
           tagEl.classList.remove('is-swapping');
           iconEl.parentElement.classList.remove('is-swapping');
-        }, 220);
+        }, 250);
       };
+
+      // Track the card closest to ~40% viewport height (the sticky panel's center)
       const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) update(e.target); });
-      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-      cards.forEach(c => io.observe(c));
-
-      // ──────── Viewport-center pinning (desktop only) ────────
-      const reset = () => {
-        sticky.classList.remove('is-pinned', 'is-end');
-        sticky.style.left = sticky.style.width = '';
-      };
-      const sync = () => {
-        if (!isDesktop()) { reset(); return; }
-        const gridRect = grid.getBoundingClientRect();
-        const stickyHeight = sticky.offsetHeight;
-        const vh = window.innerHeight;
-        const center = vh / 2;
-        const shouldPin = gridRect.top <= center - stickyHeight / 2 && gridRect.bottom >= center + stickyHeight / 2;
-        const pastEnd = gridRect.bottom < center + stickyHeight / 2;
-
-        if (shouldPin) {
-          if (!sticky.classList.contains('is-pinned')) {
-            sticky.classList.add('is-pinned');
-            sticky.classList.remove('is-end');
-          }
-          const gridStyle = getComputedStyle(grid);
-          const cols = gridStyle.gridTemplateColumns.split(' ');
-          const leftColWidth = parseFloat(cols[0]) || (gridRect.width * 5 / 12);
-          const paddingLeft = parseFloat(gridStyle.paddingLeft) || 0;
-          const nextLeft = (gridRect.left + paddingLeft) + 'px';
-          const nextWidth = leftColWidth + 'px';
-          if (sticky.style.left !== nextLeft) sticky.style.left = nextLeft;
-          if (sticky.style.width !== nextWidth) sticky.style.width = nextWidth;
-        } else if (pastEnd) {
-          if (!sticky.classList.contains('is-end')) {
-            sticky.classList.remove('is-pinned');
-            sticky.classList.add('is-end');
-            sticky.style.left = sticky.style.width = '';
-          }
-        } else {
-          if (sticky.classList.contains('is-pinned') || sticky.classList.contains('is-end')) reset();
-        }
-      };
-
-      // rAF-throttled scroll for smooth 60fps updates even on lower-end devices
-      let ticking = false;
-      const onScroll = () => {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => { sync(); ticking = false; });
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onScroll, { passive: true });
-      window.addEventListener('orientationchange', onScroll, { passive: true });
-      window.addEventListener('load', sync);
-      sync();
-    })();
-
-  </script>
-
-
-  <!-- CTA SECTION -->
-  <section class="sb-cta">
-    <div class="sb-cta-noise"></div>
-    <div class="sb-cta-orb sb-cta-orb-1"></div>
-    <div class="sb-cta-orb sb-cta-orb-2"></div>
-    <div class="sb-cta-orb sb-cta-orb-3"></div>
-    <div class="container mx-auto px-6 relative z-10 text-center">
-      <h2 class="text-3xl md:text-5xl font-bold text-clay-ink mb-6 uppercase font-heading">Ready to Build the Future?</h2>
-      <p class="text-clay-muted text-lg mb-10 max-w-xl mx-auto font-body">
-        Join hands with a team that values precision, integrity, and innovation above all.
-      </p>
-      <a href="contact.html" class="sb-cta-btn">Contact Us</a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="bg-clay-mist text-clay-muted pt-16 md:pt-20 pb-10 border-t border-clay-border relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10"
-      style="background-image: radial-gradient(rgba(239, 191, 4, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
-        <div class="col-span-1">
-          <div class="text-2xl font-bold text-clay-ink mb-6 font-heading tracking-widest flex items-center gap-2">
-            <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto">
-          </div>
-          <p class="text-clay-faint text-sm mb-6 font-light leading-relaxed">
-            Forging the future with concrete, steel, and integrity.
-          </p>
-          <div class="flex gap-4">
-            <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram"
-              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
-                class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn"
-              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
-                class="fab fa-linkedin-in"></i></a>
-            <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter"
-              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
-                class="fab fa-twitter"></i></a>
-          </div>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Navigation</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><a href="story.html" class="hover:text-clay-ink transition">About</a></li>
-            <li><a href="services.html" class="hover:text-clay-ink transition">Services</a></li>
-            <li><a href="projects.html" class="hover:text-clay-ink transition">Projects</a></li>
-            <li><a href="clients.html" class="hover:text-clay-ink transition">Clients</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Services</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><a href="services.html" class="hover:text-clay-ink transition">Residential</a></li>
-            <li><a href="services.html" class="hover:text-clay-ink transition">Commercial</a></li>
-            <li><a href="services.html" class="hover:text-clay-ink transition">Industrial</a></li>
-            <li><a href="services.html" class="hover:text-clay-ink transition">Infrastructure</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Contact</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><i class="fas fa-map-marker-alt text-brand-darkGold mr-2"></i> 901-B Wing, 9th Floor, HDIL Kaledonia, Sahar
-              Road, Opp D'Mart, Sambhaji Nagar, Andheri-East, Mumbai - 400069.</li>
-            <li><i class="fas fa-phone text-brand-darkGold mr-2"></i> +91 9619875081 / 022-6123-2500</li>
-            <li><i class="fas fa-envelope text-brand-darkGold mr-2"></i> strongbuilt@skywaygroup.co.in</li>
-          </ul>
-        </div>
-      </div>
-      <div
-        class="border-t border-clay-border pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-clay-muted font-light uppercase tracking-wider">
-        <p class="font-body">&copy; 2026 Strong Built. All rights reserved.</p>
-        <div class="flex gap-6 mt-4 md:mt-0 font-heading">
-          <a href="privacy.html" class="hover:text-clay-ink">Privacy</a>
-          <a href="terms.html" class="hover:text-clay-ink">Terms</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
-  <!-- SCRIPTS -->
-  <script>
-    // --- SCROLL ANIMATIONS ---
-    function handleScrollAnimations() {
-      const reveals = document.querySelectorAll(".reveal-up");
-      const windowHeight = window.innerHeight;
-
-      reveals.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top;
-        if (elementTop < windowHeight - 100) {
-          el.classList.add("reveal-active");
-        }
-      });
-
-    }
-
-    // --- NUMBER COUNT UP ---
-    let counted = false;
-    function startCounter() {
-      const statsSection = document.querySelector('[data-target]');
-      if (!statsSection) return;
-
-      const sectionTop = statsSection.closest('div').getBoundingClientRect().top;
-
-      if (!counted && sectionTop < window.innerHeight) {
-        const counters = document.querySelectorAll('[data-target]');
-        counters.forEach(counter => {
-          const target = +counter.getAttribute('data-target');
-          const duration = 2000; // ms
-          const increment = target / (duration / 16); // 60fps
-
-          let current = 0;
-          const updateCount = () => {
-            current += increment;
-            if (current < target) {
-              counter.innerText = Math.ceil(current);
-              requestAnimationFrame(updateCount);
-            } else {
-              counter.innerText = target + (counter.parentElement.innerText.includes('%') ? '%' : '+');
-            }
-          };
-          updateCount();
+        entries.forEach(entry => {
+          if (entry.isIntersecting) update(entry.target);
         });
-        counted = true;
-      }
-    }
+      }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
 
-    window.addEventListener("scroll", () => {
-      handleScrollAnimations();
-      startCounter();
-    });
+      cards.forEach(card => io.observe(card));
 
-    // Initial check
-    handleScrollAnimations();
-
-    // Mobile Menu Logic - REMOVED
+      // Initialise with first card active
+      cards[0].classList.add('is-active');
+    })();
   </script>
-  <script src="script.js"></script>
-
 </body>
 
 </html>

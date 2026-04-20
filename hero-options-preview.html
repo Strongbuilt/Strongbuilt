@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Hero · Minimal Options</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg: #0A0A0F;
+      --bg-alt: #12121A;
+      --muted: #1A1A24;
+      --fg: #FAFAFA;
+      --fg-muted: #A1A1AA;
+      --fg-subtle: #71717A;
+      --accent: #F59E0B;
+      --accent-foreground: #0A0A0F;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.15);
+      --font-display: 'Oswald', sans-serif;
+      --font-heading: 'Barlow Condensed', sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-label: 'Barlow Condensed', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+
+    .page {
+      max-width: 1680px;
+      margin-inline: auto;
+      padding-inline: clamp(1.5rem, 5vw, 3rem);
+    }
+
+    /* Preview page header */
+    .page-header {
+      padding: clamp(3rem, 6vw, 5rem) 0 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: clamp(2.5rem, 4vw, 4rem);
+    }
+    .page-header .eyebrow {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .page-header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      margin: 0 0 1rem;
+      line-height: 1;
+    }
+    .page-header p {
+      color: var(--fg-muted);
+      max-width: 40rem;
+      margin: 0 0 2rem;
+      line-height: 1.6;
+    }
+    .toc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.75rem;
+      font-family: var(--font-label);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .toc a {
+      color: var(--fg-muted);
+      text-decoration: none;
+      transition: color 200ms;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* Option wrapper — simulated as a real home hero */
+    .opt {
+      padding-block: clamp(5rem, 8vw, 8rem);
+      border-top: 1px solid var(--border);
+      position: relative;
+    }
+    .opt:first-of-type { border-top: 0; padding-top: 1rem; }
+    .opt-head {
+      display: flex;
+      align-items: baseline;
+      gap: 1.75rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .opt-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .opt-title {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--fg);
+      margin: 0;
+    }
+    .opt-desc {
+      color: var(--fg-muted);
+      font-size: 0.92rem;
+      max-width: 40rem;
+      line-height: 1.6;
+      margin: 0;
+      flex-basis: 100%;
+    }
+
+    /* The actual simulated hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+      min-height: 80vh;
+    }
+    @media (min-width: 900px) {
+      .hero { grid-template-columns: 1.1fr 0.9fr; gap: 5rem; }
+    }
+    @media (min-width: 1280px) {
+      .hero { gap: 7rem; }
+    }
+
+    .copy .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--fg-muted);
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+    .copy .badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(245,158,11,0.6);
+    }
+    .copy h3 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6.5vw, 5.5rem);
+      font-weight: 500;
+      line-height: 0.98;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin: 1.5rem 0 1.75rem;
+    }
+    .copy h3 em {
+      color: var(--accent);
+      font-style: italic;
+      font-weight: 400;
+    }
+    .copy .lede {
+      color: var(--fg-muted);
+      max-width: 30rem;
+      line-height: 1.65;
+      margin: 0 0 2rem;
+      font-size: 1.05rem;
+    }
+    .ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.75rem;
+      align-items: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-label);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1rem 1.5rem;
+      transition: all 200ms;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--accent-foreground);
+    }
+    .btn-primary:hover { background: #FFB526; transform: translateY(-1px); }
+    .btn-link {
+      color: var(--fg);
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--fg-subtle);
+    }
+    .btn-link:hover { border-bottom-color: var(--accent); color: var(--accent); }
+
+    /* ═══════════════════════════════════════════════════════════
+       H01 — FULL-BLEED PORTRAIT
+       One tall image bleeding right, baseline rule, project signature.
+       ═══════════════════════════════════════════════════════════ */
+    .h01 {
+      position: relative;
+      width: 100%;
+    }
+    .h01-frame {
+      position: relative;
+      aspect-ratio: 3 / 4.2;
+      overflow: hidden;
+      background: var(--muted);
+    }
+    .h01-frame img { width: 100%; height: 100%; object-fit: cover; }
+    .h01-sig {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--accent);
+      border-top-width: 1px;
+    }
+    .h01-sig .name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--fg);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+    .h01-sig .meta {
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--fg-muted);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-align: right;
+    }
+    .h01-sig .meta strong {
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 0.9rem;
+      display: block;
+      margin-bottom: 0.2rem;
+      letter-spacing: 0;
+    }
+    @media (min-width: 900px) {
+      .h01 {
+        margin-right: calc(clamp(1.5rem, 5vw, 3rem) * -1);
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       H02 — PRIMARY + ACCENT PEEK
+       Main portrait with a smaller secondary peeking from behind.
+       ═══════════════════════════════════════════════════════════ */
+    .h02 {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+    .h02-main {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: var(--muted);
+      z-index: 2;
+    }
+    .h02-main img { width: 100%; height: 100%; object-fit: cover; }
+    .h02-accent {
+      position: absolute;
+      top: -8%;
+      right: -7%;
+      width: 38%;
+      aspect-ratio: 3 / 3.6;
+      overflow: hidden;
+      background: var(--muted);
+      z-index: 1;
+      border-left: 4px solid var(--bg);
+      border-bottom: 4px solid var(--bg);
+    }
+    .h02-accent img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.35); }
+    .h02-cap {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-top: 1.5rem;
+      font-family: var(--font-label);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--fg-muted);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .h02-cap .name {
+      font-family: var(--font-display);
+      color: var(--fg);
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      font-weight: 500;
+    }
+    .h02-cap .dot::before {
+      content: '·';
+      color: var(--accent);
+      margin-inline: 0.5rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       H03 — HERO + YEAR RAIL
+       Main image + vertical timeline rail on its right side.
+       ═══════════════════════════════════════════════════════════ */
+    .h03 {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.25rem;
+    }
+    .h03-img {
+      aspect-ratio: 3 / 4.3;
+      overflow: hidden;
+      background: var(--muted);
+    }
+    .h03-img img { width: 100%; height: 100%; object-fit: cover; }
+    .h03-rail {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0.25rem 0;
+      font-family: var(--font-display);
+      border-left: 1px solid var(--border);
+      padding-left: 1rem;
+      min-width: 4.5rem;
+    }
+    .h03-rail-item {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-left: 0.75rem;
+    }
+    .h03-rail-item::before {
+      content: '';
+      position: absolute;
+      left: -1rem;
+      top: 0.4rem;
+      width: 8px;
+      height: 1px;
+      background: var(--fg-subtle);
+    }
+    .h03-rail-item .y {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--fg-subtle);
+      line-height: 1;
+    }
+    .h03-rail-item .n {
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: var(--fg-subtle);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+    .h03-rail-item--active::before {
+      width: 14px;
+      height: 2px;
+      background: var(--accent);
+      top: 0.5rem;
+    }
+    .h03-rail-item--active .y { color: var(--accent); font-weight: 500; }
+    .h03-rail-item--active .n { color: var(--fg); }
+    .h03-foot {
+      grid-column: 1 / -1;
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--accent);
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      color: var(--fg-muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+    }
+    .h03-foot .name {
+      font-family: var(--font-display);
+      color: var(--fg);
+      letter-spacing: 0.04em;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       H04 — IMAGE + AMBER STAT BLOCK
+       Portrait image + solid amber square with hero stat offset into corner.
+       ═══════════════════════════════════════════════════════════ */
+    .h04 {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+    .h04-img {
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: var(--muted);
+    }
+    .h04-img img { width: 100%; height: 100%; object-fit: cover; }
+    .h04-block {
+      position: absolute;
+      bottom: -1.5rem;
+      left: -1.5rem;
+      width: 38%;
+      aspect-ratio: 1 / 1;
+      background: var(--accent);
+      color: var(--accent-foreground);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 2;
+    }
+    .h04-block .top {
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+    .h04-block .big {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 4rem);
+      font-weight: 400;
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+    }
+    .h04-block .lbl {
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .h04-cap {
+      position: absolute;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      padding: 0.6rem 0.85rem;
+      background: rgba(10,10,15,0.82);
+      backdrop-filter: blur(10px);
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--fg);
+      z-index: 3;
+    }
+    .h04-cap strong {
+      color: var(--accent);
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 500;
+      letter-spacing: 0;
+      margin-bottom: 0.15rem;
+    }
+    @media (max-width: 639px) {
+      .h04-block { bottom: -1rem; left: -0.75rem; width: 42%; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       H05 — WIDE CINEMATIC
+       Landscape-aspect image + slim stat rail below. Movie-poster feel.
+       ═══════════════════════════════════════════════════════════ */
+    .h05 {
+      width: 100%;
+      max-width: 640px;
+      margin-inline: auto;
+    }
+    .h05-img {
+      aspect-ratio: 4 / 3.4;
+      overflow: hidden;
+      background: var(--muted);
+      position: relative;
+    }
+    .h05-img img { width: 100%; height: 100%; object-fit: cover; }
+    .h05-img .tag {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--fg);
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.7rem;
+      background: rgba(10,10,15,0.75);
+      backdrop-filter: blur(10px);
+      border-left: 2px solid var(--accent);
+    }
+    .h05-info {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--accent);
+    }
+    .h05-info > div {
+      display: flex;
+      flex-direction: column;
+    }
+    .h05-info .k {
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: var(--fg-subtle);
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+    }
+    .h05-info .v {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--fg);
+      line-height: 1;
+      margin-top: 0.35rem;
+    }
+    .h05-info .v em { color: var(--accent); font-style: normal; }
+    .h05-info > div:first-child .v {
+      font-size: 1.4rem;
+      letter-spacing: 0.02em;
+    }
+    @media (max-width: 639px) {
+      .h05-info { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       H06 — HERO + CAPTION CARD
+       Image + small offset caption card overlapping bottom-right.
+       ═══════════════════════════════════════════════════════════ */
+    .h06 {
+      position: relative;
+      width: 100%;
+      max-width: 540px;
+      margin-inline: auto;
+    }
+    .h06-img {
+      aspect-ratio: 3 / 4.2;
+      overflow: hidden;
+      background: var(--muted);
+    }
+    .h06-img img { width: 100%; height: 100%; object-fit: cover; }
+    .h06-card {
+      position: absolute;
+      right: -1rem;
+      bottom: 2rem;
+      width: min(260px, 60%);
+      background: var(--bg);
+      border: 1px solid var(--border-hover);
+      padding: 1.1rem 1.2rem;
+      z-index: 2;
+    }
+    .h06-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2.5rem;
+      height: 2px;
+      background: var(--accent);
+    }
+    .h06-card .tag {
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      margin-top: 0.6rem;
+    }
+    .h06-card .name {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 500;
+      color: var(--fg);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      margin-top: 0.6rem;
+    }
+    .h06-card .meta {
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--fg-muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-top: 0.55rem;
+      padding-top: 0.55rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+    }
+    .h06-card .meta strong { color: var(--fg); font-family: var(--font-display); font-weight: 500; letter-spacing: 0; }
+
+    /* Footer */
+    .page-footer {
+      padding: 3rem 0 4rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--fg-subtle);
+      font-family: var(--font-label);
+      font-size: 0.78rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      margin-top: 4rem;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 639px) {
+      .opt { padding-block: 4rem; }
+      .hero { min-height: auto; gap: 2.5rem; }
+      .copy h3 { font-size: clamp(2rem, 10vw, 3.25rem); }
+      .h01 { margin-right: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="page">
+
+    <header class="page-header">
+      <div class="eyebrow">Home Page Hero · Minimal</div>
+      <h1>Six hero options.</h1>
+      <p>Designed specifically for the homepage hero — image-forward, statement-making, still restrained. Each one makes a first impression without shouting.</p>
+      <nav class="toc">
+        <a href="#h01">01 · Full-bleed Portrait</a>
+        <a href="#h02">02 · Primary + Peek</a>
+        <a href="#h03">03 · Year Rail</a>
+        <a href="#h04">04 · Amber Block</a>
+        <a href="#h05">05 · Cinematic Wide</a>
+        <a href="#h06">06 · Caption Card</a>
+      </nav>
+    </header>
+
+    <!-- ═══ 01 — FULL-BLEED PORTRAIT ═══ -->
+    <section class="opt" id="h01">
+      <div class="opt-head">
+        <span class="opt-num">01</span>
+        <h2 class="opt-title">Full-bleed Portrait</h2>
+        <p class="opt-desc">A tall image that bleeds off the right edge of the page — gives the hero real estate and makes the building feel like it's stepping into view. One amber hairline separates the image from a two-part signature below. Confident and quiet.</p>
+      </div>
+
+      <div class="hero">
+        <div class="copy">
+          <span class="badge">Est. 2014 · Mumbai</span>
+          <h3>Building <em>legacies</em>,<br>not just structures.</h3>
+          <p class="lede">Strong Built delivers 5.7+ million sq.&nbsp;ft across 90+ buildings in Mumbai — residential, commercial, and institutional work anchored by the 5S philosophy.</p>
+          <div class="ctas">
+            <a href="#" class="btn btn-primary">Explore Projects <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="btn btn-link">Contact us</a>
+          </div>
+        </div>
+
+        <div class="h01">
+          <div class="h01-frame">
+            <img src="assets/Projects/monticello.jpg" alt="Monticello Tower" loading="eager">
+          </div>
+          <div class="h01-sig">
+            <span class="name">Monticello</span>
+            <span class="meta"><strong>SB / 24</strong>Mumbai · 24 Floors</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 02 — PRIMARY + PEEK ═══ -->
+    <section class="opt" id="h02">
+      <div class="opt-head">
+        <span class="opt-num">02</span>
+        <h2 class="opt-title">Primary + Peek</h2>
+        <p class="opt-desc">One main portrait image with a smaller desaturated accent image peeking from behind the top-right corner. Adds depth and implies a portfolio without showing ten things. The negative-space cutout is cut with the background color so it reads as layering, not clutter.</p>
+      </div>
+
+      <div class="hero">
+        <div class="copy">
+          <span class="badge">Est. 2014 · Mumbai</span>
+          <h3>Building <em>legacies</em>,<br>not just structures.</h3>
+          <p class="lede">Strong Built delivers 5.7+ million sq.&nbsp;ft across 90+ buildings in Mumbai — residential, commercial, and institutional work anchored by the 5S philosophy.</p>
+          <div class="ctas">
+            <a href="#" class="btn btn-primary">Explore Projects <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="btn btn-link">Contact us</a>
+          </div>
+        </div>
+
+        <div class="h02">
+          <div class="h02-accent"><img src="assets/Projects/Del Sol.jpg" alt="" loading="lazy"></div>
+          <div class="h02-main"><img src="assets/Projects/monticello.jpg" alt="Monticello Tower" loading="eager"></div>
+          <div class="h02-cap">
+            <span class="name">Monticello</span>
+            <span>Mumbai <span class="dot"></span>2024 <span class="dot"></span>24 FL</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 03 — YEAR RAIL ═══ -->
+    <section class="opt" id="h03">
+      <div class="opt-head">
+        <span class="opt-num">03</span>
+        <h2 class="opt-title">Year Rail</h2>
+        <p class="opt-desc">One portrait hero image with a slim vertical timeline rail running alongside it. Four years, one active (amber). Communicates continuity — "we've been doing this for a while" — without a bar chart or carousel.</p>
+      </div>
+
+      <div class="hero">
+        <div class="copy">
+          <span class="badge">Est. 2014 · Mumbai</span>
+          <h3>Building <em>legacies</em>,<br>not just structures.</h3>
+          <p class="lede">Strong Built delivers 5.7+ million sq.&nbsp;ft across 90+ buildings in Mumbai — residential, commercial, and institutional work anchored by the 5S philosophy.</p>
+          <div class="ctas">
+            <a href="#" class="btn btn-primary">Explore Projects <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="btn btn-link">Contact us</a>
+          </div>
+        </div>
+
+        <div class="h03">
+          <div class="h03-img">
+            <img src="assets/Projects/monticello.jpg" alt="Monticello Tower" loading="eager">
+          </div>
+          <div class="h03-rail">
+            <div class="h03-rail-item h03-rail-item--active">
+              <span class="y">'24</span>
+              <span class="n">Now</span>
+            </div>
+            <div class="h03-rail-item">
+              <span class="y">'23</span>
+              <span class="n">Del Sol</span>
+            </div>
+            <div class="h03-rail-item">
+              <span class="y">'22</span>
+              <span class="n">Tree Top</span>
+            </div>
+            <div class="h03-rail-item">
+              <span class="y">'14</span>
+              <span class="n">Founded</span>
+            </div>
+          </div>
+          <div class="h03-foot">
+            <span class="name">Monticello · Mumbai</span>
+            <span>90+ Buildings · 5.7M Sq.Ft</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 04 — AMBER BLOCK ═══ -->
+    <section class="opt" id="h04">
+      <div class="opt-head">
+        <span class="opt-num">04</span>
+        <h2 class="opt-title">Amber Block</h2>
+        <p class="opt-desc">Portrait hero with a solid amber square offset into the bottom-left corner carrying the headline stat — "90+ Buildings". Bold juxtaposition of photograph and pure geometry. A quiet glass caption sits in the opposite corner for balance.</p>
+      </div>
+
+      <div class="hero">
+        <div class="copy">
+          <span class="badge">Est. 2014 · Mumbai</span>
+          <h3>Building <em>legacies</em>,<br>not just structures.</h3>
+          <p class="lede">Strong Built delivers 5.7+ million sq.&nbsp;ft across 90+ buildings in Mumbai — residential, commercial, and institutional work anchored by the 5S philosophy.</p>
+          <div class="ctas">
+            <a href="#" class="btn btn-primary">Explore Projects <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="btn btn-link">Contact us</a>
+          </div>
+        </div>
+
+        <div class="h04">
+          <div class="h04-img">
+            <img src="assets/Projects/monticello.jpg" alt="Monticello Tower" loading="eager">
+          </div>
+          <div class="h04-block">
+            <div class="top">Since 2014</div>
+            <div class="big">90+</div>
+            <div class="lbl">Buildings<br>Delivered</div>
+          </div>
+          <div class="h04-cap">
+            <strong>Monticello</strong>
+            Mumbai · 2024
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 05 — CINEMATIC WIDE ═══ -->
+    <section class="opt" id="h05">
+      <div class="opt-head">
+        <span class="opt-num">05</span>
+        <h2 class="opt-title">Cinematic Wide</h2>
+        <p class="opt-desc">A wider-aspect image (4:3.4) with a small "Featured" tag pinned at top-left. Beneath, a minimal 4-column info rail: project name + three data points separated by a single amber rule. Feels like a well-designed movie poster.</p>
+      </div>
+
+      <div class="hero">
+        <div class="copy">
+          <span class="badge">Est. 2014 · Mumbai</span>
+          <h3>Building <em>legacies</em>,<br>not just structures.</h3>
+          <p class="lede">Strong Built delivers 5.7+ million sq.&nbsp;ft across 90+ buildings in Mumbai — residential, commercial, and institutional work anchored by the 5S philosophy.</p>
+          <div class="ctas">
+            <a href="#" class="btn btn-primary">Explore Projects <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="btn btn-link">Contact us</a>
+          </div>
+        </div>
+
+        <div class="h05">
+          <div class="h05-img">
+            <img src="assets/Projects/monticello.jpg" alt="Monticello Tower" loading="eager">
+            <span class="tag">Featured · 2024</span>
+          </div>
+          <div class="h05-info">
+            <div>
+              <span class="k">Project</span>
+              <span class="v">Monticello</span>
+            </div>
+            <div>
+              <span class="k">Floors</span>
+              <span class="v">24</span>
+            </div>
+            <div>
+              <span class="k">Area</span>
+              <span class="v">180<em>K</em></span>
+            </div>
+            <div>
+              <span class="k">City</span>
+              <span class="v">Mumbai</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 06 — CAPTION CARD ═══ -->
+    <section class="opt" id="h06">
+      <div class="opt-head">
+        <span class="opt-num">06</span>
+        <h2 class="opt-title">Caption Card</h2>
+        <p class="opt-desc">Full portrait hero with a small caption card slipping off the right edge at the bottom third. The card has a subtle amber tab at the corner, project name, and two data points. Elegant, low-key — the card feels like a museum placard.</p>
+      </div>
+
+      <div class="hero">
+        <div class="copy">
+          <span class="badge">Est. 2014 · Mumbai</span>
+          <h3>Building <em>legacies</em>,<br>not just structures.</h3>
+          <p class="lede">Strong Built delivers 5.7+ million sq.&nbsp;ft across 90+ buildings in Mumbai — residential, commercial, and institutional work anchored by the 5S philosophy.</p>
+          <div class="ctas">
+            <a href="#" class="btn btn-primary">Explore Projects <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="btn btn-link">Contact us</a>
+          </div>
+        </div>
+
+        <div class="h06">
+          <div class="h06-img">
+            <img src="assets/Projects/monticello.jpg" alt="Monticello Tower" loading="eager">
+          </div>
+          <div class="h06-card">
+            <div class="tag">Featured · 2024</div>
+            <div class="name">Monticello</div>
+            <div class="meta">
+              <span>Mumbai</span>
+              <span><strong>24 FL · 180K SQFT</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      Pick 01–06 and I'll wire it into index-minimalist-dark.html
+    </footer>
+  </main>
+</body>
+</html>

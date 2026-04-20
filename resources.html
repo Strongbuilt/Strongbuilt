@@ -1,357 +1,299 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resources | Strong Built</title>
-  <meta name="description" content="Access corporate documents, construction tools, and vendor resources from Strong Built.">
-  <meta name="keywords" content="Strong Built, construction Mumbai, construction company, building contractors, civil construction, residential construction, commercial construction">
-  <meta name="author" content="Strong Built">
-  <meta name="robots" content="index, follow">
-
-  <!-- Favicon -->
+  <meta name="description" content="Corporate documents, safety standards, and quality management resources for clients, vendors, and partners.">
   <link rel="icon" type="image/png" href="assets/Favicon/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/svg+xml" href="assets/Favicon/favicon.svg">
-  <link rel="shortcut icon" href="assets/Favicon/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/Favicon/apple-touch-icon.png">
-  <meta name="apple-mobile-web-app-title" content="Strong Built">
-  <link rel="manifest" href="assets/Favicon/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="theme.css">
+  <style>
+    .rs-hero { position: relative; padding: clamp(8rem,14vw,12rem) 0 clamp(3rem,5vw,5rem); text-align: center; overflow: hidden; }
+    .rs-hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at top, rgba(245,158,11,0.08) 0%, transparent 55%); pointer-events:none; }
+    .rs-hero h1 { font-family: var(--font-display); font-size: clamp(3rem,8vw,7rem); font-weight: 600; line-height: 0.95; margin: 1.5rem 0 1.75rem; }
+    .rs-hero h1 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .rs-hero .lede { max-width: 38rem; margin: 0 auto; color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; }
+    .rs-hero-rule { width: 3.5rem; height: 1px; background: var(--accent); margin: 2.25rem auto 0; }
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Strong Built">
-  <meta property="og:title" content="Resources | Strong Built">
-  <meta property="og:description" content="Download Strong Built's Company Profile, HSE Good Practices and QMS presentation. Plus vendor onboarding and invoicing guidelines.">
-  <meta property="og:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
-  <meta property="og:locale" content="en_IN">
+    .rs-section { padding-block: clamp(4rem,7vw,6rem); position: relative; }
+    .rs-section--alt { background: rgba(18,18,26,0.4); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .rs-head { text-align: center; max-width: 42rem; margin: 0 auto clamp(2.5rem,4vw,3.5rem); }
+    .rs-head h2 { font-family: var(--font-display); font-size: clamp(2.25rem,5vw,3.5rem); font-weight: 600; line-height: 1; margin: 1rem 0 0; }
+    .rs-head h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .rs-head p { color: var(--fg-muted); margin: 1rem auto 0; max-width: 40rem; line-height: 1.65; }
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Resources | Strong Built">
-  <meta name="twitter:description" content="Corporate documents, HSE practices, and QMS resources from Strong Built.">
-  <meta name="twitter:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
+    .rs-docs { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    @media (min-width: 720px)  { .rs-docs { grid-template-columns: repeat(2,1fr); } }
+    @media (min-width: 1024px) { .rs-docs { grid-template-columns: repeat(3,1fr); gap: 1.5rem; } }
+    .rs-doc {
+      display: flex; flex-direction: column;
+      background: var(--card); backdrop-filter: blur(8px);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: 2rem 1.75rem;
+      transition: all var(--t-slow) var(--ease-out);
+    }
+    .rs-doc:hover { border-color: rgba(245,158,11,0.28); background: rgba(26,26,36,0.85); transform: translateY(-3px); box-shadow: var(--glow-sm); }
+    .rs-doc .head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; }
+    .rs-doc .ico {
+      width: 3rem; height: 3rem;
+      display: grid; place-items: center;
+      background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 50%; color: var(--accent); font-size: 1.1rem;
+      transition: all var(--t-base-ms);
+    }
+    .rs-doc:hover .ico { background: var(--accent); color: var(--accent-foreground); box-shadow: var(--glow-btn); }
+    .rs-doc .size { font-family: var(--font-label); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg-subtle); text-align: right; }
+    .rs-doc h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 0.75rem; color: var(--fg); }
+    .rs-doc p { color: var(--fg-muted); font-size: 0.88rem; line-height: 1.65; margin: 0 0 1.5rem; flex: 1; }
+    .rs-doc .foot { display: flex; justify-content: space-between; align-items: center; padding-top: 1.1rem; border-top: 1px solid var(--border); font-family: var(--font-label); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-subtle); margin-bottom: 1.25rem; }
+    .rs-doc .foot i { color: var(--accent); margin-right: 0.3rem; }
+    .rs-doc .dl {
+      display: inline-flex; align-items: center; gap: 0.5rem; align-self: flex-start;
+      font-family: var(--font-label); font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent);
+      transition: all var(--t-base-ms);
+    }
+    .rs-doc .dl:hover { color: var(--fg); }
+    .rs-doc .dl i { transition: transform var(--t-base-ms); }
+    .rs-doc .dl:hover i { transform: translateY(2px); }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    .rs-vendor { display: grid; grid-template-columns: 1fr; gap: 1.25rem; max-width: 54rem; margin: 0 auto; }
+    @media (min-width: 720px) { .rs-vendor { grid-template-columns: repeat(2,1fr); gap: 1.5rem; } }
+    .rs-vendor-card {
+      display: flex; gap: 1rem; align-items: center; justify-content: space-between;
+      padding: 1.75rem;
+      background: var(--card); backdrop-filter: blur(8px);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      color: var(--fg);
+      transition: all var(--t-slow) var(--ease-out);
+    }
+    .rs-vendor-card:hover { border-color: rgba(245,158,11,0.3); background: rgba(26,26,36,0.85); transform: translateY(-3px); box-shadow: var(--glow-sm); }
+    .rs-vendor-card h4 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 0.5rem; color: var(--fg); }
+    .rs-vendor-card p { color: var(--fg-muted); font-size: 0.86rem; line-height: 1.55; margin: 0 0 0.75rem; }
+    .rs-vendor-card .action { font-family: var(--font-label); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+    .rs-vendor-card .action i { margin-right: 0.35rem; }
+    .rs-vendor-card .arrow {
+      width: 2.75rem; height: 2.75rem; flex-shrink: 0;
+      display: grid; place-items: center;
+      border-radius: 50%; background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.3); color: var(--accent);
+      transition: all var(--t-base-ms);
+    }
+    .rs-vendor-card:hover .arrow { background: var(--accent); color: var(--accent-foreground); transform: translateX(3px); box-shadow: var(--glow-btn); }
 
-  <!-- Global Styles -->
-  <link rel="stylesheet" href="styles.css">
+    .rs-help {
+      max-width: 48rem; margin: 0 auto;
+      background: var(--card); backdrop-filter: blur(8px);
+      border: 1px solid rgba(245,158,11,0.25); border-radius: var(--r-xl);
+      padding: clamp(2rem,4vw,3rem);
+      text-align: center;
+      box-shadow: var(--glow-sm);
+    }
+    .rs-help .ico {
+      width: 4rem; height: 4rem; margin: 0 auto 1.25rem;
+      display: grid; place-items: center;
+      background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.4);
+      border-radius: 50%; color: var(--accent); font-size: 1.35rem;
+    }
+    .rs-help h2 { font-family: var(--font-display); font-size: clamp(1.75rem,3.5vw,2.5rem); font-weight: 600; line-height: 1; margin: 0 0 1rem; }
+    .rs-help h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .rs-help p { color: var(--fg-muted); max-width: 36rem; margin: 0 auto 2rem; line-height: 1.7; font-size: 1rem; }
+    .rs-help .ctas { display: flex; flex-direction: column; gap: 0.75rem; justify-content: center; }
+    @media (min-width: 480px) { .rs-help .ctas { flex-direction: row; gap: 1rem; } }
 
-  <link rel="stylesheet" href="dist/app.css">
+    .d1 { transition-delay: 80ms; } .d2 { transition-delay: 160ms; } .d3 { transition-delay: 240ms; }
+  </style>
 </head>
 
-<body class="bg-noise antialiased overflow-x-hidden selection:bg-brand-gold selection:text-black">
+<body class="md-atmospheric">
+  <div class="md-orb" style="top:-180px;left:10%;width:520px;height:520px;" aria-hidden="true"></div>
+  <div class="md-orb" style="top:45%;right:-120px;width:460px;height:460px;" aria-hidden="true"></div>
+  <div class="md-orb" style="bottom:8%;left:-80px;width:400px;height:400px;" aria-hidden="true"></div>
 
-  <!-- NAVIGATION OVERLAY (Side Drawer) -->
-  <div id="navOverlay" class="nav-overlay">
-    <div id="navBackdrop" class="nav-overlay-backdrop"></div>
-    <div class="nav-overlay-content p-8 md:p-10">
-
-      <!-- Header -->
-      <div class="flex justify-between items-center mb-12">
-        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto opacity-80">
-        <button id="closeMenuBtn" class="nav-close-btn"><i class="fas fa-times"></i></button>
-      </div>
-
-      <!-- Links -->
-      <ul class="space-y-0 flex-1">
-        <li><a href="index.html" class="sidebar-link">Home</a></li>
-        <li>
-          <button class="sidebar-dropdown-btn">
-            <span>About</span> <i class="fas fa-chevron-down"></i>
-          </button>
-          <div class="sidebar-submenu">
-            <a href="story.html" class="sidebar-sublink">Our Story</a>
-            <a href="leadership.html" class="sidebar-sublink">Leadership</a>
-            <a href="culture.html" class="sidebar-sublink">Culture</a>
-            <a href="recognition.html" class="sidebar-sublink">Recognition</a>
-          </div>
-        </li>
-        <li>
-          <button class="sidebar-dropdown-btn">
-            <span>Projects</span> <i class="fas fa-chevron-down"></i>
-          </button>
-          <div class="sidebar-submenu">
-            <a href="projects.html" class="sidebar-sublink">Portfolio</a>
-            <a href="map.html" class="sidebar-sublink">Project Map</a>
-          </div>
-        </li>
-        <li><a href="services.html" class="sidebar-link">Services</a></li>
-        <li><a href="clients.html" class="sidebar-link">Clients</a></li>
-        <li><a href="investors.html" class="sidebar-link">Investors</a></li>
-        <li><a href="csr.html" class="sidebar-link">CSR</a></li>
-        <li><a href="careers.html" class="sidebar-link">Careers</a></li>
-        <li><a href="resources.html" class="sidebar-link">Resources</a></li>
-        <li><a href="contact.html" class="sidebar-link">Contact</a></li>
-      </ul>
-
-      <!-- Contact Info -->
-      <div class="nav-info-block">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
-          <div class="nav-info-item">
-            <span class="nav-info-label">Call</span>
-            <p class="nav-info-value">+91 9619875081</p>
-          </div>
-          <div class="nav-info-item">
-            <span class="nav-info-label">Email</span>
-            <p class="nav-info-value">strongbuilt@skywaygroup.co.in</p>
+  <header class="md-header" id="mainHeader">
+    <div class="md-header-inner">
+      <a href="index.html" class="md-logo" aria-label="Strong Built — Home"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built"></a>
+      <nav class="md-nav" aria-label="Primary">
+        <div class="md-nav-item">
+          <button class="md-nav-link" type="button" aria-haspopup="true" aria-expanded="false">About <i class="fas fa-chevron-down"></i></button>
+          <div class="md-nav-dropdown" role="menu">
+            <a href="story.html" role="menuitem"><i class="fas fa-book-open"></i> Our Story</a>
+            <a href="leadership.html" role="menuitem"><i class="fas fa-users"></i> Leadership</a>
+            <a href="culture.html" role="menuitem"><i class="fas fa-heart"></i> Culture</a>
+            <a href="recognition.html" role="menuitem"><i class="fas fa-trophy"></i> Recognition</a>
           </div>
         </div>
-        <div class="flex gap-2">
-          <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav-social-link"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram" class="nav-social-link"><i class="fab fa-instagram"></i></a>
-          <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter" class="nav-social-link"><i class="fab fa-twitter"></i></a>
+        <div class="md-nav-item">
+          <button class="md-nav-link" type="button" aria-haspopup="true" aria-expanded="false">Projects <i class="fas fa-chevron-down"></i></button>
+          <div class="md-nav-dropdown" role="menu">
+            <a href="projects.html" role="menuitem"><i class="fas fa-th"></i> Portfolio</a>
+            <a href="map.html" role="menuitem"><i class="fas fa-map-marked-alt"></i> Project Map</a>
+          </div>
         </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- HEADER (Glass) -->
-  <header class="fixed w-full z-50 transition-all duration-300 glass-header" id="mainHeader">
-    <div class="container mx-auto px-4 md:px-6 h-20 md:h-24 flex items-center justify-between">
-      <!-- Logo -->
-      <a href="index.html" class="flex items-center group relative z-50">
-        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built Logo"
-          class="h-12 md:h-24 w-auto object-contain transition duration-300 hover:opacity-90">
-      </a>
-
-      <!-- Menu Trigger -->
-      <button id="menuToggle" class="menu-btn group">
-        <div class="menu-icon">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </button>
+        <a href="services.html" class="md-nav-link">Services</a>
+        <a href="clients.html" class="md-nav-link">Clients</a>
+        <a href="investors.html" class="md-nav-link">Investors</a>
+        <a href="csr.html" class="md-nav-link">CSR</a>
+        <a href="careers.html" class="md-nav-link">Careers</a>
+        <a href="resources.html" class="md-nav-link is-active" aria-current="page">Resources</a>
+      </nav>
+      <a href="contact.html" class="md-btn md-btn-primary md-header-cta">Contact Us</a>
+      <button id="menuToggle" class="md-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer"><i class="fas fa-bars"></i></button>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="relative overflow-hidden bg-clay-mist flex items-center" style="min-height:100svh;">
-    <div class="w-full max-w-[1400px] mx-auto px-6 md:px-10 pt-28 pb-12 relative z-2 text-center">
-      <span class="block text-brand-darkGold font-bold uppercase mb-4 font-heading reveal-up" style="font-size:var(--fs-small); letter-spacing:0.25em; transition-delay:100ms;">Resource Center</span>
-      <h1 class="text-clay-ink uppercase font-hero reveal-up" style="font-size:var(--fs-hero); line-height:0.92; letter-spacing:-0.02em; font-weight:700; margin-bottom:1.5rem; transition-delay:200ms;">
-        Tools &amp; <span class="gold-gradient-text">Guides</span>
-      </h1>
-      <div class="h-px w-24 bg-brand-gold my-8 mx-auto reveal-up" style="transition-delay:300ms;"></div>
-      <p class="text-lg md:text-2xl font-light text-clay-muted max-w-xl mx-auto leading-relaxed reveal-up" style="transition-delay:400ms;">
-        Corporate documents, safety standards, and quality management resources &mdash; available for clients, vendors, and partners.
-      </p>
+  <div id="navDrawer" class="md-drawer" aria-hidden="true">
+    <div class="md-drawer-backdrop" id="drawerBackdrop"></div>
+    <aside class="md-drawer-panel" role="dialog" aria-label="Navigation">
+      <div class="md-drawer-header">
+        <div class="md-logo"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built" style="height:2.75rem;width:auto;display:block;"></div>
+        <button class="md-menu-btn" id="drawerClose" aria-label="Close menu" style="display:flex;"><i class="fas fa-times"></i></button>
+      </div>
+      <nav>
+        <a href="index.html" class="md-drawer-link">Home</a>
+        <button class="md-drawer-dropbtn" data-dropdown>About <i class="fas fa-chevron-down"></i></button>
+        <div class="md-drawer-sub"><a href="story.html">Our Story</a><a href="leadership.html">Leadership</a><a href="culture.html">Culture</a><a href="recognition.html">Recognition</a></div>
+        <button class="md-drawer-dropbtn" data-dropdown>Projects <i class="fas fa-chevron-down"></i></button>
+        <div class="md-drawer-sub"><a href="projects.html">Portfolio</a><a href="map.html">Project Map</a></div>
+        <a href="services.html" class="md-drawer-link">Services</a>
+        <a href="clients.html" class="md-drawer-link">Clients</a>
+        <a href="investors.html" class="md-drawer-link">Investors</a>
+        <a href="csr.html" class="md-drawer-link">CSR</a>
+        <a href="careers.html" class="md-drawer-link">Careers</a>
+        <a href="resources.html" class="md-drawer-link" style="color:var(--accent);">Resources</a>
+        <a href="contact.html" class="md-drawer-link">Contact</a>
+      </nav>
+      <div style="margin-top:auto;padding-top:2rem;border-top:1px solid var(--border);">
+        <p class="md-mono" style="font-size:0.75rem;color:var(--fg-subtle);margin-bottom:1rem;">Connect</p>
+        <div style="display:flex;gap:0.5rem;">
+          <a href="https://www.linkedin.com/company/strongbuilt" class="md-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/strongbuilt" class="md-social-btn" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/strongbuilt" class="md-social-btn" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="rs-hero">
+    <div class="md-container">
+      <div class="md-reveal"><div class="md-badge" style="margin-inline:auto;"><span class="md-badge-dot" aria-hidden="true"></span><span>Resource Center</span></div></div>
+      <h1 class="md-reveal d1">Tools &amp; <span class="accent">guides.</span></h1>
+      <p class="lede md-reveal d2">Corporate documents, safety standards, and quality management resources — available for clients, vendors, and partners.</p>
+      <div class="rs-hero-rule md-reveal d3"></div>
     </div>
   </section>
 
-  <section class="py-16 md:py-24 container mx-auto px-6 relative z-10">
-    <div class="text-center mb-16 reveal-up">
-      <h2 class="text-4xl md:text-5xl font-bold text-clay-ink mb-4 uppercase font-heading">Corporate <span
-          class="text-brand-darkGold">Documents</span></h2>
-      <div class="w-24 h-1 bg-brand-gold mx-auto"></div>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-
-      <!-- Company Profile -->
-      <div class="glass-panel p-6 md:p-8 group hover:-translate-y-2 transition duration-300 reveal-up flex flex-col">
-        <div class="flex items-start justify-between mb-6">
-          <div class="bg-brand-gold/10 p-4 rounded-full">
-            <i class="fas fa-file-alt text-3xl text-brand-darkGold"></i>
-          </div>
-          <span class="text-[10px] text-clay-faint uppercase tracking-widest font-heading font-bold">PDF &middot; 34&nbsp;MB</span>
-        </div>
-        <h3 class="text-xl font-bold text-clay-ink mb-2 uppercase font-heading">Company Profile</h3>
-        <p class="text-clay-muted text-sm mb-6 leading-relaxed font-body flex-grow">
-          A comprehensive overview of Strong Built's history, leadership, capabilities, and project portfolio.
-        </p>
-        <div class="flex items-center justify-between text-[10px] text-clay-faint uppercase tracking-widest font-heading mb-4 pt-4 border-t border-clay-border">
-          <span>Updated Dec 2024</span>
-          <span><i class="fas fa-globe text-brand-darkGold/70 mr-1"></i> EN</span>
-        </div>
-        <a href="assets/brochure/Strong Build brochure.pdf" target="_blank" rel="noopener" download
-          class="flex items-center gap-2 text-brand-darkGold text-xs font-bold uppercase tracking-widest font-heading hover:text-clay-ink transition">
-          <i class="fas fa-download"></i> Download PDF
-        </a>
+  <section class="rs-section">
+    <div class="md-container">
+      <div class="rs-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Downloads</span>
+        <h2>Corporate <span class="accent">documents.</span></h2>
       </div>
-
-      <!-- HSE Good Practices -->
-      <div class="glass-panel p-6 md:p-8 group hover:-translate-y-2 transition duration-300 reveal-up flex flex-col"
-        style="transition-delay: 100ms;">
-        <div class="flex items-start justify-between mb-6">
-          <div class="bg-brand-gold/10 p-4 rounded-full">
-            <i class="fas fa-shield-alt text-3xl text-brand-darkGold"></i>
-          </div>
-          <span class="text-[10px] text-clay-faint uppercase tracking-widest font-heading font-bold">PDF &middot; 4.3&nbsp;MB</span>
-        </div>
-        <h3 class="text-xl font-bold text-clay-ink mb-2 uppercase font-heading">HSE Good Practices</h3>
-        <p class="text-clay-muted text-sm mb-6 leading-relaxed font-body flex-grow">
-          Our Health, Safety, and Environment standards covering site protocols, PPE, training, and emergency procedures &mdash; aligned with ISO 45001:2018.
-        </p>
-        <div class="flex items-center justify-between text-[10px] text-clay-faint uppercase tracking-widest font-heading mb-4 pt-4 border-t border-clay-border">
-          <span>Updated Feb 2025</span>
-          <span><i class="fas fa-certificate text-brand-darkGold/70 mr-1"></i> ISO 45001</span>
-        </div>
-        <a href="assets/resources/STRONGBUILT HSE.pdf" target="_blank" rel="noopener" download
-          class="flex items-center gap-2 text-brand-darkGold text-xs font-bold uppercase tracking-widest font-heading hover:text-clay-ink transition">
-          <i class="fas fa-download"></i> Download PDF
-        </a>
+      <div class="rs-docs">
+        <article class="rs-doc md-reveal">
+          <div class="head"><div class="ico"><i class="fas fa-file-alt"></i></div><div class="size">PDF · 34 MB</div></div>
+          <h3>Company Profile</h3>
+          <p>A comprehensive overview of Strong Built's history, leadership, capabilities, and project portfolio.</p>
+          <div class="foot"><span>Updated Dec 2024</span><span><i class="fas fa-globe"></i> EN</span></div>
+          <a href="assets/brochure/Strong Build brochure.pdf" target="_blank" rel="noopener" download class="dl"><i class="fas fa-arrow-down"></i> Download PDF</a>
+        </article>
+        <article class="rs-doc md-reveal d1">
+          <div class="head"><div class="ico"><i class="fas fa-shield-alt"></i></div><div class="size">PDF · 4.3 MB</div></div>
+          <h3>HSE Good Practices</h3>
+          <p>Our Health, Safety, and Environment standards covering site protocols, PPE, training, and emergency procedures — aligned with ISO 45001:2018.</p>
+          <div class="foot"><span>Updated Feb 2025</span><span><i class="fas fa-certificate"></i> ISO 45001</span></div>
+          <a href="assets/resources/STRONGBUILT HSE.pdf" target="_blank" rel="noopener" download class="dl"><i class="fas fa-arrow-down"></i> Download PDF</a>
+        </article>
+        <article class="rs-doc md-reveal d2">
+          <div class="head"><div class="ico"><i class="fas fa-award"></i></div><div class="size">PDF · 4.1 MB</div></div>
+          <h3>QMS Presentation</h3>
+          <p>Our Quality Management System: material testing, process audits, and continuous improvement methodologies aligned with ISO 9001:2015.</p>
+          <div class="foot"><span>Updated 2024</span><span><i class="fas fa-certificate"></i> ISO 9001</span></div>
+          <a href="assets/resources/Strongbuilt QMS Presentation.pdf" target="_blank" rel="noopener" download class="dl"><i class="fas fa-arrow-down"></i> Download PDF</a>
+        </article>
       </div>
-
-      <!-- QMS Presentation -->
-      <div class="glass-panel p-6 md:p-8 group hover:-translate-y-2 transition duration-300 reveal-up flex flex-col"
-        style="transition-delay: 200ms;">
-        <div class="flex items-start justify-between mb-6">
-          <div class="bg-brand-gold/10 p-4 rounded-full">
-            <i class="fas fa-award text-3xl text-brand-darkGold"></i>
-          </div>
-          <span class="text-[10px] text-clay-faint uppercase tracking-widest font-heading font-bold">PDF &middot; 4.1&nbsp;MB</span>
-        </div>
-        <h3 class="text-xl font-bold text-clay-ink mb-2 uppercase font-heading">QMS Presentation</h3>
-        <p class="text-clay-muted text-sm mb-6 leading-relaxed font-body flex-grow">
-          Our Quality Management System: material testing, process audits, and continuous improvement methodologies aligned with ISO 9001:2015.
-        </p>
-        <div class="flex items-center justify-between text-[10px] text-clay-faint uppercase tracking-widest font-heading mb-4 pt-4 border-t border-clay-border">
-          <span>Updated 2024</span>
-          <span><i class="fas fa-certificate text-brand-darkGold/70 mr-1"></i> ISO 9001</span>
-        </div>
-        <a href="assets/resources/Strongbuilt QMS Presentation.pdf" target="_blank" rel="noopener" download
-          class="flex items-center gap-2 text-brand-darkGold text-xs font-bold uppercase tracking-widest font-heading hover:text-clay-ink transition">
-          <i class="fas fa-download"></i> Download PDF
-        </a>
-      </div>
-
     </div>
   </section>
 
-  <!-- VENDOR & SUPPLIER ZONE -->
-  <section class="py-16 md:py-24 bg-clay-surface/5 border-y border-clay-border">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-12 md:mb-16 reveal-up">
-        <span class="text-brand-darkGold text-xs font-bold tracking-[0.4em] uppercase mb-3 block font-heading">Supply Chain</span>
-        <h2 class="text-4xl md:text-5xl font-bold text-clay-ink mb-4 uppercase font-heading">Vendor &amp; Supplier <span class="text-brand-darkGold">Zone</span></h2>
-        <div class="w-24 h-1 bg-brand-gold mx-auto mb-6"></div>
-        <p class="text-clay-muted max-w-2xl mx-auto font-body text-base md:text-lg">For material suppliers and subcontractors looking to work with Strong Built.</p>
+  <section class="rs-section rs-section--alt">
+    <div class="md-container">
+      <div class="rs-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Supply Chain</span>
+        <h2>Vendor &amp; supplier <span class="accent">zone.</span></h2>
+        <p>For material suppliers and subcontractors looking to work with Strong Built.</p>
       </div>
-
-      <div class="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
-
-        <a href="mailto:strongbuilt@skywaygroup.co.in?subject=Vendor%20Registration%20Request&amp;body=Hello%20Strong%20Built%20team%2C%0A%0AI%27d%20like%20to%20be%20considered%20as%20a%20vendor%2Fsubcontractor.%20Please%20share%20your%20vendor%20registration%20form.%0A%0ACompany%3A%20%0ACategory%3A%20%0ASite%2FProject%20References%3A%20%0AContact%3A%20"
-          class="glass-panel p-8 flex items-center justify-between group hover:border-brand-gold hover:-translate-y-1 transition-all duration-300 reveal-up rounded-sm">
+      <div class="rs-vendor">
+        <a href="mailto:strongbuilt@skywaygroup.co.in?subject=Vendor%20Registration%20Request&body=Hello%20Strong%20Built%20team%2C%0A%0AI%27d%20like%20to%20be%20considered%20as%20a%20vendor%2Fsubcontractor.%20Please%20share%20your%20vendor%20registration%20form.%0A%0ACompany%3A%20%0ACategory%3A%20%0ASite%2FProject%20References%3A%20%0AContact%3A%20" class="rs-vendor-card md-reveal">
           <div>
-            <h4 class="text-lg md:text-xl font-bold text-clay-ink uppercase font-heading group-hover:text-brand-darkGold transition">Vendor Registration</h4>
-            <p class="text-clay-muted text-xs md:text-sm mt-2 font-body">New material suppliers &amp; subcontractors &mdash; email us to request the registration form.</p>
-            <p class="text-[10px] text-brand-darkGold uppercase tracking-widest font-heading font-bold mt-3"><i class="fas fa-envelope mr-1"></i> Request via Email</p>
+            <h4>Vendor Registration</h4>
+            <p>New material suppliers &amp; subcontractors — email us to request the registration form.</p>
+            <span class="action"><i class="fas fa-envelope"></i> Request via Email</span>
           </div>
-          <div class="w-12 h-12 rounded-full bg-clay-surface/10 flex items-center justify-center text-clay-ink group-hover:bg-brand-gold/15 group-hover:border group-hover:border-brand-gold group-hover:text-brand-darkGold group-hover:shadow-[0_0_15px_rgba(239,191,4,0.2)] transition-all shrink-0 ml-4">
-            <i class="fas fa-arrow-right"></i>
-          </div>
+          <div class="arrow"><i class="fas fa-arrow-right"></i></div>
         </a>
-
-        <a href="mailto:strongbuilt@skywaygroup.co.in?subject=Invoicing%20Guidelines%20Request&amp;body=Hello%20Strong%20Built%20team%2C%0A%0APlease%20share%20your%20current%20invoicing%20guidelines%20and%20payment%20cycle%20documentation.%0A%0ACompany%3A%20%0AGSTIN%3A%20%0AContact%3A%20"
-          class="glass-panel p-8 flex items-center justify-between group hover:border-brand-gold hover:-translate-y-1 transition-all duration-300 reveal-up rounded-sm" style="transition-delay: 100ms;">
+        <a href="mailto:strongbuilt@skywaygroup.co.in?subject=Invoicing%20Guidelines%20Request&body=Hello%20Strong%20Built%20team%2C%0A%0APlease%20share%20your%20current%20invoicing%20guidelines%20and%20payment%20cycle%20documentation.%0A%0ACompany%3A%20%0AGSTIN%3A%20%0AContact%3A%20" class="rs-vendor-card md-reveal d1">
           <div>
-            <h4 class="text-lg md:text-xl font-bold text-clay-ink uppercase font-heading group-hover:text-brand-darkGold transition">Invoicing Guidelines</h4>
-            <p class="text-clay-muted text-xs md:text-sm mt-2 font-body">Existing vendors &mdash; request our current billing format and payment cycle documentation.</p>
-            <p class="text-[10px] text-brand-darkGold uppercase tracking-widest font-heading font-bold mt-3"><i class="fas fa-envelope mr-1"></i> Request via Email</p>
+            <h4>Invoicing Guidelines</h4>
+            <p>Existing vendors — request our current billing format and payment cycle documentation.</p>
+            <span class="action"><i class="fas fa-envelope"></i> Request via Email</span>
           </div>
-          <div class="w-12 h-12 rounded-full bg-clay-surface/10 flex items-center justify-center text-clay-ink group-hover:bg-brand-gold/15 group-hover:border group-hover:border-brand-gold group-hover:text-brand-darkGold group-hover:shadow-[0_0_15px_rgba(239,191,4,0.2)] transition-all shrink-0 ml-4">
-            <i class="fas fa-arrow-right"></i>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- NEED SOMETHING ELSE? CTA -->
-  <section class="py-16 md:py-24 container mx-auto px-6 max-w-4xl">
-    <div class="glass-panel p-8 md:p-12 text-center reveal-up rounded-sm border border-clay-border">
-      <i class="fas fa-headset text-4xl text-brand-darkGold mb-4"></i>
-      <h2 class="text-3xl md:text-4xl font-bold text-clay-ink mb-4 uppercase font-heading">Looking for Something <span class="text-brand-darkGold">Specific?</span></h2>
-      <p class="text-clay-muted max-w-xl mx-auto font-body mb-8 text-base md:text-lg leading-relaxed">
-        Need ISO certificates, audit reports, technical datasheets, or project-specific documentation? We share materials with verified clients, vendors, and partners on request &mdash; usually within 1&ndash;2 working days.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="mailto:strongbuilt@skywaygroup.co.in?subject=Document%20Request"
-          class="inline-block bg-brand-gold text-black px-8 py-3.5 font-bold uppercase tracking-widest text-xs md:text-sm hover:bg-clay-surface transition rounded-sm font-heading">
-          <i class="fas fa-envelope mr-2"></i> Email a Request
-        </a>
-        <a href="contact.html"
-          class="inline-block border border-clay-border text-clay-ink px-8 py-3.5 font-bold uppercase tracking-widest text-xs md:text-sm hover:border-brand-gold hover:text-brand-darkGold transition rounded-sm font-heading">
-          Use Contact Form
+          <div class="arrow"><i class="fas fa-arrow-right"></i></div>
         </a>
       </div>
     </div>
   </section>
 
-  <footer class="bg-clay-mist text-clay-muted pt-16 md:pt-20 pb-10 border-t border-clay-border relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10"
-      style="background-image: radial-gradient(rgba(239, 191, 4, 0.25) 1px, transparent 1px); background-size: 20px 20px;"></div>
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
-        <div class="col-span-1">
-          <div class="text-2xl font-bold text-clay-ink mb-6 font-heading tracking-widest flex items-center gap-2">
-            <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto">
-          </div>
-          <p class="text-clay-faint text-sm mb-6 font-light leading-relaxed">
-            Forging the future with concrete, steel, and integrity.
-          </p>
-          <div class="flex gap-4">
-            <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram"
-              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
-                class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn"
-              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
-                class="fab fa-linkedin-in"></i></a>
-            <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter"
-              class="w-10 h-10 border border-clay-border flex items-center justify-center text-brand-darkGold hover:bg-brand-gold hover:text-black transition"><i
-                class="fab fa-twitter"></i></a>
-          </div>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Navigation</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><a href="story.html" class="hover:text-clay-ink transition">About</a></li>
-            <li><a href="services.html" class="hover:text-clay-ink transition">Services</a></li>
-            <li><a href="projects.html" class="hover:text-clay-ink transition">Projects</a></li>
-            <li><a href="clients.html" class="hover:text-clay-ink transition">Clients</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Services</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><a href="services.html" class="hover:text-clay-ink transition">Residential</a></li>
-            <li><a href="services.html" class="hover:text-clay-ink transition">Commercial</a></li>
-            <li><a href="services.html" class="hover:text-clay-ink transition">Industrial</a></li>
-            <li><a href="services.html" class="hover:text-clay-ink transition">Infrastructure</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-brand-darkGold font-bold uppercase tracking-widest mb-6 text-sm font-heading">Contact</h4>
-          <ul class="space-y-3 text-sm text-clay-muted font-body">
-            <li><i class="fas fa-map-marker-alt text-brand-darkGold mr-2"></i> 901-B Wing, 9th Floor, HDIL Kaledonia, Sahar
-              Road, Opp D'Mart, Sambhaji Nagar, Andheri-East, Mumbai - 400069.</li>
-            <li><i class="fas fa-phone text-brand-darkGold mr-2"></i> +91 9619875081 / 022-6123-2500</li>
-            <li><i class="fas fa-envelope text-brand-darkGold mr-2"></i> strongbuilt@skywaygroup.co.in</li>
-          </ul>
+  <section class="rs-section">
+    <div class="md-container">
+      <div class="rs-help md-reveal">
+        <div class="ico"><i class="fas fa-headset"></i></div>
+        <h2>Looking for something <span class="accent">specific?</span></h2>
+        <p>Need ISO certificates, audit reports, technical datasheets, or project-specific documentation? We share materials with verified clients, vendors, and partners on request — usually within 1–2 working days.</p>
+        <div class="ctas">
+          <a href="mailto:strongbuilt@skywaygroup.co.in?subject=Document%20Request" class="md-btn md-btn-primary"><i class="fas fa-envelope"></i> Email a Request</a>
+          <a href="contact.html" class="md-btn md-btn-secondary">Use Contact Form <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
-      <div
-        class="border-t border-clay-border pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-clay-muted font-light uppercase tracking-wider">
-        <p class="font-body">&copy; 2026 Strong Built. All rights reserved.</p>
-        <div class="flex gap-6 mt-4 md:mt-0 font-heading">
-          <a href="privacy.html" class="hover:text-clay-ink">Privacy</a>
-          <a href="terms.html" class="hover:text-clay-ink">Terms</a>
+    </div>
+  </section>
+
+  <footer class="md-footer">
+    <div class="md-container">
+      <div class="md-footer-top">
+        <div class="md-footer-brand">
+          <a href="index.html" aria-label="Strong Built — Home"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="md-footer-logo"></a>
+          <p class="md-footer-tagline">Building <em>legacies</em>, not just structures. Since 2014.</p>
         </div>
+        <div class="md-footer-contact-card">
+          <div class="md-fc-item"><span class="md-fc-k"><i class="fas fa-location-dot"></i> Address</span><p class="md-fc-v">901-B Wing, HDIL Kaledonia,<br>Sahar Road, Andheri-East,<br>Mumbai — 400069</p></div>
+          <div class="md-fc-item"><span class="md-fc-k"><i class="fas fa-phone"></i> Phone</span><a class="md-fc-v" href="tel:+919619875081">+91 96198 75081</a><a class="md-fc-v" href="tel:+912261232500">022 6123 2500</a></div>
+          <div class="md-fc-item"><span class="md-fc-k"><i class="fas fa-envelope"></i> Email</span><a class="md-fc-v" href="mailto:sales@strongbuilt.in">sales@strongbuilt.in</a></div>
+        </div>
+      </div>
+      <div class="md-footer-strip">
+        <div class="md-footer-strip-left">
+          <div class="md-footer-socials">
+            <a href="https://www.instagram.com/strongbuilt" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/strongbuilt" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://x.com/strongbuilt" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+          </div>
+          <div class="md-footer-strip-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+        </div>
+        <div class="md-footer-strip-center">© 2026 Strong Built — A Skyway Group Company. All Rights Reserved.</div>
+        <div class="md-footer-strip-right">Designed by <b>Abdul Ahad</b></div>
       </div>
     </div>
   </footer>
 
+  <div class="md-fab" aria-hidden="true">
+    <a href="https://wa.me/919619875081" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="tel:+919619875081" aria-label="Call Strong Built"><i class="fas fa-phone"></i></a>
+  </div>
 
-  <script src="script.js"></script>
+  <script src="theme.js"></script>
 </body>
-
 </html>

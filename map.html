@@ -45,6 +45,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="dist/app.css">
+    <link rel="stylesheet" href="theme.css">
 
     <style>
         .sidebar-optimized { background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-right: 1px solid rgba(255,255,255,0.08); }
@@ -59,22 +60,22 @@
             background: transparent; border: none; cursor: pointer;
             transition: all 0.2s ease; text-align: left;
         }
-        .style-opt:hover { background: rgba(239,191,4,0.08); color: #EEEEEE; }
-        .style-opt.active { color: #EFBF04; background: rgba(239,191,4,0.1); }
+        .style-opt:hover { background: rgba(239,191,4,0.08); color: #FAFAFA; }
+        .style-opt.active { color: #F59E0B; background: rgba(239,191,4,0.1); }
         .style-dot {
             width: 10px; height: 10px; border-radius: 2px; border: 1px solid rgba(255,255,255,0.15);
             flex-shrink: 0;
         }
-        .style-opt.active .style-dot { border-color: #EFBF04; box-shadow: 0 0 6px rgba(239,191,4,0.4); }
+        .style-opt.active .style-dot { border-color: #F59E0B; box-shadow: 0 0 6px rgba(239,191,4,0.4); }
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(239, 191, 4,0.3); border-radius: 2px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #EFBF04; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #F59E0B; }
 
         /* ─────── Tcard-style popup ─────── */
         .leaflet-popup-content-wrapper {
             background: linear-gradient(155deg, rgba(42, 38, 39, 0.97), rgba(20, 18, 19, 0.97));
-            color: #EEEEEE;
+            color: #FAFAFA;
             border: 1px solid rgba(239, 191, 4,0.35);
             border-radius: 6px;
             backdrop-filter: blur(14px);
@@ -89,13 +90,13 @@
             top: 0; left: 0;
             width: 60%;
             height: 2px;
-            background: linear-gradient(90deg, #EFBF04, transparent);
+            background: linear-gradient(90deg, #F59E0B, transparent);
             z-index: 5;
         }
         .leaflet-popup-content { margin: 0; width: 300px !important; }
         .leaflet-popup-tip { background: rgba(20, 18, 19, 0.97); border: 1px solid rgba(239, 191, 4,0.3); }
         .leaflet-container a.leaflet-popup-close-button {
-            color: #EEEEEE;
+            color: #FAFAFA;
             background: rgba(0,0,0,0.6);
             border: 1px solid rgba(239, 191, 4,0.3);
             border-radius: 50%;
@@ -107,11 +108,11 @@
             transition: all 0.3s ease;
             z-index: 10;
         }
-        .leaflet-container a.leaflet-popup-close-button:hover { color: #1a1718; background: #EFBF04; transform: rotate(90deg); }
+        .leaflet-container a.leaflet-popup-close-button:hover { color: #0a0a0f; background: #F59E0B; transform: rotate(90deg); }
 
         .popup-image { width: 100%; height: 150px; object-fit: cover; transition: transform 0.7s ease; }
         .leaflet-popup:hover .popup-image { transform: scale(1.06); }
-        .popup-header { overflow: hidden; position: relative; height: 150px; background: #1a1718; }
+        .popup-header { overflow: hidden; position: relative; height: 150px; background: #0a0a0f; }
         .popup-header::after {
             content: '';
             position: absolute;
@@ -131,7 +132,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            color: #EFBF04;
+            color: #F59E0B;
             font-size: 1.1rem;
             box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 16px -4px rgba(239, 191, 4,0.5);
         }
@@ -142,7 +143,7 @@
             font-weight: 700;
             letter-spacing: 0.35em;
             text-transform: uppercase;
-            color: #EFBF04;
+            color: #F59E0B;
             margin-bottom: 0.5rem;
         }
         .popup-title {
@@ -150,7 +151,7 @@
             font-weight: 700;
             font-size: 1.25rem;
             text-transform: uppercase;
-            color: #EEEEEE;
+            color: #FAFAFA;
             letter-spacing: 0.02em;
             line-height: 1.15;
             margin-bottom: 0.5rem;
@@ -158,7 +159,7 @@
         .popup-client {
             font-family: 'Inter', sans-serif;
             font-size: 0.8rem;
-            color: #B3B3B3;
+            color: #A1A1AA;
             font-weight: 300;
             margin-bottom: 1rem;
         }
@@ -177,7 +178,7 @@
             font-size: 0.55rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            color: #EFBF04;
+            color: #F59E0B;
             margin-bottom: 0.25rem;
         }
         .popup-meta-v {
@@ -185,7 +186,7 @@
             font-family: 'Oswald', sans-serif;
             font-weight: 700;
             font-size: 0.95rem;
-            color: #EEEEEE;
+            color: #FAFAFA;
         }
         .popup-badges { display: flex; gap: 0.4rem; margin-bottom: 0.85rem; flex-wrap: wrap; }
         .popup-badge {
@@ -197,8 +198,8 @@
             padding: 3px 8px;
             border-radius: 999px;
         }
-        .popup-badge-cat { background: rgba(239, 191, 4, 0.15); color: #EFBF04; border: 1px solid rgba(239, 191, 4, 0.3); }
-        .popup-badge-loc { color: #B3B3B3; border: 1px solid rgba(255,255,255,0.1); }
+        .popup-badge-cat { background: rgba(239, 191, 4, 0.15); color: #F59E0B; border: 1px solid rgba(239, 191, 4, 0.3); }
+        .popup-badge-loc { color: #A1A1AA; border: 1px solid rgba(255,255,255,0.1); }
         .popup-badge-live { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.35); }
         .popup-badge-live::before {
             content: '';
@@ -211,7 +212,7 @@
             animation: popup-dot 2s ease infinite;
             box-shadow: 0 0 8px #4ade80;
         }
-        .popup-badge-done { color: #B3B3B3; border: 1px solid rgba(255,255,255,0.1); }
+        .popup-badge-done { color: #A1A1AA; border: 1px solid rgba(255,255,255,0.1); }
         @keyframes popup-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
         .popup-cta {
             display: inline-flex;
@@ -220,8 +221,8 @@
             gap: 0.5rem;
             width: 100%;
             padding: 0.65rem 1rem;
-            background: linear-gradient(155deg, #EFBF04, #EFBF04);
-            color: #1a1718 !important;
+            background: linear-gradient(155deg, #F59E0B, #F59E0B);
+            color: #0a0a0f !important;
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 0.7rem;
             font-weight: 700;
@@ -254,9 +255,9 @@
             width: 44px; height: 44px;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            background: radial-gradient(circle at 30% 30%, #EFBF04, #EFBF04 70%);
+            background: radial-gradient(circle at 30% 30%, #F59E0B, #F59E0B 70%);
             border: 2px solid rgba(255,255,255,0.85);
-            color: #1a1718;
+            color: #0a0a0f;
             font-family: 'Oswald', sans-serif;
             font-weight: 700;
             font-size: 0.95rem;
@@ -271,17 +272,17 @@
         }
 
         /* ─────── Project card ─────── */
-        .filter-btn-map.active { background-color: #EFBF04 !important; color: #1a1718 !important; border-color: #EFBF04 !important; }
-        .status-btn.active { background-color: #EFBF04 !important; color: #1a1718 !important; border-color: #EFBF04 !important; }
-        .loc-filter.active { background-color: #EFBF04; color: #1a1718; border-color: #EFBF04; }
+        .filter-btn-map.active { background-color: #F59E0B !important; color: #0a0a0f !important; border-color: #F59E0B !important; }
+        .status-btn.active { background-color: #F59E0B !important; color: #0a0a0f !important; border-color: #F59E0B !important; }
+        .loc-filter.active { background-color: #F59E0B; color: #0a0a0f; border-color: #F59E0B; }
 
         .project-card { opacity: 0; transform: translateY(15px); animation: cardIn 0.4s cubic-bezier(0.16,1,0.3,1) forwards; }
         @keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
-        .project-card.is-selected { border-color: #EFBF04 !important; background: rgba(239, 191, 4,0.08); box-shadow: 0 0 24px -4px rgba(239, 191, 4,0.25); }
+        .project-card.is-selected { border-color: #F59E0B !important; background: rgba(239, 191, 4,0.08); box-shadow: 0 0 24px -4px rgba(239, 191, 4,0.25); }
         .project-card.is-selected .card-accent { transform: translateX(0) !important; }
-        .project-card:focus-visible { outline: 2px solid #EFBF04; outline-offset: 2px; border-radius: 4px; }
+        .project-card:focus-visible { outline: 2px solid #F59E0B; outline-offset: 2px; border-radius: 4px; }
 
-        #projectSearch:focus { border-color: #EFBF04; box-shadow: 0 0 0 2px rgba(239, 191, 4,0.2); }
+        #projectSearch:focus { border-color: #F59E0B; box-shadow: 0 0 0 2px rgba(239, 191, 4,0.2); }
 
         /* ─────── Filter chip bar ─────── */
         .filter-chip {
@@ -291,7 +292,7 @@
             padding: 3px 8px 3px 10px;
             background: rgba(239, 191, 4, 0.12);
             border: 1px solid rgba(239, 191, 4, 0.35);
-            color: #EFBF04;
+            color: #F59E0B;
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 0.6rem;
             font-weight: 700;
@@ -301,23 +302,29 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        .filter-chip:hover { background: rgba(239, 191, 4, 0.22); border-color: #EFBF04; }
+        .filter-chip:hover { background: rgba(239, 191, 4, 0.22); border-color: #F59E0B; }
         .filter-chip i { font-size: 0.5rem; opacity: 0.7; }
         .filter-chip:hover i { opacity: 1; }
+
+        /* ─────── Mobile filter panel (collapsible) ─────── */
+        .mobile-filter-bar { display: none; }
+        .mobile-filter-panel { display: none; }
 
         /* ─────── Mobile Map/List toggle ─────── */
         .m-toggle { display: none; }
         @media (max-width: 767px) {
+            /* Compact bottom segmented toggle (sits above the iOS home indicator) */
             .m-toggle {
                 display: flex;
                 position: fixed;
-                bottom: 1rem; left: 50%;
+                bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+                left: 50%;
                 transform: translateX(-50%);
                 z-index: 30;
                 gap: 4px;
                 padding: 4px;
-                background: rgba(10, 10, 10, 0.92);
-                border: 1px solid rgba(239, 191, 4, 0.3);
+                background: rgba(10, 10, 15, 0.92);
+                border: 1px solid rgba(245, 158, 11, 0.3);
                 border-radius: 999px;
                 backdrop-filter: blur(12px);
                 box-shadow: 0 10px 30px -6px rgba(0,0,0,0.7);
@@ -325,110 +332,297 @@
             .m-toggle button {
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 700;
-                font-size: 0.7rem;
+                font-size: 0.72rem;
                 letter-spacing: 0.2em;
                 text-transform: uppercase;
-                padding: 0.5rem 1.1rem;
+                padding: 0.65rem 1.25rem;
                 border-radius: 999px;
-                color: #B3B3B3;
+                color: #A1A1AA;
                 transition: all 0.3s ease;
                 display: inline-flex; align-items: center; gap: 0.4rem;
+                min-height: 42px;
             }
             .m-toggle button.is-on {
-                background: linear-gradient(155deg, #EFBF04, #EFBF04);
-                color: #1a1718;
+                background: #F59E0B;
+                color: #0a0a0f;
             }
-            /* Mobile: show only one panel at a time, full-screen */
-            .main-layout { flex-direction: column; }
-            .map-sidebar {
-                max-height: none !important;
-                width: 100%;
-                height: calc(100vh - 5rem);
-                position: absolute;
-                inset: 0;
-                z-index: 15;
+            .m-toggle .count-badge {
+                display: none;
+                min-width: 1.1rem; height: 1.1rem;
+                padding: 0 0.35rem;
+                background: #F59E0B;
+                color: #0a0a0f;
+                border-radius: 999px;
+                font-size: 0.6rem;
+                font-weight: 800;
+                align-items: center; justify-content: center;
+                margin-left: 0.25rem;
             }
+            .m-toggle .count-badge.is-visible { display: inline-flex; }
+            .m-toggle button.is-on .count-badge { background: #0a0a0f; color: #F59E0B; }
+
+            /* Layered stacking — map always below, sidebar slides over */
+            .main-layout { flex-direction: column; position: relative; }
+            .map-sidebar,
             .map-canvas {
-                width: 100%;
-                height: calc(100vh - 5rem);
                 position: absolute;
                 inset: 0;
-                z-index: 10;
+                width: 100%;
+                height: calc(100vh - 5rem);
             }
-            .main-layout[data-view="map"] .map-sidebar { display: none; }
-            .main-layout[data-view="list"] .map-canvas { visibility: hidden; }
+            .map-canvas { z-index: 10; min-height: 100%; }
+            .map-sidebar {
+                z-index: 15;
+                max-height: none !important;
+                transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+            }
+            .main-layout[data-view="map"] .map-sidebar { transform: translateY(calc(100vh - 5rem)); pointer-events: none; }
+            .main-layout[data-view="list"] .map-sidebar { transform: translateY(0); }
+
+            /* Hide content-heavy bits on mobile to save vertical space */
+            .map-sidebar .sidebar-title,
+            .map-sidebar .sidebar-stats,
+            .map-sidebar .sidebar-search-desktop,
+            .map-sidebar .sidebar-legend { display: none; }
+
+            /* The filter block collapses on mobile; toggled open by the Filter button */
+            .map-sidebar .sidebar-title-stats {
+                max-height: 0;
+                padding: 0 0.75rem;
+                border-bottom: 0;
+                overflow: hidden;
+                transition: max-height 300ms cubic-bezier(0.2, 0.8, 0.2, 1), padding 300ms, border-color 300ms;
+                background: rgba(10,10,15,0.98);
+            }
+            .map-sidebar .sidebar-title-stats.is-open {
+                max-height: 40rem;
+                padding: 0.75rem 0.75rem 0.85rem;
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+            }
+
+            /* Compact sticky top bar — search + filter toggle, always visible */
+            .mobile-filter-bar {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.75rem 0.75rem 0.65rem;
+                background: rgba(10,10,15,0.96);
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+                position: sticky; top: 0;
+                z-index: 5;
+            }
+            .mobile-filter-bar .search-wrap { flex: 1; position: relative; }
+            .mobile-filter-bar .search-wrap i { position: absolute; left: 0.7rem; top: 50%; transform: translateY(-50%); color: #71717A; font-size: 0.7rem; pointer-events: none; }
+            .mobile-filter-bar input {
+                width: 100%;
+                padding: 0.6rem 0.7rem 0.6rem 2rem;
+                background: rgba(255,255,255,0.04);
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 6px;
+                font-family: 'Inter', sans-serif;
+                font-size: 0.82rem;
+                color: #FAFAFA;
+                outline: none;
+                min-height: 40px;
+            }
+            .mobile-filter-bar input:focus { border-color: rgba(245,158,11,0.5); box-shadow: 0 0 0 2px rgba(245,158,11,0.15); }
+            .mobile-filter-bar .filter-btn {
+                padding: 0.55rem 0.85rem;
+                background: rgba(255,255,255,0.04);
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 6px;
+                color: #FAFAFA;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 0.72rem;
+                font-weight: 700;
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                cursor: pointer;
+                transition: all 200ms;
+                min-height: 40px;
+                position: relative;
+                flex-shrink: 0;
+            }
+            .mobile-filter-bar .filter-btn:active { background: rgba(245,158,11,0.1); }
+            .mobile-filter-bar .filter-btn.has-active { border-color: rgba(245,158,11,0.5); color: #F59E0B; }
+            .mobile-filter-bar .filter-btn .dot {
+                position: absolute; top: -2px; right: -2px;
+                width: 8px; height: 8px;
+                background: #F59E0B;
+                border-radius: 50%;
+                border: 2px solid #0a0a0f;
+                display: none;
+            }
+            .mobile-filter-bar .filter-btn.has-active .dot { display: block; }
+
+            /* Slide-down filter panel */
+            .mobile-filter-panel {
+                display: block;
+                max-height: 0;
+                overflow: hidden;
+                background: rgba(10,10,15,0.98);
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+                transition: max-height 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+            }
+            .mobile-filter-panel.is-open { max-height: 30rem; }
+            .mobile-filter-panel-inner { padding: 0.85rem 0.75rem 1rem; }
+            .mobile-filter-group { margin-bottom: 0.85rem; }
+            .mobile-filter-group:last-child { margin-bottom: 0; }
+            .mobile-filter-group-label {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 0.6rem;
+                font-weight: 700;
+                letter-spacing: 0.28em;
+                text-transform: uppercase;
+                color: #F59E0B;
+                margin-bottom: 0.45rem;
+                display: block;
+            }
+            .mobile-filter-panel .filter-btn-map,
+            .mobile-filter-panel .status-btn,
+            .mobile-filter-panel .loc-filter {
+                min-height: 34px;
+                font-size: 0.66rem;
+            }
+            .mobile-filter-panel .locs-scroll {
+                display: flex; gap: 0.35rem;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                padding-bottom: 0.25rem;
+                scrollbar-width: none;
+            }
+            .mobile-filter-panel .locs-scroll::-webkit-scrollbar { display: none; }
+            .mobile-filter-panel .locs-scroll .loc-filter { flex-shrink: 0; scroll-snap-align: start; white-space: nowrap; }
+            .mobile-filter-panel .result-row {
+                display: flex; justify-content: space-between; align-items: center;
+                padding-top: 0.75rem; margin-top: 0.5rem;
+                border-top: 1px solid rgba(255,255,255,0.06);
+            }
+            .mobile-filter-panel .result-row .count {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 0.65rem;
+                font-weight: 700;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: #A1A1AA;
+            }
+            .mobile-filter-panel .result-row .count strong { color: #F59E0B; font-weight: 800; }
+            .mobile-filter-panel .result-row .clear-btn {
+                padding: 0.5rem 0.9rem;
+                background: transparent;
+                border: 1px solid rgba(255,255,255,0.12);
+                color: #A1A1AA;
+                border-radius: 6px;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 0.65rem;
+                font-weight: 700;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                cursor: pointer;
+            }
+            .mobile-filter-panel .result-row .clear-btn:active { background: rgba(245,158,11,0.1); border-color: #F59E0B; color: #F59E0B; }
+
+            /* Denser list cards on mobile */
+            #listings { padding: 0.75rem; gap: 0.5rem; padding-bottom: 7rem; }
+            .project-card { padding: 0.7rem !important; }
+            .project-card img { width: 44px !important; height: 44px !important; }
+
+            /* Leaflet popups fit the screen */
+            .leaflet-popup-content { width: min(85vw, 300px) !important; }
+            .leaflet-popup-content-wrapper { max-width: 85vw; }
+
+            /* Map style switcher — thumb-friendly */
+            #mapStyleSwitcher { top: 0.75rem !important; right: 0.75rem !important; }
+            #styleToggleBtn { width: 44px !important; height: 44px !important; }
+            #styleDropdown { width: 11rem !important; }
         }
+
+        /* Hide desktop sidebar header bits on mobile via utility class */
+        .sidebar-title, .sidebar-stats, .sidebar-legend { display: block; }
     </style>
 </head>
 
 <body class="bg-clay-base antialiased overflow-hidden selection:bg-brand-gold selection:text-black h-screen flex flex-col">
 
-    <!-- NAVIGATION OVERLAY -->
-    <div id="navOverlay" class="nav-overlay">
-        <div id="navBackdrop" class="nav-overlay-backdrop"></div>
-        <div class="nav-overlay-content p-6 md:p-12">
-            <div class="flex justify-between items-center mb-16">
-                <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-14 w-auto">
-                <button id="closeMenuBtn" class="text-clay-muted hover:text-clay-ink transition text-3xl"><i class="fas fa-times"></i></button>
-            </div>      <ul class="space-y-0 flex-1">
-        <li><a href="index.html" class="sidebar-link">Home</a></li>
-        <li>
-          <button class="sidebar-dropdown-btn">
-            <span>About</span> <i class="fas fa-chevron-down"></i>
-          </button>
-          <div class="sidebar-submenu">
-            <a href="story.html" class="sidebar-sublink">Our Story</a>
-            <a href="leadership.html" class="sidebar-sublink">Leadership</a>
-            <a href="culture.html" class="sidebar-sublink">Culture</a>
-            <a href="recognition.html" class="sidebar-sublink">Recognition</a>
-          </div>
-        </li>
-        <li>
-          <button class="sidebar-dropdown-btn">
-            <span>Projects</span> <i class="fas fa-chevron-down"></i>
-          </button>
-          <div class="sidebar-submenu">
-            <a href="projects.html" class="sidebar-sublink">Portfolio</a>
-            <a href="map.html" class="sidebar-sublink">Project Map</a>
-          </div>
-        </li>
-        <li><a href="services.html" class="sidebar-link">Services</a></li>
-        <li><a href="clients.html" class="sidebar-link">Clients</a></li>
-        <li><a href="investors.html" class="sidebar-link">Investors</a></li>
-        <li><a href="csr.html" class="sidebar-link">CSR</a></li>
-        <li><a href="careers.html" class="sidebar-link">Careers</a></li>
-        <li><a href="resources.html" class="sidebar-link">Resources</a></li>
-        <li><a href="contact.html" class="sidebar-link">Contact</a></li>
-      </ul>
-            <div class="mt-auto pt-12 border-t border-clay-border">
-                <p class="text-brand-darkGold font-heading text-sm mb-4">Connect With Us</p>
-                <div class="flex gap-6 text-xl">
-                    <a href="https://www.linkedin.com/company/strongbuilt" target="_blank" rel="noopener" aria-label="LinkedIn" class="text-clay-muted hover:text-brand-darkGold transition"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://www.instagram.com/strongbuilt" target="_blank" rel="noopener" aria-label="Instagram" class="text-clay-muted hover:text-brand-darkGold transition"><i class="fab fa-instagram"></i></a>
-                    <a href="https://x.com/strongbuilt" target="_blank" rel="noopener" aria-label="Twitter" class="text-clay-muted hover:text-brand-darkGold transition"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- HEADER -->
-    <header class="w-full z-50 transition-all duration-300 glass-header flex-shrink-0" id="mainHeader">
-        <div class="container mx-auto px-4 md:px-6 h-20 md:h-24 flex items-center justify-between">
-            <a href="index.html" class="flex items-center group relative z-50">
-                <img src="assets/Logo/Strongbuilt.png" alt="Strong Built Logo" class="h-14 md:h-24 w-auto object-contain transition duration-300 hover:opacity-90">
+    <header class="md-header flex-shrink-0" id="mainHeader">
+        <div class="md-header-inner">
+            <a href="index.html" class="md-logo" aria-label="Strong Built — Home">
+                <img src="assets/Logo/Strongbuilt.png" alt="Strong Built">
             </a>
-            <div class="flex items-center">
-                <button id="menuToggle" class="menu-btn group"><div class="menu-icon"><span></span><span></span><span></span></div></button>
-            </div>
+            <nav class="md-nav" aria-label="Primary">
+                <div class="md-nav-item">
+                    <button class="md-nav-link" type="button" aria-haspopup="true" aria-expanded="false">About <i class="fas fa-chevron-down"></i></button>
+                    <div class="md-nav-dropdown" role="menu">
+                        <a href="story.html" role="menuitem"><i class="fas fa-book-open"></i> Our Story</a>
+                        <a href="leadership.html" role="menuitem"><i class="fas fa-users"></i> Leadership</a>
+                        <a href="culture.html" role="menuitem"><i class="fas fa-heart"></i> Culture</a>
+                        <a href="recognition.html" role="menuitem"><i class="fas fa-trophy"></i> Recognition</a>
+                    </div>
+                </div>
+                <div class="md-nav-item">
+                    <button class="md-nav-link" type="button" aria-haspopup="true" aria-expanded="false">Projects <i class="fas fa-chevron-down"></i></button>
+                    <div class="md-nav-dropdown" role="menu">
+                        <a href="projects.html" role="menuitem"><i class="fas fa-th"></i> Portfolio</a>
+                        <a href="map.html" class="is-active" role="menuitem"><i class="fas fa-map-marked-alt"></i> Project Map</a>
+                    </div>
+                </div>
+                <a href="services.html" class="md-nav-link">Services</a>
+                <a href="clients.html" class="md-nav-link">Clients</a>
+                <a href="investors.html" class="md-nav-link">Investors</a>
+                <a href="csr.html" class="md-nav-link">CSR</a>
+                <a href="careers.html" class="md-nav-link">Careers</a>
+                <a href="resources.html" class="md-nav-link">Resources</a>
+            </nav>
+            <a href="contact.html" class="md-btn md-btn-primary md-header-cta">Contact Us</a>
+            <button id="menuToggle" class="md-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
-    <!-- Map Version Switcher -->
-    <div style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;gap:4px;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);border:1px solid rgba(239,191,4,0.2);border-radius:4px;padding:4px;font-family:'Barlow Condensed',sans-serif;">
-        <a href="map.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:#EFBF04;color:#000;border-radius:2px;text-decoration:none;">Leaflet</a>
-        <a href="map-mapbox.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.color='#EFBF04'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Mapbox</a>
-        <a href="map-svg.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.color='#EFBF04'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">SVG</a>
-        <a href="map-google.html" style="padding:6px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.color='#EFBF04'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Google</a>
+    <!-- NAV DRAWER -->
+    <div id="navDrawer" class="md-drawer" aria-hidden="true">
+        <div class="md-drawer-backdrop" id="drawerBackdrop"></div>
+        <aside class="md-drawer-panel" role="dialog" aria-label="Navigation">
+            <div class="md-drawer-header">
+                <div class="md-logo"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built" style="height: 2.75rem; width: auto; display: block;"></div>
+                <button class="md-menu-btn" id="drawerClose" aria-label="Close menu"><i class="fas fa-times"></i></button>
+            </div>
+            <nav>
+                <a href="index.html" class="md-drawer-link">Home</a>
+                <button class="md-drawer-dropbtn" data-dropdown>About <i class="fas fa-chevron-down"></i></button>
+                <div class="md-drawer-sub">
+                    <a href="story.html">Our Story</a>
+                    <a href="leadership.html">Leadership</a>
+                    <a href="culture.html">Culture</a>
+                    <a href="recognition.html">Recognition</a>
+                </div>
+                <button class="md-drawer-dropbtn" data-dropdown>Projects <i class="fas fa-chevron-down"></i></button>
+                <div class="md-drawer-sub">
+                    <a href="projects.html">Portfolio</a>
+                    <a href="map.html" style="color: var(--accent);">Project Map</a>
+                </div>
+                <a href="services.html" class="md-drawer-link">Services</a>
+                <a href="clients.html" class="md-drawer-link">Clients</a>
+                <a href="investors.html" class="md-drawer-link">Investors</a>
+                <a href="csr.html" class="md-drawer-link">CSR</a>
+                <a href="careers.html" class="md-drawer-link">Careers</a>
+                <a href="resources.html" class="md-drawer-link">Resources</a>
+                <a href="contact.html" class="md-drawer-link">Contact</a>
+            </nav>
+            <div style="margin-top: auto; padding-top: 2rem; border-top: 1px solid var(--border);">
+                <p class="md-mono" style="font-size: 0.75rem; color: var(--fg-subtle); margin-bottom: 1rem;">Connect</p>
+                <div style="display: flex; gap: 0.5rem;">
+                    <a href="https://www.linkedin.com/company/strongbuilt" class="md-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/strongbuilt" class="md-social-btn" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/strongbuilt" class="md-social-btn" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </aside>
     </div>
 
     <!-- Mobile Map/List toggle — floating segmented control -->
@@ -441,23 +635,36 @@
     <div class="main-layout flex-grow flex flex-col md:flex-row h-full overflow-hidden relative" data-view="map">
         <!-- Sidebar -->
         <div class="map-sidebar w-full md:w-1/3 lg:w-1/4 sidebar-optimized flex flex-col relative z-20 md:max-h-none">
-            <div class="p-4 md:p-6 pb-4 border-b border-clay-border shrink-0 bg-clay-base/40">
-                <h2 class="text-3xl md:text-5xl font-bold text-clay-ink mb-1 uppercase font-heading tracking-tight leading-tight"><span>Project</span> <span class="text-brand-darkGold">Locations</span></h2>
-                <div class="flex gap-4 mt-3 text-xs font-heading tracking-widest text-clay-muted">
+
+            <!-- Mobile compact bar (hidden on desktop) -->
+            <div class="mobile-filter-bar">
+                <div class="search-wrap">
+                    <i class="fas fa-search"></i>
+                    <input id="projectSearchMobile" type="search" placeholder="Search projects…" aria-label="Search projects">
+                </div>
+                <button class="filter-btn" id="mobileFilterToggle" aria-label="Filters" aria-expanded="false">
+                    <i class="fas fa-sliders-h"></i><span>Filter</span><span class="dot" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <!-- Shared filter section (collapsible on mobile, always open on desktop) -->
+            <div class="sidebar-title-stats p-4 md:p-6 pb-4 border-b border-clay-border shrink-0 bg-clay-base/40">
+                <h2 class="sidebar-title text-3xl md:text-5xl font-bold text-clay-ink mb-1 uppercase font-heading tracking-tight leading-tight"><span>Project</span> <span class="text-brand-darkGold">Locations</span></h2>
+                <div class="sidebar-stats flex gap-4 mt-3 text-xs font-heading tracking-widest text-clay-muted">
                     <div><span class="block text-lg md:text-xl text-clay-ink font-bold" id="total-projects">0</span><span>Projects</span></div>
                     <div class="w-px bg-clay-surface/10"></div>
                     <div><span class="block text-lg md:text-xl text-clay-ink font-bold" id="total-cities">0</span><span>Cities</span></div>
                 </div>
 
-                <!-- Search -->
-                <div class="relative mt-4">
+                <!-- Search (desktop only — mobile uses the sticky bar above) -->
+                <div class="relative mt-4 sidebar-search-desktop">
                     <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-clay-faint text-xs pointer-events-none"></i>
                     <input id="projectSearch" type="search" placeholder="Search projects or clients..." aria-label="Search projects"
                         class="w-full pl-8 pr-3 py-2 bg-clay-surface/5 border border-clay-border rounded-sm text-xs text-clay-ink placeholder-gray-500 outline-none transition-all duration-300 font-body">
                 </div>
 
                 <!-- Category Filters -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-3">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-3 sidebar-categories">
                     <button class="filter-btn-map active py-2 text-[10px] uppercase font-bold tracking-wider border border-brand-gold bg-brand-gold text-black transition-all duration-300 rounded-sm" data-filter="all" aria-pressed="true">All</button>
                     <button class="filter-btn-map py-2 text-[10px] uppercase font-bold tracking-wider border border-clay-border text-clay-muted hover:border-brand-gold hover:text-brand-darkGold transition-all duration-300 rounded-sm" data-filter="residential" aria-pressed="false">Resi</button>
                     <button class="filter-btn-map py-2 text-[10px] uppercase font-bold tracking-wider border border-clay-border text-clay-muted hover:border-brand-gold hover:text-brand-darkGold transition-all duration-300 rounded-sm" data-filter="commercial" aria-pressed="false">Comm</button>
@@ -465,17 +672,17 @@
                 </div>
 
                 <!-- Status Filters -->
-                <div class="grid grid-cols-3 gap-2 mt-2">
+                <div class="grid grid-cols-3 gap-2 mt-2 sidebar-statuses">
                     <button class="status-btn active py-1.5 text-[9px] uppercase font-bold tracking-wider border border-brand-gold bg-brand-gold text-black transition-all duration-300 rounded-sm" data-status="all" aria-pressed="true">All Status</button>
                     <button class="status-btn py-1.5 text-[9px] uppercase font-bold tracking-wider border border-clay-border text-clay-muted hover:border-green-500/50 hover:text-green-400 transition-all duration-300 rounded-sm" data-status="ongoing" aria-pressed="false">Ongoing</button>
                     <button class="status-btn py-1.5 text-[9px] uppercase font-bold tracking-wider border border-clay-border text-clay-muted hover:border-brand-gold hover:text-brand-darkGold transition-all duration-300 rounded-sm" data-status="completed" aria-pressed="false">Completed</button>
                 </div>
 
                 <!-- Location Filters -->
-                <div class="flex flex-wrap gap-1.5 mt-3" id="locationFilterMap"></div>
+                <div class="flex flex-wrap gap-1.5 mt-3 sidebar-locations" id="locationFilterMap"></div>
 
                 <!-- Result count -->
-                <div class="flex items-center justify-between mt-3 pt-3 border-t border-clay-border">
+                <div class="flex items-center justify-between mt-3 pt-3 border-t border-clay-border sidebar-result-count">
                     <p class="text-[10px] text-clay-faint font-heading uppercase tracking-widest">
                         Showing <span id="resultCount" class="text-brand-darkGold font-bold">0</span> of <span id="totalCount" class="text-clay-ink">0</span>
                     </p>
@@ -488,11 +695,11 @@
 
             <div class="flex-grow overflow-y-auto custom-scrollbar p-3 md:p-4 space-y-2 md:space-y-3" id="listings"></div>
 
-            <!-- Legend -->
-            <div class="p-3 md:p-4 border-t border-clay-border shrink-0 bg-clay-base/40">
+            <!-- Legend (desktop only) -->
+            <div class="sidebar-legend p-3 md:p-4 border-t border-clay-border shrink-0 bg-clay-base/40">
                 <p class="text-[10px] text-clay-faint font-heading uppercase tracking-widest mb-2">Legend</p>
                 <div class="flex gap-3 md:gap-4 flex-wrap">
-                    <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#EFBF04] border border-clay-border shrink-0"></span><span class="text-[10px] text-clay-muted">Residential</span></div>
+                    <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#F59E0B] border border-clay-border shrink-0"></span><span class="text-[10px] text-clay-muted">Residential</span></div>
                     <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#FF8C00] border border-clay-border shrink-0"></span><span class="text-[10px] text-clay-muted">Commercial</span></div>
                     <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#C0C0C0] border border-clay-border shrink-0"></span><span class="text-[10px] text-clay-muted">Infra</span></div>
                 </div>
@@ -508,7 +715,7 @@
                 </button>
                 <div id="styleDropdown" class="hidden absolute top-11 right-0 w-48 bg-black/90 backdrop-blur-xl border border-clay-border rounded-sm shadow-2xl overflow-hidden">
                     <p class="px-3 py-2 text-[9px] text-brand-darkGold uppercase tracking-widest font-heading font-bold border-b border-clay-border">Map Style</p>
-                    <div class="max-h-[320px] overflow-y-auto custom-scrollbar">
+                    <div>
                         <button class="style-opt active" data-style="dark">
                             <span class="style-dot" style="background:#333"></span> Dark
                         </button>
@@ -523,21 +730,6 @@
                         </button>
                         <button class="style-opt" data-style="satellite">
                             <span class="style-dot" style="background:#2a4a2a"></span> Satellite
-                        </button>
-                        <button class="style-opt" data-style="toner">
-                            <span class="style-dot" style="background:#000"></span> Toner (B&W)
-                        </button>
-                        <button class="style-opt" data-style="terrain">
-                            <span class="style-dot" style="background:#c9d4a5"></span> Terrain
-                        </button>
-                        <button class="style-opt" data-style="smooth-dark">
-                            <span class="style-dot" style="background:#2b2b3a"></span> Smooth Dark
-                        </button>
-                        <button class="style-opt" data-style="osm-bright">
-                            <span class="style-dot" style="background:#aad3df"></span> OSM Bright
-                        </button>
-                        <button class="style-opt" data-style="watercolor">
-                            <span class="style-dot" style="background:#d4c4a8"></span> Watercolor
                         </button>
                     </div>
                 </div>
@@ -555,7 +747,7 @@
         }
 
         // ─── Category palette + icons ───
-        const CATEGORY_COLORS = { residential: '#EFBF04', commercial: '#FF8C00', infrastructure: '#C0C0C0' };
+        const CATEGORY_COLORS = { residential: '#F59E0B', commercial: '#FF8C00', infrastructure: '#C0C0C0' };
         const CATEGORY_ICONS  = { residential: 'fa-home', commercial: 'fa-city', infrastructure: 'fa-road' };
         const getCategoryColor = c => CATEGORY_COLORS[c] || CATEGORY_COLORS.residential;
         const getCategoryIcon  = c => CATEGORY_ICONS[c]  || 'fa-building';
@@ -587,22 +779,21 @@
             locCont.appendChild(btn);
         });
 
-        // ─── Leaflet Map (Mumbai focused) ───
-        const mumbaiBounds = L.latLngBounds([18.85, 72.75], [19.35, 73.05]);
+        // ─── Leaflet Map (Mumbai-focused, all-India reachable) ───
+        const indiaBounds = L.latLngBounds([6, 68], [36, 98]);
         const map = L.map('map', {
             zoomControl: false,
             center: [19.076, 72.877],
             zoom: 12,
-            minZoom: 10,
-            maxBounds: mumbaiBounds.pad(0.3),
+            minZoom: 5,
+            maxBounds: indiaBounds,
             maxBoundsViscosity: 0.8
         });
         L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-        // ─── Tile layer styles ───
+        // ─── Tile layer styles (free, no API key required) ───
         const OSM_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>';
         const CARTO_ATTR = OSM_ATTR + ' &copy; <a href="https://carto.com/attributions">CARTO</a>';
-        const STADIA_ATTR = OSM_ATTR + ' &copy; <a href="https://stadiamaps.com/">Stadia</a>';
         const ESRI_ATTR = '&copy; <a href="https://www.esri.com/">Esri</a>, Maxar, Earthstar Geographics';
 
         const MAP_STYLES = {
@@ -610,12 +801,7 @@
             'dark-nolabels':  { url: 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', attr: CARTO_ATTR, sub: 'abcd' },
             'voyager':        { url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', attr: CARTO_ATTR, sub: 'abcd' },
             'positron':       { url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', attr: CARTO_ATTR, sub: 'abcd' },
-            'satellite':      { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', attr: ESRI_ATTR },
-            'toner':          { url: 'https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', attr: STADIA_ATTR },
-            'terrain':        { url: 'https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png', attr: STADIA_ATTR },
-            'smooth-dark':    { url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', attr: STADIA_ATTR },
-            'osm-bright':     { url: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png', attr: STADIA_ATTR },
-            'watercolor':     { url: 'https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}{r}.jpg', attr: STADIA_ATTR }
+            'satellite':      { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', attr: ESRI_ATTR }
         };
 
         let currentTileLayer = L.tileLayer(MAP_STYLES['dark'].url, {
@@ -658,16 +844,6 @@
             });
         });
 
-        // ─── Mumbai region highlight (subtle gold tint) ───
-        L.rectangle(mumbaiBounds, {
-            color: '#EFBF04',
-            weight: 0.8,
-            opacity: 0.2,
-            fillColor: '#EFBF04',
-            fillOpacity: 0.03,
-            interactive: false
-        }).addTo(map);
-
         // ─── Cluster group (Strong Built style) ───
         const cluster = L.markerClusterGroup({
             maxClusterRadius: 50,
@@ -691,13 +867,13 @@
             const html = `<svg viewBox="0 0 36 44" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient id="pinG" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0" stop-color="#EFBF04"/>
-                        <stop offset="1" stop-color="#EFBF04"/>
+                        <stop offset="0" stop-color="#F59E0B"/>
+                        <stop offset="1" stop-color="#F59E0B"/>
                     </linearGradient>
                 </defs>
-                <circle class="sb-pin-ring" cx="18" cy="16" r="4" fill="none" stroke="#EFBF04" stroke-width="2"/>
+                <circle class="sb-pin-ring" cx="18" cy="16" r="4" fill="none" stroke="#F59E0B" stroke-width="2"/>
                 <path d="M18 2 C9.2 2 2 9.2 2 18 c0 12 16 24 16 24 s16-12 16-24 C34 9.2 26.8 2 18 2 z" fill="url(#pinG)" stroke="#fff" stroke-width="1.5"/>
-                <circle cx="18" cy="16" r="6" fill="${core}" stroke="#1a1718" stroke-width="1.5"/>
+                <circle cx="18" cy="16" r="6" fill="${core}" stroke="#0a0a0f" stroke-width="1.5"/>
             </svg>`;
             return L.divIcon({
                 className: 'sb-pin' + (isActive ? ' is-active' : ''),
@@ -709,7 +885,7 @@
         // ─── Popup (tcard style) ───
         function buildPopupHTML(p) {
             const img = p.img
-                ? `<img src="${p.img}" alt="${p.title}" class="popup-image" loading="lazy">`
+                ? `<img src="${p.img}" alt="${p.title}" class="popup-image" loading="lazy" decoding="async" width="320" height="150">`
                 : `<div class="h-full w-full flex items-center justify-center text-clay-muted"><i class="fas fa-building text-4xl opacity-40"></i></div>`;
             const statusBadge = p.status === 'ongoing'
                 ? `<span class="popup-badge popup-badge-live">Ongoing</span>`
@@ -872,7 +1048,7 @@
                 item.setAttribute('aria-label', `View ${p.title} on map`);
 
                 const thumb = p.img
-                    ? `<img src="${p.img}" class="w-12 h-12 object-cover rounded-sm border border-clay-border group-hover:border-brand-gold/50 transition-colors shrink-0" alt="${p.title}" loading="lazy">`
+                    ? `<img src="${p.img}" class="w-12 h-12 object-cover rounded-sm border border-clay-border group-hover:border-brand-gold/50 transition-colors shrink-0" alt="${p.title}" loading="lazy" decoding="async" width="48" height="48">`
                     : `<div class="w-12 h-12 bg-clay-surface/10 rounded-sm flex items-center justify-center border border-clay-border shrink-0"><i class="fas fa-building text-clay-muted text-xs"></i></div>`;
                 const dotC = getCategoryColor(p.category);
                 const featuredStar = p.featured ? '<i class="fas fa-star text-brand-darkGold text-[8px] mr-1" title="Featured"></i>' : '';
@@ -904,7 +1080,7 @@
                 listEl.appendChild(item);
             });
 
-            if (bounds.isValid()) map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14, minZoom: 10 });
+            if (bounds.isValid()) map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14, minZoom: 5 });
         }
 
         // ─── Bindings ───
@@ -945,6 +1121,51 @@
         }
         document.querySelectorAll('.m-toggle button').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
 
+        // ─── Mobile filter toggle ───
+        const mobileFilterToggle = document.getElementById('mobileFilterToggle');
+        const filterSection = document.querySelector('.sidebar-title-stats');
+        if (mobileFilterToggle && filterSection) {
+            mobileFilterToggle.addEventListener('click', () => {
+                const isOpen = filterSection.classList.toggle('is-open');
+                mobileFilterToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+        }
+
+        // ─── Mirror mobile search to desktop search (single source of truth) ───
+        const mobileSearch = document.getElementById('projectSearchMobile');
+        if (mobileSearch && searchInput) {
+            mobileSearch.value = filters.search;
+            mobileSearch.addEventListener('input', e => {
+                searchInput.value = e.target.value;
+                filters.search = e.target.value;
+                syncUI(); renderProjects();
+            });
+            // Keep mobile input in sync when desktop search changes (e.g. clear-all)
+            const origSync = syncUI;
+        }
+
+        // ─── Mobile affordances: active-filter dot + list count badge ───
+        const mobileFilterDot = mobileFilterToggle;
+        const listToggleBtn = document.querySelector('.m-toggle button[data-view="list"]');
+        let listCountBadge = null;
+        if (listToggleBtn) {
+            listCountBadge = document.createElement('span');
+            listCountBadge.className = 'count-badge';
+            listToggleBtn.appendChild(listCountBadge);
+        }
+        const originalSyncUI = syncUI;
+        syncUI = function() {
+            originalSyncUI();
+            if (mobileFilterDot) mobileFilterDot.classList.toggle('has-active', hasActiveFilters());
+            if (mobileSearch && mobileSearch.value !== filters.search) mobileSearch.value = filters.search;
+            if (listCountBadge) {
+                const n = getFiltered().length;
+                const show = hasActiveFilters() && n !== PROJECT_DATA.length;
+                listCountBadge.classList.toggle('is-visible', show);
+                if (show) listCountBadge.textContent = n;
+            }
+        };
+
         // ─── Clear selection on popup close ───
         map.on('popupclose', () => {
             markers.forEach(m => m.setIcon(getIcon(m._category, false)));
@@ -955,7 +1176,7 @@
         syncUI();
         renderProjects();
     </script>
-    <script src="script.js"></script>
+    <script src="theme.js"></script>
 </body>
 
 </html>

@@ -230,7 +230,7 @@ const PROJECT_DATA = [
     area: "80K Sq.ft",
     status: "completed",
     year: 2020,
-    img: null,
+    img: "assets/Projects/pavilion.jpg",
     featured: false,
     coordinates: [19.0750, 72.8450]
   },
@@ -347,7 +347,7 @@ const PROJECT_DATA = [
     area: "80K Sq.ft",
     status: "completed",
     year: 2021,
-    img: null,
+    img: "assets/Projects/Conwood Enclave.png",
     featured: false,
     coordinates: [19.0950, 72.8650]
   },
@@ -373,7 +373,7 @@ const PROJECT_DATA = [
     area: "60K Sq.ft",
     status: "completed",
     year: 2021,
-    img: null,
+    img: "assets/Projects/sukrut.jpeg",
     featured: false,
     coordinates: [19.1000, 72.8700]
   },
@@ -413,7 +413,7 @@ const PROJECT_DATA = [
     area: "4L Sq.ft",
     status: "ongoing",
     year: 2023,
-    img: null,
+    img: "assets/Projects/avighna.webp",
     featured: true,
     coordinates: [19.0094, 72.8163]
   },
@@ -426,7 +426,7 @@ const PROJECT_DATA = [
     area: "3.5L Sq.ft",
     status: "ongoing",
     year: 2023,
-    img: null,
+    img: "assets/Projects/AAKASA.webp",
     featured: false,
     coordinates: [19.0110, 72.8180]
   },
@@ -439,7 +439,7 @@ const PROJECT_DATA = [
     area: "2.2L Sq.ft",
     status: "ongoing",
     year: 2024,
-    img: null,
+    img: "assets/Projects/Stella.jpeg",
     featured: false,
     coordinates: [19.0596, 72.8310]
   },
@@ -452,7 +452,7 @@ const PROJECT_DATA = [
     area: "1.7L Sq.ft",
     status: "ongoing",
     year: 2024,
-    img: null,
+    img: "assets/Projects/kismet.png",
     featured: false,
     coordinates: [19.0620, 72.8340]
   },
@@ -465,7 +465,7 @@ const PROJECT_DATA = [
     area: "2.6L Sq.ft",
     status: "ongoing",
     year: 2024,
-    img: null,
+    img: "assets/Projects/antariksh-alpha.webp",
     featured: false,
     coordinates: [19.0860, 72.9081]
   },
@@ -517,7 +517,7 @@ const PROJECT_DATA = [
     area: "13L Sq.ft",
     status: "ongoing",
     year: 2025,
-    img: null,
+    img: "assets/Projects/balmoral.webp",
     featured: true,
     coordinates: [19.0620, 72.9004]
   },
@@ -530,7 +530,7 @@ const PROJECT_DATA = [
     area: "3.5L Sq.ft",
     status: "ongoing",
     year: 2026,
-    img: null,
+    img: "assets/Projects/Cliff-Tower_Render.jpg",
     featured: false,
     coordinates: [19.0540, 72.8300]
   }

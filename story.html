@@ -97,14 +97,13 @@
     }
     .ss-sticky {
       position: sticky;
-      top: calc(var(--header-h-lg) + 2rem);
+      top: var(--header-h-lg);
+      height: calc(100vh - var(--header-h-lg));
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding-block: clamp(2rem, 5vw, 4rem);
-      min-height: 40vh;
     }
     @media (max-width: 959px) { .ss-sticky { display: none; } }
     .ss-bigtag {
@@ -143,34 +142,18 @@
     }
     .ss-bigicon.is-swapping { opacity: 0; transform: scale(0.9); }
 
-    .ss-stream { display: flex; flex-direction: column; gap: clamp(1rem, 2.5vw, 2rem); }
+    .ss-stream { display: flex; flex-direction: column; gap: clamp(2.5rem, 5vw, 4.5rem); }
     .ss-card {
       position: relative;
-      padding: clamp(1.5rem, 3vw, 2.25rem);
-      background: var(--card);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      transition: all var(--t-slow) var(--ease-out);
-    }
-    .ss-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px; height: 100%;
-      background: linear-gradient(to bottom, var(--accent), transparent);
-      border-radius: var(--r-lg) 0 0 var(--r-lg);
-      opacity: 0;
-      transition: opacity 400ms var(--ease-out);
+      padding: 0;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      transition: opacity var(--t-slow) var(--ease-out);
+      opacity: 0.55;
     }
     .ss-card.is-active,
-    .ss-card:hover {
-      border-color: rgba(245,158,11,0.3);
-      background: rgba(26,26,36,0.82);
-      box-shadow: var(--glow-sm);
-    }
-    .ss-card.is-active::before { opacity: 1; }
+    .ss-card:hover { opacity: 1; }
     .ss-card-kicker {
       display: inline-flex;
       align-items: center;
@@ -212,11 +195,10 @@
 
     /* Mobile — inline year badge replaces sticky */
     @media (max-width: 959px) {
-      .ss-card { padding-left: clamp(1.5rem, 4vw, 2.25rem); }
       .ss-card[data-year]::after {
         content: attr(data-year);
         position: absolute;
-        top: 1rem; right: 1rem;
+        top: 0; right: 0;
         font-family: var(--font-display);
         font-size: 1.2rem;
         font-weight: 500;
@@ -528,12 +510,12 @@
         }, 250);
       };
 
-      // Track the card closest to ~40% viewport height (the sticky panel's center)
+      // Fire when the card crosses the viewport's vertical middle (aligned with sticky year)
       const io = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) update(entry.target);
         });
-      }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+      }, { rootMargin: '-48% 0px -48% 0px', threshold: 0 });
 
       cards.forEach(card => io.observe(card));
 

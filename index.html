@@ -535,17 +535,18 @@
     }
     .md-drawer-panel {
       position: relative;
-      width: 100%;
-      max-width: 420px;
+      width: min(22rem, 88vw);
       height: 100%;
       background: var(--bg-alt);
       border-left: 1px solid var(--border);
-      padding: 2rem;
+      padding: 1.75rem;
       transform: translateX(100%);
       transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
       overflow-y: auto;
+      overflow-x: hidden;
       display: flex;
       flex-direction: column;
+      box-sizing: border-box;
     }
     .md-drawer.is-open { pointer-events: auto; }
     .md-drawer.is-open .md-drawer-backdrop { opacity: 1; }
@@ -1998,6 +1999,42 @@
       color: var(--accent);
     }
     .md-version-chip i { color: var(--accent); }
+
+    /* Signature Projects — Ticker Gallery (auto-scroll marquee) */
+    .tg-section { padding-block: clamp(4rem, 8vw, 7rem); position: relative; }
+    .tg-head { text-align: center; margin-bottom: clamp(2rem, 4vw, 3rem); padding-inline: clamp(1.25rem, 4vw, 3rem); }
+    .tg-head h2 { font-family: var(--font-display); font-size: clamp(2.25rem, 5vw, 3.75rem); font-weight: 600; line-height: 1; margin: 0.85rem 0 0.9rem; text-transform: uppercase; letter-spacing: 0.01em; }
+    .tg-head h2 em { color: var(--accent); font-style: italic; font-weight: 500; }
+    .tg-head p { max-width: 36rem; margin: 0 auto; color: var(--fg-muted); font-size: 0.95rem; line-height: 1.6; }
+    .tg-strip { overflow: hidden; mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent); padding: 1rem 0; }
+    .tg-track { display: flex; gap: 1.25rem; flex-shrink: 0; width: max-content; animation: tg-scroll 50s linear infinite; will-change: transform; }
+    .tg-strip:hover .tg-track { animation-play-state: paused; }
+    @keyframes tg-scroll { to { transform: translateX(calc(-50% - 0.625rem)); } }
+    .tg-card { flex-shrink: 0; width: clamp(16rem, 24vw, 22rem); aspect-ratio: 4/3; position: relative; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--border); background: #0a0a0f; text-decoration: none; color: var(--fg); transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 400ms, box-shadow 400ms; }
+    .tg-card:hover { transform: scale(1.05); border-color: var(--accent); box-shadow: 0 20px 50px -10px rgba(245, 158, 11, 0.35); z-index: 10; }
+    .tg-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 700ms; }
+    .tg-card:hover img { transform: scale(1.04); }
+    .tg-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10, 10, 15, 0.92), transparent 55%); }
+    .tg-card .cap { position: absolute; left: 1rem; right: 1rem; bottom: 1rem; z-index: 2; }
+    .tg-card .cap .ey { font-family: var(--font-label); font-size: 0.58rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--accent); }
+    .tg-card .cap h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.02em; margin: 0.3rem 0 0; line-height: 1; color: var(--fg); }
+    .tg-hint { text-align: center; margin-top: 1.25rem; font-family: var(--font-label); font-size: 0.62rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--fg-subtle); }
+    .tg-hint i { color: var(--accent); margin: 0 0.4rem; }
+
+    /* 3D Coverflow Carousel — Trusted By marquee replacement */
+    .cf-wrap { position: relative; padding: 2.5rem 0 1rem; perspective: 1400px; overflow: hidden; }
+    .cf-track { position: relative; height: 8rem; transform-style: preserve-3d; }
+    .cf-card { position: absolute; top: 50%; left: 50%; width: clamp(13rem, 22vw, 17rem); height: clamp(5.5rem, 9vw, 7.5rem); margin: calc(-1 * clamp(2.75rem, 4.5vw, 3.75rem)) 0 0 calc(-1 * clamp(6.5rem, 11vw, 8.5rem)); border-radius: var(--r-lg); background: #15151c; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; padding: 1rem; transition: transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 500ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 400ms; transform-style: preserve-3d; cursor: pointer; overflow: hidden; will-change: transform, opacity; }
+    .cf-card.is-center { z-index: 10; border-color: var(--accent); }
+    .cf-card .cf-logo { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; overflow: hidden; }
+    .cf-card .cf-logo img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.9; }
+    .cf-nav { position: absolute; top: 50%; width: 2.5rem; height: 2.5rem; transform: translateY(-50%); border-radius: 50%; background: rgba(26,26,36,0.9); border: 1px solid var(--border); color: var(--fg); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; transition: all 260ms; backdrop-filter: blur(8px); }
+    .cf-nav:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 20px rgba(245, 158, 11, 0.35); }
+    .cf-nav--prev { left: 1rem; }
+    .cf-nav--next { right: 1rem; }
+    .cf-dots { display: flex; gap: 0.4rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
+    .cf-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--border); transition: all 260ms; cursor: pointer; border: none; padding: 0; }
+    .cf-dot.is-active { background: var(--accent); width: 1.75rem; border-radius: 4px; }
   </style>
 </head>
 
@@ -2267,63 +2304,43 @@
     </div>
   </section>
 
-  <!-- ═══ SIGNATURE PROJECTS (Swiper) ═══ -->
-  <section class="md-sig-section">
-    <div class="swiper-container md-sig-swiper" style="width: 100%; height: 100%;">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide md-sig-slide">
-          <img src="assets/Projects/monticello.jpg" alt="Monticello project">
-          <div class="md-sig-scrim"></div>
-          <div class="md-sig-content">
-            <span class="md-eyebrow md-eyebrow-accent">Residential · Signature</span>
-            <h2 class="md-sig-title">Monticello</h2>
-            <p class="md-sig-lede">A testament to vertical luxury living on Mumbai's western waterfront.</p>
-            <div class="md-sig-meta">
-              <div><span class="md-sig-meta-k">Year</span><span class="md-sig-meta-v">2019</span></div>
-              <div><span class="md-sig-meta-k">Sector</span><span class="md-sig-meta-v">Residential</span></div>
-              <div><span class="md-sig-meta-k">Floors</span><span class="md-sig-meta-v">3B+P+14</span></div>
-              <div><span class="md-sig-meta-k">Location</span><span class="md-sig-meta-v">Bandra</span></div>
-            </div>
-            <a href="projects.html" class="md-btn md-btn-primary">View Project <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-        <div class="swiper-slide md-sig-slide">
-          <img src="assets/Projects/Tree Top.jpg" alt="Tree Top project">
-          <div class="md-sig-scrim"></div>
-          <div class="md-sig-content">
-            <span class="md-eyebrow md-eyebrow-accent">Eco-Conscious</span>
-            <h2 class="md-sig-title">Tree Top</h2>
-            <p class="md-sig-lede">Merging modern architecture with nature — a green-certified high-rise in the heart of Mumbai.</p>
-            <div class="md-sig-meta">
-              <div><span class="md-sig-meta-k">Year</span><span class="md-sig-meta-v">2020</span></div>
-              <div><span class="md-sig-meta-k">Sector</span><span class="md-sig-meta-v">Residential</span></div>
-              <div><span class="md-sig-meta-k">Type</span><span class="md-sig-meta-v">Eco-High-Rise</span></div>
-              <div><span class="md-sig-meta-k">Built-Up</span><span class="md-sig-meta-v">3.1L sf</span></div>
-            </div>
-            <a href="projects.html" class="md-btn md-btn-primary">View Project <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-        <div class="swiper-slide md-sig-slide">
-          <img src="assets/Projects/selendora.jpg" alt="Splendora project">
-          <div class="md-sig-scrim"></div>
-          <div class="md-sig-content">
-            <span class="md-eyebrow md-eyebrow-accent">Mixed Use</span>
-            <h2 class="md-sig-title">Splendora</h2>
-            <p class="md-sig-lede">A self-sustaining urban ecosystem of homes, retail, and shared green space.</p>
-            <div class="md-sig-meta">
-              <div><span class="md-sig-meta-k">Year</span><span class="md-sig-meta-v">2022</span></div>
-              <div><span class="md-sig-meta-k">Sector</span><span class="md-sig-meta-v">Mixed Use</span></div>
-              <div><span class="md-sig-meta-k">Towers</span><span class="md-sig-meta-v">4</span></div>
-              <div><span class="md-sig-meta-k">Built-Up</span><span class="md-sig-meta-v">5.2L sf</span></div>
-            </div>
-            <a href="projects.html" class="md-btn md-btn-primary">View Project <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev" aria-label="Previous slide"></div>
-      <div class="swiper-button-next" aria-label="Next slide"></div>
+  <!-- ═══ SIGNATURE PROJECTS — Ticker Gallery ═══ -->
+  <section class="tg-section">
+    <div class="tg-head md-reveal">
+      <span class="md-eyebrow md-eyebrow-accent">Signature Projects</span>
+      <h2>Built to <em>stand.</em></h2>
+      <p>A decade of marquee residential, luxury, and mixed-use work across the Mumbai Metropolitan Region. Hover to pause — click any card to explore the portfolio.</p>
     </div>
+    <div class="tg-strip md-reveal">
+      <div class="tg-track">
+        <a href="projects.html" class="tg-card"><img src="assets/Projects/monticello.jpg" alt="Monticello" loading="lazy"><div class="cap"><div class="ey">Signature · 2019</div><h3>Monticello</h3></div></a>
+        <a href="projects.html" class="tg-card"><img src="assets/Projects/Tree Top.jpg" alt="Tree Top" loading="lazy"><div class="cap"><div class="ey">Eco · 2020</div><h3>Tree Top</h3></div></a>
+        <a href="projects.html" class="tg-card"><img src="assets/Projects/selendora.jpg" alt="Splendora" loading="lazy"><div class="cap"><div class="ey">Mixed Use · 2022</div><h3>Splendora</h3></div></a>
+        <a href="projects.html" class="tg-card"><img src="assets/Projects/luxaria lodha thane.jpg" alt="Luxaria" loading="lazy"><div class="cap"><div class="ey">Luxury · 2021</div><h3>Luxaria</h3></div></a>
+        <a href="projects.html" class="tg-card"><img src="assets/Projects/iris.jpg" alt="Iris" loading="lazy"><div class="cap"><div class="ey">Residential · 2022</div><h3>Iris</h3></div></a>
+        <a href="projects.html" class="tg-card"><img src="assets/Projects/erika.jpg" alt="Erika" loading="lazy"><div class="cap"><div class="ey">Residential · 2021</div><h3>Erika</h3></div></a>
+        <a href="projects.html" class="tg-card"><img src="assets/Projects/insignia.jpg" alt="Insignia" loading="lazy"><div class="cap"><div class="ey">Signature · 2020</div><h3>Insignia</h3></div></a>
+        <a href="projects.html" class="tg-card"><img src="assets/Projects/serenes.jpg" alt="Serenes" loading="lazy"><div class="cap"><div class="ey">Mahindra · 2017</div><h3>Serenes</h3></div></a>
+        <a href="projects.html" class="tg-card"><img src="assets/Projects/lake riviera.jpg" alt="Lake Riviera" loading="lazy"><div class="cap"><div class="ey">Residential · 2022</div><h3>Lake Riviera</h3></div></a>
+        <a href="projects.html" class="tg-card"><img src="assets/Projects/bloomdale nagpur.jpg" alt="Bloomdale" loading="lazy"><div class="cap"><div class="ey">Township · 2019</div><h3>Bloomdale</h3></div></a>
+        <a href="projects.html" class="tg-card"><img src="assets/Projects/Del Sol.jpg" alt="Del Sol" loading="lazy"><div class="cap"><div class="ey">Heritage · 2014</div><h3>Del Sol</h3></div></a>
+        <a href="projects.html" class="tg-card"><img src="assets/Projects/reserve.jpg" alt="Reserve" loading="lazy"><div class="cap"><div class="ey">Residential · 2022</div><h3>Reserve</h3></div></a>
+        <!-- duplicate set for seamless infinite loop -->
+        <a href="projects.html" class="tg-card" aria-hidden="true"><img src="assets/Projects/monticello.jpg" alt="" loading="lazy"><div class="cap"><div class="ey">Signature · 2019</div><h3>Monticello</h3></div></a>
+        <a href="projects.html" class="tg-card" aria-hidden="true"><img src="assets/Projects/Tree Top.jpg" alt="" loading="lazy"><div class="cap"><div class="ey">Eco · 2020</div><h3>Tree Top</h3></div></a>
+        <a href="projects.html" class="tg-card" aria-hidden="true"><img src="assets/Projects/selendora.jpg" alt="" loading="lazy"><div class="cap"><div class="ey">Mixed Use · 2022</div><h3>Splendora</h3></div></a>
+        <a href="projects.html" class="tg-card" aria-hidden="true"><img src="assets/Projects/luxaria lodha thane.jpg" alt="" loading="lazy"><div class="cap"><div class="ey">Luxury · 2021</div><h3>Luxaria</h3></div></a>
+        <a href="projects.html" class="tg-card" aria-hidden="true"><img src="assets/Projects/iris.jpg" alt="" loading="lazy"><div class="cap"><div class="ey">Residential · 2022</div><h3>Iris</h3></div></a>
+        <a href="projects.html" class="tg-card" aria-hidden="true"><img src="assets/Projects/erika.jpg" alt="" loading="lazy"><div class="cap"><div class="ey">Residential · 2021</div><h3>Erika</h3></div></a>
+        <a href="projects.html" class="tg-card" aria-hidden="true"><img src="assets/Projects/insignia.jpg" alt="" loading="lazy"><div class="cap"><div class="ey">Signature · 2020</div><h3>Insignia</h3></div></a>
+        <a href="projects.html" class="tg-card" aria-hidden="true"><img src="assets/Projects/serenes.jpg" alt="" loading="lazy"><div class="cap"><div class="ey">Mahindra · 2017</div><h3>Serenes</h3></div></a>
+        <a href="projects.html" class="tg-card" aria-hidden="true"><img src="assets/Projects/lake riviera.jpg" alt="" loading="lazy"><div class="cap"><div class="ey">Residential · 2022</div><h3>Lake Riviera</h3></div></a>
+        <a href="projects.html" class="tg-card" aria-hidden="true"><img src="assets/Projects/bloomdale nagpur.jpg" alt="" loading="lazy"><div class="cap"><div class="ey">Township · 2019</div><h3>Bloomdale</h3></div></a>
+        <a href="projects.html" class="tg-card" aria-hidden="true"><img src="assets/Projects/Del Sol.jpg" alt="" loading="lazy"><div class="cap"><div class="ey">Heritage · 2014</div><h3>Del Sol</h3></div></a>
+        <a href="projects.html" class="tg-card" aria-hidden="true"><img src="assets/Projects/reserve.jpg" alt="" loading="lazy"><div class="cap"><div class="ey">Residential · 2022</div><h3>Reserve</h3></div></a>
+      </div>
+    </div>
+    <div class="tg-hint">Hover to pause · scroll continues automatically</div>
   </section>
 
   <!-- ═══ ACTIVE PROJECTS ═══ -->
@@ -2481,25 +2498,26 @@
         <h2 style="font-family: var(--font-display); font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 700; letter-spacing: 0; margin-top: 0.75rem; text-transform: uppercase;">Mumbai's Leading Developers</h2>
       </div>
     </div>
-    <div class="md-marquee-wrap md-reveal">
-      <div class="md-marquee">
-        <div class="md-logo-tile"><img src="assets/Clients/lodha.png" alt="Lodha" loading="lazy"></div>
-        <div class="md-logo-tile"><img src="assets/Clients/rustomjee.png" alt="Rustomjee" loading="lazy"></div>
-        <div class="md-logo-tile"><img src="assets/Clients/mahindra-lifespaces.png" alt="Mahindra Lifespaces" loading="lazy"></div>
-        <div class="md-logo-tile"><img src="assets/Clients/hiranandani.png" alt="Hiranandani" loading="lazy"></div>
-        <div class="md-logo-tile"><img src="assets/Clients/dheeraj.png" alt="Dheeraj" loading="lazy"></div>
-        <div class="md-logo-tile"><img src="assets/Clients/ekta-world.png" alt="Ekta World" loading="lazy"></div>
-        <div class="md-logo-tile"><img src="assets/Clients/ajmera.png" alt="Ajmera" loading="lazy"></div>
-        <div class="md-logo-tile"><img src="assets/Clients/puraniks.png" alt="Puraniks" loading="lazy"></div>
-        <!-- duplicate for seamless loop -->
-        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/lodha.png" alt="" loading="lazy"></div>
-        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/rustomjee.png" alt="" loading="lazy"></div>
-        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/mahindra-lifespaces.png" alt="" loading="lazy"></div>
-        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/hiranandani.png" alt="" loading="lazy"></div>
-        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/dheeraj.png" alt="" loading="lazy"></div>
-        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/ekta-world.png" alt="" loading="lazy"></div>
-        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/ajmera.png" alt="" loading="lazy"></div>
-        <div class="md-logo-tile" aria-hidden="true"><img src="assets/Clients/puraniks.png" alt="" loading="lazy"></div>
+    <div class="md-container">
+      <div class="cf-wrap md-reveal">
+        <button class="cf-nav cf-nav--prev" aria-label="Previous client"><i class="fas fa-chevron-left"></i></button>
+        <div class="cf-track">
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/Dheeraj.png" alt="Dheeraj Realty" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/rustomjee.png" alt="Rustomjee" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/lodha.png" alt="Lodha Group" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/hiranandani.png" alt="Hiranandani" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/mahindra.png" alt="Mahindra Lifespaces" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/ekta_world.png" alt="Ekta World" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/antariksh.png" alt="Antariksh" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/pashmina.png" alt="Pashmina" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/ajmera.png" alt="Ajmera Group" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/aekade.png" alt="Arkade Group" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/conwood.png" alt="Conwood" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/neptune.png" alt="Neptune" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/puraniks.png" alt="Puraniks" loading="lazy"></div></div>
+        </div>
+        <button class="cf-nav cf-nav--next" aria-label="Next client"><i class="fas fa-chevron-right"></i></button>
+        <div class="cf-dots"></div>
       </div>
     </div>
   </section>
@@ -2764,6 +2782,55 @@
         ticking = true;
         requestAnimationFrame(sync);
       }, { passive: true });
+    })();
+
+    // 3D Coverflow Carousel — Trusted By clients
+    (function() {
+      document.querySelectorAll('.cf-wrap').forEach(function(wrap) {
+        const track = wrap.querySelector('.cf-track');
+        const prev = wrap.querySelector('.cf-nav--prev');
+        const next = wrap.querySelector('.cf-nav--next');
+        const dotsEl = wrap.querySelector('.cf-dots');
+        if (!track) return;
+        const cards = Array.from(track.querySelectorAll('.cf-card'));
+        if (!cards.length) return;
+        let active = 0;
+        let autoTimer;
+        cards.forEach((_, i) => {
+          const b = document.createElement('button');
+          b.className = 'cf-dot' + (i === 0 ? ' is-active' : '');
+          b.setAttribute('aria-label', 'Go to client ' + (i + 1));
+          b.addEventListener('click', () => { active = i; update(); resetAuto(); });
+          dotsEl.appendChild(b);
+        });
+        function update() {
+          cards.forEach((card, i) => {
+            const d = i - active;
+            const abs = Math.abs(d);
+            let tx, rotY, scale, z, opacity;
+            if (abs === 0) { tx = 0; rotY = 0; scale = 1; z = 0; opacity = 1; }
+            else if (abs === 1) { tx = d * 60; rotY = d * -35; scale = 0.85; z = -120; opacity = 0.75; }
+            else if (abs === 2) { tx = d * 95; rotY = d * -50; scale = 0.72; z = -240; opacity = 0.45; }
+            else { tx = d * 120; rotY = d * -55; scale = 0.6; z = -360; opacity = 0; }
+            card.style.transform = `translateX(${tx}%) translateZ(${z}px) rotateY(${rotY}deg) scale(${scale})`;
+            card.style.opacity = opacity;
+            card.style.pointerEvents = abs > 2 ? 'none' : 'auto';
+            card.classList.toggle('is-center', d === 0);
+          });
+          dotsEl.querySelectorAll('.cf-dot').forEach((d, i) => d.classList.toggle('is-active', i === active));
+        }
+        function resetAuto() {
+          clearInterval(autoTimer);
+          autoTimer = setInterval(() => { active = (active + 1) % cards.length; update(); }, 1000);
+        }
+        prev.addEventListener('click', () => { active = (active - 1 + cards.length) % cards.length; update(); resetAuto(); });
+        next.addEventListener('click', () => { active = (active + 1) % cards.length; update(); resetAuto(); });
+        cards.forEach(card => card.addEventListener('click', () => { window.location.href = 'clients.html'; }));
+        wrap.addEventListener('mouseenter', () => clearInterval(autoTimer));
+        wrap.addEventListener('mouseleave', () => resetAuto());
+        update();
+        resetAuto();
+      });
     })();
   </script>
 </body>

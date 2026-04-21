@@ -124,11 +124,25 @@
     return String(i + 1).padStart(3, '0');
   }
 
+  // Asymmetric bento-grid size pattern (cycles every 8 cards). Each index
+  // is deterministically assigned a tile size, so when the admin adds new
+  // projects they automatically slot into the rhythm without any extra config.
+  // 0 → hero (2×2), 3 → wide (2×1), 5 → tall (1×2), 6 → wide (2×1).
+  function bentoClass(i) {
+    const n = i % 8;
+    if (n === 0) return 'b-hero';
+    if (n === 3) return 'b-wide';
+    if (n === 5) return 'b-tall';
+    if (n === 6) return 'b-wide';
+    return '';
+  }
+
   // ── Grid Card (Glassmorphism) ──
   function gridCard(p, i) {
     const div = document.createElement('article');
     const imgSrc = p.img || FALLBACK_IMG;
-    div.className = 'project-card group';
+    const bento = bentoClass(i);
+    div.className = 'project-card group' + (bento ? ' ' + bento : '');
     div.dataset.category = p.category;
 
     div.innerHTML = `

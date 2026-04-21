@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Wall · 3D Coverflow Carousel</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+  <link rel="stylesheet" href="theme.css">
+
+  <style>
+    body { background: var(--bg); color: var(--fg); padding: 0 0 5rem; }
+    .page-container { max-width: 1680px; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 3rem); position: relative; z-index: 1; }
+
+    .page-header { padding: clamp(3rem,6vw,5rem) 0 1.5rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+    .page-header .eyebrow { font-family: var(--font-label); font-size: 0.72rem; font-weight: 600; color: var(--accent); letter-spacing: 0.32em; text-transform: uppercase; margin-bottom: 1rem; }
+    .page-header h1 { font-family: var(--font-display); font-size: clamp(2rem,4vw,3rem); font-weight: 600; text-transform: uppercase; margin: 0 0 1rem; }
+    .page-header h1 em { color: var(--accent); font-style: italic; font-weight: 500; }
+    .page-header p { color: var(--fg-muted); max-width: 40rem; margin: 0 0 2rem; line-height: 1.6; }
+
+    .opt { padding: clamp(3rem,5vw,5rem) 0; }
+    .opt-head { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .opt-num { font-family: var(--font-display); font-size: 2.25rem; font-weight: 400; color: var(--accent); line-height: 1; }
+    .opt-title { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin: 0; }
+    .opt-desc { color: var(--fg-muted); font-size: 0.9rem; max-width: 42rem; line-height: 1.6; margin: 0; flex-basis: 100%; }
+
+    /* ═══════════════════════════════════════════════════════
+       3D COVERFLOW CAROUSEL
+       ═══════════════════════════════════════════════════════ */
+    .m19-wrap { position: relative; padding: 3rem 0; perspective: 1400px; overflow: hidden; }
+    .m19-track { position: relative; height: 22rem; transform-style: preserve-3d; }
+    .m19-card { position: absolute; top: 50%; left: 50%; width: clamp(13rem, 22vw, 18rem); height: clamp(18rem, 30vw, 22rem); margin: calc(-1 * clamp(9rem, 15vw, 11rem)) 0 0 calc(-1 * clamp(6.5rem, 11vw, 9rem)); border-radius: var(--r-lg); background: #15151c; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; transition: transform 600ms var(--ease-out), opacity 500ms, border-color 400ms; transform-style: preserve-3d; cursor: pointer; overflow: hidden; }
+    .m19-card.is-center { transform: translateZ(0); z-index: 10; border-color: var(--accent); }
+    .m19-card .m19-logo { flex: 1; display: flex; align-items: center; justify-content: center; }
+    .m19-card .m19-logo img { max-width: 75%; max-height: 70%; filter: brightness(0) invert(1); opacity: 0.9; }
+    .m19-card .m19-info { text-align: center; font-family: var(--font-label); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg-subtle); }
+    .m19-card .m19-info .num { display: block; font-family: var(--font-display); font-size: 2rem; font-weight: 500; color: var(--accent); letter-spacing: 0; margin-bottom: 0.15rem; }
+    .m19-card .m19-info .name { display: block; color: var(--fg); font-size: 0.78rem; margin-top: 0.35rem; }
+    .m19-nav { position: absolute; top: 50%; width: 2.5rem; height: 2.5rem; transform: translateY(-50%); border-radius: 50%; background: rgba(26,26,36,0.9); border: 1px solid var(--border); color: var(--fg); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; transition: all 260ms; backdrop-filter: blur(8px); }
+    .m19-nav:hover { border-color: var(--accent); color: var(--accent); box-shadow: var(--glow-sm); }
+    .m19-nav--prev { left: 1rem; }
+    .m19-nav--next { right: 1rem; }
+    .m19-dots { display: flex; gap: 0.4rem; justify-content: center; margin-top: 1.5rem; }
+    .m19-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--border); transition: all 260ms; cursor: pointer; border: none; padding: 0; }
+    .m19-dot.is-active { background: var(--accent); width: 1.75rem; border-radius: 4px; }
+
+    .page-footer { padding: 3rem 0 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--fg-subtle); font-family: var(--font-label); font-size: 0.75rem; letter-spacing: 0.24em; text-transform: uppercase; margin-top: 3rem; }
+  </style>
+</head>
+<body>
+
+  <div class="md-orb" style="top:-180px; left:8%; width:480px; height:480px;"></div>
+  <div class="md-orb" style="top:40%; right:-120px; width:420px; height:420px;"></div>
+
+  <main class="page-container">
+
+    <header class="page-header">
+      <div class="eyebrow">Client Wall · Selected Design</div>
+      <h1>3D Coverflow <em>carousel.</em></h1>
+      <p>Perspective carousel — the center card sits flat with a pulsing amber glow, flanking cards rotate away into the distance. Auto-advances every 4s; use arrows, dots, or click any card to navigate manually.</p>
+    </header>
+
+    <section class="opt" id="opt-19">
+      <div class="m19-wrap">
+        <button class="m19-nav m19-nav--prev" id="m19-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+        <div class="m19-track" id="m19-track">
+          <div class="m19-card"><div class="m19-logo"><img src="assets/Clients/Dheeraj.png" alt="Dheeraj"></div><div class="m19-info"><span class="num">5</span>Projects<span class="name">Dheeraj Realty</span></div></div>
+          <div class="m19-card"><div class="m19-logo"><img src="assets/Clients/rustomjee.png" alt="Rustomjee"></div><div class="m19-info"><span class="num">4</span>Projects<span class="name">Rustomjee</span></div></div>
+          <div class="m19-card"><div class="m19-logo"><img src="assets/Clients/lodha.png" alt="Lodha"></div><div class="m19-info"><span class="num">3</span>Projects<span class="name">Lodha Group</span></div></div>
+          <div class="m19-card"><div class="m19-logo"><img src="assets/Clients/hiranandani.png" alt="Hiranandani"></div><div class="m19-info"><span class="num">3</span>Projects<span class="name">Hiranandani</span></div></div>
+          <div class="m19-card"><div class="m19-logo"><img src="assets/Clients/mahindra.png" alt="Mahindra"></div><div class="m19-info"><span class="num">2</span>Projects<span class="name">Mahindra</span></div></div>
+          <div class="m19-card"><div class="m19-logo"><img src="assets/Clients/ekta_world.png" alt="Ekta"></div><div class="m19-info"><span class="num">2</span>Projects<span class="name">Ekta World</span></div></div>
+          <div class="m19-card"><div class="m19-logo"><img src="assets/Clients/antariksh.png" alt="Antariksh"></div><div class="m19-info"><span class="num">2</span>Projects<span class="name">Antariksh</span></div></div>
+          <div class="m19-card"><div class="m19-logo"><img src="assets/Clients/pashmina.png" alt="Pashmina"></div><div class="m19-info"><span class="num">1</span>Project<span class="name">Pashmina</span></div></div>
+        </div>
+        <button class="m19-nav m19-nav--next" id="m19-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+        <div class="m19-dots" id="m19-dots"></div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      Confirm to wire into clients.html
+    </footer>
+  </main>
+
+  <script>
+    (function() {
+      const track = document.getElementById('m19-track');
+      const prev = document.getElementById('m19-prev');
+      const next = document.getElementById('m19-next');
+      const dotsEl = document.getElementById('m19-dots');
+      if (!track) return;
+      const cards = Array.from(track.querySelectorAll('.m19-card'));
+      let active = 0;
+      let autoTimer;
+      cards.forEach((_, i) => {
+        const b = document.createElement('button');
+        b.className = 'm19-dot' + (i === 0 ? ' is-active' : '');
+        b.addEventListener('click', () => { active = i; update(); resetAuto(); });
+        dotsEl.appendChild(b);
+      });
+      function update() {
+        cards.forEach((card, i) => {
+          const d = i - active;
+          const abs = Math.abs(d);
+          let tx, rotY, scale, z, opacity;
+          if (abs === 0) { tx = 0; rotY = 0; scale = 1; z = 0; opacity = 1; }
+          else if (abs === 1) { tx = d * 60; rotY = d * -35; scale = 0.85; z = -120; opacity = 0.75; }
+          else if (abs === 2) { tx = d * 95; rotY = d * -50; scale = 0.72; z = -240; opacity = 0.45; }
+          else { tx = d * 120; rotY = d * -55; scale = 0.6; z = -360; opacity = 0; }
+          card.style.transform = `translateX(${tx}%) translateZ(${z}px) rotateY(${rotY}deg) scale(${scale})`;
+          card.style.opacity = opacity;
+          card.style.pointerEvents = abs > 2 ? 'none' : 'auto';
+          card.classList.toggle('is-center', d === 0);
+        });
+        dotsEl.querySelectorAll('.m19-dot').forEach((d, i) => d.classList.toggle('is-active', i === active));
+      }
+      function resetAuto() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(() => { active = (active + 1) % cards.length; update(); }, 4000);
+      }
+      prev.addEventListener('click', () => { active = (active - 1 + cards.length) % cards.length; update(); resetAuto(); });
+      next.addEventListener('click', () => { active = (active + 1) % cards.length; update(); resetAuto(); });
+      cards.forEach((card, i) => card.addEventListener('click', () => { active = i; update(); resetAuto(); }));
+      update();
+      resetAuto();
+    })();
+  </script>
+</body>
+</html>

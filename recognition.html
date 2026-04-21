@@ -79,53 +79,241 @@
     .rc-award h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase; color: var(--fg); margin: 0 0 0.85rem; line-height: 1.2; }
     .rc-award p { color: var(--fg-muted); font-size: 0.9rem; line-height: 1.65; margin: 0; }
 
-    /* Client recognition (compact) */
-    .rc-client { display: grid; grid-template-columns: 1fr; gap: 1rem; max-width: 52rem; margin: 0 auto; }
-    @media (min-width: 720px) { .rc-client { grid-template-columns: 1fr 1fr; } }
+    /* Client recognition — editorial magazine spread */
+    .rc-client { display: flex; flex-direction: column; gap: 1.75rem; max-width: 68rem; margin: 0 auto; }
     .rc-client-card {
-      display: flex; gap: 1rem; align-items: flex-start;
-      background: var(--card); backdrop-filter: blur(8px);
-      border: 1px solid var(--border); border-radius: var(--r-md);
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: 0;
+      align-items: stretch;
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: border-color var(--t-base-ms), box-shadow var(--t-base-ms), transform var(--t-base-ms);
+      min-height: 22rem;
+    }
+    .rc-client-card:nth-child(even) .cert-thumb { grid-column: 2; grid-row: 1; border-right: 0; border-left: 1px solid var(--border); }
+    .rc-client-card:nth-child(even) .body { grid-column: 1; grid-row: 1; }
+    .rc-client-card:hover { border-color: rgba(245,158,11,0.35); box-shadow: 0 20px 60px -25px rgba(245,158,11,0.25); transform: translateY(-3px); }
+    .rc-client-card .cert-thumb {
+      position: relative;
+      background: #f4f3ef;
+      border-right: 1px solid var(--border);
+      overflow: hidden;
+      min-height: 22rem;
+    }
+    .rc-client-card .cert-thumb::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, transparent 60%, rgba(10,10,15,0.35) 100%);
+      pointer-events: none;
+      transition: opacity var(--t-slow);
+    }
+    .rc-client-card:hover .cert-thumb::after { opacity: 0.6; }
+    .rc-client-card .cert-thumb img {
+      width: 100%; height: 100%;
+      object-fit: contain;
       padding: 1.5rem;
+      transition: transform 800ms var(--ease-out);
+    }
+    .rc-client-card:hover .cert-thumb img { transform: scale(1.03); }
+    .rc-client-card .cert-badge {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      padding: 0.38rem 0.85rem;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(245,158,11,0.35);
+      border-radius: var(--r-full);
+      font-family: var(--font-label);
+      font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--accent);
+      z-index: 2;
+    }
+    .rc-client-card .cert-zoom {
+      position: absolute;
+      bottom: 1rem; right: 1rem;
+      width: 2.5rem; height: 2.5rem;
+      border-radius: 50%;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--fg);
+      font-size: 0.85rem;
+      z-index: 2;
+      text-decoration: none;
       transition: all var(--t-base-ms);
     }
-    .rc-client-card:hover { border-color: rgba(245,158,11,0.3); background: rgba(26,26,36,0.8); }
-    .rc-client-card .ico {
-      width: 2.75rem; height: 2.75rem; flex-shrink: 0;
-      display: grid; place-items: center;
-      background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3);
-      border-radius: var(--r-sm); color: var(--accent); font-size: 1rem;
+    .rc-client-card .cert-zoom:hover {
+      background: var(--accent); color: #0a0a0f;
+      border-color: var(--accent);
+      transform: scale(1.08);
     }
-    .rc-client-card .meta { font-family: var(--font-label); font-size: 0.66rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
-    .rc-client-card .title { font-family: var(--font-display); font-size: 1rem; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase; color: var(--fg); margin: 0.35rem 0 0.6rem; }
-    .rc-client-card p { color: var(--fg-muted); font-size: 0.85rem; line-height: 1.6; margin: 0; }
+    .rc-client-card .body {
+      padding: clamp(1.75rem, 3vw, 2.5rem);
+      display: flex; flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .rc-client-card .meta {
+      display: flex; align-items: center; gap: 0.65rem;
+      font-family: var(--font-label);
+      font-size: 0.66rem; font-weight: 600;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .rc-client-card .meta::before {
+      content: '';
+      width: 1.75rem; height: 1px;
+      background: var(--accent);
+    }
+    .rc-client-card .title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      color: var(--fg);
+      margin: 0;
+      line-height: 1.15;
+    }
+    .rc-client-card p {
+      color: var(--fg-muted);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+    .rc-client-card .footer-line {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      margin-top: 0.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-label);
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--fg-subtle);
+    }
+    .rc-client-card .footer-line .award { display: flex; align-items: center; gap: 0.5rem; }
+    .rc-client-card .footer-line .award i { color: var(--accent); font-size: 0.78rem; }
+    .rc-client-card .footer-line .issuer { color: var(--fg); }
+    @media (max-width: 720px) {
+      .rc-client-card { grid-template-columns: 1fr; min-height: 0; }
+      .rc-client-card .cert-thumb,
+      .rc-client-card:nth-child(even) .cert-thumb { grid-column: 1; grid-row: 1; border-right: 0; border-left: 0; border-bottom: 1px solid var(--border); min-height: 0; aspect-ratio: 4/3; }
+      .rc-client-card:nth-child(even) .body { grid-column: 1; grid-row: 2; }
+    }
 
     /* Certifications split */
-    .rc-cert { display: grid; grid-template-columns: 1fr; gap: clamp(2rem,4vw,3rem); align-items: center; }
-    @media (min-width: 900px) { .rc-cert { grid-template-columns: 1fr 1fr; gap: 4rem; } }
-    .rc-cert h2 { font-family: var(--font-display); font-size: clamp(2rem,4.5vw,3rem); font-weight: 600; line-height: 1; margin: 1rem 0 1.25rem; }
-    .rc-cert h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
-    .rc-cert > div > p { color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; margin: 0 0 1.75rem; }
-    .rc-cert ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.85rem; }
-    .rc-cert ul li {
-      display: flex; gap: 0.85rem; align-items: center;
-      color: var(--fg-muted); font-family: var(--font-label);
-      font-size: 0.92rem; letter-spacing: 0.04em;
-    }
-    .rc-cert ul li i { color: var(--accent); font-size: 1rem; }
-    .rc-cert ul li strong { color: var(--fg); font-weight: 500; }
+    /* Certified excellence — editorial full-width */
+    .rc-cert-intro { max-width: 44rem; margin: 0 auto 3rem; text-align: center; }
+    .rc-cert-intro h2 { font-family: var(--font-display); font-size: clamp(2rem,4.5vw,3rem); font-weight: 600; line-height: 1; margin: 1rem 0 1.25rem; }
+    .rc-cert-intro h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
+    .rc-cert-intro p { color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; margin: 0; }
 
-    .rc-iso-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .rc-iso-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    @media (max-width: 1024px) { .rc-iso-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .rc-iso-grid { grid-template-columns: 1fr; } }
+
     .rc-iso {
-      background: var(--card); backdrop-filter: blur(8px);
-      border: 1px solid var(--border); border-radius: var(--r-lg);
-      padding: 1.75rem 1.25rem; text-align: center;
-      transition: all var(--t-slow) var(--ease-out);
+      position: relative;
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: border-color var(--t-base-ms), transform var(--t-base-ms), box-shadow var(--t-base-ms);
     }
-    .rc-iso:hover { border-color: rgba(245,158,11,0.3); background: rgba(26,26,36,0.8); transform: translateY(-2px); box-shadow: var(--glow-sm); }
-    .rc-iso i { color: var(--accent); font-size: 1.75rem; margin-bottom: 0.75rem; }
-    .rc-iso .code { font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase; color: var(--fg); margin: 0 0 0.25rem; }
-    .rc-iso .ydesc { font-family: var(--font-label); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-subtle); }
+    .rc-iso:hover { border-color: rgba(245,158,11,0.4); transform: translateY(-4px); box-shadow: 0 20px 50px -20px rgba(245,158,11,0.22); }
+    .rc-iso::after {
+      content: '';
+      position: absolute; left: 0; right: 0; bottom: 0;
+      height: 2px; width: 0;
+      background: var(--accent);
+      transition: width 600ms var(--ease-out);
+    }
+    .rc-iso:hover::after { width: 100%; }
+
+    .rc-iso-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.15rem;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-label);
+      font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.26em; text-transform: uppercase;
+    }
+    .rc-iso-head .idx { color: var(--accent); }
+    .rc-iso-head .discipline { color: var(--fg-subtle); }
+
+    .rc-iso .cert-img {
+      position: relative;
+      background: #f4f3ef;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+    }
+    .rc-iso .cert-img img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      padding: 1rem;
+      transition: transform 700ms var(--ease-out);
+    }
+    .rc-iso:hover .cert-img img { transform: scale(1.04); }
+    .rc-iso .cert-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,10,15,0.15), transparent 40%);
+      pointer-events: none;
+    }
+    .rc-iso .zoom {
+      position: absolute; bottom: 0.75rem; right: 0.75rem;
+      width: 2.1rem; height: 2.1rem;
+      border-radius: 50%;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--fg); font-size: 0.75rem;
+      text-decoration: none;
+      transition: all var(--t-base-ms);
+      z-index: 2;
+    }
+    .rc-iso .zoom:hover { background: var(--accent); color: #0a0a0f; border-color: var(--accent); transform: scale(1.1); }
+
+    .rc-iso-body {
+      padding: 1.25rem 1.15rem 1.25rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      flex: 1;
+    }
+    .rc-iso-body .code {
+      font-family: var(--font-display);
+      font-size: 1.25rem; font-weight: 500;
+      letter-spacing: 0.02em; text-transform: uppercase;
+      color: var(--fg); margin: 0;
+      line-height: 1.1;
+    }
+    .rc-iso-body .desc {
+      font-family: var(--font-label);
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--fg-muted);
+      line-height: 1.5;
+    }
+    .rc-iso-foot {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: auto;
+      padding: 0.85rem 1.15rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-label);
+      font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--fg-subtle);
+    }
+    .rc-iso-foot .year { color: var(--accent); font-family: var(--font-display); font-size: 0.95rem; font-weight: 500; letter-spacing: 0; }
 
     .d1 { transition-delay: 80ms; } .d2 { transition-delay: 160ms; } .d3 { transition-delay: 240ms; } .d4 { transition-delay: 320ms; }
   </style>
@@ -268,46 +456,126 @@
         <p>Appreciation certificates received directly from marquee developers for performance on their sites.</p>
       </div>
       <div class="rc-client">
-        <div class="rc-client-card md-reveal">
-          <div class="ico"><i class="fas fa-hard-hat"></i></div>
-          <div>
-            <div class="meta">2019 · Safety Audit</div>
-            <div class="title">Upper Thane Recognition</div>
-            <p>Certificate of Appreciation for exemplary safety practices and procedures on the Upper Thane project site.</p>
+        <article class="rc-client-card md-reveal">
+          <div class="cert-thumb">
+            <span class="cert-badge">Apr 2018</span>
+            <img src="assets/certificates/upper thane.jpg" alt="Upper Thane safety recognition certificate" loading="lazy">
+            <a class="cert-zoom" href="assets/certificates/upper thane.jpg" target="_blank" rel="noopener" aria-label="View full certificate"><i class="fas fa-expand"></i></a>
           </div>
-        </div>
-        <div class="rc-client-card md-reveal d1">
-          <div class="ico"><i class="fas fa-certificate"></i></div>
-          <div>
-            <div class="meta">Oct 2019 · Mahindra Lifespaces</div>
-            <div class="title">Serenes MSA Audit</div>
-            <p>Certificate of Appreciation from Mahindra Lifespaces for outstanding performance in the MSA Audit on the Serenes project.</p>
+          <div class="body">
+            <div class="meta">Safety Practices · Treetop-CI</div>
+            <h3 class="title">Upper Thane <span class="accent">safety.</span></h3>
+            <p>Certification of Appreciation for implementation of Safety practices and procedures as per standards on the Treetop-CI site at the Upper Thane township, signed off by the AVP — EHS.</p>
+            <div class="footer-line">
+              <span class="award"><i class="fas fa-award"></i>Certificate of Appreciation</span>
+              <span class="issuer">Upper Thane · Lokesh R, AVP-EHS</span>
+            </div>
           </div>
-        </div>
+        </article>
+        <article class="rc-client-card md-reveal d1">
+          <div class="cert-thumb">
+            <span class="cert-badge">Apr 2018</span>
+            <img src="assets/certificates/upper thane 2.jpg" alt="Upper Thane quality recognition certificate" loading="lazy">
+            <a class="cert-zoom" href="assets/certificates/upper thane 2.jpg" target="_blank" rel="noopener" aria-label="View full certificate"><i class="fas fa-expand"></i></a>
+          </div>
+          <div class="body">
+            <div class="meta">Quality Practices · Treetop-CI</div>
+            <h3 class="title">Upper Thane <span class="accent">quality.</span></h3>
+            <p>Certification of Appreciation for implementation of Quality practices and procedures as per standards on the Treetop-CI site at the Upper Thane township, signed off by the GM — Quality Assurance.</p>
+            <div class="footer-line">
+              <span class="award"><i class="fas fa-award"></i>Certificate of Appreciation</span>
+              <span class="issuer">Upper Thane · Vipul Pandya, GM-QA</span>
+            </div>
+          </div>
+        </article>
+        <article class="rc-client-card md-reveal d2">
+          <div class="cert-thumb">
+            <span class="cert-badge">Mar 2017</span>
+            <img src="assets/certificates/serenes.jpg" alt="Serenes MSA audit certificate" loading="lazy">
+            <a class="cert-zoom" href="assets/certificates/serenes.jpg" target="_blank" rel="noopener" aria-label="View full certificate"><i class="fas fa-expand"></i></a>
+          </div>
+          <div class="body">
+            <div class="meta">Mahindra Safety Award · MSA Audit</div>
+            <h3 class="title">Serenes <span class="accent">MSA audit.</span></h3>
+            <p>Certificate of Appreciation from Mahindra Lifespaces for The Serenes being nominated for the Mahindra Safety Award — audit conducted October 2016, presented on National Safety Day March 2017.</p>
+            <div class="footer-line">
+              <span class="award"><i class="fas fa-award"></i>Certificate of Appreciation</span>
+              <span class="issuer">Mahindra Lifespaces · MLDL</span>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
   <section class="rc-section">
     <div class="md-container">
-      <div class="rc-cert">
-        <div class="md-reveal">
-          <span class="md-eyebrow md-eyebrow-accent">International Standards</span>
-          <h2>Certified <span class="accent">excellence.</span></h2>
-          <p>We adhere to the highest international standards for quality, safety, and environmental management. Every site, every process, independently audited.</p>
-          <ul>
-            <li><i class="fas fa-check-circle"></i><div><strong>ISO 9001:2015</strong> · Quality Management</div></li>
-            <li><i class="fas fa-check-circle"></i><div><strong>ISO 14001:2015</strong> · Environmental Management</div></li>
-            <li><i class="fas fa-check-circle"></i><div><strong>ISO 45001:2018</strong> · Occupational Health &amp; Safety</div></li>
-            <li><i class="fas fa-check-circle"></i><div><strong>OHSAS 18001:2007</strong> · Health &amp; Safety Legacy</div></li>
-          </ul>
-        </div>
-        <div class="rc-iso-grid md-reveal d2">
-          <div class="rc-iso"><i class="fas fa-award"></i><div class="code">ISO 9001</div><div class="ydesc">Quality · 2015</div></div>
-          <div class="rc-iso"><i class="fas fa-leaf"></i><div class="code">ISO 14001</div><div class="ydesc">Environment · 2015</div></div>
-          <div class="rc-iso"><i class="fas fa-hard-hat"></i><div class="code">ISO 45001</div><div class="ydesc">Safety · 2018</div></div>
-          <div class="rc-iso"><i class="fas fa-shield-alt"></i><div class="code">OHSAS</div><div class="ydesc">18001 · 2007</div></div>
-        </div>
+      <div class="rc-cert-intro md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">International Standards</span>
+        <h2>Certified <span class="accent">excellence.</span></h2>
+        <p>We adhere to the highest international standards for quality, safety, and environmental management. Every site, every process, independently audited.</p>
+      </div>
+      <div class="rc-iso-grid">
+        <article class="rc-iso md-reveal">
+          <div class="rc-iso-head"><span class="idx">01</span><span class="discipline">Quality</span></div>
+          <div class="cert-img">
+            <img src="assets/certificates/ISO 9001.png" alt="ISO 9001:2015 Certificate" loading="lazy">
+            <a class="zoom" href="assets/certificates/ISO 9001.png" target="_blank" rel="noopener" aria-label="View full ISO 9001 certificate"><i class="fas fa-expand"></i></a>
+          </div>
+          <div class="rc-iso-body">
+            <h3 class="code">ISO 9001:2015</h3>
+            <div class="desc">Quality Management System</div>
+          </div>
+          <div class="rc-iso-foot"><span>Certified Since</span><span class="year">2019</span></div>
+        </article>
+        <article class="rc-iso md-reveal d1">
+          <div class="rc-iso-head"><span class="idx">02</span><span class="discipline">Environment</span></div>
+          <div class="cert-img">
+            <img src="assets/certificates/ISO 14001.png" alt="ISO 14001:2015 Certificate" loading="lazy">
+            <a class="zoom" href="assets/certificates/ISO 14001.png" target="_blank" rel="noopener" aria-label="View full ISO 14001 certificate"><i class="fas fa-expand"></i></a>
+          </div>
+          <div class="rc-iso-body">
+            <h3 class="code">ISO 14001:2015</h3>
+            <div class="desc">Environmental Management</div>
+          </div>
+          <div class="rc-iso-foot"><span>Certified Since</span><span class="year">2024</span></div>
+        </article>
+        <article class="rc-iso md-reveal d2">
+          <div class="rc-iso-head"><span class="idx">03</span><span class="discipline">Safety</span></div>
+          <div class="cert-img">
+            <img src="assets/certificates/ISO 45001.png" alt="ISO 45001:2018 Certificate" loading="lazy">
+            <a class="zoom" href="assets/certificates/ISO 45001.png" target="_blank" rel="noopener" aria-label="View full ISO 45001 certificate"><i class="fas fa-expand"></i></a>
+          </div>
+          <div class="rc-iso-body">
+            <h3 class="code">ISO 45001:2018</h3>
+            <div class="desc">Occupational Health &amp; Safety</div>
+          </div>
+          <div class="rc-iso-foot"><span>Certified Since</span><span class="year">2024</span></div>
+        </article>
+        <article class="rc-iso md-reveal d3">
+          <div class="rc-iso-head"><span class="idx">04</span><span class="discipline">Legacy</span></div>
+          <div class="cert-img">
+            <img src="assets/certificates/ohsas 18001.jpg" alt="OHSAS 18001:2007 Certificate" loading="lazy">
+            <a class="zoom" href="assets/certificates/ohsas 18001.jpg" target="_blank" rel="noopener" aria-label="View full OHSAS 18001 certificate"><i class="fas fa-expand"></i></a>
+          </div>
+          <div class="rc-iso-body">
+            <h3 class="code">OHSAS 18001:2007</h3>
+            <div class="desc">Health &amp; Safety · Transitioned to ISO 45001:2018</div>
+          </div>
+          <div class="rc-iso-foot"><span>Originally Held</span><span class="year">2019</span></div>
+        </article>
+        <article class="rc-iso md-reveal">
+          <div class="rc-iso-head"><span class="idx">05</span><span class="discipline">Archive</span></div>
+          <div class="cert-img">
+            <img src="assets/certificates/ISO900120015.png" alt="ISO 9001:2015 ROHS Initial Registration" loading="lazy">
+            <a class="zoom" href="assets/certificates/ISO900120015.png" target="_blank" rel="noopener" aria-label="View full ISO 9001 ROHS certificate"><i class="fas fa-expand"></i></a>
+          </div>
+          <div class="rc-iso-body">
+            <h3 class="code">ISO 9001:2015</h3>
+            <div class="desc">Quality Management · ROHS · Cert 19DQEF17</div>
+          </div>
+          <div class="rc-iso-foot"><span>Initial Cycle</span><span class="year">2019–22</span></div>
+        </article>
       </div>
     </div>
   </section>

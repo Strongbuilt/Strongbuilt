@@ -122,38 +122,47 @@
       border-color: rgba(248,113,113,0.6);
     }
 
-    /* ─── TABS — pill active state with count ─── */
+    /* ─── TABS — quiet underline, loud only when active ─── */
     .tab {
-      padding: .55rem 1rem;
-      font-size: .65rem; font-weight: 700;
-      letter-spacing: .22em; text-transform: uppercase;
-      color: rgba(161, 161, 170,0.7);
-      border: 1px solid transparent;
-      border-radius: 999px;
-      transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
-      white-space: nowrap;
-      display: inline-flex; align-items: center; gap: .5rem;
       position: relative;
+      padding: .7rem .85rem .85rem;
+      font-size: .72rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(161, 161, 170, 0.72);
+      border: none;
+      background: transparent;
+      border-radius: 0;
+      transition: color .2s ease-out;
+      white-space: nowrap;
+      display: inline-flex; align-items: center; gap: .55rem;
+      cursor: pointer;
     }
-    .tab:hover { color: #FAFAFA; background: rgba(255,255,255,0.03); }
-    .tab.is-active {
-      color: #F59E0B;
-      background: linear-gradient(155deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
-      border-color: rgba(245, 158, 11, 0.4);
-      box-shadow: 0 2px 12px -4px rgba(245, 158, 11, 0.3);
+    .tab::after {
+      content: '';
+      position: absolute;
+      left: .85rem; right: .85rem; bottom: 0;
+      height: 2px;
+      background: #F59E0B;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .25s ease-out;
     }
-    .tab i { font-size: .75rem; opacity: .75; }
-    .tab.is-active i { opacity: 1; }
+    .tab:hover { color: #FAFAFA; }
+    .tab.is-active { color: #F59E0B; }
+    .tab.is-active::after { transform: scaleX(1); }
+    .tab i { font-size: .82rem; opacity: .7; }
+    .tab.is-active i, .tab:hover i { opacity: 1; }
     .tab-count {
       display: inline-flex; align-items: center; justify-content: center;
       min-width: 18px; height: 18px; padding: 0 5px;
-      font-size: .55rem; font-weight: 700;
-      background: rgba(255,255,255,0.08);
+      font-size: .58rem; font-weight: 600;
+      background: rgba(255,255,255,0.06);
+      color: rgba(161, 161, 170, 0.9);
       border-radius: 999px;
       letter-spacing: 0;
     }
     .tab.is-active .tab-count {
-      background: rgba(245, 158, 11, 0.25);
+      background: rgba(245, 158, 11, 0.18);
       color: #F59E0B;
     }
 
@@ -371,6 +380,155 @@
     /* Progress bar for Active Projects form */
     .progress-slider { accent-color: #F59E0B; }
 
+    /* ─── REDESIGN: simpler header buttons, grouped history, help popover ─── */
+    .btn-ghost {
+      background: transparent;
+      color: rgba(161, 161, 170, 0.85);
+      border: 1px solid transparent;
+    }
+    .btn-ghost:hover { color: #F59E0B; background: rgba(245, 158, 11, 0.06); }
+    .btn-ghost:disabled { opacity: .3; cursor: not-allowed; background: transparent !important; color: rgba(161, 161, 170, 0.3) !important; }
+
+    .admin-btn-icon {
+      width: 2.25rem; height: 2.25rem;
+      padding: 0 !important;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: .78rem;
+      border-radius: 6px;
+    }
+    .admin-btn-compact {
+      padding: .5rem .85rem !important;
+      font-size: .7rem !important;
+      letter-spacing: .14em !important;
+      border-radius: 6px !important;
+      display: inline-flex; align-items: center; gap: .45rem;
+    }
+    .admin-btn-compact i { font-size: .72rem; }
+
+    /* Grouped button cluster (undo+redo) — seamless edges */
+    .admin-btn-group {
+      display: inline-flex;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .admin-btn-group .btn-ghost {
+      border: none;
+      border-radius: 0;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .admin-btn-group .btn-ghost:last-child { border-right: none; }
+    .admin-btn-group .btn-ghost:hover { background: rgba(245, 158, 11, 0.08); }
+
+    /* Keyboard-shortcuts popover */
+    .help-popover {
+      position: fixed;
+      top: 4.5rem; right: 1rem;
+      width: min(20rem, calc(100vw - 2rem));
+      background: linear-gradient(155deg, rgba(26, 26, 36, 0.98), rgba(18, 18, 26, 0.98));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      box-shadow: 0 20px 60px -12px rgba(0,0,0,0.75), 0 0 0 1px rgba(245,158,11,0.08);
+      padding: 1rem;
+      z-index: 100;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 180ms ease, transform 180ms ease;
+      pointer-events: none;
+    }
+    .help-popover:not([hidden]) {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+    .help-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: .75rem; margin-bottom: .5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .72rem; font-weight: 700;
+      letter-spacing: .24em; text-transform: uppercase;
+      color: #F59E0B;
+    }
+    .help-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem;
+      padding: .5rem 0;
+      font-size: .78rem;
+    }
+    .help-kbd {
+      font-family: 'Inter', sans-serif;
+      font-size: .7rem; font-weight: 600;
+      color: #FAFAFA;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      padding: 2px 7px;
+      white-space: nowrap;
+    }
+    .help-kbd .kbd-mod { color: #F59E0B; }
+    .help-desc { color: rgba(161, 161, 170, 0.85); font-size: .75rem; }
+
+    /* ─── LIST HEADER + FILTER BAR ─── */
+    .admin-list-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    @media (min-width: 768px) {
+      .admin-list-header { padding: 1.25rem 1.5rem; }
+    }
+    .admin-list-header h2 { margin: 0; }
+    .admin-list-header .stats-strip {
+      padding: .45rem 0 0;
+      font-size: .58rem; letter-spacing: .2em;
+    }
+
+    .admin-list-filterbar {
+      display: flex;
+      gap: .5rem;
+      padding: .75rem 1.1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      align-items: center;
+    }
+    @media (min-width: 768px) {
+      .admin-list-filterbar { padding: .85rem 1.5rem; }
+    }
+    .admin-search {
+      position: relative;
+      flex: 1;
+      min-width: 0;
+    }
+    .admin-search i {
+      position: absolute;
+      left: .85rem; top: 50%; transform: translateY(-50%);
+      color: rgba(161, 161, 170, 0.5);
+      font-size: .72rem;
+      pointer-events: none;
+    }
+    .admin-search input {
+      width: 100%;
+      padding: .55rem .9rem .55rem 2.15rem;
+      font-size: .82rem;
+      border-radius: 6px;
+    }
+    .admin-sort {
+      padding: .55rem .75rem !important;
+      font-size: .78rem !important;
+      border-radius: 6px !important;
+      min-width: 8.5rem;
+    }
+
+    /* Listbox gets breathing room */
+    #listContainer:empty { padding: 0 !important; }
+    #listContainer { padding-top: .85rem !important; }
+
     /* ─── TAILWIND CLAY/GOLD TOKEN REMAPS ───
        dist/app.css was built with the old palette (brand-gold #EFBF04,
        clay-ink #EEEEEE, etc). These overrides realign those utility
@@ -408,26 +566,35 @@
 
   <!-- HEADER -->
   <header class="sticky top-0 z-40 glass border-b border-clay-border">
-    <div class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between gap-3">
+    <div class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between gap-3 md:gap-6">
+      <!-- Brand -->
       <div class="flex items-center gap-3 md:gap-4 min-w-0">
-        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-10 md:h-12 w-auto shrink-0">
-        <div class="min-w-0">
-          <h1 class="text-base md:text-xl font-bold uppercase tracking-wider leading-none truncate">Admin <span class="text-brand-gold">Studio</span></h1>
-          <p class="text-[10px] text-clay-faint uppercase tracking-widest mt-1 flex items-center">
+        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-10 md:h-11 w-auto shrink-0">
+        <div class="min-w-0 hidden sm:block">
+          <h1 class="text-base md:text-lg font-bold uppercase tracking-wider leading-none truncate">Admin <span class="text-brand-gold">Studio</span></h1>
+          <p class="text-[10px] text-clay-faint uppercase tracking-widest mt-1.5 flex items-center gap-2">
             <span id="currentTabLabel">Projects</span>
-            <span id="dirtyIndicator" class="hidden flex items-center"><span class="dirty-dot"></span><span class="ml-2 text-red-400">Unsaved</span></span>
+            <span id="dirtyIndicator" class="hidden items-center"><span class="dirty-dot"></span><span class="ml-2 text-brand-gold">Unsaved</span></span>
           </p>
         </div>
       </div>
-      <div class="flex items-center gap-1 md:gap-2">
-        <button id="undoBtn" class="btn btn-outline p-2 md:px-3 md:py-2 text-[10px] rounded-sm" title="Undo (Ctrl+Z)" aria-label="Undo last change"><i class="fas fa-undo"></i><span class="hidden md:inline">Undo</span></button>
-        <button id="redoBtn" class="btn btn-outline p-2 md:px-3 md:py-2 text-[10px] rounded-sm" title="Redo (Ctrl+Shift+Z)" aria-label="Redo"><i class="fas fa-redo"></i><span class="hidden md:inline">Redo</span></button>
-        <button id="importBtn" class="btn btn-outline px-3 py-2 text-[10px] rounded-sm" title="Import data file"><i class="fas fa-upload"></i><span class="hidden md:inline">Import</span></button>
-        <button id="downloadBtn" class="btn btn-primary px-3 md:px-4 py-2 text-[10px] rounded-sm" title="Publish to server (Ctrl+S)"><i class="fas fa-upload"></i><span class="hidden md:inline">Publish</span></button>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2">
+        <!-- History (undo/redo grouped) -->
+        <div class="admin-btn-group">
+          <button id="undoBtn" class="btn btn-ghost admin-btn-icon" title="Undo (Ctrl+Z)" aria-label="Undo last change"><i class="fas fa-undo"></i></button>
+          <button id="redoBtn" class="btn btn-ghost admin-btn-icon" title="Redo (Ctrl+Shift+Z)" aria-label="Redo"><i class="fas fa-redo"></i></button>
+        </div>
+        <!-- Help -->
+        <button id="helpBtn" class="btn btn-ghost admin-btn-icon" title="Keyboard shortcuts" aria-label="Show keyboard shortcuts"><i class="fas fa-keyboard"></i></button>
+        <!-- Import / Publish -->
+        <button id="importBtn" class="btn btn-outline admin-btn-compact" title="Import a data file"><i class="fas fa-file-import"></i><span class="hidden md:inline">Import</span></button>
+        <button id="downloadBtn" class="btn btn-primary admin-btn-compact" title="Publish to server (Ctrl+S)"><i class="fas fa-cloud-upload-alt"></i><span class="hidden md:inline">Publish</span></button>
       </div>
     </div>
     <!-- TABS -->
-    <nav class="container mx-auto px-4 md:px-6 flex gap-1.5 overflow-x-auto pb-3 pt-1" aria-label="Admin sections">
+    <nav class="container mx-auto px-4 md:px-6 flex gap-2 overflow-x-auto" aria-label="Admin sections">
       <button class="tab is-active" data-type="projects"><i class="fas fa-building"></i>Projects<span class="tab-count" data-count="projects">0</span></button>
       <button class="tab" data-type="testimonials"><i class="fas fa-quote-left"></i>Testimonials<span class="tab-count" data-count="testimonials">0</span></button>
       <button class="tab" data-type="timeline"><i class="fas fa-timeline"></i>Timeline<span class="tab-count" data-count="timeline">0</span></button>
@@ -438,35 +605,57 @@
     </nav>
   </header>
 
+  <!-- KEYBOARD SHORTCUTS POPOVER -->
+  <div id="helpPopover" class="help-popover" role="dialog" aria-label="Keyboard shortcuts" hidden>
+    <div class="help-header">
+      <span>Keyboard Shortcuts</span>
+      <button id="helpClose" class="btn btn-ghost admin-btn-icon" aria-label="Close"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+S</span><span class="help-desc">Publish changes</span></div>
+    <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+N</span><span class="help-desc">New item</span></div>
+    <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+Enter</span><span class="help-desc">Save edits</span></div>
+    <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+Z</span><span class="help-desc">Undo</span></div>
+    <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+Shift+Z</span><span class="help-desc">Redo</span></div>
+    <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+Del</span><span class="help-desc">Delete item</span></div>
+    <div class="help-row"><span class="help-kbd">Esc</span><span class="help-desc">Close / Cancel</span></div>
+  </div>
+
   <input type="file" id="importFile" accept=".js,.json" class="hidden">
 
   <!-- MAIN LAYOUT -->
   <main class="container mx-auto px-4 md:px-6 py-4 md:py-8 grid lg:grid-cols-[1fr_440px] gap-4 md:gap-6">
 
     <!-- LEFT: LIST -->
-    <section class="glass rounded-md p-3 md:p-5 relative">
-      <div class="flex items-start justify-between mb-3 gap-3 flex-wrap">
-        <div>
-          <h2 id="listTitle" class="text-lg md:text-2xl font-bold uppercase tracking-tight">Projects</h2>
+    <section class="glass rounded-md relative overflow-hidden">
+      <!-- Header strip: title + primary action, full-width -->
+      <div class="admin-list-header">
+        <div class="min-w-0">
+          <h2 id="listTitle" class="text-lg md:text-xl font-bold uppercase tracking-tight leading-none">Projects</h2>
           <div id="statsStrip" class="stats-strip"></div>
         </div>
-        <div class="flex items-center gap-2 flex-wrap">
-          <div class="relative">
-            <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-clay-faint text-[10px] pointer-events-none"></i>
-            <input id="listSearch" type="search" placeholder="Search..." class="text-xs pl-8 pr-3 py-2 w-36 md:w-48">
-          </div>
-          <select id="sortBy" class="text-xs px-2 py-2">
-            <option value="order">Custom order</option>
-            <option value="title">Title A–Z</option>
-          </select>
-          <button id="addNewBtn" class="btn btn-primary px-3 py-2 text-[10px]" title="New item (Ctrl+N)"><i class="fas fa-plus text-[9px]"></i><span class="hidden md:inline">New</span></button>
-        </div>
+        <button id="addNewBtn" class="btn btn-primary admin-btn-compact" title="New item (Ctrl+N)"><i class="fas fa-plus"></i><span>New</span></button>
       </div>
-      <div id="listContainer" class="space-y-2" role="listbox" aria-label="Items in current tab"></div>
-      <div id="emptyListMsg" class="hidden text-center py-12 text-clay-faint">
-        <i class="fas fa-inbox text-3xl mb-3"></i>
+
+      <!-- Filter bar -->
+      <div class="admin-list-filterbar">
+        <div class="admin-search">
+          <i class="fas fa-search"></i>
+          <input id="listSearch" type="search" placeholder="Search..." aria-label="Search items">
+        </div>
+        <select id="sortBy" class="admin-sort" aria-label="Sort order">
+          <option value="order">Custom order</option>
+          <option value="title">Title A–Z</option>
+        </select>
+      </div>
+
+      <!-- Item list -->
+      <div id="listContainer" class="space-y-2 p-3 md:p-4 pt-0" role="listbox" aria-label="Items in current tab"></div>
+
+      <!-- Empty state -->
+      <div id="emptyListMsg" class="hidden text-center py-16 px-4 text-clay-faint">
+        <i class="fas fa-inbox text-3xl mb-3 text-clay-faint/50"></i>
         <p class="text-sm uppercase tracking-widest">No items yet</p>
-        <p class="text-xs mt-1">Click <strong>New</strong> to start or Import a data file.</p>
+        <p class="text-xs mt-2 text-clay-faint/70">Click <strong class="text-brand-gold">New</strong> to start, or Import a data file.</p>
       </div>
     </section>
 
@@ -488,14 +677,7 @@
         <button id="cancelBtn" type="button" class="btn btn-outline px-4 py-2.5 text-xs">Cancel</button>
         <button id="deleteBtn" type="button" class="btn btn-danger px-4 py-2.5 text-xs hidden" title="Delete (Ctrl+Del)"><i class="fas fa-trash text-[10px]"></i></button>
       </div>
-      <div class="mt-4 pt-3 border-t border-white/5">
-        <p class="text-[9px] text-clay-faint leading-relaxed flex flex-wrap items-center gap-x-3 gap-y-1.5 justify-end" id="shortcutHints">
-          <span><span class="kbd"><span class="kbd-mod">Ctrl</span>+S</span> publish</span>
-          <span><span class="kbd"><span class="kbd-mod">Ctrl</span>+N</span> new</span>
-          <span><span class="kbd"><span class="kbd-mod">Ctrl</span>+Z</span> undo</span>
-          <span><span class="kbd">Esc</span> cancel</span>
-        </p>
-      </div>
+      <p id="shortcutHints" class="sr-only">Save: Ctrl+Enter · Cancel: Esc · Delete: Ctrl+Del</p>
     </aside>
   </main>
 
@@ -1721,6 +1903,24 @@
     // IMPORT (with backup snapshot)
     // ════════════════════════════════════════════════════════════
     $('#importBtn').addEventListener('click', () => $('#importFile').click());
+
+    // Help popover — toggle keyboard-shortcuts display
+    (function initHelpPopover() {
+      const btn = $('#helpBtn');
+      const pop = $('#helpPopover');
+      const close = $('#helpClose');
+      if (!btn || !pop) return;
+      const open = () => { pop.hidden = false; btn.setAttribute('aria-expanded', 'true'); };
+      const shut = () => { pop.hidden = true;  btn.setAttribute('aria-expanded', 'false'); };
+      btn.addEventListener('click', (e) => { e.stopPropagation(); pop.hidden ? open() : shut(); });
+      close && close.addEventListener('click', shut);
+      document.addEventListener('click', (e) => {
+        if (pop.hidden) return;
+        if (!pop.contains(e.target) && e.target !== btn) shut();
+      });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !pop.hidden) shut(); });
+    })();
+
     $('#importFile').addEventListener('change', (e) => {
       const file = e.target.files?.[0];
       if (!file) return;

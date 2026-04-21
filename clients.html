@@ -75,21 +75,40 @@
       box-shadow: var(--shadow-md), var(--glow-sm);
     }
 
+    /* Transparent-background PNGs — display them as white silhouettes
+       on the dark card. `invert(1)` flips dark brand marks to white;
+       since the bg is already transparent, there's no rectangle artifact. */
     .cl-card .logo-wrap {
-      width: 80%;
-      height: 70%;
-      display: flex; align-items: center; justify-content: center;
+      width: 68%;
+      height: 60%;
+      max-width: 11rem;
+      max-height: 4.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @media (min-width: 720px) {
+      .cl-card .logo-wrap {
+        width: 72%;
+        height: 62%;
+        max-width: 9rem;
+        max-height: 4rem;
+      }
     }
     .cl-card .logo-wrap img {
       max-width: 100%;
       max-height: 100%;
-      width: auto; height: auto;
+      width: auto;
+      height: auto;
       object-fit: contain;
-      filter: grayscale(0.4) brightness(1.05) contrast(0.92);
-      opacity: 0.78;
-      transition: all var(--t-slow) var(--ease-out);
+      filter: brightness(0) invert(1);
+      opacity: 0.85;
+      transition: opacity var(--t-slow) var(--ease-out), transform var(--t-slow) var(--ease-out);
     }
-    .cl-card:hover .logo-wrap img { filter: none; opacity: 1; }
+    .cl-card:hover .logo-wrap img {
+      opacity: 1;
+      transform: scale(1.04);
+    }
     .cl-card .logo-wrap i { color: var(--fg-subtle); font-size: 1.75rem; transition: color var(--t-slow); }
     .cl-card:hover .logo-wrap i { color: var(--accent); }
 
@@ -200,6 +219,23 @@
     .cl-cta p { max-width: 34rem; margin: 0 auto 2.25rem; color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; }
 
     .d1 { transition-delay: 80ms; } .d2 { transition-delay: 160ms; } .d3 { transition-delay: 240ms; } .d4 { transition-delay: 320ms; }
+
+    /* 3D Coverflow Carousel */
+    .cf-wrap { position: relative; padding: 3rem 0 1.5rem; perspective: 1400px; overflow: hidden; }
+    .cf-track { position: relative; height: 22rem; transform-style: preserve-3d; }
+    .cf-card { position: absolute; top: 50%; left: 50%; width: clamp(13rem, 22vw, 18rem); height: clamp(18rem, 30vw, 22rem); margin: calc(-1 * clamp(9rem, 15vw, 11rem)) 0 0 calc(-1 * clamp(6.5rem, 11vw, 9rem)); border-radius: var(--r-lg); background: #15151c; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; transition: transform 600ms var(--ease-out), opacity 500ms, border-color 400ms; transform-style: preserve-3d; cursor: pointer; overflow: hidden; }
+    .cf-card.is-center { transform: translateZ(0); z-index: 10; border-color: var(--accent); }
+    .cf-card .cf-logo { flex: 1; display: flex; align-items: center; justify-content: center; }
+    .cf-card .cf-logo img { max-width: 75%; max-height: 70%; filter: brightness(0) invert(1); opacity: 0.9; }
+    .cf-wrap--raw .cf-card .cf-logo img { filter: none; opacity: 1; }
+    .cf-card .cf-info { display: none; }
+    .cf-nav { position: absolute; top: 50%; width: 2.5rem; height: 2.5rem; transform: translateY(-50%); border-radius: 50%; background: rgba(26,26,36,0.9); border: 1px solid var(--border); color: var(--fg); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; transition: all 260ms; backdrop-filter: blur(8px); }
+    .cf-nav:hover { border-color: var(--accent); color: var(--accent); box-shadow: var(--glow-sm); }
+    .cf-nav--prev { left: 1rem; }
+    .cf-nav--next { right: 1rem; }
+    .cf-dots { display: flex; gap: 0.4rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
+    .cf-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--border); transition: all 260ms; cursor: pointer; border: none; padding: 0; }
+    .cf-dot.is-active { background: var(--accent); width: 1.75rem; border-radius: 4px; }
   </style>
 </head>
 
@@ -319,23 +355,27 @@
         <h2>Real estate <span class="accent">developers.</span></h2>
         <p>India's most respected residential developers have trusted us with their flagship projects.</p>
       </div>
-      <div class="cl-grid">
-        <article class="cl-card cl-tier1 md-reveal"><span class="crown"><i class="fas fa-crown"></i></span><span class="badge">5 Projects</span><div class="logo-wrap"><img src="assets/Clients/dheeraj.png" alt="Dheeraj Realty" loading="lazy"></div><h3 class="name">Dheeraj Realty</h3></article>
-        <article class="cl-card cl-tier1 md-reveal d1"><span class="crown"><i class="fas fa-crown"></i></span><span class="badge">4 Projects</span><div class="logo-wrap"><img src="assets/Clients/rustomjee.png" alt="Rustomjee" loading="lazy"></div><h3 class="name">Rustomjee</h3></article>
-        <article class="cl-card cl-tier1 md-reveal d2"><span class="crown"><i class="fas fa-crown"></i></span><span class="badge">3 Projects</span><div class="logo-wrap"><img src="assets/Clients/lodha.png" alt="Lodha Group" loading="lazy"></div><h3 class="name">Lodha Group</h3></article>
-        <article class="cl-card cl-tier1 md-reveal d3"><span class="crown"><i class="fas fa-crown"></i></span><span class="badge">3 Projects</span><div class="logo-wrap"><img src="assets/Clients/hiranandani.png" alt="Hiranandani" loading="lazy"></div><h3 class="name">Hiranandani</h3></article>
-        <article class="cl-card md-reveal"><span class="badge">2 Projects</span><div class="logo-wrap"><img src="assets/Clients/mahindra-lifespaces.png" alt="Mahindra Lifespaces" loading="lazy"></div><h3 class="name">Mahindra Lifespaces</h3></article>
-        <article class="cl-card md-reveal d1"><span class="badge">2 Projects</span><div class="logo-wrap"><img src="assets/Clients/ekta-world.png" alt="Ekta World" loading="lazy"></div><h3 class="name">Ekta World</h3></article>
-        <article class="cl-card md-reveal d2"><span class="badge">2 Projects</span><div class="logo-wrap"><img src="assets/Clients/antariksh.png" alt="Antariksh" loading="lazy"></div><h3 class="name">Antariksh</h3></article>
-        <article class="cl-card md-reveal d3"><div class="logo-wrap"><img src="assets/Clients/hiranandani-communities.png" alt="Hiranandani Communities" loading="lazy"></div><h3 class="name">Hiranandani Communities</h3></article>
-        <article class="cl-card md-reveal"><div class="logo-wrap"><img src="assets/Clients/ajmera.png" alt="Ajmera Group" loading="lazy"></div><h3 class="name">Ajmera Group</h3></article>
-        <article class="cl-card md-reveal d1"><div class="logo-wrap"><img src="assets/Clients/arkade-group.png" alt="Arkade Group" loading="lazy"></div><h3 class="name">Arkade Group</h3></article>
-        <article class="cl-card md-reveal d2"><div class="logo-wrap"><i class="fas fa-building"></i></div><h3 class="name">Wadhwa Group</h3></article>
-        <article class="cl-card md-reveal d3"><div class="logo-wrap"><img src="assets/Clients/avighna.png" alt="Avighna" loading="lazy"></div><h3 class="name">Avighna</h3></article>
-        <article class="cl-card md-reveal"><div class="logo-wrap"><img src="assets/Clients/techno.png" alt="Techno Group" loading="lazy"></div><h3 class="name">Techno Group</h3></article>
-        <article class="cl-card md-reveal d1"><div class="logo-wrap"><img src="assets/Clients/puraniks.png" alt="Puraniks" loading="lazy"></div><h3 class="name">Puraniks</h3></article>
-        <article class="cl-card md-reveal d2"><div class="logo-wrap"><img src="assets/Clients/tridhaatu-realty.png" alt="Tridhaatu Realty" loading="lazy"></div><h3 class="name">Tridhaatu Realty</h3></article>
-        <article class="cl-card md-reveal d3"><div class="logo-wrap"><img src="assets/Clients/satguru.png" alt="Satguru's" loading="lazy"></div><h3 class="name">Satguru's</h3></article>
+      <div class="cf-wrap md-reveal">
+        <button class="cf-nav cf-nav--prev" id="cf-prev" aria-label="Previous client"><i class="fas fa-chevron-left"></i></button>
+        <div class="cf-track" id="cf-track">
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/Dheeraj.png" alt="Dheeraj Realty" loading="lazy"></div><div class="cf-info"><span class="num">5</span>Projects<span class="name">Dheeraj Realty</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/rustomjee.png" alt="Rustomjee" loading="lazy"></div><div class="cf-info"><span class="num">4</span>Projects<span class="name">Rustomjee</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/lodha.png" alt="Lodha Group" loading="lazy"></div><div class="cf-info"><span class="num">3</span>Projects<span class="name">Lodha Group</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/hiranandani.png" alt="Hiranandani" loading="lazy"></div><div class="cf-info"><span class="num">3</span>Projects<span class="name">Hiranandani</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/mahindra.png" alt="Mahindra Lifespaces" loading="lazy"></div><div class="cf-info"><span class="num">2</span>Projects<span class="name">Mahindra Lifespaces</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/ekta_world.png" alt="Ekta World" loading="lazy"></div><div class="cf-info"><span class="num">2</span>Projects<span class="name">Ekta World</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/antariksh.png" alt="Antariksh" loading="lazy"></div><div class="cf-info"><span class="num">2</span>Projects<span class="name">Antariksh</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/pashmina.png" alt="Pashmina Developers" loading="lazy"></div><div class="cf-info"><span class="num">1</span>Project<span class="name">Pashmina</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/ajmera.png" alt="Ajmera Group" loading="lazy"></div><div class="cf-info"><span class="num">1</span>Project<span class="name">Ajmera Group</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/aekade.png" alt="Arkade Group" loading="lazy"></div><div class="cf-info"><span class="num">1</span>Project<span class="name">Arkade Group</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/conwood.png" alt="Conwood" loading="lazy"></div><div class="cf-info"><span class="num">1</span>Project<span class="name">Conwood</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/neptune.png" alt="Neptune" loading="lazy"></div><div class="cf-info"><span class="num">1</span>Project<span class="name">Neptune</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/techno.png" alt="Techno Group" loading="lazy"></div><div class="cf-info"><span class="num">1</span>Project<span class="name">Techno Group</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/puraniks.png" alt="Puraniks" loading="lazy"></div><div class="cf-info"><span class="num">1</span>Project<span class="name">Puraniks</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/tridhaatu.png" alt="Tridhaatu Realty" loading="lazy"></div><div class="cf-info"><span class="num">1</span>Project<span class="name">Tridhaatu Realty</span></div></div>
+        </div>
+        <button class="cf-nav cf-nav--next" id="cf-next" aria-label="Next client"><i class="fas fa-chevron-right"></i></button>
+        <div class="cf-dots" id="cf-dots"></div>
       </div>
     </div>
   </section>
@@ -347,11 +387,49 @@
         <h2>Beyond <span class="accent">residential.</span></h2>
         <p>From municipal housing to large-format retail — built to the same demanding standards.</p>
       </div>
-      <div class="cl-grid" style="max-width:60rem; margin-inline:auto;">
-        <article class="cl-card md-reveal"><div class="logo-wrap"><img src="assets/Clients/cpwd.png" alt="CPWD" loading="lazy"></div><h3 class="name">CPWD</h3><span class="sector">Government</span></article>
-        <article class="cl-card md-reveal d1"><div class="logo-wrap"><img src="assets/Clients/govt-maharashtra.png" alt="Government of Maharashtra" loading="lazy"></div><h3 class="name">Govt. of Maharashtra</h3><span class="sector">Municipal</span></article>
-        <article class="cl-card md-reveal d2"><div class="logo-wrap"><img src="assets/Clients/dmart.png" alt="D'Mart" loading="lazy"></div><h3 class="name">D'Mart</h3><span class="sector">Retail</span></article>
-        <article class="cl-card md-reveal d3"><div class="logo-wrap"><i class="fas fa-star" style="color:var(--accent);"></i></div><h3 class="name">Rishi Kapoor</h3><span class="sector">Private</span></article>
+      <div class="cf-wrap md-reveal">
+        <button class="cf-nav cf-nav--prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+        <div class="cf-track">
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/cpwd.png" alt="CPWD" loading="lazy"></div><div class="cf-info"><span class="num">CPWD</span>Government<span class="name">Central Public Works</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/BMC.png" alt="BMC" loading="lazy"></div><div class="cf-info"><span class="num">BMC</span>Municipal<span class="name">Brihanmumbai Municipal</span></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/Clients/dmart.png" alt="D'Mart" loading="lazy"></div><div class="cf-info"><span class="num">D'Mart</span>Retail<span class="name">Large-format Retail</span></div></div>
+        </div>
+        <button class="cf-nav cf-nav--next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+        <div class="cf-dots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS & SUPPLIERS — equipment / material network -->
+  <section class="cl-section">
+    <div class="md-container">
+      <div class="cl-head md-reveal">
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Equipment &amp; Supplier Network</span>
+        <h2>Our <span class="accent">partners.</span></h2>
+        <p>The global names behind our tools, formwork, cranes, and materials — chosen for uncompromising reliability and safety.</p>
+      </div>
+      <div class="cf-wrap cf-wrap--raw md-reveal">
+        <button class="cf-nav cf-nav--prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+        <div class="cf-track">
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/skyway.png" alt="Skyway" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/s form.png" alt="S-Form" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/RMD.png" alt="RMD Kwikform" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/MFE.png" alt="MFE Formwork" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/wacker.png" alt="Wacker Neuson" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/potain.png" alt="Potain" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/boshch.png" alt="Bosch" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/spartan.png" alt="Spartan" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/dewalt.png" alt="DeWalt" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/alimak.png" alt="Alimak" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/hilti.png" alt="Hilti" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/ispat.png" alt="Ispat" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/ace.png" alt="ACE" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/kumkang.png" alt="Kumkang Kind" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/schwing.png" alt="Schwing" loading="lazy"></div></div>
+          <div class="cf-card"><div class="cf-logo"><img src="assets/partners/doka.png" alt="Doka" loading="lazy"></div></div>
+        </div>
+        <button class="cf-nav cf-nav--next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+        <div class="cf-dots"></div>
       </div>
     </div>
   </section>
@@ -359,34 +437,34 @@
   <section class="cl-section cl-section--alt">
     <div class="md-container">
       <div class="cl-head md-reveal">
-        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Testimonials</span>
-        <h2>Client <span class="accent">voices.</span></h2>
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Lorem Ipsum</span>
+        <h2>Lorem <span class="accent">ipsum.</span></h2>
         <div class="cl-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-        <p style="font-family:var(--font-label); font-size:0.7rem; letter-spacing:0.24em; color:var(--fg-subtle); text-transform:uppercase;">Consistent 5-Star Delivery</p>
+        <p style="font-family:var(--font-label); font-size:0.7rem; letter-spacing:0.24em; color:var(--fg-subtle); text-transform:uppercase;">Lorem Ipsum Dolor Sit</p>
       </div>
       <div class="cl-tests">
         <article class="cl-test md-reveal">
           <i class="fas fa-quote-left"></i>
-          <blockquote>Strong Built has been an exceptional partner across multiple projects including Monticello, Del-Sol, and Insignia. Their engineering precision and commitment to timelines is rare in this industry.</blockquote>
+          <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</blockquote>
           <div class="attr">
-            <div class="avatar">DR</div>
-            <div><div class="who">Project Director</div><div class="org">Dheeraj Realty</div></div>
+            <div class="avatar">LI</div>
+            <div><div class="who">Lorem Ipsum</div><div class="org">Dolor Sit Amet</div></div>
           </div>
         </article>
         <article class="cl-test md-reveal d1">
           <i class="fas fa-quote-left"></i>
-          <blockquote>From Tree Top to Splendora and Luxaria, Strong Built has consistently delivered projects that exceed our specifications. Their safety record and on-site discipline are truly industry-leading.</blockquote>
+          <blockquote>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</blockquote>
           <div class="attr">
-            <div class="avatar">LG</div>
-            <div><div class="who">Construction Head</div><div class="org">Lodha Group</div></div>
+            <div class="avatar">CA</div>
+            <div><div class="who">Consectetur Adipiscing</div><div class="org">Elit Sed Do</div></div>
           </div>
         </article>
         <article class="cl-test md-reveal d2">
           <i class="fas fa-quote-left"></i>
-          <blockquote>Our 5-lakh-sq-ft Bloomdale township in Nagpur was delivered with zero compromises on quality. Strong Built brings a refreshing level of professionalism and transparency to every engagement.</blockquote>
+          <blockquote>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</blockquote>
           <div class="attr">
-            <div class="avatar">ML</div>
-            <div><div class="who">Project Lead</div><div class="org">Mahindra Lifespaces</div></div>
+            <div class="avatar">TI</div>
+            <div><div class="who">Tempor Incididunt</div><div class="org">Ut Labore Dolore</div></div>
           </div>
         </article>
       </div>
@@ -437,6 +515,56 @@
     <a href="tel:+919619875081" aria-label="Call Strong Built"><i class="fas fa-phone"></i></a>
   </div>
 
+  <script>
+    // 3D Coverflow Carousel — initializes every .cf-wrap on the page
+    (function() {
+      document.querySelectorAll('.cf-wrap').forEach(function(wrap) {
+        const track = wrap.querySelector('.cf-track');
+        const prev = wrap.querySelector('.cf-nav--prev');
+        const next = wrap.querySelector('.cf-nav--next');
+        const dotsEl = wrap.querySelector('.cf-dots');
+        if (!track) return;
+        const cards = Array.from(track.querySelectorAll('.cf-card'));
+        if (!cards.length) return;
+        let active = 0;
+        let autoTimer;
+        cards.forEach((_, i) => {
+          const b = document.createElement('button');
+          b.className = 'cf-dot' + (i === 0 ? ' is-active' : '');
+          b.setAttribute('aria-label', 'Go to item ' + (i + 1));
+          b.addEventListener('click', () => { active = i; update(); resetAuto(); });
+          dotsEl.appendChild(b);
+        });
+        function update() {
+          cards.forEach((card, i) => {
+            const d = i - active;
+            const abs = Math.abs(d);
+            let tx, rotY, scale, z, opacity;
+            if (abs === 0) { tx = 0; rotY = 0; scale = 1; z = 0; opacity = 1; }
+            else if (abs === 1) { tx = d * 60; rotY = d * -35; scale = 0.85; z = -120; opacity = 0.75; }
+            else if (abs === 2) { tx = d * 95; rotY = d * -50; scale = 0.72; z = -240; opacity = 0.45; }
+            else { tx = d * 120; rotY = d * -55; scale = 0.6; z = -360; opacity = 0; }
+            card.style.transform = `translateX(${tx}%) translateZ(${z}px) rotateY(${rotY}deg) scale(${scale})`;
+            card.style.opacity = opacity;
+            card.style.pointerEvents = abs > 2 ? 'none' : 'auto';
+            card.classList.toggle('is-center', d === 0);
+          });
+          dotsEl.querySelectorAll('.cf-dot').forEach((d, i) => d.classList.toggle('is-active', i === active));
+        }
+        function resetAuto() {
+          clearInterval(autoTimer);
+          autoTimer = setInterval(() => { active = (active + 1) % cards.length; update(); }, 2000);
+        }
+        prev.addEventListener('click', () => { active = (active - 1 + cards.length) % cards.length; update(); resetAuto(); });
+        next.addEventListener('click', () => { active = (active + 1) % cards.length; update(); resetAuto(); });
+        cards.forEach((card, i) => card.addEventListener('click', () => { active = i; update(); resetAuto(); }));
+        wrap.addEventListener('mouseenter', () => clearInterval(autoTimer));
+        wrap.addEventListener('mouseleave', () => resetAuto());
+        update();
+        resetAuto();
+      });
+    })();
+  </script>
   <script src="theme.js"></script>
 </body>
 </html>

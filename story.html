@@ -115,193 +115,171 @@
       display: block;
     }
 
-    /* ── Sticky Scroll Timeline ── */
-    .ss-grid { display: block; max-width: 76rem; margin: 0 auto; }
-    @media (min-width: 960px) {
-      .ss-grid {
-        display: grid;
-        grid-template-columns: 0.85fr 1.5fr;
-        gap: clamp(2.5rem, 5vw, 5rem);
-        align-items: start;
-      }
-    }
-
-    /* Left pane — sticky year pinned near the top, aligned with chapter text */
-    .ss-sticky {
-      position: sticky;
-      top: var(--header-h-lg);
-      height: calc(100vh - var(--header-h-lg));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding-top: clamp(2rem, 6vh, 4rem);
-      text-align: center;
-    }
-    @media (max-width: 959px) { .ss-sticky { display: none; } }
-
-    /* Animation helpers — unified smooth curve */
-    .ss-bigtag,
-    .ss-bigyear,
-    .ss-bigicon {
-      transition: opacity 450ms cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 600ms cubic-bezier(0.22, 1, 0.36, 1),
-                  filter 450ms ease;
-    }
-
-    .ss-bigtag {
-      font-family: var(--font-label);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.36em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      padding: 0.45rem 1rem;
-      border: 1px solid rgba(245,158,11,0.25);
-      border-radius: 999px;
-      background: rgba(245,158,11,0.04);
-    }
-    .ss-bigtag.is-swapping { opacity: 0; transform: translateY(-6px); filter: blur(4px); }
-
-    .ss-bigyear {
-      font-family: var(--font-display);
-      font-size: clamp(5rem, 11vw, 9.5rem);
-      font-weight: 500;
-      line-height: 0.9;
-      letter-spacing: -0.04em;
-      color: var(--fg);
-      margin-bottom: 1.75rem;
-      background: linear-gradient(180deg, var(--fg) 30%, rgba(255,255,255,0.4) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      position: relative;
-    }
-    .ss-bigyear::after {
-      content: '';
-      position: absolute;
-      left: 50%; bottom: -0.5rem;
-      transform: translateX(-50%);
-      width: 2.25rem; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      opacity: 0.6;
-    }
-    .ss-bigyear.is-swapping { opacity: 0; transform: translateY(-10px); filter: blur(6px); }
-
-    .ss-bigicon {
-      width: 3.5rem; height: 3.5rem;
-      display: grid; place-items: center;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(245,158,11,0.18), rgba(245,158,11,0.04) 70%);
-      border: 1px solid rgba(245,158,11,0.35);
-      color: var(--accent);
-      font-size: 1.15rem;
-      box-shadow: 0 0 24px -4px rgba(245,158,11,0.35);
-      margin-top: 1rem;
-    }
-    .ss-bigicon.is-swapping { opacity: 0; transform: scale(0.85) rotate(-12deg); }
-
-    /* Right pane — chapter stream with vertical rail + dots */
+    /* ═══════════════════════════════════════════════════════
+       TIMELINE — Cinematic Blur Focus
+       Only ±1 of active item has blur; far items use cheap
+       opacity + scale + saturate. Child content staggers in.
+       ═══════════════════════════════════════════════════════ */
     .ss-stream {
-      position: relative;
+      max-width: 52rem;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: clamp(2.25rem, 4.5vw, 4rem);
-      padding-left: 2rem;
+      gap: clamp(3rem, 7vw, 5rem);
+      padding: 2rem 0;
     }
-    .ss-stream::before {
-      content: '';
-      position: absolute;
-      left: 0.35rem;
-      top: 0.35rem;
-      bottom: 0.35rem;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, var(--border-hover) 10%, var(--border-hover) 90%, transparent);
-    }
+
     .ss-card {
+      /* FAR tier defaults — dim + desaturated + scaled down. NO blur. */
+      --op:    0.3;
+      --sat:   0.65;
+      --sc:    0.965;
+      --lift:  14px;
+
       position: relative;
       padding: 0;
       background: transparent;
       border: 0;
-      border-radius: 0;
-      transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1);
-      opacity: 0.42;
+      border-radius: 0.5rem;
+
+      opacity:   var(--op);
+      filter:    saturate(var(--sat));
+      transform: scale(var(--sc)) translate3d(0, 0, 0);
+
+      transition:
+        opacity   380ms cubic-bezier(0.22, 1, 0.36, 1),
+        filter    500ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+
+      contain: layout style paint;
+      content-visibility: auto;
+      contain-intrinsic-size: 0 24rem;
+      backface-visibility: hidden;
     }
+
+    /* NEAR tier — only the two items adjacent to active get real blur. */
+    .ss-card:has(+ .ss-card.is-active),
+    .ss-card.is-active + .ss-card {
+      --op:   0.65;
+      --sat:  0.85;
+      --sc:   0.985;
+      --lift: 6px;
+      filter: blur(2.5px) saturate(var(--sat));
+      transition:
+        opacity   380ms cubic-bezier(0.22, 1, 0.36, 1),
+        filter    550ms cubic-bezier(0.45, 0.05, 0.2, 1),
+        transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ACTIVE tier — sharp, full saturation. */
+    .ss-card.is-active {
+      --op: 1; --sat: 1; --sc: 1; --lift: 0;
+      filter: saturate(1);
+    }
+
+    /* Big year pulled from data-year. Rises + glows on focus. */
     .ss-card::before {
-      content: '';
-      position: absolute;
-      left: -1.9rem;
-      top: 0.5rem;
-      width: 0.6rem;
-      height: 0.6rem;
-      border-radius: 50%;
-      background: var(--bg);
-      border: 1px solid var(--border-hover);
-      transition: background 400ms, border-color 400ms, box-shadow 400ms, transform 400ms;
+      content: attr(data-year);
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      color: var(--accent);
+      line-height: 0.9;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+      transform: translate3d(0, var(--lift), 0);
+      text-shadow: 0 0 0 transparent;
+      transition:
+        transform   560ms cubic-bezier(0.22, 1, 0.36, 1),
+        text-shadow 600ms ease;
     }
-    .ss-card.is-active,
-    .ss-card:hover { opacity: 1; }
     .ss-card.is-active::before {
-      background: var(--accent);
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px rgba(245,158,11,0.15);
-      transform: scale(1.15);
+      transition-delay: 40ms;
+      transform: translate3d(0, 0, 0);
+      text-shadow: 0 0 28px rgba(245, 158, 11, 0.22);
     }
+
+    /* Child content lifts into place on focus (staggered). */
+    .ss-card > * {
+      transform: translate3d(0, var(--lift), 0);
+      transition: transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .ss-card.is-active > .ss-card-kicker { transition-delay:  90ms; transform: translate3d(0,0,0); }
+    .ss-card.is-active > .ss-card-title  { transition-delay: 140ms; transform: translate3d(0,0,0); }
+    .ss-card.is-active > .ss-card-body   { transition-delay: 190ms; transform: translate3d(0,0,0); }
+    .ss-card.is-active > .ss-card-meta   { transition-delay: 240ms; transform: translate3d(0,0,0); }
+
     .ss-card-kicker {
       display: inline-flex;
       align-items: center;
       gap: 0.55rem;
       font-family: var(--font-label);
-      font-size: 0.66rem;
+      font-size: 0.68rem;
       font-weight: 600;
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 0.75rem;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
     }
     .ss-card-kicker i { opacity: 0.9; font-size: 0.72rem; }
+
     .ss-card-title {
       font-family: var(--font-display);
-      font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+      font-size: clamp(1.8rem, 3.5vw, 2.75rem);
       font-weight: 600;
       letter-spacing: 0.01em;
       text-transform: uppercase;
       color: var(--fg);
-      margin: 0 0 0.85rem;
-      line-height: 1.1;
+      margin: 0.5rem 0 1rem;
+      line-height: 1.05;
     }
+
     .ss-card-body {
       color: var(--fg-muted);
       line-height: 1.7;
-      margin: 0 0 0.85rem;
-      font-size: 0.95rem;
-      max-width: 38rem;
+      font-size: 1.05rem;
+      margin: 0 0 1rem;
     }
+
     .ss-card-meta {
       font-family: var(--font-label);
-      font-size: 0.62rem;
-      font-weight: 500;
+      font-size: 0.65rem;
+      font-weight: 600;
       letter-spacing: 0.26em;
       text-transform: uppercase;
       color: var(--fg-subtle);
-      padding-top: 0.85rem;
+      padding-top: 1rem;
       border-top: 1px solid var(--border);
-      max-width: 38rem;
     }
 
-    /* Mobile — inline year badge replaces sticky */
-    @media (max-width: 959px) {
-      .ss-card[data-year]::after {
-        content: attr(data-year);
-        position: absolute;
-        top: 0; right: 0;
-        font-family: var(--font-display);
-        font-size: 1.2rem;
-        font-weight: 500;
-        color: rgba(245,158,11,0.35);
-        letter-spacing: -0.01em;
+    /* Reduced motion — collapse to active state. */
+    @media (prefers-reduced-motion: reduce) {
+      .ss-card,
+      .ss-card:has(+ .ss-card.is-active),
+      .ss-card.is-active + .ss-card {
+        --op: 1 !important; --sat: 1 !important; --sc: 1 !important; --lift: 0 !important;
+        filter: none !important;
       }
+      .ss-card::before, .ss-card > * { transform: none !important; transition: none !important; }
+    }
+
+    /* Touch devices — milder blur on actual phones/tablets. */
+    @media (hover: none) and (pointer: coarse) {
+      .ss-card:has(+ .ss-card.is-active),
+      .ss-card.is-active + .ss-card {
+        filter: blur(1.5px) saturate(var(--sat));
+      }
+    }
+
+    /* Narrow viewport — scale typography + lift down. */
+    @media (max-width: 640px) {
+      .ss-card { --lift: 10px; }
+      .ss-card:has(+ .ss-card.is-active),
+      .ss-card.is-active + .ss-card { --lift: 4px; }
+      .ss-card::before  { font-size: clamp(2.5rem, 9vw, 3.5rem); }
+      .ss-card-title    { font-size: clamp(1.25rem, 5vw, 1.6rem); }
     }
 
     /* CTA */
@@ -446,14 +424,8 @@
         <p>Ten chapters. One continuous story of trust, scale, and craft.</p>
       </div>
 
-      <div class="ss-grid" id="ss-grid">
-        <aside class="ss-sticky">
-          <div class="ss-bigtag" id="ss-tag">The Beginning</div>
-          <div class="ss-bigyear" id="ss-year">2014</div>
-          <div class="ss-bigicon"><i class="fas fa-flag" id="ss-icon"></i></div>
-        </aside>
-        <div class="ss-stream" id="ss-stream">
-          <article class="ss-card" data-year="2014" data-tag="The Beginning" data-icon="fa-flag">
+      <div class="ss-stream" id="ss-stream">
+          <article class="ss-card is-active" data-year="2014" data-tag="The Beginning" data-icon="fa-flag">
             <div class="ss-card-kicker"><i class="fas fa-flag"></i> Chapter One · Nov 2014</div>
             <h3 class="ss-card-title">First Project Begins</h3>
             <p class="ss-card-body">Strong Built breaks ground on Del-sol — a 3B + P + 14F structure at Carter Road, Bandra. A modest beginning for what would become a portfolio defining Mumbai's premium residential landscape.</p>
@@ -513,7 +485,6 @@
             <p class="ss-card-body">Thirty-three projects delivered. Ninety buildings standing. Five-point-seven million square feet of Strong Built construction. An order book of ₹808 Cr powers the next chapter.</p>
             <div class="ss-card-meta">33+ Projects · 90+ Buildings · 5.7M Sq.Ft · ₹808 Cr Order Book</div>
           </article>
-        </div>
       </div>
     </div>
   </section>
@@ -579,58 +550,41 @@
 
   <script src="theme.js"></script>
   <script>
-    // Sticky-scroll timeline — active card tracking + sticky panel swap
+    // Cinematic Blur Focus timeline — single active card at any time.
+    // Neighbors (±1) get a mild blur via CSS :has(); far items use cheap
+    // opacity + scale only. IO callbacks are rAF-batched for smooth scroll.
     (function initTimeline() {
-      const yearEl = document.getElementById('ss-year');
-      const tagEl = document.getElementById('ss-tag');
-      const iconEl = document.getElementById('ss-icon');
-      const cards = document.querySelectorAll('#ss-stream .ss-card');
-      if (!yearEl || !cards.length) return;
+      const stream = document.getElementById('ss-stream');
+      if (!stream) return;
+      const items = [...stream.querySelectorAll('.ss-card')];
+      if (!items.length) return;
 
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      let currentYear = yearEl.textContent.trim();
-      let swapTimer = null;
+      let current = items.find(el => el.classList.contains('is-active')) || items[0];
+      current.classList.add('is-active');
 
-      const update = (card) => {
-        cards.forEach(c => c.classList.remove('is-active'));
-        card.classList.add('is-active');
-        const y = card.dataset.year;
-        if (y === currentYear) return;
-        currentYear = y;
-        const tag = card.dataset.tag;
-        const icon = card.dataset.icon;
-        if (prefersReduced) {
-          yearEl.textContent = y;
-          tagEl.textContent = tag;
-          iconEl.className = 'fas ' + icon;
-          return;
+      let pending = null;
+      let scheduled = false;
+      const flush = () => {
+        scheduled = false;
+        if (pending && pending !== current) {
+          current.classList.remove('is-active');
+          pending.classList.add('is-active');
+          current = pending;
         }
-        yearEl.classList.add('is-swapping');
-        tagEl.classList.add('is-swapping');
-        iconEl.parentElement.classList.add('is-swapping');
-        clearTimeout(swapTimer);
-        swapTimer = setTimeout(() => {
-          yearEl.textContent = y;
-          tagEl.textContent = tag;
-          iconEl.className = 'fas ' + icon;
-          yearEl.classList.remove('is-swapping');
-          tagEl.classList.remove('is-swapping');
-          iconEl.parentElement.classList.remove('is-swapping');
-        }, 250);
+        pending = null;
       };
 
-      // Fire when a chapter reaches the upper band where the sticky year sits,
-      // so the year updates as the text scrolls up to meet it.
       const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) update(entry.target);
-        });
-      }, { rootMargin: '-12% 0px -82% 0px', threshold: 0 });
+        for (const e of entries) {
+          if (e.isIntersecting) pending = e.target;
+        }
+        if (pending && !scheduled) {
+          scheduled = true;
+          requestAnimationFrame(flush);
+        }
+      }, { rootMargin: '-35% 0px -45% 0px', threshold: 0 });
 
-      cards.forEach(card => io.observe(card));
-
-      // Initialise with first card active
-      cards[0].classList.add('is-active');
+      items.forEach(el => io.observe(el));
     })();
   </script>
 </body>

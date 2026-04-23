@@ -5,9 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us | Strong Built</title>
-  <meta name="description" content="Contact Strong Built for your construction project needs. Visit our Mumbai office or send us a message.">
+  <meta name="description" content="Contact Strong Built for your construction project needs. Visit our HDIL Kaledonia office in Andheri East, Mumbai. Call +91 96198 75081 or email sales@strongbuilt.in.">
   <meta name="author" content="Strong Built">
   <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://strongbuilt.in/contact.html">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/Favicon/favicon-96x96.png" sizes="96x96">
@@ -19,10 +20,30 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Strong Built">
+  <meta property="og:url" content="https://strongbuilt.in/contact.html">
   <meta property="og:title" content="Contact Us | Strong Built">
-  <meta property="og:description" content="Get in touch with Strong Built. Visit our HDIL Kaledonia office in Andheri-East, call +91 9619875081, or send a project enquiry.">
-  <meta property="og:image" content="https://strongbuilt.netlify.app/assets/Logo/Strongbuilt.png">
+  <meta property="og:description" content="Get in touch with Strong Built. Visit our HDIL Kaledonia office in Andheri East, Mumbai. Call +91 96198 75081 or email sales@strongbuilt.in.">
+  <meta property="og:image" content="https://strongbuilt.in/assets/images/home.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Contact Strong Built — Mumbai Construction Firm">
   <meta property="og:locale" content="en_IN">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact Us | Strong Built">
+  <meta name="twitter:description" content="Get in touch with Strong Built. Visit our HDIL Kaledonia office in Andheri East, Mumbai. Call +91 96198 75081 or email sales@strongbuilt.in.">
+  <meta name="twitter:image" content="https://strongbuilt.in/assets/images/home.png">
+
+  <!-- Structured data: Organization + WebSite + Breadcrumb + ContactPage -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[
+    {"@type":["Organization","LocalBusiness","GeneralContractor"],"@id":"https://strongbuilt.in/#organization","name":"Strong Built","alternateName":["Strong Built Construction","Strongbuilt"],"url":"https://strongbuilt.in/","logo":"https://strongbuilt.in/assets/Logo/Strongbuilt.png","image":"https://strongbuilt.in/assets/images/home.png","description":"Premier Mumbai construction firm delivering residential, commercial, and institutional buildings since 2014.","foundingDate":"2014","parentOrganization":{"@type":"Organization","name":"Skyway Group"},"address":{"@type":"PostalAddress","streetAddress":"901-B Wing, HDIL Kaledonia, Sahar Road","addressLocality":"Andheri East","addressRegion":"Maharashtra","postalCode":"400069","addressCountry":"IN"},"telephone":"+91-96198-75081","email":"sales@strongbuilt.in","areaServed":[{"@type":"City","name":"Mumbai"},{"@type":"City","name":"Thane"},{"@type":"City","name":"Pune"},{"@type":"AdministrativeArea","name":"Mumbai Metropolitan Region"}],"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"ISO 9001"},{"@type":"EducationalOccupationalCredential","name":"ISO 14001"},{"@type":"EducationalOccupationalCredential","name":"ISO 45001"}]},
+    {"@type":"WebSite","@id":"https://strongbuilt.in/#website","url":"https://strongbuilt.in/","name":"Strong Built","publisher":{"@id":"https://strongbuilt.in/#organization"},"inLanguage":"en-IN"},
+    {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://strongbuilt.in/"},{"@type":"ListItem","position":2,"name":"Contact","item":"https://strongbuilt.in/contact.html"}]},
+    {"@type":"ContactPage","@id":"https://strongbuilt.in/contact.html#page","url":"https://strongbuilt.in/contact.html","name":"Contact Strong Built","isPartOf":{"@id":"https://strongbuilt.in/#website"},"about":{"@id":"https://strongbuilt.in/#organization"}}
+  ]}
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,7 +79,7 @@
     }
     .ct-hero h1 {
       font-family: var(--font-display);
-      font-size: clamp(3rem, 8vw, 7rem);
+      font-size: var(--text-display-xl);
       font-weight: 600;
       line-height: 0.95;
       letter-spacing: 0;
@@ -425,7 +446,7 @@
     }
     .ct-faq-head h2 {
       font-family: var(--font-display);
-      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      font-size: var(--text-h1);
       font-weight: 600;
       line-height: 1;
       margin: 1rem 0 0;
@@ -514,7 +535,7 @@
     }
     .ct-newsletter h2 {
       font-family: var(--font-display);
-      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-size: var(--text-h2);
       font-weight: 600;
       line-height: 1;
       margin: 1rem 0 0.75rem;
@@ -633,39 +654,41 @@
     <div class="md-drawer-backdrop" id="drawerBackdrop"></div>
     <aside class="md-drawer-panel" role="dialog" aria-label="Navigation">
       <div class="md-drawer-header">
-        <div class="md-logo">
-          <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" style="height: 2.75rem; width: auto; display: block;">
-        </div>
-        <button class="md-menu-btn" id="drawerClose" aria-label="Close menu" style="display: flex;"><i class="fas fa-times"></i></button>
+        <div class="md-logo"><img src="assets/Logo/Strongbuilt.png" alt="Strong Built"></div>
+        <button class="md-menu-btn" id="drawerClose" aria-label="Close menu" style="display:flex;"><i class="fas fa-times"></i></button>
       </div>
+      <div class="md-drawer-eyebrow">Menu</div>
       <nav>
-        <a href="index.html" class="md-drawer-link">Home</a>
-        <button class="md-drawer-dropbtn" data-dropdown>About <i class="fas fa-chevron-down"></i></button>
+        <a href="index.html" class="md-drawer-link"><i class="fas fa-house"></i> Home</a>
+        <button class="md-drawer-dropbtn" data-dropdown><i class="fas fa-book-open"></i> About <i class="fas fa-chevron-down chev"></i></button>
         <div class="md-drawer-sub">
           <a href="story.html">Our Story</a>
           <a href="leadership.html">Leadership</a>
           <a href="culture.html">Culture</a>
           <a href="recognition.html">Recognition</a>
         </div>
-        <button class="md-drawer-dropbtn" data-dropdown>Projects <i class="fas fa-chevron-down"></i></button>
+        <button class="md-drawer-dropbtn" data-dropdown><i class="fas fa-building"></i> Projects <i class="fas fa-chevron-down chev"></i></button>
         <div class="md-drawer-sub">
           <a href="projects.html">Portfolio</a>
           <a href="map.html">Project Map</a>
         </div>
-        <a href="services.html" class="md-drawer-link">Services</a>
-        <a href="clients.html" class="md-drawer-link">Clients</a>
-        <a href="investors.html" class="md-drawer-link">Investors</a>
-        <a href="csr.html" class="md-drawer-link">CSR</a>
-        <a href="careers.html" class="md-drawer-link">Careers</a>
-        <a href="resources.html" class="md-drawer-link">Resources</a>
-        <a href="contact.html" class="md-drawer-link" style="color:var(--accent);">Contact</a>
+        <a href="services.html" class="md-drawer-link"><i class="fas fa-hard-hat"></i> Services</a>
+        <a href="clients.html" class="md-drawer-link"><i class="fas fa-handshake"></i> Clients</a>
+        <a href="investors.html" class="md-drawer-link"><i class="fas fa-chart-line"></i> Investors</a>
+        <a href="csr.html" class="md-drawer-link"><i class="fas fa-seedling"></i> CSR</a>
+        <a href="careers.html" class="md-drawer-link"><i class="fas fa-briefcase"></i> Careers</a>
+        <a href="resources.html" class="md-drawer-link"><i class="fas fa-folder-open"></i> Resources</a>
       </nav>
-      <div style="margin-top: auto; padding-top: 2rem; border-top: 1px solid var(--border);">
-        <p class="md-mono" style="font-size: 0.75rem; color: var(--fg-subtle); margin-bottom: 1rem;">Connect</p>
-        <div style="display: flex; gap: 0.5rem;">
+      <a href="contact.html" class="md-drawer-cta">Get in touch <i class="fas fa-arrow-right"></i></a>
+      <div class="md-drawer-foot">
+        <p class="md-drawer-foot-label">Connect</p>
+        <div class="md-drawer-foot-socials">
           <a href="https://www.linkedin.com/company/strongbuilt" class="md-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
           <a href="https://www.instagram.com/strongbuilt" class="md-social-btn" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
           <a href="https://x.com/strongbuilt" class="md-social-btn" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+        </div>
+        <div class="md-drawer-foot-contact">
+          <a href="tel:+919619875081"><i class="fas fa-phone"></i> +91 96198 75081</a>
         </div>
       </div>
     </aside>

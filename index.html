@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Strong Built | Engineering Legacies | Premier Mumbai Construction Firm</title>
+  <title>Premier Construction Company in Mumbai | Strong Built</title>
   <meta name="description" content="Strong Built is a premier construction firm building legacies across residential, commercial, and institutional sectors with 12+ years of excellence in Mumbai, India.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://strongbuilt.netlify.app/">
+  <link rel="canonical" href="https://strongbuilt.in/">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/Favicon/favicon-96x96.png" sizes="96x96">
@@ -19,10 +19,77 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://strongbuilt.netlify.app/">
-  <meta property="og:title" content="Strong Built | Engineering Legacies">
-  <meta property="og:description" content="Premier construction firm building legacies across residential, commercial, and industrial sectors in Mumbai, India.">
-  <meta property="og:image" content="https://strongbuilt.netlify.app/assets/images/home.png">
+  <meta property="og:site_name" content="Strong Built">
+  <meta property="og:url" content="https://strongbuilt.in/">
+  <meta property="og:title" content="Premier Construction Company in Mumbai | Strong Built">
+  <meta property="og:description" content="Strong Built is a premier construction firm building legacies across residential, commercial, and institutional sectors with 12+ years of excellence in Mumbai, India.">
+  <meta property="og:image" content="https://strongbuilt.in/assets/images/home.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Strong Built — Premier Mumbai Construction Firm">
+  <meta property="og:locale" content="en_IN">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Premier Construction Company in Mumbai | Strong Built">
+  <meta name="twitter:description" content="Strong Built is a premier construction firm building legacies across residential, commercial, and institutional sectors with 12+ years of excellence in Mumbai, India.">
+  <meta name="twitter:image" content="https://strongbuilt.in/assets/images/home.png">
+
+  <!-- Structured data: Organization + LocalBusiness + WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Organization", "LocalBusiness", "GeneralContractor"],
+        "@id": "https://strongbuilt.in/#organization",
+        "name": "Strong Built",
+        "alternateName": ["Strong Built Construction", "Strongbuilt"],
+        "url": "https://strongbuilt.in/",
+        "logo": "https://strongbuilt.in/assets/Logo/Strongbuilt.png",
+        "image": "https://strongbuilt.in/assets/images/home.png",
+        "description": "Premier Mumbai construction firm delivering residential, commercial, and institutional buildings since 2014.",
+        "foundingDate": "2014",
+        "parentOrganization": { "@type": "Organization", "name": "Skyway Group" },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "901-B Wing, HDIL Kaledonia, Sahar Road",
+          "addressLocality": "Andheri East",
+          "addressRegion": "Maharashtra",
+          "postalCode": "400069",
+          "addressCountry": "IN"
+        },
+        "telephone": "+91-96198-75081",
+        "email": "sales@strongbuilt.in",
+        "areaServed": [
+          { "@type": "City", "name": "Mumbai" },
+          { "@type": "City", "name": "Thane" },
+          { "@type": "City", "name": "Pune" },
+          { "@type": "AdministrativeArea", "name": "Mumbai Metropolitan Region" }
+        ],
+        "hasCredential": [
+          { "@type": "EducationalOccupationalCredential", "name": "ISO 9001" },
+          { "@type": "EducationalOccupationalCredential", "name": "ISO 14001" },
+          { "@type": "EducationalOccupationalCredential", "name": "ISO 45001" }
+        ],
+        "award": [
+          "Fastest Growing Firm '21",
+          "Governor's Award '22",
+          "Times Excellence '23",
+          "ET Safety Practices '24"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://strongbuilt.in/#website",
+        "url": "https://strongbuilt.in/",
+        "name": "Strong Built",
+        "publisher": { "@id": "https://strongbuilt.in/#organization" },
+        "inLanguage": "en-IN"
+      }
+    ]
+  }
+  </script>
 
   <link rel="preload" as="image" href="assets/Projects/monticello.jpg" fetchpriority="high">
 
@@ -38,71 +105,12 @@
   <!-- Swiper (for signature slider) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
+  <!-- Shared theme (fluid type scale + .t-* utilities + primitives) -->
+  <link rel="stylesheet" href="theme.css" />
+
   <style>
-    /* ═══════════════════════════════════════════════════════════════
-       MINIMALIST DARK — DESIGN TOKENS
-       Single source of truth for palette, type, spacing, radii, shadows.
-       All components below reference these variables exclusively.
-       ═══════════════════════════════════════════════════════════════ */
-    :root {
-      /* Palette — layered slate + warm amber */
-      --bg:                #0A0A0F;
-      --bg-alt:            #12121A;
-      --muted:             #1A1A24;
-      --fg:                #FAFAFA;
-      --fg-muted:          #A1A1AA;
-      --fg-subtle:         #71717A;
-      --accent:            #F59E0B;
-      --accent-foreground: #0A0A0F;
-      --accent-muted:      rgba(245, 158, 11, 0.15);
-      --border:            rgba(255, 255, 255, 0.08);
-      --border-hover:      rgba(255, 255, 255, 0.15);
-      --card:              rgba(26, 26, 36, 0.6);
-      --card-solid:        #1A1A24;
-
-      /* Shadows — subtle elevation + amber glows (signature) */
-      --shadow-sm:   0 1px 2px rgba(0, 0, 0, 0.3);
-      --shadow-md:   0 4px 6px rgba(0, 0, 0, 0.3);
-      --shadow-lg:   0 10px 15px rgba(0, 0, 0, 0.3);
-      --shadow-xl:   0 20px 25px rgba(0, 0, 0, 0.4);
-      --glow-sm:     0 0 20px rgba(245, 158, 11, 0.15);
-      --glow-md:     0 0 40px rgba(245, 158, 11, 0.2);
-      --glow-lg:     0 0 60px rgba(245, 158, 11, 0.25);
-      --glow-btn:    0 0 20px rgba(245, 158, 11, 0.4);
-      --border-glow: 0 0 0 1px rgba(245, 158, 11, 0.3), 0 0 20px rgba(245, 158, 11, 0.15);
-
-      /* Radii — softer than sharp, not as dramatic as modern */
-      --r-sm:   6px;
-      --r-md:   8px;
-      --r-lg:   12px;
-      --r-xl:   16px;
-      --r-2xl:  24px;
-      --r-full: 9999px;
-
-      /* Type scale */
-      --t-xs:   0.75rem;
-      --t-sm:   0.875rem;
-      --t-base: 1rem;
-      --t-lg:   1.125rem;
-      --t-xl:   1.25rem;
-      --t-2xl:  1.5rem;
-      --t-3xl:  2rem;
-      --t-4xl:  2.5rem;
-      --t-5xl:  3.5rem;
-      --t-6xl:  4.5rem;
-      --t-7xl:  6rem;
-
-      /* Spacing tokens */
-      --section-y: clamp(5rem, 10vw, 10rem);
-      --container: 100%;
-      --container-max: 1680px;
-
-      /* Font families */
-      --font-display: 'Oswald', 'Barlow Condensed', Impact, sans-serif;
-      --font-heading: 'Barlow Condensed', 'Oswald', sans-serif;
-      --font-body: 'Inter', system-ui, sans-serif;
-      --font-label: 'Barlow Condensed', sans-serif;
-    }
+    /* Tokens (palette, type scale, shadows, radii, fonts) now inherit from theme.css.
+       Page-local overrides and component styles remain below. */
 
     /* ───────────────────────────────────────────────────────────
        RESET / BASE
@@ -697,7 +705,7 @@
       margin: 1.25rem 0.5rem 1rem;
       padding: 0.9rem 1.25rem;
       background: var(--accent);
-      color: #0a0a0f;
+      color: var(--accent-foreground);
       font-family: var(--font-label);
       font-size: 0.78rem;
       font-weight: 700;
@@ -767,7 +775,7 @@
     }
     .md-hero h1 {
       font-family: var(--font-display);
-      font-size: clamp(3rem, 8vw, 7rem);
+      font-size: var(--text-display-xl);
       font-weight: 700;
       line-height: 0.95;
       letter-spacing: 0;
@@ -905,7 +913,7 @@
     }
     .md-section-head h2 {
       font-family: var(--font-display);
-      font-size: clamp(2.25rem, 5vw, 4rem);
+      font-size: var(--text-display-md);
       font-weight: 700;
       letter-spacing: 0;
       line-height: 1;
@@ -1625,7 +1633,7 @@
     .md-cta-content { position: relative; z-index: 1; max-width: 40rem; margin-inline: auto; }
     .md-cta-block h2 {
       font-family: var(--font-display);
-      font-size: clamp(2.25rem, 5.5vw, 4rem);
+      font-size: var(--text-display-md);
       font-weight: 700;
       letter-spacing: 0;
       line-height: 1;
@@ -1657,17 +1665,17 @@
       grid-template-columns: 1fr;
       gap: 2.5rem;
     }
-    @media (min-width: 900px) {
+    @media (min-width: 720px) {
       .md-footer-top {
-        grid-template-columns: 1fr 2fr;
-        gap: 3rem;
+        grid-template-columns: 2fr repeat(3, minmax(0, 1fr));
+        gap: 2.5rem;
         align-items: start;
       }
     }
     @media (min-width: 1200px) {
       .md-footer-top {
-        grid-template-columns: 1fr 2.2fr;
-        gap: 4.5rem;
+        grid-template-columns: 1.6fr repeat(3, minmax(0, 1fr));
+        gap: 3rem;
       }
     }
 
@@ -1784,8 +1792,8 @@
       box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
     }
     .md-footer-cta:hover {
-      background: #FFB526;
-      border-color: #FFB526;
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
       box-shadow: 0 0 24px rgba(245, 158, 11, 0.35);
       transform: translateY(-1px);
     }
@@ -1846,7 +1854,7 @@
       transition: all 200ms;
     }
     .md-footer-form button:hover {
-      background: #FFB526;
+      background: var(--accent-hover);
       box-shadow: 0 0 18px rgba(245, 158, 11, 0.4);
     }
     .md-footer-signup .note {
@@ -2147,7 +2155,7 @@
     .tg-track { display: flex; gap: 1.25rem; flex-shrink: 0; width: max-content; animation: tg-scroll 50s linear infinite; will-change: transform; }
     .tg-strip:hover .tg-track { animation-play-state: paused; }
     @keyframes tg-scroll { to { transform: translateX(calc(-50% - 0.625rem)); } }
-    .tg-card { flex-shrink: 0; width: clamp(16rem, 24vw, 22rem); aspect-ratio: 4/3; position: relative; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--border); background: #0a0a0f; text-decoration: none; color: var(--fg); transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 400ms, box-shadow 400ms; }
+    .tg-card { flex-shrink: 0; width: clamp(16rem, 24vw, 22rem); aspect-ratio: 4/3; position: relative; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--border); background: var(--bg); text-decoration: none; color: var(--fg); transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 400ms, box-shadow 400ms; }
     .tg-card:hover { transform: scale(1.05); border-color: var(--accent); box-shadow: 0 20px 50px -10px rgba(245, 158, 11, 0.35); z-index: 10; }
     .tg-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 700ms; }
     .tg-card:hover img { transform: scale(1.04); }
@@ -2270,7 +2278,6 @@
         </div>
         <div class="md-drawer-foot-contact">
           <a href="tel:+919619875081"><i class="fas fa-phone"></i> +91 96198 75081</a>
-          <a href="mailto:info@strongbuilt.com"><i class="fas fa-envelope"></i> info@strongbuilt.com</a>
         </div>
       </div>
     </aside>
@@ -2351,22 +2358,6 @@
           <div class="md-stat-num">5.7<span class="md-stat-suffix">M</span></div>
           <div class="md-stat-label">Sq.Ft Constructed</div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ AWARDS STRIP ═══ -->
-  <section class="md-section" style="padding-block: 2rem 4rem;">
-    <div class="md-container">
-      <div class="md-reveal" style="text-align: center; margin-bottom: 2rem;">
-        <span class="md-eyebrow md-eyebrow-accent">Industry Honours</span>
-      </div>
-      <div class="md-awards md-reveal" style="transition-delay: 100ms;">
-        <a href="recognition.html" class="md-award"><i class="fas fa-trophy"></i> Fastest Growing Firm <span class="md-award-year">'21</span></a>
-        <a href="recognition.html" class="md-award"><i class="fas fa-landmark"></i> Governor's Award <span class="md-award-year">'22</span></a>
-        <a href="recognition.html" class="md-award"><i class="fas fa-medal"></i> Times Excellence <span class="md-award-year">'23</span></a>
-        <a href="recognition.html" class="md-award"><i class="fas fa-shield-alt"></i> ET Safety Practices <span class="md-award-year">'24</span></a>
-        <a href="recognition.html" class="md-award"><i class="fas fa-certificate"></i> ISO 9001 · 14001 · 45001</a>
       </div>
     </div>
   </section>
@@ -2636,7 +2627,7 @@
     <div class="md-container" style="margin-bottom: 2rem; text-align: center;">
       <div class="md-reveal">
         <span class="md-eyebrow md-eyebrow-accent">Trusted By</span>
-        <h2 style="font-family: var(--font-display); font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 700; letter-spacing: 0; margin-top: 0.75rem; text-transform: uppercase;">Mumbai's Leading Developers</h2>
+        <h2 style="font-family: var(--font-display); font-size: var(--text-h2); font-weight: 700; letter-spacing: 0; margin-top: 0.75rem; text-transform: uppercase;">Mumbai's Leading Developers</h2>
       </div>
     </div>
     <div class="md-container">
@@ -2698,21 +2689,19 @@
           <p class="md-footer-tagline">Building <em>legacies</em>, not just structures. Since 2014.</p>
         </div>
 
-        <!-- RIGHT — Contact -->
-        <div class="md-footer-signup md-footer-contact-card">
-          <div class="md-fc-item">
-            <span class="md-fc-k"><i class="fas fa-location-dot"></i> Address</span>
-            <p class="md-fc-v">901-B Wing, HDIL Kaledonia,<br>Sahar Road, Andheri-East,<br>Mumbai — 400069</p>
-          </div>
-          <div class="md-fc-item">
-            <span class="md-fc-k"><i class="fas fa-phone"></i> Phone</span>
-            <a class="md-fc-v" href="tel:+919619875081">+91 96198 75081</a>
-            <a class="md-fc-v" href="tel:+912261232500">022 6123 2500</a>
-          </div>
-          <div class="md-fc-item">
-            <span class="md-fc-k"><i class="fas fa-envelope"></i> Email</span>
-            <a class="md-fc-v" href="mailto:sales@strongbuilt.in">sales@strongbuilt.in</a>
-          </div>
+        <!-- RIGHT — Contact items as peers of brand for even distribution -->
+        <div class="md-fc-item">
+          <span class="md-fc-k"><i class="fas fa-location-dot"></i> Address</span>
+          <p class="md-fc-v">901-B Wing, HDIL Kaledonia,<br>Sahar Road, Andheri-East,<br>Mumbai — 400069</p>
+        </div>
+        <div class="md-fc-item">
+          <span class="md-fc-k"><i class="fas fa-phone"></i> Phone</span>
+          <a class="md-fc-v" href="tel:+919619875081">+91 96198 75081</a>
+          <a class="md-fc-v" href="tel:+912261232500">022 6123 2500</a>
+        </div>
+        <div class="md-fc-item">
+          <span class="md-fc-k"><i class="fas fa-envelope"></i> Email</span>
+          <a class="md-fc-v" href="mailto:sales@strongbuilt.in">sales@strongbuilt.in</a>
         </div>
 
       </div>

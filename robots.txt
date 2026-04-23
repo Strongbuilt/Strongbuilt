@@ -1,0 +1,13 @@
+# Strong Built — robots.txt
+# https://strongbuilt.in/
+
+User-agent: *
+Allow: /
+
+# Block the admin surface and any build artifacts
+Disallow: /admin.html
+Disallow: /assets/maps/
+Disallow: /*.json$
+
+# Sitemap location
+Sitemap: https://strongbuilt.in/sitemap.xml

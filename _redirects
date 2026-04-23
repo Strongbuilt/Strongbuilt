@@ -1,8 +1,3 @@
 # Strong Built — Netlify redirects
-
-# Force primary host (apex over www)
-https://www.strongbuilt.in/*   https://strongbuilt.in/:splat   301!
-
-# Retire the old Netlify preview URL
-https://strongbuilt.netlify.app/*   https://strongbuilt.in/:splat   301!
-https://strongbuiltofficial.netlify.app/*   https://strongbuilt.in/:splat   301!
+# Current live site: https://strongbuiltofficial.netlify.app/
+# (strongbuilt.in is a separate site hosted elsewhere — do NOT redirect to it.)

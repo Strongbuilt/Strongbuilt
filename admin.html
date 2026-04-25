@@ -18,10 +18,7 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background:
-        none,
-        linear-gradient(180deg, #000000 0%, #000000 100%);
-      background-attachment: fixed;
+      background: #000000;
       color: #FAFAFA;
       min-height: 100vh;
     }
@@ -29,8 +26,8 @@
 
     /* ─── INPUTS ─── */
     input,select,textarea {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: #000000;
+      border: 1px solid rgba(255,255,255,0.18);
       color: #FAFAFA;
       transition: border-color .2s, box-shadow .2s, background .2s;
       font-family: 'Inter', sans-serif;
@@ -39,13 +36,13 @@
     }
     input::placeholder, textarea::placeholder { color: rgba(161, 161, 170,0.4); }
     input:hover:not(:focus), select:hover:not(:focus), textarea:hover:not(:focus) {
-      border-color: rgba(245, 158, 11,0.25);
-      background: rgba(255,255,255,0.045);
+      border-color: rgba(245, 158, 11, 0.4);
+      background: #050508;
     }
     input:focus,select:focus,textarea:focus {
       outline: none; border-color: #F59E0B;
       box-shadow: 0 0 0 3px rgba(245, 158, 11,0.15);
-      background: rgba(255,255,255,0.055);
+      background: #050508;
     }
     input.invalid,select.invalid,textarea.invalid {
       border-color: #f87171;
@@ -75,10 +72,11 @@
     .field-error.is-visible { display: block; }
 
     /* ─── GLASS SURFACE ─── */
+    /* Pitch-black surface with the same 0.18 white border the
+       public site uses so admin chrome reads as one design. */
     .glass {
-      background: linear-gradient(155deg, #000000, #000000);
-      
-      border: 1px solid rgba(255,255,255,0.06);
+      background: #000000;
+      border: 1px solid rgba(255,255,255,0.18);
     }
 
     /* ─── BUTTONS ─── */
@@ -231,8 +229,8 @@
     }
     .badge-completed { background: rgba(255,255,255,0.04); color: #A1A1AA; border: 1px solid rgba(255,255,255,0.1); }
     .badge-featured {
-      background: none);
-      color: #F59E0B; border: 1px solid rgba(245, 158, 11,0.4);
+      background: rgba(245, 158, 11, 0.18);
+      color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.4);
     }
 
     /* ─── STATS STRIP (above list) ─── */
@@ -560,10 +558,96 @@
     /* Focus-visible ring amber */
     *:focus-visible { outline: 2px solid #F59E0B; outline-offset: 2px; border-radius: 2px; }
     input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible { outline: none; }
+    /* ─── LOGIN GATE ─── */
+    .login-gate {
+      position: fixed; inset: 0; z-index: 99999;
+      display: flex; align-items: center; justify-content: center;
+      background: #000;
+      padding: 1rem;
+    }
+    .login-gate.is-hidden { display: none; }
+    .login-card {
+      width: min(420px, 100%);
+      padding: 2rem;
+      background: #000000;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 6px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.8), 0 0 0 1px rgba(245, 158, 11, 0.18);
+      text-align: center;
+    }
+    .login-card img { height: 3.5rem; width: auto; margin: 0 auto 1.25rem; display: block; }
+    .login-card h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #F59E0B; margin: 0 0 0.4rem;
+    }
+    .login-card p {
+      color: rgba(180,180,190,0.7); font-size: 0.78rem; margin: 0 0 1.5rem;
+      letter-spacing: 0.04em;
+    }
+    .login-form { display: flex; flex-direction: column; gap: 0.85rem; }
+    .login-form input { padding: 0.85rem 1rem; font-size: 0.9rem; }
+    .login-form .err {
+      font-size: 0.7rem; color: #f87171; min-height: 1em;
+      letter-spacing: 0.05em; font-weight: 600;
+    }
+    .login-form button { padding: 0.85rem 1rem; font-size: 0.85rem; }
   </style>
   <link rel="stylesheet" href="contrast-cards.css" />
 </head>
 <body class="min-h-screen">
+
+  <!-- LOGIN GATE — client-side password check.
+       Token is set in localStorage on success; page contents stay
+       hidden until then. Not real auth — just a friction barrier
+       so the admin URL isn't drive-by accessible. -->
+  <div id="loginGate" class="login-gate">
+    <form class="login-card" id="loginForm" autocomplete="off">
+      <img src="assets/Logo/Strongbuilt.png" alt="Strong Built">
+      <h2>Admin Access</h2>
+      <p>Enter passcode to continue</p>
+      <div class="login-form">
+        <input type="password" id="loginPass" placeholder="Passcode" autofocus required>
+        <div class="err" id="loginErr"></div>
+        <button type="submit" class="btn btn-primary">Unlock <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </form>
+  </div>
+  <script>
+    (function(){
+      // Change this to your own passcode. SHA-256 hash is stored
+      // here so the cleartext doesn't sit in source. Default = "strongbuilt"
+      const HASH = 'ae908af1175dacb20f6d13bf75b6b098e17112be60b2dc69d5ae0c22760c6a72';
+      const KEY  = 'sb_admin_unlocked';
+      async function sha256(s){
+        const buf = new TextEncoder().encode(s);
+        const h = await crypto.subtle.digest('SHA-256', buf);
+        return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('');
+      }
+      const gate = document.getElementById('loginGate');
+      const form = document.getElementById('loginForm');
+      const pass = document.getElementById('loginPass');
+      const err  = document.getElementById('loginErr');
+
+      // Already unlocked this session?
+      if (sessionStorage.getItem(KEY) === '1') gate.classList.add('is-hidden');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        err.textContent = '';
+        const h = await sha256(pass.value);
+        if (h === HASH) {
+          sessionStorage.setItem(KEY, '1');
+          gate.classList.add('is-hidden');
+        } else {
+          err.textContent = 'Incorrect passcode';
+          pass.value = '';
+          pass.focus();
+        }
+      });
+    })();
+  </script>
 
   <!-- HEADER -->
   <header class="sticky top-0 z-40 glass border-b border-clay-border">

@@ -142,11 +142,18 @@
     const div = document.createElement('article');
     const imgSrc = p.img || FALLBACK_IMG;
     const bento = bentoClass(i);
-    div.className = 'project-card group' + (bento ? ' ' + bento : '');
+    const noImage = !p.img;
+    div.className = 'project-card group'
+      + (bento ? ' ' + bento : '')
+      + (noImage ? ' no-image' : '');
     div.dataset.category = p.category;
 
+    const imgWrap = noImage
+      ? ''
+      : `<div class="img-wrap"><img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy"></div>`;
+
     div.innerHTML = `
-      <div class="img-wrap"><img src="${esc(imgSrc)}" alt="${esc(p.title)}" loading="lazy"></div>
+      ${imgWrap}
       <div class="glass-info">
         <div class="cat">${esc(capitalize(p.category))}</div>
         <h3>${esc(p.title)}</h3>
@@ -163,10 +170,15 @@
   function listCard(p, i) {
     const div = document.createElement('article');
     const imgSrc = p.img || FALLBACK_IMG;
-    div.className = 'project-card list-mode group';
+    const noImage = !p.img;
+    div.className = 'project-card list-mode group' + (noImage ? ' no-image' : '');
+
+    const imgWrap = noImage
+      ? ''
+      : `<div class="img-wrap"><img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy"></div>`;
 
     div.innerHTML = `
-      <div class="img-wrap"><img src="${esc(imgSrc)}" alt="${esc(p.title)}" loading="lazy"></div>
+      ${imgWrap}
       <div class="meta">
         <div class="flex items-center gap-6 min-w-0 flex-1">
           <span class="num">${numberLabel(i)}</span>

@@ -43,20 +43,20 @@
   <link rel="stylesheet" href="theme.css">
   <style>
     .cl-hero { position: relative; padding: clamp(8rem,14vw,12rem) 0 clamp(3rem,5vw,5rem); text-align: center; overflow: hidden; }
-    .cl-hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at top, rgba(245,158,11,0.08) 0%, transparent 55%); pointer-events:none; }
+    .cl-hero::before { content:''; position:absolute; inset:0; background: none; pointer-events:none; }
     .cl-hero h1 { font-family: var(--font-display); font-size: var(--text-display-xl); font-weight: 600; line-height: 0.95; margin: 1.5rem 0 1.75rem; }
     .cl-hero h1 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
     .cl-hero .lede { max-width: 38rem; margin: 0 auto; color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; }
     .cl-hero-rule { width: 3.5rem; height: 1px; background: var(--accent); margin: 2.25rem auto 0; }
 
-    .cl-stats { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(18,18,26,0.4); padding-block: clamp(2rem,3.5vw,2.75rem); }
+    .cl-stats { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: #000000; padding-block: clamp(2rem,3.5vw,2.75rem); }
     .cl-stats-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; text-align: center; }
     @media (min-width: 720px) { .cl-stats-grid { grid-template-columns: repeat(4,1fr); } }
     .cl-stat strong { display: block; font-family: var(--font-display); font-size: var(--text-h2); font-weight: 500; color: var(--accent); line-height: 1; }
     .cl-stat small { display: block; font-family: var(--font-label); font-size: 0.66rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg-subtle); margin-top: 0.5rem; }
 
     .cl-section { padding-block: clamp(4rem,7vw,6rem); position: relative; }
-    .cl-section--alt { background: rgba(18,18,26,0.4); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .cl-section--alt { background: #000000; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .cl-head { text-align: center; max-width: 42rem; margin: 0 auto clamp(2.5rem,4vw,3.5rem); }
     .cl-head h2 { font-family: var(--font-display); font-size: clamp(2.25rem,5vw,3.5rem); font-weight: 600; line-height: 1; margin: 1rem 0 0; }
     .cl-head h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
@@ -65,7 +65,7 @@
     /* Repeat trust callout */
     .cl-repeat {
       display: grid; grid-template-columns: 1fr; gap: clamp(2rem,4vw,3rem); align-items: center;
-      background: var(--card); backdrop-filter: blur(8px);
+      background: var(--card); 
       border: 1px solid rgba(245,158,11,0.2); border-radius: var(--r-lg);
       padding: clamp(1.75rem,3.5vw,2.75rem);
       box-shadow: var(--glow-sm);
@@ -88,8 +88,8 @@
       position: relative;
       aspect-ratio: 5 / 3;
       background: var(--card);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      
+      
       border: 1px solid var(--border);
       border-radius: var(--r-md);
       overflow: hidden;
@@ -101,7 +101,7 @@
     }
     .cl-card:hover {
       border-color: rgba(245,158,11,0.3);
-      background: rgba(26,26,36,0.85);
+      background: #000000;
       transform: translateY(-2px);
       box-shadow: var(--shadow-md), var(--glow-sm);
     }
@@ -148,7 +148,7 @@
       position: absolute;
       left: 0; right: 0; bottom: 0;
       padding: 0.7rem 0.85rem;
-      background: linear-gradient(to top, rgba(10,10,15,0.96) 40%, rgba(10,10,15,0) 100%);
+      background: linear-gradient(to top, #000000 40%, #000000 100%);
       font-family: var(--font-heading);
       font-size: 0.72rem;
       font-weight: 600;
@@ -186,10 +186,10 @@
       text-transform: uppercase;
       padding: 0.2rem 0.5rem;
       border-radius: 999px;
-      background: rgba(10,10,15,0.7);
+      background: #000000;
       color: var(--fg-subtle);
       border: 1px solid var(--border);
-      backdrop-filter: blur(6px);
+      
       z-index: 2;
     }
 
@@ -200,7 +200,7 @@
     }
     .cl-card.cl-tier1:hover {
       border-color: var(--accent);
-      background: linear-gradient(145deg, rgba(26,26,36,0.85) 0%, rgba(245,158,11,0.08) 100%);
+      background: none;
       box-shadow: var(--shadow-md), var(--glow-md);
     }
     .cl-card.cl-tier1 .badge {
@@ -221,13 +221,13 @@
     .cl-tests { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
     @media (min-width: 900px) { .cl-tests { grid-template-columns: repeat(3,1fr); } }
     .cl-test {
-      background: var(--card); backdrop-filter: blur(8px);
+      background: var(--card); 
       border: 1px solid var(--border); border-radius: var(--r-lg);
       padding: 2rem 1.75rem;
       display: flex; flex-direction: column;
       transition: all var(--t-slow) var(--ease-out);
     }
-    .cl-test:hover { border-color: rgba(245,158,11,0.28); background: rgba(26,26,36,0.85); }
+    .cl-test:hover { border-color: rgba(245,158,11,0.28); background: #000000; }
     .cl-test i.fa-quote-left { color: rgba(245,158,11,0.25); font-size: 1.75rem; margin-bottom: 1rem; }
     .cl-test blockquote { font-family: var(--font-body); font-size: 1rem; font-style: italic; color: var(--fg-muted); line-height: 1.75; margin: 0 0 2rem; flex: 1; }
     .cl-test .attr { display: flex; align-items: center; gap: 0.85rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
@@ -244,7 +244,7 @@
     .cl-stars { display: inline-flex; gap: 0.25rem; color: var(--accent); font-size: 1rem; margin-top: 0.5rem; }
 
     .cl-cta { position: relative; padding-block: clamp(5rem,9vw,8rem); border-top: 1px solid var(--border); text-align: center; overflow: hidden; }
-    .cl-cta::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at center, rgba(245,158,11,0.1) 0%, transparent 55%); pointer-events:none; }
+    .cl-cta::before { content:''; position:absolute; inset:0; background: none; pointer-events:none; }
     .cl-cta h2 { font-family: var(--font-display); font-size: clamp(2.25rem,5vw,3.5rem); font-weight: 600; line-height: 1; margin: 1rem 0 1.25rem; }
     .cl-cta h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
     .cl-cta p { max-width: 34rem; margin: 0 auto 2.25rem; color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; }
@@ -254,13 +254,13 @@
     /* 3D Coverflow Carousel */
     .cf-wrap { position: relative; padding: 3rem 0 1.5rem; perspective: 1400px; overflow: hidden; }
     .cf-track { position: relative; height: 22rem; transform-style: preserve-3d; }
-    .cf-card { position: absolute; top: 50%; left: 50%; width: clamp(13rem, 22vw, 18rem); height: clamp(18rem, 30vw, 22rem); margin: calc(-1 * clamp(9rem, 15vw, 11rem)) 0 0 calc(-1 * clamp(6.5rem, 11vw, 9rem)); border-radius: var(--r-lg); background: #15151c; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; transition: transform 600ms var(--ease-out), opacity 500ms, border-color 400ms; transform-style: preserve-3d; cursor: pointer; overflow: hidden; }
+    .cf-card { position: absolute; top: 50%; left: 50%; width: clamp(13rem, 22vw, 18rem); height: clamp(18rem, 30vw, 22rem); margin: calc(-1 * clamp(9rem, 15vw, 11rem)) 0 0 calc(-1 * clamp(6.5rem, 11vw, 9rem)); border-radius: var(--r-lg); background: #000000; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; transition: transform 600ms var(--ease-out), opacity 500ms, border-color 400ms; transform-style: preserve-3d; cursor: pointer; overflow: hidden; }
     .cf-card.is-center { transform: translateZ(0); z-index: 10; border-color: var(--accent); }
     .cf-card .cf-logo { flex: 1; display: flex; align-items: center; justify-content: center; }
     .cf-card .cf-logo img { max-width: 75%; max-height: 70%; filter: brightness(0) invert(1); opacity: 0.9; }
     .cf-wrap--raw .cf-card .cf-logo img { filter: none; opacity: 1; }
     .cf-card .cf-info { display: none; }
-    .cf-nav { position: absolute; top: 50%; width: 2.5rem; height: 2.5rem; transform: translateY(-50%); border-radius: 50%; background: rgba(26,26,36,0.9); border: 1px solid var(--border); color: var(--fg); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; transition: all 260ms; backdrop-filter: blur(8px); }
+    .cf-nav { position: absolute; top: 50%; width: 2.5rem; height: 2.5rem; transform: translateY(-50%); border-radius: 50%; background: #000000; border: 1px solid var(--border); color: var(--fg); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; transition: all 260ms;  }
     .cf-nav:hover { border-color: var(--accent); color: var(--accent); box-shadow: var(--glow-sm); }
     .cf-nav--prev { left: 1rem; }
     .cf-nav--next { right: 1rem; }
@@ -268,6 +268,7 @@
     .cf-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--border); transition: all 260ms; cursor: pointer; border: none; padding: 0; }
     .cf-dot.is-active { background: var(--accent); width: 1.75rem; border-radius: 4px; }
   </style>
+  <link rel="stylesheet" href="contrast-cards.css" />
 </head>
 
 <body class="md-atmospheric">

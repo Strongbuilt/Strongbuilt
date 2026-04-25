@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Premier Construction Company in Mumbai | Strong Built</title>
+  <title>Strong Built · High-Contrast Cards Preview</title>
   <meta name="description" content="Strong Built is a premier construction firm building legacies across residential, commercial, and institutional sectors with 12+ years of excellence in Mumbai, India.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://strongbuiltofficial.netlify.app/">
@@ -798,15 +798,6 @@
       flex-wrap: wrap;
       gap: 0.75rem;
     }
-    /* Mobile — both hero CTAs stretch to the same full width */
-    @media (max-width: 540px) {
-      .md-hero-ctas .md-btn {
-        flex: 1 1 100%;
-        width: 100%;
-        max-width: 22rem;
-        justify-content: center;
-      }
-    }
 
     /* Hero stack — image cards */
     .md-hero-visual {
@@ -906,50 +897,6 @@
     @media (max-width: 899px) {
       .md-hero-badge-float { right: 2%; bottom: 4%; padding: 0.75rem 1rem; }
       .md-hero-badge-float strong { font-size: 1.35rem; }
-    }
-
-    /* ───────────────────────────────────────────────────────────
-       Mobile hero visual redesign — single centered card, badge
-       moved to the top-right corner so it doesn't fight the
-       Monticello caption at the bottom.
-       ─────────────────────────────────────────────────────────── */
-    @media (max-width: 767px) {
-      .md-hero-visual {
-        max-width: min(420px, 88vw);
-        aspect-ratio: 4 / 4.4;
-      }
-      /* Hide decorative tilted siblings — only the focal card */
-      .md-hero-card:nth-child(1),
-      .md-hero-card:nth-child(2) { display: none; }
-      .md-hero-card:nth-child(3) {
-        transform: none !important;
-        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6) !important;
-      }
-      /* Caption — clean, full-width pill at bottom */
-      .md-hero-card-caption {
-        bottom: 0.75rem;
-        left: 0.75rem;
-        right: 0.75rem;
-        padding: 0.55rem 0.85rem;
-        font-size: 0.65rem;
-        letter-spacing: 0.18em;
-        text-align: center;
-      }
-      /* Badge — top-right corner, compact */
-      .md-hero-badge-float {
-        top: 0.75rem;
-        right: 0.75rem;
-        bottom: auto;
-        left: auto;
-        padding: 0.5rem 0.75rem;
-        border-radius: var(--r-md);
-      }
-      .md-hero-badge-float strong { font-size: 1.1rem; }
-      .md-hero-badge-float small {
-        font-size: 0.55rem;
-        letter-spacing: 0.18em;
-        margin-top: 0.15rem;
-      }
     }
 
     /* ───────────────────────────────────────────────────────────
@@ -2235,6 +2182,8 @@
     .cf-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--border); transition: all 260ms; cursor: pointer; border: none; padding: 0; }
     .cf-dot.is-active { background: var(--accent); width: 1.75rem; border-radius: 4px; }
   </style>
+
+  <!-- High-contrast cards override (must load AFTER the inline <style> above) -->
   <link rel="stylesheet" href="contrast-cards.css" />
 </head>
 

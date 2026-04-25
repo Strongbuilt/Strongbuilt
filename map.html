@@ -63,7 +63,7 @@
     <link rel="stylesheet" href="theme.css">
 
     <style>
-        .sidebar-optimized { background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-right: 1px solid rgba(255,255,255,0.08); }
+        .sidebar-optimized { background: rgba(0,0,0,0.8);  border-right: 1px solid rgba(255,255,255,0.08); }
 
         /* Map style switcher */
         .style-opt {
@@ -93,7 +93,7 @@
             color: #FAFAFA;
             border: 1px solid rgba(239, 191, 4,0.35);
             border-radius: 6px;
-            backdrop-filter: blur(14px);
+            
             padding: 0;
             overflow: hidden;
             box-shadow: 0 20px 50px -10px rgba(0,0,0,0.7), 0 0 30px -10px rgba(239, 191, 4,0.25);
@@ -123,11 +123,11 @@
             transition: all 0.3s ease;
             z-index: 10;
         }
-        .leaflet-container a.leaflet-popup-close-button:hover { color: #0a0a0f; background: #F59E0B; transform: rotate(90deg); }
+        .leaflet-container a.leaflet-popup-close-button:hover { color: #000000; background: #F59E0B; transform: rotate(90deg); }
 
         .popup-image { width: 100%; height: 150px; object-fit: cover; transition: transform 0.7s ease; }
         .leaflet-popup:hover .popup-image { transform: scale(1.06); }
-        .popup-header { overflow: hidden; position: relative; height: 150px; background: #0a0a0f; }
+        .popup-header { overflow: hidden; position: relative; height: 150px; background: #000000; }
         .popup-header::after {
             content: '';
             position: absolute;
@@ -142,7 +142,7 @@
             z-index: 3;
             width: 44px; height: 44px;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(239, 191, 4, 0.28), rgba(239, 191, 4, 0.06) 70%);
+            background: none 70%);
             border: 1px solid rgba(239, 191, 4, 0.5);
             display: inline-flex;
             align-items: center;
@@ -237,7 +237,7 @@
             width: 100%;
             padding: 0.65rem 1rem;
             background: linear-gradient(155deg, #F59E0B, #F59E0B);
-            color: #0a0a0f !important;
+            color: #000000 !important;
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 0.7rem;
             font-weight: 700;
@@ -272,7 +272,7 @@
             display: flex; align-items: center; justify-content: center;
             background: radial-gradient(circle at 30% 30%, #F59E0B, #F59E0B 70%);
             border: 2px solid rgba(255,255,255,0.85);
-            color: #0a0a0f;
+            color: #000000;
             font-family: 'Oswald', sans-serif;
             font-weight: 700;
             font-size: 0.95rem;
@@ -287,9 +287,9 @@
         }
 
         /* ─────── Project card ─────── */
-        .filter-btn-map.active { background-color: #F59E0B !important; color: #0a0a0f !important; border-color: #F59E0B !important; }
-        .status-btn.active { background-color: #F59E0B !important; color: #0a0a0f !important; border-color: #F59E0B !important; }
-        .loc-filter.active { background-color: #F59E0B; color: #0a0a0f; border-color: #F59E0B; }
+        .filter-btn-map.active { background-color: #F59E0B !important; color: #000000 !important; border-color: #F59E0B !important; }
+        .status-btn.active { background-color: #F59E0B !important; color: #000000 !important; border-color: #F59E0B !important; }
+        .loc-filter.active { background-color: #F59E0B; color: #000000; border-color: #F59E0B; }
 
         .project-card { opacity: 0; transform: translateY(15px); animation: cardIn 0.4s cubic-bezier(0.16,1,0.3,1) forwards; }
         @keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
@@ -338,10 +338,10 @@
                 z-index: 30;
                 gap: 4px;
                 padding: 4px;
-                background: rgba(10, 10, 15, 0.92);
+                background: #000000;
                 border: 1px solid rgba(245, 158, 11, 0.3);
                 border-radius: 999px;
-                backdrop-filter: blur(12px);
+                
                 box-shadow: 0 10px 30px -6px rgba(0,0,0,0.7);
             }
             .m-toggle button {
@@ -359,14 +359,14 @@
             }
             .m-toggle button.is-on {
                 background: #F59E0B;
-                color: #0a0a0f;
+                color: #000000;
             }
             .m-toggle .count-badge {
                 display: none;
                 min-width: 1.1rem; height: 1.1rem;
                 padding: 0 0.35rem;
                 background: #F59E0B;
-                color: #0a0a0f;
+                color: #000000;
                 border-radius: 999px;
                 font-size: 0.6rem;
                 font-weight: 800;
@@ -374,7 +374,7 @@
                 margin-left: 0.25rem;
             }
             .m-toggle .count-badge.is-visible { display: inline-flex; }
-            .m-toggle button.is-on .count-badge { background: #0a0a0f; color: #F59E0B; }
+            .m-toggle button.is-on .count-badge { background: #000000; color: #F59E0B; }
 
             /* Layered stacking — map always below, sidebar slides over */
             .main-layout { flex-direction: column; position: relative; }
@@ -407,7 +407,7 @@
                 border-bottom: 0;
                 overflow: hidden;
                 transition: max-height 300ms cubic-bezier(0.2, 0.8, 0.2, 1), padding 300ms, border-color 300ms;
-                background: rgba(10,10,15,0.98);
+                background: #000000;
             }
             .map-sidebar .sidebar-title-stats.is-open {
                 max-height: 40rem;
@@ -421,7 +421,7 @@
                 align-items: center;
                 gap: 0.5rem;
                 padding: 0.75rem 0.75rem 0.65rem;
-                background: rgba(10,10,15,0.96);
+                background: #000000;
                 border-bottom: 1px solid rgba(255,255,255,0.06);
                 position: sticky; top: 0;
                 z-index: 5;
@@ -468,7 +468,7 @@
                 width: 8px; height: 8px;
                 background: #F59E0B;
                 border-radius: 50%;
-                border: 2px solid #0a0a0f;
+                border: 2px solid #000000;
                 display: none;
             }
             .mobile-filter-bar .filter-btn.has-active .dot { display: block; }
@@ -478,7 +478,7 @@
                 display: block;
                 max-height: 0;
                 overflow: hidden;
-                background: rgba(10,10,15,0.98);
+                background: #000000;
                 border-bottom: 1px solid rgba(255,255,255,0.06);
                 transition: max-height 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
             }
@@ -558,6 +558,7 @@
         /* Hide desktop sidebar header bits on mobile via utility class */
         .sidebar-title, .sidebar-stats, .sidebar-legend { display: block; }
     </style>
+  <link rel="stylesheet" href="contrast-cards.css" />
 </head>
 
 <body class="bg-clay-base antialiased overflow-hidden selection:bg-brand-gold selection:text-black h-screen flex flex-col">
@@ -729,10 +730,10 @@
         <div id='map' class="map-canvas w-full md:w-2/3 lg:w-3/4 flex-grow md:h-full bg-[#1a1a1a] relative z-0 min-h-[400px]">
             <!-- Map Style Switcher -->
             <div id="mapStyleSwitcher" class="absolute top-3 right-3 z-[1000]">
-                <button id="styleToggleBtn" class="w-9 h-9 bg-black/70 backdrop-blur-md border border-clay-border rounded-sm flex items-center justify-center text-clay-muted hover:text-brand-darkGold hover:border-brand-gold/50 transition-all" title="Change map style">
+                <button id="styleToggleBtn" class="w-9 h-9 bg-black border border-clay-border rounded-sm flex items-center justify-center text-clay-muted hover:text-brand-darkGold hover:border-brand-gold/50 transition-all" title="Change map style">
                     <i class="fas fa-layer-group text-sm"></i>
                 </button>
-                <div id="styleDropdown" class="hidden absolute top-11 right-0 w-48 bg-black/90 backdrop-blur-xl border border-clay-border rounded-sm shadow-2xl overflow-hidden">
+                <div id="styleDropdown" class="hidden absolute top-11 right-0 w-48 bg-black border border-clay-border rounded-sm shadow-2xl overflow-hidden">
                     <p class="px-3 py-2 text-[9px] text-brand-darkGold uppercase tracking-widest font-heading font-bold border-b border-clay-border">Map Style</p>
                     <div>
                         <button class="style-opt active" data-style="dark">
@@ -892,7 +893,7 @@
                 </defs>
                 <circle class="sb-pin-ring" cx="18" cy="16" r="4" fill="none" stroke="#F59E0B" stroke-width="2"/>
                 <path d="M18 2 C9.2 2 2 9.2 2 18 c0 12 16 24 16 24 s16-12 16-24 C34 9.2 26.8 2 18 2 z" fill="url(#pinG)" stroke="#fff" stroke-width="1.5"/>
-                <circle cx="18" cy="16" r="6" fill="${core}" stroke="#0a0a0f" stroke-width="1.5"/>
+                <circle cx="18" cy="16" r="6" fill="${core}" stroke="#000000" stroke-width="1.5"/>
             </svg>`;
             return L.divIcon({
                 className: 'sb-pin' + (isActive ? ' is-active' : ''),

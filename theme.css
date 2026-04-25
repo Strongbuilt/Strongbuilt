@@ -20,21 +20,23 @@
 
 /* ───── 1. DESIGN TOKENS ───── */
 :root {
-  /* Palette — layered slate + warm amber */
-  --bg:                #0A0A0F;
-  --bg-alt:            #12121A;
-  --muted:             #1A1A24;
+  /* Palette — pitch-black canvas + warm amber.
+     Cards have no fill contrast against the page; they're defined
+     entirely by their borders. Hover states light up amber. */
+  --bg:                #000000;
+  --bg-alt:            #000000;
+  --muted:             #000000;
   --fg:                #FAFAFA;
-  --fg-muted:          #A1A1AA;
-  --fg-subtle:         #71717A;
+  --fg-muted:          #B4B4BE;
+  --fg-subtle:         #8A8A95;
   --accent:            #F59E0B;
   --accent-hover:      #FFB526;
-  --accent-foreground: #0A0A0F;
+  --accent-foreground: #000000;
   --accent-muted:      rgba(245, 158, 11, 0.15);
-  --border:            rgba(255, 255, 255, 0.08);
-  --border-hover:      rgba(255, 255, 255, 0.15);
-  --card:              rgba(26, 26, 36, 0.6);
-  --card-solid:        #1A1A24;
+  --border:            rgba(255, 255, 255, 0.18);
+  --border-hover:      rgba(245, 158, 11, 0.7);
+  --card:              #000000;
+  --card-solid:        #000000;
 
   /* Shadows + amber glows (signature) */
   --shadow-sm:   0 1px 2px rgba(0, 0, 0, 0.3);
@@ -72,12 +74,12 @@
   /* Spacing */
   --section-y:     clamp(5rem, 10vw, 10rem);
   --container-max: 1680px;
-  --container-pad: clamp(1.25rem, 4vw, 3rem);
+  --container-pad: clamp(1rem, 3.5vw, 3rem);
 
   /* Header height (used by sticky offsets) */
-  --header-h:       5rem;
-  --header-h-lg:    5.75rem;
-  --header-h-xl:    6.5rem;
+  --header-h:       5.5rem;
+  --header-h-lg:    6.75rem;
+  --header-h-xl:    7.75rem;
 
   /* Transitions */
   --ease-out:  cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -325,12 +327,7 @@ body::before[data-md-noise] {
 }
 
 .md-orb {
-  position: fixed;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.10) 0%, transparent 70%);
-  filter: blur(80px);
-  pointer-events: none;
-  z-index: 0;
+  display: none !important;
 }
 
 /* ───── 5. LAYOUT PRIMITIVES ───── */
@@ -396,9 +393,7 @@ body::before[data-md-noise] {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--fg-muted);
-  background: rgba(26, 26, 36, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: var(--card-solid);
 }
 .md-badge-dot {
   width: 0.45rem;
@@ -481,14 +476,12 @@ body::before[data-md-noise] {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 50;
-  background: rgba(10, 10, 15, 0.6);
-  backdrop-filter: blur(20px) saturate(1.2);
-  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
   transition: background var(--t-slow), border-color var(--t-slow);
 }
 .md-header.is-scrolled {
-  background: rgba(10, 10, 15, 0.85);
+  background: var(--bg);
   border-bottom-color: var(--border-hover);
 }
 .md-header-inner {
@@ -508,15 +501,25 @@ body::before[data-md-noise] {
 }
 
 .md-logo { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
+/* Unified logo size — scales up at each breakpoint. Header
+   heights bump together so the logo has room. !important wins
+   against per-page overrides in index.html / projects.html /
+   map.html / etc., so every page renders the same size logo. */
 .md-logo img {
-  height: 3.5rem;
-  width: auto;
+  height: 4rem !important;
+  width: auto !important;
   display: block;
   transition: filter var(--t-base-ms), opacity var(--t-base-ms);
 }
-@media (min-width: 768px)  { .md-logo img { height: 4rem; } }
-@media (min-width: 1280px) { .md-logo img { height: 4.75rem; } }
-@media (min-width: 1680px) { .md-logo img { height: 5.25rem; } }
+@media (min-width: 1024px) {
+  .md-logo img { height: 4.5rem !important; }
+}
+@media (min-width: 1280px) {
+  .md-logo img { height: 5rem !important; }
+}
+@media (min-width: 1680px) {
+  .md-logo img { height: 5.5rem !important; }
+}
 .md-logo:hover img { filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.35)); opacity: 0.9; }
 
 .md-nav {
@@ -636,8 +639,7 @@ body::before[data-md-noise] {
 .md-drawer-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(6px);
+  background: var(--bg);
   opacity: 0;
   transition: opacity var(--t-slow);
 }
@@ -646,8 +648,8 @@ body::before[data-md-noise] {
   position: absolute;
   top: 0; right: 0; bottom: 0;
   width: min(22rem, 88vw);
-  background: linear-gradient(160deg, rgba(26, 26, 36, 0.98), rgba(14, 14, 22, 0.98));
-  border-left: 1px solid var(--border);
+  background: var(--bg);
+  border-left: 1px solid rgba(255, 255, 255, 0.04);
   padding: 1.5rem 1.25rem 1.25rem;
   transform: translateX(100%);
   transition: transform var(--t-slow) cubic-bezier(0.4, 0, 0.2, 1);
@@ -657,6 +659,30 @@ body::before[data-md-noise] {
   overflow-x: hidden;
   box-sizing: border-box;
 }
+
+/* Drawer close button — borderless, icon-only. ID selector beats
+   any per-page `.md-menu-btn` override, so the cross looks
+   consistent on every page. */
+#drawerClose {
+  background: transparent !important;
+  border: none !important;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--fg);
+  border-radius: var(--r-md);
+  transition: background 200ms, color 200ms, transform 200ms;
+}
+#drawerClose i { font-size: 1.05rem; line-height: 1; }
+#drawerClose:hover,
+#drawerClose:focus-visible {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: var(--accent) !important;
+  border: none !important;
+  outline: none;
+  transform: rotate(90deg);
+}
 .md-drawer.is-open .md-drawer-panel { transform: none; }
 .md-drawer-header {
   display: flex;
@@ -664,7 +690,7 @@ body::before[data-md-noise] {
   align-items: center;
   margin-bottom: 0.75rem;
 }
-.md-drawer-header img { height: 3rem !important; }
+.md-drawer-header img { height: 3.5rem !important; width: auto !important; }
 .md-drawer-eyebrow {
   font-family: var(--font-label);
   font-size: 0.62rem;
@@ -789,7 +815,7 @@ body::before[data-md-noise] {
   margin: 1.25rem 0.5rem 1rem;
   padding: 0.9rem 1.25rem;
   background: var(--accent);
-  color: #0a0a0f;
+  color: #000000;
   font-family: var(--font-label);
   font-size: 0.78rem;
   font-weight: 700;
@@ -888,9 +914,12 @@ body::before[data-md-noise] {
 }
 .md-footer-brand > a { display: inline-block; line-height: 0; }
 .md-footer-logo {
-  height: clamp(72px, 7vw, 96px);
-  width: auto;
+  height: 3.5rem !important;
+  width: auto !important;
   filter: drop-shadow(0 0 24px rgba(245, 158, 11, 0.22));
+}
+@media (min-width: 1024px) {
+  .md-footer-logo { height: 4.25rem !important; }
 }
 .md-footer-tagline {
   font-family: var(--font-display);
@@ -1057,8 +1086,6 @@ p.md-fc-v { color: var(--fg-muted); }
 /* ───── Utility: glass card primitive ───── */
 .md-card {
   background: var(--card);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   padding: 1.5rem;
@@ -1066,7 +1093,7 @@ p.md-fc-v { color: var(--fg-muted); }
 }
 .md-card-interactive:hover {
   border-color: var(--border-hover);
-  background: rgba(26, 26, 36, 0.8);
+  background: var(--card-solid);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }

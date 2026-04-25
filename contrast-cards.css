@@ -1,0 +1,464 @@
+/* ═══════════════════════════════════════════════════════════════
+   STRONG BUILT · PITCH-BLACK CONTRAST OVERRIDE
+   Loaded AFTER the inline <style> in index-contrast.html so it
+   wins the cascade.
+
+   Strategy: take the canvas to true black (#000) and lift every
+   card surface to a noticeably lighter slate so the panels
+   visibly stand off the page. Borders become brighter, hover
+   states gain stronger amber rings.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Pitch-black everywhere — cards defined by borders only */
+  --c-page:        #000000;     /* True black canvas */
+  --c-page-alt:    #000000;     /* Sections too — uniform black */
+  --c-card:        #000000;     /* Cards = same black as page */
+  --c-card-hover:  #0A0A12;     /* Subtle lift on hover (barely lighter) */
+  --c-fg:          #FAFAFA;
+  --c-fg-muted:    #B4B4BE;
+  --c-fg-sub:      #8A8A95;
+  --c-border:      rgba(255, 255, 255, 0.18);   /* Bumped — borders are the only thing defining cards */
+  --c-border-hover: rgba(245, 158, 11, 0.7);    /* Strong amber on hover */
+
+  /* Re-route the theme tokens so var() callers swing automatically */
+  --bg:            var(--c-page) !important;
+  --bg-alt:        var(--c-page-alt) !important;
+  --muted:         var(--c-page-alt) !important;
+  --fg:            var(--c-fg) !important;
+  --fg-muted:      var(--c-fg-muted) !important;
+  --fg-subtle:     var(--c-fg-sub) !important;
+  --card:          var(--c-card) !important;
+  --card-solid:    var(--c-card) !important;
+  --border:        var(--c-border) !important;
+  --border-hover:  rgba(255, 255, 255, 0.20) !important;
+}
+
+/* ───── BASE PAGE ───── */
+html, body {
+  background: var(--c-page) !important;
+  color: var(--c-fg) !important;
+}
+::selection { background: var(--accent); color: #000; }
+
+/* Strip atmospheric overlays — keep canvas pure */
+.md-orb,
+.md-noise,
+body::before,
+body::after { display: none !important; }
+
+h1, h2, h3, h4, h5, h6,
+.md-display { color: var(--c-fg) !important; }
+
+.md-italic-accent,
+em,
+.md-accent-text { color: var(--accent) !important; }
+
+/* ───── HEADER (pitch black, dim bottom rule) ─────
+   Sizing pinned with !important so per-page inline <style>
+   overrides in index.html / projects.html / etc. can't make
+   one page's header taller/shorter than another. Padding mirrors
+   the .md-container pad so the logo / CTA visually align with
+   the content below the header. */
+.md-header-inner {
+  height: 5.5rem !important;
+  padding: 0 var(--container-pad) !important;
+  max-width: var(--container-max) !important;
+  margin-inline: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+@media (min-width: 1024px) {
+  .md-header-inner { height: 6.75rem !important; }
+}
+@media (min-width: 1280px) {
+  .md-header-inner { height: 7.75rem !important; }
+}
+.md-header {
+  background: var(--c-page) !important;
+  border-bottom: 1px solid var(--c-border) !important;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.md-header.is-scrolled {
+  background: var(--c-page) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.18) !important;
+}
+.md-nav-link {
+  color: var(--c-fg-muted) !important;
+  background: transparent !important;
+}
+.md-nav-link:hover,
+.md-nav-item:hover .md-nav-link {
+  color: var(--c-fg) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+.md-nav-link.is-active { color: var(--accent) !important; }
+.md-nav-dropdown {
+  background: var(--c-card) !important;
+  border: 1px solid var(--c-border) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.85);
+}
+.md-nav-dropdown a { color: var(--c-fg-muted) !important; }
+.md-nav-dropdown a:hover {
+  color: var(--accent) !important;
+  background: rgba(245, 158, 11, 0.10) !important;
+}
+.md-menu-btn {
+  background: var(--c-card) !important;
+  border: 1px solid var(--c-border) !important;
+  color: var(--c-fg) !important;
+}
+.md-menu-btn:hover {
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+
+/* Drawer (mobile menu) */
+.md-drawer-backdrop { background: var(--c-page) !important; }
+.md-drawer-panel {
+  background: var(--c-page) !important;
+  border-left: 1px solid var(--c-border) !important;
+}
+.md-drawer-link,
+.md-drawer-dropbtn { color: var(--c-fg) !important; }
+.md-drawer-link:hover,
+.md-drawer-dropbtn:hover {
+  color: var(--accent) !important;
+  background: rgba(245, 158, 11, 0.10) !important;
+}
+.md-drawer-link > i,
+.md-drawer-dropbtn > i:first-child { color: var(--c-fg-sub) !important; }
+#drawerClose { color: var(--c-fg) !important; }
+#drawerClose:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: var(--accent) !important;
+}
+
+/* ───── HERO ───── */
+.md-hero h1 { color: var(--c-fg) !important; }
+.md-hero-lede,
+.md-hero p { color: var(--c-fg-muted) !important; }
+.md-hero-card {
+  border: 1px solid var(--c-border) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7);
+}
+.md-hero-card-caption {
+  background: var(--c-card) !important;
+  border: 1px solid var(--c-border) !important;
+  color: var(--c-fg-muted) !important;
+}
+.md-hero-badge-float {
+  background: var(--c-card) !important;
+  border: 1px solid var(--c-border) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
+  color: var(--c-fg) !important;
+}
+.md-hero-badge-float strong { color: var(--accent) !important; }
+.md-hero-badge-float small { color: var(--c-fg-sub) !important; }
+
+/* ───── BUTTONS ───── */
+.md-btn-primary { background: var(--accent) !important; color: #000 !important; }
+.md-btn-primary:hover {
+  background: var(--accent-hover) !important;
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.5);
+}
+.md-btn-secondary {
+  background: transparent !important;
+  border: 1px solid var(--c-fg) !important;
+  color: var(--c-fg) !important;
+}
+.md-btn-secondary:hover {
+  background: var(--c-fg) !important;
+  color: var(--c-page) !important;
+}
+
+/* Ghost button — clean text-only on pitch black. No background,
+   no border at rest. Amber text. Hover fills with amber. Used on
+   "Read our story", "View all", inline link-style CTAs. */
+.md-btn-ghost {
+  background: transparent !important;
+  border: none !important;
+  color: var(--accent) !important;
+  padding: 0.5rem 0.25rem !important;
+  gap: 0.6rem !important;
+}
+.md-btn-ghost:hover {
+  color: var(--accent-hover) !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.md-btn-ghost i {
+  transition: transform 220ms cubic-bezier(.22, 1, .36, 1);
+}
+.md-btn-ghost:hover i { transform: translateX(4px); }
+
+/* ───── CARDS — pitch-black fill, defined by borders only.
+   Hardcoded #000 (no var indirection) to guarantee the value
+   wins over any inline `.md-vcard { background: var(--card) }`
+   in the page's <style> block. */
+.md-stat,
+.md-vcard,
+.md-active-card,
+.md-step-body,
+.md-card,
+.cf-card,
+.tg-card,
+[class*="type-card"],
+[class*="category-card"] {
+  background: #000000 !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #FAFAFA !important;
+  box-shadow: none !important;
+}
+.md-stat:hover,
+.md-vcard:hover,
+.md-active-card:hover,
+.md-step:hover .md-step-body,
+.md-card-interactive:hover,
+.cf-card:hover,
+.tg-card:hover,
+[class*="type-card"]:hover,
+[class*="category-card"]:hover {
+  background: #050508 !important;
+  border-color: rgba(245, 158, 11, 0.7) !important;
+  transform: translateY(-4px);
+  box-shadow:
+      0 0 0 1px rgba(245, 158, 11, 0.35),
+      0 0 48px rgba(245, 158, 11, 0.25),
+      0 12px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Card text colors */
+.md-stat-num,
+.md-vcard-title,
+.md-active-card h3,
+.md-step-title,
+.md-card h3,
+.md-card h2 { color: var(--c-fg) !important; }
+.md-stat-label,
+.md-vcard-body,
+.md-active-card p,
+.md-active-card [class*="meta"],
+.md-step-body p,
+.md-card p { color: var(--c-fg-muted) !important; }
+.md-vcard-num { color: var(--c-fg-sub) !important; }
+.md-stat-suffix { color: var(--accent) !important; }
+.md-vcard-list li { color: var(--c-fg-muted) !important; }
+.md-vcard-list li::before { background: var(--accent) !important; opacity: 1 !important; }
+
+/* Card icons — amber-filled tile for punch */
+.md-stat-icon,
+.md-vcard-icon {
+  background: var(--accent) !important;
+  color: #000 !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.45);
+}
+
+/* Process step circles */
+.md-step-num {
+  background: var(--c-card) !important;
+  color: var(--c-fg) !important;
+  border: 2px solid var(--c-border) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.65);
+}
+.md-step:hover .md-step-num {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #000 !important;
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.55);
+}
+.md-step-dur { color: var(--accent) !important; }
+.md-process-grid::before {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent) !important;
+}
+
+/* Equal-height process cards — cards in a row size to the tallest */
+.md-process-grid {
+  align-items: stretch !important;
+}
+.md-step {
+  height: 100% !important;
+}
+.md-step-body {
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 11rem;
+}
+
+/* Active-projects accents */
+.md-active-card [class*="status"],
+.md-active-card .md-active-pct,
+.md-active-card [class*="pct"],
+.md-active-card [class*="complete"] { color: var(--accent) !important; }
+.md-active-card [class*="quarter"],
+.md-active-card [class*="eta"] { color: var(--c-fg-sub) !important; }
+
+/* Coverflow trust cards */
+.cf-card.is-center {
+  border-color: var(--accent) !important;
+  box-shadow:
+      0 0 0 2px rgba(245, 158, 11, 0.55),
+      0 24px 48px rgba(0, 0, 0, 0.75),
+      0 0 60px rgba(245, 158, 11, 0.25) !important;
+}
+.cf-card .cf-logo img {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.85 !important;
+}
+.cf-nav {
+  background: var(--c-card) !important;
+  border: 1px solid var(--c-border) !important;
+  color: var(--c-fg) !important;
+}
+.cf-nav:hover {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #000 !important;
+}
+.cf-dot { background: rgba(255, 255, 255, 0.18) !important; }
+.cf-dot.is-active { background: var(--accent) !important; }
+
+/* Ticker project captions */
+.tg-card .cap h3 { color: var(--c-fg) !important; }
+.tg-card .cap .ey { color: var(--accent) !important; }
+
+/* CTA block */
+.md-cta-block {
+  background: var(--c-card) !important;
+  border: 1px solid var(--c-border) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7);
+}
+.md-cta-block h2,
+.md-cta-block h3 { color: var(--c-fg) !important; }
+.md-cta-block p { color: var(--c-fg-muted) !important; }
+.md-cta-block .md-eyebrow { color: var(--accent) !important; }
+.md-cta-block .md-eyebrow::before { background: var(--accent) !important; opacity: 1 !important; }
+
+/* ───── BADGES / EYEBROW / TAGS ───── */
+.md-badge {
+  background: var(--c-card) !important;
+  color: var(--c-fg) !important;
+  border: 1px solid var(--c-border) !important;
+}
+.md-eyebrow { color: var(--c-fg-sub) !important; }
+.md-eyebrow-accent { color: var(--accent) !important; }
+
+/* ───── SECTION HEADS ───── */
+.md-section-head h2,
+.tg-head h2 { color: var(--c-fg) !important; }
+.md-section-head h2 em,
+.tg-head h2 em { color: var(--accent) !important; }
+.md-section-head p,
+.tg-head p { color: var(--c-fg-muted) !important; }
+
+/* ───── LOGO TILES (Trusted-by) ───── */
+.md-logo-tile {
+  background: var(--c-card) !important;
+  border: 1px solid var(--c-border) !important;
+}
+.md-logo-tile img {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.6 !important;
+}
+.md-logo-tile:hover {
+  border-color: var(--c-border-hover) !important;
+}
+.md-logo-tile:hover img { opacity: 1 !important; }
+
+/* ───── AWARDS PILLS ───── */
+.md-award {
+  background: var(--c-card) !important;
+  border: 1px solid var(--c-border) !important;
+  color: var(--c-fg-muted) !important;
+}
+.md-award:hover {
+  border-color: var(--c-border-hover) !important;
+  color: var(--c-fg) !important;
+}
+.md-award i,
+.md-award-year { color: var(--accent) !important; }
+
+/* ───── SIGNATURE PROJECTS (Swiper) ───── */
+.md-sig-section {
+  background: var(--c-page) !important;
+  border-top: 1px solid var(--c-border) !important;
+  border-bottom: 1px solid var(--c-border) !important;
+}
+.md-sig-section .swiper-button-next,
+.md-sig-section .swiper-button-prev {
+  background: var(--c-card) !important;
+  border: 1px solid var(--c-border) !important;
+  color: var(--c-fg) !important;
+}
+.md-sig-section .swiper-button-next:hover,
+.md-sig-section .swiper-button-prev:hover {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #000 !important;
+}
+
+/* ───── FOOTER ───── */
+.md-footer {
+  background: var(--c-page) !important;
+  border-top: 1px solid var(--c-border) !important;
+  color: var(--c-fg-muted) !important;
+}
+.md-footer-tagline { color: var(--c-fg) !important; }
+.md-footer-tagline em { color: var(--accent) !important; }
+.md-fc-k { color: var(--accent) !important; }
+.md-fc-v { color: var(--c-fg) !important; }
+p.md-fc-v { color: var(--c-fg-muted) !important; }
+.md-footer-strip { border-top: 1px solid var(--c-border) !important; }
+.md-footer-strip-links a,
+.md-footer-strip-center,
+.md-footer-strip-right { color: var(--c-fg-sub) !important; }
+.md-footer-strip-links a:hover { color: var(--accent) !important; }
+.md-footer-socials a {
+  background: var(--c-card) !important;
+  border: 1px solid var(--c-border) !important;
+  color: var(--c-fg-muted) !important;
+}
+.md-footer-socials a:hover {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+.md-footer-form input {
+  background: var(--c-card) !important;
+  border: 1px solid var(--c-border) !important;
+  color: var(--c-fg) !important;
+}
+.md-footer-form input::placeholder { color: var(--c-fg-sub) !important; }
+.md-footer-form input:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+}
+.md-footer-form button { background: var(--accent) !important; color: #000 !important; }
+.md-footer-signup .note { color: var(--c-fg-sub) !important; }
+
+/* ───── FAB ───── */
+.md-fab a {
+  background: var(--c-card) !important;
+  border: 1px solid var(--c-border) !important;
+  color: var(--c-fg) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+}
+.md-fab a:hover {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #000 !important;
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.5);
+}
+
+/* Sections all transparent so the pitch-black canvas shows through */
+section { background: transparent !important; }
+
+/* Marquee fade masks match the pitch-black canvas */
+.md-marquee-wrap::before {
+  background: linear-gradient(90deg, var(--c-page), transparent) !important;
+}
+.md-marquee-wrap::after {
+  background: linear-gradient(-90deg, var(--c-page), transparent) !important;
+}

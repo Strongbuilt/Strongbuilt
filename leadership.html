@@ -52,14 +52,14 @@
 
   <style>
     .ld-hero { position: relative; padding: clamp(8rem,14vw,12rem) 0 clamp(3rem,5vw,5rem); text-align: center; overflow: hidden; }
-    .ld-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at top, rgba(245,158,11,0.08) 0%, transparent 55%); pointer-events: none; }
+    .ld-hero::before { content: ''; position: absolute; inset: 0; background: none; pointer-events: none; }
     .ld-hero h1 { font-family: var(--font-display); font-size: var(--text-display-xl); font-weight: 600; line-height: 0.95; margin: 1.5rem 0 1.75rem; }
     .ld-hero h1 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
     .ld-hero .lede { max-width: 34rem; margin: 0 auto; color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; }
     .ld-hero-rule { width: 3.5rem; height: 1px; background: var(--accent); margin: 2.25rem auto 0; }
 
     .ld-section { padding-block: clamp(4rem,7vw,6rem); position: relative; }
-    .ld-section--alt { background: rgba(18,18,26,0.4); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .ld-section--alt { background: #000000; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .ld-head { text-align: center; max-width: 42rem; margin: 0 auto clamp(2.5rem,4vw,3.5rem); }
     .ld-head h2 { font-family: var(--font-display); font-size: clamp(2.25rem,5vw,3.5rem); font-weight: 600; line-height: 1; margin: 1rem 0 0; }
     .ld-head h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
@@ -70,19 +70,19 @@
     @media (min-width: 640px) { .ld-directors { grid-template-columns: repeat(2,1fr); } }
     @media (min-width: 1100px) { .ld-directors { grid-template-columns: repeat(4,1fr); gap: 1.25rem; } }
     .ld-director {
-      background: var(--card); backdrop-filter: blur(8px);
+      background: var(--card); 
       border: 1px solid var(--border); border-radius: var(--r-lg);
       overflow: hidden; transition: all var(--t-slow) var(--ease-out);
       display: flex; flex-direction: column;
     }
-    .ld-director:hover { border-color: rgba(245,158,11,0.3); background: rgba(26,26,36,0.85); transform: translateY(-3px); box-shadow: var(--shadow-lg), var(--glow-sm); }
+    .ld-director:hover { border-color: rgba(245,158,11,0.3); background: #000000; transform: translateY(-3px); box-shadow: var(--shadow-lg), var(--glow-sm); }
     .ld-director .photo { aspect-ratio: 4/5; background: var(--muted); overflow: hidden; position: relative; }
     .ld-director .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease-out); }
     .ld-director:hover .photo img { transform: scale(1.05); }
     .ld-director .photo::after {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(10,10,15,0.6) 0%, transparent 40%);
+      background: linear-gradient(to top, #000000 0%, transparent 40%);
       pointer-events: none;
     }
     .ld-director .info { padding: 1.25rem 1.35rem 1.5rem; }
@@ -101,7 +101,7 @@
     .ld-director p { color: var(--fg-muted); font-size: 0.85rem; line-height: 1.6; margin: 0; }
 
     /* Quote strip */
-    .ld-quote { padding-block: clamp(3rem,5vw,4.5rem); text-align: center; background: rgba(18,18,26,0.4); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .ld-quote { padding-block: clamp(3rem,5vw,4.5rem); text-align: center; background: #000000; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .ld-quote .md-container { max-width: 42rem; }
     .ld-quote i.fa-quote-left { color: rgba(245,158,11,0.3); font-size: 1.8rem; margin-bottom: 1rem; }
     .ld-quote blockquote { font-family: var(--font-display); font-size: clamp(1.2rem,2.5vw,1.75rem); font-weight: 400; font-style: italic; line-height: 1.35; color: var(--fg); margin: 0 0 1.5rem; }
@@ -115,11 +115,11 @@
     .ld-team.ld-team--ops { }
     @media (min-width: 1024px) { .ld-team--ops { grid-template-columns: repeat(7,1fr); } }
     .ld-team-card {
-      background: var(--card); backdrop-filter: blur(8px);
+      background: var(--card); 
       border: 1px solid var(--border); border-radius: var(--r-md);
       overflow: hidden; transition: all var(--t-slow) var(--ease-out);
     }
-    .ld-team-card:hover { border-color: rgba(245,158,11,0.28); background: rgba(26,26,36,0.8); transform: translateY(-2px); box-shadow: var(--glow-sm); }
+    .ld-team-card:hover { border-color: rgba(245,158,11,0.28); background: #000000; transform: translateY(-2px); box-shadow: var(--glow-sm); }
     .ld-team-card .photo { aspect-ratio: 1/1; background: var(--muted); overflow: hidden; position: relative; }
     .ld-team-card .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms var(--ease-out); }
     .ld-team-card:hover .photo img { transform: scale(1.05); }
@@ -143,7 +143,7 @@
     }
     .ld-phil-quote {
       position: relative;
-      background: var(--card); backdrop-filter: blur(8px);
+      background: var(--card); 
       border: 1px solid rgba(245,158,11,0.22); border-radius: var(--r-lg);
       padding: 2.5rem 2.25rem;
       overflow: hidden;
@@ -168,6 +168,7 @@
 
     .d1 { transition-delay: 80ms; } .d2 { transition-delay: 160ms; } .d3 { transition-delay: 240ms; } .d4 { transition-delay: 320ms; }
   </style>
+  <link rel="stylesheet" href="contrast-cards.css" />
 </head>
 
 <body class="md-atmospheric">

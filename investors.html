@@ -71,7 +71,7 @@
     .ir-hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse at top, rgba(245,158,11,0.08) 0%, transparent 55%);
+      background: none;
       pointer-events: none;
     }
     .ir-hero h1 {
@@ -99,7 +99,7 @@
     .ir-head p { color: var(--fg-muted); margin: 1rem auto 0; max-width: 38rem; line-height: 1.65; }
 
     .ir-section { padding-block: clamp(4.5rem, 8vw, 7rem); position: relative; }
-    .ir-section--alt { background: rgba(18,18,26,0.4); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .ir-section--alt { background: #000000; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 
     /* ── Metric cards ── */
     .ir-metrics {
@@ -112,15 +112,15 @@
       position: relative;
       padding: 1.25rem 1.1rem;
       background: var(--card);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      
+      
       border: 1px solid var(--border);
       border-radius: var(--r-md);
       transition: all var(--t-slow) var(--ease-out);
     }
     .ir-metric:hover {
       border-color: rgba(245,158,11,0.3);
-      background: rgba(26,26,36,0.8);
+      background: #000000;
       transform: translateY(-2px);
       box-shadow: var(--glow-sm);
     }
@@ -167,8 +167,8 @@
     @media (min-width: 900px) { .ir-pillars { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
     .ir-pillar {
       background: var(--card);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      
+      
       border: 1px solid var(--border);
       border-radius: var(--r-lg);
       padding: 2rem 1.75rem;
@@ -176,7 +176,7 @@
     }
     .ir-pillar:hover {
       border-color: rgba(245,158,11,0.28);
-      background: rgba(26,26,36,0.8);
+      background: #000000;
       box-shadow: var(--glow-sm);
       transform: translateY(-3px);
     }
@@ -242,8 +242,8 @@
       border: 1px solid var(--border);
       border-radius: var(--r-lg);
       background: var(--card);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      
+      
     }
     .ir-table {
       width: 100%;
@@ -262,7 +262,7 @@
       text-align: left;
       padding: 1.1rem 1.25rem;
       border-bottom: 1px solid var(--border);
-      background: rgba(10,10,15,0.3);
+      background: #000000;
     }
     .ir-table tbody td {
       padding: 1rem 1.25rem;
@@ -303,7 +303,7 @@
     }
     .ir-doc-row:hover {
       border-color: rgba(245,158,11,0.35);
-      background: rgba(26,26,36,0.8);
+      background: #000000;
       transform: translateX(3px);
     }
     .ir-doc-row .file-icon {
@@ -380,8 +380,8 @@
 
     .ir-stockcard {
       background: var(--card);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      
+      
       border: 1px solid var(--border);
       border-radius: var(--r-lg);
       padding: 1.75rem;
@@ -420,8 +420,8 @@
     @media (min-width: 1024px) { .ir-boards-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
     .ir-board-card {
       background: var(--card);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      
+      
       border: 1px solid var(--border);
       border-radius: var(--r-md);
       padding: 1.5rem 1.25rem;
@@ -429,7 +429,7 @@
     }
     .ir-board-card:hover {
       border-color: rgba(245,158,11,0.3);
-      background: rgba(26,26,36,0.8);
+      background: #000000;
       transform: translateY(-2px);
       box-shadow: var(--glow-sm);
     }
@@ -466,7 +466,7 @@
     @media (min-width: 720px) { .ir-committees { grid-template-columns: repeat(4, 1fr); gap: 1rem; } }
     .ir-committee {
       background: var(--card);
-      backdrop-filter: blur(8px);
+      
       border: 1px solid var(--border);
       border-radius: var(--r-md);
       padding: 1.4rem 1rem;
@@ -475,7 +475,7 @@
     }
     .ir-committee:hover {
       border-color: rgba(245,158,11,0.3);
-      background: rgba(26,26,36,0.8);
+      background: #000000;
       transform: translateY(-2px);
     }
     .ir-committee i { color: var(--accent); font-size: 1.25rem; margin-bottom: 0.75rem; }
@@ -507,20 +507,20 @@
       align-items: center;
       padding: 1.1rem 1.25rem;
       background: var(--card);
-      backdrop-filter: blur(8px);
+      
       border: 1px solid var(--border);
       border-radius: var(--r-md);
       transition: all var(--t-base-ms) var(--ease-out);
     }
     .ir-event:hover {
       border-color: rgba(245,158,11,0.3);
-      background: rgba(26,26,36,0.8);
+      background: #000000;
     }
     .ir-event .date {
       display: flex; flex-direction: column; align-items: center;
       width: 3.25rem;
       padding: 0.5rem 0;
-      background: rgba(10,10,15,0.4);
+      background: #000000;
       border: 1px solid rgba(245,158,11,0.22);
       border-radius: var(--r-sm);
     }
@@ -579,7 +579,7 @@
     .ir-faqs { max-width: 48rem; margin: 0 auto; display: flex; flex-direction: column; gap: 0.5rem; }
     .ir-accordion {
       background: var(--card);
-      backdrop-filter: blur(8px);
+      
       border: 1px solid var(--border);
       border-radius: var(--r-md);
       overflow: hidden;
@@ -587,7 +587,7 @@
     }
     .ir-accordion[open] {
       border-color: rgba(245,158,11,0.28);
-      background: rgba(26,26,36,0.8);
+      background: #000000;
       box-shadow: var(--glow-sm);
     }
     .ir-accordion summary {
@@ -665,7 +665,7 @@
 
     .ir-form {
       background: var(--card);
-      backdrop-filter: blur(8px);
+      
       border: 1px solid var(--border);
       border-radius: var(--r-xl);
       padding: clamp(1.5rem, 3vw, 2.5rem);
@@ -701,7 +701,7 @@
     .ir-form select,
     .ir-form textarea {
       width: 100%;
-      background: rgba(10,10,15,0.5);
+      background: #000000;
       border: 1px solid var(--border);
       border-radius: var(--r-md);
       padding: 0.85rem 1rem;
@@ -719,7 +719,7 @@
     .ir-form select:focus,
     .ir-form textarea:focus {
       border-color: rgba(245,158,11,0.45);
-      background: rgba(10,10,15,0.7);
+      background: #000000;
       box-shadow: 0 0 0 3px rgba(245,158,11,0.12);
     }
     .ir-form button { justify-content: center; margin-top: 0.4rem; }
@@ -732,7 +732,7 @@
       text-align: center;
       overflow: hidden;
     }
-    .ir-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(245,158,11,0.1) 0%, transparent 55%); pointer-events: none; }
+    .ir-cta::before { content: ''; position: absolute; inset: 0; background: none; pointer-events: none; }
     .ir-cta h2 { font-family: var(--font-display); font-size: var(--text-h2); font-weight: 600; line-height: 1; margin: 1rem 0 0.75rem; }
     .ir-cta h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
     .ir-cta .sub { color: var(--fg-muted); margin: 0 auto 2rem; max-width: 32rem; }
@@ -740,7 +740,7 @@
     @media (min-width: 500px) { .ir-cta form { flex-direction: row; } }
     .ir-cta form input {
       flex: 1;
-      background: rgba(10,10,15,0.5);
+      background: #000000;
       border: 1px solid var(--border);
       border-radius: var(--r-md);
       padding: 0.85rem 1rem;
@@ -752,7 +752,7 @@
     .ir-cta form input::placeholder { color: var(--fg-subtle); }
     .ir-cta form input:focus {
       border-color: rgba(245,158,11,0.45);
-      background: rgba(10,10,15,0.75);
+      background: #000000;
       box-shadow: 0 0 0 3px rgba(245,158,11,0.12);
     }
 
@@ -763,6 +763,7 @@
     .d4 { transition-delay: 320ms; }
     .d5 { transition-delay: 400ms; }
   </style>
+  <link rel="stylesheet" href="contrast-cards.css" />
 </head>
 
 <body class="md-atmospheric">

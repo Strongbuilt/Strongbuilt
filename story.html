@@ -52,14 +52,14 @@
 
   <style>
     .st-hero { position: relative; padding: clamp(8rem,14vw,12rem) 0 clamp(3rem,5vw,5rem); text-align: center; overflow: hidden; }
-    .st-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at top, rgba(245,158,11,0.08) 0%, transparent 55%); pointer-events: none; }
+    .st-hero::before { content: ''; position: absolute; inset: 0; background: none; pointer-events: none; }
     .st-hero h1 { font-family: var(--font-display); font-size: var(--text-display-xl); font-weight: 600; line-height: 0.95; margin: 1.5rem 0 1.75rem; }
     .st-hero h1 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
     .st-hero .lede { max-width: 36rem; margin: 0 auto; color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; }
     .st-hero-rule { width: 3.5rem; height: 1px; background: var(--accent); margin: 2.25rem auto 0; }
 
     .st-section { padding-block: clamp(4.5rem,8vw,7rem); position: relative; }
-    .st-section--alt { background: rgba(18,18,26,0.4); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .st-section--alt { background: #000000; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .st-head { text-align: center; max-width: 42rem; margin: 0 auto clamp(2.5rem,4vw,3.5rem); }
     .st-head h2 { font-family: var(--font-display); font-size: clamp(2.25rem,5vw,3.75rem); font-weight: 600; line-height: 1; margin: 1rem 0 0; }
     .st-head h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
@@ -77,8 +77,9 @@
 
     .st-visual { position: relative; }
     .st-visual .img-box {
-      aspect-ratio: 4/4;
-      max-width: 420px;
+      aspect-ratio: 4 / 5;
+      width: 100%;
+      max-width: 480px;
       margin-inline: auto;
       border-radius: var(--r-lg);
       overflow: hidden;
@@ -86,7 +87,10 @@
       border: 1px solid var(--border);
       box-shadow: var(--shadow-xl);
     }
-    .st-visual .img-box img { width: 100%; height: 100%; object-fit: cover; }
+    .st-visual .img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @media (max-width: 540px) {
+      .st-visual .img-box { aspect-ratio: 4 / 4.4; max-width: 360px; }
+    }
     .st-visual .stat-chip {
       position: absolute;
       bottom: -1.25rem; left: -1.25rem;
@@ -284,13 +288,14 @@
 
     /* CTA */
     .st-cta { position: relative; padding-block: clamp(5rem,9vw,8rem); border-top: 1px solid var(--border); text-align: center; overflow: hidden; }
-    .st-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(245,158,11,0.1) 0%, transparent 55%); pointer-events: none; }
+    .st-cta::before { content: ''; position: absolute; inset: 0; background: none; pointer-events: none; }
     .st-cta h2 { font-family: var(--font-display); font-size: clamp(2.25rem,5vw,3.75rem); font-weight: 600; line-height: 1; margin: 1rem 0 1.25rem; }
     .st-cta h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
     .st-cta p { max-width: 34rem; margin: 0 auto 2.25rem; color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; }
 
     .d1 { transition-delay: 80ms; } .d2 { transition-delay: 160ms; } .d3 { transition-delay: 240ms; } .d4 { transition-delay: 320ms; }
   </style>
+  <link rel="stylesheet" href="contrast-cards.css" />
 </head>
 
 <body class="md-atmospheric">

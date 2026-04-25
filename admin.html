@@ -19,8 +19,8 @@
     body {
       font-family: 'Inter', sans-serif;
       background:
-        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(245, 158, 11, 0.06), transparent 60%),
-        linear-gradient(180deg, #12121A 0%, #0A0A0F 100%);
+        none,
+        linear-gradient(180deg, #000000 0%, #000000 100%);
       background-attachment: fixed;
       color: #FAFAFA;
       min-height: 100vh;
@@ -53,14 +53,14 @@
     }
     /* Native select option list — force dark background so options are legible */
     select option {
-      background-color: #12121A;
+      background-color: #000000;
       color: #FAFAFA;
       padding: 8px;
     }
     select option:hover,
     select option:checked {
       background-color: #F59E0B;
-      color: #12121A;
+      color: #000000;
     }
     label {
       display: block; font-size: .6rem; font-weight: 700;
@@ -76,8 +76,8 @@
 
     /* ─── GLASS SURFACE ─── */
     .glass {
-      background: linear-gradient(155deg, rgba(26, 26, 36, 0.55), rgba(18, 18, 26, 0.65));
-      backdrop-filter: blur(18px);
+      background: linear-gradient(155deg, #000000, #000000);
+      
       border: 1px solid rgba(255,255,255,0.06);
     }
 
@@ -92,7 +92,7 @@
     }
     .btn-primary {
       background: linear-gradient(155deg, #F59E0B, #F59E0B);
-      color: #12121A;
+      color: #000000;
       border: 1px solid rgba(245, 158, 11, 0.8);
       box-shadow: 0 2px 12px -2px rgba(245, 158, 11, 0.4), inset 0 1px 0 rgba(255,255,255,0.15);
     }
@@ -170,7 +170,7 @@
     .list-item {
       position: relative;
       padding: 0.85rem 1rem;
-      background: linear-gradient(155deg, rgba(26, 26, 36, 0.4), rgba(18, 18, 26, 0.5));
+      background: linear-gradient(155deg, #000000, #000000);
       border: 1px solid rgba(255,255,255,0.04);
       border-radius: 4px;
       cursor: pointer;
@@ -195,7 +195,7 @@
     .list-item:hover::before { transform: scaleY(1); }
     .list-item.is-editing {
       border-color: rgba(245, 158, 11, 0.5);
-      background: linear-gradient(155deg, rgba(245, 158, 11, 0.1), rgba(26, 26, 36, 0.5));
+      background: none;
       box-shadow: 0 8px 28px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(245, 158, 11, 0.3);
     }
     .list-item.is-editing::before { transform: scaleY(1); }
@@ -231,7 +231,7 @@
     }
     .badge-completed { background: rgba(255,255,255,0.04); color: #A1A1AA; border: 1px solid rgba(255,255,255,0.1); }
     .badge-featured {
-      background: linear-gradient(155deg, rgba(245, 158, 11,0.22), rgba(245, 158, 11,0.08));
+      background: none);
       color: #F59E0B; border: 1px solid rgba(245, 158, 11,0.4);
     }
 
@@ -250,7 +250,7 @@
       position: fixed; bottom: 1.5rem; left: 50%;
       transform: translateX(-50%) translateY(20px);
       padding: .85rem 1.4rem;
-      background: linear-gradient(155deg, rgba(30, 26, 27, 0.98), rgba(18, 18, 26, 0.98));
+      background: linear-gradient(155deg, rgba(30, 26, 27, 0.98), #000000);
       border: 1px solid rgba(245, 158, 11, 0.5);
       color: #FAFAFA;
       border-radius: 8px;
@@ -259,7 +259,7 @@
       font-weight: 700;
       letter-spacing: .14em;
       text-transform: uppercase;
-      backdrop-filter: blur(16px);
+      
       box-shadow: 0 16px 40px -8px rgba(0,0,0,0.8), 0 0 24px -8px rgba(245, 158, 11, 0.25);
       opacity: 0; pointer-events: none;
       transition: all .35s cubic-bezier(0.16,1,0.3,1);
@@ -315,7 +315,7 @@
 
     /* ─── MAP PICKER ─── */
     #pickerMap { height: 240px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
-    .leaflet-container { background: #0A0A0F; font-family: 'Inter', sans-serif; }
+    .leaflet-container { background: #000000; font-family: 'Inter', sans-serif; }
     .leaflet-control-zoom a { background: rgba(0,0,0,0.85) !important; color: #F59E0B !important; border: 1px solid rgba(245, 158, 11,0.25) !important; }
     .leaflet-popup-content-wrapper { background: rgba(20,18,19,0.97); color: #FAFAFA; border: 1px solid rgba(245, 158, 11,0.3); border-radius: 4px; }
     .geo-result {
@@ -325,7 +325,7 @@
     }
     .geo-result:hover { background: rgba(245, 158, 11,0.1); }
     .context-marker { background: transparent !important; border: none !important; }
-    .context-marker-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(245, 158, 11, 0.85); border: 1px solid #12121A; box-shadow: 0 0 8px rgba(245, 158, 11, 0.6); }
+    .context-marker-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(245, 158, 11, 0.85); border: 1px solid #000000; box-shadow: 0 0 8px rgba(245, 158, 11, 0.6); }
 
     /* ─── IMAGE PREVIEW ─── */
     .img-preview {
@@ -351,7 +351,7 @@
         position: fixed !important;
         inset: 0;
         z-index: 50;
-        background: #12121A;
+        background: #000000;
         transform: translateY(100%);
         transition: transform .35s cubic-bezier(0.16,1,0.3,1);
         overflow-y: auto;
@@ -426,9 +426,9 @@
       position: fixed;
       top: 4.5rem; right: 1rem;
       width: min(20rem, calc(100vw - 2rem));
-      background: linear-gradient(155deg, rgba(26, 26, 36, 0.98), rgba(18, 18, 26, 0.98));
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: linear-gradient(155deg, #000000, #000000);
+      
+      
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 8px;
       box-shadow: 0 20px 60px -12px rgba(0,0,0,0.75), 0 0 0 1px rgba(245,158,11,0.08);
@@ -546,11 +546,11 @@
     .hover\:text-clay-ink:hover { color: #FAFAFA !important; }
     .hover\:text-clay-muted:hover { color: #A1A1AA !important; }
 
-    .bg-clay-base { background-color: #0A0A0F !important; }
-    .bg-clay-mist { background-color: #12121A !important; }
-    .bg-clay-paper { background-color: #1A1A24 !important; }
-    .bg-clay-sunken { background-color: #0A0A0F !important; }
-    .bg-clay-elevated { background-color: #1A1A24 !important; }
+    .bg-clay-base { background-color: #000000 !important; }
+    .bg-clay-mist { background-color: #000000 !important; }
+    .bg-clay-paper { background-color: #000000 !important; }
+    .bg-clay-sunken { background-color: #000000 !important; }
+    .bg-clay-elevated { background-color: #000000 !important; }
     .bg-clay-surface\/5 { background-color: rgba(255, 255, 255, 0.04) !important; }
     .bg-clay-surface\/10 { background-color: rgba(255, 255, 255, 0.08) !important; }
 
@@ -561,6 +561,7 @@
     *:focus-visible { outline: 2px solid #F59E0B; outline-offset: 2px; border-radius: 2px; }
     input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible { outline: none; }
   </style>
+  <link rel="stylesheet" href="contrast-cards.css" />
 </head>
 <body class="min-h-screen">
 
@@ -1198,7 +1199,7 @@
       const cfg = TYPES[state.activeType];
       const { item, group } = entry;
       const el = document.createElement('div');
-      el.className = 'list-item p-3 rounded-sm flex items-center gap-3 bg-white/[0.02]';
+      el.className = 'list-item p-3 rounded-sm flex items-center gap-3';
       el.dataset.id = item[cfg.idField];
       if (group) el.dataset.group = group;
       el.draggable = !!cfg.features?.reorder;
@@ -1232,7 +1233,7 @@
         label = item.name;
         sublabel = `${item.location} · ETA ${item.eta}`;
         meta = `<div class="flex items-center gap-2 w-32">
-          <div class="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-brand-gold" style="width:${item.progress}%"></div></div>
+          <div class="flex-1 h-1.5 bg-clay-border rounded-full overflow-hidden"><div class="h-full bg-brand-gold" style="width:${item.progress}%"></div></div>
           <span class="text-[10px] text-brand-gold font-bold">${item.progress}%</span>
         </div>`;
       } else if (state.activeType === 'leadership') {
@@ -1515,7 +1516,7 @@
           </div>
           <div class="relative mt-2">
             <input id="geoSearch" type="text" class="w-full rounded-sm px-3 py-2 text-xs" placeholder="Search address (e.g. Bandra, Mumbai)">
-            <div id="geoResults" class="absolute z-20 left-0 right-0 mt-1 bg-[#12121A] border border-white/10 rounded-sm max-h-48 overflow-y-auto hidden"></div>
+            <div id="geoResults" class="absolute z-20 left-0 right-0 mt-1 bg-[#000000] border border-white/10 rounded-sm max-h-48 overflow-y-auto hidden"></div>
           </div>
           <div id="pickerMap" class="mt-2"></div>
           <p class="text-[10px] text-clay-faint mt-1">Click map to set · drag marker to adjust · search address above</p>

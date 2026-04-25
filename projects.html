@@ -99,7 +99,7 @@
     .md-orb {
       position: fixed;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,158,11,0.10) 0%, transparent 70%);
+      background: none;
       filter: blur(80px);
       pointer-events: none;
       z-index: 0;
@@ -150,13 +150,13 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 50;
-      background: rgba(10, 10, 15, 0.6);
-      backdrop-filter: blur(20px) saturate(1.2);
-      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+      background: #000000;
+      
+      
       border-bottom: 1px solid var(--border);
       transition: background 300ms, border-color 300ms;
     }
-    .md-header.is-scrolled { background: rgba(10, 10, 15, 0.85); border-bottom-color: var(--border-hover); }
+    .md-header.is-scrolled { background: #000000; border-bottom-color: var(--border-hover); }
     .md-header-inner {
       display: flex;
       align-items: center;
@@ -260,15 +260,14 @@
     .md-drawer.is-open { visibility: visible; pointer-events: auto; }
     .md-drawer-backdrop {
       position: absolute; inset: 0;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(6px);
+      background: var(--bg);
       opacity: 0; transition: opacity 300ms;
     }
     .md-drawer.is-open .md-drawer-backdrop { opacity: 1; }
     .md-drawer-panel {
       position: absolute; top: 0; right: 0; bottom: 0;
       width: min(22rem, 88vw);
-      background: var(--bg-alt);
+      background: var(--bg);
       border-left: 1px solid var(--border);
       padding: 1.75rem;
       transform: translateX(100%);
@@ -281,7 +280,9 @@
     .md-drawer nav { display: flex; flex-direction: column; gap: 0.25rem; }
     .md-drawer-link,
     .md-drawer-dropbtn {
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
       padding: 0.8rem 0.25rem;
       font-family: var(--font-label);
       font-size: 1rem;
@@ -295,9 +296,22 @@
       cursor: pointer;
       transition: color 200ms;
     }
+    .md-drawer-link > i,
+    .md-drawer-dropbtn > i:first-child {
+      width: 1.15rem;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      text-align: center;
+    }
     .md-drawer-link:hover, .md-drawer-dropbtn:hover { color: var(--accent); }
-    .md-drawer-dropbtn i { font-size: 0.7em; transition: transform 200ms; }
-    .md-drawer-dropbtn.is-open i { transform: rotate(180deg); }
+    .md-drawer-dropbtn .chev,
+    .md-drawer-dropbtn > i:last-child {
+      margin-left: auto;
+      font-size: 0.7em;
+      transition: transform 200ms;
+    }
+    .md-drawer-dropbtn.is-open .chev,
+    .md-drawer-dropbtn.is-open > i:last-child { transform: rotate(180deg); }
     .md-drawer-sub {
       max-height: 0;
       overflow: hidden;
@@ -378,8 +392,8 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--fg-muted);
-      background: rgba(26, 26, 36, 0.5);
-      backdrop-filter: blur(8px);
+      background: #000000;
+      
     }
     .md-badge-dot {
       width: 0.45rem; height: 0.45rem;
@@ -403,7 +417,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at top, rgba(245,158,11,0.08) 0%, transparent 55%);
+      background: none;
       pointer-events: none;
     }
     .pf-hero h1 {
@@ -456,6 +470,25 @@
       text-transform: uppercase;
       margin-top: 0.5rem;
     }
+    /* Mobile — fit all 3 stats on one row instead of wrapping the
+       last one to a new line. Tightens gap, downsizes labels, and
+       balances label wrap so they don't run to a 3rd line. */
+    @media (max-width: 640px) {
+      .pf-hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        margin-top: 2rem;
+      }
+      .pf-hero-stat strong { font-size: clamp(1.5rem, 6vw, 1.85rem); }
+      .pf-hero-stat small {
+        font-size: 0.55rem;
+        letter-spacing: 0.16em;
+        line-height: 1.35;
+        margin-top: 0.45rem;
+        text-wrap: balance;
+      }
+    }
 
     /* ═══════════════════════════════════════════════════════════════
        PORTFOLIO HEADER + FILTER BAR
@@ -491,9 +524,9 @@
       position: sticky;
       top: 5rem;
       z-index: 20;
-      background: rgba(10, 10, 15, 0.72);
-      backdrop-filter: blur(18px) saturate(1.2);
-      -webkit-backdrop-filter: blur(18px) saturate(1.2);
+      background: #000000;
+      
+      
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       padding-block: 0.85rem;
@@ -528,8 +561,8 @@
       width: 100%;
       height: 2.5rem;
       padding: 0 1rem 0 2.5rem;
-      background: rgba(26, 26, 36, 0.6);
-      backdrop-filter: blur(8px);
+      background: #000000;
+      
       border: 1px solid var(--border);
       border-radius: var(--r-full);
       color: var(--fg);
@@ -540,7 +573,7 @@
     .pf-search input::placeholder { color: var(--fg-subtle); }
     .pf-search input:focus {
       border-color: rgba(245,158,11,0.4);
-      background: rgba(26, 26, 36, 0.85);
+      background: #000000;
       box-shadow: 0 0 0 3px rgba(245,158,11,0.1);
     }
 
@@ -583,7 +616,7 @@
       display: inline-flex;
       gap: 0.25rem;
       padding: 0.25rem;
-      background: rgba(26, 26, 36, 0.6);
+      background: #000000;
       border: 1px solid var(--border);
       border-radius: var(--r-full);
       margin-left: auto;
@@ -605,6 +638,48 @@
     .pf-viewtoggle #mapViewBtn.bg-brand-gold {
       background: var(--accent) !important;
       color: var(--accent-foreground) !important;
+    }
+
+    /* Mobile filter-bar layout — pull the view-toggle inline with
+       the search bar so it doesn't float on its own row, and let
+       the category pills occupy their own full-width row below. */
+    @media (max-width: 640px) {
+      .pf-filterbar { padding-block: 0.75rem; margin-bottom: 1.75rem; }
+      .pf-filterbar-inner {
+        gap: 0.6rem 0.5rem;
+      }
+      .pf-search {
+        flex: 1 1 0;
+        min-width: 0;
+        max-width: none;
+        order: 0;
+      }
+      .pf-search input {
+        height: 2.4rem;
+        font-size: 0.8rem;
+        padding-left: 2.25rem;
+      }
+      .pf-viewtoggle {
+        margin-left: 0;
+        flex-shrink: 0;
+        order: 1;
+      }
+      .pf-viewtoggle .view-toggle,
+      .pf-viewtoggle #mapViewBtn {
+        width: 1.85rem;
+        height: 1.85rem;
+      }
+      #categoryFilters {
+        flex: 0 1 100%;
+        order: 2;
+        gap: 0.35rem;
+      }
+      #categoryFilters button,
+      #categoryFilters button.px-3 {
+        padding: 0.35rem 0.75rem !important;
+        font-size: 0.6rem !important;
+        letter-spacing: 0.18em !important;
+      }
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -630,7 +705,7 @@
       overflow: hidden;
       border-radius: var(--r-lg);
       background: var(--card);
-      backdrop-filter: blur(8px);
+      
       border: 1px solid var(--border);
       cursor: pointer;
       transition: transform 320ms cubic-bezier(0.2,0.8,0.2,1), border-color 260ms, box-shadow 260ms;
@@ -669,11 +744,55 @@
       transform: scale(1.05);
       filter: brightness(1);
     }
+
+    /* No-image card — clean text-only treatment.
+       The .img-wrap isn't rendered for these projects, so the
+       .glass-info expands to fill the whole card with title +
+       category + client/location, centered. */
+    .project-card.no-image {
+      background: linear-gradient(135deg, #000000 0%, #09090f 100%);
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+    .project-card.no-image::after { display: none; }
+    .project-card.no-image .glass-info {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 0.65rem;
+      padding: 1.5rem;
+      background: none;
+      
+      
+    }
+    .project-card.no-image .glass-info .cat {
+      align-self: center;
+    }
+    .project-card.no-image .glass-info h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 3.6vw, 2.25rem);
+      line-height: 1.05;
+      color: var(--fg);
+    }
+    .project-card.no-image.b-hero .glass-info h3 { font-size: clamp(1.75rem, 4.5vw, 3rem); }
+    .project-card.no-image.b-wide .glass-info h3 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+    .project-card.no-image .glass-info .meta-row {
+      color: var(--fg-muted);
+      max-width: 24ch;
+    }
+
+    /* List-mode no-image — img column is gone, meta fills width */
+    .project-card.list-mode.no-image .meta {
+      padding-left: 1.25rem;
+    }
     .project-card::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(10,10,15,0.92) 0%, rgba(10,10,15,0.2) 45%, transparent 70%);
+      background: linear-gradient(to top, #000000 0%, #000000 45%, transparent 70%);
       pointer-events: none;
       transition: opacity 260ms;
     }
@@ -697,8 +816,8 @@
       text-transform: uppercase;
       color: var(--accent);
       padding: 0.3rem 0.55rem;
-      background: rgba(10, 10, 15, 0.75);
-      backdrop-filter: blur(6px);
+      background: #000000;
+      
       border: 1px solid rgba(245,158,11,0.25);
       border-radius: var(--r-sm);
     }
@@ -737,7 +856,7 @@
       padding: 0;
       gap: 0;
       background: transparent;
-      backdrop-filter: none;
+      
       border: none;
       border-bottom: 1px solid var(--border);
       border-radius: 0;
@@ -899,9 +1018,9 @@
     .pf-map-card {
       position: absolute;
       z-index: 1000;
-      background: rgba(10, 10, 15, 0.75);
-      backdrop-filter: blur(14px) saturate(1.2);
-      -webkit-backdrop-filter: blur(14px) saturate(1.2);
+      background: #000000;
+      
+      
       border: 1px solid var(--border-hover);
       border-radius: var(--r-md);
       padding: 0.9rem 1.1rem;
@@ -925,18 +1044,18 @@
 
     /* Leaflet overrides for dark theme */
     .leaflet-popup-content-wrapper {
-      background: rgba(10, 10, 15, 0.9) !important;
+      background: #000000 !important;
       color: var(--fg) !important;
       border: 1px solid var(--border-hover);
       border-radius: var(--r-md) !important;
-      backdrop-filter: blur(12px);
+      
       padding: 0 !important;
       overflow: hidden;
       box-shadow: var(--shadow-xl) !important;
     }
     .leaflet-popup-content { margin: 0 !important; width: 280px !important; }
     .leaflet-popup-tip {
-      background: rgba(10, 10, 15, 0.9) !important;
+      background: #000000 !important;
       border: 1px solid var(--border-hover);
     }
     .leaflet-container a.leaflet-popup-close-button {
@@ -952,7 +1071,7 @@
     }
     .leaflet-container a.leaflet-popup-close-button:hover { color: var(--accent) !important; background: rgba(0,0,0,0.85); transform: rotate(90deg); }
     .leaflet-control-zoom a {
-      background: rgba(10, 10, 15, 0.82) !important;
+      background: #000000 !important;
       color: var(--fg) !important;
       border: 1px solid var(--border-hover) !important;
     }
@@ -995,7 +1114,7 @@
     .pf-5s-cards { display: flex; flex-direction: column; gap: 1rem; }
     .pf-5s-card {
       background: var(--card);
-      backdrop-filter: blur(8px);
+      
       border: 1px solid var(--border);
       border-radius: var(--r-lg);
       padding: 1.5rem;
@@ -1006,7 +1125,7 @@
     }
     .pf-5s-card:hover {
       border-color: rgba(245,158,11,0.3);
-      background: rgba(26, 26, 36, 0.8);
+      background: #000000;
       box-shadow: var(--glow-sm);
       transform: translateY(-3px);
     }
@@ -1049,7 +1168,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at center, rgba(245,158,11,0.1) 0%, transparent 60%);
+      background: none;
       pointer-events: none;
     }
     .pf-cta h2 {
@@ -1075,9 +1194,9 @@
       position: fixed;
       inset: 0;
       z-index: 10000;
-      background: rgba(10, 10, 15, 0.95);
-      backdrop-filter: blur(16px) saturate(1.2);
-      -webkit-backdrop-filter: blur(16px) saturate(1.2);
+      background: #000000;
+      
+      
       align-items: center;
       justify-content: center;
       flex-direction: column;
@@ -1107,7 +1226,7 @@
       top: 1.25rem; right: 1.25rem;
       width: 2.75rem; height: 2.75rem;
       display: grid; place-items: center;
-      background: rgba(26, 26, 36, 0.75);
+      background: #000000;
       border: 1px solid var(--border-hover);
       border-radius: 50%;
       color: var(--fg);
@@ -1259,6 +1378,7 @@
       box-shadow: var(--glow-btn);
     }
   </style>
+  <link rel="stylesheet" href="contrast-cards.css" />
 </head>
 
 <body>

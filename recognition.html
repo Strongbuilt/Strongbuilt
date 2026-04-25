@@ -43,22 +43,63 @@
   <link rel="stylesheet" href="theme.css">
   <style>
     .rc-hero { position: relative; padding: clamp(8rem,14vw,12rem) 0 clamp(3rem,5vw,5rem); text-align: center; overflow: hidden; }
-    .rc-hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at top, rgba(245,158,11,0.08) 0%, transparent 55%); pointer-events:none; }
+    .rc-hero::before { content:''; position:absolute; inset:0; background: none; pointer-events:none; }
     .rc-hero h1 { font-family: var(--font-display); font-size: var(--text-display-xl); font-weight: 600; line-height: 0.95; margin: 1.5rem 0 1.75rem; }
     .rc-hero h1 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
     .rc-hero .lede { max-width: 38rem; margin: 0 auto; color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; }
     .rc-hero-rule { width: 3.5rem; height: 1px; background: var(--accent); margin: 2.25rem auto 0; }
 
-    .rc-stats { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(18,18,26,0.4); }
+    .rc-stats { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: #000000; }
     .rc-stats-grid { display: grid; grid-template-columns: repeat(3,1fr); }
     .rc-stat { padding: 1.75rem 1rem; text-align: center; border-right: 1px solid var(--border); }
     .rc-stat:last-child { border-right: 0; }
-    @media (max-width: 719px) { .rc-stat:nth-child(even) { border-right: 0; } .rc-stat:nth-child(-n+2) { border-bottom: 1px solid var(--border); } }
     .rc-stat .num { font-family: var(--font-display); font-size: var(--text-h2); font-weight: 500; color: var(--accent); line-height: 1; }
     .rc-stat .lbl { font-family: var(--font-label); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg-muted); margin-top: 0.5rem; }
 
+    /* Tablet / narrow desktop — keep 3-col but stop labels from
+       breaking to one word per line. Wider letter-spacing made
+       "YEARS OF HONOURS" wrap awkwardly in cramped cells. */
+    @media (max-width: 719px) {
+      .rc-stat { padding: 1.5rem 0.5rem; }
+      .rc-stat .num { font-size: clamp(1.75rem, 7vw, 2rem); }
+      .rc-stat .lbl {
+        font-size: 0.6rem;
+        letter-spacing: 0.14em;
+        line-height: 1.4;
+        text-wrap: balance;
+      }
+    }
+
+    /* Phone — switch to a vertical stack with horizontal item rows.
+       Big amber number on the left, label on the right; gives
+       labels real room to breathe and reads as a credentials list. */
+    @media (max-width: 480px) {
+      .rc-stats-grid { grid-template-columns: 1fr; }
+      .rc-stat {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        padding: 1.1rem 1.5rem;
+        text-align: left;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .rc-stat:last-child { border-bottom: 0; }
+      .rc-stat .num {
+        font-size: 2.5rem;
+        flex-shrink: 0;
+        min-width: 3.25rem;
+      }
+      .rc-stat .lbl {
+        margin-top: 0;
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        line-height: 1.45;
+      }
+    }
+
     .rc-section { padding-block: clamp(4rem,7vw,6rem); position: relative; }
-    .rc-section--alt { background: rgba(18,18,26,0.4); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .rc-section--alt { background: #000000; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .rc-head { text-align: center; max-width: 42rem; margin: 0 auto clamp(2.5rem,4vw,3.5rem); }
     .rc-head h2 { font-family: var(--font-display); font-size: clamp(2.25rem,5vw,3.5rem); font-weight: 600; line-height: 1; margin: 1rem 0 0; }
     .rc-head h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
@@ -94,6 +135,7 @@
 
     .d1 { transition-delay: 80ms; } .d2 { transition-delay: 160ms; } .d3 { transition-delay: 240ms; } .d4 { transition-delay: 320ms; }
   </style>
+  <link rel="stylesheet" href="contrast-cards.css" />
 </head>
 
 <body class="md-atmospheric">

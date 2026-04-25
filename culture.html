@@ -48,14 +48,14 @@
   <link rel="stylesheet" href="theme.css">
   <style>
     .cu-hero { position: relative; padding: clamp(8rem,14vw,12rem) 0 clamp(3rem,5vw,5rem); text-align: center; overflow: hidden; }
-    .cu-hero::before { content:''; position: absolute; inset: 0; background: radial-gradient(ellipse at top, rgba(245,158,11,0.08) 0%, transparent 55%); pointer-events: none; }
+    .cu-hero::before { content:''; position: absolute; inset: 0; background: none; pointer-events: none; }
     .cu-hero h1 { font-family: var(--font-display); font-size: var(--text-display-xl); font-weight: 600; line-height: 0.95; margin: 1.5rem 0 1.75rem; }
     .cu-hero h1 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
     .cu-hero .lede { max-width: 34rem; margin: 0 auto; color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; }
     .cu-hero-rule { width: 3.5rem; height: 1px; background: var(--accent); margin: 2.25rem auto 0; }
 
     .cu-section { padding-block: clamp(4rem,7vw,6rem); position: relative; }
-    .cu-section--alt { background: rgba(18,18,26,0.4); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .cu-section--alt { background: #000000; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .cu-head { text-align: center; max-width: 42rem; margin: 0 auto clamp(2.5rem,4vw,3.5rem); }
     .cu-head h2 { font-family: var(--font-display); font-size: clamp(2.25rem,5vw,3.5rem); font-weight: 600; line-height: 1; margin: 1rem 0 0; }
     .cu-head h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
@@ -64,12 +64,12 @@
     .cu-values { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
     @media (min-width: 900px) { .cu-values { grid-template-columns: repeat(3,1fr); gap: 1.5rem; } }
     .cu-value {
-      background: var(--card); backdrop-filter: blur(8px);
+      background: var(--card); 
       border: 1px solid var(--border); border-radius: var(--r-lg);
       padding: 2rem 1.75rem;
       transition: all var(--t-slow) var(--ease-out);
     }
-    .cu-value:hover { border-color: rgba(245,158,11,0.28); background: rgba(26,26,36,0.8); transform: translateY(-3px); box-shadow: var(--glow-sm); }
+    .cu-value:hover { border-color: rgba(245,158,11,0.28); background: #000000; transform: translateY(-3px); box-shadow: var(--glow-sm); }
     .cu-value .icon {
       width: 3.25rem; height: 3.25rem; display: grid; place-items: center;
       border-radius: 50%; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3);
@@ -101,13 +101,14 @@
     .cu-collage > div:nth-child(even) { transform: translateY(1.5rem); }
 
     .cu-cta { position: relative; padding-block: clamp(5rem,9vw,8rem); border-top: 1px solid var(--border); text-align: center; overflow: hidden; }
-    .cu-cta::before { content:''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(245,158,11,0.1) 0%, transparent 55%); pointer-events: none; }
+    .cu-cta::before { content:''; position: absolute; inset: 0; background: none; pointer-events: none; }
     .cu-cta h2 { font-family: var(--font-display); font-size: clamp(2.25rem,5vw,3.5rem); font-weight: 600; line-height: 1; margin: 1rem 0 1.25rem; }
     .cu-cta h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
     .cu-cta p { max-width: 34rem; margin: 0 auto 2.25rem; color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; }
 
     .d1 { transition-delay: 80ms; } .d2 { transition-delay: 160ms; } .d3 { transition-delay: 240ms; }
   </style>
+  <link rel="stylesheet" href="contrast-cards.css" />
 </head>
 
 <body class="md-atmospheric">

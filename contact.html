@@ -74,7 +74,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at top, rgba(245, 158, 11, 0.08) 0%, transparent 55%);
+      background: none;
       pointer-events: none;
     }
     .ct-hero h1 {
@@ -107,13 +107,16 @@
     .ct-quickbar {
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      background: rgba(18, 18, 26, 0.4);
+      background: #000000;
       padding-block: clamp(1.5rem, 2.5vw, 2rem);
     }
     .ct-quick-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;     /* Single column on phones so tiles don't get cut off */
       gap: 0.75rem;
+    }
+    @media (min-width: 540px) {
+      .ct-quick-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (min-width: 720px) {
       .ct-quick-grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
@@ -125,8 +128,8 @@
       gap: 0.5rem;
       padding: 1rem 1.1rem;
       background: var(--card);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      
+      
       border: 1px solid var(--border);
       border-radius: var(--r-md);
       color: var(--fg);
@@ -134,7 +137,7 @@
     }
     .ct-quick-tile:hover {
       border-color: rgba(245, 158, 11, 0.3);
-      background: rgba(26, 26, 36, 0.8);
+      background: #000000;
       transform: translateY(-2px);
       box-shadow: var(--glow-sm);
     }
@@ -232,7 +235,23 @@
       margin-left: 0.35rem;
     }
     .ct-info p,
-    .ct-info a { color: var(--fg-muted); line-height: 1.6; transition: color var(--t-base-ms); display: block; }
+    .ct-info a {
+      color: var(--fg-muted);
+      line-height: 1.6;
+      transition: color var(--t-base-ms);
+      display: block;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    /* Mobile-only safety net — keep the head-office column inside
+       the viewport so long emails/phone numbers can't introduce a
+       horizontal page scroll. */
+    @media (max-width: 540px) {
+      .ct-main { overflow-x: hidden; }
+      .ct-info { gap: 0.85rem; }
+      .ct-info-ico { width: 2.25rem; height: 2.25rem; font-size: 0.85rem; }
+    }
+    html, body { overflow-x: hidden; }
     .ct-info a:hover { color: var(--accent); }
     .ct-info .transit {
       display: inline-flex;
@@ -263,7 +282,7 @@
     .ct-map::after {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(10,10,15,0.15) 0%, transparent 30%, rgba(10,10,15,0.08) 100%);
+      background: linear-gradient(180deg, #000000 0%, transparent 30%, #000000 100%);
       pointer-events: none;
       transition: opacity var(--t-slow);
     }
@@ -275,8 +294,8 @@
       align-items: center;
       gap: 0.45rem;
       padding: 0.55rem 0.95rem;
-      background: rgba(10, 10, 15, 0.88);
-      backdrop-filter: blur(10px);
+      background: #000000;
+      
       border: 1px solid rgba(245, 158, 11, 0.35);
       border-radius: var(--r-full);
       color: var(--accent);
@@ -298,8 +317,8 @@
     /* ───── Form Card ───── */
     .ct-form-card {
       background: var(--card);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      
+      
       border: 1px solid var(--border);
       border-radius: var(--r-xl);
       padding: clamp(1.5rem, 3vw, 2.5rem);
@@ -312,13 +331,7 @@
     @media (max-width: 959px) {
       .ct-form-card { position: static; }
     }
-    .ct-form-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 80px; height: 3px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-    }
+    .ct-form-card::before { display: none; }
     .ct-form-card h3 {
       font-family: var(--font-display);
       font-size: clamp(1.65rem, 3vw, 2rem);
@@ -346,7 +359,7 @@
     .ct-field input,
     .ct-field textarea {
       width: 100%;
-      background: rgba(10, 10, 15, 0.5);
+      background: #000000;
       border: 1px solid var(--border);
       border-radius: var(--r-md);
       padding: 0.85rem 1rem;
@@ -366,7 +379,7 @@
     .ct-field input:focus,
     .ct-field textarea:focus {
       border-color: rgba(245, 158, 11, 0.45);
-      background: rgba(10, 10, 15, 0.7);
+      background: #000000;
       box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.12);
     }
     .ct-consent {
@@ -461,8 +474,8 @@
     }
     .faq-item {
       background: var(--card);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      
+      
       border: 1px solid var(--border);
       border-radius: var(--r-md);
       overflow: hidden;
@@ -472,7 +485,7 @@
     .faq-item:hover { border-color: var(--border-hover); }
     .faq-item.faq-active {
       border-color: rgba(245, 158, 11, 0.3);
-      background: rgba(26, 26, 36, 0.8);
+      background: #000000;
       box-shadow: var(--glow-sm);
     }
     .faq-item .faq-trigger {
@@ -530,7 +543,7 @@
     .ct-newsletter::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, rgba(245, 158, 11, 0.08) 0%, transparent 55%);
+      background: none;
       pointer-events: none;
     }
     .ct-newsletter h2 {
@@ -558,7 +571,7 @@
     }
     #newsletterForm input[type="email"] {
       flex: 1;
-      background: rgba(10, 10, 15, 0.5);
+      background: #000000;
       border: 1px solid var(--border);
       border-radius: var(--r-md);
       padding: 0.85rem 1rem;
@@ -571,7 +584,7 @@
     #newsletterForm input[type="email"]::placeholder { color: var(--fg-subtle); }
     #newsletterForm input[type="email"]:focus {
       border-color: rgba(245, 158, 11, 0.45);
-      background: rgba(10, 10, 15, 0.75);
+      background: #000000;
       box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.12);
     }
     #newsletterBtn { min-width: 6rem; justify-content: center; }
@@ -594,6 +607,7 @@
     .ct-delay-3 { transition-delay: 240ms; }
     .ct-delay-4 { transition-delay: 320ms; }
   </style>
+  <link rel="stylesheet" href="contrast-cards.css" />
 </head>
 
 <body class="md-atmospheric">

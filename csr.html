@@ -43,14 +43,14 @@
   <link rel="stylesheet" href="theme.css">
   <style>
     .cs-hero { position: relative; padding: clamp(8rem,14vw,12rem) 0 clamp(3rem,5vw,5rem); text-align: center; overflow: hidden; }
-    .cs-hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at top, rgba(245,158,11,0.08) 0%, transparent 55%); pointer-events:none; }
+    .cs-hero::before { content:''; position:absolute; inset:0; background: none; pointer-events:none; }
     .cs-hero h1 { font-family: var(--font-display); font-size: var(--text-display-xl); font-weight: 600; line-height: 0.95; margin: 1.5rem 0 1.75rem; }
     .cs-hero h1 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
     .cs-hero .lede { max-width: 40rem; margin: 0 auto; color: var(--fg-muted); font-size: var(--t-lg); line-height: 1.65; }
     .cs-hero-rule { width: 3.5rem; height: 1px; background: var(--accent); margin: 2.25rem auto 0; }
 
     .cs-section { padding-block: clamp(4rem,7vw,6rem); position: relative; }
-    .cs-section--alt { background: rgba(18,18,26,0.4); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .cs-section--alt { background: #000000; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .cs-head { text-align: center; max-width: 42rem; margin: 0 auto clamp(2.5rem,4vw,3.5rem); }
     .cs-head h2 { font-family: var(--font-display); font-size: clamp(2.25rem,5vw,3.5rem); font-weight: 600; line-height: 1; margin: 1rem 0 0; }
     .cs-head h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
@@ -67,12 +67,12 @@
     .cs-impact { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.85rem; }
     @media (min-width: 720px)  { .cs-impact { grid-template-columns: repeat(4,1fr); gap: 1rem; } }
     .cs-metric {
-      background: var(--card); backdrop-filter: blur(8px);
+      background: var(--card); 
       border: 1px solid var(--border); border-radius: var(--r-md);
       padding: 1.5rem 1.25rem;
       transition: all var(--t-slow) var(--ease-out);
     }
-    .cs-metric:hover { border-color: rgba(245,158,11,0.3); background: rgba(26,26,36,0.8); transform: translateY(-2px); box-shadow: var(--glow-sm); }
+    .cs-metric:hover { border-color: rgba(245,158,11,0.3); background: #000000; transform: translateY(-2px); box-shadow: var(--glow-sm); }
     .cs-metric .n { font-family: var(--font-display); font-size: clamp(1.65rem,3.2vw,2.25rem); font-weight: 500; color: var(--fg); line-height: 1; letter-spacing: -0.01em; }
     .cs-metric .n em { color: var(--accent); font-style: normal; font-size: 0.75em; font-weight: 500; }
     .cs-metric .l { font-family: var(--font-label); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg); margin-top: 0.75rem; }
@@ -83,12 +83,12 @@
     @media (min-width: 720px)  { .cs-focus-grid { grid-template-columns: repeat(2,1fr); } }
     @media (min-width: 1024px) { .cs-focus-grid { grid-template-columns: repeat(3,1fr); gap: 1.5rem; } }
     .cs-focus {
-      background: var(--card); backdrop-filter: blur(8px);
+      background: var(--card); 
       border: 1px solid var(--border); border-radius: var(--r-lg);
       padding: 2rem 1.75rem;
       transition: all var(--t-slow) var(--ease-out);
     }
-    .cs-focus:hover { border-color: rgba(245,158,11,0.28); background: rgba(26,26,36,0.8); transform: translateY(-3px); box-shadow: var(--glow-sm); }
+    .cs-focus:hover { border-color: rgba(245,158,11,0.28); background: #000000; transform: translateY(-3px); box-shadow: var(--glow-sm); }
     .cs-focus .icon {
       width: 3rem; height: 3rem; display: grid; place-items: center;
       border-radius: 50%; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3);
@@ -114,13 +114,13 @@
     }
     .cs-prog-card {
       display: grid; grid-template-columns: 1fr; gap: 1.5rem;
-      background: var(--card); backdrop-filter: blur(8px);
+      background: var(--card); 
       border: 1px solid var(--border); border-radius: var(--r-lg);
       padding: 1.5rem;
       transition: all var(--t-slow) var(--ease-out);
     }
     @media (min-width: 720px) { .cs-prog-card { grid-template-columns: 0.85fr 1.15fr; gap: 2rem; padding: 2rem; } }
-    .cs-prog-card:hover { border-color: rgba(245,158,11,0.28); background: rgba(26,26,36,0.85); box-shadow: var(--glow-sm); }
+    .cs-prog-card:hover { border-color: rgba(245,158,11,0.28); background: #000000; box-shadow: var(--glow-sm); }
     .cs-prog-card.reverse { direction: rtl; }
     .cs-prog-card.reverse > * { direction: ltr; }
     @media (max-width: 719px) { .cs-prog-card.reverse { direction: ltr; } }
@@ -155,7 +155,7 @@
     .cs-spend h2 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
     .cs-spend > div:first-child > p { color: var(--fg-muted); line-height: 1.7; margin: 0 0 2rem; }
     .cs-spend-chart {
-      background: var(--card); backdrop-filter: blur(8px);
+      background: var(--card); 
       border: 1px solid var(--border); border-radius: var(--r-lg);
       padding: 1.75rem;
     }
@@ -178,7 +178,7 @@
     .cs-voices { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
     @media (min-width: 900px) { .cs-voices { grid-template-columns: repeat(3,1fr); } }
     .cs-voice {
-      background: var(--card); backdrop-filter: blur(8px);
+      background: var(--card); 
       border: 1px solid var(--border); border-radius: var(--r-lg);
       padding: 2rem 1.75rem;
       display: flex; flex-direction: column;
@@ -200,7 +200,7 @@
     @media (min-width: 640px)  { .cs-partners { grid-template-columns: repeat(4,1fr); } }
     @media (min-width: 1024px) { .cs-partners { grid-template-columns: repeat(7,1fr); } }
     .cs-partner {
-      background: var(--card); backdrop-filter: blur(8px);
+      background: var(--card); 
       border: 1px solid var(--border); border-radius: var(--r-md);
       padding: 1rem 0.75rem; text-align: center;
       font-family: var(--font-heading); font-size: 0.72rem; font-weight: 600;
@@ -209,11 +209,11 @@
       transition: all var(--t-base-ms);
       min-height: 4.5rem; display: grid; place-items: center;
     }
-    .cs-partner:hover { color: var(--accent); border-color: rgba(245,158,11,0.3); background: rgba(26,26,36,0.8); }
+    .cs-partner:hover { color: var(--accent); border-color: rgba(245,158,11,0.3); background: #000000; }
 
     /* Journey timeline */
     .cs-journey { max-width: 48rem; margin: 0 auto; position: relative; padding-left: 2.5rem; }
-    .cs-journey::before { content: ''; position: absolute; left: 0.7rem; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, rgba(245,158,11,0.3), transparent); }
+    .cs-journey::before { content: ''; position: absolute; left: 0.7rem; top: 0; bottom: 0; width: 1px; background: none; }
     .cs-j-item { position: relative; padding: 0.5rem 0 clamp(1.5rem,3vw,2.5rem); }
     .cs-j-item::before {
       content: '';
@@ -241,7 +241,7 @@
       color: var(--fg);
       transition: all var(--t-base-ms) var(--ease-out);
     }
-    .cs-doc-row:hover { border-color: rgba(245,158,11,0.35); background: rgba(26,26,36,0.8); transform: translateX(3px); }
+    .cs-doc-row:hover { border-color: rgba(245,158,11,0.35); background: #000000; transform: translateX(3px); }
     .cs-doc-row .ico {
       width: 2.5rem; height: 2.5rem; flex-shrink: 0;
       display: grid; place-items: center;
@@ -256,6 +256,7 @@
 
     .d1 { transition-delay: 80ms; } .d2 { transition-delay: 160ms; } .d3 { transition-delay: 240ms; } .d4 { transition-delay: 320ms; } .d5 { transition-delay: 400ms; }
   </style>
+  <link rel="stylesheet" href="contrast-cards.css" />
 </head>
 
 <body class="md-atmospheric">

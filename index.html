@@ -1287,16 +1287,21 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 1rem;
+      gap: 0.85rem;
+    }
+    .md-footer-brand-label {
+      /* Aligns this column's "K label" with the K labels on the
+         contact columns so all 4 columns start at the same y. */
+      margin-bottom: 0 !important;
     }
     .md-footer-brand > a {
       display: inline-block;
       line-height: 0;
     }
     .md-footer-logo {
-      height: clamp(72px, 7vw, 96px);
+      height: clamp(60px, 5.5vw, 76px);
       width: auto;
-      filter: drop-shadow(0 0 24px rgba(245, 158, 11, 0.22));
+      filter: drop-shadow(0 0 18px rgba(245, 158, 11, 0.18));
     }
     .md-footer-tagline {
       font-family: var(--font-display);
@@ -2288,6 +2293,7 @@
 
         <!-- LEFT — Brand -->
         <div class="md-footer-brand">
+          <span class="md-fc-k md-footer-brand-label"><i class="fas fa-bookmark"></i> Strong Built</span>
           <a href="index.html" aria-label="Strong Built — Home">
             <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="md-footer-logo">
           </a>
@@ -2297,7 +2303,7 @@
         <!-- RIGHT — Contact items as peers of brand for even distribution -->
         <div class="md-fc-item">
           <span class="md-fc-k"><i class="fas fa-location-dot"></i> Address</span>
-          <p class="md-fc-v">901-B Wing, HDIL Kaledonia,<br>Sahar Road, Andheri-East,<br>Mumbai — 400069</p>
+          <a class="md-fc-v" href="https://www.google.com/maps/search/?api=1&query=HDIL+Kaledonia+Sahar+Road+Andheri+East+Mumbai+400069" target="_blank" rel="noopener" aria-label="View address on Google Maps">901-B Wing, HDIL Kaledonia,<br>Sahar Road, Andheri-East,<br>Mumbai — 400069</a>
         </div>
         <div class="md-fc-item">
           <span class="md-fc-k"><i class="fas fa-phone"></i> Phone</span>

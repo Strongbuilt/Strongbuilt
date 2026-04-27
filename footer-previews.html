@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Footer Design · Strong Built Preview</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="theme.css">
+
+  <style>
+    body { background: #000; color: #FAFAFA; }
+    .preview-page { padding: 4rem 0 6rem; }
+    .preview-head {
+      max-width: 60rem;
+      margin: 0 auto 4rem;
+      padding-inline: clamp(1.25rem, 4vw, 3rem);
+      text-align: center;
+    }
+    .preview-head h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      margin: 0 0 1rem;
+      text-transform: uppercase;
+    }
+    .preview-head h1 em { color: var(--accent); font-style: italic; font-weight: 500; }
+    .preview-head p { color: var(--fg-muted); font-size: 1.05rem; max-width: 36rem; margin: 0 auto; line-height: 1.65; }
+
+    .preview-item {
+      margin: 4rem auto;
+      max-width: 1680px;
+      padding-inline: clamp(1rem, 4vw, 3rem);
+    }
+    .preview-tag {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: rgba(245, 158, 11, 0.08);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+    }
+    .preview-tag .name {
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fg);
+    }
+    .preview-tag .desc {
+      font-size: 0.85rem;
+      color: var(--fg-muted);
+      margin-left: auto;
+      max-width: 30rem;
+      text-align: right;
+    }
+
+    .preview-frame {
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #0A0A0F;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SHARED footer skeleton helpers
+       ═══════════════════════════════════════════════════════════ */
+    .fp-container { max-width: 1480px; margin: 0 auto; padding-inline: clamp(1rem, 3.5vw, 3rem); }
+    .fp-strip {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+      padding-block: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+    }
+    @media (max-width: 720px) {
+      .fp-strip { grid-template-columns: 1fr; text-align: center; gap: 0.6rem; }
+    }
+    .fp-socials { display: flex; gap: 0.5rem; justify-content: center; }
+    .fp-socials a {
+      width: 32px; height: 32px;
+      display: grid; place-items: center;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 6px;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.8rem;
+      transition: color 200ms, border-color 200ms;
+      text-decoration: none;
+    }
+    .fp-socials a:hover { color: var(--accent); border-color: var(--accent); }
+    .fp-strip a { color: inherit; text-decoration: none; transition: color 200ms; }
+    .fp-strip a:hover { color: var(--accent); }
+    .fp-credit {
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+    }
+    .fp-credit strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ───────────────── DESIGN — Vertical Lines / Editorial ───────────────── */
+    .ft10 { padding: 4rem 0 0; background: #0A0A0F; }
+    .ft10 .grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr 1fr 1fr;
+      gap: 0;
+      padding-bottom: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 720px) {
+      .ft10 .grid { grid-template-columns: 1fr 1fr; }
+      .ft10 .grid > * { padding: 1.5rem !important; }
+      .ft10 .grid > *:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.1); }
+    }
+    @media (max-width: 480px) {
+      .ft10 .grid { grid-template-columns: 1fr; }
+      .ft10 .grid > * { border-right: 0 !important; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .ft10 .grid > *:last-child { border-bottom: 0; }
+    }
+    .ft10 .col { padding: 0 2rem; border-right: 1px solid rgba(255,255,255,0.1); }
+    .ft10 .col:first-child { padding-left: 0; }
+    .ft10 .col:last-child { border-right: 0; padding-right: 0; }
+
+    /* Brand column — logo + tagline */
+    .ft10 .col-brand img {
+      height: clamp(76px, 7vw, 104px);
+      width: auto;
+      display: block;
+      margin-bottom: 1.25rem;
+      filter: drop-shadow(0 0 18px rgba(245,158,11,0.2));
+    }
+    .ft10 .col-brand p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .ft10 .col-brand p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .ft10 .col-brand .est {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+    }
+
+    /* Other columns */
+    .ft10 .col h4 {
+      font-family: var(--font-label);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin: 0 0 0.85rem;
+    }
+    .ft10 .col p, .ft10 .col a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.65;
+      margin: 0;
+      text-decoration: none;
+      display: block;
+    }
+    .ft10 .col a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <div class="preview-page">
+
+    <div class="preview-head">
+      <h1>Footer <em>preview.</em></h1>
+      <p>Vertical-lines / editorial design with the actual logo in the brand column.</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         VERTICAL LINES / EDITORIAL — with logo
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="preview-item">
+      <div class="preview-tag">
+        <span class="name">Vertical Lines</span>
+        <span class="desc">Magazine-style columns separated by hairlines. Editorial, refined.</span>
+      </div>
+      <div class="preview-frame">
+        <footer class="ft10">
+          <div class="fp-container">
+            <div class="grid">
+              <div class="col col-brand">
+                <img src="assets/Logo/Strongbuilt.png" alt="Strong Built">
+                <p>Mumbai construction, since 2014.</p>
+              </div>
+              <div class="col">
+                <h4>— Address</h4>
+                <a href="https://www.google.com/maps/search/?api=1&query=HDIL+Kaledonia+Andheri+East+Mumbai" target="_blank" rel="noopener">901-B Wing, HDIL Kaledonia,<br>Sahar Road, Andheri-East,<br>Mumbai — 400069</a>
+              </div>
+              <div class="col">
+                <h4>— Reach</h4>
+                <a href="tel:+919619875081">+91 96198 75081</a>
+                <a href="mailto:strongbuilt@skywaygroup.co.in">strongbuilt@<br>skywaygroup.co.in</a>
+              </div>
+              <div class="col">
+                <h4>— Hours</h4>
+                <p>Mon – Sat<br>09:00 – 19:00 IST<br><span style="color:rgba(255,255,255,0.4);">Closed Sun &amp; holidays</span></p>
+              </div>
+            </div>
+            <div class="fp-strip">
+              <span>© 2026 Strong Built · A Skyway Group Company</span>
+              <span class="fp-credit">Designed by <strong>ABDUL AHAD</strong></span>
+              <span class="fp-socials">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              </span>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </section>
+
+    <div class="preview-head" style="margin-top: 5rem;">
+      <p style="font-size: 1.05rem; color: var(--accent);">Like this? Tell me to roll it out site-wide and I'll replace the current footer on every page.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>

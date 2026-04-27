@@ -983,7 +983,10 @@ a.md-fc-v:hover { color: var(--accent); }
 p.md-fc-v { color: rgba(255, 255, 255, 0.75); }
 .md-fc-v + .md-fc-v { margin-top: 0.15rem; }
 
-/* Bottom strip — Copyright | Designed by | Socials */
+/* Bottom strip — Copyright | Designed by | Socials.
+   The divider above the strip spans the full viewport width
+   (matching the top border on .md-footer) via a ::before
+   pseudo-element using 100vw. */
 .md-footer-strip {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -992,6 +995,18 @@ p.md-fc-v { color: rgba(255, 255, 255, 0.75); }
   padding-block: 1.1rem;
   font-size: 0.78rem;
   color: rgba(255, 255, 255, 0.55);
+  position: relative;
+}
+.md-footer-strip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 1px;
+  background: var(--border);
+  pointer-events: none;
 }
 .md-footer-strip-left {
   justify-self: start;

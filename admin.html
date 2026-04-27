@@ -2104,5 +2104,638 @@
     window._admin = { state, TYPES, publish, publishAll, undo, redo };
   })();
   </script>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       WAVE 1 — Admin enhancements
+       1) GitHub API publish (replaces download fallback)
+       2) Image upload via GitHub API
+       3) Schema validation before save/publish
+       4) Live preview iframe of the public site
+       5) Settings modal for GitHub token + worker auth URL
+       ─────────────────────────────────────────────────────────────── *
+       This script runs AFTER the original IIFE so it can override
+       publish/publishAll/handleFile via the window._admin handle and
+       hook into the same TYPES schema.
+       ═══════════════════════════════════════════════════════════════ -->
+  <style>
+    /* Settings modal */
+    .sb-modal {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.78);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    .sb-modal.is-hidden { display: none; }
+    .sb-modal-card {
+      width: min(560px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.75rem;
+      background: #000;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 6px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.85);
+    }
+    .sb-modal-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #F59E0B; margin: 0 0 0.25rem;
+    }
+    .sb-modal-card p.sb-modal-desc {
+      color: rgba(255,255,255,0.65); font-size: 0.78rem;
+      margin: 0 0 1.25rem; line-height: 1.55;
+    }
+    .sb-modal-card label {
+      display: block; font-size: 0.6rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.22em;
+      color: #F59E0B; margin: 1rem 0 0.4rem;
+    }
+    .sb-modal-card input,
+    .sb-modal-card select {
+      width: 100%;
+      padding: 0.7rem 0.85rem;
+      background: #050508;
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #FAFAFA;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      border-radius: 3px;
+    }
+    .sb-modal-card .sb-hint {
+      font-size: 0.7rem; color: rgba(255,255,255,0.5);
+      margin-top: 0.4rem; line-height: 1.5;
+    }
+    .sb-modal-card .sb-hint a {
+      color: #F59E0B; text-decoration: underline;
+    }
+    .sb-modal-card .sb-actions {
+      display: flex; gap: 0.6rem; justify-content: flex-end;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .sb-modal-card .sb-status {
+      margin-top: 0.85rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      display: none;
+    }
+    .sb-modal-card .sb-status.ok {
+      display: block;
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.4);
+      color: #4ade80;
+    }
+    .sb-modal-card .sb-status.err {
+      display: block;
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.4);
+      color: #f87171;
+    }
+
+    /* Preview iframe drawer */
+    .sb-preview-drawer {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: min(560px, 60vw);
+      background: #000;
+      border-left: 1px solid rgba(255,255,255,0.18);
+      box-shadow: -10px 0 40px rgba(0,0,0,0.6);
+      z-index: 998;
+      display: flex; flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 280ms cubic-bezier(.22,1,.36,1);
+    }
+    .sb-preview-drawer.is-open { transform: translateX(0); }
+    .sb-preview-head {
+      flex: 0 0 auto;
+      padding: 0.75rem 1rem;
+      display: flex; align-items: center; gap: 0.65rem;
+      background: #000;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .sb-preview-head .sb-preview-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #F59E0B;
+    }
+    .sb-preview-head select {
+      flex: 1;
+      padding: 0.4rem 0.65rem;
+      background: #050508;
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #FAFAFA; font-size: 0.75rem;
+      border-radius: 3px;
+    }
+    .sb-preview-head .sb-icon-btn {
+      width: 28px; height: 28px;
+      display: grid; place-items: center;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #FAFAFA;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.78rem;
+    }
+    .sb-preview-head .sb-icon-btn:hover {
+      border-color: #F59E0B; color: #F59E0B;
+    }
+    .sb-preview-iframe {
+      flex: 1 1 auto;
+      width: 100%;
+      border: 0;
+      background: #000;
+    }
+
+    /* Validation error styling */
+    .sb-validation-list {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .sb-validation-list li {
+      padding: 0.5rem 0.75rem;
+      background: rgba(248, 113, 113, 0.08);
+      border-left: 2px solid #f87171;
+      color: #FAFAFA; font-size: 0.78rem;
+    }
+    .sb-validation-list li strong { color: #f87171; }
+  </style>
+
+  <!-- Settings modal -->
+  <div id="sbSettingsModal" class="sb-modal is-hidden" role="dialog" aria-label="Admin settings">
+    <div class="sb-modal-card">
+      <h3>GitHub Publishing</h3>
+      <p class="sb-modal-desc">Configure a GitHub Personal Access Token so the admin can commit changes directly to the repo. Without a token, Publish falls back to downloading a file.</p>
+
+      <label>Personal Access Token</label>
+      <input type="password" id="sbToken" placeholder="ghp_..." autocomplete="off">
+      <p class="sb-hint">Create one at <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">github.com/settings/tokens</a> — Fine-grained, scoped to <strong>Strongbuilt/Strongbuilt</strong>, with <strong>Contents: Read and write</strong> permission. Stored locally in this browser only — never sent anywhere except api.github.com.</p>
+
+      <label>Repo (owner/name)</label>
+      <input type="text" id="sbRepo" value="Strongbuilt/Strongbuilt">
+
+      <label>Branch</label>
+      <input type="text" id="sbBranch" value="main">
+
+      <label>Commit author email (for git history)</label>
+      <input type="email" id="sbCommitEmail" placeholder="abdul.ahad@strongbuilt.in">
+
+      <div id="sbStatus" class="sb-status"></div>
+
+      <div class="sb-actions">
+        <button class="btn btn-outline" id="sbTestBtn" type="button">Test connection</button>
+        <button class="btn btn-outline" id="sbCancelBtn" type="button">Close</button>
+        <button class="btn btn-primary" id="sbSaveBtn" type="button">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preview drawer -->
+  <div id="sbPreviewDrawer" class="sb-preview-drawer">
+    <div class="sb-preview-head">
+      <span class="sb-preview-title">Live Preview</span>
+      <select id="sbPreviewPage">
+        <option value="index.html">Home</option>
+        <option value="projects.html">Projects</option>
+        <option value="map.html">Map</option>
+        <option value="story.html">Story</option>
+        <option value="leadership.html">Leadership</option>
+        <option value="recognition.html">Recognition</option>
+        <option value="contact.html">Contact</option>
+      </select>
+      <button class="sb-icon-btn" id="sbPreviewReload" title="Reload preview"><i class="fas fa-sync-alt"></i></button>
+      <button class="sb-icon-btn" id="sbPreviewClose" title="Close preview"><i class="fas fa-times"></i></button>
+    </div>
+    <iframe id="sbPreviewFrame" class="sb-preview-iframe" src="about:blank"></iframe>
+  </div>
+
+  <script>
+  /* ═══════════════════════════════════════════════════════════════
+     ADMIN ENHANCEMENTS — wave 1
+     ═══════════════════════════════════════════════════════════════ */
+  (function() {
+    'use strict';
+    if (!window._admin) { console.warn('[sb-enhance] _admin not found'); return; }
+    const A = window._admin;
+    const $ = (sel) => document.querySelector(sel);
+
+    // ── Settings storage (localStorage) ──────────────────────────
+    const STORAGE_KEY = 'sb_admin_github_settings';
+    function loadSettings() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+      catch { return {}; }
+    }
+    function saveSettings(s) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+    }
+    function hasGithubAuth() {
+      const s = loadSettings();
+      return Boolean(s.token && s.repo && s.branch);
+    }
+
+    // ── Toast helper that mirrors the existing one ──────────────
+    function toast(msg, kind = 'info') {
+      const el = $('#toast');
+      if (!el) return console.log(`[${kind}]`, msg);
+      el.textContent = msg;
+      el.className = `toast is-visible ${kind}`;
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => { el.className = 'toast'; }, 4000);
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // 5. SCHEMA VALIDATION
+    // ════════════════════════════════════════════════════════════
+    /**
+     * Validate a single record against its TYPES[type].fields schema.
+     * Returns array of error messages (empty if valid).
+     */
+    function validateItem(type, record) {
+      const cfg = A.TYPES[type];
+      if (!cfg || !cfg.fields) return [];
+      const errors = [];
+      for (const f of cfg.fields) {
+        const v = record?.[f.name];
+        const empty = v === undefined || v === null || v === '';
+        if (f.required && empty) {
+          errors.push(`<strong>${f.label}</strong> is required`);
+          continue;
+        }
+        if (empty) continue;
+        if (f.pattern && !new RegExp(f.pattern).test(String(v))) {
+          errors.push(`<strong>${f.label}</strong> doesn't match the expected format`);
+        }
+        if (f.type === 'coordinates') {
+          if (!Array.isArray(v) || v.length !== 2 ||
+              typeof v[0] !== 'number' || typeof v[1] !== 'number' ||
+              !isFinite(v[0]) || !isFinite(v[1])) {
+            errors.push(`<strong>${f.label}</strong> must be valid [lat, lng] numbers`);
+          }
+        }
+        if (f.maxlength && String(v).length > f.maxlength) {
+          errors.push(`<strong>${f.label}</strong> exceeds ${f.maxlength} characters`);
+        }
+      }
+      return errors;
+    }
+
+    /**
+     * Validate the entire collection for a type. Returns { ok, errors }.
+     * Errors is an array of { index, errors[] } per failing record.
+     */
+    function validateCollection(type) {
+      const data = A.state.data[type];
+      const out = [];
+      if (!data) return { ok: true, errors: [] };
+      const list = Array.isArray(data) ? data : Object.values(data).flat?.() || [];
+      list.forEach((rec, i) => {
+        const errs = validateItem(type, rec);
+        if (errs.length) out.push({ index: i, item: rec, errors: errs });
+      });
+      return { ok: out.length === 0, errors: out };
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // 1+2. GITHUB API PUBLISH + IMAGE UPLOAD
+    // ════════════════════════════════════════════════════════════
+    /**
+     * Fetch a file's current SHA from GitHub (needed for PUTs).
+     * Returns null if file doesn't exist (new file scenario).
+     */
+    async function ghGetSha(path) {
+      const s = loadSettings();
+      const url = `https://api.github.com/repos/${s.repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(s.branch)}`;
+      const r = await fetch(url, {
+        headers: { 'Authorization': `Bearer ${s.token}`, 'Accept': 'application/vnd.github+json' }
+      });
+      if (r.status === 404) return null;
+      if (!r.ok) throw new Error(`GitHub GET ${path} → ${r.status}`);
+      const j = await r.json();
+      return j.sha;
+    }
+
+    /**
+     * PUT a file (text or binary) to GitHub. Creates or updates.
+     * @param path     Repo path, e.g. "projects-data.js"
+     * @param content  String OR Uint8Array
+     * @param message  Commit message
+     */
+    async function ghPut(path, content, message) {
+      const s = loadSettings();
+      // Convert to base64 (GitHub Contents API requires it)
+      let b64;
+      if (typeof content === 'string') {
+        b64 = btoa(unescape(encodeURIComponent(content)));
+      } else {
+        // Uint8Array → binary string → base64
+        let bin = '';
+        for (let i = 0; i < content.byteLength; i++) bin += String.fromCharCode(content[i]);
+        b64 = btoa(bin);
+      }
+      const sha = await ghGetSha(path);
+      const url = `https://api.github.com/repos/${s.repo}/contents/${encodeURIComponent(path)}`;
+      const body = {
+        message,
+        content: b64,
+        branch: s.branch,
+      };
+      if (sha) body.sha = sha;
+      if (s.commitEmail) body.committer = { name: 'Strong Built Admin', email: s.commitEmail };
+      const r = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${s.token}`,
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      });
+      if (!r.ok) {
+        const errText = await r.text();
+        throw new Error(`GitHub PUT ${path} → ${r.status}: ${errText.slice(0, 200)}`);
+      }
+      return r.json();
+    }
+
+    /**
+     * Build the JS module body for a data type.
+     */
+    function buildJsBody(type) {
+      const cfg = A.TYPES[type];
+      const stamp = new Date().toISOString();
+      return `/**\n * ${cfg.label} Data — generated by Admin Studio on ${stamp}\n */\nconst ${cfg.constName} = ${JSON.stringify(A.state.data[type], null, 2)};\nif (typeof window !== 'undefined') window.${cfg.constName} = ${cfg.constName};\n`;
+    }
+
+    /**
+     * Publish current type via GitHub API.
+     * Falls back to download if no token configured.
+     */
+    async function publishViaGithub(type) {
+      type = type || A.state.activeType;
+      const cfg = A.TYPES[type];
+      // Validate first
+      const v = validateCollection(type);
+      if (!v.ok) {
+        showValidationErrors(type, v.errors);
+        toast(`Validation failed — ${v.errors.length} item(s) have errors`, 'error');
+        return false;
+      }
+      if (!hasGithubAuth()) {
+        toast('No GitHub token — open Settings to configure, or use download fallback', 'warn');
+        return false;
+      }
+      const body = buildJsBody(type);
+      const msg = `admin: update ${cfg.filename}`;
+      try {
+        await ghPut(cfg.filename, body, msg);
+        toast(`Published ${cfg.label} to GitHub — Cloudflare deploys in ~30s`, 'success');
+        A.state.dirty.delete(type);
+        try { localStorage.removeItem(cfg.storageKey); } catch {}
+        // Update the dirty indicator UI
+        const indicator = document.getElementById('dirtyIndicator');
+        if (indicator && A.state.dirty.size === 0) indicator.classList.add('hidden');
+        return true;
+      } catch (err) {
+        console.error(err);
+        toast(`Publish failed: ${err.message}`, 'error');
+        return false;
+      }
+    }
+
+    async function publishAllViaGithub() {
+      if (!hasGithubAuth()) return toast('Configure GitHub Settings first', 'warn');
+      const dirty = [...A.state.dirty];
+      if (!dirty.length) return toast('Nothing to publish', 'info');
+      let ok = 0, fail = 0;
+      for (const t of dirty) {
+        const success = await publishViaGithub(t);
+        success ? ok++ : fail++;
+      }
+      toast(`Published ${ok}/${dirty.length}${fail ? `, ${fail} failed` : ''}`, fail ? 'warn' : 'success');
+    }
+
+    /**
+     * Image upload via GitHub API. Reads file → base64 → PUTs to
+     * assets/<folder>/<filename>. Returns the repo path on success.
+     */
+    async function uploadImageViaGithub(file, folder) {
+      if (!hasGithubAuth()) throw new Error('No GitHub token');
+      const safe = file.name.replace(/[^a-zA-Z0-9._\- ]/g, '');
+      const path = `assets/${folder}/${safe}`;
+      const buf = new Uint8Array(await file.arrayBuffer());
+      await ghPut(path, buf, `admin: upload ${path}`);
+      return { path };
+    }
+
+    // Patch the existing publish/publishAll to prefer GitHub when available.
+    // We expose new functions on _admin so the original button handlers
+    // can be intercepted via event delegation.
+    A.publish = async function () {
+      if (hasGithubAuth()) return publishViaGithub(A.state.activeType);
+      // Otherwise call the original (which will download)
+      return A._origPublish ? A._origPublish() : null;
+    };
+    A.publishAll = async function () {
+      if (hasGithubAuth()) return publishAllViaGithub();
+      return A._origPublishAll ? A._origPublishAll() : null;
+    };
+    // Save originals (currently they're the same as A.publish — preserve closure)
+    // Trick: re-bind the Publish button to call our patched function.
+    const downloadBtn = $('#downloadBtn');
+    if (downloadBtn) {
+      // Clone to drop existing listener, then add ours
+      const fresh = downloadBtn.cloneNode(true);
+      downloadBtn.parentNode.replaceChild(fresh, downloadBtn);
+      fresh.addEventListener('click', async (e) => {
+        e.preventDefault();
+        if (hasGithubAuth()) {
+          await publishViaGithub(A.state.activeType);
+        } else {
+          // Trigger original logic (which is now lost — so reimplement download)
+          downloadType(A.state.activeType);
+        }
+      });
+    }
+
+    function downloadType(type) {
+      const cfg = A.TYPES[type];
+      const body = buildJsBody(type);
+      const blob = new Blob([body], { type: 'application/javascript' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = cfg.filename; a.click();
+      URL.revokeObjectURL(url);
+      toast(`Downloaded ${cfg.filename} — replace on server to publish`, 'success');
+      A.state.dirty.delete(type);
+    }
+
+    // Replace image-upload behavior: when GitHub auth is set, drag/drop
+    // calls our function instead of the original (server-mode) call.
+    // We do this via event capture on the document so we don't have to
+    // modify wireImageUpload.
+    document.addEventListener('change', async (e) => {
+      const input = e.target;
+      if (!input || input.tagName !== 'INPUT' || input.type !== 'file') return;
+      if (!input.id || !input.id.startsWith('imgFile-')) return;
+      if (!hasGithubAuth()) return; // let original handler do its thing
+      e.stopImmediatePropagation();  // we own this event
+      const file = input.files?.[0];
+      if (!file) return;
+      const fieldName = input.id.replace('imgFile-', '');
+      const drop = document.getElementById(`imgDrop-${fieldName}`);
+      const folder = drop?.dataset.folder || 'Projects';
+      const uploading = document.getElementById(`imgUploading-${fieldName}`);
+      if (uploading) uploading.classList.remove('hidden');
+      try {
+        const { path } = await uploadImageViaGithub(file, folder);
+        const valueInput = document.querySelector(`#itemForm [name="${fieldName}"]`);
+        const prev = document.getElementById(`imgPrev-${fieldName}`);
+        if (valueInput) {
+          valueInput.value = path;
+          valueInput.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+        if (prev) { prev.src = path; prev.classList.add('is-visible'); }
+        toast(`Uploaded → ${path}`, 'success');
+      } catch (err) {
+        console.error(err);
+        toast(`Upload failed: ${err.message}`, 'error');
+      } finally {
+        if (uploading) uploading.classList.add('hidden');
+      }
+    }, true); // capture phase
+
+    // ════════════════════════════════════════════════════════════
+    // 5. VALIDATION ERRORS UI
+    // ════════════════════════════════════════════════════════════
+    function showValidationErrors(type, list) {
+      const cfg = A.TYPES[type];
+      let html = `<div style="position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:9999;max-width:560px;width:calc(100% - 2rem);padding:1.25rem;background:#000;border:1px solid #f87171;border-radius:6px;box-shadow:0 16px 40px rgba(0,0,0,0.85);">`;
+      html += `<div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.85rem;"><i class="fas fa-exclamation-triangle" style="color:#f87171;"></i><strong style="font-family:'Barlow Condensed';letter-spacing:0.18em;text-transform:uppercase;color:#f87171;">${list.length} validation error${list.length === 1 ? '' : 's'}</strong></div>`;
+      html += `<ul class="sb-validation-list">`;
+      list.forEach(({ index, item, errors }) => {
+        const label = item?.title || item?.name || item?.id || `Item #${index + 1}`;
+        html += `<li><strong>${label}:</strong> ${errors.join('; ')}</li>`;
+      });
+      html += `</ul>`;
+      html += `<div style="text-align:right;margin-top:1rem;"><button class="btn btn-outline" onclick="this.closest('div[style*=position]').remove()">Dismiss</button></div>`;
+      html += `</div>`;
+      const wrap = document.createElement('div');
+      wrap.innerHTML = html;
+      document.body.appendChild(wrap.firstElementChild);
+      setTimeout(() => {
+        const el = document.querySelector('div[style*="position:fixed"][style*="border:1px solid #f87171"]');
+        if (el) el.remove();
+      }, 12000);
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // SETTINGS MODAL
+    // ════════════════════════════════════════════════════════════
+    function openSettings() {
+      const s = loadSettings();
+      $('#sbToken').value = s.token || '';
+      $('#sbRepo').value = s.repo || 'Strongbuilt/Strongbuilt';
+      $('#sbBranch').value = s.branch || 'main';
+      $('#sbCommitEmail').value = s.commitEmail || '';
+      $('#sbStatus').className = 'sb-status';
+      $('#sbStatus').textContent = '';
+      $('#sbSettingsModal').classList.remove('is-hidden');
+    }
+    function closeSettings() {
+      $('#sbSettingsModal').classList.add('is-hidden');
+    }
+    $('#sbCancelBtn').addEventListener('click', closeSettings);
+    $('#sbSaveBtn').addEventListener('click', () => {
+      const s = {
+        token: $('#sbToken').value.trim(),
+        repo: $('#sbRepo').value.trim(),
+        branch: $('#sbBranch').value.trim() || 'main',
+        commitEmail: $('#sbCommitEmail').value.trim(),
+      };
+      saveSettings(s);
+      toast('Settings saved', 'success');
+      closeSettings();
+    });
+    $('#sbTestBtn').addEventListener('click', async () => {
+      const status = $('#sbStatus');
+      const tempSettings = {
+        token: $('#sbToken').value.trim(),
+        repo: $('#sbRepo').value.trim(),
+        branch: $('#sbBranch').value.trim() || 'main',
+      };
+      // Temporarily swap settings
+      const prev = loadSettings();
+      saveSettings(tempSettings);
+      status.className = 'sb-status';
+      status.textContent = 'Testing…';
+      status.style.display = 'block';
+      try {
+        const sha = await ghGetSha('projects-data.js');
+        if (sha === null) throw new Error('projects-data.js not found in repo (wrong repo or branch?)');
+        status.className = 'sb-status ok';
+        status.textContent = `✓ Connected. Found projects-data.js at sha ${sha.slice(0, 7)}.`;
+      } catch (err) {
+        status.className = 'sb-status err';
+        status.textContent = `✗ ${err.message}`;
+        // Restore previous settings on failure
+        saveSettings(prev);
+      }
+    });
+
+    // Add a Settings button to the header (next to Publish)
+    (function addSettingsBtn() {
+      const publishBtn = $('#downloadBtn');
+      if (!publishBtn || $('#sbSettingsBtn')) return;
+      const btn = document.createElement('button');
+      btn.id = 'sbSettingsBtn';
+      btn.className = 'btn btn-outline admin-btn-icon';
+      btn.title = 'GitHub publishing settings';
+      btn.setAttribute('aria-label', 'GitHub settings');
+      btn.innerHTML = '<i class="fas fa-cog"></i>';
+      publishBtn.parentNode.insertBefore(btn, publishBtn);
+      btn.addEventListener('click', openSettings);
+    })();
+
+    // ════════════════════════════════════════════════════════════
+    // 3. LIVE PREVIEW DRAWER
+    // ════════════════════════════════════════════════════════════
+    const drawer = $('#sbPreviewDrawer');
+    const frame  = $('#sbPreviewFrame');
+    const pageSelect = $('#sbPreviewPage');
+
+    function openPreview() {
+      drawer.classList.add('is-open');
+      reloadPreview();
+    }
+    function closePreview() { drawer.classList.remove('is-open'); }
+    function reloadPreview() {
+      // Add a cache-buster so iframe reflects latest
+      frame.src = pageSelect.value + '?_t=' + Date.now();
+    }
+    $('#sbPreviewClose').addEventListener('click', closePreview);
+    $('#sbPreviewReload').addEventListener('click', reloadPreview);
+    pageSelect.addEventListener('change', reloadPreview);
+
+    // Add a Preview button to the header
+    (function addPreviewBtn() {
+      const importBtn = $('#importBtn');
+      if (!importBtn || $('#sbPreviewBtn')) return;
+      const btn = document.createElement('button');
+      btn.id = 'sbPreviewBtn';
+      btn.className = 'btn btn-outline admin-btn-compact';
+      btn.title = 'Open live preview';
+      btn.innerHTML = '<i class="fas fa-eye"></i><span class="hidden md:inline">Preview</span>';
+      importBtn.parentNode.insertBefore(btn, importBtn);
+      btn.addEventListener('click', () => {
+        if (drawer.classList.contains('is-open')) closePreview();
+        else openPreview();
+      });
+    })();
+
+    console.info('[sb-enhance] Wave 1 loaded — GitHub publish, image upload, validation, preview');
+  })();
+  </script>
 </body>
 </html>

@@ -86,6 +86,7 @@ em,
    the .md-container pad so the logo / CTA visually align with
    the content below the header. */
 .md-header-inner {
+  width: 100% !important;
   height: 5.5rem !important;
   padding: 0 var(--container-pad) !important;
   max-width: var(--container-max) !important;
@@ -93,12 +94,20 @@ em,
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
+  gap: 1.5rem !important;
 }
 @media (min-width: 1024px) {
   .md-header-inner { height: 6.75rem !important; }
 }
 @media (min-width: 1280px) {
   .md-header-inner { height: 7.75rem !important; }
+}
+/* Logo container — pin display + alignment uniformly */
+.md-logo {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  flex-shrink: 0 !important;
 }
 .md-header {
   background: var(--c-page) !important;

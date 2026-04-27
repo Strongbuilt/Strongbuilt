@@ -916,7 +916,6 @@ body::before[data-md-noise] {
 .md-footer-logo {
   height: clamp(76px, 7vw, 104px) !important;
   width: auto !important;
-  filter: drop-shadow(0 0 18px rgba(245, 158, 11, 0.2));
 }
 .md-footer-tagline {
   font-family: var(--font-body);
@@ -991,7 +990,6 @@ p.md-fc-v { color: rgba(255, 255, 255, 0.75); }
   align-items: center;
   gap: 1.5rem;
   padding-block: 1.1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 0.78rem;
   color: rgba(255, 255, 255, 0.55);
 }

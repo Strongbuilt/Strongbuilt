@@ -381,11 +381,11 @@
 
       <div class="cr-form-card md-reveal">
         <div id="careerFormContainer">
-          <form id="careerForm" action="https://formsubmit.co/strongbuilt@skywaygroup.co.in" method="POST">
-            <input type="hidden" name="_subject" value="Career Application — Strong Built Website">
-            <input type="hidden" name="_template" value="table">
-            <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
-            <input type="hidden" name="_captcha" value="false">
+          <form id="careerForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="da3c5d4f-5f21-4b46-b4fe-012c0c415991">
+            <input type="hidden" name="subject" value="Career Application — Strong Built Website">
+            <input type="hidden" name="from_name" value="Strong Built Careers">
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
 
             <div class="cr-row">
               <div class="cr-field"><label for="cf-name">Full Name *</label><input id="cf-name" type="text" name="name" required placeholder="Your name"></div>
@@ -549,7 +549,7 @@
         btn.setAttribute('data-loading', 'true');
         const data = Object.fromEntries(new FormData(form).entries());
         try {
-          const r = await fetch('https://formsubmit.co/ajax/strongbuilt@skywaygroup.co.in', {
+          const r = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify(data)

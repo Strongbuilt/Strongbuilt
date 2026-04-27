@@ -815,11 +815,11 @@
             <span class="md-eyebrow md-eyebrow-accent" style="margin-bottom:0.85rem;">Project Enquiry</span>
             <h3>Send a <span class="accent">message.</span></h3>
 
-            <form id="contactForm" action="https://formsubmit.co/strongbuilt@skywaygroup.co.in" method="POST">
-              <input type="hidden" name="_subject" value="New Contact Enquiry — Strong Built Website">
-              <input type="hidden" name="_template" value="table">
-              <input type="hidden" name="_captcha" value="false">
-              <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+            <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+              <input type="hidden" name="access_key" value="da3c5d4f-5f21-4b46-b4fe-012c0c415991">
+              <input type="hidden" name="subject" value="New Contact Enquiry — Strong Built Website">
+              <input type="hidden" name="from_name" value="Strong Built Website">
+              <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
 
               <div class="ct-row">
                 <div class="ct-field">
@@ -942,11 +942,11 @@
         <h2>Project announcements &amp; <span class="accent">insights.</span></h2>
         <p class="sub">Quarterly project reveals and industry notes from the Strong Built team.</p>
 
-        <form id="newsletterForm" action="https://formsubmit.co/strongbuilt@skywaygroup.co.in" method="POST">
-          <input type="hidden" name="_subject" value="Newsletter Subscription — Strong Built Website">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+        <form id="newsletterForm" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="da3c5d4f-5f21-4b46-b4fe-012c0c415991">
+          <input type="hidden" name="subject" value="Newsletter Subscription — Strong Built Website">
+          <input type="hidden" name="from_name" value="Strong Built Website">
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
 
           <input type="email" name="email" required autocomplete="email" placeholder="Your email address" aria-label="Email address">
           <button type="submit" id="newsletterBtn" class="md-btn md-btn-primary">
@@ -1111,7 +1111,7 @@
         const data = Object.fromEntries(formData.entries());
 
         try {
-          const response = await fetch("https://formsubmit.co/ajax/strongbuilt@skywaygroup.co.in", {
+          const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify(data)
@@ -1159,7 +1159,7 @@
 
         const data = Object.fromEntries(new FormData(nForm).entries());
         try {
-          const r = await fetch('https://formsubmit.co/ajax/strongbuilt@skywaygroup.co.in', {
+          const r = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify(data)

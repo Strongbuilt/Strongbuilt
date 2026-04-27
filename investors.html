@@ -762,6 +762,32 @@
     .d3 { transition-delay: 240ms; }
     .d4 { transition-delay: 320ms; }
     .d5 { transition-delay: 400ms; }
+
+    /* ═══ COMING SOON OVERLAY (loaded in <head> to prevent FOUC) ═══ */
+    .ir-hero, .ir-section { display: none !important; }
+    .coming-soon-page {
+      min-height: calc(100vh - var(--header-h-lg) - 6rem);
+      display: flex; align-items: center; justify-content: center;
+      padding: clamp(4rem, 12vw, 9rem) 0; text-align: center;
+    }
+    .coming-soon-inner { max-width: 36rem; margin-inline: auto; }
+    .coming-soon-page .md-eyebrow { justify-content: center; margin-bottom: 1.5rem; }
+    .coming-soon-page h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 700; line-height: 0.95; letter-spacing: -0.01em;
+      text-transform: uppercase; margin: 0 0 1.5rem;
+    }
+    .coming-soon-page h1 em { color: var(--accent); font-style: italic; font-weight: 500; }
+    .coming-soon-page p {
+      color: var(--fg-muted);
+      font-size: clamp(1rem, 1.4vw, 1.15rem); line-height: 1.65;
+      max-width: 30rem; margin: 0 auto 2.5rem;
+    }
+    .coming-soon-rule {
+      width: 4rem; height: 2px; background: var(--accent);
+      margin: 2rem auto 0; border-radius: 2px;
+    }
   </style>
   <link rel="stylesheet" href="contrast-cards.css" />
 </head>
@@ -780,6 +806,7 @@
         <img src="assets/Logo/Strongbuilt.png" alt="Strong Built">
       </a>
       <nav class="md-nav" aria-label="Primary">
+        <a href="index.html" class="md-nav-link">Home</a>
         <div class="md-nav-item">
           <button class="md-nav-link" type="button" aria-haspopup="true" aria-expanded="false">About <i class="fas fa-chevron-down"></i></button>
           <div class="md-nav-dropdown" role="menu">
@@ -852,6 +879,22 @@
       </div>
     </aside>
   </div>
+
+  <!-- ═══ COMING SOON OVERLAY ═══
+       Original page content below preserved in DOM (links,
+       JSON-LD, re-launch) but hidden via CSS in <head>.
+       Only this section is visible. -->
+  <section class="coming-soon-page">
+    <div class="md-container">
+      <div class="coming-soon-inner">
+        <span class="md-eyebrow md-eyebrow-accent">Investor Relations</span>
+        <h1>Coming <em>soon.</em></h1>
+        <p>Our investor relations portal — financials, governance, IR contacts, and disclosures — is being prepared. Check back shortly, or reach out directly for any inquiries.</p>
+        <a href="contact.html" class="md-btn md-btn-primary">Contact us <i class="fas fa-arrow-right"></i></a>
+        <div class="coming-soon-rule"></div>
+      </div>
+    </div>
+  </section>
 
   <!-- ═══ HERO ═══ -->
   <section class="ir-hero">
@@ -1262,12 +1305,12 @@
   <section class="ir-cta">
     <div class="md-container">
       <div class="md-reveal">
-        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Lorem Ipsum</span>
-        <h2>Lorem ipsum <span class="accent">dolor sit.</span></h2>
-        <p class="sub">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Stay Informed</span>
+        <h2>Be the first to know when <span class="accent">we launch.</span></h2>
+        <p class="sub">Leave your email and we'll notify you the moment our investor relations portal goes live — financials, governance updates, and disclosures, straight to your inbox.</p>
         <form>
-          <input type="email" placeholder="your.email@lorem.com" required>
-          <button type="submit" class="md-btn md-btn-primary">Subscribe <i class="fas fa-arrow-right"></i></button>
+          <input type="email" placeholder="you@example.com" required aria-label="Your email address">
+          <button type="submit" class="md-btn md-btn-primary">Notify me <i class="fas fa-arrow-right"></i></button>
         </form>
       </div>
     </div>

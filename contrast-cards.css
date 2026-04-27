@@ -79,10 +79,30 @@ em,
   background: var(--c-page) !important;
   border-bottom: 1px solid var(--c-border) !important;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
+  /* Kill the 320ms background/border-color transition from
+     theme.css. It was firing on every paint as the cascade
+     resolved values, causing visible header flicker on every
+     page navigation. The .is-scrolled state change is now
+     instant — no animation. */
+  transition: none !important;
 }
 .md-header.is-scrolled {
   background: var(--c-page) !important;
   border-bottom-color: rgba(255, 255, 255, 0.18) !important;
+}
+/* Belt-and-suspenders: pin the logo image dimensions in stone so
+   the row never reflows when the image finally loads. */
+.md-logo {
+  flex-shrink: 0 !important;
+  contain: layout;
+}
+.md-logo img {
+  display: block;
+  /* The PNG is 1600×1600 (1:1). Reserving aspect-ratio in CSS
+     means the browser allocates the square slot during initial
+     paint — no horizontal reflow when the image actually loads. */
+  aspect-ratio: 1 / 1 !important;
+  width: auto !important;
 }
 .md-nav-link {
   color: var(--c-fg-muted) !important;

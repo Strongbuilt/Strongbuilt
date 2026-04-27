@@ -259,6 +259,12 @@
     .cf-card.is-center { transform: translateZ(0); z-index: 10; border-color: var(--accent); }
     .cf-card .cf-logo { flex: 1; display: flex; align-items: center; justify-content: center; }
     .cf-card .cf-logo img { max-width: 75%; max-height: 70%; filter: brightness(0) invert(1); opacity: 0.9; }
+    /* Raw coverflow (partners) — logos render in their native
+       brand colors. Most partner PNGs ship with a white/light
+       background, so we give the card itself a light panel so
+       both white-bg and transparent-bg logos look intentional. */
+    .cf-wrap--raw .cf-card { background: #FAFAFA; border-color: rgba(255, 255, 255, 0.18); }
+    .cf-wrap--raw .cf-card.is-center { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 12px 36px rgba(0, 0, 0, 0.5); }
     .cf-wrap--raw .cf-card .cf-logo img { filter: none; opacity: 1; }
     .cf-card .cf-info { display: none; }
     .cf-nav { position: absolute; top: 50%; width: 2.5rem; height: 2.5rem; transform: translateY(-50%); border-radius: 50%; background: #000000; border: 1px solid var(--border); color: var(--fg); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; transition: all 260ms;  }

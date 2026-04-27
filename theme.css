@@ -934,26 +934,22 @@ body::before[data-md-noise] {
   font-weight: 400;
 }
 
-/* Each contact column. Vertical hairlines on inside edges. */
+/* Each contact column. No hairline dividers — clean grid only. */
 .md-fc-item {
   display: flex;
   flex-direction: column;
   gap: 0;
   padding: 0 2rem;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
-.md-fc-item:last-of-type { border-right: 0; padding-right: 0; }
+.md-fc-item:last-of-type { padding-right: 0; }
 @media (max-width: 719px) {
   .md-fc-item {
     padding: 1.5rem 0 0;
-    border-right: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
   .md-fc-item:first-of-type { padding-top: 1.5rem; }
 }
 @media (min-width: 720px) {
-  /* The brand col gets a right-edge hairline too */
-  .md-footer-brand { padding-right: 2rem; border-right: 1px solid rgba(255, 255, 255, 0.1); }
+  .md-footer-brand { padding-right: 2rem; }
 }
 
 .md-fc-k {

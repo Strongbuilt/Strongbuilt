@@ -347,7 +347,7 @@ const PROJECT_DATA = [
     area: "80K Sq.ft",
     status: "completed",
     year: 2021,
-    img: "assets/Projects/Conwood Enclave.png",
+    img: "assets/Projects/Conwood Enclave.jpg",
     featured: false,
     coordinates: [19.0950, 72.8650]
   },
@@ -373,7 +373,7 @@ const PROJECT_DATA = [
     area: "60K Sq.ft",
     status: "completed",
     year: 2021,
-    img: "assets/Projects/sukrut.jpeg",
+    img: "assets/Projects/sukrut.jpg",
     featured: false,
     coordinates: [19.1000, 72.8700]
   },
@@ -413,7 +413,7 @@ const PROJECT_DATA = [
     area: "4L Sq.ft",
     status: "ongoing",
     year: 2023,
-    img: "assets/Projects/avighna.webp",
+    img: "assets/Projects/avighna.jpg",
     featured: true,
     coordinates: [19.0094, 72.8163]
   },
@@ -426,7 +426,7 @@ const PROJECT_DATA = [
     area: "3.5L Sq.ft",
     status: "ongoing",
     year: 2023,
-    img: "assets/Projects/AAKASA.webp",
+    img: "assets/Projects/AAKASA.jpg",
     featured: false,
     coordinates: [19.0110, 72.8180]
   },
@@ -439,7 +439,7 @@ const PROJECT_DATA = [
     area: "2.2L Sq.ft",
     status: "ongoing",
     year: 2024,
-    img: "assets/Projects/Stella.jpeg",
+    img: "assets/Projects/Stella.jpg",
     featured: false,
     coordinates: [19.0596, 72.8310]
   },
@@ -452,7 +452,7 @@ const PROJECT_DATA = [
     area: "1.7L Sq.ft",
     status: "ongoing",
     year: 2024,
-    img: "assets/Projects/kismet.png",
+    img: "assets/Projects/kismet.jpg",
     featured: false,
     coordinates: [19.0620, 72.8340]
   },
@@ -465,7 +465,7 @@ const PROJECT_DATA = [
     area: "2.6L Sq.ft",
     status: "ongoing",
     year: 2024,
-    img: "assets/Projects/antariksh-alpha.webp",
+    img: "assets/Projects/antariksh-alpha.jpg",
     featured: false,
     coordinates: [19.0860, 72.9081]
   },

@@ -498,7 +498,7 @@ em,
 .md-fc-k { color: var(--accent) !important; }
 .md-fc-v { color: var(--c-fg) !important; }
 p.md-fc-v { color: var(--c-fg-muted) !important; }
-.md-footer-strip { border-top: 1px solid var(--c-border) !important; }
+/* (border-top removed — full-viewport divider drawn via theme.css ::before) */
 .md-footer-strip-links a,
 .md-footer-strip-center,
 .md-footer-strip-right { color: var(--c-fg-sub) !important; }

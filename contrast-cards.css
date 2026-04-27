@@ -54,6 +54,31 @@ h1, h2, h3, h4, h5, h6,
 em,
 .md-accent-text { color: var(--accent) !important; }
 
+/* ═══ CROSS-DOCUMENT VIEW TRANSITIONS ═══
+   Modern browsers (Chrome 126+, Edge 126+, Safari 18+) cross-fade
+   between same-origin pages instead of showing a blank flash. The
+   header keeps its identity (`view-transition-name: site-header`)
+   so it visually stays put while page bodies fade. Browsers that
+   don't support this just navigate normally — no fallback needed. */
+@view-transition { navigation: auto; }
+.md-header {
+  view-transition-name: site-header;
+}
+::view-transition-old(site-header),
+::view-transition-new(site-header) {
+  /* Header doesn't fade — it stays visually anchored, only the
+     page body cross-fades around it. */
+  animation: none;
+  mix-blend-mode: normal;
+  height: 100%;
+  object-fit: cover;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
 /* ───── HEADER (pitch black, dim bottom rule) ─────
    Sizing pinned with !important so per-page inline <style>
    overrides in index.html / projects.html / etc. can't make

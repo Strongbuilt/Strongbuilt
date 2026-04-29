@@ -544,4 +544,4 @@ function getFilterOptions(field) {
 // Helper: Get project count by field value
 function getProjectCount(field, value) {
   return PROJECT_DATA.filter(p => p[field] === value).length;
-}
+} 

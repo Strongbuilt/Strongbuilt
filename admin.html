@@ -13,6 +13,7 @@
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
 
   <link rel="stylesheet" href="dist/app.css">
 
@@ -617,32 +618,57 @@
   </div>
   <script>
     (function(){
-      // Change this to your own passcode. SHA-256 hash is stored
-      // here so the cleartext doesn't sit in source. Default = "strongbuilt"
-      const HASH = 'ae908af1175dacb20f6d13bf75b6b098e17112be60b2dc69d5ae0c22760c6a72';
-      const KEY  = 'sb_admin_unlocked';
-      async function sha256(s){
-        const buf = new TextEncoder().encode(s);
-        const h = await crypto.subtle.digest('SHA-256', buf);
-        return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('');
-      }
       const gate = document.getElementById('loginGate');
       const form = document.getElementById('loginForm');
       const pass = document.getElementById('loginPass');
       const err  = document.getElementById('loginErr');
+      
+      const SETTINGS_KEY = 'sb_settings';
+      const UNLOCKED_KEY = 'sb_admin_unlocked';
 
-      // Already unlocked this session?
-      if (sessionStorage.getItem(KEY) === '1') gate.classList.add('is-hidden');
+      // Check if already unlocked this session, OR if they have a valid token saved
+      let hasToken = false;
+      try {
+        const s = JSON.parse(localStorage.getItem(SETTINGS_KEY));
+        if (s && s.token) hasToken = true;
+      } catch(e) {}
+
+      if (sessionStorage.getItem(UNLOCKED_KEY) === '1' || hasToken) {
+        gate.classList.add('is-hidden');
+      }
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        err.textContent = '';
-        const h = await sha256(pass.value);
-        if (h === HASH) {
-          sessionStorage.setItem(KEY, '1');
-          gate.classList.add('is-hidden');
-        } else {
-          err.textContent = 'Incorrect passcode';
+        err.textContent = 'Verifying with GitHub...';
+        err.style.color = '#F59E0B'; // yellow/loading color
+        
+        const token = pass.value.trim();
+        
+        try {
+          // Verify token against GitHub API
+          const res = await fetch('https://api.github.com/user', {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          
+          if (res.ok) {
+            sessionStorage.setItem(UNLOCKED_KEY, '1');
+            
+            // Auto-save the token to settings so they don't have to enter it again
+            try {
+               let s = JSON.parse(localStorage.getItem(SETTINGS_KEY)) || { repo: 'Strongbuilt/Strongbuilt', branch: 'main' };
+               s.token = token;
+               localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+            } catch(e) {}
+
+            gate.classList.add('is-hidden');
+            // If they are on the page, force a reload to fetch new initial SHAs
+            window.location.reload();
+          } else {
+            throw new Error('Invalid token');
+          }
+        } catch (error) {
+          err.style.color = '#f87171'; // red error color
+          err.textContent = 'Invalid GitHub Personal Access Token';
           pass.value = '';
           pass.focus();
         }
@@ -943,6 +969,7 @@
     const state = {
       activeType: 'projects',
       data: {},        // { projects: [...], testimonials: [...], ... }
+      initialSha: {},  // { projects: 'abc123sha...', ... }
       editing: null,   // current item being edited OR null
       editingIndex: -1,
       undoStack: [],
@@ -1120,6 +1147,18 @@
           state.data[type] = deepClone(globalData);
         } else {
           state.data[type] = cfg.isList ? (cfg.isKeyed ? Object.fromEntries(cfg.groups.map(g => [g.key, []])) : []) : {};
+        }
+      }
+      
+      // 4. Fetch initial GitHub SHAs for collision detection
+      if (hasGithubAuth()) {
+        for (const type of Object.keys(TYPES)) {
+          try {
+            const sha = await ghGetSha(TYPES[type].filename);
+            if (sha) state.initialSha[type] = sha;
+          } catch (e) {
+            console.warn(`Could not fetch initial SHA for ${type}:`, e);
+          }
         }
       }
     }
@@ -2406,9 +2445,17 @@
      */
     async function ghGetSha(path) {
       const s = loadSettings();
-      const url = `https://api.github.com/repos/${s.repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(s.branch)}`;
+      // Add timestamp query parameter to bust any overly aggressive caches
+      const ts = new Date().getTime();
+      const url = `https://api.github.com/repos/${s.repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(s.branch)}&_t=${ts}`;
       const r = await fetch(url, {
-        headers: { 'Authorization': `Bearer ${s.token}`, 'Accept': 'application/vnd.github+json' }
+        method: 'GET',
+        cache: 'no-store', // Prevent browser caching the SHA
+        headers: { 
+          'Authorization': `Bearer ${s.token}`, 
+          'Accept': 'application/vnd.github+json',
+          'Cache-Control': 'no-cache'
+        }
       });
       if (r.status === 404) return null;
       if (!r.ok) throw new Error(`GitHub GET ${path} → ${r.status}`);
@@ -2421,8 +2468,9 @@
      * @param path     Repo path, e.g. "projects-data.js"
      * @param content  String OR Uint8Array
      * @param message  Commit message
+     * @param expectedSha Optional SHA to ensure we don't overwrite newer changes
      */
-    async function ghPut(path, content, message) {
+    async function ghPut(path, content, message, expectedSha = null) {
       const s = loadSettings();
       // Convert to base64 (GitHub Contents API requires it)
       let b64;
@@ -2434,7 +2482,9 @@
         for (let i = 0; i < content.byteLength; i++) bin += String.fromCharCode(content[i]);
         b64 = btoa(bin);
       }
-      const sha = await ghGetSha(path);
+      
+      const sha = expectedSha !== null ? expectedSha : await ghGetSha(path);
+      
       const url = `https://api.github.com/repos/${s.repo}/contents/${encodeURIComponent(path)}`;
       const body = {
         message,
@@ -2489,7 +2539,14 @@
       const body = buildJsBody(type);
       const msg = `admin: update ${cfg.filename}`;
       try {
-        await ghPut(cfg.filename, body, msg);
+        const expectedSha = state.initialSha[type] || null;
+        const res = await ghPut(cfg.filename, body, msg, expectedSha);
+        
+        // Update the SHA so subsequent saves don't conflict with our own commit
+        if (res.content && res.content.sha) {
+          state.initialSha[type] = res.content.sha;
+        }
+
         toast(`Published ${cfg.label} to GitHub — Cloudflare deploys in ~30s`, 'success');
         A.state.dirty.delete(type);
         try { localStorage.removeItem(cfg.storageKey); } catch {}
@@ -2499,7 +2556,11 @@
         return true;
       } catch (err) {
         console.error(err);
-        toast(`Publish failed: ${err.message}`, 'error');
+        if (err.message.includes('409')) {
+          toast(`Conflict: Someone else modified ${cfg.label} while you were editing! Please refresh and try again.`, 'error');
+        } else {
+          toast(`Publish failed: ${err.message}`, 'error');
+        }
         return false;
       }
     }
@@ -2522,9 +2583,35 @@
      */
     async function uploadImageViaGithub(file, folder) {
       if (!hasGithubAuth()) throw new Error('No GitHub token');
-      const safe = file.name.replace(/[^a-zA-Z0-9._\- ]/g, '');
-      const path = `assets/${folder}/${safe}`;
-      const buf = new Uint8Array(await file.arrayBuffer());
+
+      let finalFile = file;
+      let safeName = file.name.replace(/[^a-zA-Z0-9._\- ]/g, '');
+
+      try {
+        if (window.imageCompression && file.type.startsWith('image/')) {
+          toast('Compressing image...', 'info');
+          const options = {
+            maxSizeMB: 0.5,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true,
+            fileType: 'image/webp'
+          };
+          finalFile = await imageCompression(file, options);
+          
+          // Ensure .webp extension
+          const lastDot = safeName.lastIndexOf('.');
+          if (lastDot > -1) {
+            safeName = safeName.substring(0, lastDot) + '.webp';
+          } else {
+            safeName += '.webp';
+          }
+        }
+      } catch (e) {
+        console.warn('Compression failed, using original file', e);
+      }
+
+      const path = `assets/${folder}/${safeName}`;
+      const buf = new Uint8Array(await finalFile.arrayBuffer());
       await ghPut(path, buf, `admin: upload ${path}`);
       return { path };
     }

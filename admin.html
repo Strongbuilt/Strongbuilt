@@ -1465,6 +1465,8 @@
           ? `<i class="fas fa-plus"></i><span>${cfg.label}</span><i class="fas fa-chevron-right"></i><span>New</span>`
           : `<i class="fas ${cfg.icon}"></i><span>${cfg.label}</span><i class="fas fa-chevron-right"></i><span>Editing</span>`;
       }
+      $('#saveBtn').classList.remove('hidden');
+      $('#cancelBtn').classList.remove('hidden');
       $('#deleteBtn').classList.toggle('hidden', state.isNew || !cfg.isList);
       buildForm();
       renderActiveListHighlight();
@@ -1501,6 +1503,12 @@
       // Clean up map picker + focus trap (prevents stale fetch + listener leaks)
       teardownMapPicker();
       detachFocusTrap();
+      
+      $('#itemForm').innerHTML = ''; // Clear stale form fields from previous tab
+      $('#saveBtn').classList.add('hidden');
+      $('#cancelBtn').classList.add('hidden');
+      $('#deleteBtn').classList.add('hidden');
+
       $('.editor-panel').classList.remove('is-open');
       $('#editorBackdrop').classList.remove('is-open');
       $('#formTitle').textContent = 'Select an item or click New';

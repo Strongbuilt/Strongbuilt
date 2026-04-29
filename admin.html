@@ -908,7 +908,12 @@
         columns: ['name', 'location'],
         features: { reorder: true, search: ['name','location'] },
         fields: [
-          { name: 'name', label: 'Project Name', type: 'text', required: true },
+          { name: 'name', label: 'Project Name', type: 'select', required: true, options: () => {
+              if (!state.data.projects || !Array.isArray(state.data.projects)) return [];
+              const titles = new Set();
+              state.data.projects.forEach(p => { if (p.title) titles.add(p.title); });
+              return Array.from(titles).sort().map(t => [t, t]);
+          }},
           { name: 'id', label: 'ID (slug)', type: 'text', required: true, autoSlug: 'name', pattern: '^[a-z0-9-]+$' },
           { name: 'location', label: 'Location & Sector (e.g. "Pune · Mixed Use")', type: 'text', required: true },
           { name: 'progress', label: 'Progress %', type: 'slider', required: true, min: 0, max: 100, default: 50 },
@@ -1550,13 +1555,15 @@
               if (locked) { hintEl.innerHTML = '<i class="fas fa-lock text-[9px] mr-1"></i>Manual override — no longer auto-syncs from ' + f.autoSlug; hintEl.style.color = '#F59E0B'; }
               else       { hintEl.textContent = 'lowercase, hyphens only — auto-generated from ' + f.autoSlug; hintEl.style.color = ''; }
             };
-            srcEl.addEventListener('input', () => {
+            const updateSlug = () => {
               if (state.isNew || !idEl.value || idEl.dataset.autoFilled === 'true') {
                 idEl.value = slugify(srcEl.value);
                 idEl.dataset.autoFilled = 'true';
                 setLockHint(false);
               }
-            });
+            };
+            srcEl.addEventListener('input', updateSlug);
+            srcEl.addEventListener('change', updateSlug);
             idEl.addEventListener('input', () => {
               if (idEl.dataset.autoFilled !== 'false') { idEl.dataset.autoFilled = 'false'; setLockHint(true); }
             });
@@ -1596,7 +1603,8 @@
           <p class="field-error" id="${errorId}"></p>
           ${hint}`;
       } else if (f.type === 'select') {
-        const opts = f.options.map(([v, lbl]) => `<option value="${v}"${val === v ? ' selected' : ''}>${lbl}</option>`).join('');
+        const optsArray = typeof f.options === 'function' ? f.options() : (f.options || []);
+        const opts = optsArray.map(([v, lbl]) => `<option value="${v}"${val === v ? ' selected' : ''}>${lbl}</option>`).join('');
         wrap.innerHTML = `
           <label>${f.label}${required}</label>
           <select name="${f.name}" class="w-full rounded-sm px-3 py-2" ${f.required ? 'data-required="true"' : ''}>

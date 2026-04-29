@@ -114,12 +114,17 @@
 
     /* ───────────────── DESIGN — Vertical Lines / Editorial ───────────────── */
     .ft10 { padding: 4rem 0 0; background: #0A0A0F; }
-    .ft10 .grid {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr 1fr 1fr;
-      gap: 0;
-      padding-bottom: 3rem;
-      align-items: start;
+    @media (min-width: 1024px) {
+      .ft10 .grid {
+        grid-template-columns: 1fr 1.5fr 1.2fr 1fr;
+        gap: 0;
+        align-items: start;
+      }
+      .ft10 .grid > div {
+        padding: 0 1.5rem;
+      }
+      .ft10 .grid > div:first-child { padding-left: 0; }
+      .ft10 .grid > div:last-child { padding-right: 0; }
     }
     @media (max-width: 720px) {
       .ft10 .grid { grid-template-columns: 1fr 1fr; }
@@ -131,7 +136,7 @@
       .ft10 .grid > * { border-right: 0 !important; border-bottom: 1px solid rgba(255,255,255,0.1); }
       .ft10 .grid > *:last-child { border-bottom: 0; }
     }
-    .ft10 .col { padding: 0 2rem; border-right: 1px solid rgba(255,255,255,0.1); }
+    .ft10 .col { padding: 0; border-right: none; }
     .ft10 .col:first-child { padding-left: 0; }
     .ft10 .col:last-child { border-right: 0; padding-right: 0; }
 
@@ -208,7 +213,6 @@
             <div class="grid">
               <div class="col col-brand">
                 <img src="assets/Logo/Strongbuilt.png" alt="Strong Built">
-                <p>Mumbai construction, since 2014.</p>
               </div>
               <div class="col">
                 <h4>— Address</h4>

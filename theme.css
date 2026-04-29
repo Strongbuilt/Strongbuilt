@@ -963,7 +963,7 @@ body::before[data-md-noise] {
   position: relative;
 }
 .md-footer .md-container {
-  padding-block: clamp(2.5rem, 4vw, 3.5rem) 0;
+  padding-block: 1.5rem 0;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -977,12 +977,24 @@ body::before[data-md-noise] {
   gap: 2rem;
   padding-bottom: 3rem;
 }
-@media (min-width: 720px) {
+@media (min-width: 720px) and (max-width: 1023px) {
   .md-footer-top {
-    grid-template-columns: 1fr 1.4fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .md-footer-top {
+    grid-template-columns: 1fr 1.5fr 1.2fr 1fr;
     gap: 0;
     align-items: start;
   }
+  .md-footer-top > div {
+    padding: 0 1.5rem;
+  }
+  .md-footer-top > div:first-child { padding-left: 0; }
+  .md-footer-top > div:last-child { padding-right: 0; }
 }
 
 /* Brand column */
@@ -1018,7 +1030,6 @@ body::before[data-md-noise] {
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 0 2rem;
 }
 .md-fc-item:last-of-type { padding-right: 0; }
 @media (max-width: 719px) {
@@ -1028,7 +1039,7 @@ body::before[data-md-noise] {
   .md-fc-item:first-of-type { padding-top: 1.5rem; }
 }
 @media (min-width: 720px) {
-  .md-footer-brand { padding-right: 2rem; }
+  /* Padding removed as gap handles spacing */
 }
 
 .md-fc-k {

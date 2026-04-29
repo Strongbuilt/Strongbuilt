@@ -20,31 +20,32 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background: #000000;
+      background: #0A0A0B;
       color: #FAFAFA;
       min-height: 100vh;
+      overflow-x: hidden;
     }
-    h1,h2,h3,h4,.font-heading,button,input,select,textarea,label { font-family: 'Barlow Condensed', sans-serif; }
+    h1,h2,h3,h4,.font-heading,button { font-family: 'Barlow Condensed', sans-serif; }
 
     /* ─── INPUTS ─── */
     input,select,textarea {
-      background: #000000;
-      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255,255,255,0.12);
       color: #FAFAFA;
       transition: border-color .2s, box-shadow .2s, background .2s;
       font-family: 'Inter', sans-serif;
       font-size: 0.85rem;
-      border-radius: 3px;
+      border-radius: 4px;
     }
-    input::placeholder, textarea::placeholder { color: rgba(161, 161, 170,0.4); }
+    input::placeholder, textarea::placeholder { color: rgba(161, 161, 170,0.5); }
     input:hover:not(:focus), select:hover:not(:focus), textarea:hover:not(:focus) {
       border-color: rgba(245, 158, 11, 0.4);
-      background: #050508;
+      background: rgba(255, 255, 255, 0.05);
     }
     input:focus,select:focus,textarea:focus {
       outline: none; border-color: #F59E0B;
       box-shadow: 0 0 0 3px rgba(245, 158, 11,0.15);
-      background: #050508;
+      background: rgba(0, 0, 0, 0.5);
     }
     input.invalid,select.invalid,textarea.invalid {
       border-color: #f87171;
@@ -52,7 +53,7 @@
     }
     /* Native select option list — force dark background so options are legible */
     select option {
-      background-color: #000000;
+      background-color: #0A0A0B;
       color: #FAFAFA;
       padding: 8px;
     }
@@ -62,9 +63,9 @@
       color: #000000;
     }
     label {
-      display: block; font-size: .6rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .22em;
-      color: #F59E0B; margin-bottom: .4rem;
+      display: block; font-size: .65rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .15em;
+      color: rgba(245, 158, 11, 0.85); margin-bottom: .45rem;
     }
     .field-error {
       font-size: .65rem; color: #f87171;
@@ -74,11 +75,10 @@
     .field-error.is-visible { display: block; }
 
     /* ─── GLASS SURFACE ─── */
-    /* Pitch-black surface with the same 0.18 white border the
-       public site uses so admin chrome reads as one design. */
     .glass {
-      background: #000000;
-      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(10, 10, 11, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.06);
     }
 
     /* ─── BUTTONS ─── */
@@ -122,40 +122,41 @@
       border-color: rgba(248,113,113,0.6);
     }
 
-    /* ─── TABS — quiet underline, loud only when active ─── */
+    /* ─── TABS — Vertical for Sidebar ─── */
     .tab {
       position: relative;
-      padding: .7rem .85rem .85rem;
-      font-size: .72rem; font-weight: 600;
-      letter-spacing: .12em; text-transform: uppercase;
+      padding: .85rem 1.15rem;
+      font-size: .8rem; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
       color: rgba(161, 161, 170, 0.72);
       border: none;
       background: transparent;
-      border-radius: 0;
-      transition: color .2s ease-out;
+      border-radius: 4px;
+      transition: color .2s ease-out, background .2s;
       white-space: nowrap;
-      display: inline-flex; align-items: center; gap: .55rem;
+      display: flex; align-items: center; gap: .75rem;
       cursor: pointer;
     }
     .tab::after {
       content: '';
       position: absolute;
-      left: .85rem; right: .85rem; bottom: 0;
-      height: 2px;
+      left: 0; top: .4rem; bottom: .4rem;
+      width: 3px;
       background: #F59E0B;
-      transform: scaleX(0);
+      transform: scaleY(0);
       transform-origin: center;
       transition: transform .25s ease-out;
+      border-radius: 0 3px 3px 0;
     }
-    .tab:hover { color: #FAFAFA; }
-    .tab.is-active { color: #F59E0B; }
-    .tab.is-active::after { transform: scaleX(1); }
-    .tab i { font-size: .82rem; opacity: .7; }
+    .tab:hover { color: #FAFAFA; background: rgba(255,255,255,0.03); }
+    .tab.is-active { color: #F59E0B; background: rgba(245, 158, 11, 0.05); }
+    .tab.is-active::after { transform: scaleY(1); }
+    .tab i { font-size: 1rem; opacity: .7; }
     .tab.is-active i, .tab:hover i { opacity: 1; }
     .tab-count {
       display: inline-flex; align-items: center; justify-content: center;
-      min-width: 18px; height: 18px; padding: 0 5px;
-      font-size: .58rem; font-weight: 600;
+      min-width: 20px; height: 20px; padding: 0 6px;
+      font-size: .65rem; font-weight: 600;
       background: rgba(255,255,255,0.06);
       color: rgba(161, 161, 170, 0.9);
       border-radius: 999px;
@@ -169,34 +170,35 @@
     /* ─── LIST ITEMS — tcard premium ─── */
     .list-item {
       position: relative;
-      padding: 0.85rem 1rem;
-      background: linear-gradient(155deg, #000000, #000000);
-      border: 1px solid rgba(255,255,255,0.04);
-      border-radius: 4px;
+      padding: 1.15rem 1.25rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px;
       cursor: pointer;
       overflow: hidden;
-      transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), border-color .25s, box-shadow .3s;
+      transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), border-color .25s, box-shadow .3s, background .25s;
     }
     .list-item::before {
       content: '';
       position: absolute;
       left: 0; top: 0; bottom: 0;
-      width: 2px;
+      width: 3px;
       background: linear-gradient(180deg, transparent, #F59E0B, transparent);
       transform: scaleY(0);
       transform-origin: center;
       transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .list-item:hover {
+      background: rgba(255, 255, 255, 0.04);
       border-color: rgba(245, 158, 11, 0.3);
       transform: translateX(4px);
       box-shadow: 0 6px 20px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(245, 158, 11, 0.15);
     }
     .list-item:hover::before { transform: scaleY(1); }
     .list-item.is-editing {
-      border-color: rgba(245, 158, 11, 0.5);
-      background: none;
-      box-shadow: 0 8px 28px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(245, 158, 11, 0.3);
+      border-color: rgba(245, 158, 11, 0.6) !important;
+      background: rgba(245, 158, 11, 0.08) !important;
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7), 0 0 0 1px rgba(245, 158, 11, 0.2);
     }
     .list-item.is-editing::before { transform: scaleY(1); }
     .list-item.dragging { opacity: .4; transform: scale(0.98); }
@@ -238,10 +240,10 @@
     /* ─── STATS STRIP (above list) ─── */
     .stats-strip {
       display: flex; gap: 0.5rem 1.25rem; flex-wrap: wrap;
-      padding: 0.65rem 0.25rem 0;
+      padding: 0.25rem 0 0;
       font-size: .6rem; font-weight: 700;
       letter-spacing: .18em; text-transform: uppercase;
-      color: #A1A1AA;
+      color: rgba(161, 161, 170, 0.6);
     }
     .stats-strip .stat-num { color: #F59E0B; font-family: 'Oswald', sans-serif; font-size: 0.85rem; margin-right: 4px; letter-spacing: 0; }
 
@@ -347,21 +349,13 @@
 
     /* ─── MOBILE DRAWER ─── */
     @media (max-width: 1023px) {
-      .editor-panel {
-        position: fixed !important;
-        inset: 0;
-        z-index: 50;
-        background: #000000;
-        transform: translateY(100%);
-        transition: transform .35s cubic-bezier(0.16,1,0.3,1);
-        overflow-y: auto;
-      }
-      .editor-panel.is-open { transform: translateY(0); }
+      .editor-panel.is-open { transform: translateX(0) !important; }
       .editor-backdrop {
-        position: fixed; inset: 0; z-index: 49;
-        background: rgba(0,0,0,0.6);
+        position: fixed; inset: 0; z-index: 35;
+        background: rgba(0,0,0,0.7);
         opacity: 0; pointer-events: none;
         transition: opacity .3s;
+        backdrop-filter: blur(4px);
       }
       .editor-backdrop.is-open { opacity: 1; pointer-events: auto; }
       .editor-close-mobile { display: inline-flex !important; }
@@ -472,38 +466,10 @@
     .help-kbd .kbd-mod { color: #F59E0B; }
     .help-desc { color: rgba(161, 161, 170, 0.85); font-size: .75rem; }
 
-    /* ─── LIST HEADER + FILTER BAR ─── */
-    .admin-list-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1rem 1.1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
-    @media (min-width: 768px) {
-      .admin-list-header { padding: 1.25rem 1.5rem; }
-    }
-    .admin-list-header h2 { margin: 0; }
-    .admin-list-header .stats-strip {
-      padding: .45rem 0 0;
-      font-size: .58rem; letter-spacing: .2em;
-    }
-
-    .admin-list-filterbar {
-      display: flex;
-      gap: .5rem;
-      padding: .75rem 1.1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      align-items: center;
-    }
-    @media (min-width: 768px) {
-      .admin-list-filterbar { padding: .85rem 1.5rem; }
-    }
-    .admin-search {
-      position: relative;
-      flex: 1;
-      min-width: 0;
+    /* ─── SEARCH INPUT ─── */
+    .admin-search input:focus {
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: none;
     }
     .admin-search i {
       position: absolute;
@@ -546,11 +512,11 @@
     .hover\:text-clay-ink:hover { color: #FAFAFA !important; }
     .hover\:text-clay-muted:hover { color: #A1A1AA !important; }
 
-    .bg-clay-base { background-color: #000000 !important; }
-    .bg-clay-mist { background-color: #000000 !important; }
-    .bg-clay-paper { background-color: #000000 !important; }
-    .bg-clay-sunken { background-color: #000000 !important; }
-    .bg-clay-elevated { background-color: #000000 !important; }
+    .bg-clay-base { background-color: #0A0A0B !important; }
+    .bg-clay-mist { background-color: #0A0A0B !important; }
+    .bg-clay-paper { background-color: #111112 !important; }
+    .bg-clay-sunken { background-color: #050506 !important; }
+    .bg-clay-elevated { background-color: #161618 !important; }
     .bg-clay-surface\/5 { background-color: rgba(255, 255, 255, 0.04) !important; }
     .bg-clay-surface\/10 { background-color: rgba(255, 255, 255, 0.08) !important; }
 
@@ -676,122 +642,139 @@
     })();
   </script>
 
-  <!-- HEADER -->
-  <header class="sticky top-0 z-40 glass border-b border-clay-border">
-    <div class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between gap-3 md:gap-6">
-      <!-- Brand -->
-      <div class="flex items-center gap-3 md:gap-4 min-w-0">
-        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-10 md:h-11 w-auto shrink-0">
-        <div class="min-w-0 hidden sm:block">
-          <h1 class="text-base md:text-lg font-bold uppercase tracking-wider leading-none truncate">Admin <span class="text-brand-gold">Studio</span></h1>
-          <p class="text-[10px] text-clay-faint uppercase tracking-widest mt-1.5 flex items-center gap-2">
-            <span id="currentTabLabel">Projects</span>
-            <span id="dirtyIndicator" class="hidden items-center"><span class="dirty-dot"></span><span class="ml-2 text-brand-gold">Unsaved</span></span>
-          </p>
-        </div>
-      </div>
+  <!-- LAYOUT WRAPPER -->
+  <div class="flex h-screen overflow-hidden bg-[#0A0A0B]">
 
-      <!-- Actions -->
+    <!-- MOBILE TOP BAR (Visible only on small screens) -->
+    <header class="lg:hidden shrink-0 z-40 glass border-b border-white/10 p-3 flex items-center justify-between sticky top-0 w-full">
+      <div class="flex items-center gap-3">
+        <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-8 w-auto">
+        <h1 class="text-sm font-bold uppercase tracking-wider">Admin</h1>
+      </div>
       <div class="flex items-center gap-2">
-        <!-- History (undo/redo grouped) -->
-        <div class="admin-btn-group">
-          <button id="undoBtn" class="btn btn-ghost admin-btn-icon" title="Undo (Ctrl+Z)" aria-label="Undo last change"><i class="fas fa-undo"></i></button>
-          <button id="redoBtn" class="btn btn-ghost admin-btn-icon" title="Redo (Ctrl+Shift+Z)" aria-label="Redo"><i class="fas fa-redo"></i></button>
+        <button id="mobileMenuBtn" class="btn btn-ghost text-lg p-2"><i class="fas fa-bars"></i></button>
+      </div>
+    </header>
+
+    <!-- LEFT SIDEBAR -->
+    <aside id="sidebar" class="w-64 glass shrink-0 flex flex-col border-r border-white/10 z-50 fixed inset-y-0 left-0 lg:static lg:translate-x-0 transition-transform -translate-x-full">
+      <div class="p-5 border-b border-white/10 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img src="assets/Logo/Strongbuilt.png" alt="Strong Built" class="h-10 w-auto">
+          <div>
+            <h1 class="text-lg font-bold uppercase tracking-wider leading-none">Admin <span class="text-brand-gold">Studio</span></h1>
+          </div>
         </div>
-        <!-- Help -->
-        <button id="helpBtn" class="btn btn-ghost admin-btn-icon" title="Keyboard shortcuts" aria-label="Show keyboard shortcuts"><i class="fas fa-keyboard"></i></button>
-        <!-- Import / Publish -->
-        <button id="importBtn" class="btn btn-outline admin-btn-compact" title="Import a data file"><i class="fas fa-file-import"></i><span class="hidden md:inline">Import</span></button>
-        <button id="downloadBtn" class="btn btn-primary admin-btn-compact" title="Publish to server (Ctrl+S)"><i class="fas fa-cloud-upload-alt"></i><span class="hidden md:inline">Publish</span></button>
+        <button id="closeSidebarBtn" class="lg:hidden btn btn-ghost text-xs"><i class="fas fa-times"></i></button>
       </div>
-    </div>
-    <!-- TABS -->
-    <nav class="container mx-auto px-4 md:px-6 flex gap-2 overflow-x-auto" aria-label="Admin sections">
-      <button class="tab is-active" data-type="projects"><i class="fas fa-building"></i>Projects<span class="tab-count" data-count="projects">0</span></button>
-      <button class="tab" data-type="testimonials"><i class="fas fa-quote-left"></i>Testimonials<span class="tab-count" data-count="testimonials">0</span></button>
-      <button class="tab" data-type="timeline"><i class="fas fa-timeline"></i>Timeline<span class="tab-count" data-count="timeline">0</span></button>
-      <button class="tab" data-type="awards"><i class="fas fa-trophy"></i>Awards<span class="tab-count" data-count="awards">0</span></button>
-      <button class="tab" data-type="activeProjects"><i class="fas fa-hard-hat"></i>Active<span class="tab-count" data-count="activeProjects">0</span></button>
-      <button class="tab" data-type="leadership"><i class="fas fa-users"></i>Leadership<span class="tab-count" data-count="leadership">0</span></button>
-      <button class="tab" data-type="siteInfo"><i class="fas fa-cog"></i>Site Info</button>
-    </nav>
-  </header>
 
-  <!-- KEYBOARD SHORTCUTS POPOVER -->
-  <div id="helpPopover" class="help-popover" role="dialog" aria-label="Keyboard shortcuts" hidden>
-    <div class="help-header">
-      <span>Keyboard Shortcuts</span>
-      <button id="helpClose" class="btn btn-ghost admin-btn-icon" aria-label="Close"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+S</span><span class="help-desc">Publish changes</span></div>
-    <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+N</span><span class="help-desc">New item</span></div>
-    <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+Enter</span><span class="help-desc">Save edits</span></div>
-    <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+Z</span><span class="help-desc">Undo</span></div>
-    <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+Shift+Z</span><span class="help-desc">Redo</span></div>
-    <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+Del</span><span class="help-desc">Delete item</span></div>
-    <div class="help-row"><span class="help-kbd">Esc</span><span class="help-desc">Close / Cancel</span></div>
-  </div>
-
-  <input type="file" id="importFile" accept=".js,.json" class="hidden">
-
-  <!-- MAIN LAYOUT -->
-  <main class="container mx-auto px-4 md:px-6 py-4 md:py-8 grid lg:grid-cols-[1fr_440px] gap-4 md:gap-6">
-
-    <!-- LEFT: LIST -->
-    <section class="glass rounded-md relative overflow-hidden">
-      <!-- Header strip: title + primary action, full-width -->
-      <div class="admin-list-header">
-        <div class="min-w-0">
-          <h2 id="listTitle" class="text-lg md:text-xl font-bold uppercase tracking-tight leading-none">Projects</h2>
-          <div id="statsStrip" class="stats-strip"></div>
+      <!-- Navigation Tabs -->
+      <nav class="flex-1 overflow-y-auto p-4 space-y-1.5" aria-label="Admin sections">
+        <button class="tab is-active w-full justify-start" data-type="projects"><i class="fas fa-building w-5"></i><span>Projects</span><span class="tab-count ml-auto" data-count="projects">0</span></button>
+        <button class="tab w-full justify-start" data-type="testimonials"><i class="fas fa-quote-left w-5"></i><span>Testimonials</span><span class="tab-count ml-auto" data-count="testimonials">0</span></button>
+        <button class="tab w-full justify-start" data-type="timeline"><i class="fas fa-timeline w-5"></i><span>Timeline</span><span class="tab-count ml-auto" data-count="timeline">0</span></button>
+        <button class="tab w-full justify-start" data-type="awards"><i class="fas fa-trophy w-5"></i><span>Awards</span><span class="tab-count ml-auto" data-count="awards">0</span></button>
+        <button class="tab w-full justify-start" data-type="activeProjects"><i class="fas fa-hard-hat w-5"></i><span>Active</span><span class="tab-count ml-auto" data-count="activeProjects">0</span></button>
+        <button class="tab w-full justify-start" data-type="leadership"><i class="fas fa-users w-5"></i><span>Leadership</span><span class="tab-count ml-auto" data-count="leadership">0</span></button>
+        <button class="tab w-full justify-start" data-type="siteInfo"><i class="fas fa-cog w-5"></i><span>Site Info</span></button>
+      </nav>
+      
+      <!-- Bottom Sidebar Tools -->
+      <div class="p-4 border-t border-white/10 space-y-2">
+        <div class="flex items-center gap-2 justify-between">
+          <div class="admin-btn-group flex-1">
+            <button id="undoBtn" class="btn btn-ghost flex-1 py-2 text-xs" title="Undo (Ctrl+Z)"><i class="fas fa-undo"></i></button>
+            <button id="redoBtn" class="btn btn-ghost flex-1 py-2 text-xs" title="Redo (Ctrl+Shift+Z)"><i class="fas fa-redo"></i></button>
+          </div>
+          <button id="helpBtn" class="btn btn-ghost p-2 text-xs" title="Keyboard shortcuts"><i class="fas fa-keyboard"></i></button>
         </div>
-        <button id="addNewBtn" class="btn btn-primary admin-btn-compact" title="New item (Ctrl+N)"><i class="fas fa-plus"></i><span>New</span></button>
+        <button id="importBtn" class="btn btn-outline w-full py-2 text-xs" title="Import a data file"><i class="fas fa-file-import"></i><span>Import Data</span></button>
+        <button id="downloadBtn" class="btn btn-primary w-full py-2.5 text-xs" title="Publish to server (Ctrl+S)"><i class="fas fa-cloud-upload-alt"></i><span>Publish</span></button>
+        <p id="dirtyIndicator" class="text-[10px] text-center text-brand-gold uppercase tracking-widest hidden"><span class="dirty-dot mr-1 inline-block"></span>Unsaved Changes</p>
       </div>
-
-      <!-- Filter bar -->
-      <div class="admin-list-filterbar">
-        <div class="admin-search">
-          <i class="fas fa-search"></i>
-          <input id="listSearch" type="search" placeholder="Search..." aria-label="Search items">
-        </div>
-        <select id="sortBy" class="admin-sort" aria-label="Sort order">
-          <option value="order">Custom order</option>
-          <option value="title">Title A–Z</option>
-        </select>
-      </div>
-
-      <!-- Item list -->
-      <div id="listContainer" class="space-y-2 p-3 md:p-4 pt-0" role="listbox" aria-label="Items in current tab"></div>
-
-      <!-- Empty state -->
-      <div id="emptyListMsg" class="hidden text-center py-16 px-4 text-clay-faint">
-        <i class="fas fa-inbox text-3xl mb-3 text-clay-faint/50"></i>
-        <p class="text-sm uppercase tracking-widest">No items yet</p>
-        <p class="text-xs mt-2 text-clay-faint/70">Click <strong class="text-brand-gold">New</strong> to start, or Import a data file.</p>
-      </div>
-    </section>
-
-    <!-- EDITOR BACKDROP (mobile only) -->
-    <div id="editorBackdrop" class="editor-backdrop"></div>
-
-    <!-- RIGHT: EDITOR -->
-    <aside class="editor-panel glass rounded-md p-4 md:p-5 lg:sticky lg:top-[9rem] lg:self-start lg:max-h-[calc(100vh-10rem)] lg:overflow-y-auto">
-      <div class="flex items-start justify-between mb-4">
-        <div class="min-w-0 flex-1">
-          <div id="editorCrumb" class="editor-crumb"><span>New Item</span></div>
-          <h2 id="formTitle" class="text-lg md:text-xl font-bold uppercase tracking-tight truncate">New Item</h2>
-        </div>
-        <button id="editorCloseMobile" class="editor-close-mobile btn btn-outline p-2 text-[10px] rounded-sm ml-2" aria-label="Close editor"><i class="fas fa-times"></i></button>
-      </div>
-      <form id="itemForm" class="space-y-3" autocomplete="off" novalidate aria-labelledby="formTitle"></form>
-      <div class="flex gap-2 pt-4 mt-4 border-t border-white/5">
-        <button id="saveBtn" form="itemForm" type="submit" class="btn btn-primary flex-1 py-2.5 text-xs" title="Save (Ctrl+Enter)"><i class="fas fa-check text-[10px]"></i>Save</button>
-        <button id="cancelBtn" type="button" class="btn btn-outline px-4 py-2.5 text-xs">Cancel</button>
-        <button id="deleteBtn" type="button" class="btn btn-danger px-4 py-2.5 text-xs hidden" title="Delete (Ctrl+Del)"><i class="fas fa-trash text-[10px]"></i></button>
-      </div>
-      <p id="shortcutHints" class="sr-only">Save: Ctrl+Enter · Cancel: Esc · Delete: Ctrl+Del</p>
     </aside>
-  </main>
+
+    <!-- KEYBOARD SHORTCUTS POPOVER -->
+    <div id="helpPopover" class="help-popover" role="dialog" aria-label="Keyboard shortcuts" hidden>
+      <div class="help-header">
+        <span>Keyboard Shortcuts</span>
+        <button id="helpClose" class="btn btn-ghost admin-btn-icon" aria-label="Close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+S</span><span class="help-desc">Publish changes</span></div>
+      <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+N</span><span class="help-desc">New item</span></div>
+      <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+Enter</span><span class="help-desc">Save edits</span></div>
+      <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+Z</span><span class="help-desc">Undo</span></div>
+      <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+Shift+Z</span><span class="help-desc">Redo</span></div>
+      <div class="help-row"><span class="help-kbd"><span class="kbd-mod">Ctrl</span>+Del</span><span class="help-desc">Delete item</span></div>
+      <div class="help-row"><span class="help-kbd">Esc</span><span class="help-desc">Close / Cancel</span></div>
+    </div>
+
+    <input type="file" id="importFile" accept=".js,.json" class="hidden">
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-1 flex overflow-hidden pt-[56px] lg:pt-0">
+      
+      <!-- CENTER: LIST -->
+      <section class="flex-1 flex flex-col relative overflow-hidden bg-[#050508]">
+        <!-- Header strip -->
+        <div class="p-5 border-b border-white/5 flex items-center justify-between bg-black/20 shrink-0">
+          <div>
+            <h2 id="listTitle" class="text-xl md:text-2xl font-bold uppercase tracking-tight leading-none text-[#FAFAFA]">Projects</h2>
+            <div id="statsStrip" class="stats-strip mt-1"></div>
+          </div>
+          <button id="addNewBtn" class="btn btn-primary px-4 py-2 text-xs shadow-lg shadow-brand-gold/20" title="New item (Ctrl+N)"><i class="fas fa-plus"></i><span class="hidden sm:inline">New Item</span></button>
+        </div>
+
+        <!-- Filter bar -->
+        <div class="admin-list-filterbar p-3 px-5 border-b border-white/5 shrink-0 bg-black/10">
+          <div class="admin-search flex-1">
+            <i class="fas fa-search text-clay-faint absolute left-3 top-1/2 -translate-y-1/2 text-xs"></i>
+            <input id="listSearch" type="search" class="w-full pl-8 py-1.5 bg-transparent border-none text-sm focus:ring-0" placeholder="Search items...">
+          </div>
+          <select id="sortBy" class="admin-sort bg-transparent border border-white/10 text-xs py-1.5 px-2 rounded ml-3 text-clay-faint" aria-label="Sort order">
+            <option value="order">Custom order</option>
+            <option value="title">Title A–Z</option>
+          </select>
+        </div>
+
+        <!-- Item list -->
+        <div id="listContainer" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-3" role="listbox" aria-label="Items in current tab"></div>
+
+        <!-- Empty state -->
+        <div id="emptyListMsg" class="hidden h-full flex flex-col items-center justify-center p-8 text-clay-faint">
+          <i class="fas fa-inbox text-5xl mb-4 text-white/5"></i>
+          <p class="text-lg font-bold uppercase tracking-widest text-white/40">No items yet</p>
+          <p class="text-sm mt-2 text-clay-faint/70">Click <strong class="text-brand-gold">New Item</strong> to get started.</p>
+        </div>
+      </section>
+
+      <!-- EDITOR BACKDROP (mobile only) -->
+      <div id="editorBackdrop" class="editor-backdrop"></div>
+
+      <!-- RIGHT: EDITOR -->
+      <aside class="editor-panel w-full lg:w-[480px] xl:w-[540px] shrink-0 glass flex flex-col z-40 fixed inset-y-0 right-0 lg:static lg:translate-x-0 transition-transform translate-x-full border-l border-white/10 lg:shadow-[-20px_0_50px_rgba(0,0,0,0.5)]">
+        
+        <div class="p-5 border-b border-white/5 flex items-start justify-between bg-black/40 shrink-0">
+          <div class="min-w-0 flex-1">
+            <div id="editorCrumb" class="text-[10px] text-brand-gold uppercase tracking-widest font-bold flex items-center gap-2 mb-1 opacity-80"><span>New Item</span></div>
+            <h2 id="formTitle" class="text-xl md:text-2xl font-bold uppercase tracking-tight truncate text-white">New Item</h2>
+          </div>
+          <button id="editorCloseMobile" class="lg:hidden btn btn-outline p-2 text-[10px] rounded-sm ml-3 shrink-0"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto p-5 md:p-6">
+          <form id="itemForm" class="space-y-5" autocomplete="off" novalidate aria-labelledby="formTitle"></form>
+        </div>
+        
+        <div class="p-5 border-t border-white/10 flex gap-3 bg-black/40 shrink-0">
+          <button id="saveBtn" form="itemForm" type="submit" class="btn btn-primary flex-1 py-3 text-sm shadow-lg shadow-brand-gold/20"><i class="fas fa-check"></i>Save Changes</button>
+          <button id="cancelBtn" type="button" class="btn btn-outline px-5 py-3 text-sm hidden">Cancel</button>
+          <button id="deleteBtn" type="button" class="btn btn-danger px-4 py-3 text-sm hidden" title="Delete (Ctrl+Del)"><i class="fas fa-trash"></i></button>
+        </div>
+        <p id="shortcutHints" class="sr-only">Save: Ctrl+Enter · Cancel: Esc · Delete: Ctrl+Del</p>
+      </aside>
+    </main>
+  </div>
 
   <!-- TOAST -->
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -1384,11 +1367,19 @@
           <div class="text-[11px] text-clay-faint truncate mt-0.5" title="${esc(sublabel)}">${sublabel}</div>
         </div>
         <div class="flex items-center gap-2 shrink-0">${meta}</div>
-        <button class="btn btn-outline p-1.5 text-[10px] rounded-sm shrink-0" aria-label="Edit ${esc(label)}"><i class="fas fa-pencil-alt"></i></button>
+        <div class="flex items-center gap-1 shrink-0 ml-2">
+          <button class="btn btn-outline p-1.5 text-[10px] rounded-sm edit-card-btn" aria-label="Edit ${esc(label)}"><i class="fas fa-pencil-alt"></i></button>
+          <button class="btn btn-outline border-red-900/50 text-red-400 hover:bg-red-900/20 hover:text-red-300 p-1.5 text-[10px] rounded-sm delete-card-btn" aria-label="Delete ${esc(label)}"><i class="fas fa-trash"></i></button>
+        </div>
       `;
 
       el.addEventListener('click', (e) => {
         if (e.target.closest('.drag-handle')) return;
+        if (e.target.closest('.delete-card-btn')) {
+          e.stopPropagation();
+          deleteItem(item);
+          return;
+        }
         openEditor(deepClone(item), 'Edit', entry);
       });
 
@@ -1941,22 +1932,31 @@
     $('#editorCloseMobile').addEventListener('click', closeEditor);
     $('#editorBackdrop').addEventListener('click', closeEditor);
 
-    $('#deleteBtn').addEventListener('click', () => {
-      const cfg = TYPES[state.activeType];
-      const name = state.editing?.title || state.editing?.name || 'this item';
+    function deleteItem(item, type = state.activeType) {
+      const cfg = TYPES[type];
+      const name = item.title || item.name || 'this item';
       if (!confirm(`Delete "${name}"?\n\nThis can be undone with Ctrl+Z.`)) return;
       pushUndo('Delete ' + name);
       if (cfg.isKeyed) {
         cfg.groups.forEach(g => {
-          state.data[state.activeType][g.key] = (state.data[state.activeType][g.key] || []).filter(i => i[cfg.idField] !== state.editing[cfg.idField]);
+          state.data[type][g.key] = (state.data[type][g.key] || []).filter(i => i[cfg.idField] !== item[cfg.idField]);
         });
       } else {
-        state.data[state.activeType] = state.data[state.activeType].filter(i => i[cfg.idField] !== state.editing[cfg.idField]);
+        state.data[type] = state.data[type].filter(i => i[cfg.idField] !== item[cfg.idField]);
       }
       markDirty();
       render();
-      closeEditor();
+      
+      // If the deleted item was currently being edited, close the editor
+      if (state.editing && state.editing[cfg.idField] === item[cfg.idField]) {
+        closeEditor();
+      }
+      
       toast('Deleted — Ctrl+Z to undo', 'info', { action: { label: 'UNDO', onClick: undo } });
+    }
+
+    $('#deleteBtn').addEventListener('click', () => {
+      if (state.editing) deleteItem(state.editing);
     });
 
     $('#addNewBtn').addEventListener('click', () => openEditor(null, 'New'));
@@ -1972,9 +1972,27 @@
     $('#sortBy').addEventListener('change', (e) => { state.sortBy = e.target.value; render(); });
 
     // ════════════════════════════════════════════════════════════
-    // TAB CLICKS
+    // TAB CLICKS & SIDEBAR TOGGLE
     // ════════════════════════════════════════════════════════════
-    $$('.tab').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.type)));
+    const sidebar = $('#sidebar');
+    const mobileMenuBtn = $('#mobileMenuBtn');
+    const closeSidebarBtn = $('#closeSidebarBtn');
+
+    function toggleSidebar(show) {
+      if (show) {
+        sidebar.classList.remove('-translate-x-full');
+      } else {
+        sidebar.classList.add('-translate-x-full');
+      }
+    }
+
+    mobileMenuBtn?.addEventListener('click', () => toggleSidebar(true));
+    closeSidebarBtn?.addEventListener('click', () => toggleSidebar(false));
+
+    $$('.tab').forEach(b => b.addEventListener('click', () => {
+      switchTab(b.dataset.type);
+      if (window.innerWidth < 1024) toggleSidebar(false);
+    }));
 
     // ════════════════════════════════════════════════════════════
     // PUBLISH (write to server) / DOWNLOAD (fallback)

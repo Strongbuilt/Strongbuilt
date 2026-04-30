@@ -545,3 +545,5 @@ function getFilterOptions(field) {
 function getProjectCount(field, value) {
   return PROJECT_DATA.filter(p => p[field] === value).length;
 } 
+
+if (typeof window !== 'undefined') window.PROJECT_DATA = PROJECT_DATA;

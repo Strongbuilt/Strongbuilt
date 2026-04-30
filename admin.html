@@ -1723,9 +1723,9 @@
       </nav>
 
       <!-- Bottom Sidebar Tools -->
-      <div class="admin-sidebar-footer">
+      <div class="admin-sidebar-footer" style="display:flex; flex-direction:column; gap:0.6rem; padding-top:0.75rem;">
         <div style="display:flex;align-items:center;gap:0.5rem;justify-content:space-between;">
-          <div class="admin-btn-group" style="flex:1;">
+          <div class="admin-btn-group" style="flex:1; display:flex;">
             <button id="undoBtn" class="btn btn-ghost" style="flex:1;padding:0.5rem;font-size:0.75rem;" title="Undo (Ctrl+Z)">
               <i class="fas fa-undo"></i>
             </button>
@@ -1733,17 +1733,22 @@
               <i class="fas fa-redo"></i>
             </button>
           </div>
-          <button id="helpBtn" class="btn btn-ghost" style="padding:0.5rem;font-size:0.75rem;" title="Keyboard shortcuts">
+          <button id="helpBtn" class="btn btn-ghost admin-btn-icon" style="width:2.1rem;height:auto;padding:0.5rem 0;display:flex;align-items:center;justify-content:center;" title="Keyboard shortcuts">
             <i class="fas fa-keyboard"></i>
           </button>
         </div>
-        <button id="importBtn" class="btn btn-outline" style="width:100%;padding:0.5rem;font-size:0.75rem;">
-          <i class="fas fa-file-import"></i><span>Import Data</span>
+
+        <div id="secondaryActions" style="display:flex; gap:0.4rem; align-items:stretch;">
+          <button id="importBtn" class="btn btn-outline" style="flex:1;padding:0.5rem 0.2rem;font-size:0.6rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:0.3rem;white-space:nowrap;overflow:hidden;" title="Import Data">
+            <i class="fas fa-file-import" style="font-size:0.8rem;"></i><span>Import</span>
+          </button>
+        </div>
+
+        <button id="downloadBtn" class="btn btn-primary" style="width:100%;padding:0.85rem;font-size:0.9rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;font-weight:700;letter-spacing:0.05em;border-radius:6px;" title="Publish to server (Ctrl+S)">
+          <i class="fas fa-cloud-upload-alt" style="font-size:1.1rem;"></i><span>PUBLISH</span>
         </button>
-        <button id="downloadBtn" class="btn btn-primary" style="width:100%;padding:0.625rem;font-size:0.75rem;" title="Publish to server (Ctrl+S)">
-          <i class="fas fa-cloud-upload-alt"></i><span>Publish</span>
-        </button>
-        <p id="dirtyIndicator" style="font-size:10px;text-align:center;color:#F59E0B;text-transform:uppercase;letter-spacing:0.15em;display:none;">
+
+        <p id="dirtyIndicator" style="font-size:10px;text-align:center;color:#F59E0B;text-transform:uppercase;letter-spacing:0.15em;display:none;margin:0;">
           <span class="dirty-dot" style="margin-right:4px;display:inline-block;"></span>Unsaved Changes
         </p>
       </div>
@@ -4082,12 +4087,12 @@
         const body = buildJsBody(type);
         const msg = `admin: update ${cfg.filename}`;
         try {
-          const expectedSha = state.initialSha[type] || null;
+          const expectedSha = A.state.initialSha[type] || null;
           const res = await ghPut(cfg.filename, body, msg, expectedSha);
 
           // Update the SHA so subsequent saves don't conflict with our own commit
           if (res.content && res.content.sha) {
-            state.initialSha[type] = res.content.sha;
+            A.state.initialSha[type] = res.content.sha;
           }
 
           toast(`Published ${cfg.label} to GitHub — Cloudflare deploys in ~30s`, 'success');
@@ -4314,17 +4319,18 @@
         }
       });
 
-      // Add a Settings button to the header (next to Publish)
+      // Add a Settings button to the secondary actions
       (function addSettingsBtn() {
-        const publishBtn = $('#downloadBtn');
-        if (!publishBtn || $('#sbSettingsBtn')) return;
+        const secondaryActions = $('#secondaryActions');
+        if (!secondaryActions || $('#sbSettingsBtn')) return;
         const btn = document.createElement('button');
         btn.id = 'sbSettingsBtn';
         btn.className = 'btn btn-outline admin-btn-icon';
+        btn.style.cssText = 'padding:0.5rem 0; width:2rem; height:auto; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.8rem;';
         btn.title = 'GitHub publishing settings';
         btn.setAttribute('aria-label', 'GitHub settings');
         btn.innerHTML = '<i class="fas fa-cog"></i>';
-        publishBtn.parentNode.insertBefore(btn, publishBtn);
+        secondaryActions.appendChild(btn);
         btn.addEventListener('click', openSettings);
       })();
 
@@ -4348,15 +4354,16 @@
       $('#sbPreviewReload').addEventListener('click', reloadPreview);
       pageSelect.addEventListener('change', reloadPreview);
 
-      // Add a Preview button to the header
+      // Add a Preview button to the secondary actions
       (function addPreviewBtn() {
         const importBtn = $('#importBtn');
         if (!importBtn || $('#sbPreviewBtn')) return;
         const btn = document.createElement('button');
         btn.id = 'sbPreviewBtn';
-        btn.className = 'btn btn-outline admin-btn-compact';
+        btn.className = 'btn btn-outline';
+        btn.style.cssText = 'flex:1; padding:0.5rem 0.2rem; font-size:0.6rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; display:flex; align-items:center; justify-content:center; gap:0.3rem; white-space:nowrap; overflow:hidden;';
         btn.title = 'Open live preview';
-        btn.innerHTML = '<i class="fas fa-eye"></i><span class="hidden md:inline">Preview</span>';
+        btn.innerHTML = '<i class="fas fa-eye" style="font-size:0.8rem;"></i><span>Preview</span>';
         importBtn.parentNode.insertBefore(btn, importBtn);
         btn.addEventListener('click', () => {
           if (drawer.classList.contains('is-open')) closePreview();

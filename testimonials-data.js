@@ -1,13 +1,5 @@
 /**
- * Testimonials Data
+ * Testimonials Data — saved by Admin Studio on 2026-04-30T06:39:42.905Z
  */
-const TESTIMONIALS_DATA = [
-  {
-    "name": "Rishabh Jain",
-    "id": "rishabh-jain",
-    "company": "Strongbuilt",
-    "initials": "RJ",
-    "quote": "bahut badhiya building banate hai"
-  }
-];
+const TESTIMONIALS_DATA = [];
 if (typeof window !== 'undefined') window.TESTIMONIALS_DATA = TESTIMONIALS_DATA;

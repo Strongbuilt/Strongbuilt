@@ -3909,8 +3909,13 @@
       // ── Settings storage (localStorage) ──────────────────────────
       const STORAGE_KEY = 'sb_admin_github_settings';
       function loadSettings() {
-        try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
-        catch { return {}; }
+        try {
+          const s = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+          if (s.repo) s.repo = s.repo.trim();
+          if (s.branch) s.branch = s.branch.trim();
+          if (s.token) s.token = s.token.trim();
+          return s;
+        } catch { return {}; }
       }
       function saveSettings(s) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(s));

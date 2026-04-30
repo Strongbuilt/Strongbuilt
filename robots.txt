@@ -1,5 +1,5 @@
 # Strong Built — robots.txt
-# https://strongbuiltofficial.netlify.app/
+# https://www.strongbuilt.in/
 
 User-agent: *
 Allow: /
@@ -10,4 +10,4 @@ Disallow: /assets/maps/
 Disallow: /*.json$
 
 # Sitemap location
-Sitemap: https://strongbuiltofficial.netlify.app/sitemap.xml
+Sitemap: https://www.strongbuilt.in/sitemap.xml

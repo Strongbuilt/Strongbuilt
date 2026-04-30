@@ -3974,9 +3974,19 @@
        */
       function validateCollection(type) {
         const data = A.state.data[type];
+        const cfg = A.TYPES[type];
         const out = [];
         if (!data) return { ok: true, errors: [] };
-        const list = Array.isArray(data) ? data : Object.values(data).flat?.() || [];
+
+        let list = [];
+        if (!cfg.isList) {
+          list = [data];
+        } else if (cfg.isKeyed) {
+          list = Object.entries(data).flatMap(([k, arr]) => (Array.isArray(arr) ? arr : []).map(item => ({ ...item, group: k })));
+        } else {
+          list = Array.isArray(data) ? data : [];
+        }
+
         list.forEach((rec, i) => {
           const errs = validateItem(type, rec);
           if (errs.length) out.push({ index: i, item: rec, errors: errs });

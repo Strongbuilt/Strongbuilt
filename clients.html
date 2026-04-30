@@ -486,41 +486,17 @@
     </div>
   </section>
 
-  <!-- Testimonials section temporarily hidden until real client
-       quotes are ready. To re-enable, remove style="display:none" -->
-  <section class="cl-section cl-section--alt" style="display:none;">
+  <!-- Dynamic Testimonials Section -->
+  <section id="testimonialsSection" class="cl-section cl-section--alt" style="display:none;">
     <div class="md-container">
       <div class="cl-head md-reveal">
-        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Lorem Ipsum</span>
-        <h2>Lorem <span class="accent">ipsum.</span></h2>
+        <span class="md-eyebrow md-eyebrow-accent" style="margin-inline:auto;">Voice of Clients</span>
+        <h2>Client <span class="accent">testimonials.</span></h2>
         <div class="cl-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-        <p style="font-family:var(--font-label); font-size:0.7rem; letter-spacing:0.24em; color:var(--fg-subtle); text-transform:uppercase;">Lorem Ipsum Dolor Sit</p>
+        <p style="font-family:var(--font-label); font-size:0.7rem; letter-spacing:0.24em; color:var(--fg-subtle); text-transform:uppercase;">Trusted by leading developers</p>
       </div>
-      <div class="cl-tests">
-        <article class="cl-test md-reveal">
-          <i class="fas fa-quote-left"></i>
-          <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</blockquote>
-          <div class="attr">
-            <div class="avatar">LI</div>
-            <div><div class="who">Lorem Ipsum</div><div class="org">Dolor Sit Amet</div></div>
-          </div>
-        </article>
-        <article class="cl-test md-reveal d1">
-          <i class="fas fa-quote-left"></i>
-          <blockquote>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</blockquote>
-          <div class="attr">
-            <div class="avatar">CA</div>
-            <div><div class="who">Consectetur Adipiscing</div><div class="org">Elit Sed Do</div></div>
-          </div>
-        </article>
-        <article class="cl-test md-reveal d2">
-          <i class="fas fa-quote-left"></i>
-          <blockquote>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</blockquote>
-          <div class="attr">
-            <div class="avatar">TI</div>
-            <div><div class="who">Tempor Incididunt</div><div class="org">Ut Labore Dolore</div></div>
-          </div>
-        </article>
+      <div class="cl-tests" id="testimonialsContainer">
+        <!-- Rendered by script -->
       </div>
     </div>
   </section>
@@ -629,6 +605,44 @@
         update();
         resetAuto();
       });
+    })();
+  </script>
+  <script src="testimonials-data.js"></script>
+  <script>
+    (function initTestimonials() {
+      const section = document.getElementById('testimonialsSection');
+      const container = document.getElementById('testimonialsContainer');
+      const data = window.TESTIMONIALS_DATA;
+
+      if (!section || !container || !data || data.length === 0) return;
+
+      // Clear placeholders
+      container.innerHTML = '';
+
+      data.forEach((item, idx) => {
+        const delayClass = idx === 1 ? 'd1' : idx >= 2 ? 'd2' : '';
+        const article = document.createElement('article');
+        article.className = `cl-test md-reveal ${delayClass}`;
+        
+        // Generate initials if missing
+        const initials = item.initials || item.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+
+        article.innerHTML = `
+          <i class="fas fa-quote-left"></i>
+          <blockquote>${item.quote}</blockquote>
+          <div class="attr">
+            <div class="avatar">${initials}</div>
+            <div>
+              <div class="who">${item.name}</div>
+              <div class="org">${item.company}</div>
+            </div>
+          </div>
+        `;
+        container.appendChild(article);
+      });
+
+      // Show section
+      section.style.display = 'block';
     })();
   </script>
   <script src="theme.js"></script>

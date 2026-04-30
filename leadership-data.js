@@ -1,12 +1,12 @@
 /**
- * Leadership Data — saved by Admin Studio on 2026-04-17T00:00:00.000Z
+ * Leadership Data — saved by Admin Studio on 2026-04-30T07:18:16.938Z
  */
 const LEADERSHIP_DATA = {
   "directors": [
     {
       "id": "kelvin-singh-kohli",
       "name": "Mr. Kelvin Singh Kohli",
-      "role": "Director \u2014 Finance",
+      "role": "Director — Finance",
       "img": "assets/Leaders/kelvin_singh_kohli.jpg",
       "imgPosition": "50% 22%",
       "bio": "A strategic and analytical leader overseeing all financial operations. Expertise across financial planning, budgeting, forecasting, and regulatory compliance to drive sustained growth."
@@ -14,10 +14,10 @@ const LEADERSHIP_DATA = {
     {
       "id": "rishi-singh-kohli",
       "name": "Mr. Rishi Singh Kohli",
-      "role": "Director \u2014 Operations",
+      "role": "Director — Operations",
       "img": "assets/Leaders/rishi_singh_kohli.jpg",
       "imgPosition": "50% 22%",
-      "bio": "A hands-on leader focused on end-to-end project management \u2014 from procurement to quality control \u2014 ensuring every project is delivered on time and within budget."
+      "bio": "A hands-on leader focused on end-to-end project management — from procurement to quality control — ensuring every project is delivered on time and within budget."
     },
     {
       "id": "jagpreet-singh-kohli",
@@ -30,7 +30,7 @@ const LEADERSHIP_DATA = {
     {
       "id": "rupesh-sancheti",
       "name": "Mr. Rupesh Sancheti",
-      "role": "Director \u2014 Business Development",
+      "role": "Director — Business Development",
       "img": "assets/Leaders/rupesh_sancheti.jpg",
       "imgPosition": "50% 22%",
       "bio": "Drives strategic growth and cultivates key client relationships. Expertise is central to expanding the company's market footprint while upholding operational excellence."
@@ -72,7 +72,7 @@ const LEADERSHIP_DATA = {
     {
       "id": "prateek-borde",
       "name": "Mr. Prateek Borde",
-      "role": "Head \u2014 Planning & Coordination",
+      "role": "Head — Planning & Coordination",
       "img": "assets/Leaders/prateek_borde.jpg",
       "imgPosition": "center",
       "bio": ""
@@ -80,7 +80,7 @@ const LEADERSHIP_DATA = {
     {
       "id": "hussain-pathan",
       "name": "Mr. Hussain Pathan",
-      "role": "Head \u2014 Plant & Machinery",
+      "role": "Head — Plant & Machinery",
       "img": "assets/Leaders/hussain_pathan.jpg",
       "imgPosition": "center",
       "bio": ""
@@ -120,30 +120,6 @@ const LEADERSHIP_DATA = {
   ],
   "operations": [
     {
-      "id": "rameshwar-singh",
-      "name": "Mr. Rameshwar Singh",
-      "role": "Senior Safety Manager",
-      "img": "assets/Leaders/rameshwar_singh.jpg",
-      "imgPosition": "center",
-      "bio": ""
-    },
-    {
-      "id": "makim-khan",
-      "name": "Mr. Makim Khan",
-      "role": "Manager \u2014 Procurement",
-      "img": "assets/Leaders/makim_khan.jpg",
-      "imgPosition": "center",
-      "bio": ""
-    },
-    {
-      "id": "shivajee-sharma",
-      "name": "Mr. Shivajee Sharma",
-      "role": "Purchase",
-      "img": "assets/Leaders/shivajee_sharma.jpg",
-      "imgPosition": "center",
-      "bio": ""
-    },
-    {
       "id": "choudhary-zakwan",
       "name": "Choudhary Zakwan",
       "role": "Project Manager",
@@ -164,6 +140,30 @@ const LEADERSHIP_DATA = {
       "name": "Bonam Sai Kishore",
       "role": "Project Manager",
       "img": "assets/Leaders/bonam_sai_kishore.jpg",
+      "imgPosition": "center",
+      "bio": ""
+    },
+    {
+      "id": "rameshwar-singh",
+      "name": "Mr. Rameshwar Singh",
+      "role": "Senior Safety Manager",
+      "img": "assets/Leaders/rameshwar_singh.jpg",
+      "imgPosition": "center",
+      "bio": ""
+    },
+    {
+      "id": "shivajee-sharma",
+      "name": "Mr. Shivajee Sharma",
+      "role": "Purchase",
+      "img": "assets/Leaders/shivajee_sharma.jpg",
+      "imgPosition": "center",
+      "bio": ""
+    },
+    {
+      "id": "makim-khan",
+      "name": "Mr. Makim Khan",
+      "role": "Manager — Procurement",
+      "img": "assets/Leaders/makim_khan.jpg",
       "imgPosition": "center",
       "bio": ""
     },

@@ -3173,7 +3173,6 @@
       function deleteItem(item, type = state.activeType) {
         const cfg = TYPES[type];
         const name = item.title || item.name || 'this item';
-        if (!confirm(`Delete "${name}"?\n\nThis can be undone with Ctrl+Z.`)) return;
         pushUndo('Delete ' + name);
         if (cfg.isKeyed) {
           cfg.groups.forEach(g => {
@@ -3380,7 +3379,6 @@
         const cfg = TYPES[state.activeType];
         const ids = [...bulkState.selected];
         if (!ids.length) return;
-        if (!confirm(`Delete ${ids.length} item(s)? This can be undone with Ctrl+Z.`)) return;
         pushUndo(`Bulk delete ${ids.length} items`);
         if (cfg.isKeyed) {
           cfg.groups.forEach(g => {
